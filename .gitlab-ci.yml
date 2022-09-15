@@ -1,4 +1,4 @@
-image: node:16.3.0-alpine
+image: node:latest
 
 stages:
   - deploy
