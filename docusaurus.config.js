@@ -38,8 +38,8 @@ const redocusaurus = [
 const config = {
   title: 'My Site',
   tagline: 'Dinosaurs are cool',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
+  url: 'https://rarify-protocol.gitlab.io/',
+  baseUrl: '/platform-engineering/rarimo-docs-docusaurus/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
