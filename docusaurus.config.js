@@ -90,10 +90,10 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'My Site',
+        title: 'Rarimo Docs',
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: 'We are professionals',
+          src: 'img/confused-dog.gif',
         },
         items: [
           {
