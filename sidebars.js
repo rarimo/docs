@@ -28,6 +28,14 @@ const sidebars = {
     {
       type: 'doc',
       id: 'overview/applications',
+    },
+    {
+      type: 'doc',
+      id: 'overview/bundling',
+    },
+    {
+      type: 'doc',
+      id: 'overview/security',
     }
   ],
   smartContracts: [
@@ -40,11 +48,11 @@ const sidebars = {
       label: 'Guides',
       link: {
         type: 'doc',
-        id: 'smart-contracts/examples',
+        id: 'smart-contracts/guides',
       },
       items: [
-        'smart-contracts/examples/passing-a-message',
-        'smart-contracts/examples/passing-a-token',
+        'smart-contracts/guides/passing-a-message',
+        'smart-contracts/guides/passing-a-token',
       ],
     },
     {
@@ -73,6 +81,18 @@ const sidebars = {
       type: 'doc',
       id: 'api',
     },
+    {
+      type: 'category',
+      label: 'Guides',
+      link: {
+        type: 'doc',
+        id: 'api/guides',
+      },
+      items: [
+        'api/guides/retrieving-tokens',
+        'api/guides/building-transactions',
+      ],
+    },
     // @ts-ignore
     ...apiReference
   ],
@@ -89,7 +109,8 @@ const sidebars = {
         id: 'solutions/nft-settlement',
       },
       items: [
-        'solutions/nft-settlement/overview',
+        'solutions/nft-settlement/installation',
+        'solutions/nft-settlement/configuration',
       ],
     },
   ],
