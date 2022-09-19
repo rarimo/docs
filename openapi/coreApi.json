@@ -1,0 +1,902 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "core",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "https://api.demo.tokend.io",
+      "description": "TokenD Developer Environment"
+    }
+  ],
+  "tags": [
+    { "name": "Chains" },
+    { "name": "Tokens" },
+    { "name": "Transfers" }
+  ],
+  "paths": {
+    "/v1/chains": {
+      "get": {
+        "tags": [
+          "Chains"
+        ],
+        "summary": "Get supported chains list",
+        "operationId": "getChainList",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "filter[chain_type]",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ChainType"
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "token"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Chain"
+                      }
+                    },
+                    "included": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Token"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal error",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/tokens": {
+      "get": {
+        "tags": [
+          "Tokens"
+        ],
+        "summary": "Get supported list of tokens",
+        "operationId": "getTokenList",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "include",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "chain"
+                ]
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "filter[token_type]",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/TokenType"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Token"
+                      }
+                    },
+                    "included": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Chain"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal error",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/tokens/{token_id}/nfts/{nft_id}": {
+      "parameters": [
+        {
+          "name": "token_id",
+          "in": "path",
+          "description": "token identifier",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "nft_id",
+          "in": "path",
+          "description": "NFT identifier",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Tokens"
+        ],
+        "summary": "Get details about specific NFT",
+        "operationId": "getNFT",
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/NFT"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "not found",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal error",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/transfers/confirm": {
+      "post": {
+        "tags": [
+          "Transfers"
+        ],
+        "summary": "Confirm transfer",
+        "description": "Generates transaction to send on destination network to finish cross-chain transfer",
+        "operationId": "confirmTransfer",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Transaction"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "blob creation not allowed",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "account does not exist",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "failed to save blob",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "data"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/TransferConfirmationRequest"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/transfers/create": {
+      "post": {
+        "tags": [
+          "Transfers"
+        ],
+        "summary": "Create transfer",
+        "description": "Starts cross-chain transfer. Generates transaction to sign",
+        "operationId": "createTransfer",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Transaction"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "blob creation not allowed",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "account does not exist",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "failed to save blob",
+            "content": {
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Errors"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "data"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/TransferCreateRequest"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApproveRequest": {
+        "type": "object",
+        "required": [
+          "network",
+          "address",
+          "token_id",
+          "address_to"
+        ],
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string"
+          },
+          "token_id": {
+            "type": "string"
+          },
+          "address_to": {
+            "type": "string"
+          }
+        }
+      },
+      "Chain": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ChainKey"
+          },
+          {
+            "type": "object",
+            "required": [
+              "attributes",
+              "relationships"
+            ],
+            "properties": {
+              "attributes": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "bridge_contract",
+                  "chain_type",
+                  "chain_params"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "icon": {
+                    "type": "string",
+                    "description": "Link to network icon",
+                    "example": "https://some.storage.com/image.png"
+                  },
+                  "bridge_contract": {
+                    "type": "string",
+                    "description": "Address of bridge contract in specific chain"
+                  },
+                  "chain_type": {
+                    "$ref": "#/components/schemas/ChainType"
+                  },
+                  "chain_params": {
+                    "$ref": "#/components/schemas/ChainParams"
+                  }
+                }
+              },
+              "relationships": {
+                "type": "object",
+                "required": [
+                  "tokens"
+                ],
+                "properties": {
+                  "tokens": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/TokenKey"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ChainKey": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "chain"
+            ]
+          }
+        }
+      },
+      "ChainParams": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/EvmChainParams"
+          },
+          {
+            "$ref": "#/components/schemas/SolanaChainParams"
+          }
+        ]
+      },
+      "ChainType": {
+        "type": "string",
+        "description": "Type of blockchain by supported wallets, APIs, etc.",
+        "enum": [
+          "evm",
+          "solana"
+        ]
+      },
+      "Errors": {
+        "description": "Standard JSON:API error",
+        "type": "object",
+        "required": [
+          "errors"
+        ],
+        "properties": {
+          "errors": {
+            "type": "array",
+            "description": "Non empty array of errors occurred during request processing",
+            "items": {
+              "type": "object",
+              "required": [
+                "title",
+                "status"
+              ],
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "Title is a short, human-readable summary of the problem",
+                  "example": "Bad Request"
+                },
+                "detail": {
+                  "type": "string",
+                  "description": "Detail is a human-readable explanation specific to this occurrence of the problem",
+                  "example": "Request body was expected"
+                },
+                "status": {
+                  "type": "integer",
+                  "description": "Status is the HTTP status code applicable to this problem",
+                  "example": 400,
+                  "enum": [
+                    400,
+                    401,
+                    403,
+                    404,
+                    409,
+                    500
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "EvmChainParams": {
+        "type": "object",
+        "required": [
+          "chain_id",
+          "rpc_url",
+          "native_symbol"
+        ],
+        "properties": {
+          "chain_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "rpc_url": {
+            "type": "string"
+          },
+          "native_symbol": {
+            "type": "string"
+          },
+          "explorer_url": {
+            "type": "string"
+          }
+        }
+      },
+      "NFT": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NFTKey"
+          },
+          {
+            "type": "object",
+            "required": [
+              "attributes"
+            ],
+            "properties": {
+              "attributes": {
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "icon": {
+                    "type": "string",
+                    "description": "Link to icon",
+                    "example": "https://some.storage.com/image.png"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "NFTKey": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "nft"
+            ]
+          }
+        }
+      },
+      "SolanaChainParams": {
+        "type": "object",
+        "required": [
+          "network"
+        ],
+        "properties": {
+          "network": {
+            "type": "string",
+            "enum": [
+              "testnet",
+              "mainnet"
+            ]
+          }
+        }
+      },
+      "Token": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TokenKey"
+          },
+          {
+            "type": "object",
+            "required": [
+              "attributes",
+              "relationships"
+            ],
+            "properties": {
+              "attributes": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "symbol",
+                  "token_type"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "icon": {
+                    "type": "string",
+                    "description": "Link to icon",
+                    "example": "https://some.storage.com/image.png"
+                  },
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "token_type": {
+                    "$ref": "#/components/schemas/TokenType"
+                  }
+                }
+              },
+              "relationships": {
+                "type": "object",
+                "required": [
+                  "chains"
+                ],
+                "properties": {
+                  "chains": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/ChainKey"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "TokenKey": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "token"
+            ]
+          }
+        }
+      },
+      "TokenType": {
+        "type": "string",
+        "description": "Type of token",
+        "enum": [
+          "erc20",
+          "erc721"
+        ]
+      },
+      "Transaction": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TransactionKey"
+          },
+          {
+            "type": "object",
+            "required": [
+              "attributes"
+            ],
+            "properties": {
+              "attributes": {
+                "type": "object",
+                "required": [
+                  "encoded_tx"
+                ],
+                "properties": {
+                  "encoded_tx": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "TransactionKey": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "transaction"
+            ]
+          }
+        }
+      },
+      "TransferConfirmationRequest": {
+        "type": "object",
+        "required": [
+          "token_id",
+          "network_from",
+          "network_to",
+          "tx_hash",
+          "nft_id",
+          "address_from",
+          "address_to"
+        ],
+        "properties": {
+          "address_to": {
+            "type": "string"
+          },
+          "address_from": {
+            "type": "string"
+          },
+          "token_id": {
+            "type": "string"
+          },
+          "network_from": {
+            "type": "string"
+          },
+          "network_to": {
+            "type": "string"
+          },
+          "nft_id": {
+            "type": "string"
+          },
+          "tx_hash": {
+            "type": "string"
+          }
+        }
+      },
+      "TransferCreateRequest": {
+        "type": "object",
+        "required": [
+          "token_id",
+          "network_from",
+          "network_to",
+          "address_from",
+          "address_to",
+          "nft_id"
+        ],
+        "properties": {
+          "address_to": {
+            "type": "string"
+          },
+          "address_from": {
+            "type": "string"
+          },
+          "token_id": {
+            "type": "string"
+          },
+          "network_from": {
+            "type": "string"
+          },
+          "nft_id": {
+            "type": "string"
+          },
+          "network_to": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "pageLimitParam": {
+        "in": "query",
+        "name": "page[limit]",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 15,
+          "description": "Numbers of items per page to return."
+        }
+      },
+      "pageNumberParam": {
+        "in": "query",
+        "name": "page[number]",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        },
+        "description": "The number of a page to return."
+      },
+      "sortingParam": {
+        "in": "query",
+        "name": "page[order]",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "default": "desc",
+          "description": "Order of records on the page. If sortingParam is not specified, order of records is by default sorted by ID."
+        }
+      }
+    }
+  }
+}
