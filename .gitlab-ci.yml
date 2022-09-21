@@ -1,7 +1,6 @@
-image: node:latest
+image: node:16.17.0-alpine
 tags:
   - "tokend"
-
 
 stages:
   - deploy
@@ -9,11 +8,11 @@ stages:
 pages:
   stage: deploy
   script:
-  - yarn install
-  - yarn build
-  - mv ./build ./public
+    - yarn install
+    - yarn build
+    - mv ./build ./public
   artifacts:
     paths:
-    - public
+      - public
   only:
     - main
