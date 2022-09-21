@@ -1,6 +1,7 @@
-image: node:16.17.0-alpine
-tags:
-  - "tokend"
+default:
+  image: node:16.17.0-alpine
+  tags:
+    - "tokend"
 
 stages:
   - deploy
