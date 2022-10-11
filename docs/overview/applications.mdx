@@ -3,10 +3,39 @@
 
 # Applications
 
-Here we can talk about potential applications
+Our protocol has limitless potential with its future-facing design.
+Anything that is possible on a single blockchain will be unlocked for all dApps and users across chains.
+We've already created one sub-protocol, which can safely lock and unlock tokens across chains.
+We are not limited by this one - and are already planning future sub-protocols to support future applications.
 
-- Cross-chain NFT Settlement
-- Cross-chain Airdrops
-- Cross-chain NFT lending
+## Cross-Chain NFT Settlement
 
-This section could be built out into separate pages eventually
+It is complex and requires multiple steps for users with tokens on different blockchains to buy NFTs from a marketplace.
+If a user holds liquidity on `Chain A` and an NFT exists on `Chain B`, there is no easy solution for the user to purchase the NFT.
+They must leave the marketplace, find an exchange, execute a swap (and be subject to the swap fees), return to the marketplace, and then execute a trade.
+
+With Rarimo's protocol, a user can perform a single transaction to make a cross-chain purchase.
+Also, with our bundling, this means a single gas fee for a secure, atomic transaction.
+
+![NFT Settlement](/img/nft-settlement.png)
+
+## Cross-Chain Listing
+
+Creator platforms are limited to single chains and marketplaces, alienating them from potential users and customers.
+There is no easy way to allow minting on `Chain A` and listing on marketplaces that are on `Chain B`.
+
+We can allow users to mint, list, and trade on the chains that make sense for them, increasing community reach.
+Again, our bundling design means that multiple steps can occur within a single transaction.
+
+> Image TBD
+
+## Cross-Chain Proofs
+
+Verification of ownership / provenance of non-fungible assets are limited to a single chain.
+dApps on `Chain A` can only cater to users on that chain - any users with assets on `Chain B` cannot interact.
+This limits reach, especially for non-transferable assets like Soul-Bound Tokens (SBTs).
+
+Rarimo's protocol allows cross-chain proofs.
+Token-gated access logic, DAO membership, voting rights, and other ownership rights can be checked cross-chain.
+
+![Proofs](/img/proofs.png)

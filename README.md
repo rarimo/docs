@@ -1,6 +1,3 @@
-> ❗️ Deprecated
-> This repo is deprecated. All development on this project should occur on github.com/rarimo.
-
 # Website
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator

@@ -36,6 +36,14 @@ const sidebars = {
     {
       type: 'doc',
       id: 'overview/security',
+    },
+    {
+      type: 'doc',
+      id: 'overview/addresses',
+    },
+    {
+      type: 'doc',
+      id: 'overview/fees',
     }
   ],
   smartContracts: [
@@ -66,15 +74,7 @@ const sidebars = {
         'smart-contracts/interface/evm-reference',
         'smart-contracts/interface/solana-reference',
       ],
-    },
-    {
-      type: 'doc',
-      id: 'smart-contracts/addresses',
-    },
-    {
-      type: 'doc',
-      id: 'smart-contracts/fees',
-    },
+    }
   ],
   api: [
     {

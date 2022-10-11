@@ -2,17 +2,15 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 // @TODO - make our own themes, i guess
-const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
   /** Meta information */
   title: "Rarimo Docs",
-  tagline:
-    "Tooling and guides to build the next generation of cross-chain integration",
+  tagline: "Tooling and guides to build the next generation of cross-chain integration",
   url: "https://rarify-protocol.gitlab.io/", // @todo docs.rarimo.com
-  baseUrl: "/platform-engineering/rarimo-docs-docusaurus/",
+  baseUrl: "/platform-engineering/rarimo-docs-docusaurus/", // @todo remove this
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/confused-dog.gif",
@@ -36,15 +34,15 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           breadcrumbs: false,
-          // @todo this should be our public github repo for "edit this page" feature
-          // editUrl: 'https://github.com/rarimo/rarimo-docs/blob/main',
-          editUrl:
-            "https://gitlab.com/rarify-protocol/platform-engineering/rarimo-docs-docusaurus/-/tree/main",
+          editUrl: 'https://github.com/rarimo/rarimo-docs/blob/main',
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
+        },
+        gtag: {
+          trackingID: 'GTM-PRLLH6W',
         },
       }),
     ],
@@ -103,7 +101,7 @@ module.exports = {
         apiKey: "8ececec9220ccf9a750c79fc04ecc23f",
         indexName: "rar",
         contextualSearch: true,
-        appId: "PBVGCPZL48", // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them. externalUrlRegex: "external\\.com|domain\\.com",
+        appId: "PBVGCPZL48",
         searchParameters: {},
         placeholder: "Search in the jungle",
         searchPagePath: "search",
@@ -113,7 +111,6 @@ module.exports = {
         defaultLanguage: "javascript",
         additionalLangauges: ["json", "shell", "solidity"],
       },
-      // @todo Google Analytics
       metadata: [
         {
           name: "title",

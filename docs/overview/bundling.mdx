@@ -3,4 +3,40 @@
 
 # Bundling
 
-Dedicated page to talk about bundling, and how it can save developers time & money
+Rarimo's cross-chain protocol allows multiple events to occur within a single transaction.
+User actions are often complex and requires multiple steps to achieve a goal.
+While other protocols would require a user (or application) to send unique transactions for each step, Rarimo's protocol permits bundling multiple steps.
+
+## Example
+
+This high-level example demonstrates how our bundling can simplify a user flow.
+
+Alice has an NFT on the Ethereum blockchain.
+They want to stake this NFT in a DeFi application on the Polygon blockchain.
+Normally, this would entail the following transactions:
+
+1. Locking of the NFT on Etherum network.
+1. Redemption of NFT on Polygon network.
+1. Staking NFT in the DeFi application.
+
+Each of these transactions would be subjected to gas fees and could fail independently.
+This is why we designed Rarimo to have bundled transactions on the destination chain.
+Our bundled transactions handles all of these steps efficiently with a single request, incurring one gas fee and behaving atomically.
+
+## Implementation
+
+When a token is locked in one of Rarimo's contracts, users can specify additional contracts and methods to be called on the destination chain.
+Rarimo while sign these parameters when checking the event and execute them.
+Methods that call custom contracts will not be overridable, protecting transactions from re-entrancy attacks.
+
+### Benefits
+
+- Our protocol will have efficient gas usage for end users
+- Transactions on the destination chain will succeed or fail together
+- Development is easier with this approach
+- Any address can handle the transaction calls and gas fees on behalf of the original requestor
+
+### Limitations
+
+- Transaction bundling only works with EVM networks
+- ERC1155 token transfers cannot use bundling
