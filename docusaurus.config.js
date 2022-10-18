@@ -16,8 +16,8 @@ module.exports = {
   favicon: "img/confused-dog.gif",
 
   // @todo we'll use these when we move to github
-  organizationName: "rarimo",
-  projectName: "rarimo-docs",
+  // organizationName: "rarimo",
+  // projectName: "rarimo-docs",
 
   /** Localization */
   i18n: {
@@ -34,7 +34,9 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           breadcrumbs: false,
-          editUrl: 'https://github.com/rarimo/rarimo-docs/blob/main',
+          // @todo update when we move to github
+          // editUrl: 'https://github.com/rarimo/rarimo-docs/blob/main',
+          editUrl: 'https://gitlab.com/rarify-protocol/platform-engineering/rarimo-docs-docusaurus/-/tree/main',
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem",
         },
