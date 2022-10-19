@@ -103,14 +103,14 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'NFT Settlement Button',
+      label: 'Cross-Chain NFT Settlement',
       link: {
         type: 'doc',
-        id: 'solutions/nft-settlement',
+        id: 'solutions/cross-chain-nft-settlement',
       },
       items: [
-        'solutions/nft-settlement/installation',
-        'solutions/nft-settlement/configuration',
+        'solutions/cross-chain-nft-settlement/installation',
+        'solutions/cross-chain-nft-settlement/configuration',
       ],
     },
   ],
