@@ -1,5 +1,5 @@
 // @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 // @TODO - make our own themes, i guess
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
@@ -8,7 +8,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 module.exports = {
   /** Meta information */
   title: "Rarimo Docs",
-  tagline: "Tooling and guides to build the next generation of cross-chain integration",
+  tagline:
+    "Tooling and guides to build the next generation of cross-chain integration",
   url: "https://rarify-protocol.gitlab.io/", // @todo docs.rarimo.com
   baseUrl: "/platform-engineering/rarimo-docs-docusaurus/", // @todo remove this
   onBrokenLinks: "ignore",
@@ -36,7 +37,8 @@ module.exports = {
           breadcrumbs: false,
           // @todo update when we move to github
           // editUrl: 'https://github.com/rarimo/rarimo-docs/blob/main',
-          editUrl: 'https://gitlab.com/rarify-protocol/platform-engineering/rarimo-docs-docusaurus/-/tree/main',
+          editUrl:
+            "https://gitlab.com/rarify-protocol/platform-engineering/rarimo-docs-docusaurus/-/tree/main",
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem",
         },
@@ -44,7 +46,7 @@ module.exports = {
           customCss: require.resolve("./src/css/custom.css"),
         },
         gtag: {
-          trackingID: 'GTM-PRLLH6W',
+          trackingID: "GTM-PRLLH6W",
         },
       }),
     ],

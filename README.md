@@ -33,9 +33,10 @@ This command starts a local development server and opens up a browser window. Mo
 
 ```
 $ yarn typecheck
+$ yarn lint
 ```
 
-This does a quick typecheck. We don't have any formal tests (yet) for this repo.
+This does a quick typecheck / lint. We don't have any formal tests (yet) for this repo.
 
 ### Build
 
