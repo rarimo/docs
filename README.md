@@ -46,6 +46,18 @@ $ yarn build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
+```
+$ yarn gen-api-docs
+```
+
+This command will re-generate BOTH the menu and API reference docs.
+When there is an update to the API, we need to do the following.
+
+1. Move the file to `./openapi/coreApi.json`, replacing the existing file
+1. Run `$ yarn gen-api-docs` on the command line (assuming you have the project built already)
+1. Check locally! In particular, the file in `./docs/api/reference/sidebar.js` should be reviewed carefully
+1. If everything looks good, open a new merge request against `main` (following the above contributing guidelines)
+
 ### Deployment
 
 Using SSH:

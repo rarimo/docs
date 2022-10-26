@@ -7,6 +7,7 @@ module.exports = [
       title: "Chains",
       slug: "/category/api/reference/chains",
     },
+    collapsed: false,
     items: [
       {
         type: "doc",
@@ -24,6 +25,7 @@ module.exports = [
       title: "Tokens",
       slug: "/category/api/reference/tokens",
     },
+    collapsed: false,
     items: [
       {
         type: "doc",
@@ -47,6 +49,7 @@ module.exports = [
       title: "Transfers",
       slug: "/category/api/reference/transfers",
     },
+    collapsed: false,
     items: [
       {
         type: "doc",

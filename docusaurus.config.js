@@ -141,6 +141,7 @@ module.exports = {
             outputDir: "docs/api/reference", // Output directory for generated .mdx docs
             sidebarOptions: {
               groupPathsBy: "tag",
+              sidebarCollapsed: false,
             },
           },
         },
