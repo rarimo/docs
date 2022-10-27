@@ -29,10 +29,6 @@ const sidebars = {
     },
     {
       type: "doc",
-      id: "overview/addresses",
-    },
-    {
-      type: "doc",
       id: "overview/fees",
     },
   ],
@@ -40,6 +36,10 @@ const sidebars = {
     {
       type: "doc",
       id: "smart-contracts",
+    },
+    {
+      type: "doc",
+      id: "smart-contracts/addresses",
     },
     {
       type: "category",
