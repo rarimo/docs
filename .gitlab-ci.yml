@@ -4,14 +4,22 @@ default:
     - "tokend"
 
 stages:
+  - test
   - deploy
 
-pages:
+test:
+  stage: test
+  script:
+   - yarn install --frozen-lockfile
+   - yarn lint
+   - yarn typecheck
+  only:
+   - merge_requests
+
+deploy:
   stage: deploy
   script:
-    - yarn install
-    - yarn lint
-    - yarn typecheck
+    - yarn install --frozen-lockfile --production
     - yarn build
     - mv ./build ./public
   artifacts:
