@@ -1,0 +1,105 @@
+---
+sidebar_label: Moving Liquidity
+---
+
+# Moving Liquidity Across Chains
+
+Moving liquidity, either with ERC20 tokens or native coins, is easy with Rarimo's protocol.
+It is important to understand how the liquidity will transfer.
+
+1. If the token exists on both chains, then the transfer will be symmetric. USDC tokens on Polygon will unlock USDC on Binance.
+1. Native coins rarely on multiple chains and will be mapped to wrapped versions. Ether on Ethereum will unlock Wrapped Ether on Solana.
+
+## Token Pair Examples
+
+> We should link the exact ERC20 token version once it is defined
+
+| Ethereum | Polygon | Avalanche | Solana |
+| --- | --- | --- | --- |
+| Ether | WETH | WETH | WETH |
+| WMATIC | Matic | WMATIC | WMATIC |
+| WAVAX | WAVAX | AVAX | WAVAX |
+| WSOL | WSOL | WSOL | Sol |
+| USDC | USDC | USDC | USDC |
+
+:::note
+
+You can always get the exact pairs of tokens that Rarimo supports with our [API](api/reference/get-token-list.api.mdx).
+
+:::
+
+## Example
+
+With this difference in mind, let's look at an example transfer.
+You have a friend on the Polygon network and want to send them some native Matic coin.
+The only on-chain liquidity you have is on the Ethereum network.
+Referencing the *outstanding* Rarimo documentation and API, you realize that you can transfer WMATIC -> Matic.
+
+### Setup Configuration Parameters
+
+> May be useful to have a note in here about dotenv
+
+```
+RPC_PROVIDER // preferred RPC provider, such as alchemy or infura
+PRIVATE_KEY // your wallet private key... Be Careful!
+RARIMO_CONTRACT_ADDRESS // source chain contract address
+TOKEN_CONTRACT_ADDRESS // wrapped token contract on source chain
+FRIEND_CONTRACT_ADDRESS // friend's wallet address
+```
+
+### Lock WMATIC Tokens in Ethereum Contract
+
+> TODO: verify this works once we get functional relayers
+
+```javascript
+const { ethers } = require("ethers");
+
+const contractInterface = [
+  "function depositERC20(" +
+    "address token_, " +
+    "uint256 amount_, " +
+    "tuple(bytes32 salt, bytes bundle) bundle_, " +
+    "string network_, " +
+    "string receiver_, " +
+    "boolean isWrapped_" +
+  ")"
+];
+
+const ethereumProvider = new ethers.providers.JsonRpcProvider(
+  process.env.RPC_PROVIDER,
+);
+
+const signer = new ethers.Wallet(
+  process.env.PRIVATE_KEY,
+  ethereumProvider,
+);
+
+const rarimoContract = new ethers.Contract(
+  process.env.RARIMO_CONTRACT_ADDRESS,
+  contractInterface,
+  signer,
+);
+
+async function main() {
+  const transaction = await rarimoContract.depositERC20(
+    process.env.TOKEN_CONTRACT_ADDRESS,
+    1,
+    {
+      salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
+      bundle: "0x",
+    },
+    "polygon",
+    process.env.FRIEND_CONTRACT_ADDRESS,
+    true,
+  );
+
+  const output = await transaction.wait();
+  return output.transactionHash;
+}
+
+(async () => await main())();
+```
+
+### Unlock Transaction on Destination
+
+> Check to see if this is needed
