@@ -100,6 +100,16 @@ module.exports = {
       },
       footer: {
         style: "dark",
+        links: [
+          {
+            label: "Discord",
+            href: "https://discordapp.com/invite/rarimoprotocol",
+          },
+          {
+            label: "Twitter",
+            href: "https://twitter.com/rarimoprotocol",
+          },
+        ],
       },
       algolia: {
         apiKey: "8ececec9220ccf9a750c79fc04ecc23f",
