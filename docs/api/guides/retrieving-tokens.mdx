@@ -1,6 +1,111 @@
 ---
+sidebar_label: Retrieving Tokens
 ---
 
-# Retrieving tokens
+# Retrieving Supported Tokens
 
-Guide & code examples for retrieving chains & tokens
+Getting a list of which tokens can be transferred across blockchains with Rarimo is important for certain user flows.
+There are different ways to fetch this information.
+Which way is easier for you depends on your integration and preference.
+
+## Tokens by Blockchain -> Blockchain Transfer
+
+If you want to see all tokens supported for transfer between two different blockchains, it may be easier to start with the chain.
+To do this, you can call the [Get Supported Chain List](/api/reference/get-chain-list.api.mdx) endpoint and include token information.
+Here's an example flow that will follow this criteria...
+
+1. Transfer between the Görli and Sepolia blockchains
+1. List all tokens that transfer between these two chains
+1. Show the Name, Symbol, and ID of these tokens
+
+> TODO: update baseUrl w/ launch version, hopefully "test" mode
+> TODO: verify naming convention of chains
+
+```javascript
+const BASE_URL = "https://api.rarify.tokend.io";
+
+const CHAIN_NAMES = [
+  'Görli',
+  'Sepolia',
+];
+
+async function main() {
+  const response = await fetch(`${BASE_URL}/v1/chains?include=token`);
+  const jsonResponse = await response.json();
+
+  // json-api schema
+  // we need to iterate through relationships to find associated tokens
+  const supportedTokenIds = [];
+  jsonResponse.data.forEach((chain) => {
+    if (CHAIN_NAMES.includes(chain.attributes.name)) {
+      chain.relationships.tokens.data.forEach((token) => {
+        // avoid duplicates
+        if (!supportedTokenIds.includes(token.id)) {
+          supportedTokenIds.push(token.id);
+        }
+      });
+    }
+  });
+
+  // now iterate through includes to fetch token metadata
+  const supportedTokens = [];
+  jsonResponse.included.forEach((included) => {
+    if (
+      supportedTokenIds.includes(included.id) &&
+      included.type === 'token'
+    ) {
+      supportedTokens.push({
+        id: included.id,
+        name: included.attributes.name,
+        symbol: included.attributes.symbol,
+      });
+    }
+  });
+
+  return supportedTokens;
+}
+
+(async () => await main().then(console.log))();
+```
+
+## Tokens by ERC Standard
+
+If you want to see a list of tokens that can be transferred by their ERC Standard, it is best to start with the tokens.
+You will use the [Get Supported Token List](/api/reference/get-token-list.api.mdx) endpoint and filter by the standard.
+This example flow will follow this criteria...
+
+1. Only retrieve ERC721 tokens
+1. List these tokens and the supported chains
+1. Show the Name, Symbol, ID, and Chains for these tokens
+
+```javascript
+const BASE_URL = "https://api.rarify.tokend.io";
+const ERC_STANDARD = 'erc721';
+
+async function main() {
+  const response = await fetch(
+    `${BASE_URL}/v1/tokens?include=chain&filter[token_type]=${ERC_STANDARD}`,
+  );
+  const jsonResponse = await response.json();
+
+  const supportedTokens = jsonResponse.data.map((token) => ({
+    id: token.id,
+    name: token.attributes.name,
+    symbol: token.attributes.symbol,
+    // json-api schema
+    // we need to connect the relationships & included for chain metadata
+    chains: token.relationships.chains.data.map((relatedChain) => {
+      const chain = jsonResponse.included.find(includedChain => (
+        includedChain.id == relatedChain.id &&
+        includedChain.type === 'chain'
+      ));
+
+      return chain.attributes.name;
+    }),
+  }));
+
+  return supportedTokens;
+}
+
+(async () => await main().then(console.log))();
+```

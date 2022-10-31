@@ -50,10 +50,12 @@ FRIEND_CONTRACT_ADDRESS // friend's wallet address
 ### Lock WMATIC Tokens in Ethereum Contract
 
 > TODO: verify this works once we get functional relayers
+> TODO: maybe replace interface with package ABI
 
 ```javascript
 const { ethers } = require("ethers");
 
+// broken up for readability, this is totally optional
 const contractInterface = [
   "function depositERC20(" +
     "address token_, " +
@@ -80,14 +82,17 @@ const rarimoContract = new ethers.Contract(
   signer,
 );
 
+// mock bundle - this won't actually do anything besides send to desired friend address
+const stubBundle = {
+  salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
+  bundle: "0x",
+};
+
 async function main() {
   const transaction = await rarimoContract.depositERC20(
     process.env.TOKEN_CONTRACT_ADDRESS,
+    stubBundle,
     1,
-    {
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
-      bundle: "0x",
-    },
     "polygon",
     process.env.FRIEND_CONTRACT_ADDRESS,
     true,
@@ -97,7 +102,7 @@ async function main() {
   return output.transactionHash;
 }
 
-(async () => await main())();
+(async () => await main().then(console.log)();
 ```
 
 ### Unlock Transaction on Destination

@@ -3,7 +3,9 @@
 
 # Core API
 
-Our API makes working with the Rarimo protocol and smart contract interfaces simply delightful.
+Our API provides a programmatic helper for working with the Rarimo Protocol.
+Using the API, you can fetch the supported blockchains, contract addresses, tokens that can be natively used with Rarimo.
+It is structured to support a discovery process to build one-off developer scripts or dynamic user-generated flows.
 
 :::note
 
@@ -13,13 +15,12 @@ You can work with our API with NO authentication. Its free to use, today and for
 
 ## Features
 
-- Retrieve a list of compatability blockchains & tokens
-- Understand the interface of the contracts
-- Build transactions
-- Test mode (testnet vs mainnets)
+- Retrieve information about supported blockchains, contract addresses, and tokens
+- Build transactions and bundling flows
+- Easily toggle test mode (testnets vs mainnets)
+- JSON-API schema for request-side aggregation
 
 ## Access
 
-- BaseURL - https://api.rarify.tokend.io/v1/ (for now)
-- Note about design (json, rest, whatever)
-- Link to openapi file
+- BaseURL - https://api.rarify.tokend.io (for now)
+- Download our [OpenAPI spec](/openapi/coreApi.json)
