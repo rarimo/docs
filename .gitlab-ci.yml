@@ -16,7 +16,7 @@ test:
   rules:
   - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
 
-deploy:
+pages:
   stage: deploy
   script:
   - yarn install --frozen-lockfile --production
