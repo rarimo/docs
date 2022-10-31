@@ -16,12 +16,12 @@ test:
   rules:
   - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
 
-
 deploy:
   stage: deploy
   script:
   - yarn install --frozen-lockfile --production
   - yarn build
+  - rm -rf ./public/*
   - mv ./build ./public
   artifacts:
     paths:
