@@ -7,8 +7,8 @@
   },
   "servers": [
     {
-      "url": "https://api.demo.tokend.io",
-      "description": "TokenD Developer Environment"
+      "url": "https://api.rarify.tokend.io",
+      "description": "Rarimo Core API [beta]"
     }
   ],
   "tags": [

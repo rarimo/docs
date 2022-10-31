@@ -12,6 +12,7 @@ module.exports = {
     "Tooling and guides to build the next generation of cross-chain integration",
   url: "https://rarify-protocol.gitlab.io/", // @todo docs.rarimo.com
   baseUrl: "/platform-engineering/rarimo-docs-docusaurus/", // @todo remove this
+  trailingSlash: false,
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/confused-dog.gif",
@@ -147,7 +148,7 @@ module.exports = {
         docsPluginId: "classic",
         config: {
           coreApi: {
-            specPath: "openapi/coreApi.json", // Path to designated spec file
+            specPath: "static/openapi/coreApi.json", // Path to designated spec file
             outputDir: "docs/api/reference", // Output directory for generated .mdx docs
             sidebarOptions: {
               groupPathsBy: "tag",
