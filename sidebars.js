@@ -50,7 +50,6 @@ const sidebars = {
       },
       collapsed: false,
       items: [
-        "smart-contracts/guides/passing-a-message",
         "smart-contracts/guides/moving-liquidity",
         "smart-contracts/guides/transferring-tokens",
       ],

@@ -3,4 +3,206 @@
 
 # EVM Reference
 
-Some sort of ABI or high-level interface discussion
+On each of the EVM-compatible blockchains that we support, the deployed smart contract adhere to the exact same interface.
+This interface is available for you on both `npm` and `github`.
+You can use this page to quickly reference the interface and capabilities of our deployed contracts.
+
+> TODO: link to the package / github where our ABIs are accessible
+
+## General Notes
+
+### Emitted Events
+
+Each of these methods will emit an event in a standardized way.
+As an example, the `DepositNative` will emit an event of `DepositedNative` when it is called.
+All of the parameters passed in will be part of the emitted event, in the same order, with the exception of the bundle parameter - this will be unwrapped and logged as two separate parameters (salt and bundle).
+
+### Bundling
+
+Each method accepts a bundle parameter, which is a tuple of a salt and bundle.
+The salt is used to determine a proxy address, while the bundle is an encoded transaction bundle.
+
+> Give some examples of how bundles work
+
+### Network Parameters
+
+To ensure that our protocol works with all blockchains, not just EVM-compatible ones, the destination network is a simple string.
+Make sure you pass in the correct spelling of the blockchain by using our [Get supported chain list endpoint]([API](../../api/reference/get-chain-list.api.mdx).
+
+## DepositNative
+
+### Interface
+
+```solidity
+function depositNative(
+  IBundler.Bundle calldata bundle_,
+  string calldata network_,
+  string calldata receiver_
+) external payable;
+```
+
+### Parameters
+
+- `bundle_` used for transaction bundling *tuple (bytes32 salt, bytes bundle)*
+- `network_` network name destination of the transfer
+- `receiver_` receiver address in destination chain
+
+As the `DepositNative` method is called to transfer native coin from a source to destination, the method signature is basic.
+You will need to pass in the amount of native coin in the signature, usually via a wallet, that you want to send to the protocol.
+
+### Example
+
+Here's an example call in Javascript that could transfer 100000 WEI from Ethereum to Polygon (where it could be withdrawn as Wrapped ETH ERC20).
+
+```javascript
+await rarimoContract.despositNative(
+  {
+    salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
+    bundle: "0x",
+  },
+  "polygon",
+  "0x",
+  {
+    gasLimit: 50000,
+    value: 100000,
+  },
+);
+```
+
+## DepositERC20
+
+### Interface
+
+```solidity
+function depositERC20(
+  address token_,
+  uint256 amount_,
+  IBundler.Bundle calldata bundle_,
+  string calldata network_,
+  string calldata receiver_,
+  bool isWrapped_
+) external;
+```
+
+### Parameters
+
+- `token_` source contract address for the fungible tokens being transferred
+- `amount_` how many tokens are being transferred
+- `bundle_` used for transaction bundling *tuple (bytes32 salt, bytes bundle)*
+- `network_` network name destination of the transfer
+- `receiver_` receiver address in destination chain
+- `isWrapped_` whether the tokens will be locked (true) or transferred (false)
+
+You can use the `DepositERC20` method to move fungible tokens from a source to destination.
+When you call this, you need to decide if you want to lock & unlock or attempt a true transfer.
+
+### Example
+
+Here's an example call in Javascript that will transfer 10 USDT from Avalanche to Solana by locking & unlocking tokens in each chain.
+
+```javascript
+await rarimoContract.depositERC20(
+  '0xc7198437980c041c805a1edcba50c1ce5db95118',
+  10,
+  {
+    salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
+    bundle: "0x",
+  },
+  "solana",
+  "0x",
+  true,
+);
+```
+
+## DepositERC721
+
+### Interface
+
+```solidity
+function depositERC721(
+  address token_,
+  uint256 tokenId_,
+  IBundler.Bundle calldata bundle_,
+  string calldata network_,
+  string calldata receiver_,
+  bool isWrapped_
+) external;
+```
+
+### Parameters
+
+- `token_` source contract address for NFT contract
+- `tokenId_` which token is being transferred
+- `bundle_` used for transaction bundling *tuple (bytes32 salt, bytes bundle)*
+- `network_` network name destination of the transfer
+- `receiver_` receiver address in destination chain
+- `isWrapped_` whether the tokens will be locked (true) or transferred (false)
+
+The `DepositERC721` method is used to move a single NFT from a contract to another chain.
+Similar to ERC20s, when you call this, you need to decide if you want to lock & unlock or attempt a true transfer.
+
+### Example
+
+Here's an example call in Javascript that will transfer an NFT from Binance to Ethereum by a raw transfer.
+
+```javascript
+await rarimoContract.depositERC721(
+  '0x12786C473E6d6bB78E554c90812772bEad18264e',
+  996800003035,
+  {
+    salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
+    bundle: "0x",
+  },
+  "ethereum",
+  "0x",
+  false,
+);
+```
+
+## DepositERC1155
+
+### Interface
+
+```solidity
+function depositERC1155(
+  address token_,
+  uint256 tokenId_,
+  uint256 amount_,
+  IBundler.Bundle calldata bundle_,
+  string calldata network_,
+  string calldata receiver_,
+  bool isWrapped_
+) external;
+```
+
+### Parameters
+
+- `token_` source contract address for NFT contract
+- `tokenId_` which token is being transferred
+- `amount_` how many fungible tokens to include
+- `bundle_` used for transaction bundling *tuple (bytes32 salt, bytes bundle)*
+- `network_` network name destination of the transfer
+- `receiver_` receiver address in destination chain
+- `isWrapped_` whether the tokens will be locked (true) or transferred (false)
+
+The `DepositERC1155` method is used to move either non-fungible or fungible tokens from an ERC1155.
+Predictably, the interface is usage is a combination of the ERC20 and ERC721 methods.
+
+### Example
+
+Here's an example call in Javascript that will transfer 10 SLI fungible tokens from Polygon to NEAR by locking & unlocking.
+
+```javascript
+await rarimoContract.depositERC1155(
+  '0x22d5f9B75c524Fec1D6619787e582644CD4D7422',
+  0,
+  10,
+  {
+    salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
+    bundle: "0x",
+  },
+  "near",
+  "0x",
+  true,
+);
+```
