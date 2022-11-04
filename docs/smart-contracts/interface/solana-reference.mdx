@@ -1,6 +1,86 @@
 ---
+sidebar_label: Solana Program
 ---
 
-# Solana Reference
+# Solana Program Reference
 
-Some sort of ABI or high-level interface discussion
+The smart contract for interacting with the Rarimo protocol over Solana is similar to the NEAR blockchain.
+You can view our contracts directly on `npm` and `github`.
+This page serves as a reference to the interface and a summary of the capabilities.
+
+> TODO: link to the package / github where the contracts are accessible
+
+## General Notes
+
+### Emitted Events
+
+> TODO: once we have some functional examples, show how the [websocket events](https://docs.solana.com/developing/clients/jsonrpc-api#subscription-websocket) will look
+
+### Bundling
+
+Each method accepts a bundle_data and a bundle_seed parameter, which can be used for bundling transactions on the destination chain.
+
+> TODO: Give some examples of how bundles work
+
+### Network Parameters
+
+To ensure that our protocol works with all blockchains, the destination network parameter is a string.
+Make sure you pass in the correct spelling of the blockchain by using our [Get supported chain list endpoint](../../api/reference/get-chain-list.api.mdx).
+
+## deposit_native
+
+### Interface
+
+```rust
+pub fn deposit_native(
+    program_id: Pubkey,
+    bridge_admin: Pubkey,
+    owner: Pubkey,
+    seeds: [u8; 32],
+    network_to: String,
+    amount: u64,
+    receiver_address: String,
+    bundle_data: Option<Vec<u8>>,
+    bundle_seed: Option<[u8; 32]>,
+)
+
+```
+
+### Parameters
+
+- `amount` how much native SOL to transfer
+- `network_to` destination network
+- `receiver_address` receiever address in destination chain
+- `seeds` ???
+- `bundle_data` encoded transaction bundle
+- `bundle_seed` seed for decoding bundle and determine the addresses
+
+The `deposit_native` method is called to transfer native coin from the Solana blockchain to a destination chain.
+
+### Example
+
+Here's an example call in Javascript that could transfer 5 SOL from Solana Devnet to Görli (where it could be withdrawn as Wrapped SOL ERC20).
+
+```javascript
+const seed = ""; // TODO what should this be
+
+const transaction = new Transaction().add(
+  SystemProgram.createAccountWithSeed({
+    fromPubkey: payer.publicKey,
+    basePubKey: payer.publicKey,
+    seed: seed,
+    newAccountPubkey: pubkey,
+    lamports: lamports,
+    space: seed.length(), // TODO verify this
+    programId: "", // TODO get Solana test contract id
+  });
+);
+
+await sendAndConfirmTransaction(
+  connection,
+  transaction,
+  [payer],
+);
+```
+
+> TODO: add fungible & non-fungible token documentation

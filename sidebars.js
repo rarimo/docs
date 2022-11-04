@@ -51,7 +51,7 @@ const sidebars = {
       collapsed: false,
       items: [
         "smart-contracts/guides/moving-liquidity",
-        "smart-contracts/guides/transferring-tokens",
+        "smart-contracts/guides/transfer-nfts",
       ],
     },
     {
@@ -64,6 +64,7 @@ const sidebars = {
       collapsed: false,
       items: [
         "smart-contracts/interface/evm-reference",
+        "smart-contracts/interface/near-reference",
         "smart-contracts/interface/solana-reference",
       ],
     },
