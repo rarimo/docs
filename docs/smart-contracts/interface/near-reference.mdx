@@ -1,0 +1,76 @@
+---
+sidebar_label: NEAR Contract
+---
+
+# NEAR Contract Reference
+
+Rarimo's smart contract interface on the NEAR blockchain is similar, but not identical, to the EVM smart contracts.
+You can pull our NEAR contract via `npm` and `github`.
+This page is a quick reference for the interface and capabilities of this contract.
+
+> TODO: link to the package / github where the contracts are accessible
+
+## General Notes
+
+### Emitted Events
+
+Each of these methods will emit an event in a standardized way.
+As an example, the `native_deposit` will emit an event of `native_deposited` when it is called.
+All of the parameters passed in will be part of the emitted event, in the same order.
+
+### Bundling
+
+Each method accepts a salt and a bundle parameter, which can be used for bundling on the destination chain.
+
+> TODO: Give some examples of how bundles work
+
+### Network Parameters
+
+To ensure that our protocol works with all blockchains, the destination network parameter is a string.
+Make sure you pass in the correct spelling of the blockchain by using our [Get supported chain list endpoint](../../api/reference/get-chain-list.api.mdx).
+
+## native_deposit
+
+### Interface
+
+```rust
+#[payable]
+pub fn native_deposit(
+  &mut self,
+  receiver_id: AccountId,
+  chain: String,
+  bundle_data: Option<String>,
+  bundle_hash: Option<String>,
+)
+```
+
+### Parameters
+
+- `receiver_id` receiver address in destination chain
+- `chain` network name destination of the transfer
+- `bundle_data` endcoded transaction bundle
+- `bundle_hash` hash for decoding bundle and determine the addresses
+
+The `native_deposit` method is called to transfer native coin from the NEAR blockchain to a destination chain.
+You will need to pass in the amount of native coin in the signature, usually via a wallet, that you want to transfer.
+
+### Example
+
+Here's an example call in Javascript that could transfer 100 NEAR from NEAR testnet to Ethereum (where it could be withdrawn as Wrapped NEAR ERC20).
+
+```javascript
+await wallet.callMethod({
+  contractId: '0x',
+  method: 'deposit_native',
+  args: {
+    receiver_id: '0x',
+    chain: 'goerli',
+    bundle_data: '0x',
+    bundle_hash: '0x0000000000000000000000000000000000000000000000000000000000000001',
+  },
+  50000,
+  100,
+});
+```
+
+> TODO: add fungible & non-fungible token documentation
