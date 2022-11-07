@@ -105,7 +105,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Cross-Chain NFT Settlement",
+      label: "Cross-Chain Settlement",
       link: {
         type: "doc",
         id: "solutions/cross-chain-nft-settlement",
