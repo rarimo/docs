@@ -4,4 +4,96 @@ sidebar_label: Transferring NFTs
 
 # Transfer NFTs Between Chains
 
-Bridging without the word bridge
+Rarimo's bridging protocol allows you to transfer NFTs between the supported blockchains.
+There are two ways to do this, and you can switch between the two with the `wrapped` parameter.
+
+1. `wrapped=true` will lock the token and unlock a similar token on the destination chain
+1. `wrapped=false` will burn the token and mint a new token on the destination chain
+
+Either method will preserve the original token information for later reference.
+
+:::note
+
+To check to make sure the token can be transferred, you can use our [API](api/reference/get-token-list.api.mdx).
+
+:::
+
+## Example
+
+As an example, let's say that you want to transfer an ERC721 NFT from Avalanche to Ethereum.
+You want to burn the token on Avalance and mint a new one on Ethereum, and have it dropped in your Ethereum wallet.
+
+### Setup Configuration Parameters
+
+> May be useful to have a note in here about dotenv
+
+```
+RPC_PROVIDER // preferred RPC provider, such as alchemy or infura
+PRIVATE_KEY // your wallet private key... Be Careful!
+RARIMO_CONTRACT_ADDRESS // source chain contract address
+NFT_CONTRACT_ADDRESS // contract address on source chain for NFT
+NFT_ID // the id of your NFT within the contract
+WALLET_ADDRESS // your wallet address, on destination chain
+```
+
+### Send NFT to Avalanche Contract
+
+> TODO: verify this works once we get functional relayers
+> TODO: maybe replace interface with package ABI
+
+```javascript
+const { ethers } = require("ethers");
+
+// broken up for readability, this is totally optional
+const contractInterface = [
+  "function depositERC721(" +
+    "address token_, " +
+    "uint256 tokenId_, " +
+    "tuple(bytes32 salt, bytes bundle) bundle_, " +
+    "string network_, " +
+    "string receiver_, " +
+    "boolean isWrapped_" +
+  ")"
+];
+
+const ethereumProvider = new ethers.providers.JsonRpcProvider(
+  process.env.RPC_PROVIDER,
+);
+
+const signer = new ethers.Wallet(
+  process.env.PRIVATE_KEY,
+  ethereumProvider,
+);
+
+const rarimoContract = new ethers.Contract(
+  process.env.RARIMO_CONTRACT_ADDRESS,
+  contractInterface,
+  signer,
+);
+
+// mock bundle - this won't actually do anything
+const stubBundle = {
+  salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
+  bundle: "0x",
+};
+
+async function main() {
+  const transaction = await rarimoContract.depositERC721(
+    process.env.NFT_CONTRACT_ADDRESS,
+    process.env.NFT_ID,
+    stubBundle,
+    "ethereum",
+    process.env.WALLET_ADDRESS,
+    false,
+  );
+
+  const output = await transaction.wait();
+  return output.transactionHash;
+}
+
+(async () => await main().then(console.log)();
+```
+
+### Unlock Transaction on Destination
+
+> TODO: Check to see if this is needed, sometimes it is, sometime it isn't
