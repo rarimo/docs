@@ -6,6 +6,12 @@ const apiReference = require("./docs/api/reference/sidebar");
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
+  whitepaper: [
+    {
+      type: "doc",
+      id: "whitepaper",
+    },
+  ],
   overview: [
     {
       type: "doc",
