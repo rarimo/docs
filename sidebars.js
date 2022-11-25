@@ -11,6 +11,10 @@ const sidebars = {
       type: "doc",
       id: "whitepaper",
     },
+    {
+      type: "doc",
+      id: "whitepaper/abstract",
+    },
   ],
   overview: [
     {
