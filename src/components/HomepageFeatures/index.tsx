@@ -11,34 +11,36 @@ type FeatureItem = {
   description: JSX.Element;
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const FeatureList: FeatureItem[] = [
   {
-    title: "Easy to Use",
-    Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
+    title: "NFT Settlement",
+    Svg: require("@site/static/img/settlement.svg").default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Users can buy NFTs using their token of choice from any supported
+        blockchain in a single transaction — with the lowest fees.
       </>
     ),
   },
   {
-    title: "Focus on What Matters",
-    Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
+    title: "Lending & Borrowing",
+    Svg: require("@site/static/img/lend-borr.svg").default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Rarimo integrates with lending platforms, enabling collateralized or
+        uncollateralized lending across different blockchain.
       </>
     ),
   },
   {
-    title: "Powered by React",
-    Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
+    title: "Asset verification",
+    Svg: require("@site/static/img/asset-verification.svg").default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Allowing to retrieve and publish timestamped proofs about an NFT’s state
+        and activities.
       </>
     ),
   },
