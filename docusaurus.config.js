@@ -70,6 +70,12 @@ module.exports = {
         items: [
           {
             type: "doc",
+            docId: "whitepaper",
+            position: "left",
+            label: "Whitepaper",
+          },
+          {
+            type: "doc",
             docId: "overview",
             position: "left",
             label: "Overview",

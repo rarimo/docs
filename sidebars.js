@@ -13,7 +13,7 @@ const sidebars = {
     },
     {
       type: "doc",
-      id: "whitepaper/abstract",
+      id: "whitepaper/problem_statement",
     },
   ],
   overview: [
