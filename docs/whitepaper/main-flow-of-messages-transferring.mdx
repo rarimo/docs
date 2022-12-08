@@ -1,0 +1,24 @@
+---
+---
+
+# Main flow of messages transferring
+The main flow of message transfer happens in 4 steps:
+1. Initiator creates action and sends it to the Rarimo Contract
+2. Validators add a transaction to the Rarimo core and generate a witness
+3. Prover receives the witness from the Rarimo core and provides it to the Rarimo Contract on the destination chain
+4. Receiver updates their state depending on the received message
+
+Cross-Chain Message Transfer Example:
+1. In order to transfer a message from one system to another, Alice creates an event in the Rarimo contract.
+2. The block proposer adds this transaction to the block, signs it, and transfers it to other validators. If 2/3+ current validators have signed the block (if the threshold signature is valid), it’s added to the blockchain is irreversible. Adding a block to the chain will automatically initiate the creation of the witness needed by the message recipient.
+3. The Prover listens to events in the Rarimo core and in the case of needed block confirmation - receives the needed witness. So, what is the witness? The witness is a data structure that includes:
+* Transaction with event
+* The header of the block in which the transaction was added
+* Evidence of the block in which transaction was added
+* Merkle branch for proving that the transaction is included in the needed block.
+4. The Prover provides the witness to the Rarimo Contract and the contract performs the following verification:
+* That this witness wasn’t confirmed before (contract stores hash values of all previous witnesses)
+* The signature of the block header (using evidence)
+* The Merkle branch for confirming that the transaction is included in the needed block
+
+If all verifications are passed - the bridge initiates the corresponding event with the destination address (contract/account).

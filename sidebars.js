@@ -15,6 +15,42 @@ const sidebars = {
       type: "doc",
       id: "whitepaper/problem_statement",
     },
+    {
+      type: "doc",
+      id: "whitepaper/protocol-vision",
+    },
+    {
+      type: "doc",
+      id: "whitepaper/architecture-and-operating-principles",
+    },
+    {
+      type: "doc",
+      id: "whitepaper/main-flow-of-messages-transferring",
+    },
+    {
+      type: "doc",
+      id: "whitepaper/light-wallet-supporting",
+    },
+    {
+      type: "doc",
+      id: "whitepaper/security-and-efficiency",
+    },
+    {
+      type: "doc",
+      id: "whitepaper/utilities-of-the-token",
+    },
+    {
+      type: "doc",
+      id: "whitepaper/governance",
+    },
+    {
+      type: "doc",
+      id: "whitepaper/summary",
+    },
+    {
+      type: "doc",
+      id: "whitepaper/sources",
+    },
   ],
   overview: [
     {
