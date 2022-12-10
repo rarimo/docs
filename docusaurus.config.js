@@ -10,8 +10,8 @@ module.exports = {
   title: "Rarimo Docs",
   tagline:
     "Tooling and guides to build the next generation of cross-chain integration",
-  url: "https://rarify-protocol.gitlab.io/", // @todo docs.rarimo.com
-  baseUrl: "/platform-engineering/rarimo-docs-docusaurus/", // @todo remove this
+  url: "https://rarimo.gitlab.io/", // @todo docs.rarimo.com
+  baseUrl: "/docs/", // @todo remove this
   trailingSlash: false,
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "warn",
@@ -39,7 +39,7 @@ module.exports = {
           // @todo update when we move to github
           // editUrl: 'https://github.com/rarimo/rarimo-docs/blob/main',
           editUrl:
-            "https://gitlab.com/rarify-protocol/platform-engineering/rarimo-docs-docusaurus/-/tree/main",
+            "https://gitlab.com/rarimo/docs/-/tree/main",
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem",
         },

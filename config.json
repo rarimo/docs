@@ -1,10 +1,10 @@
 {
   "index_name": "rar",
   "start_urls": [
-    "https://rarify-protocol.gitlab.io/platform-engineering/rarimo-docs-docusaurus/"
+    "https://rarimo.gitlab.io/docs/"
   ],
   "sitemap_urls": [
-    "https://rarify-protocol.gitlab.io/platform-engineering/rarimo-docs-docusaurus/sitemap.xml"
+    "https://rarimo.gitlab.io/docs/sitemap.xml"
   ],
   "sitemap_alternate_links": true,
   "stop_urls": ["/tests"],
