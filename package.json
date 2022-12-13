@@ -34,6 +34,7 @@
     "@tsconfig/docusaurus": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
+    "docusaurus": "^1.14.7",
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-markdown": "^3.0.0",
