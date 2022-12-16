@@ -4,8 +4,9 @@
 # Rarimo NFT Settlement Use Case
 ## Integration Doc - v0.3
 ### The main flow of NFT Settlement Use Case
-The main flow of NFT Settlement Usecase is buying NFT for tokens which will be exchanged for the needed one through one
-transaction, which happens in 7 steps:
+Rarimo’s NFT Settlement flow allows marketplace users to make cross-chain NFT purchases without the extra manual steps.
+Clients accept practically any fungible token from our supported blockchains, using our unique bundling technology to
+minimize fees and increase transaction reliability., Flow orchestration takes place in 7 steps:
 
 1. Web application creates a transaction with the call method and sends it to the Swap Contract on the original chain
 (interaction with Rarimo Contract not needed)
@@ -14,7 +15,8 @@ transaction, which happens in 7 steps:
 4. Validators add a transaction of lock event to the Rarimo core and generate a witness
 5. The relayer receives the witness from the Rarimo core and provides it to the Rarimo Contract on the destination chain
 6. Rarimo Contract on the destination chain handles bundled data which Web application included in the transaction to buy NFT for exchanged tokens
-7. The receiver gets bought NFT in his wallet
+7. The receiver gets purchased NFT in the wallet
+
 
 ![NFT Settlement](/img/nft-settlement.png)
 
@@ -28,15 +30,14 @@ Bundle salt is needed to call custom code securely, it defines an intermediate a
 will send fungible tokens because the Rarimo contract on the destination chain creates a temporary contract on which
 will call another contract to buy NFT. Salt is used as part of the Solidity create2 method to create a proxy contract.
 So you can use it to determine this proxy contract address. It is needed in rare cases, and you don’t have to determine
-it. As salt you should specify random 32 bytes length array encoded into the hex string, there is snipped how to
-generate it:
+it. As salt you should specify random 32 bytes length array encoded into the hex string, there is snipped how to generate it:
 ```javascript
 const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))`
 ```
 
 #### Bundle Data
-To create a transaction bundle needed to specify Marketplace contract call and Web3.js and ethers packages must be
-installed. We will use web3.eth.abi.encodeParameters function to encode all needed parameters into the bytes array.
+To create a transaction bundle needed to specify Marketplace contract call and Web3.js and ethers packages must be installed.
+We will use `web3.eth.abi.encodeParameters` function to encode all needed parameters into the bytes array.
 
 The first argument will be the Solidity types of parameters that we pass:
 
