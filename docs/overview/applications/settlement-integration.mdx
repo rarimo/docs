@@ -32,7 +32,7 @@ will call another contract to buy NFT. Salt is used as part of the Solidity crea
 So you can use it to determine this proxy contract address. It is needed in rare cases, and you don’t have to determine
 it. As salt you should specify random 32 bytes length array encoded into the hex string, there is snipped how to generate it:
 ```javascript
-const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))`
+const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
 ```
 
 #### Bundle Data
