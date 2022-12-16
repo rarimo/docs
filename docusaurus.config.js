@@ -58,7 +58,7 @@ module.exports = {
     ({
       colorMode: {
         defaultMode: "dark",
-        disableSwitch: true,
+        disableSwitch: false,
       },
       navbar: {
         title: "Rarimo Docs",
