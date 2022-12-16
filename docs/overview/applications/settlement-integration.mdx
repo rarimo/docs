@@ -1,0 +1,98 @@
+---
+---
+
+# Rarimo NFT Settlement Use Case
+## Integration Doc - v0.3
+### The main flow of NFT Settlement Use Case
+The main flow of NFT Settlement Usecase is buying NFT for tokens which will be exchanged for the needed one through one
+transaction, which happens in 7 steps:
+
+1. Web application creates a transaction with the call method and sends it to the Swap Contract on the original chain
+(interaction with Rarimo Contract not needed)
+2. Swap Contract calls DEX (decentralized exchange contract, Uniswap in our case)
+3. DEX contract returns exchanged tokens to the Swap Contract, which one calls Rarimo Contract to send and lock tokens on it.
+4. Validators add a transaction of lock event to the Rarimo core and generate a witness
+5. The relayer receives the witness from the Rarimo core and provides it to the Rarimo Contract on the destination chain
+6. Rarimo Contract on the destination chain handles bundled data which Web application included in the transaction to buy NFT for exchanged tokens
+7. The receiver gets bought NFT in his wallet
+
+![NFT Settlement](/img/nft-settlement.png)
+
+### Transaction bundling
+Transaction bundle is needed to provide custom logic that will be used on the destination chain by the Rarimo contract
+to execute some action after unlocking transferred tokens such as buying NFT tokens through calling another contract
+method there is how we do it in our demo.
+
+#### Bundle Salt
+Bundle salt is needed to call custom code securely, it defines an intermediate address from which the Rarimo contract
+will send fungible tokens because the Rarimo contract on the destination chain creates a temporary contract on which
+will call another contract to buy NFT. Salt is used as part of the Solidity create2 method to create a proxy contract.
+So you can use it to determine this proxy contract address. It is needed in rare cases, and you don’t have to determine
+it. As salt you should specify random 32 bytes length array encoded into the hex string, there is snipped how to
+generate it:
+```javascript
+const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))`
+```
+
+#### Bundle Data
+To create a transaction bundle needed to specify Marketplace contract call and Web3.js and ethers packages must be
+installed. We will use web3.eth.abi.encodeParameters function to encode all needed parameters into the bytes array.
+
+The first argument will be the Solidity types of parameters that we pass:
+
+NFT contract address (`address[]`) – will be called by Rarimo contract to buy NFT
+NFT price (`uint256[]`) –  calculated NFT price token on the destination chain
+Encoded function call (`bytes[]`) - encoded NFT contract buy function call
+
+The second argument is a value for upwards types, there is a snippet:
+
+```javascript
+const priceOfNft = ethers.utils
+  .parseUnits(inputAmount.toString(), TokenB.decimals)
+  .toString()
+
+const encodeBuyFunctionCall = (receiver: string) => web3.eth.abi.encodeFunctionCall(
+    {
+      inputs: [
+        { internalType: "address", name: "receiver_", type: "address" },
+      ],
+      name: "buy",
+      outputs: [],
+      stateMutability: "payable",
+      type: "function",
+    },
+    [receiver]
+)
+
+const bundle = web3.eth.abi.encodeParameters(
+  ["address[]", "uint256[]", "bytes[]"],
+  [
+    [NFT_CONTRACT_ADDRESS],
+    [priceOfNft],
+    [encodeBuyFunctionCall(USER_WALLET_ADDRESS)],
+  ]
+)
+```
+After creating all bundle data we need to call Swap contract method:
+```javascript
+const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
+
+const transaction = await swapContract.swapExactOutputSingleThenBridge(
+  amountOut, // 100000000000000000000 === 1*10^18 – one NFT
+  approvalAmount,
+  inputToken.address, // Token address which we exchange
+  outputToken.address, // Token address which we get after exchange
+  USER_WALLET_ADDRESS,
+  "Sepolia", // Destination network
+  true, // isWrapped: is token which we exchange wrapped
+  { salt, bundle },
+)
+```
+#### Links
+[NFT Settlement use case demo](https://rarimo.gitlab.io/demo-settlement/?path=/story/demo-purchasewithanytoken--demo)
+
+[Goerli Bridge](https://goerli.etherscan.io/address/0x6EA0C45bAC29a2A2769ec14f4BCD959b07780106)
+
+[Sepolia Bridge](https://sepolia.etherscan.io/address/0x300f5ee2409c999eba1bfdadb4cf5d16a45500ac)
+
+[Swap contract](https://goerli.etherscan.io/address/0x1840Bc40c28af54dF509A7e5dfC31723E5331d4D)

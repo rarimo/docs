@@ -38,8 +38,7 @@ module.exports = {
           breadcrumbs: false,
           // @todo update when we move to github
           // editUrl: 'https://github.com/rarimo/rarimo-docs/blob/main',
-          editUrl:
-            "https://gitlab.com/rarimo/docs/-/tree/main",
+          editUrl: "https://gitlab.com/rarimo/docs/-/tree/main",
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem",
         },

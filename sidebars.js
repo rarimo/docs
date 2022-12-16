@@ -62,8 +62,14 @@ const sidebars = {
       id: "overview/design",
     },
     {
-      type: "doc",
-      id: "overview/applications",
+      type: "category",
+      label: "Applications",
+      link: {
+        type: "doc",
+        id: "overview/applications",
+      },
+      collapsed: false,
+      items: ["overview/applications/settlement-integration"],
     },
     {
       type: "doc",
