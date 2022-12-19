@@ -8,6 +8,8 @@ The main flow of message transfer happens in 4 steps:
 3. Prover receives the witness from the Rarimo core and provides it to the Rarimo Contract on the destination chain
 4. Receiver updates their state depending on the received message
 
+![image](data-migration-flow.png)
+
 Cross-Chain Message Transfer Example:
 1. In order to transfer a message from one system to another, Alice creates an event in the Rarimo contract.
 2. The block proposer adds this transaction to the block, signs it, and transfers it to other validators. If 2/3+ current validators have signed the block (if the threshold signature is valid), it’s added to the blockchain is irreversible. Adding a block to the chain will automatically initiate the creation of the witness needed by the message recipient.
@@ -23,4 +25,4 @@ Cross-Chain Message Transfer Example:
 
 If all verifications are passed - the bridge initiates the corresponding event with the destination address (contract/account).
 
-![Protocol Description](/img/protocol-description.svg)
+![Protocol Description](protocol.png)

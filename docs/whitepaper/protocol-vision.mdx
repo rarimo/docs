@@ -13,12 +13,16 @@ protocol is used. On top of this messaging protocol, there is a bridging protoco
 locking/unlocking assets and has enough flexibility to build applications on top of this bridging logic. The third level
 will be applications that use the bridging protocol for different use cases.
 
+![image](layers.png)
+
 Security of Rarimo protocol will be handled by two main roles: Validators and Signers. Validators will be responsible for two main actions:
 * Security of Rarimo blockchain
 * Being Oracle that submits and checks events on connected chains
 
 Signers will be responsible for producing a threshold signature based on the actions submitted to Rarimo blockchain that
 could be used in connected chains as proof of checking event in an external network.
+
+![image](validator.png)
 
 The messaging protocol architecture of Rarimo can support the following verticals:
 
