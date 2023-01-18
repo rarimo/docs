@@ -4,19 +4,27 @@
 # Rarimo NFT Settlement Use Case
 ## Integration Doc - v0.3
 ### The main flow of NFT Settlement Use Case
-Rarimo’s NFT Settlement flow allows marketplace users to make cross-chain NFT purchases without the extra manual steps.
-Clients accept practically any fungible token from our supported blockchains, using our unique bundling technology to
-minimize fees and increase transaction reliability., Flow orchestration takes place in 7 steps:
 
-1. Web application creates a transaction with the call method and sends it to the Swap Contract on the original chain
-(interaction with Rarimo Contract not needed)
-2. Swap Contract calls DEX (decentralized exchange contract, Uniswap in our case)
-3. DEX contract returns exchanged tokens to the Swap Contract, which one calls Rarimo Contract to send and lock tokens on it.
-4. Validators add a transaction of lock event to the Rarimo core and generate a witness
-5. The relayer receives the witness from the Rarimo core and provides it to the Rarimo Contract on the destination chain
-6. Rarimo Contract on the destination chain handles bundled data which Web application included in the transaction to buy NFT for exchanged tokens
-7. The receiver gets purchased NFT in the wallet
+Rarimo's NFT settlement flow automates token swaps, which allows users to make cross-chain purchases seamlessly.
+Clients can accept practically any fungible token from Rarimo's supported blockchains and receive payments in their token of choice.
 
+Rarimo's unique bundling technology combines and automates the conversion transactions to minimize fees and increase transaction reliability.
+In particular, it automates two main conversions:
+
+- Converting the customer payment token to the token that the seller accepts
+- Moving the converted tokens to the target blockchain, which is the chain that the seller wants to accept payment on
+
+Making purchases with this flow follows these general steps:
+
+1. On a web application, such as an NFT marketplace, a customer buys an NFT, provides their payment information, and selects the token to use for payment from a list of supported payment tokens.
+1. The web application creates a transaction and sends the payment tokens to a swap contract on the same chain.
+1. The swap contract calls the distributed exchange (DEX) and sends the payment tokens to it.
+1. The DEX exchanges the payment tokens for the tokens that the seller accepts and returns those exchanged tokens to the swap contract.
+1. The swap contract sends the exchanged tokens to the Rarimo bridge contract.
+1. The bridge contract locks the tokens and generates a witness to prove that it has the tokens.
+1. The bridge contract calls the relayer, which receives the witness and provides it to the Rarimo contract on the target chain.
+1. The Rarimo contract on the target chain unlocks the equivalent tokens on the target chain and sends them to the seller's wallet on that chain.
+1. The Rarimo contract sends the purchased NFT to the customer's wallet.
 
 ![NFT Settlement](/img/nft-settlement.png)
 
