@@ -25,20 +25,20 @@ Separately, each of these transactions incur gas fees and can fail independently
 This is why we designed Rarimo to bundle transactions on the destination chain.
 Our bundled transactions handle these steps efficiently with a single request, incurring a single gas fee and behaving atomically.
 
-## Implementation
-
-When a transaction locks a token in a Rarimo contract, users can specify additional contracts and methods to call on the destination chain.
-The Rarimo contract signs and runs these additional transactions automatically.
-Methods that call custom contracts are not overridable, which protects transactions from re-entrancy attacks.
-
-### Benefits
+## Benefits
 
 - The protocol has efficient gas usage for end users
 - Transactions on the destination chain will succeed or fail together
 - The development flow can be simplified
 - Any address can handle transaction calls and gas fees on behalf of the original requestor
 
-### Limitations
+## Limitations
 
 - Transaction bundling works only with EVM networks
 - ERC1155 token transfers cannot use bundling
+
+## Implementation
+
+When a transaction locks a token in a Rarimo contract, users can specify additional contracts and methods to call on the destination chain.
+The Rarimo contract signs and runs these additional transactions automatically.
+Methods that call custom contracts are not overridable, which protects transactions from re-entrancy attacks.
