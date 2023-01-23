@@ -3,40 +3,39 @@
 
 # Bundling
 
-Rarimo's multichain protocol allows multiple events to occur within a single transaction.
-User actions are often complex and requires multiple steps to achieve a goal.
-While other protocols would require a user (or application) to send unique transactions for each step, Rarimo's protocol enables bundling of multiple steps.
+Rarimo's multichain protocol bundles multiple related events into single transactions.
+In this way, the protocol simplifies complex, multistep user actions.
 
 ## Example
 
-This high-level example demonstrates how bundling can simplify a user flow.
+This high-level example demonstrates how bundling can simplify a user flow:
 
 Alice has an NFT on the Ethereum blockchain.
 They want to stake this NFT in a DeFi application on the Polygon blockchain.
-Normally, this would entail the following transactions:
+Normally, staking an NFT requires multiple transactions:
 
-1. Locking of the NFT on Etherum network.
-1. Redemption of NFT on Polygon network.
-1. Staking NFT in the DeFi application.
+1. Lock the NFT on the Etherum network.
+1. Redeem the NFT on the Polygon network.
+1. Stake the NFT in the DeFi application.
 
-Each of these transactions would be subjected to gas fees and could fail independently.
+Separately, each of these transactions incur gas fees and can fail independently.
 This is why we designed Rarimo to bundle transactions on the destination chain.
 Our bundled transactions handle these steps efficiently with a single request, incurring a single gas fee and behaving atomically.
 
 ## Implementation
 
-When a token is locked in one of Rarimo's contracts, users can specify additional contracts and methods to be called on the destination chain.
-Rarimo will sign these parameters when checking the event and execute them.
-Methods that call custom contracts will not be overridable, protecting transactions from re-entrancy attacks.
+When a transaction locks a token in a Rarimo contract, users can specify additional contracts and methods to call on the destination chain.
+The Rarimo contract signs and runs these additional transactions automatically.
+Methods that call custom contracts are not overridable, which protects transactions from re-entrancy attacks.
 
 ### Benefits
 
-- Our protocol will have efficient gas usage for end users
+- The protocol has efficient gas usage for end users
 - Transactions on the destination chain will succeed or fail together
-- Development flow can be simplified
+- The development flow can be simplified
 - Any address can handle transaction calls and gas fees on behalf of the original requestor
 
 ### Limitations
 
-- Transaction bundling only works with EVM networks
+- Transaction bundling works only with EVM networks
 - ERC1155 token transfers cannot use bundling
