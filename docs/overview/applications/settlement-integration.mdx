@@ -20,7 +20,7 @@ Making purchases with this flow follows these general steps:
 1. The DEX exchanges the payment tokens for the tokens that the seller accepts and returns those exchanged tokens to the swap contract.
 1. The swap contract sends the exchanged tokens to the Rarimo bridge contract.
 1. The bridge contract locks the tokens and generates a witness to prove that it has the tokens.
-1. The relayer sees the witness and sends a transaction to the Rarimo contract on the destination chain.
+1. The relayer module sees the witness and sends a transaction to the Rarimo contract on the destination chain.
 1. The Rarimo contract receives the transaction and unlocks the equivalent tokens on the destination chain.
 1. The Rarimo contract calls the application's smart contract to purchase the NFT, which sends the tokens to the seller's wallet on the destination chain and sends the purchased NFT to the customer's wallet.
 
