@@ -1,9 +1,7 @@
 ---
 ---
 
-# Rarimo NFT Settlement Use Case
-## Integration Doc - v0.3
-### The main flow of NFT Settlement Use Case
+# Rarimo NFT Settlement Use Case v0.3
 
 Rarimo's NFT settlement flow automates token swaps, which allows users to make cross-chain purchases seamlessly.
 Clients can accept practically any fungible token from Rarimo's supported blockchains and receive payments in their token of choice.
@@ -28,12 +26,12 @@ Making purchases with this flow follows these general steps:
 
 ![NFT Settlement](/img/nft-settlement.png)
 
-### Transaction bundling
+## Transaction bundling
 Transaction bundle is needed to provide custom logic that will be used on the destination chain by the Rarimo contract
 to execute some action after unlocking transferred tokens such as buying NFT tokens through calling another contract
 method there is how we do it in our demo.
 
-#### Bundle Salt
+### Bundle Salt
 Bundle salt is needed to call custom code securely, it defines an intermediate address from which the Rarimo contract
 will send fungible tokens because the Rarimo contract on the destination chain creates a temporary contract on which
 will call another contract to buy NFT. Salt is used as part of the Solidity create2 method to create a proxy contract.
@@ -43,7 +41,7 @@ it. As salt you should specify random 32 bytes length array encoded into the hex
 const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
 ```
 
-#### Bundle Data
+### Bundle Data
 To create a transaction bundle needed to specify Marketplace contract call and Web3.js and ethers packages must be installed.
 We will use `web3.eth.abi.encodeParameters` function to encode all needed parameters into the bytes array.
 
@@ -97,7 +95,8 @@ const transaction = await swapContract.swapExactOutputSingleThenBridge(
   { salt, bundle },
 )
 ```
-#### Links
+### References
+
 [NFT Settlement use case demo](https://rarimo.gitlab.io/demo-settlement/?path=/story/demo-purchasewithanytoken--demo)
 
 [Goerli Bridge](https://goerli.etherscan.io/address/0x6EA0C45bAC29a2A2769ec14f4BCD959b07780106)
