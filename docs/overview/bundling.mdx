@@ -42,3 +42,70 @@ Our bundled transactions handle these steps efficiently with a single request, i
 When a transaction locks a token in a Rarimo contract, users can specify additional contracts and methods to call on the destination chain.
 The Rarimo contract signs and runs these additional transactions automatically.
 Methods that call custom contracts are not overridable, which protects transactions from re-entrancy attacks.
+
+### Bundle Salt
+
+Bundle salt is needed to call custom code securely, it defines an intermediate address from which the Rarimo contract
+will send fungible tokens because the Rarimo contract on the destination chain creates a temporary contract on which
+will call another contract to buy NFT. Salt is used as part of the Solidity create2 method to create a proxy contract.
+So you can use it to determine this proxy contract address. It is needed in rare cases, and you don’t have to determine
+it. As salt you should specify random 32 bytes length array encoded into the hex string, there is snipped how to generate it:
+```javascript
+const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
+```
+
+### Bundle Data
+
+To create a transaction bundle needed to specify Marketplace contract call and Web3.js and ethers packages must be installed.
+We will use `web3.eth.abi.encodeParameters` function to encode all needed parameters into the bytes array.
+
+The first argument will be the Solidity types of parameters that we pass:
+
+NFT contract address (`address[]`) – will be called by Rarimo contract to buy NFT
+NFT price (`uint256[]`) –  calculated NFT price token on the destination chain
+Encoded function call (`bytes[]`) - encoded NFT contract buy function call
+
+The second argument is a value for upwards types, there is a snippet:
+
+```javascript
+const priceOfNft = ethers.utils
+  .parseUnits(inputAmount.toString(), TokenB.decimals)
+  .toString()
+
+const encodeBuyFunctionCall = (receiver: string) => web3.eth.abi.encodeFunctionCall(
+    {
+      inputs: [
+        { internalType: "address", name: "receiver_", type: "address" },
+      ],
+      name: "buy",
+      outputs: [],
+      stateMutability: "payable",
+      type: "function",
+    },
+    [receiver]
+)
+
+const bundle = web3.eth.abi.encodeParameters(
+  ["address[]", "uint256[]", "bytes[]"],
+  [
+    [NFT_CONTRACT_ADDRESS],
+    [priceOfNft],
+    [encodeBuyFunctionCall(USER_WALLET_ADDRESS)],
+  ]
+)
+```
+After creating all bundle data we need to call Swap contract method:
+```javascript
+const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
+
+const transaction = await swapContract.swapExactOutputSingleThenBridge(
+  amountOut, // 100000000000000000000 === 1*10^18 – one NFT
+  approvalAmount,
+  inputToken.address, // Token address which we exchange
+  outputToken.address, // Token address which we get after exchange
+  USER_WALLET_ADDRESS,
+  "Sepolia", // Destination network
+  true, // isWrapped: is token which we exchange wrapped
+  { salt, bundle },
+)
+```
