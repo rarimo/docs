@@ -45,10 +45,9 @@ Methods that call custom contracts are not overridable, which protects transacti
 
 ### Bundle salt
 
-Bundling creates temporary addresses that Rarimo uses to store and lock tokens.
-Then, Rarimo creates a temporary contract on the destination chain to unlock equivalent tokens and use them to buy NFTs.
+To bundle transactions, Rarimo creates a temporary contract on the destination chain to unlock equivalent tokens and use them to buy NFTs.
 
-You don't usually need to access these temporary addresses and contracts, but if you want to, you can set the bundle salt for a transaction.
+You don't usually need to access these temporary contracts, but if you want to, you can set the bundle salt for a transaction.
 Rarimo uses this salt as part of the Solidity create2 method to create proxy contracts.
 
 To set the bundle salt, specify a random 32-byte array and encode it into a hex string, as in this example:
@@ -57,7 +56,11 @@ To set the bundle salt, specify a random 32-byte array and encode it into a hex 
 const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
 ```
 
-Then you can use this salt in Rarimo transactions, which helps you determine the addresses.
+Then when you use this salt in Rarimo transactions, you can determine the address of the temporary contract with the `determineProxyAddress()` function, as in this example:
+
+```javascript
+const tempContractAddress = determineProxyAddress(salt)
+```
 
 ### Creating bundled transactions
 
