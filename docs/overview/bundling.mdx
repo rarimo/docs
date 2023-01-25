@@ -17,7 +17,7 @@ Alice has an NFT on the Ethereum blockchain.
 They want to stake this NFT in a DeFi application on the Polygon blockchain.
 Normally, staking an NFT requires multiple transactions:
 
-1. Lock the NFT on the Etherum network.
+1. Lock the NFT on the Ethereum network.
 1. Redeem the NFT on the Polygon network.
 1. Stake the NFT in the DeFi application.
 
@@ -27,15 +27,15 @@ Our bundled transactions handle these steps efficiently with a single request, i
 
 ## Benefits
 
-- The protocol has efficient gas usage for end users
-- Transactions on the destination chain will succeed or fail together
-- The development flow can be simplified
-- Any address can handle transaction calls and gas fees on behalf of the original requestor
+- Bundled transactions have a lower gas cost than the individual transactions.
+- Transactions on the destination chain succeed or fail together.
+- Bundling transactions makes your development flow simpler.
+- Any address can handle transaction calls and gas fees on behalf of the original requestor.
 
 ## Limitations
 
-- Transaction bundling works only with EVM networks
-- ERC1155 token transfers cannot use bundling
+- Transaction bundling works only with EVM networks.
+- ERC1155 token transfers cannot use bundling.
 
 ## Implementation
 
@@ -43,69 +43,92 @@ When a transaction locks a token in a Rarimo contract, users can specify additio
 The Rarimo contract signs and runs these additional transactions automatically.
 Methods that call custom contracts are not overridable, which protects transactions from re-entrancy attacks.
 
-### Bundle Salt
+### Bundle salt
 
-Bundle salt is needed to call custom code securely, it defines an intermediate address from which the Rarimo contract
-will send fungible tokens because the Rarimo contract on the destination chain creates a temporary contract on which
-will call another contract to buy NFT. Salt is used as part of the Solidity create2 method to create a proxy contract.
-So you can use it to determine this proxy contract address. It is needed in rare cases, and you don’t have to determine
-it. As salt you should specify random 32 bytes length array encoded into the hex string, there is snipped how to generate it:
+Bundling creates temporary addresses that Rarimo uses to store and lock tokens.
+Then, Rarimo creates a temporary contract on the destination chain to unlock equivalent tokens and use them to buy NFTs.
+
+You don't usually need to access these temporary addresses and contracts, but if you want to, you can set the bundle salt for a transaction.
+Rarimo uses this salt as part of the Solidity create2 method to create proxy contracts.
+
+To set the bundle salt, specify a random 32-byte array and encode it into a hex string, as in this example:
+
 ```javascript
 const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
 ```
 
-### Bundle Data
+Then you can use this salt in Rarimo transactions, which helps you determine the addresses.
 
-To create a transaction bundle needed to specify Marketplace contract call and Web3.js and ethers packages must be installed.
-We will use `web3.eth.abi.encodeParameters` function to encode all needed parameters into the bytes array.
+### Creating bundled transactions
 
-The first argument will be the Solidity types of parameters that we pass:
+To create a bundled transaction, you must install the [Web3.js](https://web3js.org/) and [ethers.js](https://ethers.org/) libraries to access the Ethereum API.
+The following examples use the [`web3.eth.abi.encodeParameters()`](https://web3js.readthedocs.io/en/v1.7.5/web3-eth-abi.html#encodeparameters) function to encode parameters into the bytes array.
 
-NFT contract address (`address[]`) – will be called by Rarimo contract to buy NFT
-NFT price (`uint256[]`) –  calculated NFT price token on the destination chain
-Encoded function call (`bytes[]`) - encoded NFT contract buy function call
+Follow these steps to bundle a transaction inside a Rarimo transaction:
 
-The second argument is a value for upwards types, there is a snippet:
+1. Set the price of the NFT as a string.
+   This example accepts the price as the `inputAmount` variable in ETH and converts it to gwei:
 
-```javascript
-const priceOfNft = ethers.utils
-  .parseUnits(inputAmount.toString(), TokenB.decimals)
-  .toString()
+   ```javascript
+   const priceOfNft = ethers.utils
+    .parseUnits(inputAmount.toString(), "gwei")
+    .toString()
+  ```
 
-const encodeBuyFunctionCall = (receiver: string) => web3.eth.abi.encodeFunctionCall(
-    {
-      inputs: [
-        { internalType: "address", name: "receiver_", type: "address" },
-      ],
-      name: "buy",
-      outputs: [],
-      stateMutability: "payable",
-      type: "function",
-    },
-    [receiver]
-)
+1. Using the [`encodeFunctionCall`](https://web3js.readthedocs.io/en/v1.7.5/web3-eth-abi.html#encodefunctioncall) function, encode the bundled transaction as a function that accepts the receiver's address as a parameter, buys the NFT, and sends it to the receiver's address, as in this example:
 
-const bundle = web3.eth.abi.encodeParameters(
-  ["address[]", "uint256[]", "bytes[]"],
-  [
-    [NFT_CONTRACT_ADDRESS],
-    [priceOfNft],
-    [encodeBuyFunctionCall(USER_WALLET_ADDRESS)],
-  ]
-)
-```
-After creating all bundle data we need to call Swap contract method:
-```javascript
-const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
+   ```javascript
+   const encodeBuyFunctionCall = (receiver: string) => web3.eth.abi.encodeFunctionCall(
+     {
+       inputs: [
+         { internalType: "address", name: "receiver_", type: "address" },
+       ],
+       name: "buy",
+       outputs: [],
+       stateMutability: "payable",
+       type: "function",
+     },
+     [receiver]
+   )
+   ```
 
-const transaction = await swapContract.swapExactOutputSingleThenBridge(
-  amountOut, // 100000000000000000000 === 1*10^18 – one NFT
-  approvalAmount,
-  inputToken.address, // Token address which we exchange
-  outputToken.address, // Token address which we get after exchange
-  USER_WALLET_ADDRESS,
-  "Sepolia", // Destination network
-  true, // isWrapped: is token which we exchange wrapped
-  { salt, bundle },
-)
-```
+1. Using the [`encodeParameters`](https://web3js.readthedocs.io/en/v1.7.5/web3-eth-abi.html#encodeparameters) function, encode your function into a bundle.
+This function takes two parameters:
+
+   - An array of the Solidity types that Rarimo passes, which are:
+     - The NFT contract address that Rarimo calls to buy the NFT, which is `address[]`
+     - The calculated price of the NFT on the destination chain, which is `uint256[]`
+     - The encoded NFT contract buy function, which is `bytes[]`
+
+   - An array that includes the NFT contract address, the price of the NFT, and the encoded function.
+
+   Here is an example:
+
+   ```javascript
+   const bundle = web3.eth.abi.encodeParameters(
+     ["address[]", "uint256[]", "bytes[]"],
+     [
+       [NFT_CONTRACT_ADDRESS],
+       [priceOfNft],
+       [encodeBuyFunctionCall(USER_WALLET_ADDRESS)],
+     ]
+   )
+   ```
+
+1. Call the Rarify swap contract method and pass the bundle as a parameter.
+Optionally, you can include the bundle salt, as in this example:
+
+   ```javascript
+   const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
+
+   const transaction = await swapContract.swapExactOutputSingleThenBridge(
+     amountOut, // 100000000000000000000 === 1*10^18 – one NFT
+     approvalAmount,
+     inputToken.address, // Address of the token to accept as payment
+     outputToken.address, // Address of the token to exchange to
+     USER_WALLET_ADDRESS,
+     "Sepolia", // Destination network
+     true, // isWrapped: whether the token to exchange is wrapped
+     { salt, bundle },
+   )
+   ```
