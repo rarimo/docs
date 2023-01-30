@@ -149,3 +149,26 @@ Optionally, you can include the bundle salt, as in this example:
      { salt, bundle },
    )
    ```
+
+1. To get the address of the temporary contract, create an ethers.js `Contract` object to represent the bridge contract and use its `determineProxyAddress()` method.
+You need the address of the bridge contract, as in this example:
+
+   ```javascript
+   import BRIDGE_ABI from "/path/to/bridge-abi.json"
+   import { ethers } from "ethers"
+
+   // Create RPC provider to be able to call contract methods
+   const rpc = new ethers.providers.JsonRpcProvider("https://chain-rpc-url.com")
+
+   // Create contract instance
+   const bridgeContract = new ethers.Contract(
+     "0x0000000000000000000000000000000000000000", // Bridge contract address
+     BRIDGE_ABI, // Bridge contract ABI
+     rpc,
+   )
+
+   const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
+
+   // Call the contract method to get the temporary contract address
+   const tempContractAddress = await bridgeContract.determineProxyAddress(ethers.utils.hexlify(saltBytes))
+   ```
