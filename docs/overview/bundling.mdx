@@ -3,40 +3,172 @@
 
 # Bundling
 
-Rarimo's multichain protocol allows multiple events to occur within a single transaction.
-User actions are often complex and requires multiple steps to achieve a goal.
-While other protocols would require a user (or application) to send unique transactions for each step, Rarimo's protocol enables bundling of multiple steps.
+Rarimo's multichain protocol bundles multiple related events into single contract calls or transactions.
+In this way, the protocol simplifies complex, multistep user actions.
+
+Bundling also allows Rarimo to include custom logic with transactions.
+Rarimo contracts use this logic to run actions that follow an initial transaction, such as unlocking tokens on other chains and buying NFTs by calling other contracts.
 
 ## Example
 
-This high-level example demonstrates how bundling can simplify a user flow.
+This high-level example demonstrates how bundling can simplify a user flow:
 
 Alice has an NFT on the Ethereum blockchain.
 They want to stake this NFT in a DeFi application on the Polygon blockchain.
-Normally, this would entail the following transactions:
+Normally, staking an NFT requires multiple transactions:
 
-1. Locking of the NFT on Etherum network.
-1. Redemption of NFT on Polygon network.
-1. Staking NFT in the DeFi application.
+1. Lock the NFT on the Ethereum network.
+1. Redeem the NFT on the Polygon network.
+1. Stake the NFT in the DeFi application.
 
-Each of these transactions would be subjected to gas fees and could fail independently.
+Separately, each of these transactions incur gas fees and can fail independently.
 This is why we designed Rarimo to bundle transactions on the destination chain.
 Our bundled transactions handle these steps efficiently with a single request, incurring a single gas fee and behaving atomically.
 
+## Benefits
+
+- Bundled transactions have a lower gas cost than the individual transactions.
+- Transactions on the destination chain succeed or fail together.
+- Bundling transactions makes your development flow simpler.
+- Any address can handle transaction calls and gas fees on behalf of the original requestor.
+
+## Limitations
+
+- Transaction bundling works only with EVM networks.
+- ERC1155 token transfers cannot use bundling.
+
 ## Implementation
 
-When a token is locked in one of Rarimo's contracts, users can specify additional contracts and methods to be called on the destination chain.
-Rarimo will sign these parameters when checking the event and execute them.
-Methods that call custom contracts will not be overridable, protecting transactions from re-entrancy attacks.
+When a transaction locks a token in a Rarimo contract, users can specify additional contracts and methods to call on the destination chain.
+The Rarimo contract signs and runs these additional transactions automatically.
+Methods that call custom contracts are not overridable, which protects transactions from re-entrancy attacks.
 
-### Benefits
+### Bundle salt
 
-- Our protocol will have efficient gas usage for end users
-- Transactions on the destination chain will succeed or fail together
-- Development flow can be simplified
-- Any address can handle transaction calls and gas fees on behalf of the original requestor
+To bundle transactions, Rarimo creates a temporary contract on the destination chain to unlock equivalent tokens and use them to buy NFTs.
 
-### Limitations
+You don't usually need to access these temporary contracts, but if you want to, you can set the bundle salt for a transaction.
+Rarimo uses this salt as part of the Solidity create2 method to create proxy contracts.
 
-- Transaction bundling only works with EVM networks
-- ERC1155 token transfers cannot use bundling
+To set the bundle salt, specify a random 32-byte array and encode it into a hex string, as in this example:
+
+```javascript
+const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
+```
+
+Then when you use this salt in Rarimo transactions, you can determine the address of the temporary contract with the `determineProxyAddress()` function, as in this example:
+
+```javascript
+const tempContractAddress = determineProxyAddress(salt)
+```
+
+### Creating bundled transactions
+
+To create a bundled transaction, you must install the [Web3.js](https://web3js.org/) and [ethers.js](https://ethers.org/) libraries to access the Ethereum API.
+The following examples use the [`web3.eth.abi.encodeParameters()`](https://web3js.readthedocs.io/en/v1.7.5/web3-eth-abi.html#encodeparameters) function to encode parameters into the bytes array.
+
+Follow these steps to bundle a transaction inside a Rarimo transaction:
+
+1. Set the price of the NFT as a string.
+   This example accepts the price as the `inputAmount` variable in ETH and converts it to gwei:
+
+   ```javascript
+   const priceOfNft = ethers.utils
+    .parseUnits(inputAmount.toString(), "gwei")
+    .toString()
+  ```
+
+1. Using the [`encodeFunctionCall`](https://web3js.readthedocs.io/en/v1.7.5/web3-eth-abi.html#encodefunctioncall) function, encode the bundled transaction as a function that accepts the receiver's address as a parameter, buys the NFT, and sends it to the receiver's address, as in this example:
+
+   ```javascript
+   const encodeBuyFunctionCall = (receiver: string) => web3.eth.abi.encodeFunctionCall(
+     {
+       inputs: [
+         { internalType: "address", name: "receiver_", type: "address" },
+       ],
+       name: "buy",
+       outputs: [],
+       stateMutability: "payable",
+       type: "function",
+     },
+     [receiver]
+   )
+   ```
+
+1. Using the [`encodeParameters`](https://web3js.readthedocs.io/en/v1.7.5/web3-eth-abi.html#encodeparameters) function, encode your function into a bundle.
+This function takes two parameters:
+
+   - An array of the Solidity types that Rarimo passes, which are:
+     - The NFT contract address that Rarimo calls to buy the NFT, which is `address[]`
+     - The calculated price of the NFT on the destination chain, which is `uint256[]`
+     - The encoded NFT contract buy function, which is `bytes[]`
+
+   - An array that includes the NFT contract address, the price of the NFT, and the encoded function.
+
+   Here is an example:
+
+   ```javascript
+   const bundle = web3.eth.abi.encodeParameters(
+     ["address[]", "uint256[]", "bytes[]"],
+     [
+       [NFT_CONTRACT_ADDRESS],
+       [priceOfNft],
+       [encodeBuyFunctionCall(USER_WALLET_ADDRESS)],
+     ]
+   )
+   ```
+
+   To bundle multiple transactions, add their NFT contract addresses, prices, and encoded functions to the respective arrays.
+   For example, this code bundles two functions:
+
+   ```javascript
+   const bundle = web3.eth.abi.encodeParameters(
+     ["address[]", "uint256[]", "bytes[]"],
+     [
+       [NFT_CONTRACT_ADDRESS_A, NFT_CONTRACT_ADDRESS_B],
+       [priceOfNftA, priceOfNftB],
+       [encodeBuyFunctionCallA(USER_WALLET_ADDRESS_A), encodeBuyFunctionCallB(USER_WALLET_ADDRESS_B)],
+     ]
+   )
+   ```
+
+1. Call the Rarify swap contract method and pass the bundle as a parameter.
+Optionally, you can include the bundle salt, as in this example:
+
+   ```javascript
+   const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
+
+   const transaction = await swapContract.swapExactOutputSingleThenBridge(
+     amountOut, // 100000000000000000000 === 1*10^18 – one NFT
+     approvalAmount,
+     inputToken.address, // Address of the token to accept as payment
+     outputToken.address, // Address of the token to exchange to
+     USER_WALLET_ADDRESS,
+     "Sepolia", // Destination network
+     true, // isWrapped: whether the token to exchange is wrapped
+     { salt, bundle },
+   )
+   ```
+
+1. To get the address of the temporary contract, create an ethers.js `Contract` object to represent the bridge contract and use its `determineProxyAddress()` method.
+You need the address of the bridge contract, as in this example:
+
+   ```javascript
+   import BRIDGE_ABI from "/path/to/bridge-abi.json"
+   import { ethers } from "ethers"
+
+   // Create RPC provider to be able to call contract methods
+   const rpc = new ethers.providers.JsonRpcProvider("https://chain-rpc-url.com")
+
+   // Create contract instance
+   const bridgeContract = new ethers.Contract(
+     "0x0000000000000000000000000000000000000000", // Bridge contract address
+     BRIDGE_ABI, // Bridge contract ABI
+     rpc,
+   )
+
+   const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
+
+   // Call the contract method to get the temporary contract address
+   const tempContractAddress = await bridgeContract.determineProxyAddress(ethers.utils.hexlify(saltBytes))
+   ```

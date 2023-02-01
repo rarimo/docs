@@ -1,95 +1,36 @@
 ---
+sidebar_label: NFT settlement use case
 ---
 
-# Rarimo NFT Settlement Use Case
-## Integration Doc - v0.3
-### The main flow of NFT Settlement Use Case
-Rarimo’s NFT Settlement flow allows marketplace users to make cross-chain NFT purchases without the extra manual steps.
-Clients accept practically any fungible token from our supported blockchains, using our unique bundling technology to
-minimize fees and increase transaction reliability., Flow orchestration takes place in 7 steps:
+# Rarimo NFT Settlement Use Case v0.3
 
-1. Web application creates a transaction with the call method and sends it to the Swap Contract on the original chain
-(interaction with Rarimo Contract not needed)
-2. Swap Contract calls DEX (decentralized exchange contract, Uniswap in our case)
-3. DEX contract returns exchanged tokens to the Swap Contract, which one calls Rarimo Contract to send and lock tokens on it.
-4. Validators add a transaction of lock event to the Rarimo core and generate a witness
-5. The relayer receives the witness from the Rarimo core and provides it to the Rarimo Contract on the destination chain
-6. Rarimo Contract on the destination chain handles bundled data which Web application included in the transaction to buy NFT for exchanged tokens
-7. The receiver gets purchased NFT in the wallet
+Rarimo's NFT settlement flow automates token swaps, which allows users to make cross-chain purchases seamlessly.
+Clients can accept practically any fungible token from Rarimo's supported blockchains and receive payments in their token of choice.
 
+Rarimo's unique bundling technology bundles and automates the conversion transactions to minimize fees and increase transaction reliability.
+In particular, it automates two main conversions:
+
+- Converting the customer payment token to the token that the seller accepts on the same chain
+- Moving the converted tokens to the chain that the seller wants to accept payment on, by locking tokens on the source chain and unlocking tokens on the destination chain before purchasing the NFT on the destination chain
+
+For more information about transaction bundling, see [Bundling](../bundling).
+
+Making purchases with this flow follows these general steps:
+
+1. On a web application, such as an NFT marketplace, a customer buys an NFT, provides their payment information, and selects the token to use for payment from a list of supported payment tokens.
+1. The web application creates a transaction and sends the payment tokens to a swap contract on the same chain.
+1. The swap contract calls the distributed exchange (DEX) and sends the payment tokens to it.
+1. The DEX exchanges the payment tokens for the tokens that the seller accepts and returns those exchanged tokens to the swap contract.
+1. The swap contract sends the exchanged tokens to the Rarimo bridge contract.
+1. The bridge contract locks the tokens and generates a witness to prove that it has the tokens.
+1. The relayer module sees the witness and sends a transaction to the Rarimo contract on the destination chain.
+1. The Rarimo contract receives the transaction and unlocks the equivalent tokens on the destination chain.
+1. The Rarimo contract calls the application's smart contract to purchase the NFT, which sends the tokens to the seller's wallet on the destination chain and sends the purchased NFT to the customer's wallet.
 
 ![NFT Settlement](/img/nft-settlement.png)
 
-### Transaction bundling
-Transaction bundle is needed to provide custom logic that will be used on the destination chain by the Rarimo contract
-to execute some action after unlocking transferred tokens such as buying NFT tokens through calling another contract
-method there is how we do it in our demo.
+### References
 
-#### Bundle Salt
-Bundle salt is needed to call custom code securely, it defines an intermediate address from which the Rarimo contract
-will send fungible tokens because the Rarimo contract on the destination chain creates a temporary contract on which
-will call another contract to buy NFT. Salt is used as part of the Solidity create2 method to create a proxy contract.
-So you can use it to determine this proxy contract address. It is needed in rare cases, and you don’t have to determine
-it. As salt you should specify random 32 bytes length array encoded into the hex string, there is snipped how to generate it:
-```javascript
-const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
-```
-
-#### Bundle Data
-To create a transaction bundle needed to specify Marketplace contract call and Web3.js and ethers packages must be installed.
-We will use `web3.eth.abi.encodeParameters` function to encode all needed parameters into the bytes array.
-
-The first argument will be the Solidity types of parameters that we pass:
-
-NFT contract address (`address[]`) – will be called by Rarimo contract to buy NFT
-NFT price (`uint256[]`) –  calculated NFT price token on the destination chain
-Encoded function call (`bytes[]`) - encoded NFT contract buy function call
-
-The second argument is a value for upwards types, there is a snippet:
-
-```javascript
-const priceOfNft = ethers.utils
-  .parseUnits(inputAmount.toString(), TokenB.decimals)
-  .toString()
-
-const encodeBuyFunctionCall = (receiver: string) => web3.eth.abi.encodeFunctionCall(
-    {
-      inputs: [
-        { internalType: "address", name: "receiver_", type: "address" },
-      ],
-      name: "buy",
-      outputs: [],
-      stateMutability: "payable",
-      type: "function",
-    },
-    [receiver]
-)
-
-const bundle = web3.eth.abi.encodeParameters(
-  ["address[]", "uint256[]", "bytes[]"],
-  [
-    [NFT_CONTRACT_ADDRESS],
-    [priceOfNft],
-    [encodeBuyFunctionCall(USER_WALLET_ADDRESS)],
-  ]
-)
-```
-After creating all bundle data we need to call Swap contract method:
-```javascript
-const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
-
-const transaction = await swapContract.swapExactOutputSingleThenBridge(
-  amountOut, // 100000000000000000000 === 1*10^18 – one NFT
-  approvalAmount,
-  inputToken.address, // Token address which we exchange
-  outputToken.address, // Token address which we get after exchange
-  USER_WALLET_ADDRESS,
-  "Sepolia", // Destination network
-  true, // isWrapped: is token which we exchange wrapped
-  { salt, bundle },
-)
-```
-#### Links
 [NFT Settlement use case demo](https://rarimo.gitlab.io/demo-settlement/?path=/story/demo-purchasewithanytoken--demo)
 
 [Goerli Bridge](https://goerli.etherscan.io/address/0x6EA0C45bAC29a2A2769ec14f4BCD959b07780106)
