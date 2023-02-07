@@ -35,3 +35,36 @@
 .footer--dark {
   --ifm-footer-background-color: var(--ifm-background-surface-color);
 }
+
+.footer__social-link {
+  display: inline-block;
+  height: 24px;
+}
+
+.footer__social-link svg {
+  height: 24px;
+  width: 24px;
+  fill: rgb(116, 116, 116);
+  opacity: 1;
+}
+
+.footer__social-link:hover svg  {
+  opacity: 0.7;
+  color: transparent;
+}
+
+.footer__link-separator {
+  display: none;
+}
+
+.footer__links {
+  margin-bottom: 0;
+  align-items: center;
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+
+.footer__link-item {
+  height: 24px;
+}
