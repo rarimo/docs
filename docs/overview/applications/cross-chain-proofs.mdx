@@ -1,14 +1,14 @@
 # Rarimo Cross Chain Proofs
 
-Rarimo allows you to transfer proof of owning identity from one chain to another. Note that you should contact our team to register your specific NFT or SBT contracts before you can use these contracts.
+Rarimo allows you to transfer proof of owning identity, credential, or certificate from one chain to another. Note that you should contact our team to register your specific NFT or SBT contracts before you can use these contracts.
 
-## Identity based on ERC721 and ERC1155 tokens
+## Based on ERC721 and ERC1155 tokens
 
-In case identity is represented as a transferable NFT, you have to lock it in the Rarimo bridge smart contract to transfer proofs of owning it from one chain to another.
+In case token is represented as a transferable NFT, you have to lock it in the Rarimo bridge smart contract to transfer proofs of owning it from one chain to another.
 
 1. Approve bridge smart contract to transfer NFT using `setApprovalForAll` method from [ERC721](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol#L136) or [ERC1155](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/ERC1155.sol#L100) standard. It should be done only the first time for each NFT contract.
 2. Call the deposit method on the bridge contract. For ERC721 [`depositERC721`](https://rarimo.gitlab.io/docs/docs/smart-contracts/interface/evm-reference#depositerc721), for ERC1155 [`depositERC1155`](https://rarimo.gitlab.io/docs/docs/smart-contracts/interface/evm-reference#depositerc1155). Note that you could specify some code that should be called on destination chain using [bundling feature](https://rarimo.gitlab.io/docs/docs/overview/bundling).
-3. After the transaction is confirmed, usually 10-20 blocks are needed, Rarimo relayers will mint identity on the destination network.
+3. After the transaction is confirmed, usually 10-20 blocks are needed, Rarimo relayers will mint token on the destination network.
 
 ## Soulbound Tokens
 
