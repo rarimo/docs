@@ -69,7 +69,7 @@ const sidebars = {
         id: "overview/applications",
       },
       collapsed: false,
-      items: ["overview/applications/settlement-integration"],
+      items: ["overview/applications/settlement-integration", "overview/applications/cross-chain-proofs.mdx"],
     },
     {
       type: "doc",
