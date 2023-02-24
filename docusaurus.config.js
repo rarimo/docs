@@ -86,6 +86,12 @@ module.exports = {
           },
           {
             type: "doc",
+            docId: "sdk",
+            position: "left",
+            label: "SDK",
+          },
+          {
+            type: "doc",
             docId: "solutions",
             position: "left",
             label: "Solutions",

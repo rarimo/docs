@@ -69,7 +69,10 @@ const sidebars = {
         id: "overview/applications",
       },
       collapsed: false,
-      items: ["overview/applications/settlement-integration", "overview/applications/cross-chain-proofs"],
+      items: [
+        "overview/applications/settlement-integration",
+        "overview/applications/cross-chain-proofs",
+      ],
     },
     {
       type: "doc",
@@ -148,6 +151,12 @@ const sidebars = {
       },
       collapsed: false,
       items: apiReference,
+    },
+  ],
+  sdk: [
+    {
+      type: "doc",
+      id: "sdk",
     },
   ],
   solutions: [
