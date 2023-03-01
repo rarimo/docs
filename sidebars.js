@@ -52,6 +52,54 @@ const sidebars = {
       id: "whitepaper/sources",
     },
   ],
+  developers: [
+    {
+      type: "doc",
+      id: "developers",
+    },
+    {
+      type: "doc",
+      label: "Oracles",
+      id: "developers/oracles",
+    },
+    {
+      type: "category",
+      label: "Core",
+      link: {
+        type: "doc",
+        id: "developers/core",
+      },
+      collapsed: false,
+      items: [
+        "developers/core/rarimocore",
+        "developers/core/tokenmanager",
+      ],
+    },
+    {
+      type: "category",
+      label: "Contracts",
+      link: {
+        type: "doc",
+        id: "developers/contracts",
+      },
+      collapsed: false,
+      items: [
+        "developers/contracts/bridge",
+      ],
+    },
+    {
+      type: "category",
+      label: "TSS",
+      link: {
+        type: "doc",
+        id: "developers/tss",
+      },
+      collapsed: false,
+      items: [
+        "developers/tss/overview",
+      ],
+    }
+  ],
   overview: [
     {
       type: "doc",

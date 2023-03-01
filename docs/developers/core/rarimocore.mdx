@@ -1,0 +1,218 @@
+---
+---
+
+# Rarimocore module
+
+## Entities
+1. Params - defines all tss information: parties, threshold, pub key, etc.
+```protobuf
+message Party {
+  // PublicKey in hex format
+  string pubKey = 1;
+  // Server address connect to
+  string address = 2;
+  // Rarimo core account
+  string account = 3;
+  bool verified = 4;
+}
+
+// Params defines the parameters for the module.
+message Params {
+  string keyECDSA = 1;
+  uint64 threshold = 2;
+  repeated Party parties = 3;
+  bool isUpdateRequired = 5;
+  string lastSignature = 6;
+}
+```
+
+2. Operation - defines generic operation to be signed by core.
+```protobuf
+enum opType {
+  TRANSFER = 0;
+  CHANGE_PARTIES = 1;
+}
+
+enum opStatus {
+  INITIALIZED = 0;
+  APPROVED = 1;
+  NOT_APPROVED = 2;
+  SIGNED = 3;
+}
+
+message Operation {
+  // Should be in a hex format 0x...
+  string index = 1;
+  opType operationType = 2;
+  // Corresponding to type details
+  google.protobuf.Any details = 3;
+  opStatus status = 4;
+  string creator = 5;
+  uint64 timestamp = 6;
+}
+```
+
+3. Confirmation - defines tss signature for some set of operations.
+```protobuf
+message Confirmation {
+  // hex-encoded
+  string root = 1;
+  // hex-encoded
+  repeated string indexes = 2;
+  // hex-encoded
+  string signatureECDSA = 3;
+  string creator = 4;
+}
+```
+
+4. Vote - defines validator votes for operation validity.
+```protobuf
+enum VoteType {
+  YES = 0;
+  NO = 1;
+}
+
+message VoteIndex {
+  string operation = 1;
+  string validator = 2;
+}
+
+message Vote {
+  VoteIndex index = 1;
+  VoteType vote = 2;
+}
+```
+
+## RPC
+1. CreateTransferOperation - crates Operation with type `TRANSFER` and `INITIALIZED` status.
+Metadata should be provided in case of first NFT transfer. Tx, EventId, Sender can be specified in native for source chain format.
+Other data should be formatted into hex with `0x` prefix.
+Also, MsgCreateTransferOp can be re-submitted for the same event if operation has status `APPROVED`, `NOT_APPROVED` or `SIGNED`.
+```protobuf
+message MsgCreateTransferOp {
+  string creator = 1;
+  // Information to identify transfer
+  string tx = 2;
+  string eventId = 3;
+  string sender = 4;
+  // Information about deposit
+  string receiver = 5;
+  string amount = 6;
+  string bundleData = 7;// hex-encoded
+  string bundleSalt = 8;// hex-encoded
+  // Information about current and target chains
+  rarimo.rarimocore.tokenmanager.OnChainItemIndex from = 9;
+  rarimo.rarimocore.tokenmanager.OnChainItemIndex to = 10;
+  rarimo.rarimocore.tokenmanager.ItemMetadata meta = 11; // Optional (if item currently does not exists)
+}
+```
+
+2. CreateChangePartiesOperation - creates new operation with type `CHANGE_PARTIES` and `APPROVED` status.
+Used by TSS producers to reshare keys when parties set has been changed.
+Signature field contains the signature of new public key by old public key and will be used to change keys on the bridge contracts.
+```protobuf
+message MsgCreateChangePartiesOp {
+  string creator = 1;
+  repeated Party newSet = 2;
+  string newPublicKey = 3;
+  string signature = 4;
+}
+```
+
+3. CreateConfirmation - creates the confirmation for set of operations. After confirmation created user can use provided
+signature and merkle tree to execute event unlocking on destination chain.
+```protobuf
+message MsgCreateConfirmation {
+  string creator = 1;
+  // hex-encoded
+  string root = 2;
+  repeated string indexes = 3;
+  // hex-encoded
+  string signatureECDSA = 4;
+}
+```
+
+4. SetupInitial - used only once during first TSS parties set up. After threshold keys generation TSS parties submits
+`MsgSetupInitial` to confirm successful keys generation and provide new party public key data.
+```protobuf
+message MsgSetupInitial {
+  string creator = 1;
+  string partyPublicKey = 2;
+  string newPublicKey = 3;
+}
+```
+
+5. ChangePartyAddress - changes party address. Only party account can execute. After total voting power reaches
+required quorum operation status changes to `APPROVED` or `NOT_APPROVED`.
+```protobuf
+message MsgChangePartyAddress {
+  string creator = 1;
+  string newAddress = 2;
+}
+```
+
+6. Vote - vote for operation. Vote power will be equal to the voter staked balance.
+```protobuf
+message MsgVote {
+  string creator = 1;
+  string operation = 2;
+  VoteType vote = 3;
+}
+```
+
+## Proposals
+1. AddSignerPartyProposal - adding new TSS party to the set. After approval, new party will be added to the parties
+list with `verified=false` flag and global flag will be updated `isUpdateRequired=true`.
+```protobuf
+message AddSignerPartyProposal {
+  string title = 1;
+  string description = 2;
+  string account = 3;
+  string address = 4;
+  string trialPublicKey = 5;
+}
+```
+
+2. RemoveSignerPartyProposal - remove TSS party from parties set. After approval, party will be removed from parties
+list and global flag will be updated `isUpdateRequired=true`.
+```protobuf
+message RemoveSignerPartyProposal {
+  string title = 1;
+  string description = 2;
+  string account = 3;
+}
+```
+
+3. ReshareKeysProposal - will set `isUpdateRequired=true` and launch key resharing if any of parties lost his secret key data.
+```protobuf
+message ReshareKeysProposal {
+  string title = 1;
+  string description = 2;
+}
+```
+
+4. ChangeThresholdProposal - changing threshold value. After approval, global flag will be updated `isUpdateRequired=true`.
+```protobuf
+message ChangeThresholdProposal {
+  string title = 1;
+  string description = 2;
+  uint32 threshold = 3;
+}
+```
+
+## Flow
+The `rarimocore` cosmos module contains logic for all cross-chain operations, its votes, confirmations and signers management.
+
+The common flow consists of three steps:
+1. Any Oracle creates the operation on the core
+2. Oracles vote for the operation correctness, and after that operation defined as approved/not approved.
+3. Signature producers sign the operation
+4. Signature producers submit confirmation to the core, and after that operation defined as signed.
+
+Currently, we define two operation types:
+- transfer operation (transferring token from one chain to another)
+- change parties (changing ECDSA parameters).
+
+Transfer operation message that will be created by `MsgCreateTransferOperation` and encoded into the details field.
+You can explore the messages and RPC server definition of the `rarimocore` module in the `rarimo-core/proto/rarimocore` package.
+
