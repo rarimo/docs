@@ -58,3 +58,23 @@ and put that implementations into the `voter.Subscriber` and `voter.Catchupper` 
 
 Also, we recommend to split `verifiers.TransferOperator` logic in two methods: verifier and message creator.
 It allows to use message creator while fetching new events and submitting them into core.
+
+## Broadcaster integration
+
+All oracles recommended to integrate with broadcaster service (`broadcaster-svc`) to submit queued transactions. Cause any transaction should contain valid account sequence
+(is incremental value) it becomes problematically to submit concurrent transactions.
+So our oracles implementations use broadcaster service as an endpoint for sending messages using a queue.
+
+## Flow
+
+Saver mode flow:
+1. Oracle subscribes to the new events on bridge contract.
+2. Oracle receives new event.
+3. Oracle creates and submits `MsgCreateTransferOp` using `broadcaster-svc`.
+
+Voter mode flow:
+1. Oracle subscribes to the new operations on Rarimo core for defined oracle's chain.
+2. Oracle receives new operation.
+3. Oracle verifies operation and if it is correct submits `MsgVote` transaction with `YES` vote. Otherwise, oracle submits `MsgVote` transaction with `NO` vote.
+4. After operation votes reaches `Quorum` (defined in `Gov` module) `rarimocore` calculates the voting power and vote results. To become `APPROVED` there should be at least `Threshold` (defined in `Gov` module) percentage positive votes.
+  Otherwise, operation becomes `NOT_APPROVED`.
