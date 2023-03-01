@@ -97,23 +97,4 @@ The first key generation requires a launched core with a preconfigured set of pa
 
 Until at least one party has as enabled raw flag there will not be possible to submit any confirmation.
 
-## 	Key regeneration
-
-### Adding new party
-1. New party creates a proposal to add him to the signature producers list (he deposits the stake Rarimo-tokens as a guarantor of his intentions).
-2. After the proposal becomes accepted, a new party will be added to the core parties list, and all parties’ keys will be marked as raw.
-3. Signers will go into key reshare mode and regenerate keys and shares.
-4. After resharing,  every party submits their ECDSA public key to the core and the corresponding raw flag will be set as false.
-5. After all parties submit their public keys, the common public key will be generated.
-6. Somebody should send the transactions to all bridges for changing the public key.
-
-### Removing party
-1. If any party wants to finish his work he submits the request to leave the parties set and get back the staked tokens. That party will be removed from the core parties list, and all parties’ keys will be marked as raw.
-2. Signers will go into key reshare mode and regenerate keys and shares.
-3. After resharing,  every party submits their ECDSA public key to the core and the corresponding raw flag will be set as false.
-4. After all parties submit their public keys, the common public key will be generated.
-5. Somebody should send the transactions to all bridges for changing the public key. Sender will receive the reward from the party stake.
-6. Somebody should send the transactions to all bridges for changing the public key. Sender will receive the reward from the treasury.
-7. After some constant time the ex-party stake can be returned back to the ex-party balance.
-
 
