@@ -84,7 +84,10 @@ message Vote {
 ```
 
 ## RPC:
-1. CreateTransferOperation
+1. CreateTransferOperation - crates Operation with type `TRANSFER` and `INITIALIZED` status.
+Metadata should be provided in case of first NFT transfer. Tx, EventId, Sender can be specified in native for source chain format.
+Other data should be formatted into hex with `0x` prefix.
+Also, MsgCreateTransferOp can be re-submitted for the same event if operation has status `APPROVED`, `NOT_APPROVED` or `SIGNED`.
 ```protobuf
 message MsgCreateTransferOp {
   string creator = 1;
@@ -104,7 +107,9 @@ message MsgCreateTransferOp {
 }
 ```
 
-2. CreateChangePartiesOperation
+2. CreateChangePartiesOperation - creates new operation with type `CHANGE_PARTIES` and `APPROVED` status.
+Used by TSS producers to reshare keys when parties set has been changed.
+Signature field contains the signature of new public key by old public key and will be used to change keys on the bridge contracts.
 ```protobuf
 message MsgCreateChangePartiesOp {
   string creator = 1;
@@ -114,7 +119,8 @@ message MsgCreateChangePartiesOp {
 }
 ```
 
-3. CreateConfirmation
+3. CreateConfirmation - creates the confirmation for set of operations. After confirmation created user can use provided
+signature and merkle tree to execute event unlocking on destination chain.
 ```protobuf
 message MsgCreateConfirmation {
   string creator = 1;
@@ -126,7 +132,8 @@ message MsgCreateConfirmation {
 }
 ```
 
-4. SetupInitial
+4. SetupInitial - used only once during first TSS parties set up. After threshold keys generation TSS parties submits
+`MsgSetupInitial` to confirm successful keys generation and provide new party public key data.
 ```protobuf
 message MsgSetupInitial {
   string creator = 1;
@@ -135,7 +142,8 @@ message MsgSetupInitial {
 }
 ```
 
-5. ChangePartyAddress
+5. ChangePartyAddress - changes party address. Only party account can execute. After total voting power reaches
+required quorum operation status changes to `APPROVED` or `NOT_APPROVED`.
 ```protobuf
 message MsgChangePartyAddress {
   string creator = 1;
@@ -143,9 +151,9 @@ message MsgChangePartyAddress {
 }
 ```
 
-6. Vote
+6. Vote - vote for operation. Vote power will be equal to the voter balance.
 ```protobuf
-message MsgVote{
+message MsgVote {
   string creator = 1;
   string operation = 2;
   VoteType vote = 3;
