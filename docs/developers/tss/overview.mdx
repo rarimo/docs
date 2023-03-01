@@ -19,27 +19,6 @@ Core operation entry contains the information about some data to sign. Operation
 
 ## Protocol
 
-### Sign session flow
-
-1. Parties calculate the next proposer using deterministic function f(prev_signature, parties, session_id).
-2. Proposer selects the pool to sign
-3. Proposer shares the pool between all parties
-4. Parties share the acceptance of that pool (the signature using party private key)
-5. Parties that have received minimum t acceptances start the threshold signature process.
-6. After the signature process finishes every party can send the confirmation transaction to the core.
-
-
-### Reshare session flow
-
-1. Parties calculate the next proposer using deterministic function f(prev_signature, parties, session_id).
-2. Proposer checks if reshare needed (if parties set have changed)
-3. Proposer shares the proposal request to reshare keys
-4. Parties share the acceptance of that pool (the signature using party private key)
-5. If all parties accepted the proposal they start the keygen process.
-6. After the keygen process finishes parties from old set start a sign session to sign new key.
-7. After the sign process finishes parties from old set start a sign session to sign the operation.
-8. After the signature process finishes every party can send the new operation (change parties set) and confirmation transactions to the core.
-
 ### Timestamps
 
 To reach the consensus and prevent system failures all steps should depend on any time source. Unfortunately, using timestamps is not possible because it can create lots of troubles with defining current time between parties, so we will use block number from core to define the time position of the current step. Every party should be connected to the core validator and synchronize their block number to use it like a timestamp in the whole process.
@@ -97,4 +76,22 @@ The first key generation requires a launched core with a preconfigured set of pa
 
 Until at least one party has as enabled raw flag there will not be possible to submit any confirmation.
 
+### Sign session flow
 
+1. Parties calculate the next proposer using deterministic function f(prev_signature, parties, session_id).
+2. Proposer selects the pool to sign
+3. Proposer shares the pool between all parties
+4. Parties share the acceptance of that pool (the signature using party private key)
+5. Parties that have received minimum t acceptances start the threshold signature process.
+6. After the signature process finishes every party can send the confirmation transaction to the core.
+
+### Reshare session flow
+
+1. Parties calculate the next proposer using deterministic function `f(prev_signature, parties, session_id)`.
+2. Proposer checks if reshare needed (if parties set have changed)
+3. Proposer shares the proposal request to reshare keys
+4. Parties share the acceptance of that pool (the signature using party private key)
+5. If all parties accepted the proposal they start the keygen process.
+6. After the keygen process finishes parties from old set start a sign session to sign new key.
+7. After the sign process finishes parties from old set start a sign session to sign the operation.
+8. After the signature process finishes every party can send the new operation (change parties set) and confirmation transactions to the core.
