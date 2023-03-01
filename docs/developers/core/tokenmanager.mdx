@@ -3,6 +3,15 @@
 
 # Tokenmanager module
 
+The `tokenamanager` module is responsible for storing information about all supported tokens.
+For FT and Native tokens such an information will be strongly predefined. NFT collection can contain huge amount of tokens under it, and also they can be minted in future.
+So we can not define all tokens in core during initialization or token add operation. That is why collections flow was created.
+Using `tokenmanager` `Collection` and `CollectionData` we can define collection global and chain information regardless
+of the number of tokens in collection or their metadata.
+Token information (`Item` and `OnChainItem`) will be set up during the first token transfer.
+During the first transfer oracles should fill the metadata field in `MsgCreateTransferOp` and provide all required token information to create `Item` and `OnChainItem`.
+
+
 ## Entities
 1. **Params** - defines supported networks and their bridge contracts
 
@@ -338,14 +347,3 @@
     string index = 3;
   }
   ```
-
-## Flow
-The `tokenamanager` module is responsible for storing information about all supported tokens.
-For FT and Native tokens such an information will be strongly predefined. NFT collection can contain huge amount of tokens under it, and also they can be minted in future.
-So we can not define all tokens in core during initialization or token add operation. That is why collections flow was created.
-Using `tokenmanager` `Collection` and `CollectionData` we can define collection global and chain information regardless
-of the number of tokens in collection or their metadata.
-Token information (`Item` and `OnChainItem`) will be set up during the first token transfer.
-During the first transfer oracles should fill the metadata field in `MsgCreateTransferOp` and provide all required token information to create `Item` and `OnChainItem`.
-
-

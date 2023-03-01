@@ -3,6 +3,21 @@
 
 # Rarimocore module
 
+The `rarimocore` cosmos module contains logic for all cross-chain operations, its votes, confirmations and signers management.
+
+The common flow consists of three steps:
+1. Any Oracle creates the operation on the core
+2. Oracles vote for the operation correctness, and after that operation defined as approved/not approved.
+3. Signature producers sign the operation
+4. Signature producers submit confirmation to the core, and after that operation defined as signed.
+
+Currently, we define two operation types:
+- transfer operation (transferring token from one chain to another)
+- change parties (changing ECDSA parameters).
+
+Transfer operation message that will be created by `MsgCreateTransferOperation` and encoded into the details field.
+You can explore the messages and RPC server definition of the `rarimocore` module in the `rarimo-core/proto/rarimocore` package.
+
 ## Entities
 1. **Params** - defines all tss information: parties, threshold, pub key, etc.
 
@@ -294,20 +309,3 @@ required quorum operation status changes to `APPROVED` or `NOT_APPROVED`.
     uint32 threshold = 3;
   }
   ```
-
-## Flow
-The `rarimocore` cosmos module contains logic for all cross-chain operations, its votes, confirmations and signers management.
-
-The common flow consists of three steps:
-1. Any Oracle creates the operation on the core
-2. Oracles vote for the operation correctness, and after that operation defined as approved/not approved.
-3. Signature producers sign the operation
-4. Signature producers submit confirmation to the core, and after that operation defined as signed.
-
-Currently, we define two operation types:
-- transfer operation (transferring token from one chain to another)
-- change parties (changing ECDSA parameters).
-
-Transfer operation message that will be created by `MsgCreateTransferOperation` and encoded into the details field.
-You can explore the messages and RPC server definition of the `rarimocore` module in the `rarimo-core/proto/rarimocore` package.
-
