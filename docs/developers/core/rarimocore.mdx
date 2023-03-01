@@ -214,7 +214,8 @@
   ```
 
 3. **CreateConfirmation** - creates the confirmation for set of operations. After confirmation created user can use provided
-  signature and merkle tree to execute event unlocking on destination chain.
+  signature and merkle tree to execute event unlocking on destination chain. Confirmation can be created only for operation with `APPROVED` status.
+  After hash and signature verification operation status will be changed to `SIGNED`.
   ```protobuf
   message MsgCreateConfirmation {
     string creator = 1;
@@ -236,8 +237,7 @@
   }
 ```
 
-5. **ChangePartyAddress** - changes party address. Only party account can execute. After total voting power reaches
-  required quorum operation status changes to `APPROVED` or `NOT_APPROVED`.
+5. **ChangePartyAddress** - changes party address. Only party account can execute. Change will be applied immediately.
   ```protobuf
   message MsgChangePartyAddress {
     string creator = 1;
@@ -245,7 +245,8 @@
   }
   ```
 
-6. **Vote** - vote for operation. Vote power will be equal to the voter staked balance.
+6. **Vote** - vote for operation. Vote power will be equal to the voter staked balance. After total voting power reaches
+required quorum operation status changes to `APPROVED` or `NOT_APPROVED`.
   ```protobuf
   message MsgVote {
     string creator = 1;
