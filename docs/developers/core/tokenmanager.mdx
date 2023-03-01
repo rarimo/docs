@@ -3,7 +3,7 @@
 
 # Tokenmanager module
 
-## Entities:
+## Entities
 1. Params - defines supported networks and their bridge contracts
 ```protobuf
 enum NetworkType {
@@ -98,7 +98,7 @@ message OnChainItem {
 }
 ```
 
-## Proposals:
+## Proposals
 1. SetNetworkProposal
 ```protobuf
 message SetNetworkProposal {
@@ -183,7 +183,7 @@ message RemoveCollectionProposal {
 }
 ```
 
-## Flow:
+## Flow
 The `tokenamanager` module is responsible for storing information about all supported tokens.
 For FT and Native tokens such an information will be strongly predefined but for NFT tokens it can be set up during first transfer.
 It is the main feature collections were created for.

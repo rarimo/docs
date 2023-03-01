@@ -3,7 +3,7 @@
 
 # Rarimocore module
 
-## Entities:
+## Entities
 1. Params - defines all tss information: parties, threshold, pub key, etc.
 ```protobuf
 message Party {
@@ -83,7 +83,7 @@ message Vote {
 }
 ```
 
-## RPC:
+## RPC
 1. CreateTransferOperation - crates Operation with type `TRANSFER` and `INITIALIZED` status.
 Metadata should be provided in case of first NFT transfer. Tx, EventId, Sender can be specified in native for source chain format.
 Other data should be formatted into hex with `0x` prefix.
@@ -160,7 +160,7 @@ message MsgVote {
 }
 ```
 
-## Proposals:
+## Proposals
 1. AddSignerPartyProposal - adding new TSS party to the set. After approval, new party will be added to the parties
 list with `verified=false` flag and global flag will be updated `isUpdateRequired=true`.
 ```protobuf
@@ -200,7 +200,7 @@ message ChangeThresholdProposal {
 }
 ```
 
-## Flow:
+## Flow
 The `rarimocore` cosmos module contains logic for all cross-chain operations, its votes, confirmations and signers management.
 
 The common flow consists of three steps:
