@@ -99,7 +99,7 @@ message OnChainItem {
 ```
 
 ## Proposals
-1. SetNetworkProposal
+1. SetNetworkProposal - creating or updating existing network params.
 ```protobuf
 message SetNetworkProposal {
   string title = 1;
@@ -108,7 +108,7 @@ message SetNetworkProposal {
 }
 ```
 
-2. UpdateTokenItemProposal
+2. UpdateTokenItemProposal - updating token item params (metadata)
 ```protobuf
 message UpdateTokenItemProposal {
   string title = 1;
@@ -118,7 +118,7 @@ message UpdateTokenItemProposal {
 }
 ```
 
-3. RemoveTokenItemProposal
+3. RemoveTokenItemProposal - removing token item from core.
 ```protobuf
 message RemoveTokenItemProposal {
   string title = 1;
@@ -128,7 +128,7 @@ message RemoveTokenItemProposal {
 }
 ```
 
-4. CreateCollectionProposal
+4. CreateCollectionProposal - adding new collection. CollectionData should be provided. Items and OnChainItems can be optionally provided.
 ```protobuf
 message CreateCollectionProposal {
   string title = 1;
@@ -143,7 +143,7 @@ message CreateCollectionProposal {
 }
 ```
 
-5. UpdateCollectionDataProposal
+5. UpdateCollectionDataProposal - updating collection data information.
 ```protobuf
 message UpdateCollectionDataProposal {
   string title = 1;
@@ -153,7 +153,7 @@ message UpdateCollectionDataProposal {
 }
 ```
 
-6. AddCollectionDataProposal
+6. AddCollectionDataProposal - adding collection data (which means support of new chain for collection)
 ```protobuf
 message AddCollectionDataProposal {
   string title = 1;
@@ -163,7 +163,7 @@ message AddCollectionDataProposal {
 }
 ```
 
-7. RemoveCollectionDataProposal
+7. RemoveCollectionDataProposal - removing collection data (which means disabling of certain chain for collection)
 ```protobuf
 message RemoveCollectionDataProposal {
   string title = 1;
@@ -173,7 +173,7 @@ message RemoveCollectionDataProposal {
 }
 ```
 
-8. RemoveCollectionProposal
+8. RemoveCollectionProposal - removing the hole collection
 ```protobuf
 message RemoveCollectionProposal {
   string title = 1;
@@ -185,7 +185,11 @@ message RemoveCollectionProposal {
 
 ## Flow
 The `tokenamanager` module is responsible for storing information about all supported tokens.
-For FT and Native tokens such an information will be strongly predefined but for NFT tokens it can be set up during first transfer.
-It is the main feature collections were created for.
+For FT and Native tokens such an information will be strongly predefined. NFT collection can contain huge amount of tokens under it, and also they can be minted if future.
+So we can not define all tokens in core during initialization or token add operation. That is why collections flow was created.
+Using `tokenmanager` `Collection` and `CollectionData` we can define collection global and chain information regardless
+of the number of tokens in collection or their metadata.
+Token information (`Item` and `OnChainItem`) will be set up during the first token transfer.
+During the first transfer oracles should fill the metadata field in `MsgCreateTransferOp` and provide all required token information to create `Item` and `OnChainItem`.
 
 
