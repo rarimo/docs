@@ -230,12 +230,12 @@
 4. **SetupInitial** - used only once during first TSS parties set up. After threshold keys generation TSS parties submits
   `MsgSetupInitial` to confirm successful keys generation and provide new party public key data.
   ```protobuf
-  message MsgSetupInitial {
-    string creator = 1;
-    string partyPublicKey = 2;
-    string newPublicKey = 3;
-  }
-```
+    message MsgSetupInitial {
+      string creator = 1;
+      string partyPublicKey = 2;
+      string newPublicKey = 3;
+    }
+  ```
 
 5. **ChangePartyAddress** - changes party address. Only party account can execute. Change will be applied immediately.
   ```protobuf
