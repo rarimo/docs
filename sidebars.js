@@ -70,10 +70,7 @@ const sidebars = {
         id: "developers/core",
       },
       collapsed: false,
-      items: [
-        "developers/core/rarimocore",
-        "developers/core/tokenmanager",
-      ],
+      items: ["developers/core/rarimocore", "developers/core/tokenmanager"],
     },
     {
       type: "category",
@@ -83,9 +80,7 @@ const sidebars = {
         id: "developers/contracts",
       },
       collapsed: false,
-      items: [
-        "developers/contracts/bridge",
-      ],
+      items: ["developers/contracts/bridge"],
     },
     {
       type: "category",
@@ -95,10 +90,8 @@ const sidebars = {
         id: "developers/tss",
       },
       collapsed: false,
-      items: [
-        "developers/tss/overview",
-      ],
-    }
+      items: ["developers/tss/overview"],
+    },
   ],
   overview: [
     {
