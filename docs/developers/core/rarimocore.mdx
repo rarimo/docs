@@ -151,7 +151,7 @@ message MsgChangePartyAddress {
 }
 ```
 
-6. Vote - vote for operation. Vote power will be equal to the voter balance.
+6. Vote - vote for operation. Vote power will be equal to the voter staked balance.
 ```protobuf
 message MsgVote {
   string creator = 1;
@@ -161,7 +161,8 @@ message MsgVote {
 ```
 
 ## Proposals:
-1. AddSignerPartyProposal
+1. AddSignerPartyProposal - adding new TSS party to the set. After approval, new party will be added to the parties
+list with `verified=false` flag and global flag will be updated `isUpdateRequired=true`.
 ```protobuf
 message AddSignerPartyProposal {
   string title = 1;
@@ -172,7 +173,8 @@ message AddSignerPartyProposal {
 }
 ```
 
-2. RemoveSignerPartyProposal
+2. RemoveSignerPartyProposal - remove TSS party from parties set. After approval, party will be removed from parties
+list and global flag will be updated `isUpdateRequired=true`.
 ```protobuf
 message RemoveSignerPartyProposal {
   string title = 1;
@@ -181,7 +183,7 @@ message RemoveSignerPartyProposal {
 }
 ```
 
-3. ReshareKeysProposal
+3. ReshareKeysProposal - will set `isUpdateRequired=true` and launch key resharing if any of parties lost his secret key data.
 ```protobuf
 message ReshareKeysProposal {
   string title = 1;
@@ -189,7 +191,7 @@ message ReshareKeysProposal {
 }
 ```
 
-4. ChangeThresholdProposal
+4. ChangeThresholdProposal - changing threshold value. After approval, global flag will be updated `isUpdateRequired=true`.
 ```protobuf
 message ChangeThresholdProposal {
   string title = 1;
