@@ -1,0 +1,191 @@
+---
+---
+
+# Tokenmanager module
+
+## Entities:
+1. Params - defines supported networks and their bridge contracts
+```protobuf
+enum NetworkType {
+  EVM = 0;
+  Solana = 1;
+  Near = 2;
+  Other = 3;
+}
+
+message NetworkTypeBinding {
+  uint32 coreType = 1;
+  uint32 saverType = 2;
+}
+
+message NetworkParams {
+  // network name
+  string name = 1;
+  // contract address hex
+  string contract = 2;
+  NetworkType type = 4;
+}
+
+// Params defines the parameters for the module.
+message Params {
+  repeated NetworkParams networks = 1;
+}
+```
+
+2. Collection - defines collection - the high level concept of token that is supported on Rarimo bridge.
+```protobuf
+message CollectionMetadata {
+  string name = 1;
+  string symbol = 2;
+  string metadataURI = 3;
+}
+
+message CollectionDataIndex {
+  // Chain name
+  string chain = 1;
+  // Collection contract address
+  string address = 2;
+}
+
+message Collection {
+  string index = 1;
+  CollectionMetadata meta = 2;
+  repeated CollectionDataIndex data = 3;
+}
+```
+
+3. CollectionData - defines collection data on the certain chain. Indexed by chain|address and contains id of the collection.
+```protobuf
+message CollectionData {
+  CollectionDataIndex index = 1;
+  string collection = 2;
+  Type tokenType = 3;
+  bool wrapped = 4;
+  uint32 decimals = 5;
+}
+```
+
+4. Item - defines one simple token across all chains. Contains all metadata required to perform transfers.
+```protobuf
+message ItemMetadata {
+  string imageUri = 1;
+  // Hash of the token image. Encoded into hex string. (optional)
+  string imageHash = 2;
+  // Seed is used to generate PDA address for Solana
+  string seed = 3;
+  string uri = 4;
+}
+
+message OnChainItemIndex {
+  string chain = 1;
+  string address = 2;
+  string tokenID = 3;
+}
+
+message Item {
+  string index = 1;
+  string collection = 2;
+  ItemMetadata meta = 3;
+  repeated OnChainItemIndex onChain = 4;
+}
+```
+
+5. OnChainItem - defines one simple token on the certain chain. Indexed by `chain|address|tokenId`.
+```protobuf
+message OnChainItem {
+  OnChainItemIndex index = 1;
+  string item = 2;
+}
+```
+
+## Proposals:
+1. SetNetworkProposal
+```protobuf
+message SetNetworkProposal {
+  string title = 1;
+  string description = 2;
+  NetworkParams networkParams = 3;
+}
+```
+
+2. UpdateTokenItemProposal
+```protobuf
+message UpdateTokenItemProposal {
+  string title = 1;
+  string description = 2;
+
+  repeated Item item = 3;
+}
+```
+
+3. RemoveTokenItemProposal
+```protobuf
+message RemoveTokenItemProposal {
+  string title = 1;
+  string description = 2;
+
+  repeated string index = 3;
+}
+```
+
+4. CreateCollectionProposal
+```protobuf
+message CreateCollectionProposal {
+  string title = 1;
+  string description = 2;
+
+  string index = 3;
+  CollectionMetadata metadata = 4;
+  // All supported networks described
+  repeated CollectionData data = 5;
+  repeated Item item = 6;
+  repeated OnChainItem onChainItem = 7;
+}
+```
+
+5. UpdateCollectionDataProposal
+```protobuf
+message UpdateCollectionDataProposal {
+  string title = 1;
+  string description = 2;
+
+  repeated CollectionData data = 3;
+}
+```
+
+6. AddCollectionDataProposal
+```protobuf
+message AddCollectionDataProposal {
+  string title = 1;
+  string description = 2;
+
+  repeated CollectionData data = 3;
+}
+```
+
+7. RemoveCollectionDataProposal
+```protobuf
+message RemoveCollectionDataProposal {
+  string title = 1;
+  string description = 2;
+
+  repeated CollectionDataIndex index = 3;
+}
+```
+
+8. RemoveCollectionProposal
+```protobuf
+message RemoveCollectionProposal {
+  string title = 1;
+  string description = 2;
+
+  string index = 3;
+}
+```
+
+## Flow:
+The `tokenamanager` module is responsible for storing information about all supported tokens.
+For FT and Native tokens such an information will be strongly predefined but for NFT tokens it can be set up during first transfer.
+It is the main feature collections were created for.
+
+

@@ -98,6 +98,12 @@ module.exports = {
           },
           {
             type: "doc",
+            docId: "developers",
+            position: "left",
+            label: "Developers",
+          },
+          {
+            type: "doc",
             docId: "whitepaper",
             position: "right",
             label: "Whitepaper",
