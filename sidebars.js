@@ -113,6 +113,7 @@ const sidebars = {
       items: [
         "overview/applications/settlement-integration",
         "overview/applications/cross-chain-proofs",
+        "overview/applications/cross-chain-minting",
       ],
     },
     {
