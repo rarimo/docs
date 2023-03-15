@@ -14,10 +14,7 @@ The SDK includes these packages:
 
 ## Prerequisites
 
-- The SDK requires the [`ethers`](https://www.npmjs.com/package/ethers) package.
-
-- To use the SDK, you must add the [Web3.js](https://web3js.org/) script to the page like this: `<script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>`.
-This library provides access to browser-based wallets.
+The SDK requires the [`ethers`](https://www.npmjs.com/package/ethers) package.
 
 ## Installation
 
@@ -45,7 +42,7 @@ import { createProvider, MetamaskProvider } from '@rarimo/provider'
 import { utils } from "ethers";
 
 const sendTransaction = async () => {
-  // Connect to the Metamask wallet in the browser using Web3.js, using the MetamaskProvider interface to limit bundle size.
+  // Connect to the Metamask wallet in the browser, using the MetamaskProvider interface to limit bundle size.
   const provider = await createProvider(MetamaskProvider)
 
   // Initialize the object that represents the transaction operation, in this case on EVM.
