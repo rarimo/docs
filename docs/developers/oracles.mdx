@@ -8,17 +8,28 @@
 - Repo: [Solana Saver](gitlab.com/rarimo/savers/solana-saver-svc)
 - Repo: [Near Saver](gitlab.com/rarimo/savers/near-saver-svc)
 
-The saver services designed to be launched by validators in two supported modes:
+Managing events' creation requires some special logic for every chain that will observe blockchain state for new events,
+parse in accordance with chain rules, etc. Rarimo core can not fetch events data by itself because interaction with
+other systems can not be deterministic.
+So there should be custom software for observing blockchain state and transferring events from
+source chain to Rarimo core. That is why we’ve created Oracles.
+
+Rarimo oracles are built to provide everyone an opportunity to deliver and validate cross-chain messages.
+We believe that architecture constructed on worldwide open and transparent oracles brings the real decentralization
+into any cross-chain protocol.
+
+In Rarimo oracle’s goal is to observe blockchains state for new events, deliver such events into the Rarimo core and
+verify events delivered from other oracles. In particular oracles should observe new token deposits,
+create transfer operations, submit them into the core and vote for correctness of submitted operations.
+
+The oracle services designed to be launched by anyone in two supported modes:
 - saver (connects to the chain rpc and submits new transfer operations to the Rarimo core)
 - voter (fetches new operations from core, verifies the content and votes for its correctness)
 
-Currently there are three implementations exists:
+Currently, there are three implementations exists:
 - evm-saver (used with any evm-compatible chains)
 - solana-saver (used with any solana-compatible chains)
 - near-saver (used with any near-compatible chains)
-
-Every validator should run validator node (rarimo-core) and saver service in voter mode for every supported chain.
-Saver mode can be also optionally launched.
 
 ## Logic
 
@@ -76,5 +87,5 @@ Voter mode flow:
 1. Oracle subscribes to the new operations on Rarimo core for defined oracle's chain.
 2. Oracle receives new operation.
 3. Oracle verifies operation and if it is correct submits `MsgVote` transaction with `YES` vote. Otherwise, oracle submits `MsgVote` transaction with `NO` vote.
-4. After operation votes reaches `Quorum` (defined in `Gov` module) `rarimocore` calculates the voting power and vote results. To become `APPROVED` there should be at least `Threshold` (defined in `Gov` module) percentage positive votes.
+4. After operation votes reaches `Quorum` (defined in `Rarimocore` module) `rarimocore` calculates the voting power and vote results. To become `APPROVED` there should be at least `Threshold` (defined in `Gov` module) percentage positive votes.
   Otherwise, operation becomes `NOT_APPROVED`.
