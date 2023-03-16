@@ -78,24 +78,24 @@ module.exports = {
             position: "left",
             label: "Contracts",
           },
-          {
-            type: "doc",
-            docId: "api",
-            position: "left",
-            label: "API",
-          },
+          // {
+          //   type: "doc",
+          //   docId: "api",
+          //   position: "left",
+          //   label: "API",
+          // },
           {
             type: "doc",
             docId: "sdk",
             position: "left",
             label: "SDK",
           },
-          {
-            type: "doc",
-            docId: "solutions",
-            position: "left",
-            label: "Solutions",
-          },
+          // {
+          //   type: "doc",
+          //   docId: "solutions",
+          //   position: "left",
+          //   label: "Solutions",
+          // },
           {
             type: "doc",
             docId: "developers",

@@ -5,19 +5,18 @@
 
 Rarimo's JavaScript/TypeScript SDK provides tools to interact with browser-based wallets such as Metamask, Near, and Phantom and send transactions from wallets to Rarimo's contracts.
 
+You could find full developer docs [here](https://rarimo.github.io/js-sdk/index.html). 
+
 ## Packages
 
 The SDK includes these packages:
 
-- @rarimo/provider: Tools that provide access to wallets
-- @rarimo/nft-checkout: Tools to get the estimated price of a transaction and to send transactions to Rarimo
+- [@rarimo/provider](https://rarimo.github.io/js-sdk/modules/_rarimo_provider.html): Tools that provide access to wallets
+- [@rarimo/nft-checkout](https://rarimo.github.io/js-sdk/modules/_rarimo_nft_checkout.html): Tools to get the estimated price of a transaction and to send transactions to Rarimo
 
 ## Prerequisites
 
-- The SDK requires the [`ethers`](https://www.npmjs.com/package/ethers) package.
-
-- To use the SDK, you must add the [Web3.js](https://web3js.org/) script to the page like this: `<script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>`.
-This library provides access to browser-based wallets.
+The SDK requires the [`ethers`](https://www.npmjs.com/package/ethers) package.
 
 ## Installation
 
@@ -45,7 +44,7 @@ import { createProvider, MetamaskProvider } from '@rarimo/provider'
 import { utils } from "ethers";
 
 const sendTransaction = async () => {
-  // Connect to the Metamask wallet in the browser using Web3.js, using the MetamaskProvider interface to limit bundle size.
+  // Connect to the Metamask wallet in the browser, using the MetamaskProvider interface to limit bundle size.
   const provider = await createProvider(MetamaskProvider)
 
   // Initialize the object that represents the transaction operation, in this case on EVM.
