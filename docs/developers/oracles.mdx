@@ -49,16 +49,16 @@ Token addresses are equal to the token collection addresses that is already defi
 Let's describe the flow more accurately:
 
 1. If token was already transferred between source and destination chain no additional actions required. Oracle just 
-fetches `OnChainItem` from core and leaves metadata field empty.
+  fetches `OnChainItem` from core and leaves metadata field empty.
 
 2. If source `OnChainItem` exists but destination `OnChainItem` does no (it means that token never was transferred on destination chain)
-oracle should construct destination `OnChainItem` using the following rules:
-- if destination chain is Solana, tokenId should be derived using bridge address and seed from `Item` metadata (`Item` should exist cause `OnChainItem` exists)
-- otherwise tokenId will be equal to the home chain tokenId (the chain where token was minted firstly).
+  oracle should construct destination `OnChainItem` using the following rules:
+  - if destination chain is Solana, tokenId should be derived using bridge address and seed from `Item` metadata (`Item` should exist cause `OnChainItem` exists)
+-   otherwise tokenId will be equal to the home chain tokenId (the chain where token was minted firstly).
 
 3. If source `OnChainItem` does not exists it means that we are transferring token at first time and `Item` with its metadata also does not exist.
-So oracle should create `Item` metadata what means fetching on-chain metadata and generation of solana seed. Then using paragraph 2 rules oracle constructs destination `OnChainItem`.
-Source `OnChainItem, which is home `OnChainItem`, can be constructed using deposit event information.
+  So oracle should create `Item` metadata which means fetching on-chain metadata and generation of solana seed. Then using paragraph 2 rules oracle constructs destination `OnChainItem`.
+  Source `OnChainItem`, which is home `OnChainItem`, can be constructed using deposit event information.
 
 
 ## Library
