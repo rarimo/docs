@@ -70,7 +70,11 @@ const sidebars = {
         id: "developers/core",
       },
       collapsed: false,
-      items: ["developers/core/rarimocore", "developers/core/tokenmanager", "developers/core/oraclemanager"],
+      items: [
+        "developers/core/rarimocore",
+        "developers/core/tokenmanager",
+        "developers/core/oraclemanager",
+      ],
     },
     {
       type: "category",
