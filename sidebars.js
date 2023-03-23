@@ -110,6 +110,8 @@ const sidebars = {
       type: "doc",
       id: "overview/creating-transactions",
     },
+  ],
+  concepts: [
     {
       type: "doc",
       id: "overview/design",
