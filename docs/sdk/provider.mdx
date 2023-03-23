@@ -1,0 +1,34 @@
+---
+---
+
+# @rarimo/provider
+
+The [@rarimo/provider](https://www.npmjs.com/package/@rarimo/provider) package provides access to in-browser wallets such as Metamask.
+
+For information about connecting to wallets, see [Connecting to wallets](../overview/connecting-to-wallets).
+
+## Provider types
+
+The SDK supports these wallet types with their matching provider classes:
+
+- [CoinbaseProvider](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.CoinbaseProvider.html): Coinbase wallets
+- [MetamaskProvider](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.MetamaskProvider.html): Metamask wallets
+- [NearProvider](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.NearProvider.html): NEAR wallets
+- [PhantomProvider](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.PhantomProvider.html): Phantom wallets
+- [SolflareProvider](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.SolflareProvider.html): Solflare wallets
+
+## Methods and properties
+
+These classes all implement the [IProvider](https://rarimo.github.io/js-sdk/interfaces/_rarimo_provider.IProvider.html) interface, which allows you to work with different wallet types in a consistent way.
+In this way, each provider has these main methods:
+
+- [connect()](https://rarimo.github.io/js-sdk/interfaces/_rarimo_provider.IProvider.html#connect): Connects to the wallet, prompting the user to log in if necessary.
+
+After you connect, you can access information about the wallet with these properties of the provider object:
+
+- `address`: The wallet address
+- `providerType`: The type of wallet, such as `metamask`
+- `chainType`: The type of chain from the [`ChainTypes`](https://rarimo.github.io/js-sdk/enums/_rarimo_provider.ChainTypes.html) enumeration, such as EVM, Near, or Solana
+
+Many other methods and properties are available.
+For complete information about providers, see the [@rarimo/provider](https://rarimo.github.io/js-sdk/modules/_rarimo_provider.html) SDK reference.
