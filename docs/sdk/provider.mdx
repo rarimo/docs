@@ -11,18 +11,18 @@ For information about connecting to wallets, see [Connecting to wallets](../over
 
 The SDK supports these wallet types with their matching provider classes:
 
-- [CoinbaseProvider](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.CoinbaseProvider.html): Coinbase wallets
-- [MetamaskProvider](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.MetamaskProvider.html): Metamask wallets
-- [NearProvider](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.NearProvider.html): NEAR wallets
-- [PhantomProvider](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.PhantomProvider.html): Phantom wallets
-- [SolflareProvider](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.SolflareProvider.html): Solflare wallets
+- [`CoinbaseProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.CoinbaseProvider.html): Coinbase wallets
+- [`MetamaskProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.MetamaskProvider.html): Metamask wallets
+- [`NearProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.NearProvider.html): NEAR wallets
+- [`PhantomProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.PhantomProvider.html): Phantom wallets
+- [`SolflareProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.SolflareProvider.html): Solflare wallets
 
 ## Methods and properties
 
-These classes all implement the [IProvider](https://rarimo.github.io/js-sdk/interfaces/_rarimo_provider.IProvider.html) interface, which allows you to work with different wallet types in a consistent way.
+These classes all implement the [`IProvider`](https://rarimo.github.io/js-sdk/interfaces/_rarimo_provider.IProvider.html) interface, which allows you to work with different wallet types in a consistent way.
 In this way, each provider has these main methods:
 
-- [connect()](https://rarimo.github.io/js-sdk/interfaces/_rarimo_provider.IProvider.html#connect): Connects to the wallet, prompting the user to log in if necessary.
+- [`connect()`](https://rarimo.github.io/js-sdk/interfaces/_rarimo_provider.IProvider.html#connect): Connects to the wallet, prompting the user to log in if necessary.
 
 After you connect, you can access information about the wallet with these properties of the provider object:
 

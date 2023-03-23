@@ -70,7 +70,7 @@ module.exports = {
             type: "doc",
             docId: "overview",
             position: "left",
-            label: "Overview",
+            label: "Getting started",
           },
           {
             type: "doc",
