@@ -10,7 +10,7 @@ module.exports = {
   title: "Welcome to Rarimo's documentation portal",
   tagline:
     "Tooling and guides to build the next generation of cross-chain integration",
-  url: "https://rarimo.gitlab.io/", // @todo docs.rarimo.com
+  url: "https://rarimo.gitlab.io", // @todo docs.rarimo.com
   baseUrl: "/docs/", // @todo remove this
   trailingSlash: false,
   onBrokenLinks: "ignore",
@@ -71,6 +71,12 @@ module.exports = {
             docId: "overview",
             position: "left",
             label: "Overview",
+          },
+          {
+            type: "doc",
+            docId: "overview/design",
+            position: "left",
+            label: "Concepts",
           },
           {
             type: "doc",
