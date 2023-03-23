@@ -104,6 +104,14 @@ const sidebars = {
     },
     {
       type: "doc",
+      id: "overview/connecting-to-wallets",
+    },
+    {
+      type: "doc",
+      id: "overview/creating-transactions",
+    },
+    {
+      type: "doc",
       id: "overview/design",
     },
     {
@@ -204,6 +212,22 @@ const sidebars = {
     {
       type: "doc",
       id: "sdk",
+    },
+    {
+      type: "doc",
+      id: "sdk/provider",
+    },
+    {
+      type: "doc",
+      id: "sdk/nft-checkout",
+    },
+    {
+      type: "doc",
+      id: "sdk/react-provider",
+    },
+    {
+      type: "doc",
+      id: "sdk/react-nft-checkout",
     },
   ],
   solutions: [

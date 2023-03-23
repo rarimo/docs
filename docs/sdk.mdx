@@ -5,14 +5,17 @@
 
 Rarimo's JavaScript/TypeScript SDK provides tools to interact with browser-based wallets such as Metamask, Near, and Phantom and send transactions from wallets to Rarimo's contracts.
 
-You could find full developer docs [here](https://rarimo.github.io/js-sdk/index.html). 
-
 ## Packages
 
-The SDK includes these packages:
+The SDK includes these packages.
+For more information about the main things that each package provides, click on the package name.
 
-- [@rarimo/provider](https://rarimo.github.io/js-sdk/modules/_rarimo_provider.html): Tools that provide access to wallets
-- [@rarimo/nft-checkout](https://rarimo.github.io/js-sdk/modules/_rarimo_nft_checkout.html): Tools to get the estimated price of a transaction and to send transactions to Rarimo
+- [@rarimo/provider](sdk/provider): Tools that provide access to wallets
+- [@rarimo/nft-checkout](sdk/nft-checkout): Tools to get the estimated price of a transaction and to send transactions to Rarimo
+- [@rarimo/react-provider](sdk/react-provider): Tools that provide access to wallets in React applications
+- [@rarimo/react-nft-checkout](sdk/react-nft-checkout): React components that create transactions
+
+For complete reference information about the SDK packages, see the [SDK reference](https://rarimo.github.io/js-sdk/index.html).
 
 ## Prerequisites
 
@@ -26,111 +29,7 @@ To install the SDK, run `yarn add` and the names of the packages to install, as 
 yarn add ethers @rarimo/provider @rarimo/nft-checkout
 ```
 
-## Creating transactions
+## Usage
 
-Sending a transaction with the SDK includes these main steps:
-
-1. Connect to the wallet with the `createProvider()` function, which creates a wallet provider that represents the wallet.
-1. Use the `createCheckoutOperation()` function to create an object that implements the `INFTCheckoutOperation` interface.
-This object represents the transaction operation and provides methods to access a specific type of chain, estimate the transaction price, and complete the checkout process.
-1. Bundle the data for the contracts to call as part of the transaction.
-1. Run the transaction operation's `checkout()` method, which starts the transaction.
-
-Here is an example of creating a transaction on the Goerli test chain:
-
-```ts
-import { createCheckoutOperation, EVMOperation, ChainNames } from '@rarimo/nft-checkout'
-import { createProvider, MetamaskProvider } from '@rarimo/provider'
-import { utils } from "ethers";
-
-const sendTransaction = async () => {
-  // Connect to the Metamask wallet in the browser, using the MetamaskProvider interface to limit bundle size.
-  const provider = await createProvider(MetamaskProvider)
-
-  // Initialize the object that represents the transaction operation, in this case on EVM.
-  const op = createCheckoutOperation(EVMOperation, provider)
-
-  // Get the chains that are supported from that chain type.
-  const chains = await op.supportedChains()
-
-  // Select the chain to pay from.
-  // This example uses the Goerli chain, but your application can ask the user which chain to use.
-  const selectedChain = chains.find(i => i.name === ChainNames.Goerli)
-
-  // Set the parameters for the transaction, including the price and the tokens to accept payment in.
-  const target = {
-    // Destination chain id (Sepolia in this case)
-    chainId: 11155111,
-    // Address of the NFT sale contract
-    address: "0x77fedfb705c8bac2e03aad2ad8a8fe83e3e20fa1",
-    // Recipient's wallet address
-    recipient: "0x8fe0d4923f61ff466430f63471e27b89a7cf0c92",
-    price: {
-      // Price amount as an unsigned integer in a string
-      value: "10000000000000000",
-      // Number of decimals in the currency; in this case 18 for wei
-      decimals: 18,
-      // Price token symbol
-      symbol: "ETH",
-      // Results in a price of 10000000000000000/10^18, or 0.01 ETH
-    },
-    // The token to swap the payment token to
-    swapTargetTokenSymbol: "WETH",
-  }
-
-  // Initialize the operation with the source chain and transaction parameters.
-  await op.init({
-    chainIdFrom: selectedChain!.id,
-    target,
-  })
-
-  // Load the user's balance of payment tokens on the source chain.
-  // When this method runs, the wallet prompts the user to switch to the selected chain if necessary.
-  // Then, the method returns the tokens on this chain that the DEX supports and that the wallet has a balance of greater than zero.
-  const tokens = await op.loadPaymentTokens(selectedChain!)
-
-  // Select the token to accept payment in on the source chain.
-  // This example hard-codes UNI, but your application can ask the user which token to pay with.
-  const paymentToken = tokens[0]
-
-  // Get the estimated purchase price in the payment token, including the cost to swap the tokens to the tokens that the seller accepts payment in.
-  // At this point you can ask the user to confirm the transaction with the fees or cancel it.
-  const estimatedPrice = await op.estimatePrice(paymentToken)
-
-  // Create the transaction bundle, which includes custom logic that tells the Rarimo contract what to do after unlocking the transferred tokens on the destination chain, such as calling another contract to buy the NFT on the destination chain.
-  // Optionally, you can set the bundle salt to be able to access the temporary contracts that Rarimo uses to run the bundled transactions.
-  // See "Bundling" in the Rarimo documentation.
-
-  // First, use the Ethers Interface to encode a command to add to the bundle.
-  // This example encodes a command that purchases the NFT on the destination chain via the NFT contract's Application Binary Interface (ABI).
-  // You can include other custom logic in the bundle.
-  const encodedFunctionData = new utils
-    .Interface(["function buy(address receiver_) payable"])
-    .encodeFunctionData("buy", [
-      target.recipient,
-    ])
-
-  // Then, create a bundle and add the purchase function.
-  // The first parameter is the Solidity types of the values in the second parameter.
-  // These parameters and their types are:
-  // 1) The address of the contract that Rarimo will call to buy the NFT (`address[]`)
-  // 2) The price of the NFT on the destination chain (`uint256[]`)
-  // 3) The encoded purchase function (`bytes[]`)
-  const bundle = utils.defaultAbiCoder.encode(
-      ["address[]", "uint256[]", "bytes[]"],
-      [
-        [target.address],
-        [target.price.value],
-        [encodedFunctionData],
-      ]
-  );
-
-  // Call the asynchronous checkout method to run the transaction.
-  // The `checkout()` method takes the parameters from the operation instance, gets approval from the user's wallet, and calls the Rarimo contract to handle the transaction.
-  const txHash = await op.checkout(estimatedPrice, { bundle })
-
-  // Print a link to the transaction.
-  console.log(provider.getTxUrl(selectedChain!, String(txHash)))
-}
-```
-
+- For information about working with wallets, see [@rarimo/provider](sdk/provider).
+- For information about creating transactions, see [@rarimo/nft-checkout](sdk/nft-checkout).
