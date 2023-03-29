@@ -63,6 +63,10 @@ const sidebars = {
       id: "developers/oracles",
     },
     {
+      type: "doc",
+      id: "getting-started",
+    },
+    {
       type: "category",
       label: "Core",
       link: {
@@ -101,6 +105,10 @@ const sidebars = {
     {
       type: "doc",
       id: "overview",
+    },
+    {
+      type: "doc",
+      id: "getting-started",
     },
     {
       type: "doc",
