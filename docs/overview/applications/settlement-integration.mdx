@@ -1,13 +1,13 @@
 ---
-sidebar_label: NFT Settlement
+sidebar_label: NFT Checkout
 ---
 
-# Rarimo NFT Settlement Use Case v0.3
+# Rarimo NFT Checkout Use Case v0.3
 
-Rarimo's NFT settlement flow automates token swaps, which allows users to make cross-chain purchases seamlessly.
+Rarimo's NFT checkout flow automates token swaps, which allows users to make cross-chain purchases seamlessly.
 Clients can accept practically any fungible token from Rarimo's supported blockchains and receive payments in their token of choice.
 
-For a working demo of this use case, see the [NFT Settlement use case demo](https://rarimo.gitlab.io/demo-settlement/?path=/story/demo-purchasewithanytoken--demo).
+For a working demo of this use case, see the [NFT Checkout use case demo](https://rarimo.gitlab.io/demo-settlement/?path=/story/demo-purchasewithanytoken--demo).
 To see full instructions for getting test UNI and using it to buy an NFT using Rarimo, click the instructions at the bottom of the demo page.
 
 Rarimo's unique bundling technology bundles and automates the conversion transactions to minimize fees and increase transaction reliability.
@@ -30,11 +30,11 @@ Making purchases with this flow follows these general steps:
 1. The Rarimo contract receives the transaction and unlocks the equivalent tokens on the destination chain.
 1. The Rarimo contract calls the application's smart contract to purchase the NFT, which sends the tokens to the seller's wallet on the destination chain and sends the purchased NFT to the customer's wallet.
 
-![NFT Settlement](/img/nft-settlement.png)
+![NFT checkout sequence diagram](/img/nft-settlement.png)
 
 ### References
 
-[NFT Settlement use case demo](https://rarimo.gitlab.io/demo-settlement/?path=/story/demo-purchasewithanytoken--demo)
+[NFT Checkout use case demo](https://rarimo.gitlab.io/demo-settlement/?path=/story/demo-purchasewithanytoken--demo)
 
 [Goerli Bridge](https://goerli.etherscan.io/address/0x6EA0C45bAC29a2A2769ec14f4BCD959b07780106)
 
