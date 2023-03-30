@@ -51,6 +51,10 @@ Build:
           alias: docker
           command: ["--tls=false"]
   stage: build-and-publish
+  only:
+    refs:
+      - dev
+      - main
   <<: *before_script_templ
   script:
     - type werf && source $(werf ci-env gitlab --as-file)
@@ -83,8 +87,7 @@ Deploy to Staging:
   stage: deploy-kubernetes
   only:
     refs:
-      - ci-deploy
-      # - dev
+      - dev
   script:
     - mkdir ~/.kube/
     - echo ${k8sconfig} | base64 -d > config
