@@ -54,7 +54,6 @@ Build:
   only:
     refs:
       - dev
-      - ci-deploy
   <<: *before_script_templ
   script:
     - export URL="https://staging.docs.rarimo.com"
@@ -116,7 +115,6 @@ Deploy to Staging:
   only:
     refs:
       - dev
-      - ci-deploy
   script:
     - mkdir ~/.kube/
     - echo ${k8sconfig} | base64 -d > config
