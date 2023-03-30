@@ -4,14 +4,22 @@
 // @TODO - make our own themes, i guess
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
+function getUrl() {
+  return process.env.URL || "https://rarimo.gitlab.io";
+}
+
+function getBaseUrl() {
+  return process.env.BASE_URL || "/docs/";
+}
+
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
   /** Meta information */
   title: "Welcome to Rarimo's documentation portal",
   tagline:
     "Tooling and guides to build the next generation of cross-chain integration",
-  url: "https://rarimo.gitlab.io", // @todo docs.rarimo.com
-  baseUrl: "/docs/", // @todo remove this
+  url: getUrl(),
+  baseUrl: getBaseUrl(),
   trailingSlash: false,
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "warn",
