@@ -19,8 +19,8 @@ shell:
     #- yarn autoclean --force
     - yarn
   setup:
-    - BASE_URL={{ env "BASE_URL" }}
-    - URL={{ env "URL" }}
+    - export BASE_URL={{ env "BASE_URL" }}
+    - export URL={{ env "URL" }}
     - cd /app
     - yarn build
 

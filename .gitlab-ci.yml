@@ -57,8 +57,8 @@ Build:
       - ci-deploy
   <<: *before_script_templ
   script:
-    - URL="https://staging.docs.rarimo.com"
-    - BASE_URL="/"
+    - export URL="https://staging.docs.rarimo.com"
+    - export BASE_URL="/"
     - type werf && source $(werf ci-env gitlab --as-file)
     - werf build --report-path=images-report.json
     - docker pull $(cat images-report.json | jq -r .Images.web.DockerImageName)
@@ -81,8 +81,8 @@ Build-main:
       - main
   <<: *before_script_templ
   script:
-    - URL="https://docs.rarimo.com"
-    - BASE_URL="/"
+    - export URL="https://docs.rarimo.com"
+    - export BASE_URL="/"
     - type werf && source $(werf ci-env gitlab --as-file)
     - werf build --report-path=images-report.json
     - docker pull $(cat images-report.json | jq -r .Images.web.DockerImageName)
@@ -95,8 +95,8 @@ Build-main:
 pages:
   stage: deploy
   script:
-  - URL="https://rarimo.gitlab.io"
-  - BASE_URL="/docs/"
+  - export URL="https://rarimo.gitlab.io"
+  - export BASE_URL="/docs/"
   - yarn install --frozen-lockfile --production
   - yarn build
   - rm -rf ./public/*
