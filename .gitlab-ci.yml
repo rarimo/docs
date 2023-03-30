@@ -54,9 +54,35 @@ Build:
   only:
     refs:
       - dev
+      - ci-deploy
+  <<: *before_script_templ
+  script:
+    - URL="https://staging.docs.rarimo.com"
+    - BASE_URL="/"
+    - type werf && source $(werf ci-env gitlab --as-file)
+    - werf build --report-path=images-report.json
+    - docker pull $(cat images-report.json | jq -r .Images.web.DockerImageName)
+    - docker tag $(cat images-report.json | jq -r .Images.web.DockerImageName) $IMAGE_NAME
+    - docker push $IMAGE_NAME
+  except: [schedules]
+  interruptible: true
+
+Build-main:
+  image:
+      name: "tokend/werf:0.0.11"
+      entrypoint: [""]
+  services:
+        - name: docker:20-dind
+          alias: docker
+          command: ["--tls=false"]
+  stage: build-and-publish
+  only:
+    refs:
       - main
   <<: *before_script_templ
   script:
+    - URL="https://docs.rarimo.com"
+    - BASE_URL="/"
     - type werf && source $(werf ci-env gitlab --as-file)
     - werf build --report-path=images-report.json
     - docker pull $(cat images-report.json | jq -r .Images.web.DockerImageName)
@@ -69,6 +95,8 @@ Build:
 pages:
   stage: deploy
   script:
+  - URL="https://rarimo.gitlab.io"
+  - BASE_URL="/docs/"
   - yarn install --frozen-lockfile --production
   - yarn build
   - rm -rf ./public/*
@@ -88,6 +116,7 @@ Deploy to Staging:
   only:
     refs:
       - dev
+      - ci-deploy
   script:
     - mkdir ~/.kube/
     - echo ${k8sconfig} | base64 -d > config
