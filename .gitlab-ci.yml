@@ -81,6 +81,10 @@ Deploy to Staging:
       - docker:18-dind
   image: dtzar/helm-kubectl:latest
   stage: deploy-kubernetes
+  only:
+    refs:
+      - ci-deploy
+      # - dev
   script:
     - mkdir ~/.kube/
     - echo ${k8sconfig} | base64 -d > config
@@ -93,12 +97,14 @@ Deploy to Production:
       - docker:18-dind
   image: dtzar/helm-kubectl:latest
   stage: deploy-kubernetes
+  only:
+    refs:
+      - main
   script:
     - mkdir ~/.kube/
     - echo ${k8sconfig} | base64 -d > config
     - mv config ~/.kube/
     - helm upgrade -i "docs" ".helm" --set global.IngressDomain=${DOMAIN} --set "image.repository=${REGISTRY}" --set "image.tag=${CI_COMMIT_SHA}" --create-namespace --namespace $CI_PROJECT_NAME-prod
-  when: manual
   interruptible: true
 
 
