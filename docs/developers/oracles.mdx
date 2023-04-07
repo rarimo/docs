@@ -3,11 +3,6 @@
 
 # Oracles (Savers)
 
-- Repo: [Saver Lib](gitlab.com/rarimo/savers/saver-grpc-lib)
-- Repo: [EVM Saver](gitlab.com/rarimo/savers/evm-saver-svc)
-- Repo: [Solana Saver](gitlab.com/rarimo/savers/solana-saver-svc)
-- Repo: [Near Saver](gitlab.com/rarimo/savers/near-saver-svc)
-
 Managing events' creation requires some special logic for every chain that will observe blockchain state for new events,
 parse in accordance with chain rules, etc. Rarimo core can not fetch events data by itself because interaction with
 other systems can not be deterministic.
@@ -48,7 +43,7 @@ During the first transfer oracles should fill the metadata field in `MsgCreateTr
 Token addresses are equal to the token collection addresses that is already defined in `Collection` but for token id we should provide more complicated implementation.
 Let's describe the flow more accurately:
 
-1. If token was already transferred between source and destination chain no additional actions required. Oracle just 
+1. If token was already transferred between source and destination chain no additional actions required. Oracle just
   fetches `OnChainItem` from core and leaves metadata field empty.
 
 2. If source `OnChainItem` exists but destination `OnChainItem` does no (it means that token never was transferred on destination chain)
