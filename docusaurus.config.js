@@ -82,27 +82,38 @@ module.exports = {
           },
           {
             type: "doc",
+            docId: "overview/applications",
+            position: "left",
+            label: "Use cases",
+          },
+          {
+            type: "doc",
             docId: "overview/design",
             position: "left",
-            label: "Concepts",
+            label: "Architecture",
           },
           {
-            type: "doc",
-            docId: "smart-contracts",
+            type: "dropdown",
+            docId: "reference",
             position: "left",
-            label: "Contracts",
-          },
-          // {
-          //   type: "doc",
-          //   docId: "api",
-          //   position: "left",
-          //   label: "API",
-          // },
-          {
-            type: "doc",
-            docId: "sdk",
-            position: "left",
-            label: "SDK",
+            label: "Reference",
+            items: [
+              {
+                label: "Contracts",
+                type: "doc",
+                docId: "developers/contracts",
+              },
+              {
+                label: "API",
+                type: "doc",
+                docId: "api",
+              },
+              {
+                label: "SDK",
+                type: "doc",
+                docId: "sdk",
+              },
+            ],
           },
           // {
           //   type: "doc",
@@ -110,12 +121,6 @@ module.exports = {
           //   position: "left",
           //   label: "Solutions",
           // },
-          {
-            type: "doc",
-            docId: "developers",
-            position: "left",
-            label: "Developers",
-          },
           {
             type: "doc",
             docId: "whitepaper",
