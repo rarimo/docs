@@ -7,94 +7,31 @@ const apiReference = require("./docs/api/reference/sidebar");
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   whitepaper: [
-    {
-      type: "doc",
-      id: "whitepaper",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/problem_statement",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/protocol-vision",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/architecture-and-operating-principles",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/main-flow-of-messages-transferring",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/light-wallet-supporting",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/security-and-efficiency",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/utilities-of-the-token",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/governance",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/summary",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/sources",
-    },
+    "whitepaper",
+    "whitepaper/problem_statement",
+    "whitepaper/protocol-vision",
+    "whitepaper/architecture-and-operating-principles",
+    "whitepaper/main-flow-of-messages-transferring",
+    "whitepaper/light-wallet-supporting",
+    "whitepaper/security-and-efficiency",
+    "whitepaper/utilities-of-the-token",
+    "whitepaper/governance",
+    "whitepaper/summary",
+    "whitepaper/sources",
   ],
   overview: [
-    {
-      type: "doc",
-      id: "overview",
-    },
-    {
-      type: "doc",
-      id: "getting-started",
-    },
-    {
-      type: "doc",
-      id: "overview/connecting-to-wallets",
-    },
-    {
-      type: "doc",
-      id: "overview/creating-transactions",
-    },
-    {
-      type: "doc",
-      id: "glossary",
-    },
+    "overview",
+    "getting-started",
+    "overview/connecting-to-wallets",
+    "overview/creating-transactions",
+    "glossary",
   ],
   applications: [
-    {
-      type: "doc",
-      id: "overview/applications",
-    },
-    {
-      type: "doc",
-      id: "overview/applications/settlement-integration",
-    },
-    {
-      type: "doc",
-      id: "overview/applications/cross-chain-proofs",
-    },
-    {
-      type: "doc",
-      id: "overview/applications/cross-chain-minting",
-    },
-    {
-      type: "doc",
-      id: "overview/applications/cross-chain-staking",
-    },
+    "overview/applications",
+    "overview/applications/settlement-integration",
+    "overview/applications/cross-chain-proofs",
+    "overview/applications/cross-chain-minting",
+    "overview/applications/cross-chain-staking",
   ],
   architecture: [
     {
@@ -237,22 +174,10 @@ const sidebars = {
       },
       collapsed: true,
       items: [
-        {
-          type: "doc",
-          id: "sdk/provider",
-        },
-        {
-          type: "doc",
-          id: "sdk/nft-checkout",
-        },
-        {
-          type: "doc",
-          id: "sdk/react-provider",
-        },
-        {
-          type: "doc",
-          id: "sdk/react-nft-checkout",
-        },
+        "sdk/provider",
+        "sdk/nft-checkout",
+        "sdk/react-provider",
+        "sdk/react-nft-checkout",
       ],
     },
   ],
