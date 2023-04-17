@@ -1,7 +1,9 @@
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
+import HomepageLinks from "@site/src/components/HomepageLinks";
+import ArrowSvg from "@site/static/img/arrow-forward.svg";
 import Layout from "@theme/Layout";
-import OriginalSearchBar from "@theme-original/SearchBar";
 import clsx from "clsx";
 import React from "react";
 
@@ -10,17 +12,85 @@ import styles from "./index.module.css";
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx("hero hero--primary", styles.heroBanner)}>
-      <div className="container">
+    <header className={clsx("heroBanner hero--primary", styles.heroBanner)}>
+      <div className={clsx("heroContent container", styles.heroContent)}>
         <h1 className={clsx("hero__title", styles.heroTitle)}>
           {siteConfig.title}
         </h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <OriginalSearchBar className="123" />
+        <p className={clsx("hero__subtitle", styles.heroSubtitle)}>
+          {siteConfig.tagline}
+        </p>
+        <div className={clsx("buttonContainer", styles.buttonContainer)}>
+          <a
+            href="/docs/docs/overview"
+            className={clsx(
+              "heroButton svgContainer",
+              styles.heroButton,
+              styles.svgContainer
+            )}
+          >
+            Getting Started <ArrowSvg />
+          </a>
+          <button
+            style={{
+              border: "none",
+              background: "none",
+              fontSize: "16px",
+              color: "rgba(255, 255, 255, 0.84)",
+              fontWeight: "600",
+            }}
+          >
+            Explore Features
+          </button>
         </div>
       </div>
     </header>
+  );
+}
+function HomepageStartBuilding() {
+  return (
+    <div className={clsx("startBuildingSection", styles.startBuildingSection)}>
+      <h1
+        className={clsx("hero__title", styles.heroTitle)}
+        style={{ fontSize: "3.5rem" }}
+      >
+        Start Building with rarimo
+      </h1>
+      <p
+        className={clsx("hero__subtitle", styles.heroSubtitle)}
+        style={{ fontSize: "0.875rem" }}
+      >
+        Our community is here to help! Enjoy support tailored to the unique
+        needs of your project
+      </p>
+      <div style={{ display: "flex" }}>
+        <button
+          onClick={() => window.open("https://rarimo.com/testnet/sign-up")}
+          className={clsx(
+            "heroButton svgContainer",
+            styles.heroButton,
+            styles.svgContainer
+          )}
+        >
+          Join Testnet
+          <ArrowSvg />
+        </button>
+        <a
+          href="/docs/docs/whitepaper/"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            border: "none",
+            background: "none",
+            fontSize: "16px",
+            color: "rgba(255, 255, 255, 0.84)",
+            fontWeight: "600",
+          }}
+        >
+          Whitepaper
+        </a>
+      </div>
+    </div>
   );
 }
 
@@ -35,6 +105,11 @@ export default function Home(): JSX.Element {
 
       <main>
         <HomepageFeatures />
+        <div className={clsx("bottomContent container", styles.bottomContent)}>
+          <HomepageStartBuilding />
+          <HomepageDeveloperLinks />
+        </div>
+        <HomepageLinks />
       </main>
     </Layout>
   );

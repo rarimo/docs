@@ -1,0 +1,40 @@
+.developerLinks{
+    display: flex;
+    align-items: center;
+    padding: 3rem 2rem;
+    background: var(--primary-bg-color);
+}
+
+@media screen and (max-width: 996px) {
+    .developerLinks{
+        display: none;
+    }
+}
+.developerLink{
+    display: flex;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    color: var(--primary-text-color-light);
+    width: 100%;
+}
+.developerLinkTitle{
+    font-size: 1.25rem;
+    font-weight: 500;
+    font-family: 'Oswald';
+    text-transform: capitalize;
+    margin: 0 2rem;
+    flex: 1 0 auto;
+}
+.developerLinkSvgContainer {
+    display: flex;
+    align-items: center;
+}
+.developerLinksTitle {
+    font-family: 'Oswald';
+    text-transform: uppercase;
+    font-size: 1.25rem;
+}
+.linkSvg {
+    height: 32px;
+    width: 32px;
+}

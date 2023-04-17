@@ -2,7 +2,6 @@
  * CSS files with the .module.css suffix will be treated as CSS modules
  * and scoped locally.
  */
-
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
@@ -11,17 +10,100 @@
   background: initial;
   color: #ffffff;
 }
+.heroContent{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--primary-bg-color);
+  padding: 4rem 0;
+  position: relative;
+  z-index: 0;
+}
+.startBuildingSection{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--primary-bg-color);
+  padding: 3rem 9rem 3rem 2rem;
+  margin-right: 5rem;
+  position: relative;
+  z-index: 1;
+}
+.heroButton{
+  position: relative;
+  background: var(--primary-bg-color);
+  border: 1px solid #ffffff;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 1.5rem 0 0;
+  cursor: pointer;
+  color: var(--primary-text-color-light);
+}
+.heroButton::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  border: 1px solid #fff;
+  filter: drop-shadow(5px 5px 0px #fff);
+  z-index: -1;
+}
 
+.heroSubtitle{
+  font-size: 1.25rem;
+  color: var(--primary-text-color);
+  max-width: 634px;
+}
+.buttonContainer{
+  display: flex;
+}
 .heroTitle {
-  font-size: 36px;
+  font-size: 112px;
+  font-weight: 700;
+  color: var(--primary-text-color-light);
+  font-family: 'Oswald';
+  text-transform: uppercase;
+}
+@media screen and (max-width: 625px) {
+  .heroTitle {
+    font-size: 54px;
+  }
+  .buttonContainer{
+    flex-direction: column;
+  }
+  .heroButton{
+    margin: 0 0 1.5rem 0;
+  }
+}
+.bottomContent {
+  display: flex;
+  justify-content: space-around;
+  background: transparent;
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    margin: 2rem;
+  }
+  .startBuildingSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--primary-bg-color);
+    padding: 3rem 2rem 3rem 2rem;
+    margin-right: 0;
+    position: relative;
+    z-index: 1;
   }
 }
-
+.svgContainer {
+  display: flex;
+  align-items: center;
+}
 .buttons {
   display: flex;
   align-items: center;

@@ -9,54 +9,89 @@ type FeatureItem = {
   title: string;
   Svg: React.ComponentType<React.ComponentProps<"svg">>;
   description: JSX.Element;
+  url: string;
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const FeatureList: FeatureItem[] = [
   {
-    title: "NFT Settlement",
-    Svg: require("@site/static/img/settlement.svg").default,
+    title: "Getting started",
+    Svg: require("@site/static/img/flag.svg").default,
     description: (
       <>
-        Users can buy NFTs using their token of choice from any supported
-        blockchain in a single transaction — with the lowest fees.
+        It is a long established fact that a reader will be distracted by the
+        readable content of a page when looking at its layout.
       </>
     ),
+    url: "/docs/docs/overview",
+  },
+  //TODO: add link to Tutorials
+  {
+    title: "Tutorials",
+    Svg: require("@site/static/img/layers.svg").default,
+    description: (
+      <>
+        It is a long established fact that a reader will be distracted by the
+        readable conten
+      </>
+    ),
+    url: "/docs/overview",
   },
   {
-    title: "Lending & Borrowing",
-    Svg: require("@site/static/img/lend-borr.svg").default,
+    title: "Core Concepts",
+    Svg: require("@site/static/img/arrow_top_right.svg").default,
     description: (
       <>
-        Rarimo integrates with lending platforms, enabling collateralized or
-        uncollateralized lending across different blockchain.
+        Morbi mattis risus in orci porta facilisis. Praesent tempus pharetra
+        tellus. Mauris elementum sapien in orci blandit aliquam
       </>
     ),
+    url: "/docs/docs/overview/design",
+  },
+  //TODO: add link to validator guide
+  {
+    title: "Validator guide",
+    Svg: require("@site/static/img/flag.svg").default,
+    description: (
+      <>Praesent sollicitudin vestibulum nibh, eget dictum quam facilisis id</>
+    ),
+    url: "/docs/overview",
   },
   {
-    title: "Asset verification",
-    Svg: require("@site/static/img/asset-verification.svg").default,
+    title: "Api refference",
+    Svg: require("@site/static/img/extension.svg").default,
     description: (
       <>
-        Allowing to retrieve and publish timestamped proofs about an NFT’s state
-        and activities.
+        Morbi mattis risus in orci porta facilisis. Praesent tempus pharetra
+        tellus. Mauris elementum sapien in orci blandit aliquam
       </>
     ),
+    url: "/docs/docs/api",
+  },
+  {
+    title: "SDKS & inteegrations",
+    Svg: require("@site/static/img/question_mark.svg").default,
+    description: (
+      <>Praesent in sodales odio. Donec facilisis, dolor ut gravida finibus</>
+    ),
+    url: "/docs/docs/sdk",
   },
 ];
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, Svg, description, url }: FeatureItem) {
   return (
-    <div className={clsx("col col--4")}>
-      <div className="text--center">
+    <a href={url} className={clsx("feature", styles.feature)}>
+      <div className="text--left padding--md">
         <Svg className={styles.featureSvg} role="img" />
       </div>
-      <div className="text--center padding-horiz--md">
-        <h3>{title}</h3>
-        <p>{description}</p>
+      <div className="text--left padding-horiz--md padding-top--lg">
+        <h3 className={clsx("featureTittle", styles.featureTittle)}>{title}</h3>
+        <p className={clsx("featureDescription", styles.featureDescription)}>
+          {description}
+        </p>
       </div>
-    </div>
+    </a>
   );
 }
 
@@ -64,7 +99,12 @@ export default function HomepageFeatures(): JSX.Element {
   return (
     <section className={styles.features}>
       <div className="container">
-        <div className="row">
+        <div
+          className={clsx(
+            "featuresGridContainer",
+            styles.featuresGridContainer
+          )}
+        >
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}
