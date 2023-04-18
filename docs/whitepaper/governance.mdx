@@ -2,19 +2,90 @@
 ---
 
 # Governance
-The first structure of the governance will be prescribed by the smart contract and, thereafter, for the purposes of
-enhancement of the governance model, it can be changed by the DAO.
 
-Initially, any RMO holder can participate. To submit a proposal, its creator blocks part of the Tokens, which will be
-burned if the other participants consider such a proposal to be a fraud. Then the voting round begins. An epoch lasting
-2 weeks is allocated for voting. If a simple majority of all voters support the proposal, it is deemed as accepted and
-the protocol should be updated, provided that certain requirements with respect to the quorum are met. The creator of
-the request receives a reward, the amount of which is determined by the protocol. In the event that the proposal is not
-accepted and users do not consider this proposal a fraud, the blocked Tokens will be returned to the user's account.
+The Rarimo smart contracts prescribe the initial governance structure.
+Thereafter, the DAO can change the governance model.
 
-It is suggested, that in the future the governance structure will be as follows:
+## Initial governance model
 
-1. on-chain governance, in which any RMO holder can participate
+Initially, anyone who holds RMO tokens can participate in governance.
+To propose changes, the creator deposits 100 RMO tokens along with submitting the proposal.
 
-2. off-chain ministerial structure, which is created by the DAO and the main and sole function of which may be implementation
-of decisions of the on-chain governance.
+Then, Rarimo users have 2 weeks to vote.
+They can vote to accept the proposal, reject it, or flag it as fraudulent.
+
+If a simple majority of the voters votes to accept and a quorum is reached, the proposal is accepted and the protocol will be updated.
+The creator receives a reward determined by the protocol.
+
+If not enough voters vote to accept, the proposal is rejected and the deposited tokens are returned to the proposer.
+If the voters vote that the proposal is fraudulent, the proposer's tokens are burned.
+
+## Future governance model
+
+In the future, the governance structure might have these features:
+
+1. On-chain governance in which any RMO holder can participate
+
+2. Off-chain ministerial structure created by the DAO, whose sole function is to implement decisions of the on-chain governance
+
+## Proposal process
+
+The proposal process requires proposers to submit a proposal and also block RMO tokens as a deposit to ensure good faith.
+Then users that stake tokens can vote on the proposal.
+
+For a proposal to be accepted, the submitted votes must achieve a quorum.
+A quorum is 50% of the amount of staked RMO tokens at the moment that voting ends, plus one token.
+A user's voting power is the number of their staked tokens, and the total voting power is the number of all staked tokens at the end of the voting period.
+
+1. Preparation
+
+   1. The proposer suggests the idea and discusses it online, such as on the [Rarimo discord](https://discordapp.com/invite/rarimoprotocol).
+
+   1. The proposer writes a draft of the proposal, including this information:
+
+      - Problem and motivation
+      - Proposed solution
+      - Risks and benefits, including the beneficiaries and the importance of the change
+      - Supplementary materials
+      - If the proposal requires a grant from the community, the funding details, deliverables, timeline, and responsibilities
+
+   1. The proposer sends a draft of the proposal to the community and discusses it with community members
+
+   1. The proposer submits the proposal to testnet and tests it
+
+   1. If the proposer thinks that the majority of the community will support the proposal, they submit it to the mainnet
+
+1. Deposit
+
+   To submit a proposal, the proposer must block at least 100 RMO tokens to ensure that they are making the proposal in good faith.
+   The proposer receives this deposit back unless users vote that the proposal is fraudulent, spam, or otherwise inappropriate, in which case the tokens are burnt.
+
+   If the proposer does not block enough tokens, other users can block tokens in support of the proposal.
+   The proposal must have 100 tokens deposited within 7 days of submission.
+
+1. Voting
+
+   When the proposal is received, a 14-day voting period begins.
+   During the voting period, participants may make one of the following votes by sending a transaction for the appropriate option on the mainchain.
+   They can send a new transaction to change their vote before the voting period ends.
+
+   These are the valid vote options:
+
+   - Abstain: The voter does not express an opinion for or against the proposal but adds their vote to help achieve a quorum
+   - Yes: The voter supports the proposal
+   - No: The voter does not support the proposal
+   - NoWithVeto: The voter does not support the proposal and flags it as fraudulent, spam, or otherwise inappropriate
+
+1. Result
+
+   - If all of the following criteria are met, the proposal is accepted:
+
+     - The sum of the tokens voted Yes add up to 50% of the voting power plus one vote are Yes at the end of the voting period
+     - The proposal has enough deposited tokens within 7 days of submission
+     - Less than 34% of the tokens voted are NoWithVeto
+     - A quorum is reached
+
+     If any of these criteria are not met, the proposal fails.
+     In this case, if less than 34% of the votes are NoWithVeto, the tokens are returned.
+
+   - If 34% or more of the voters vote NoWithVeto, the proposal is rejected and the tokens are burnt, regardless of the other votes.
