@@ -79,6 +79,10 @@ const sidebars = {
       type: "doc",
       id: "overview/fees",
     },
+    {
+      type: "doc",
+      id: "whitepaper/governance",
+    },
   ],
   reference: [
     {
