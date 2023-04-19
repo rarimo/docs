@@ -102,6 +102,15 @@ export default function Home(): JSX.Element {
       description="Description will go into a meta tag in <head />"
     >
       <HomepageHeader />
+      <div className={clsx("bgImage1", styles.bgImage1)} />
+      <div className={clsx("bgImage2", styles.bgImage2)} />
+      <div className={clsx("bgImage3", styles.bgImage3)} />
+      <div className={clsx("bgImage4", styles.bgImage4)} />
+      <div className={clsx("bgImage5", styles.bgImage5)} />
+      <div className={clsx("bgImage6", styles.bgImage6)} />
+      <div className={clsx("bgImage7", styles.bgImage7)} />
+      <div className={clsx("bgImage8", styles.bgImage8)} />
+      <div className={clsx("bgImage9", styles.bgImage9)} />
 
       <main>
         <HomepageFeatures />

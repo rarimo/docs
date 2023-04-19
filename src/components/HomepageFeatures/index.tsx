@@ -20,51 +20,31 @@ const FeatureList: FeatureItem[] = [
     Svg: require("@site/static/img/flag.svg").default,
     description: (
       <>
-        It is a long established fact that a reader will be distracted by the
-        readable content of a page when looking at its layout.
+        Learn the basics of the protocol and create simple applications to
+        connect to wallets and create cross-chain transactions.
       </>
     ),
     url: "/docs/docs/overview",
-  },
-  //TODO: add link to Tutorials
-  {
-    title: "Tutorials",
-    Svg: require("@site/static/img/layers.svg").default,
-    description: (
-      <>
-        It is a long established fact that a reader will be distracted by the
-        readable conten
-      </>
-    ),
-    url: "/docs/overview",
   },
   {
     title: "Core Concepts",
     Svg: require("@site/static/img/arrow_top_right.svg").default,
     description: (
       <>
-        Morbi mattis risus in orci porta facilisis. Praesent tempus pharetra
-        tellus. Mauris elementum sapien in orci blandit aliquam
+        Read about how the protocol is structured, how its oracles and contracts
+        work, and how it bundles different events into a single transaction to
+        save fees.
       </>
     ),
     url: "/docs/docs/overview/design",
-  },
-  //TODO: add link to validator guide
-  {
-    title: "Validator guide",
-    Svg: require("@site/static/img/flag.svg").default,
-    description: (
-      <>Praesent sollicitudin vestibulum nibh, eget dictum quam facilisis id</>
-    ),
-    url: "/docs/overview",
   },
   {
     title: "Api refference",
     Svg: require("@site/static/img/extension.svg").default,
     description: (
       <>
-        Morbi mattis risus in orci porta facilisis. Praesent tempus pharetra
-        tellus. Mauris elementum sapien in orci blandit aliquam
+        Refer to information about the Rarimo API, which provides information
+        about the protocol's contracts and its supported blockchains and tokens.
       </>
     ),
     url: "/docs/docs/api",
@@ -73,7 +53,10 @@ const FeatureList: FeatureItem[] = [
     title: "SDKS & inteegrations",
     Svg: require("@site/static/img/question_mark.svg").default,
     description: (
-      <>Praesent in sodales odio. Donec facilisis, dolor ut gravida finibus</>
+      <>
+        Use the Rarimo JavaScript/TypeScript SDK to simplify using the protocol
+        from your applications.
+      </>
     ),
     url: "/docs/docs/sdk",
   },
