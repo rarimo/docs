@@ -1,0 +1,60 @@
+---
+---
+
+# Swapping tokens
+
+You can use Rarimo to swap tokens on the same chain or on any other chain that Rarimo supports.
+Rarimo can make these token swaps:
+
+- erc-20 tokens to other erc-20 tokens
+- Native tokens to erc-20 tokens
+
+To set up a token swap, create a Rarimo transaction and specify the token and amount that you want to receive, as in this example:
+
+```ts
+import { createCheckoutOperation, EVMOperation, ChainName, Price } from '@rarimo/nft-checkout'
+import { createProvider, MetamaskProvider } from '@rarimo/provider'
+
+const sendSwapTransaction = async () => {
+  // Connect to the Metamask wallet in the browser using Web3.js, using the MetamaskProvider interface to limit bundle size.
+  const provider = await createProvider(MetamaskProvider)
+
+  // Initialize the object that represents the transaction operation, in this case on EVM.
+  const op = createCheckoutOperation(EVMOperation, provider)
+
+  // Get the chains that are supported from that chain type.
+  const chains = await op.supportedChains()
+
+  // Select the source chain.
+  // This example uses the Goerli chain, but your application can ask the user which chain to use.
+  const selectedChain = chains.find(i => i.name === ChainNames.Goerli)
+
+  // Configure the swap transaction
+  const target = {
+      // Destination chain id
+      chainId: selectedChain!.id,
+      recipient: provider.address!.toString(),
+      // Amount of tokens to receive
+      price: Price.fromRaw("0.1", 18, "WETH"),
+      // The token to swap the source token to, in this case WETH
+      swapTargetTokenSymbol: "WETH",
+    }
+
+  // Initialize the transaction
+  await op.init({
+    chainIdFrom: selectedChain!.id,
+    target,
+  })
+
+  // Identify the tokens to exchange, in this case UNI
+  const tokens = await op.loadPaymentTokens(selectedChain!)
+  const paymentToken = tokens.find(({ symbol }) => symbol === "UNI")
+  const estimatedPrice = await op.estimatePrice(paymentToken!)
+
+  // Run the transaction
+  // The `checkout()` method takes the parameters from the operation instance, gets approval from the user's wallet, and calls the Rarimo contract to handle the transaction.
+  const txHash = await op.checkout(estimatedPrice)
+}
+
+sendSwapTransaction()
+```
