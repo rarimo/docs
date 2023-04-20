@@ -23,6 +23,7 @@ const sidebars = {
     "overview",
     "getting-started",
     "overview/connecting-to-wallets",
+    "overview/swapping-tokens",
     "overview/creating-transactions",
     "glossary",
   ],
