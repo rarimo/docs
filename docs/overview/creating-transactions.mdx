@@ -32,6 +32,9 @@ import { createCheckoutOperation, EVMOperation, ChainNames } from '@rarimo/nft-c
 import { createProvider, MetamaskProvider } from '@rarimo/provider'
 import { utils } from "ethers";
 
+// Address of the NFT sale contract
+const NFT_CONTRACT_ADDRESS = "0x77fedfb705c8bac2e03aad2ad8a8fe83e3e20fa1"
+
 const sendTransaction = async () => {
   // Connect to the Metamask wallet in the browser using Web3.js, using the MetamaskProvider interface to limit bundle size.
   const provider = await createProvider(MetamaskProvider)
@@ -50,8 +53,6 @@ const sendTransaction = async () => {
   const target = {
     // Destination chain id (Sepolia in this case)
     chainId: 11155111,
-    // Address of the NFT sale contract
-    address: "0x77fedfb705c8bac2e03aad2ad8a8fe83e3e20fa1",
     // Recipient's wallet address
     recipient: "0x8fe0d4923f61ff466430f63471e27b89a7cf0c92",
     price: {
@@ -108,7 +109,7 @@ const sendTransaction = async () => {
   const bundle = utils.defaultAbiCoder.encode(
       ["address[]", "uint256[]", "bytes[]"],
       [
-        [target.address],
+        [NFT_CONTRACT_ADDRESS],
         [target.price.value],
         [encodedFunctionData],
       ]
@@ -140,8 +141,6 @@ To create a transaction with the React components, follow these general steps:
    const targetNft: Target = {
      // Source chain id (Sepolia in this case)
      chainId: 11155111,
-     // NFT contract address
-     address: "0x77fedfb705c8bac2e03aad2ad8a8fe83e3e20fa1",
      // Recipient wallet address
      recipient: "0x0000000000000000000000000000000000000000",
      price: priceOfNft,
@@ -155,6 +154,9 @@ The object includes the address and price of the NFT and the buyer's wallet addr
 
    ```tsx
    import { ethers } from "ethers"
+
+   // Address of the NFT sale contract
+   const NFT_CONTRACT_ADDRESS = "0x77fedfb705c8bac2e03aad2ad8a8fe83e3e20fa1"
 
    const checkoutTxBundle = ethers.utils.defaultAbiCoder.encode(
      // The Solidity types of the values in the second parameter
