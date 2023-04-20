@@ -110,6 +110,9 @@ This function takes two parameters:
    Here is an example:
 
    ```ts
+   // Address of the NFT sale contract
+   const NFT_CONTRACT_ADDRESS = "0x77fedfb705c8bac2e03aad2ad8a8fe83e3e20fa1"
+
    const bundle = web3.eth.abi.encodeParameters(
      ["address[]", "uint256[]", "bytes[]"],
      [
@@ -227,6 +230,9 @@ The function takes these two parameters:
    Here is an example:
 
    ```ts
+   // Address of the NFT sale contract
+   const NFT_CONTRACT_ADDRESS = "0x77fedfb705c8bac2e03aad2ad8a8fe83e3e20fa1"
+
    const bundle = utils.defaultAbiCoder.encode(
      ["address[]", "uint256[]", "bytes[]"],
      [
