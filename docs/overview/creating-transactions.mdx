@@ -49,10 +49,14 @@ const sendTransaction = async () => {
   // This example uses the Goerli chain, but your application can ask the user which chain to use.
   const selectedChain = chains.find(i => i.name === ChainNames.Goerli)
 
+  // Select the chain to pay on.
+  // In this case, the NFT contract is on the Sepolia chain.
+  const destinationChain = chains.find(i => i.name === ChainNames.Sepolia)
+
   // Set the parameters for the transaction, including the price and the tokens to accept payment in.
   const target = {
-    // Destination chain id (Sepolia in this case)
-    chainId: 11155111,
+    // Destination chain id
+    chainId: destinationChain!.id,
     // Recipient's wallet address
     recipient: "0x8fe0d4923f61ff466430f63471e27b89a7cf0c92",
     price: {
@@ -119,8 +123,14 @@ const sendTransaction = async () => {
   // The `checkout()` method takes the parameters from the operation instance, gets approval from the user's wallet, and calls the Rarimo contract to handle the transaction.
   const txHash = await op.checkout(estimatedPrice, { bundle })
 
-  // Print a link to the transaction.
-  console.log(provider.getTxUrl(selectedChain!, String(txHash)))
+  // Get the transaction on the source chain
+  const sourceTxUrl = provider.getTxUrl(selectedChain!, String(txHash))
+  console.log("Source chain transaction:", sourceTxUrl)
+
+  // Get the transaction that unlocks tokens on the destination chain
+  const destinationTx = await op.getDestinationTx(selectedChain!, String(txHash))
+  const destinationTxUrl = provider.getTxUrl(targetChain, destinationTx.hash)
+  console.log("Destination chain transaction:", destinationTxUrl)
 }
 ```
 
