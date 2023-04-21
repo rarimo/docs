@@ -40,10 +40,15 @@ function Link({ title, Svg, description, url }: LinkItem) {
       <div className="text--left">
         <Svg className={styles.linkSvg} role="img" />
       </div>
-      <span className={clsx("linkTitle", styles.linkTitle)}>{title}</span>
-      <p className={clsx("linkDescription", styles.linkDescription)}>
-        {description}
-      </p>
+      <div>
+        <span className={clsx("linkTitle", styles.linkTitle)}>{title}</span>
+      </div>
+      <div>
+        <span className={clsx("linkDescription", styles.linkDescription)}>
+          {description}
+        </span>
+      </div>
+
       <div className={clsx("linkSvgContainer", styles.linkSvgContainer)}>
         <ArrowOutward role="img" />
       </div>

@@ -131,20 +131,32 @@ module.exports = {
           {
             items: [
               {
-                label: "Use cases",
-                to: "/docs/docs",
+                html: `
+                <a href="/docs/docs" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Discord">
+                Use cases
+                </a>
+              `,
               },
               {
-                label: "Developers",
-                to: "/docs/docs",
+                html: `
+                <a href="/docs/docs" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
+                Developers
+                </a>
+              `,
               },
               {
-                label: "Community",
-                to: "/docs/docs",
+                html: `
+                <a href="/docs/docs" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
+                Community
+                </a>
+              `,
               },
               {
-                label: "Contact",
-                to: "/docs/docs",
+                html: `
+                <a href="/docs/docs" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
+                Contact
+                </a>
+              `,
               },
             ],
           },

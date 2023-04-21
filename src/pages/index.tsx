@@ -31,6 +31,7 @@ function HomepageHeader() {
           >
             Getting Started <ArrowSvg />
           </a>
+          {/*//Todo: add link to explore features*/}
           <button
             style={{
               border: "none",
@@ -63,7 +64,7 @@ function HomepageStartBuilding() {
         Our community is here to help! Enjoy support tailored to the unique
         needs of your project
       </p>
-      <div style={{ display: "flex" }}>
+      <div className={clsx("buttonContainer", styles.buttonContainer)}>
         <button
           onClick={() => window.open("https://rarimo.com/testnet/sign-up")}
           className={clsx(
@@ -75,8 +76,10 @@ function HomepageStartBuilding() {
           Join Testnet
           <ArrowSvg />
         </button>
-        <a
-          href="/docs/docs/whitepaper/"
+        <button
+          onClick={() =>
+            window.open("https://rarimo.gitlab.io/docs/docs/whitepaper")
+          }
           style={{
             display: "flex",
             alignItems: "center",
@@ -88,7 +91,7 @@ function HomepageStartBuilding() {
           }}
         >
           Whitepaper
-        </a>
+        </button>
       </div>
     </div>
   );
