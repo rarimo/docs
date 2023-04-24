@@ -16,17 +16,6 @@ type FeatureItem = {
 // @ts-ignore
 const FeatureList: FeatureItem[] = [
   {
-    title: "Getting started",
-    Svg: require("@site/static/img/flag.svg").default,
-    description: (
-      <>
-        Learn the basics of the protocol and create simple applications to
-        connect to wallets and create cross-chain transactions.
-      </>
-    ),
-    url: "/docs/docs/overview",
-  },
-  {
     title: "Core Concepts",
     Svg: require("@site/static/img/arrow_top_right.svg").default,
     description: (
@@ -37,6 +26,17 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
     url: "/docs/docs/overview/design",
+  },
+  {
+    title: "Oracles",
+    Svg: require("@site/static/img/flag.svg").default,
+    description: (
+      <>
+        Learn the basics of the protocol and create simple applications to
+        connect to wallets and create cross-chain transactions.
+      </>
+    ),
+    url: "/docs/docs/overview",
   },
   {
     title: "Api refference",
@@ -51,6 +51,28 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "SDKS & inteegrations",
+    Svg: require("@site/static/img/question_mark.svg").default,
+    description: (
+      <>
+        Use the Rarimo JavaScript/TypeScript SDK to simplify using the protocol
+        from your applications.
+      </>
+    ),
+    url: "/docs/docs/sdk",
+  },
+  {
+    title: "Tutorials & Guides",
+    Svg: require("@site/static/img/question_mark.svg").default,
+    description: (
+      <>
+        Use the Rarimo JavaScript/TypeScript SDK to simplify using the protocol
+        from your applications.
+      </>
+    ),
+    url: "/docs/docs/sdk",
+  },
+  {
+    title: "FAQ",
     Svg: require("@site/static/img/question_mark.svg").default,
     description: (
       <>

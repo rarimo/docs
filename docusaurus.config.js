@@ -17,7 +17,7 @@ module.exports = {
   /** Meta information */
   title: "Rarimo Developer Documentation",
   tagline:
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem",
+    "Learn the basics of the protocol and create simple applications to connect to wallets and create cross-chain transactions.",
   url: getUrl(),
   baseUrl: getBaseUrl(),
   trailingSlash: false,
