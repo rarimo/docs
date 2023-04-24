@@ -44,7 +44,7 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Refer to information about the Rarimo API, which provides information
-        about the protocol's contracts and its supported blockchains and tokens.
+        about the protocols contracts and its supported blockchains and tokens.
       </>
     ),
     url: "/docs/docs/api",
