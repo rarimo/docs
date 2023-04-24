@@ -37,19 +37,19 @@ const LinksListTablet: LinkItem[] = [
   // TODO: add links
   {
     title: "Engineric Support",
-    Svg: require("@site/static/img/ri-discord-line.svg").default,
+    Svg: require("@site/static/img/support_agent.svg").default,
     description: "Make your engineering workflow more efficient",
     url: "#",
   },
   {
     title: "Additional Resources",
-    Svg: require("@site/static/img/forum.svg").default,
+    Svg: require("@site/static/img/monetization_on.svg").default,
     description: "Coming soon",
     url: "#",
   },
   {
     title: "Social Links",
-    Svg: require("@site/static/img/ri-github-fill.svg").default,
+    Svg: require("@site/static/img/ri-discord-line.svg").default,
     description:
       "Connect with like-minded community for support and inspiration",
     url: "#",
