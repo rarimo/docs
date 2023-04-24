@@ -129,7 +129,7 @@ const sendTransaction = async () => {
 
   // Get the transaction that unlocks tokens on the destination chain
   const destinationTx = await op.getDestinationTx(selectedChain!, String(txHash))
-  const destinationTxUrl = provider.getTxUrl(targetChain, destinationTx.hash)
+  const destinationTxUrl = provider.getTxUrl(selectedChain!, destinationTx.hash)
   console.log("Destination chain transaction:", destinationTxUrl)
 }
 ```
