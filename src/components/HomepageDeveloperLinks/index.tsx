@@ -13,19 +13,24 @@ type LinkItem = {
 // @ts-ignore
 const DeveloperLinksList: LinkItem[] = [
   {
-    title: "Uniswap-V3-core",
+    title: "Example applications",
     Svg: require("@site/static/img/ri-github-fill.svg").default,
-    url: "https://uniswap.org/whitepaper-v3.pdf",
+    url: "https://github.com/rarimo/js-sdk-examples",
   },
   {
-    title: "Uniswap-V3-Sdk",
+    title: "SDK reference",
     Svg: require("@site/static/img/ri-github-fill.svg").default,
-    url: "https://docs.uniswap.org/sdk/v3/overview",
+    url: "https://rarimo.github.io/js-sdk/",
   },
   {
-    title: "Uniswap-V3-Periphery",
+    title: "Smart contract reference",
     Svg: require("@site/static/img/ri-github-fill.svg").default,
-    url: "https://github.com/Uniswap/v3-periphery",
+    url: "https://rarimo.gitlab.io/docs/docs/developers/contracts",
+  },
+  {
+    title: "Rarimo on GitHub",
+    Svg: require("@site/static/img/ri-github-fill.svg").default,
+    url: "https://github.com/rarimo",
   },
   //TODO: add link
   {
