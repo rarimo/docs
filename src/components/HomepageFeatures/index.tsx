@@ -50,7 +50,7 @@ const FeatureList: FeatureItem[] = [
     url: "/docs/docs/api",
   },
   {
-    title: "SDKS & inteegrations",
+    title: "SDK",
     Svg: require("@site/static/img/question_mark.svg").default,
     description: (
       <>
