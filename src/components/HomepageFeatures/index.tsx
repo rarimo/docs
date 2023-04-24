@@ -16,6 +16,17 @@ type FeatureItem = {
 // @ts-ignore
 const FeatureList: FeatureItem[] = [
   {
+    title: "Getting started",
+    Svg: require("@site/static/img/flag.svg").default,
+    description: (
+      <>
+        Learn the basics of the protocol and create simple applications to
+        connect to wallets and create cross-chain transactions.
+      </>
+    ),
+    url: "/docs/docs/overview",
+  },
+  {
     title: "Architecture",
     Svg: require("@site/static/img/arrow_top_right.svg").default,
     description: (
@@ -28,52 +39,21 @@ const FeatureList: FeatureItem[] = [
     url: "/docs/docs/overview/design",
   },
   {
-    title: "Oracles",
-    Svg: require("@site/static/img/flag.svg").default,
-    description: (
-      <>
-        Learn the basics of the protocol and create simple applications to
-        connect to wallets and create cross-chain transactions.
-      </>
-    ),
-    url: "/docs/docs/overview",
-  },
-  {
     title: "API reference",
     Svg: require("@site/static/img/extension.svg").default,
     description: (
       <>
         Refer to information about the Rarimo API, which provides information
-        about the protocols contracts and its supported blockchains and tokens.
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        about the protocol's smart contracts and its supported blockchains and
+        tokens.
       </>
     ),
     url: "/docs/docs/api",
   },
   {
     title: "SDK",
-    Svg: require("@site/static/img/question_mark.svg").default,
-    description: (
-      <>
-        Use the Rarimo JavaScript/TypeScript SDK to simplify using the protocol
-        from your applications.
-      </>
-    ),
-    url: "/docs/docs/sdk",
-  },
-  {
-    title: "Tutorials & Guides",
-    Svg: require("@site/static/img/question_mark.svg").default,
-    description: (
-      <>
-        Use the Rarimo JavaScript/TypeScript SDK to simplify using the protocol
-        from your applications.
-      </>
-    ),
-    url: "/docs/docs/sdk",
-  },
-  {
-    title: "FAQ",
-    Svg: require("@site/static/img/question_mark.svg").default,
+    Svg: require("@site/static/img/flag.svg").default,
     description: (
       <>
         Use the Rarimo JavaScript/TypeScript SDK to simplify using the protocol
