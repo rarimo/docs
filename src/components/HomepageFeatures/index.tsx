@@ -44,9 +44,8 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Refer to information about the Rarimo API, which provides information
-        {/* eslint-disable-next-line react/no-unescaped-entities */}
-        about the protocol's smart contracts and its supported blockchains and
-        tokens.
+        about the protocol&apos;s smart contracts and its supported blockchains
+        and tokens.
       </>
     ),
     url: "/docs/docs/api",
