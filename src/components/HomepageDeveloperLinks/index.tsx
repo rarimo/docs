@@ -34,7 +34,7 @@ const DeveloperLinksList: LinkItem[] = [
   },
   //TODO: add link
   {
-    title: "Deployment Adress",
+    title: "Deployment Address",
     Svg: require("@site/static/img/ri-github-fill.svg").default,
     url: "#",
   },
