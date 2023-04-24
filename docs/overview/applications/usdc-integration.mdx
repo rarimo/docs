@@ -2,11 +2,11 @@
 
 ## Cross-chain Transfer Protocol for Rarimo Identity
 
-Rarimo is a protocol that allows user to use their identity cross-chain. That means that user can prove their identity in dapp on any chain connected to Rarimo Protocol. Rarimo allows identity providers to publish ZK identity states. These states are used to verify identity on-chain. Rarimo Protocol synchronizes these states between chains so identity proofs can be verified cross-chain.
+Rarimo is a protocol that allows users to use their identity cross-chain. That means that user can prove their identity in any dApp on any chain connected to Rarimo Protocol. Rarimo allows identity providers to publish ZK identity states. These states are used to verify identity on-chain. Rarimo Protocol synchronizes these states between chains so identity proofs can be verified cross-chain.
 
-Circle Cross-Chain Transfer Protocol allows you to use USDC cross-chain. Integration of Rarimo with Circle CCTP gives you a wide range of use cases for using identity with cross-chain payments.
+Circle Cross-Chain Transfer Protocol allows you to use USDC cross-chain. The integration of Rarimo with Circle CCTP gives you a wide range of use cases for using identity with cross-chain payments.
 
-For example, assume a decentralized bank working on Avalanche. You have some USDC on Ethereum that you want to deposit into this bank. Also, to accept a deposit the bank has to verify your identity to make sure that you are eligible to make a deposit. In this case, the user can make a deposit of USDC from Ethereum to dapp on Polygon and provide proof from Rarimo Protocol.
+For example, assume there is a decentralized bank on Avalanche, and you have some USDC on Ethereum that you want to deposit into this bank. To accept the deposit, the bank has to verify your identity to make sure that you are eligible. The user can deposit USDC from Ethereum to a dApp on Polygon, and Rarimo Protocol will provide a proof.
 
 ![flow](/img/USDC-ID.png)
 
@@ -18,6 +18,6 @@ They must leave the marketplace, use an exchange, execute a swap (and be subject
 
 With Rarimo's NFT Checkout solution, users can purchase NFTs with non-native tokens. At checkout, users will be prompted to select the currency they like to pay with from the balance, and after paying the transaction fee and signing to authorize the payment, the process will be complete. Rarimo bundles the different steps into a secure, atomic transaction with a single gas fee.
 
-Such apps usually suffer from liquidity problems as they need to manage liquidity on different chains, but using Circle Cross-Chain Transfer Protocol allows fully eliminating this problem. Under the hood, Rarimo will swap tokens to USDC and transfer them to the chain where NFT will be bought. As Circle CCTP will burn USDC in one chain and issue the same amount in the destination chain Rarimo doesn’t need to hold any liquidity pools and rely on Circle Protocol to provide cross-chain USDC liquidity.
+Such apps usually suffer from liquidity problems as they need to manage liquidity on different chains, but using Circle's Cross-Chain Transfer Protocol fully eliminates this problem. Under the hood, Rarimo will swap tokens to USDC and transfer them to the chain where NFT will be bought. As Circle CCTP will burn USDC in one chain and issue the same amount in the destination chain, Rarimo doesn’t need to hold any liquidity pools and can rely on Circle Protocol to provide cross-chain USDC liquidity.
 
 ![flow](/img/USDC-NFT-Checkout.png)
