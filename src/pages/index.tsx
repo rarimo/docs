@@ -81,8 +81,6 @@ function HomepageStartBuilding() {
             window.open("https://rarimo.gitlab.io/docs/docs/whitepaper")
           }
           style={{
-            display: "flex",
-            alignItems: "center",
             border: "none",
             background: "none",
             fontSize: "16px",

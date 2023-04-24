@@ -16,7 +16,7 @@ type FeatureItem = {
 // @ts-ignore
 const FeatureList: FeatureItem[] = [
   {
-    title: "Core Concepts",
+    title: "Architecture",
     Svg: require("@site/static/img/arrow_top_right.svg").default,
     description: (
       <>
@@ -39,7 +39,7 @@ const FeatureList: FeatureItem[] = [
     url: "/docs/docs/overview",
   },
   {
-    title: "Api refference",
+    title: "API reference",
     Svg: require("@site/static/img/extension.svg").default,
     description: (
       <>

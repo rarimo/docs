@@ -82,22 +82,40 @@ module.exports = {
           },
           {
             type: "doc",
+            docId: "overview/applications",
+            position: "left",
+            label: "Use cases",
+          },
+          {
+            type: "doc",
             docId: "overview/design",
             position: "left",
-            label: "Core Concepts",
+            label: "Architecture",
           },
           {
-            type: "doc",
-            docId: "api",
+            type: "dropdown",
+            docId: "reference",
             position: "left",
-            label: "API Reference",
+            label: "Reference",
+            items: [
+              {
+                label: "Contracts",
+                type: "doc",
+                docId: "developers/contracts",
+              },
+              {
+                label: "API",
+                type: "doc",
+                docId: "api",
+              },
+              {
+                label: "SDK",
+                type: "doc",
+                docId: "sdk",
+              },
+            ],
           },
-          {
-            type: "doc",
-            docId: "sdk",
-            position: "left",
-            label: "SDKs & Integrations",
-          },
+
           {
             type: "doc",
             docId: "whitepaper",
@@ -178,11 +196,6 @@ module.exports = {
             ],
           },
         ],
-        // copyright: `© ${new Date().getFullYear()}`,
-        // logo: {
-        //   alt: "We are professionals",
-        //   src: "img/logo-footer.svg",
-        // },
       },
       algolia: {
         apiKey: "8ececec9220ccf9a750c79fc04ecc23f",

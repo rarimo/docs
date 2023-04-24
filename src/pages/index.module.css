@@ -68,6 +68,7 @@
   color: var(--primary-text-color-light);
   font-family: 'Oswald';
   text-transform: uppercase;
+  text-align: center;
 }
 @media screen and (max-width: 625px) {
   .heroTitle {

@@ -55,7 +55,6 @@ html {
   --ifm-footer-background-color: var(--primary-bg-color);
   background-image: url("@site/static/img/footer-bg.svg");
   background-repeat: repeat;
-  /*background-size: 2.7rem;*/
   margin: 0 2.5rem 5rem 2.5rem;
   padding: 0;
 }
@@ -73,6 +72,10 @@ html {
   .footer__items {
     display: flex;
     justify-content: space-between;
+  }
+  .footer--dark {
+    background: #131313;
+    height: 80px;
   }
 }
 .footer__social-link svg {
