@@ -1,15 +1,5 @@
 # Circle CCTP Integration
 
-## Cross-chain Transfer Protocol for Rarimo Identity
-
-Rarimo is a protocol that allows users to use their identity cross-chain. That means that user can prove their identity in any dApp on any chain connected to Rarimo Protocol. Rarimo allows identity providers to publish ZK identity states. These states are used to verify identity on-chain. Rarimo Protocol synchronizes these states between chains so identity proofs can be verified cross-chain.
-
-Circle Cross-Chain Transfer Protocol allows you to use USDC cross-chain. The integration of Rarimo with Circle CCTP gives you a wide range of use cases for using identity with cross-chain payments.
-
-For example, assume there is a decentralized bank on Avalanche, and you have some USDC on Ethereum that you want to deposit into this bank. To accept the deposit, the bank has to verify your identity to make sure that you are eligible. The user can deposit USDC from Ethereum to a dApp on Polygon, and Rarimo Protocol will provide a proof.
-
-![flow](/img/USDC-ID.png)
-
 ## NFT Checkout
 
 If a user holds tokens on one chain and an NFT is for sale on another chain, there is no easy way for the user to purchase the NFT with those tokens.
@@ -21,3 +11,13 @@ With Rarimo's NFT Checkout solution, users can purchase NFTs with non-native tok
 Such apps usually suffer from liquidity problems as they need to manage liquidity on different chains, but using Circle's Cross-Chain Transfer Protocol fully eliminates this problem. Under the hood, Rarimo will swap tokens to USDC and transfer them to the chain where NFT will be bought. As Circle CCTP will burn USDC in one chain and issue the same amount in the destination chain, Rarimo doesn’t need to hold any liquidity pools and can rely on Circle Protocol to provide cross-chain USDC liquidity.
 
 ![flow](/img/USDC-NFT-Checkout.png)
+
+## Cross-chain Transfer Protocol for Rarimo Identity
+
+Rarimo is a protocol that allows users to use their identity cross-chain. That means that user can prove their identity in any dApp on any chain connected to Rarimo Protocol. Rarimo allows identity providers to publish ZK identity states. These states are used to verify identity on-chain. Rarimo Protocol synchronizes these states between chains so identity proofs can be verified cross-chain.
+
+Circle Cross-Chain Transfer Protocol allows you to use USDC cross-chain. The integration of Rarimo with Circle CCTP gives you a wide range of use cases for using identity with cross-chain payments.
+
+For example, assume there is a decentralized bank on Avalanche, and you have some USDC on Ethereum that you want to deposit into this bank. To accept the deposit, the bank has to verify your identity to make sure that you are eligible. The user can deposit USDC from Ethereum to a dApp on Polygon, and Rarimo Protocol will provide a proof.
+
+![flow](/img/USDC-ID.png)
