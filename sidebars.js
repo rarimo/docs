@@ -83,7 +83,7 @@ const sidebars = {
     },
     {
       type: "doc",
-      id: "whitepaper/governance",
+      id: "glossary",
     },
   ],
   reference: [
