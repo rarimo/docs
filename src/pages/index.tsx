@@ -1,4 +1,5 @@
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import HomepageLinks from "@site/src/components/HomepageLinks";
@@ -114,12 +115,18 @@ export default function Home(): JSX.Element {
       <div className={clsx("bgImage9", styles.bgImage9)} />
 
       <main>
-        <HomepageFeatures />
-        <div className={clsx("bottomContent container", styles.bottomContent)}>
-          <HomepageStartBuilding />
-          <HomepageDeveloperLinks />
-        </div>
-        <HomepageLinks />
+        <BrowserOnly>
+          {() =>
+            <>
+              <HomepageFeatures />
+              <div className={clsx("bottomContent container", styles.bottomContent)}>
+                <HomepageStartBuilding />
+                <HomepageDeveloperLinks />
+              </div>
+              <HomepageLinks />
+            </>
+          }
+        </BrowserOnly>
       </main>
     </Layout>
   );
