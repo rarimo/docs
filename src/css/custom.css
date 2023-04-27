@@ -38,7 +38,7 @@
   --bg-rect-border-color: rgba(255, 255, 255, 5%);
   --primary-text-color: #8f8f8f;
   --primary-bg-rect-size: 2.33594rem;
-
+  --ifm-navbar-link-color: var(--primary-text-color);
 }
 
 .DocSearch-Button .DocSearch-Search-Icon{

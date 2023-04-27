@@ -117,10 +117,9 @@ module.exports = {
           },
 
           {
-            type: "doc",
-            docId: "whitepaper",
-            position: "right",
+            href: "https://rarimo.gitlab.io/docs/docs/whitepaper/",
             label: "Whitepaper",
+            position: "right",
           },
           {
             href: "https://github.com/rarimo",
