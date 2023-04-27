@@ -23,6 +23,7 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --primary-bg-color: #131313;
   --primary-text-color-light: rgba(255, 255, 255, 0.84);
+
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -34,8 +35,9 @@
   --ifm-color-primary-light: #46d9ce;
   --ifm-color-primary-lighter: #51dcd1;
   --ifm-color-primary-lightest: #71e2d9;
-
+  --bg-rect-border-color: rgba(255, 255, 255, 5%);
   --primary-text-color: #8f8f8f;
+  --primary-bg-rect-size: 2.33594rem;
 
 }
 
@@ -47,9 +49,12 @@
   margin: 0 2.5rem;
   --ifm-navbar-background-color: var(--primary-bg-color);
 }
-html {
-  background: url("@site/static/img/Rectangle-bg.svg") repeat;
 
+html {
+  background-color: var(--primary-bg-color);
+  background-image: linear-gradient(to right,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem),linear-gradient(to bottom,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem);
+  background-size: var(--primary-bg-rect-size) var(--primary-bg-rect-size);
+  background-repeat: repeat;
 }
 .footer--dark {
   --ifm-footer-background-color: var(--primary-bg-color);
