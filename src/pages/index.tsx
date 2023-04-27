@@ -1,5 +1,5 @@
+import BrowserOnly from "@docusaurus/BrowserOnly";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import BrowserOnly from '@docusaurus/BrowserOnly';
 import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import HomepageLinks from "@site/src/components/HomepageLinks";
@@ -116,16 +116,21 @@ export default function Home(): JSX.Element {
 
       <main>
         <BrowserOnly>
-          {() =>
+          {() => (
             <>
               <HomepageFeatures />
-              <div className={clsx("bottomContent container", styles.bottomContent)}>
+              <div
+                className={clsx(
+                  "bottomContent container",
+                  styles.bottomContent
+                )}
+              >
                 <HomepageStartBuilding />
                 <HomepageDeveloperLinks />
               </div>
               <HomepageLinks />
             </>
-          }
+          )}
         </BrowserOnly>
       </main>
     </Layout>
