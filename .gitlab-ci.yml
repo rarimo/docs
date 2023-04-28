@@ -94,8 +94,8 @@ Build-main:
 pages:
   stage: deploy
   script:
-  - export URL="https://rarimo.gitlab.io"
-  - export BASE_URL="/docs/"
+  - export URL="https://docs.rarimo.com"
+  - export BASE_URL="/"
   - yarn install --frozen-lockfile --production
   - yarn build
   - rm -rf ./public/*
