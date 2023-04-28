@@ -23,7 +23,7 @@ function HomepageHeader() {
         </p>
         <div className={clsx("buttonContainer", styles.buttonContainer)}>
           <a
-            href="/getting-started"
+            href="./getting-started"
             className={clsx(
               "heroButton svgContainer",
               styles.heroButton,
