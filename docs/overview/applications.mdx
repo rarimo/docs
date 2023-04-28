@@ -1,45 +1,51 @@
 ---
 ---
 
-# Applications
+# Overview of use cases
 
-Our protocol has limitless potential with its future-facing design.
-Any messaging, asset, and operability that is possible on a single blockchain will be unlocked for all users across chains.
-We have already created one sub-protocol, which can safely transfer assets across chains.
-We are not limited by this one - and are already planning future sub-protocols to support upcoming applications.
+One of the key features that distinguishes Rarimo from all other interoperability bridges is its focus on decentralized identities and credentials.
+By making metadata retrievable and replicating state, Rarimo enables tokens, Soulbound Tokens (SBTs), dynamic NFTs, and other components of onchain identity to seamlessly travel across ecosystems.
 
-## Cross-Chain NFT Checkout
+Rarimo dramatically improves the user experience of interacting with multi-chain digital assets by eliminating excess transaction fees and time-consuming manual steps from an endless range of use cases.
+Instead, Rarimo offers users single-click, single-fee solutions.
 
-It is complex and requires multiple steps for users with tokens on different blockchains to buy NFTs from a marketplace.
-If a user holds liquidity on `Chain A` and an NFT exists on `Chain B`, there is no easy solution for the user to purchase the NFT.
-They must leave the marketplace, find an exchange, execute a swap (and be subject to the swap fees), return to the marketplace, and then execute a trade.
+These are the main use cases of the Protocol that are available today:
 
-With Rarimo's protocol, a user can perform a single transaction to make a cross-chain purchase.
-Also, with our bundling, this means a single gas fee for a secure, atomic transaction.
+## Token-agnostic NFT checkout
 
-![NFT Checkout sequence diagram](/img/nft-settlement.png)
+If a user holds tokens on one chain and an NFT is for sale on another chain, there is no easy way for the user to purchase the NFT with those tokens.
 
-> NOTE: we should replace this graphic with a consistent-theme one
+They must leave the marketplace, use an exchange, execute a swap (and be subject to the swap fees), return to the marketplace, and then execute a trade.
 
-## Cross-Chain Listing
+With Rarimo's NFT Checkout solution, users can purchase NFTs with non-native tokens.
+At checkout, users will be prompted to select the currency they like to pay with from the balance, and after paying the transaction fee and signing to authorize the payment, the process will be complete.
+Rarimo bundles the different steps into a secure, atomic transaction with a single gas fee.
 
-Creator platforms are limited to single chains and marketplaces, alienating them from potential users and customers.
-There is no easy way to allow minting on `Chain A` and listing on marketplaces that are on `Chain B`.
+For more information, see [Token-agnostic payments](./applications/settlement-integration).
 
-We can allow users to mint, list, and trade on the chains that make sense for them, increasing community reach.
-Again, our bundling design means that multiple steps can occur within a single transaction.
+## Cross-chain proofs
 
-> NOTE: Image TBD
+There is no way for dApps to verify the state or ownership of social tokens in the form of credentials, digital identities, soul-bound tokens, and other NFTs across chains, as they are restricted to their native ecosystems.
 
-## Cross-Chain Proofs
+Rarimo's protocol allows cross-chain proofs, token-gated access logic, DAO membership, voting rights to be executed across the ecosystems.
 
-Verification of ownership / provenance of non-fungible assets are limited to a single chain.
-dApps on `Chain A` can only cater to users on that chain - any users with assets on `Chain B` cannot interact.
-This limits reach, especially for non-transferable assets like Soul-Bound Tokens (SBTs).
+By using Rarimo, cross-chain proofs can be generated, or their state can be replicated across different chains.
+This allows digital credentials, soul-bound tokens, and dynamic NFTs to transcend the confines of a single chain or ecosystem.
 
-Rarimo's protocol allows cross-chain proofs.
-Token-gated access logic, DAO membership, voting rights, and other ownership rights can be checked cross-chain.
+For more information, see [Cross-chain proofs](./applications/cross-chain-proofs).
 
-![Proofs](/img/proofs.png)
+## Cross-chain NFT/credential minting
 
-> TODO: we should replace this graphic with a consistent-theme one
+Rarimo can simplify the process of minting tokens on multiple chains.
+In this case, the token issuer sends only one transaction to lock tokens, and users can redeem tokens on any chain of their choice.
+Token standards include NFTs, SBTs, and semi-fungible tokens.
+
+For more information, see [Multi-chain NFT/credentials minting](./applications/cross-chain-minting).
+
+## Cross-chain staking
+
+Through bundling functionality, the required steps for users are simplified to a single step.
+Users only need to send a transaction to lock their tokens, and the protocol will bridge the assets to the
+target chain and stake them.
+
+For more information, see [Cross-chain staking](./applications/cross-chain-staking).

@@ -7,64 +7,43 @@ const apiReference = require("./docs/api/reference/sidebar");
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   whitepaper: [
-    {
-      type: "doc",
-      id: "whitepaper",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/problem_statement",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/protocol-vision",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/architecture-and-operating-principles",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/main-flow-of-messages-transferring",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/light-wallet-supporting",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/security-and-efficiency",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/utilities-of-the-token",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/governance",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/summary",
-    },
-    {
-      type: "doc",
-      id: "whitepaper/sources",
-    },
+    "whitepaper",
+    "whitepaper/problem_statement",
+    "whitepaper/protocol-vision",
+    "whitepaper/architecture-and-operating-principles",
+    "whitepaper/main-flow-of-messages-transferring",
+    "whitepaper/light-wallet-supporting",
+    "whitepaper/security-and-efficiency",
+    "whitepaper/utilities-of-the-token",
+    "whitepaper/governance",
+    "whitepaper/summary",
+    "whitepaper/sources",
   ],
-  developers: [
+  overview: [
+    "overview",
+    "getting-started",
+    "overview/connecting-to-wallets",
+    "overview/swapping-tokens",
+    "overview/creating-transactions",
+    "glossary",
+  ],
+  applications: [
+    "overview/applications",
+    "overview/applications/settlement-integration",
+    "overview/applications/cross-chain-proofs",
+    "overview/applications/cross-chain-minting",
+    "overview/applications/cross-chain-staking",
+    "overview/applications/usdc-integration",
+  ],
+  architecture: [
     {
       type: "doc",
-      id: "developers",
+      id: "overview/design",
     },
     {
       type: "doc",
       label: "Oracles",
       id: "developers/oracles",
-    },
-    {
-      type: "doc",
-      id: "getting-started",
     },
     {
       type: "category",
@@ -73,7 +52,7 @@ const sidebars = {
         type: "doc",
         id: "developers/core",
       },
-      collapsed: false,
+      collapsed: true,
       items: [
         "developers/core/rarimocore",
         "developers/core/tokenmanager",
@@ -82,62 +61,13 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Contracts",
-      link: {
-        type: "doc",
-        id: "developers/contracts",
-      },
-      collapsed: false,
-      items: ["developers/contracts/bridge"],
-    },
-    {
-      type: "category",
       label: "TSS",
       link: {
         type: "doc",
         id: "developers/tss",
       },
-      collapsed: false,
+      collapsed: true,
       items: ["developers/tss/overview"],
-    },
-  ],
-  overview: [
-    {
-      type: "doc",
-      id: "overview",
-    },
-    {
-      type: "doc",
-      id: "getting-started",
-    },
-    {
-      type: "doc",
-      id: "overview/connecting-to-wallets",
-    },
-    {
-      type: "doc",
-      id: "overview/creating-transactions",
-    },
-  ],
-  concepts: [
-    {
-      type: "doc",
-      id: "overview/design",
-    },
-    {
-      type: "category",
-      label: "Applications",
-      link: {
-        type: "doc",
-        id: "overview/applications",
-      },
-      collapsed: false,
-      items: [
-        "overview/applications/settlement-integration",
-        "overview/applications/cross-chain-proofs",
-        "overview/applications/cross-chain-minting",
-        "overview/applications/cross-chain-staking",
-      ],
     },
     {
       type: "doc",
@@ -151,93 +81,110 @@ const sidebars = {
       type: "doc",
       id: "overview/fees",
     },
-  ],
-  smartContracts: [
     {
       type: "doc",
-      id: "smart-contracts",
+      id: "glossary",
     },
+  ],
+  reference: [
     {
       type: "doc",
-      id: "smart-contracts/addresses",
+      id: "reference",
     },
     {
       type: "category",
-      label: "Guides",
+      label: "Contracts",
       link: {
         type: "doc",
-        id: "smart-contracts/guides",
+        id: "developers/contracts",
       },
-      collapsed: false,
+      collapsed: true,
       items: [
-        "smart-contracts/guides/moving-liquidity",
-        "smart-contracts/guides/transfer-nfts",
+        {
+          type: "doc",
+          id: "smart-contracts/addresses",
+        },
+        {
+          type: "doc",
+          id: "developers/contracts/bridge",
+        },
+        {
+          type: "category",
+          label: "Guides",
+          link: {
+            type: "doc",
+            id: "smart-contracts/guides",
+          },
+          collapsed: false,
+          items: [
+            "smart-contracts/guides/moving-liquidity",
+            "smart-contracts/guides/transfer-nfts",
+          ],
+        },
+        {
+          type: "category",
+          label: "Interface",
+          link: {
+            type: "doc",
+            id: "smart-contracts/interface",
+          },
+          collapsed: false,
+          items: [
+            "smart-contracts/interface/evm-reference",
+            "smart-contracts/interface/near-reference",
+            "smart-contracts/interface/solana-reference",
+          ],
+        },
       ],
     },
     {
       type: "category",
-      label: "Interface",
+      label: "API",
       link: {
         type: "doc",
-        id: "smart-contracts/interface",
+        id: "api",
       },
-      collapsed: false,
+      collapsed: true,
       items: [
-        "smart-contracts/interface/evm-reference",
-        "smart-contracts/interface/near-reference",
-        "smart-contracts/interface/solana-reference",
+        {
+          type: "category",
+          label: "Guides",
+          link: {
+            type: "doc",
+            id: "api/guides",
+          },
+          collapsed: false,
+          items: [
+            "api/guides/retrieving-tokens",
+            "api/guides/building-transactions",
+          ],
+        },
+        {
+          type: "category",
+          label: "Reference",
+          link: {
+            type: "doc",
+            id: "api/reference",
+          },
+          collapsed: false,
+          items: apiReference,
+        },
       ],
-    },
-  ],
-  api: [
-    {
-      type: "doc",
-      id: "api",
     },
     {
       type: "category",
-      label: "Guides",
+      label: "SDK",
       link: {
         type: "doc",
-        id: "api/guides",
+        id: "sdk",
       },
-      collapsed: false,
+      collapsed: true,
       items: [
-        "api/guides/retrieving-tokens",
-        "api/guides/building-transactions",
+        "sdk/provider",
+        "sdk/nft-checkout",
+        "sdk/react-provider",
+        "sdk/react-nft-checkout",
       ],
-    },
-    {
-      type: "category",
-      label: "Reference",
-      link: {
-        type: "doc",
-        id: "api/reference",
-      },
-      collapsed: false,
-      items: apiReference,
-    },
-  ],
-  sdk: [
-    {
-      type: "doc",
-      id: "sdk",
-    },
-    {
-      type: "doc",
-      id: "sdk/provider",
-    },
-    {
-      type: "doc",
-      id: "sdk/nft-checkout",
-    },
-    {
-      type: "doc",
-      id: "sdk/react-provider",
-    },
-    {
-      type: "doc",
-      id: "sdk/react-nft-checkout",
     },
   ],
   solutions: [

@@ -116,11 +116,17 @@ module.exports = {
               },
             ],
           },
-
+          // {
+          //   type: "doc",
+          //   docId: "solutions",
+          //   position: "left",
+          //   label: "Solutions",
+          // },
           {
-            href: "https://docs.rarimo.com/whitepaper/",
-            label: "Whitepaper",
+            type: "doc",
+            docId: "whitepaper",
             position: "right",
+            label: "Whitepaper",
           },
           {
             href: "https://github.com/rarimo",
