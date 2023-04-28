@@ -25,7 +25,7 @@ const FeatureList: FeatureItem[] = [
         connect to wallets and create cross-chain transactions.
       </>
     ),
-    url: "/overview",
+    url: "/getting-started",
   },
   {
     title: "Architecture",
