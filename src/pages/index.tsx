@@ -32,11 +32,13 @@ function HomepageHeader() {
           >
             Getting Started <ArrowSvg />
           </a>
-          {/*//Todo: add link to explore features*/}
           <button
             className={clsx("heroButton-secondary", styles.heroButtonSecondary)}
+            onClick={() =>
+              window.open("https://docs.rarimo.com/overview/applications")
+            }
           >
-            Explore Features
+            Explore use cases
           </button>
         </div>
       </div>
