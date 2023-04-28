@@ -23,7 +23,7 @@ function HomepageHeader() {
         </p>
         <div className={clsx("buttonContainer", styles.buttonContainer)}>
           <a
-            href="/docs/docs/overview"
+            href="/overview"
             className={clsx(
               "heroButton svgContainer",
               styles.heroButton,
@@ -74,7 +74,7 @@ function HomepageStartBuilding() {
         <button
           className={clsx("heroButton-secondary", styles.heroButtonSecondary)}
           onClick={() =>
-            window.open("https://rarimo.gitlab.io/docs/docs/whitepaper")
+            window.open("https://docs.rarimo.com/whitepaper")
           }
         >
           Whitepaper

@@ -117,7 +117,7 @@ module.exports = {
           },
 
           {
-            href: "https://rarimo.gitlab.io/docs/docs/whitepaper/",
+            href: "https://docs.rarimo.com/whitepaper/",
             label: "Whitepaper",
             position: "right",
           },
@@ -149,28 +149,28 @@ module.exports = {
             items: [
               {
                 html: `
-                <a href="/docs/docs" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Discord">
+                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Discord">
                 Use cases
                 </a>
               `,
               },
               {
                 html: `
-                <a href="/docs/docs" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
+                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
                 Developers
                 </a>
               `,
               },
               {
                 html: `
-                <a href="/docs/docs" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
+                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
                 Community
                 </a>
               `,
               },
               {
                 html: `
-                <a href="/docs/docs" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
+                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
                 Contact
                 </a>
               `,

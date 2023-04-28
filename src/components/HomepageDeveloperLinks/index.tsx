@@ -25,7 +25,7 @@ const DeveloperLinksList: LinkItem[] = [
   {
     title: "Smart contract reference",
     Svg: require("@site/static/img/ri-github-fill.svg").default,
-    url: "https://rarimo.gitlab.io/docs/docs/developers/contracts",
+    url: "https://docs.rarimo.com/developers/contracts",
   },
   {
     title: "Rarimo on GitHub",
