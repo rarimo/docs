@@ -34,13 +34,7 @@ function HomepageHeader() {
           </a>
           {/*//Todo: add link to explore features*/}
           <button
-            style={{
-              border: "none",
-              background: "none",
-              fontSize: "16px",
-              color: "rgba(255, 255, 255, 0.84)",
-              fontWeight: "600",
-            }}
+            className={clsx("heroButton-secondary", styles.heroButtonSecondary)}
           >
             Explore Features
           </button>
@@ -78,16 +72,10 @@ function HomepageStartBuilding() {
           <ArrowSvg />
         </button>
         <button
+          className={clsx("heroButton-secondary", styles.heroButtonSecondary)}
           onClick={() =>
             window.open("https://rarimo.gitlab.io/docs/docs/whitepaper")
           }
-          style={{
-            border: "none",
-            background: "none",
-            fontSize: "16px",
-            color: "rgba(255, 255, 255, 0.84)",
-            fontWeight: "600",
-          }}
         >
           Whitepaper
         </button>
