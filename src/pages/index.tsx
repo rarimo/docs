@@ -23,7 +23,7 @@ function HomepageHeader() {
         </p>
         <div className={clsx("buttonContainer", styles.buttonContainer)}>
           <a
-            href="/overview"
+            href="/getting-started"
             className={clsx(
               "heroButton svgContainer",
               styles.heroButton,
@@ -35,7 +35,7 @@ function HomepageHeader() {
           <button
             className={clsx("heroButton-secondary", styles.heroButtonSecondary)}
             onClick={() =>
-              window.open("https://docs.rarimo.com/overview/applications")
+              window.open("/overview/applications")
             }
           >
             Explore use cases
@@ -76,7 +76,7 @@ function HomepageStartBuilding() {
         <button
           className={clsx("heroButton-secondary", styles.heroButtonSecondary)}
           onClick={() =>
-            window.open("https://docs.rarimo.com/whitepaper")
+            window.open("/whitepaper")
           }
         >
           Whitepaper
