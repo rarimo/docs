@@ -2,6 +2,7 @@
 
 import clsx from "clsx";
 import React from "react";
+import Link from "@docusaurus/Link";
 
 import styles from "./styles.module.css";
 
@@ -65,7 +66,7 @@ const FeatureList: FeatureItem[] = [
 
 function Feature({ title, Svg, description, url }: FeatureItem) {
   return (
-    <a href={url} className={clsx("feature", styles.feature)}>
+    <Link to={url} className={clsx("feature", styles.feature)}>
       <div className="text--left padding--md">
         <Svg className={styles.featureSvg} role="img" />
       </div>
@@ -75,7 +76,7 @@ function Feature({ title, Svg, description, url }: FeatureItem) {
           {description}
         </p>
       </div>
-    </a>
+    </Link>
   );
 }
 

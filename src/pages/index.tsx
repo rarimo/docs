@@ -33,14 +33,12 @@ function HomepageHeader() {
           >
             Getting Started <ArrowSvg />
           </Link>
-          <button
+          <Link
             className={clsx("heroButton-secondary", styles.heroButtonSecondary)}
-            onClick={() =>
-              window.open("/overview/applications")
-            }
+            to="/overview/applications"
           >
             Explore use cases
-          </button>
+          </Link>
         </div>
       </div>
     </header>
@@ -63,8 +61,8 @@ function HomepageStartBuilding() {
         needs of your project
       </p>
       <div className={clsx("buttonContainer", styles.buttonContainer)}>
-        <button
-          onClick={() => window.open("https://rarimo.com/testnet/sign-up")}
+        <Link
+          to="https://rarimo.com/testnet/sign-up"
           className={clsx(
             "heroButton svgContainer",
             styles.heroButton,
@@ -73,15 +71,13 @@ function HomepageStartBuilding() {
         >
           Join Testnet
           <ArrowSvg />
-        </button>
-        <button
+        </Link>
+        <Link
           className={clsx("heroButton-secondary", styles.heroButtonSecondary)}
-          onClick={() =>
-            window.open("/whitepaper")
-          }
+          to="/whitepaper"
         >
           Whitepaper
-        </button>
+        </Link>
       </div>
     </div>
   );

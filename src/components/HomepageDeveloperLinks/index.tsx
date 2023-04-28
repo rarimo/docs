@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import styles from "@site/src/components/HomepageDeveloperLinks/styles.module.css";
 import ArrowOutward from "@site/static/img/arrow_outward.svg";
+import Link from "@docusaurus/Link";
 import clsx from "clsx";
 import React from "react";
 type LinkItem = {
@@ -48,7 +49,7 @@ const DeveloperLinksList: LinkItem[] = [
 
 function DeveloperLink({ title, Svg, url }: LinkItem) {
   return (
-    <a href={url} className={clsx("developerLink", styles.developerLink)}>
+    <Link to={url} className={clsx("developerLink", styles.developerLink)}>
       <div className="text--left">
         <Svg className={styles.linkSvg} role="img" />
       </div>
@@ -63,7 +64,7 @@ function DeveloperLink({ title, Svg, url }: LinkItem) {
       >
         <ArrowOutward role="img" />
       </div>
-    </a>
+    </Link>
   );
 }
 
