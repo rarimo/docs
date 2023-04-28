@@ -1,4 +1,5 @@
 import BrowserOnly from "@docusaurus/BrowserOnly";
+import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
@@ -22,8 +23,8 @@ function HomepageHeader() {
           {siteConfig.tagline}
         </p>
         <div className={clsx("buttonContainer", styles.buttonContainer)}>
-          <a
-            href="/getting-started"
+          <Link
+            to="/getting-started"
             className={clsx(
               "heroButton svgContainer",
               styles.heroButton,
@@ -31,7 +32,7 @@ function HomepageHeader() {
             )}
           >
             Getting Started <ArrowSvg />
-          </a>
+          </Link>
           <button
             className={clsx("heroButton-secondary", styles.heroButtonSecondary)}
             onClick={() =>
