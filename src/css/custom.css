@@ -21,8 +21,9 @@
   --ifm-font-family-base: 'Open Sans', 'Segoe UI', Tahoma, sans-serif;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --primary-bg-color: #131313;
+  --primary-bg-color: #0D0D0D;
   --primary-text-color-light: rgba(255, 255, 255, 0.84);
+  --primary-text-color-dark: #131313
 
 }
 
@@ -35,9 +36,9 @@
   --ifm-color-primary-light: #46d9ce;
   --ifm-color-primary-lighter: #51dcd1;
   --ifm-color-primary-lightest: #71e2d9;
-  --bg-rect-border-color: rgba(255, 255, 255, 5%);
+  --bg-rect-border-color: rgba(255, 255, 255, 3%);
   --primary-text-color: #8f8f8f;
-  --primary-bg-rect-size: 2.33594rem;
+  --primary-bg-rect-size: 4.125rem;
   --ifm-navbar-link-color: var(--primary-text-color);
 }
 
@@ -47,21 +48,22 @@
 
 .navbar{
   margin: 0 2.5rem;
-  --ifm-navbar-background-color: var(--primary-bg-color);
+  --ifm-navbar-background-color: transparent;
 }
 
 html {
+  background-color: var(--primary-bg-color);
+}
+.footer--dark {
+  --ifm-footer-background-color: transparent;
   background-color: var(--primary-bg-color);
   background-image: linear-gradient(to right,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem),linear-gradient(to bottom,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem);
   background-size: var(--primary-bg-rect-size) var(--primary-bg-rect-size);
   background-repeat: repeat;
 }
-.footer--dark {
-  --ifm-footer-background-color: var(--primary-bg-color);
-  background-image: url("@site/static/img/footer-bg.svg");
-  background-repeat: repeat;
-  margin: 0 2.5rem 5rem 2.5rem;
-  padding: 0;
+.footer--dark::before{
+
+
 }
 
 .footer__social-link {
@@ -125,4 +127,34 @@ html {
 }
 span.DocSearch-Button-Placeholder {
   font-size: 12px
+}
+.heroButton{
+  position: relative;
+  font-family: 'Inter';
+  background: #8AB5A4;
+  padding: 1.0625rem 2.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 1.5rem 0 0;
+  cursor: pointer;
+  color: var(--primary-text-color-dark);
+  border: none;
+  white-space: nowrap;
+}
+.heroButton:hover{
+  color: var(--primary-text-color-dark);
+  text-decoration: none;
+}
+.heroButtonSecondary{
+  border: none;
+  background: none;
+  font-size: 16px;
+  font-family: 'Inter';
+  color: rgba(255, 255, 255, 0.84);
+  font-weight: 600;
+  cursor: pointer;
+}
+.svgContainer {
+  display: flex;
+  align-items: center;
 }

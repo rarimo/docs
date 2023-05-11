@@ -16,7 +16,7 @@ const LinksList: LinkItem[] = [
   {
     title: "Discord",
     Svg: require("@site/static/img/ri-discord-line.svg").default,
-    description: "Join our developer Community",
+    description: "Make your engineering workflow more efficient",
     url: "https://discord.gg/cfrH3Fe7ke",
   },
   // TODO: add link to forum
@@ -33,46 +33,47 @@ const LinksList: LinkItem[] = [
     url: "https://github.com/rarimo",
   },
 ];
-const LinksListTablet: LinkItem[] = [
-  // TODO: add links
-  {
-    title: "Engineric Support",
-    Svg: require("@site/static/img/support_agent.svg").default,
-    description: "Make your engineering workflow more efficient",
-    url: "#",
-  },
-  {
-    title: "Additional Resources",
-    Svg: require("@site/static/img/monetization_on.svg").default,
-    description: "Coming soon",
-    url: "#",
-  },
-  {
-    title: "Social Links",
-    Svg: require("@site/static/img/ri-discord-line.svg").default,
-    description:
-      "Connect with like-minded community for support and inspiration",
-    url: "#",
-  },
-];
+// const LinksListTablet: LinkItem[] = [
+//   // TODO: add links
+//   {
+//     title: "Engineric Support",
+//     Svg: require("@site/static/img/support_agent.svg").default,
+//     description: "Make your engineering workflow more efficient",
+//     url: "#",
+//   },
+//   {
+//     title: "Additional Resources",
+//     Svg: require("@site/static/img/monetization_on.svg").default,
+//     description: "Coming soon",
+//     url: "#",
+//   },
+//   {
+//     title: "Social Links",
+//     Svg: require("@site/static/img/ri-discord-line.svg").default,
+//     description:
+//       "Connect with like-minded community for support and inspiration",
+//     url: "#",
+//   },
+// ];
 
 function Link({ title, Svg, description, url }: LinkItem) {
   return (
     <a href={url} className={clsx("link", styles.link)}>
-      <div className="text--center">
-        <Svg className={styles.linkSvg} role="img" />
-      </div>
-      <div className={clsx("linkText", styles.linkText)}>
-        <div>
-          <span className={clsx("linkTitle", styles.linkTitle)}>{title}</span>
+      <div className={clsx("linkWrapper", styles.linkWrapper)}>
+        <div className="text--center">
+          <Svg className={styles.linkSvg} role="img" />
         </div>
-        <div className="text--left">
-          <span className={clsx("linkDescription", styles.linkDescription)}>
-            {description}
-          </span>
+        <div className={clsx("linkText", styles.linkText)}>
+          <div>
+            <span className={clsx("linkTitle", styles.linkTitle)}>{title}</span>
+          </div>
+          <div className="text--left">
+            <span className={clsx("linkDescription", styles.linkDescription)}>
+              {description}
+            </span>
+          </div>
         </div>
       </div>
-
       <div className={clsx("linkSvgContainer", styles.linkSvgContainer)}>
         <ArrowOutward role="img" />
       </div>
@@ -93,18 +94,12 @@ export default function HomepageLinks(): JSX.Element {
     };
   }, []);
 
-  const isTabletOrMobile = width <= 996;
+  // const isTabletOrMobile = width <= 996;
   return (
-    <section>
-      <div className="container">
-        <div className={styles.links}>
-          {(!isTabletOrMobile ? LinksList : LinksListTablet).map(
-            (props, idx) => (
-              <Link key={idx} {...props} />
-            )
-          )}
-        </div>
-      </div>
-    </section>
+    <div className={styles.links}>
+      {LinksList.map((props, idx) => (
+        <Link key={idx} {...props} />
+      ))}
+    </div>
   );
 }

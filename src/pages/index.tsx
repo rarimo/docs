@@ -3,10 +3,10 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import HomepageLinks from "@site/src/components/HomepageLinks";
-import ArrowSvg from "@site/static/img/arrow-forward.svg";
+import ArrowSvg from "@site/static/img/arrow_forward.svg";
 import Layout from "@theme/Layout";
 import clsx from "clsx";
-import React from "react";
+import React, {useEffect} from "react";
 
 import styles from "./index.module.css";
 
@@ -34,7 +34,7 @@ function HomepageHeader() {
           </a>
           {/*//Todo: add link to explore features*/}
           <button
-            className={clsx("heroButton-secondary", styles.heroButtonSecondary)}
+            className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
           >
             Explore Features
           </button>
@@ -48,18 +48,21 @@ function HomepageStartBuilding() {
     <div className={clsx("startBuildingSection", styles.startBuildingSection)}>
       <h1
         className={clsx("hero__title", styles.heroTitle)}
-        style={{ fontSize: "3.5rem" }}
+        style={{ fontSize: "3.5rem", textAlign: "start" }}
       >
         Start Building with rarimo
       </h1>
       <p
         className={clsx("hero__subtitle", styles.heroSubtitle)}
-        style={{ fontSize: "0.875rem" }}
+        style={{ fontSize: "0.875rem", textAlign: "start" }}
       >
         Our community is here to help! Enjoy support tailored to the unique
         needs of your project
       </p>
-      <div className={clsx("buttonContainer", styles.buttonContainer)}>
+      <div
+        className={clsx("buttonContainer", styles.buttonContainer)}
+        style={{ justifyContent: "start" }}
+      >
         <button
           onClick={() => window.open("https://rarimo.com/testnet/sign-up")}
           className={clsx(
@@ -72,7 +75,7 @@ function HomepageStartBuilding() {
           <ArrowSvg />
         </button>
         <button
-          className={clsx("heroButton-secondary", styles.heroButtonSecondary)}
+          className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
           onClick={() =>
             window.open("https://rarimo.gitlab.io/docs/docs/whitepaper")
           }
@@ -94,29 +97,19 @@ export default function Home(): JSX.Element {
       <HomepageHeader />
       <div className={clsx("bgImage1", styles.bgImage1)} />
       <div className={clsx("bgImage2", styles.bgImage2)} />
-      <div className={clsx("bgImage3", styles.bgImage3)} />
-      <div className={clsx("bgImage4", styles.bgImage4)} />
-      <div className={clsx("bgImage5", styles.bgImage5)} />
-      <div className={clsx("bgImage6", styles.bgImage6)} />
-      <div className={clsx("bgImage7", styles.bgImage7)} />
-      <div className={clsx("bgImage8", styles.bgImage8)} />
-      <div className={clsx("bgImage9", styles.bgImage9)} />
 
       <main>
         <BrowserOnly>
           {() => (
             <>
               <HomepageFeatures />
-              <div
-                className={clsx(
-                  "bottomContent container",
-                  styles.bottomContent
-                )}
-              >
-                <HomepageStartBuilding />
-                <HomepageDeveloperLinks />
+              <HomepageDeveloperLinks/>
+              <div className="container">
+                <div className={clsx("bottomContent", styles.bottomContent)}>
+                  <HomepageStartBuilding />
+                  <HomepageLinks />
+                </div>
               </div>
-              <HomepageLinks />
             </>
           )}
         </BrowserOnly>

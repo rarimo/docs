@@ -1,18 +1,29 @@
 .links{
     display: flex;
-    align-items: center;
     justify-content: space-around;
-    padding: 3rem 2rem;
+    flex-direction: column;
+    align-items: start;
+    width: 50%;
 }
 
 .link{
     display: flex;
-    flex-direction: column;
+    width: 100%;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     cursor: pointer;
-    padding: 2rem 3.5rem;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
     background: var(--primary-bg-color);
+    margin-bottom: 1rem;
 }
+
+.linkWrapper{
+    display: flex;
+    align-items: center;
+}
+
 .linkSvg{
     width: 32px;
     height: 32px;
@@ -23,9 +34,8 @@
     font-size: 0.875rem;
     font-style: normal;
     color: var(--primary-text-color);
-    margin-bottom: 1rem;
-    display: block;
     text-align: center;
+    /*display: inline;*/
 }
 
 .linkTitle{
@@ -34,7 +44,6 @@
     font-family: 'Oswald';
     text-transform: capitalize;
     color: var(--primary-text-color-light);
-    margin: 0 2rem;
     padding-top: 1rem ;
     flex: 1 0 auto;
     white-space: nowrap;
@@ -47,54 +56,6 @@
 }
 
 .linkText {
- text-align: center;
-}
+    padding-left: 1.5rem;
+    align-items: start;}
 
-@media screen and (max-width: 996px) {
-    .link{
-        padding: 1rem;
-    }
-
-    .linkSvgContainer {
-        display: none;
-    }
-
-    .links{
-        align-items: start;
-    }
-
-    .linkText{
-        display: flex;
-        flex-direction: column;
-    }
-
-}
-
-@media screen and (max-width: 625px) {
-    .links{
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-    }
-
-    .linkDescription {
-        margin-bottom: 0;
-        display: inline;
-    }
-
-    .link{
-        width: 100%;
-        flex-direction: row;
-        align-items: center;
-        justify-content: start;
-    }
-
-    .linkText{
-        padding-left: 1.5rem;
-        align-items: start;
-    }
-
-    .linkTitle{
-        margin: 0;
-    }
-}
