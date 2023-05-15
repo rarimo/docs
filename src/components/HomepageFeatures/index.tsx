@@ -65,7 +65,7 @@ const FeatureList: FeatureItem[] = [
 
 function Feature({ title, Svg, description, url }: FeatureItem) {
   return (
-    <a href={url} className={clsx("feature", styles.feature)}>
+    <a href={url} className={clsx("feature", styles.feature)} data-aos="fade-up">
       <div className="text--left padding--md">
         <Svg className={styles.featureSvg} role="img" />
       </div>

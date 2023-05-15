@@ -2,7 +2,7 @@
  * CSS files with the .module.css suffix will be treated as CSS modules
  * and scoped locally.
  */
-.heroBanner {
+.secondBanner {
   padding: 4rem 0;
   text-align: center;
   position: relative;
@@ -10,7 +10,7 @@
   background: initial;
   color: #ffffff;
 }
-.heroContent{
+.secondContent{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,6 +20,30 @@
   position: relative;
   z-index: 0;
 }
+
+.secondSubtitle{
+  font-size: 0.875rem;
+  color: var(--primary-text-color);
+  max-width: 634px;
+  text-align: start;
+}
+
+.secondButtonContainer{
+  display: flex;
+  margin-top: 1rem;
+  justify-content: start;
+  width: 100%;
+}
+
+.secondTitle {
+  font-size: 3.5rem;
+  font-weight: 600;
+  color: var(--primary-text-color-light);
+  font-family: 'Oswald';
+  text-transform: uppercase;
+  text-align: start;
+}
+
 .startBuildingSection{
   display: flex;
   flex-direction: column;
@@ -31,43 +55,6 @@
   z-index: 1;
 }
 
-.heroSubtitle{
-  font-size: 1.25rem;
-  color: var(--primary-text-color);
-  max-width: 634px;
-}
-
-.buttonContainer{
-  display: flex;
-  margin-top: 1rem;
-  justify-content: center;
-  width: 100%;
-}
-
-.heroTitle {
-  font-size: 112px;
-  font-weight: 700;
-  color: var(--primary-text-color-light);
-  font-family: 'Oswald';
-  text-transform: uppercase;
-  text-align: center;
-}
-
-@media screen and (max-width: 625px) {
-  .heroTitle {
-    font-size: 54px;
-  }
-
-  .buttonContainer{
-    flex-direction: column;
-  }
-
-  .heroButton{
-    margin: 0 0 1.5rem 0;
-  }
-
-}
-
 .bottomContent {
   display: flex;
   justify-content: space-around;
@@ -75,13 +62,36 @@
   margin: 10rem 0;
 }
 
+@media screen and (max-width: 1249px) {
+  .bgImage3, .bgImage4, .bgImage5, .bgImage6 {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 996px) {
-  .heroBanner {
+  .bgImage3, .bgImage4, .bgImage5, .bgImage6{
+    display: none;
+  }
+  .secondTitle{
+    font-size: 5rem;
+    text-align: center;
+  }
+  .secondSubtitle{
+    text-align: center;
+  }
+
+  .secondBanner {
     margin: 2rem;
   }
-  .heroContent{
+
+  .secondButtonContainer{
+    justify-content: center;
+  }
+
+  .secondContent{
     max-width: 100%;
   }
+
   .startBuildingSection{
     display: flex;
     flex-direction: column;
@@ -91,7 +101,34 @@
     margin-right: 0;
     position: relative;
     z-index: 1;
+    max-width: 100%  }
+  .bottomContent {
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1;
+    margin: 2rem 0;
   }
+}
+
+
+@media screen and (max-width: 625px) {
+  .secondTitle {
+    font-size: 2.625rem;
+    text-align: center;
+  }
+  .secondSubtitle{
+    text-align: center;
+  }
+
+  .buttonContainer{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .secondButton{
+    margin: 0 0 1.5rem 0;
+  }
+
 }
 
 .bgImage1{
@@ -116,6 +153,58 @@
   z-index: -1;
   opacity: 0.6;
 }
+.bgImage3{
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  left: 4%;
+  top: 335px;
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.05);
+  background: linear-gradient(180deg, #3A8B8F 0%, rgba(58, 139, 143, 0) 100%), #3A8B8F;
+  background-blend-mode: normal, overlay, normal;
+}
+
+.bgImage4{
+  position: absolute;
+  width: 67px;
+  height: 68px;
+  left: 13%;
+  top: 471px;
+  background: linear-gradient(180deg, #FEB475 0%, rgba(254, 180, 117, 0) 100%), #FEB475;
+  background-blend-mode: normal, overlay, normal;
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.bgImage5{
+  position: absolute;
+  width: 67px;
+  height: 67px;
+  right: 12%;
+  top: 269px;
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.05);
+  background: linear-gradient(180deg, #FB7C3F 0%, rgba(251, 124, 63, 0) 100%), #FB7C3F;
+  background-blend-mode: normal, overlay, normal;
+}
+
+.bgImage6{
+  position: absolute;
+  width: 67px;
+  height: 67px;
+  right: 4%;
+  top: 408px;
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.05);
+  background: linear-gradient(180deg, #8AB5A4 0%, rgba(138, 181, 164, 0) 100%), #8AB5A4;
+  background-blend-mode: normal, overlay, normal;
+}
+
 
 .buttons {
   display: flex;

@@ -33,34 +33,12 @@ const LinksList: LinkItem[] = [
     url: "https://github.com/rarimo",
   },
 ];
-// const LinksListTablet: LinkItem[] = [
-//   // TODO: add links
-//   {
-//     title: "Engineric Support",
-//     Svg: require("@site/static/img/support_agent.svg").default,
-//     description: "Make your engineering workflow more efficient",
-//     url: "#",
-//   },
-//   {
-//     title: "Additional Resources",
-//     Svg: require("@site/static/img/monetization_on.svg").default,
-//     description: "Coming soon",
-//     url: "#",
-//   },
-//   {
-//     title: "Social Links",
-//     Svg: require("@site/static/img/ri-discord-line.svg").default,
-//     description:
-//       "Connect with like-minded community for support and inspiration",
-//     url: "#",
-//   },
-// ];
 
 function Link({ title, Svg, description, url }: LinkItem) {
   return (
     <a href={url} className={clsx("link", styles.link)}>
       <div className={clsx("linkWrapper", styles.linkWrapper)}>
-        <div className="text--center">
+        <div>
           <Svg className={styles.linkSvg} role="img" />
         </div>
         <div className={clsx("linkText", styles.linkText)}>
@@ -82,21 +60,8 @@ function Link({ title, Svg, description, url }: LinkItem) {
 }
 
 export default function HomepageLinks(): JSX.Element {
-  const [width, setWidth] = useState<number>(window.innerWidth);
-
-  function handleWindowSizeChange() {
-    setWidth(window.innerWidth);
-  }
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
-
-  // const isTabletOrMobile = width <= 996;
   return (
-    <div className={styles.links}>
+    <div className={styles.links} data-aos="fade-up">
       {LinksList.map((props, idx) => (
         <Link key={idx} {...props} />
       ))}

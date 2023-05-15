@@ -140,7 +140,7 @@ module.exports = {
               },
               {
                 html: `
-           <span style="margin-top: 1rem">© ${new Date().getFullYear()}</span>
+           <span style="margin-left: 1rem; color: #8F8F8F">© ${new Date().getFullYear()}</span>
 `,
               },
             ],

@@ -1,67 +1,33 @@
+import "aos/dist/aos.css";
+
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
+import HomepageHeader from "@site/src/components/HomepageHeader";
 import HomepageLinks from "@site/src/components/HomepageLinks";
 import ArrowSvg from "@site/static/img/arrow_forward.svg";
 import Layout from "@theme/Layout";
+import aos from "AOS";
 import clsx from "clsx";
-import React, {useEffect} from "react";
+import React from "react";
 
 import styles from "./index.module.css";
 
-function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext();
-  return (
-    <header className={clsx("heroBanner hero--primary", styles.heroBanner)}>
-      <div className={clsx("heroContent container", styles.heroContent)}>
-        <h1 className={clsx("hero__title", styles.heroTitle)}>
-          {siteConfig.title}
-        </h1>
-        <p className={clsx("hero__subtitle", styles.heroSubtitle)}>
-          {siteConfig.tagline}
-        </p>
-        <div className={clsx("buttonContainer", styles.buttonContainer)}>
-          <a
-            href="/docs/docs/overview"
-            className={clsx(
-              "heroButton svgContainer",
-              styles.heroButton,
-              styles.svgContainer
-            )}
-          >
-            Getting Started <ArrowSvg />
-          </a>
-          {/*//Todo: add link to explore features*/}
-          <button
-            className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
-          >
-            Explore Features
-          </button>
-        </div>
-      </div>
-    </header>
-  );
-}
 function HomepageStartBuilding() {
   return (
     <div className={clsx("startBuildingSection", styles.startBuildingSection)}>
-      <h1
-        className={clsx("hero__title", styles.heroTitle)}
-        style={{ fontSize: "3.5rem", textAlign: "start" }}
-      >
+      <h1 className={clsx("second__title", styles.secondTitle)}>
         Start Building with rarimo
       </h1>
       <p
-        className={clsx("hero__subtitle", styles.heroSubtitle)}
-        style={{ fontSize: "0.875rem", textAlign: "start" }}
+        className={clsx("second__subtitle", styles.secondSubtitle)}
       >
         Our community is here to help! Enjoy support tailored to the unique
         needs of your project
       </p>
       <div
-        className={clsx("buttonContainer", styles.buttonContainer)}
-        style={{ justifyContent: "start" }}
+        className={clsx("secondButtonContainer", styles.secondButtonContainer)}
       >
         <button
           onClick={() => window.open("https://rarimo.com/testnet/sign-up")}
@@ -89,6 +55,14 @@ function HomepageStartBuilding() {
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
+  aos.init({
+    duration: 900,
+    easing: "ease",
+    offset: 0,
+    once: true,
+    mirror: false,
+    anchorPlacement: "center-bottom",
+  });
   return (
     <Layout
       title={`${siteConfig.title}`}
@@ -97,13 +71,37 @@ export default function Home(): JSX.Element {
       <HomepageHeader />
       <div className={clsx("bgImage1", styles.bgImage1)} />
       <div className={clsx("bgImage2", styles.bgImage2)} />
+      <div data-aos="fade-up" className={clsx("bgImage3", styles.bgImage3)}>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div data-aos="fade-up" className={clsx("bgImage4", styles.bgImage4)}>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div data-aos="fade-up" className={clsx("bgImage5", styles.bgImage5)}>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div data-aos="fade-up" className={clsx("bgImage6", styles.bgImage6)}>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
       <main>
         <BrowserOnly>
           {() => (
             <>
               <HomepageFeatures />
-              <HomepageDeveloperLinks/>
+              <HomepageDeveloperLinks />
               <div className="container">
                 <div className={clsx("bottomContent", styles.bottomContent)}>
                   <HomepageStartBuilding />

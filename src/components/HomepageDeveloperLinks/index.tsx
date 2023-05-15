@@ -3,7 +3,7 @@ import styles from "@site/src/components/HomepageDeveloperLinks/styles.module.cs
 import ArrowSvg from "@site/static/img/arrow_forward.svg";
 import ArrowOutward from "@site/static/img/arrow_outward.svg";
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 type LinkItem = {
   title: string;
   items: { title: string; url: string }[];
@@ -19,7 +19,6 @@ const DeveloperLinksList: LinkItem[] = [
       { title: "Provide Liquidity", url: "#" },
       { title: "UI Components", url: "#" },
       { title: "Self Contract", url: "#" },
-
     ],
   },
   {
@@ -46,9 +45,38 @@ const DeveloperLinksList: LinkItem[] = [
 ];
 
 function DeveloperLink({ title, items }: LinkItem) {
+  const AnimationLine = useRef(null);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("developerLinkBlockTitleLineAnimation");
+      }
+    });
+  });
+  useEffect(() => {
+    if (AnimationLine.current) {
+      observer.observe(AnimationLine.current);
+    }
+  }, [AnimationLine]);
+
   return (
-    <div style={{ width: "30%" }}>
-      <h3>{title}</h3>
+    <div className={clsx("developerLinkBlock", styles.developerLinkBlock)}>
+      <h3
+        className={clsx(
+          "developerLinkBlockTitle",
+          styles.developerLinkBlockTitle
+        )}
+      >
+        {title}
+        <div
+          className={clsx(
+            "developerLinkBlockTitleLine",
+            styles.developerLinkBlockTitleLine
+          )}
+          ref={AnimationLine}
+        />
+      </h3>
       {items.map(({ url, title }, idx) => (
         <a
           key={idx}

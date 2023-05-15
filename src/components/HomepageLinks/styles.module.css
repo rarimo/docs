@@ -35,7 +35,6 @@
     font-style: normal;
     color: var(--primary-text-color);
     text-align: center;
-    /*display: inline;*/
 }
 
 .linkTitle{
@@ -57,5 +56,41 @@
 
 .linkText {
     padding-left: 1.5rem;
-    align-items: start;}
+    align-items: start;
+}
 
+@media screen and (max-width: 996px) {
+    .links{
+        flex-direction: row;
+        width: 100%;
+    }
+    .link{
+        align-items: start;
+        width: 30%;
+    }
+    .linkWrapper{
+        flex-direction: column;
+        align-items: start;
+        padding-left: 1.5rem;
+    }
+    .linkText{
+        padding: 1rem 0;
+    }
+}
+
+@media screen and (max-width: 625px) {
+    .links{
+        flex-direction: column;
+    }
+    .link{
+        align-items: center;
+        width: 100%;
+    }
+    .linkWrapper{
+        flex-direction: row;
+        padding-left: 0;
+    }
+    .linkText{
+        padding-left: 1.5rem;
+    }
+}

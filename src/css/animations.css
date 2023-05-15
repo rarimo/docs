@@ -1,0 +1,9 @@
+@keyframes LineAnimation {
+    0%   { width: 85%; }
+    100% { width: 100%; }
+}
+
+
+.developerLinkBlockTitleLineAnimation {
+    animation: LineAnimation 1.0s both;
+}

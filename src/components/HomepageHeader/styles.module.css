@@ -1,0 +1,70 @@
+.heroBanner {
+    padding: 4rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: initial;
+    color: #ffffff;
+}
+.heroContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    padding: 4rem 0;
+    max-width: 75%;
+    position: relative;
+    z-index: 0;
+}
+
+.heroSubtitle{
+    font-size: 1.25rem;
+    color: var(--primary-text-color);
+    max-width: 634px;
+}
+
+.buttonContainer{
+    display: flex;
+    margin-top: 1rem;
+    justify-content: center;
+    width: 100%;
+}
+
+.heroTitle {
+    font-size: 6.25rem;
+    font-weight: 600;
+    color: var(--primary-text-color-light);
+    font-family: 'Oswald';
+    text-transform: uppercase;
+    text-align: center;
+}
+@media screen and (max-width: 996px) {
+    .heroTitle{
+        font-size: 5rem;
+    }
+
+    .heroBanner {
+        margin: 2rem;
+    }
+
+    .heroContent{
+        max-width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 625px) {
+    .heroTitle {
+        font-size: 2.625rem;
+    }
+
+    .buttonContainer{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .heroButton{
+        margin: 0 0 1.5rem 0;
+    }
+
+}

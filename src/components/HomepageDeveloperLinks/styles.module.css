@@ -22,11 +22,31 @@
     font-size: 16px;
     color: #8F8F8F;
 }
+
+.developerLinkBlockTitle{
+    position: relative;
+    margin-bottom: 2rem;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.developerLinkBlockTitleLine {
+    position: absolute;
+    left: 0;
+    top: 2.5rem;
+    bottom: -0.125rem;
+    height: 0.0625rem;
+    background-color: #ffffff;
+
+}
+
+
 .developerLinksBody{
     display: flex;
     justify-content: space-between;
     margin-top: 5.5rem;
 }
+
 .developerLink{
     display: flex;
     justify-content: space-between;
@@ -37,4 +57,26 @@
     font-size: 16px;
     text-decoration-line: underline;
     color: #8F8F8F;
+}
+
+.developerLinkBlock{
+    width: 30%;
+    margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 996px) {
+    .developerLinks{
+        padding: 5rem 2rem;
+    }
+}
+@media screen and (max-width: 625px) {
+    .developerLinksBody{
+        flex-direction: column;
+    }
+    .developerLinkBlock{
+        width: 100%;
+    }
+    .developerLinksHeader{
+        flex-direction: column;
+    }
 }

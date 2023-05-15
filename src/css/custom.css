@@ -9,7 +9,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css2?family=Oswald');
 @import url('https://fonts.googleapis.com/css2?family=Inter');
-
+@import url('./animations.css');
 :root {
   --ifm-color-primary: #30d5c8;
   --ifm-color-primary-dark: #28c3b7;
@@ -36,7 +36,7 @@
   --ifm-color-primary-light: #46d9ce;
   --ifm-color-primary-lighter: #51dcd1;
   --ifm-color-primary-lightest: #71e2d9;
-  --bg-rect-border-color: rgba(255, 255, 255, 3%);
+  --bg-rect-border-color: rgba(255, 255, 255, 4%);
   --primary-text-color: #8f8f8f;
   --primary-bg-rect-size: 4.125rem;
   --ifm-navbar-link-color: var(--primary-text-color);
@@ -50,6 +50,9 @@
   margin: 0 2.5rem;
   --ifm-navbar-background-color: transparent;
 }
+.navbar--fixed-top{
+  position: static;
+}
 
 html {
   background-color: var(--primary-bg-color);
@@ -60,10 +63,6 @@ html {
   background-image: linear-gradient(to right,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem),linear-gradient(to bottom,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem);
   background-size: var(--primary-bg-rect-size) var(--primary-bg-rect-size);
   background-repeat: repeat;
-}
-.footer--dark::before{
-
-
 }
 
 .footer__social-link {
@@ -78,11 +77,12 @@ html {
   }
   .footer__items {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
   }
   .footer--dark {
     background: #131313;
-    height: 80px;
+    height: 100px;
+    overflow: hidden;
   }
 }
 .footer__social-link svg {
