@@ -187,7 +187,8 @@ For a complete example, see [NFT Checkout SDK](../sdk).
 
    ```ts
    import { createCheckoutOperation, EVMOperation } from '@rarimo/nft-checkout'
-   import { createProvider, MetamaskProvider } from '@rarimo/provider'
+   import { createProvider } from '@rarimo/provider'
+   import { MetamaskProvider } from '@rarimo/providers-evm'
 
    const addTransactionToBundle = async () => {
     const provider = await createProvider(MetamaskProvider)
