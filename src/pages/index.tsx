@@ -8,7 +8,7 @@ import HomepageHeader from "@site/src/components/HomepageHeader";
 import HomepageLinks from "@site/src/components/HomepageLinks";
 import ArrowSvg from "@site/static/img/arrow_forward.svg";
 import Layout from "@theme/Layout";
-import aos from "AOS";
+import aos from "aos";
 import clsx from "clsx";
 import React, { useRef } from "react";
 
