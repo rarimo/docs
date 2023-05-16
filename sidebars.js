@@ -179,12 +179,7 @@ const sidebars = {
         id: "sdk",
       },
       collapsed: true,
-      items: [
-        "sdk/provider",
-        "sdk/nft-checkout",
-        "sdk/react-provider",
-        "sdk/react-nft-checkout",
-      ],
+      items: ["sdk/packages-provider", "sdk/packages-checkout"],
     },
   ],
   solutions: [
