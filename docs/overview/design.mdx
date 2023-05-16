@@ -36,3 +36,17 @@ One of these sub-protocols can securely lock and unlock assets, which dApps dire
 Our system is based on a network of independent validators and oracles.
 Validators work together to achieve secure consensus on events, and oracles deliver messages over the network.
 Each validator is responsible for moving events from the initial chain to the destination.
+
+# Architecture
+
+The Rarimo protocol architecture includes the following parts:
+
+- Rarimo Core (Blockchain core that stores validated state)
+- TSS service (Threshold signature producers that signs validated operations to provide proof for unlocking on the destination chain)
+- Vault (Stores the TSS service keys)
+- Saver services or Oracles (The oracles that observers the connected chains state, submits new events and vote for new events' correctness)
+- Broadcaster service (Running to broadcast transactions from different services by certain account)
+- Smart-contracts (Bridges)
+- BDJuno, Hasura and Explorer frontend
+- Horizon (Service that communicates with core and provides REST API for frontend integration)
+- Relayer service and contracts (Provides user with opportunity to pay for automatic transaction execution)

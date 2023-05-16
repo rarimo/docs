@@ -1,4 +1,4 @@
-# Cross-Chain Ownership Proofs
+# Cross-chain proofs
 
 Rarimo enables cross-chain ownership proofs for non-fungible tokens. You can claim your identity, credentials, and certificates on any supported chain.
 
@@ -9,7 +9,7 @@ Rarimo enables cross-chain ownership proofs for non-fungible tokens. You can cla
 For transferrable tokens, you have to lock them in the Rarimo bridge smart contract.
 
 1. Approve bridge smart contract to transfer NFT using `setApprovalForAll` method from [ERC721](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol#L136) or [ERC1155](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/ERC1155.sol#L100) standard. It should be done only the first time for each NFT contract.
-1. Call the deposit method on the bridge contract. For ERC721 [`depositERC721`](https://rarimo.gitlab.io/docs/docs/smart-contracts/interface/evm-reference#depositerc721), for ERC1155 [`depositERC1155`](https://rarimo.gitlab.io/docs/docs/smart-contracts/interface/evm-reference#depositerc1155). Note that you could specify some code that should be called on destination chain using [bundling feature](https://rarimo.gitlab.io/docs/docs/overview/bundling).
+1. Call the deposit method on the bridge contract. For ERC721 [`depositERC721`](https://docs.rarimo.com/smart-contracts/interface/evm-reference#depositerc721), for ERC1155 [`depositERC1155`](https://docs.rarimo.com/smart-contracts/interface/evm-reference#depositerc1155). Note that you could specify some code that should be called on destination chain using [bundling feature](https://docs.rarimo.com/overview/bundling).
 1. Once the transaction is processed, Rarimo relayers will automatically mint a wrapped NFT on the destination network.
 
 ## Soulbound Tokens

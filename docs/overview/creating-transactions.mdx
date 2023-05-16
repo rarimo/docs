@@ -32,6 +32,9 @@ import { createCheckoutOperation, EVMOperation, ChainNames } from '@rarimo/nft-c
 import { createProvider, MetamaskProvider } from '@rarimo/provider'
 import { utils } from "ethers";
 
+// Address of the NFT sale contract
+const NFT_CONTRACT_ADDRESS = "0x77fedfb705c8bac2e03aad2ad8a8fe83e3e20fa1"
+
 const sendTransaction = async () => {
   // Connect to the Metamask wallet in the browser using Web3.js, using the MetamaskProvider interface to limit bundle size.
   const provider = await createProvider(MetamaskProvider)
@@ -46,12 +49,14 @@ const sendTransaction = async () => {
   // This example uses the Goerli chain, but your application can ask the user which chain to use.
   const selectedChain = chains.find(i => i.name === ChainNames.Goerli)
 
+  // Select the chain to pay on.
+  // In this case, the NFT contract is on the Sepolia chain.
+  const destinationChain = chains.find(i => i.name === ChainNames.Sepolia)
+
   // Set the parameters for the transaction, including the price and the tokens to accept payment in.
   const target = {
-    // Destination chain id (Sepolia in this case)
-    chainId: 11155111,
-    // Address of the NFT sale contract
-    address: "0x77fedfb705c8bac2e03aad2ad8a8fe83e3e20fa1",
+    // Destination chain id
+    chainId: destinationChain!.id,
     // Recipient's wallet address
     recipient: "0x8fe0d4923f61ff466430f63471e27b89a7cf0c92",
     price: {
@@ -108,7 +113,7 @@ const sendTransaction = async () => {
   const bundle = utils.defaultAbiCoder.encode(
       ["address[]", "uint256[]", "bytes[]"],
       [
-        [target.address],
+        [NFT_CONTRACT_ADDRESS],
         [target.price.value],
         [encodedFunctionData],
       ]
@@ -118,8 +123,14 @@ const sendTransaction = async () => {
   // The `checkout()` method takes the parameters from the operation instance, gets approval from the user's wallet, and calls the Rarimo contract to handle the transaction.
   const txHash = await op.checkout(estimatedPrice, { bundle })
 
-  // Print a link to the transaction.
-  console.log(provider.getTxUrl(selectedChain!, String(txHash)))
+  // Get the transaction on the source chain
+  const sourceTxUrl = provider.getTxUrl(selectedChain!, String(txHash))
+  console.log("Source chain transaction:", sourceTxUrl)
+
+  // Get the transaction that unlocks tokens on the destination chain
+  const destinationTx = await op.getDestinationTx(selectedChain!, String(txHash))
+  const destinationTxUrl = provider.getTxUrl(selectedChain!, destinationTx.hash)
+  console.log("Destination chain transaction:", destinationTxUrl)
 }
 ```
 
@@ -140,8 +151,6 @@ To create a transaction with the React components, follow these general steps:
    const targetNft: Target = {
      // Source chain id (Sepolia in this case)
      chainId: 11155111,
-     // NFT contract address
-     address: "0x77fedfb705c8bac2e03aad2ad8a8fe83e3e20fa1",
      // Recipient wallet address
      recipient: "0x0000000000000000000000000000000000000000",
      price: priceOfNft,
@@ -155,6 +164,9 @@ The object includes the address and price of the NFT and the buyer's wallet addr
 
    ```tsx
    import { ethers } from "ethers"
+
+   // Address of the NFT sale contract
+   const NFT_CONTRACT_ADDRESS = "0x77fedfb705c8bac2e03aad2ad8a8fe83e3e20fa1"
 
    const checkoutTxBundle = ethers.utils.defaultAbiCoder.encode(
      // The Solidity types of the values in the second parameter
@@ -237,4 +249,4 @@ export const App = () => {
 }
 ```
 
-For information about the flow of the component that appear through the checkout process, see [`@rarimo/react-nft-checkout`](../sdk/react-nft-checkout).
+For information about the flow of the components that appear through the checkout process, see [`@rarimo/react-nft-checkout`](../sdk/react-nft-checkout).

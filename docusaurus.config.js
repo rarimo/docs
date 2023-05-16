@@ -42,6 +42,7 @@ module.exports = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           breadcrumbs: false,
           // @todo update when we move to github
@@ -115,11 +116,17 @@ module.exports = {
               },
             ],
           },
-
+          // {
+          //   type: "doc",
+          //   docId: "solutions",
+          //   position: "left",
+          //   label: "Solutions",
+          // },
           {
-            href: "https://rarimo.gitlab.io/docs/docs/whitepaper/",
-            label: "Whitepaper",
+            type: "doc",
+            docId: "whitepaper",
             position: "right",
+            label: "Whitepaper",
           },
           {
             href: "https://github.com/rarimo",
@@ -149,28 +156,28 @@ module.exports = {
             items: [
               {
                 html: `
-                <a href="/docs/docs" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Discord">
+                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Discord">
                 Use cases
                 </a>
               `,
               },
               {
                 html: `
-                <a href="/docs/docs" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
+                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
                 Developers
                 </a>
               `,
               },
               {
                 html: `
-                <a href="/docs/docs" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
+                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
                 Community
                 </a>
               `,
               },
               {
                 html: `
-                <a href="/docs/docs" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
+                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
                 Contact
                 </a>
               `,

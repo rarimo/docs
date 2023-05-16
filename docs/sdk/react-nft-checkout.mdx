@@ -31,8 +31,6 @@ When the user selects a chain, the dialog updates to show the tokens in the wall
 When the user clicks a token, the dialog opens a `LoadingIndicator` component as it retrieves prices.
 Then the dialog shows the price of the transaction and the fees involved.
 
-If the wallet does not have enough of the selected token, the dialog shows an error message with the `ErrorText` component, as in this example:
+If the wallet has enough of the selected token, the dialog shows the transaction fees and prompts the user to complete the transaction, as in this example:
 
-![The Rarimo pay dialog, showing that there are not enough tokens to complete the transaction](/img/sdk/RarimoPayDialog-NotEnoughTokens.png)
-
-If the wallet has enough of the selected token, the dialog shows the transaction fees and prompts the user to complete the transaction.
+![The Rarimo pay dialog, showing the selected token, the price conversion, and the fees](/img/sdk/RarimoPayDialog-checkout.png)
