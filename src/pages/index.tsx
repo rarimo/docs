@@ -10,7 +10,7 @@ import ArrowSvg from "@site/static/img/arrow_forward.svg";
 import Layout from "@theme/Layout";
 import aos from "AOS";
 import clsx from "clsx";
-import React from "react";
+import React, { useRef } from "react";
 
 import styles from "./index.module.css";
 
@@ -20,9 +20,7 @@ function HomepageStartBuilding() {
       <h1 className={clsx("second__title", styles.secondTitle)}>
         Start Building with rarimo
       </h1>
-      <p
-        className={clsx("second__subtitle", styles.secondSubtitle)}
-      >
+      <p className={clsx("second__subtitle", styles.secondSubtitle)}>
         Our community is here to help! Enjoy support tailored to the unique
         needs of your project
       </p>
@@ -63,6 +61,17 @@ export default function Home(): JSX.Element {
     mirror: false,
     anchorPlacement: "center-bottom",
   });
+  const light = useRef(null);
+  document.addEventListener("mousemove", function (e) {
+    const x = e.pageX;
+    const y = e.pageY;
+    const spotlightSize = "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
+    if (light.current) {
+      light.current.style.background = `radial-gradient(circle at ${
+        x
+      }px ${y}px, ${spotlightSize}`;
+    }
+  });
   return (
     <Layout
       title={`${siteConfig.title}`}
@@ -70,26 +79,38 @@ export default function Home(): JSX.Element {
     >
       <HomepageHeader />
       <div className={clsx("bgImage1", styles.bgImage1)} />
-      <div className={clsx("bgImage2", styles.bgImage2)} />
-      <div data-aos="fade-up" className={clsx("bgImage3", styles.bgImage3)}>
+      <div className={clsx("bgImage2", styles.bgImage2)} ref={light} />
+      <div
+        data-aos="fade-up"
+        className={clsx("bgImage3 squareWaveAnimationDown", styles.bgImage3)}
+      >
         <span></span>
         <span></span>
         <span></span>
         <span></span>
       </div>
-      <div data-aos="fade-up" className={clsx("bgImage4", styles.bgImage4)}>
+      <div
+        data-aos="fade-up"
+        className={clsx("bgImage4 squareWaveAnimationUp", styles.bgImage4)}
+      >
         <span></span>
         <span></span>
         <span></span>
         <span></span>
       </div>
-      <div data-aos="fade-up" className={clsx("bgImage5", styles.bgImage5)}>
+      <div
+        data-aos="fade-up"
+        className={clsx("bgImage5 squareWaveAnimationUp", styles.bgImage5)}
+      >
         <span></span>
         <span></span>
         <span></span>
         <span></span>
       </div>
-      <div data-aos="fade-up" className={clsx("bgImage6", styles.bgImage6)}>
+      <div
+        data-aos="fade-up"
+        className={clsx("bgImage6 squareWaveAnimationDown", styles.bgImage6)}
+      >
         <span></span>
         <span></span>
         <span></span>

@@ -4,6 +4,7 @@
     flex-direction: column;
     align-items: start;
     width: 50%;
+    position: relative;
 }
 
 .link{
@@ -59,6 +60,67 @@
     align-items: start;
 }
 
+.bgImage7{
+    position: absolute;
+    width: 67px;
+    height: 67px;
+    right: 70px;
+    bottom: -200px;
+    border-width: 0 1px 1px 0;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.05);
+    background: linear-gradient(180deg, #FEB475 0%, rgba(254, 180, 117, 0) 100%), #FEB475;
+    background-blend-mode: normal, overlay, normal;
+    opacity: 0.5;
+    z-index: -1;
+    }
+
+.bgImage8{
+    position: absolute;
+    width: 67px;
+    height: 67px;
+    right: 200px;
+    bottom: -320px;
+    border-width: 0 1px 1px 0;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.05);
+    background: linear-gradient(180deg, #3A8B8F 0%, rgba(58, 139, 143, 0) 100%) #3A8B8F;
+    background-blend-mode: normal, overlay, normal;
+    opacity: 0.5;
+    z-index: -1;
+}
+.bgImage9{
+    background-color: var(--primary-bg-color);
+    bottom: -21rem;
+    left: -1100px;
+    height: 15rem;
+    width: 100vw;
+    position: absolute;
+    z-index: 0;
+    opacity: 0.5;
+}
+.bgImage10 {
+    background-color: var(--primary-bg-color);
+    background-image: linear-gradient(to right,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem),linear-gradient(to bottom,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem);
+    background-size: var(--primary-bg-rect-size) var(--primary-bg-rect-size);
+    background-repeat: repeat;
+    bottom: -23rem;
+    height: 15rem;
+    left: -1100px;
+    width: 100vw;
+    position: absolute;
+    z-index: -2;
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 1249px) {
+    .bgImage7, .bgImage8 , .bgImage9, .bgImage10{
+        display: none;
+        bottom: 0;
+        height: 0;
+        width: 0;
+    }
+}
 @media screen and (max-width: 996px) {
     .links{
         flex-direction: row;

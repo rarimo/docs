@@ -2,7 +2,7 @@
 import styles from "@site/src/components/HomepageLinks/styles.module.css";
 import ArrowOutward from "@site/static/img/arrow_outward.svg";
 import clsx from "clsx";
-import React, { useEffect, useState } from "react";
+import React from "react";
 type LinkItem = {
   title: string;
   Svg: React.ComponentType<React.ComponentProps<"svg">>;
@@ -65,6 +65,11 @@ export default function HomepageLinks(): JSX.Element {
       {LinksList.map((props, idx) => (
         <Link key={idx} {...props} />
       ))}
+      <div className={clsx("bgImage7", styles.bgImage7)} />
+      <div className={clsx("bgImage8", styles.bgImage8)} />
+      <div className={clsx("bgImage9", styles.bgImage9)} />
+      <div className={clsx("bgImage9", styles.bgImage10)} />
+
     </div>
   );
 }

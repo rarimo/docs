@@ -36,7 +36,7 @@
   --ifm-color-primary-light: #46d9ce;
   --ifm-color-primary-lighter: #51dcd1;
   --ifm-color-primary-lightest: #71e2d9;
-  --bg-rect-border-color: rgba(255, 255, 255, 4%);
+  --bg-rect-border-color: rgba(255, 255, 255, 5%);
   --primary-text-color: #8f8f8f;
   --primary-bg-rect-size: 4.125rem;
   --ifm-navbar-link-color: var(--primary-text-color);
@@ -59,10 +59,7 @@ html {
 }
 .footer--dark {
   --ifm-footer-background-color: transparent;
-  background-color: var(--primary-bg-color);
-  background-image: linear-gradient(to right,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem),linear-gradient(to bottom,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem);
-  background-size: var(--primary-bg-rect-size) var(--primary-bg-rect-size);
-  background-repeat: repeat;
+  z-index: 1;
 }
 
 .footer__social-link {
@@ -71,20 +68,7 @@ html {
   height: 24px;
   color: var(--primary-text-color);
 }
-@media screen and (max-width: 996px) {
-  .footer__social-link {
-    display: none;
-  }
-  .footer__items {
-    display: flex;
-    justify-content: start;
-  }
-  .footer--dark {
-    background: #131313;
-    height: 100px;
-    overflow: hidden;
-  }
-}
+
 .footer__social-link svg {
   height:  16px;
   width: 16px;
@@ -106,7 +90,7 @@ html {
   margin-bottom: 0;
   display: flex;
   gap: 14px;
-  justify-content: center;
+  justify-content: start;
 }
 
 .footer__link-item {
@@ -115,19 +99,23 @@ html {
 .footer__item{
   margin-top: 0.3rem;
 }
+
 .DocSearch.DocSearch-Button{
   border-radius: 0;
   border:  1px solid rgba(255, 255, 255, 0.2);
   font-family: 'Inter';
 
 }
+
 .DocSearch-Button-Key{
   --docsearch-key-gradient: rgba(255, 255, 255, 0.1);
   --docsearch-key-shadow: none;
 }
+
 span.DocSearch-Button-Placeholder {
   font-size: 12px
 }
+
 .heroButton{
   position: relative;
   font-family: 'Inter';
@@ -141,10 +129,12 @@ span.DocSearch-Button-Placeholder {
   border: none;
   white-space: nowrap;
 }
+
 .heroButton:hover{
   color: var(--primary-text-color-dark);
   text-decoration: none;
 }
+
 .heroButtonSecondary{
   border: none;
   background: none;
@@ -154,7 +144,34 @@ span.DocSearch-Button-Placeholder {
   font-weight: 600;
   cursor: pointer;
 }
+
 .svgContainer {
   display: flex;
   align-items: center;
+}
+
+.col{
+  width: 20%;
+  flex: initial;
+}
+
+.lantern{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+@media screen and (max-width: 996px) {
+  .footer__social-link {
+    display: none;
+  }
+  .footer__items {
+    display: flex;
+    justify-content: start;
+  }
+  .footer--dark {
+    background: #131313;
+    height: 100px;
+    overflow: hidden;
+  }
 }

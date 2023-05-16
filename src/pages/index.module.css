@@ -62,6 +62,12 @@
   margin: 10rem 0;
 }
 
+.bgImage3, .bgImage4, .bgImage5, .bgImage6 {
+  animation-delay: 1s;
+  animation-duration: 3.5s;
+  animation-iteration-count: infinite;
+}
+
 @media screen and (max-width: 1249px) {
   .bgImage3, .bgImage4, .bgImage5, .bgImage6 {
     display: none;
@@ -69,7 +75,7 @@
 }
 
 @media screen and (max-width: 996px) {
-  .bgImage3, .bgImage4, .bgImage5, .bgImage6{
+  .bgImage1, .bgImage2, .bgImage3, .bgImage4, .bgImage5, .bgImage6{
     display: none;
   }
   .secondTitle{
@@ -120,12 +126,12 @@
     text-align: center;
   }
 
-  .buttonContainer{
+  .secondButtonContainer{
     flex-direction: column;
     align-items: center;
   }
 
-  .secondButton{
+  .heroButton{
     margin: 0 0 1.5rem 0;
   }
 
@@ -137,7 +143,7 @@
   background-size: var(--primary-bg-rect-size) var(--primary-bg-rect-size);
   background-repeat: repeat;
   top: 0;
-  height: 30rem;
+  height: 770px;
   width: 100%;
   position: absolute;
   z-index: -2;
@@ -145,9 +151,9 @@
 }
 
 .bgImage2{
-  background-color: var(--primary-bg-color);
-  top: 20rem;
-  height: 10rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  height: 1450px;
   width: 100%;
   position: absolute;
   z-index: -1;

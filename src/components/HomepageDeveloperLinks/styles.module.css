@@ -24,7 +24,6 @@
 }
 
 .developerLinkBlockTitle{
-    position: relative;
     margin-bottom: 2rem;
     white-space: nowrap;
     overflow: hidden;
@@ -60,6 +59,7 @@
 }
 
 .developerLinkBlock{
+    position: relative;
     width: 30%;
     margin-bottom: 1rem;
 }
