@@ -67,9 +67,7 @@ export default function Home(): JSX.Element {
     const y = e.pageY;
     const spotlightSize = "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
     if (light.current) {
-      light.current.style.background = `radial-gradient(circle at ${
-        x
-      }px ${y}px, ${spotlightSize}`;
+      light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`;
     }
   });
   return (

@@ -11,9 +11,6 @@ type FeatureItem = {
   description: JSX.Element;
   url: string;
 };
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 const FeatureList: FeatureItem[] = [
   {
     title: "Getting started",
@@ -65,7 +62,11 @@ const FeatureList: FeatureItem[] = [
 
 function Feature({ title, Svg, description, url }: FeatureItem) {
   return (
-    <a href={url} className={clsx("feature", styles.feature)} data-aos="fade-up">
+    <a
+      href={url}
+      className={clsx("feature", styles.feature)}
+      data-aos="fade-up"
+    >
       <div className="text--left padding--md">
         <Svg className={styles.featureSvg} role="img" />
       </div>

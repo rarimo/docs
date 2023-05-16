@@ -9,9 +9,6 @@ type LinkItem = {
   description: string;
   url: string;
 };
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 const LinksList: LinkItem[] = [
   {
     title: "Discord",
@@ -69,7 +66,6 @@ export default function HomepageLinks(): JSX.Element {
       <div className={clsx("bgImage8", styles.bgImage8)} />
       <div className={clsx("bgImage9", styles.bgImage9)} />
       <div className={clsx("bgImage9", styles.bgImage10)} />
-
     </div>
   );
 }
