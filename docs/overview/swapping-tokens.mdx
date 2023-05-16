@@ -13,7 +13,8 @@ To set up a token swap, create a Rarimo transaction and specify the token and am
 
 ```ts
 import { createCheckoutOperation, EVMOperation, ChainName, Price } from '@rarimo/nft-checkout'
-import { createProvider, MetamaskProvider } from '@rarimo/provider'
+import { createProvider } from '@rarimo/provider'
+import { MetamaskProvider } from '@rarimo/providers-evm'
 
 const sendSwapTransaction = async () => {
   // Connect to the Metamask wallet in the browser using Web3.js, using the MetamaskProvider interface to limit bundle size.

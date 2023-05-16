@@ -18,19 +18,23 @@ These examples show how to connect to wallets:
 
 ## Connecting to wallets in JavaScript/TypeScript applications {#javascript}
 
-The [@rarimo/provider](https://www.npmjs.com/package/@rarimo/provider) package provides tools that provide access to wallets.
+Rarimo provides several packages for interacting with wallets on different blockchains:
+
+- The [@rarimo/provider](https://www.npmjs.com/package/@rarimo/provider) package provides a common interface for interacting with wallets, so you can work with different types of wallets and blockchains with similar code.
+- Packages that are specific to blockchain types, which provide tools for accessing wallets and interacting with them on blockchains.
 
 To connect to a wallet, first use the `createProvider()` function to create the appropriate class of provider object, which represents the wallet.
 
 Then, run the object's `connect()` method to prompt the user to log in to the wallet.
 This connect step runs automatically if you initiate a transaction with the provider object.
 
-Here is an example that creates a MetamaskProvider object for a MetaMask wallet and prints information about it:
+Here is an example that creates a MetamaskProvider object for a MetaMask wallet on an EVM-compatible chain and prints information about it:
 
 ```ts
-import { createProvider, MetamaskProvider, ChainTypes } from '@rarimo/provider'
+import { createProvider } from '@rarimo/provider'
+import { MetamaskProvider } from '@rarimo/providers-evm'
 
-const getMetamaskWalletInfo = async () => {
+const getMetamaskWalletAddress = async () => {
   // Connect to the Metamask wallet in the browser using Web3.js, using the MetamaskProvider interface to limit bundle size.
   const provider = await createProvider(MetamaskProvider)
   await provider.connect()
@@ -52,7 +56,7 @@ To connect to a wallet, import the `useProvider` hook create the appropriate wal
 Then you can use the provider object to get information about the wallet or run transactions with it, as in this example:
 
 ```ts
-import { MetamaskProvider } from '@rarimo/provider'
+import { MetamaskProvider } from '@rarimo/providers-evm'
 import { useProvider } from '@rarimo/react-provider'
 
 function App() {
