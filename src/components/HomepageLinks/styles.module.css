@@ -15,7 +15,7 @@
     justify-content: space-between;
     cursor: pointer;
     padding: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: var(--primary-border);
     background: var(--primary-bg-color);
     margin-bottom: 1rem;
 }
@@ -31,7 +31,7 @@
 }
 
 .linkDescription {
-    font-family: 'Inter';
+    font-family: var(--secondary-font-family);
     font-size: 0.875rem;
     font-style: normal;
     color: var(--primary-text-color);
@@ -41,7 +41,7 @@
 .linkTitle{
     font-size: 1rem;
     font-weight: 500;
-    font-family: 'Oswald';
+    font-family: var(--primary-font-family);
     text-transform: capitalize;
     color: var(--primary-text-color-light);
     padding-top: 1rem;
@@ -60,7 +60,7 @@
     align-items: start;
 }
 
-.bgImage7{
+.bgImageSeventh{
     position: absolute;
     width: 67px;
     height: 67px;
@@ -75,7 +75,7 @@
     z-index: -1;
     }
 
-.bgImage8{
+.bgImageEighth{
     position: absolute;
     width: 67px;
     height: 67px;
@@ -89,7 +89,7 @@
     opacity: 0.5;
     z-index: -1;
 }
-.bgImage9{
+.bgImageNinth{
     background-color: var(--primary-bg-color);
     bottom: -21rem;
     left: -1100px;
@@ -99,7 +99,7 @@
     z-index: 0;
     opacity: 0.5;
 }
-.bgImage10 {
+.bgImageTenth {
     background-color: var(--primary-bg-color);
     background-image: linear-gradient(to right,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem),linear-gradient(to bottom,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem);
     background-size: var(--primary-bg-rect-size) var(--primary-bg-rect-size);
@@ -114,7 +114,7 @@
 }
 
 @media screen and (max-width: 1249px) {
-    .bgImage7, .bgImage8 , .bgImage9, .bgImage10{
+    .bgImageSeventh, .bgImageEighth , .bgImageNinth, .bgImageTenth{
         display: none;
     }
 }

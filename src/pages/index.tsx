@@ -27,25 +27,27 @@ function HomepageStartBuilding() {
       <div
         className={clsx("secondButtonContainer", styles.secondButtonContainer)}
       >
-        <button
-          onClick={() => window.open("https://rarimo.com/testnet/sign-up")}
+        <a
           className={clsx(
             "heroButton svgContainer",
             styles.heroButton,
             styles.svgContainer
           )}
+          href="https://rarimo.com/testnet/sign-up"
+          target="_blank"
+          rel="noreferrer"
         >
           Join Testnet
           <ArrowSvg />
-        </button>
-        <button
+        </a>
+        <a
           className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
-          onClick={() =>
-            window.open("https://rarimo.gitlab.io/docs/docs/whitepaper")
-          }
+          href="https://rarimo.gitlab.io/docs/docs/whitepaper"
+          target="_blank"
+          rel="noreferrer"
         >
           Whitepaper
-        </button>
+        </a>
       </div>
     </div>
   );
@@ -62,9 +64,9 @@ export default function Home(): JSX.Element {
     anchorPlacement: "center-bottom",
   });
   const light = useRef(null);
-  document.addEventListener("mousemove", function (e) {
-    const x = e.pageX;
-    const y = e.pageY;
+  document.addEventListener("mousemove", function ({ pageX, pageY }) {
+    const x = pageX;
+    const y = pageY;
     const spotlightSize = "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
     if (light.current) {
       light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`;
@@ -76,44 +78,24 @@ export default function Home(): JSX.Element {
       description="Description will go into a meta tag in <head />"
     >
       <HomepageHeader />
-      <div className={clsx("bgImage1", styles.bgImage1)} />
-      <div className={clsx("bgImage2", styles.bgImage2)} ref={light} />
+      <div className={clsx("bgImageFirst", styles.bgImageFirst)} />
+      <div className={clsx("bgImageSecond", styles.bgImageSecond)} ref={light} />
       <div
         data-aos="fade-up"
-        className={clsx("bgImage3 squareWaveAnimationDown", styles.bgImage3)}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+        className={clsx("bgImageThird squareWaveAnimationDown", styles.bgImageThird)}
+      />
       <div
         data-aos="fade-up"
-        className={clsx("bgImage4 squareWaveAnimationUp", styles.bgImage4)}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+        className={clsx("bgImageFourth squareWaveAnimationUp", styles.bgImageFourth)}
+      />
       <div
         data-aos="fade-up"
-        className={clsx("bgImage5 squareWaveAnimationUp", styles.bgImage5)}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+        className={clsx("bgImageFifth squareWaveAnimationUp", styles.bgImageFifth)}
+      />
       <div
         data-aos="fade-up"
-        className={clsx("bgImage6 squareWaveAnimationDown", styles.bgImage6)}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+        className={clsx("bgImageSixth squareWaveAnimationDown", styles.bgImageSixth)}
+      />
 
       <main>
         <BrowserOnly>

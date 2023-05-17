@@ -4,6 +4,126 @@ import clsx from "clsx";
 import React from "react";
 
 import styles from "./styles.module.css";
+const firstWord = [
+  {
+    delay: 0,
+    text: "R",
+  },
+  {
+    delay: 0,
+    text: "A",
+  },
+  {
+    delay: 50,
+    text: "R",
+  },
+  {
+    delay: 50,
+    text: "I",
+  },
+  {
+    delay: 100,
+    text: "M",
+  },
+  {
+    delay: 100,
+    text: "0",
+  },
+];
+
+const secondWord = [
+  {
+    delay: 150,
+    text: "D",
+  },
+  {
+    delay: 200,
+    text: "E",
+  },
+  {
+    delay: 200,
+    text: "V",
+  },
+  {
+    delay: 250,
+    text: "E",
+  },
+  {
+    delay: 250,
+    text: "L",
+  },
+  {
+    delay: 300,
+    text: "0",
+  },
+  {
+    delay: 300,
+    text: "P",
+  },
+  {
+    delay: 350,
+    text: "E",
+  },
+  {
+    delay: 350,
+    text: "R",
+  },
+];
+
+const thirdWord = [
+  {
+    delay: 400,
+    text: "D",
+  },
+  {
+    delay: 400,
+    text: "O",
+  },
+  {
+    delay: 450,
+    text: "C",
+  },
+  {
+    delay: 450,
+    text: "U",
+  },
+  {
+    delay: 500,
+    text: "M",
+  },
+  {
+    delay: 500,
+    text: "E",
+  },
+  {
+    delay: 550,
+    text: "N",
+  },
+  {
+    delay: 600,
+    text: "T",
+  },
+  {
+    delay: 600,
+    text: "A",
+  },
+  {
+    delay: 650,
+    text: "T",
+  },
+  {
+    delay: 650,
+    text: "I",
+  },
+  {
+    delay: 700,
+    text: "O",
+  },
+  {
+    delay: 700,
+    text: "N",
+  },
+];
 
 export default function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -15,235 +135,45 @@ export default function HomepageHeader() {
       <div className={clsx("heroContent container", styles.heroContent)}>
         <h1 className={clsx("hero__title", styles.heroTitle)}>
           <div>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="0"
-              data-aos-duration="400"
-            >
-              R
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="0"
-              data-aos-duration="400"
-            >
-              A
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="50"
-              data-aos-duration="400"
-            >
-              R
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="50"
-              data-aos-duration="400"
-            >
-              I
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="100"
-              data-aos-duration="400"
-            >
-              M
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="100"
-              data-aos-duration="400"
-            >
-              O
-            </span>
+            {firstWord.map(({ text, delay }, idx) => (
+              <span
+                key={idx}
+                style={{ display: "inline-block" }}
+                data-aos="fade-up"
+                data-aos-delay={delay}
+                data-aos-duration="400"
+              >
+                {text}
+              </span>
+            ))}
+
             <span data-aos="fade-up" data-aos-delay="700">
               {" "}
             </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="150"
-              data-aos-duration="400"
-            >
-              D
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="150"
-              data-aos-duration="400"
-            >
-              E
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="200"
-              data-aos-duration="400"
-            >
-              V
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="200"
-              data-aos-duration="400"
-            >
-              E
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="250"
-              data-aos-duration="400"
-            >
-              L
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="250"
-              data-aos-duration="400"
-            >
-              O
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="300"
-              data-aos-duration="400"
-            >
-              P
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="300"
-              data-aos-duration="400"
-            >
-              E
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="350"
-              data-aos-duration="400"
-            >
-              R
-            </span>
+            {secondWord.map(({ text, delay }, idx) => (
+              <span
+                key={idx}
+                style={{ display: "inline-block" }}
+                data-aos="fade-up"
+                data-aos-delay={delay}
+                data-aos-duration="400"
+              >
+                {text}
+              </span>
+            ))}
           </div>
           <div>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="350"
-              data-aos-duration="400"
-            >
-              D
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="400"
-              data-aos-duration="400"
-            >
-              O
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="400"
-              data-aos-duration="400"
-            >
-              C
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="450"
-              data-aos-duration="400"
-            >
-              U
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="450"
-              data-aos-duration="400"
-            >
-              M
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="500"
-              data-aos-duration="400"
-            >
-              E
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="500"
-              data-aos-duration="400"
-            >
-              N
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="550"
-              data-aos-duration="400"
-            >
-              T
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="550"
-              data-aos-duration="400"
-            >
-              A
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="600"
-              data-aos-duration="400"
-            >
-              T
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="600"
-              data-aos-duration="400"
-            >
-              I
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="650"
-              data-aos-duration="400"
-            >
-              O
-            </span>
-            <span
-              style={{ display: "inline-block" }}
-              data-aos="fade-up"
-              data-aos-delay="650"
-              data-aos-duration="400"
-            >
-              N
-            </span>
+            {thirdWord.map(({ text, delay }, idx) => (
+              <span
+                key={idx}
+                style={{ display: "inline-block" }}
+                data-aos="fade-up"
+                data-aos-delay={delay}
+                data-aos-duration="400"
+              >
+                {text}
+              </span>
+            ))}
           </div>
         </h1>
         <p className={clsx("hero__subtitle", styles.heroSubtitle)}>
@@ -261,11 +191,12 @@ export default function HomepageHeader() {
             Getting Started <ArrowSvg />
           </a>
           {/*//Todo: add link to explore features*/}
-          <button
+          <a
             className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
+            href="#"
           >
             Explore Features
-          </button>
+          </a>
         </div>
       </div>
     </header>

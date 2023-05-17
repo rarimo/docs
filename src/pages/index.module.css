@@ -39,7 +39,7 @@
   font-size: 3.5rem;
   font-weight: 600;
   color: var(--primary-text-color-light);
-  font-family: 'Oswald';
+  font-family: var(--primary-font-family);
   text-transform: uppercase;
   text-align: start;
 }
@@ -62,20 +62,20 @@
   margin: 10rem 0;
 }
 
-.bgImage3, .bgImage4, .bgImage5, .bgImage6 {
+.bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth {
   animation-delay: 1s;
   animation-duration: 3.5s;
   animation-iteration-count: infinite;
 }
 
 @media screen and (max-width: 1249px) {
-  .bgImage3, .bgImage4, .bgImage5, .bgImage6 {
+  .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth {
     display: none;
   }
 }
 
 @media screen and (max-width: 996px) {
-  .bgImage1, .bgImage2, .bgImage3, .bgImage4, .bgImage5, .bgImage6{
+  .bgImageFirst, .bgImageSecond, .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
     display: none;
   }
   .secondTitle{
@@ -137,7 +137,7 @@
 
 }
 
-.bgImage1{
+.bgImageFirst{
   background-color: var(--primary-bg-color);
   background-image: linear-gradient(to right,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem),linear-gradient(to bottom,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem);
   background-size: var(--primary-bg-rect-size) var(--primary-bg-rect-size);
@@ -150,63 +150,49 @@
   opacity: 0.6;
 }
 
-.bgImage2{
+.bgImageSecond{
   background-color: rgba(0, 0, 0, 0.6);
   top: 0;
-  height: 1450px;
+  height: 1400px;
   width: 100%;
   position: absolute;
   z-index: -1;
   opacity: 0.6;
 }
-.bgImage3{
+
+.bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
   position: absolute;
   width: 68px;
   height: 68px;
-  left: 4%;
-  top: 335px;
   border-width: 0 1px 1px 0;
   border-style: solid;
   border-color: rgba(255, 255, 255, 0.05);
+}
+
+.bgImageThird{
+  left: 4%;
+  top: 335px;
   background: linear-gradient(180deg, #3A8B8F 0%, rgba(58, 139, 143, 0) 100%), #3A8B8F;
   background-blend-mode: normal, overlay, normal;
 }
 
-.bgImage4{
-  position: absolute;
-  width: 67px;
-  height: 68px;
+.bgImageFourth{
   left: 13%;
   top: 471px;
   background: linear-gradient(180deg, #FEB475 0%, rgba(254, 180, 117, 0) 100%), #FEB475;
-  background-blend-mode: normal, overlay, normal;
-  border-width: 0 1px 1px 0;
-  border-style: solid;
   border-color: rgba(255, 255, 255, 0.05);
 }
 
-.bgImage5{
-  position: absolute;
-  width: 67px;
-  height: 67px;
+.bgImageFifth{
   right: 12%;
   top: 269px;
-  border-width: 0 1px 1px 0;
-  border-style: solid;
-  border-color: rgba(255, 255, 255, 0.05);
   background: linear-gradient(180deg, #FB7C3F 0%, rgba(251, 124, 63, 0) 100%), #FB7C3F;
   background-blend-mode: normal, overlay, normal;
 }
 
-.bgImage6{
-  position: absolute;
-  width: 67px;
-  height: 67px;
+.bgImageSixth{
   right: 4%;
   top: 408px;
-  border-width: 0 1px 1px 0;
-  border-style: solid;
-  border-color: rgba(255, 255, 255, 0.05);
   background: linear-gradient(180deg, #8AB5A4 0%, rgba(138, 181, 164, 0) 100%), #8AB5A4;
   background-blend-mode: normal, overlay, normal;
 }

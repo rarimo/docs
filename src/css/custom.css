@@ -22,9 +22,13 @@
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --primary-bg-color: #0D0D0D;
+  --secondary-bg-color: rgba(255, 255, 255, 0.05);
   --primary-text-color-light: rgba(255, 255, 255, 0.84);
-  --primary-text-color-dark: #131313
-
+  --secondary-text-color-light: #ffffff;
+  --primary-text-color-dark: #131313;
+  --primary-border: 1px solid var(--secondary-bg-color);
+  --primary-font-family: 'Oswald';
+  --secondary-font-family: 'Inter';
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -65,7 +69,7 @@ html {
 .footer__social-link {
   display: flex;
   align-items: center;
-  height: 24px;
+  height: 1.5rem;
   color: var(--primary-text-color);
 }
 
@@ -94,7 +98,7 @@ html {
 }
 
 .footer__link-item {
-  height: 32px;
+  height: 2rem;
 }
 .footer__item{
   margin-top: 0.3rem;
@@ -103,7 +107,7 @@ html {
 .DocSearch.DocSearch-Button{
   border-radius: 0;
   border:  1px solid rgba(255, 255, 255, 0.2);
-  font-family: 'Inter';
+  font-family: var(--secondary-font-family);
 
 }
 
@@ -113,12 +117,12 @@ html {
 }
 
 span.DocSearch-Button-Placeholder {
-  font-size: 12px
+  font-size: 0.75rem
 }
 
 .heroButton{
   position: relative;
-  font-family: 'Inter';
+  font-family: var(--secondary-font-family);
   background: #8AB5A4;
   padding: 1.0625rem 2.25rem;
   font-size: 1rem;
@@ -136,11 +140,11 @@ span.DocSearch-Button-Placeholder {
 }
 
 .heroButtonSecondary{
-  border: none;
-  background: none;
-  font-size: 16px;
-  font-family: 'Inter';
-  color: rgba(255, 255, 255, 0.84);
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-family: var(--secondary-font-family);
+  color: var(--primary-text-color-light);
   font-weight: 600;
   cursor: pointer;
 }
@@ -170,7 +174,7 @@ span.DocSearch-Button-Placeholder {
     justify-content: start;
   }
   .footer--dark {
-    background: #131313;
+    background: var(--primary-text-color-dark);
     height: 100px;
     overflow: hidden;
   }

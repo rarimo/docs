@@ -70,7 +70,7 @@ function DeveloperLink({ title, items }: LinkItem) {
         )}
       >
         {title}
-        <div
+        <span
           className={clsx(
             `developerLinkBlockTitleLine ${
               isVisible ? "developerLinkBlockTitleLineAnimation" : ""

@@ -3,7 +3,7 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-    color: #ffffff;
+    color: var(--secondary-text-color-light);
 }
 .heroContent{
     display: flex;
@@ -32,7 +32,7 @@
     font-size: 6.25rem;
     font-weight: 600;
     color: var(--primary-text-color-light);
-    font-family: 'Oswald';
+    font-family: var(--primary-font-family);
     text-transform: uppercase;
     text-align: center;
 }

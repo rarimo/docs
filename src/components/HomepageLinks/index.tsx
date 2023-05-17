@@ -62,10 +62,10 @@ export default function HomepageLinks(): JSX.Element {
       {LinksList.map((props, idx) => (
         <Link key={idx} {...props} />
       ))}
-      <div className={clsx("bgImage7", styles.bgImage7)} />
-      <div className={clsx("bgImage8", styles.bgImage8)} />
-      <div className={clsx("bgImage9", styles.bgImage9)} />
-      <div className={clsx("bgImage9", styles.bgImage10)} />
+      <div className={clsx("bgImageSeventh", styles.bgImageSeventh)} />
+      <div className={clsx("bgImageEighth", styles.bgImageEighth)} />
+      <div className={clsx("bgImageNinth", styles.bgImageNinth)} />
+      <div className={clsx("bgImageNinth", styles.bgImageTenth)} />
     </div>
   );
 }

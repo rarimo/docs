@@ -1,6 +1,6 @@
 .developerLinks{
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--secondary-bg-color);
     padding: 5rem 8rem;
 }
 .developerLinksHeader{
@@ -9,18 +9,18 @@
     align-items: center;
 }
 .developerLinksTitle{
-    font-family: 'Oswald';
+    font-family: var(--primary-font-family);
     font-weight: 500;
     font-size: 2rem;
     text-transform: capitalize;
-    color: rgba(255, 255, 255, 0.84);
+    color: var(--primary-text-color-light)
 }
 
 .developerLinksDescription {
-    font-family: 'Inter';
+    font-family: var(--secondary-font-family);
     font-weight: 400;
     font-size: 1rem;
-    color: #8F8F8F;
+    color: var(--primary-text-color);
 }
 
 .developerLinkBlockTitle{
@@ -30,12 +30,13 @@
 }
 
 .developerLinkBlockTitleLine {
+    display: inline-block;
     position: absolute;
     left: 0;
     top: 2.5rem;
     bottom: -0.125rem;
     height: 0.0625rem;
-    background-color: #ffffff;
+    background-color: var(--secondary-text-color-light);
 
 }
 
@@ -51,11 +52,11 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-    font-family: 'Inter';
+    font-family: var(--secondary-font-family);
     font-weight: 400;
     font-size: 16px;
     text-decoration-line: underline;
-    color: #8F8F8F;
+    color: var(--primary-text-color);
 }
 
 .developerLinkBlock{
