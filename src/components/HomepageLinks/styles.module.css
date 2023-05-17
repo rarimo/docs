@@ -44,7 +44,7 @@
     font-family: 'Oswald';
     text-transform: capitalize;
     color: var(--primary-text-color-light);
-    padding-top: 1rem ;
+    padding-top: 1rem;
     flex: 1 0 auto;
     white-space: nowrap;
     text-align: center;
@@ -116,9 +116,6 @@
 @media screen and (max-width: 1249px) {
     .bgImage7, .bgImage8 , .bgImage9, .bgImage10{
         display: none;
-        bottom: 0;
-        height: 0;
-        width: 0;
     }
 }
 @media screen and (max-width: 996px) {

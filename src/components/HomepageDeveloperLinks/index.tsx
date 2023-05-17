@@ -3,7 +3,7 @@ import styles from "@site/src/components/HomepageDeveloperLinks/styles.module.cs
 import ArrowSvg from "@site/static/img/arrow_forward.svg";
 import ArrowOutward from "@site/static/img/arrow_outward.svg";
 import clsx from "clsx";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 type LinkItem = {
   title: string;
   items: { title: string; url: string }[];
@@ -45,20 +45,21 @@ const DeveloperLinksList: LinkItem[] = [
 ];
 
 function DeveloperLink({ title, items }: LinkItem) {
-  const AnimationLine = useRef(null);
-
+  const animationLine = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("developerLinkBlockTitleLineAnimation");
+        setIsVisible(entry.isIntersecting);
+        observer.disconnect();
       }
     });
   });
   useEffect(() => {
-    if (AnimationLine.current) {
-      observer.observe(AnimationLine.current);
+    if (animationLine.current) {
+      observer.observe(animationLine.current);
     }
-  }, [AnimationLine]);
+  }, [animationLine]);
 
   return (
     <div className={clsx("developerLinkBlock", styles.developerLinkBlock)}>
@@ -71,10 +72,12 @@ function DeveloperLink({ title, items }: LinkItem) {
         {title}
         <div
           className={clsx(
-            "developerLinkBlockTitleLine",
+            `developerLinkBlockTitleLine ${
+              isVisible ? "developerLinkBlockTitleLineAnimation" : ""
+            }`,
             styles.developerLinkBlockTitleLine
           )}
-          ref={AnimationLine}
+          ref={animationLine}
         />
       </h3>
       {items.map(({ url, title }, idx) => (

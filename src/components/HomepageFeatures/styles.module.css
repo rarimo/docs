@@ -30,10 +30,9 @@
 
 .featuresGridContainer {
   display: grid;
-  grid-template-columns: 2fr 2fr;
+  grid-template-columns: repeat(2, 2fr);
   grid-template-rows: repeat(2, 1fr);
-  grid-column-gap: 2rem;
-  grid-row-gap: 2rem;
+  grid-gap: 2rem;
   margin: 0 5rem;
 }
 
@@ -43,9 +42,8 @@
 
 @media screen and (max-width: 996px) {
   .featuresGridContainer {
-    grid-template-columns:1fr 1fr;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.25rem;
     margin: 0 1rem;
   }
   .featuresGridContainer .feature:nth-child(odd){
@@ -55,7 +53,7 @@
 
 @media screen and (max-width: 625px) {
   .featuresGridContainer {
-    grid-template-columns:1fr;
+    grid-template-columns: 1fr;
     margin: 0 1rem;
   }
 }

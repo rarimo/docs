@@ -64,6 +64,7 @@ function Feature({ title, Svg, description, url }: FeatureItem) {
   return (
     <a
       href={url}
+      rel="noopener"
       className={clsx("feature", styles.feature)}
       data-aos="fade-up"
     >

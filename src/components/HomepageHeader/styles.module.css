@@ -3,14 +3,12 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-    background: initial;
     color: #ffffff;
 }
 .heroContent{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: transparent;
     padding: 4rem 0;
     max-width: 75%;
     position: relative;
@@ -20,7 +18,7 @@
 .heroSubtitle{
     font-size: 1.25rem;
     color: var(--primary-text-color);
-    max-width: 634px;
+    max-width: 39.625rem;
 }
 
 .buttonContainer{
