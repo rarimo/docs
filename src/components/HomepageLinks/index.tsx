@@ -34,22 +34,22 @@ const LinksList: LinkItem[] = [
 function Link({ title, Svg, description, url }: LinkItem) {
   return (
     <a href={url} className={clsx("link", styles.link)}>
-      <div className={clsx("linkWrapper", styles.linkWrapper)}>
+      <div className={clsx("link__wrapper", styles.linkWrapper)}>
         <div>
           <Svg className={styles.linkSvg} role="img" />
         </div>
-        <div className={clsx("linkText", styles.linkText)}>
+        <div className={clsx("link__text", styles.linkText)}>
           <div>
-            <span className={clsx("linkTitle", styles.linkTitle)}>{title}</span>
+            <span className={clsx("link__title", styles.linkTitle)}>{title}</span>
           </div>
           <div className="text--left">
-            <span className={clsx("linkDescription", styles.linkDescription)}>
+            <span className={clsx("link__description", styles.linkDescription)}>
               {description}
             </span>
           </div>
         </div>
       </div>
-      <div className={clsx("linkSvgContainer", styles.linkSvgContainer)}>
+      <div className={clsx("link__svg-container", styles.linkSvgContainer)}>
         <ArrowOutward role="img" />
       </div>
     </a>

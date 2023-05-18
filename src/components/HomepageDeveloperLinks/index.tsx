@@ -65,15 +65,15 @@ function DeveloperLink({ title, items }: LinkItem) {
     <div className={clsx("developerLinkBlock", styles.developerLinkBlock)}>
       <h3
         className={clsx(
-          "developerLinkBlockTitle",
+          "developerLinkBlock__title",
           styles.developerLinkBlockTitle
         )}
       >
         {title}
         <span
           className={clsx(
-            `developerLinkBlockTitleLine ${
-              isVisible ? "developerLinkBlockTitleLineAnimation" : ""
+            `developerLinkBlock__title-line ${
+              isVisible ? "developerLinkBlock__title-line-animation" : ""
             }`,
             styles.developerLinkBlockTitleLine
           )}
@@ -87,13 +87,13 @@ function DeveloperLink({ title, items }: LinkItem) {
           className={clsx("developerLink", styles.developerLink)}
         >
           <span
-            className={clsx("developerLinkTitle", styles.developerLinkTitle)}
+            className={clsx("developerLink__title", styles.developerLinkTitle)}
           >
             {title}
           </span>
           <div
             className={clsx(
-              "developerLinkSvgContainer",
+              "developerLink__svg-container",
               styles.developerLinkSvgContainer
             )}
           >
@@ -110,12 +110,15 @@ export default function HomepageDeveloperLinks(): JSX.Element {
     <section className={clsx("developerLinks", styles.developerLinks)}>
       <div className="container">
         <div
-          className={clsx("developerLinksHeader", styles.developerLinksHeader)}
+          className={clsx(
+            "developerLinks__header",
+            styles.developerLinksHeader
+          )}
         >
           <div>
             <h3
               className={clsx(
-                "developerLinksTitle",
+                "developerLinks__title",
                 styles.developerLinksTitle
               )}
             >
@@ -123,7 +126,7 @@ export default function HomepageDeveloperLinks(): JSX.Element {
             </h3>
             <p
               className={clsx(
-                "developerLinksDescription",
+                "developerLinks__description",
                 styles.developerLinksDescription
               )}
             >
@@ -136,7 +139,7 @@ export default function HomepageDeveloperLinks(): JSX.Element {
             <ArrowSvg />
           </button>
         </div>
-        <div className={clsx("developerLinksBody", styles.developerLinksBody)}>
+        <div className={clsx("developerLinks__body", styles.developerLinksBody)}>
           {DeveloperLinksList.map((props, idx) => (
             <DeveloperLink key={idx} {...props} />
           ))}

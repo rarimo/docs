@@ -37,6 +37,6 @@
 
 }
 
-.developerLinkBlockTitleLineAnimation {
+.developerLinkBlock__title-line-animation {
     animation: LineAnimation 1.0s both;
 }

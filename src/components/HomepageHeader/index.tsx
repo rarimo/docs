@@ -130,9 +130,9 @@ export default function HomepageHeader() {
   return (
     <header
       data-aos="fade-up"
-      className={clsx("heroBanner hero--primary", styles.heroBanner)}
+      className={clsx("hero__banner hero--primary", styles.heroBanner)}
     >
-      <div className={clsx("heroContent container", styles.heroContent)}>
+      <div className={clsx("hero__content container", styles.heroContent)}>
         <h1 className={clsx("hero__title", styles.heroTitle)}>
           <div>
             {firstWord.map(({ text, delay }, idx) => (
