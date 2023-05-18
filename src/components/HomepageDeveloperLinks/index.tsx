@@ -139,7 +139,9 @@ export default function HomepageDeveloperLinks(): JSX.Element {
             <ArrowSvg />
           </button>
         </div>
-        <div className={clsx("developerLinks__body", styles.developerLinksBody)}>
+        <div
+          className={clsx("developerLinks__body", styles.developerLinksBody)}
+        >
           {DeveloperLinksList.map((props, idx) => (
             <DeveloperLink key={idx} {...props} />
           ))}
