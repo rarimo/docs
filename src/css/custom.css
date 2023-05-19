@@ -154,7 +154,7 @@ span.DocSearch-Button-Placeholder {
   align-items: center;
 }
 
-.col{
+.footer__links.col{
   width: 20%;
   flex: initial;
 }
@@ -178,7 +178,7 @@ span.DocSearch-Button-Placeholder {
     height: 100px;
     overflow: hidden;
   }
-  .col{
+  .footer__links.col.col{
     flex: 1 0;
   }
 }
