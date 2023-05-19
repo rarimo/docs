@@ -55,23 +55,7 @@ function HomepageStartBuilding() {
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
-  aos.init({
-    duration: 900,
-    easing: "ease",
-    offset: 0,
-    once: true,
-    mirror: false,
-    anchorPlacement: "center-bottom",
-  });
   const light = useRef(null);
-  document.addEventListener("mousemove", function ({ pageX, pageY }) {
-    const x = pageX;
-    const y = pageY;
-    const spotlightSize = "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
-    if (light.current) {
-      light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`;
-    }
-  });
   return (
     <Layout
       title={`${siteConfig.title}`}
@@ -114,8 +98,24 @@ export default function Home(): JSX.Element {
 
       <main>
         <BrowserOnly>
-          {() => (
-            <>
+          {() => {
+            aos.init({
+              duration: 900,
+              easing: "ease",
+              offset: 0,
+              once: true,
+              mirror: false,
+              anchorPlacement: "center-bottom",
+            });
+            document.addEventListener("mousemove", function ({ pageX, pageY }) {
+              const x = pageX;
+              const y = pageY;
+              const spotlightSize = "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
+              if (light.current) {
+                light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`;
+              }
+            });
+            return <>
               <HomepageFeatures />
               <HomepageDeveloperLinks />
               <div className="container">
@@ -125,7 +125,8 @@ export default function Home(): JSX.Element {
                 </div>
               </div>
             </>
-          )}
+          }
+          }
         </BrowserOnly>
       </main>
     </Layout>
