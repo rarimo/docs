@@ -1,81 +1,147 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import styles from "@site/src/components/HomepageDeveloperLinks/styles.module.css";
+import ArrowSvg from "@site/static/img/arrow_forward.svg";
 import ArrowOutward from "@site/static/img/arrow_outward.svg";
-import Link from "@docusaurus/Link";
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 type LinkItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<"svg">>;
-  url: string;
+  items: { title: string; url: string }[];
 };
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+//todo: Add links
 const DeveloperLinksList: LinkItem[] = [
   {
-    title: "Example applications",
-    Svg: require("@site/static/img/ri-github-fill.svg").default,
-    url: "https://github.com/rarimo/js-sdk-examples",
+    title: "Integrate your dapp",
+    items: [
+      { title: "Fetch token prices", url: "#" },
+      { title: "Create a trade", url: "#" },
+      { title: "Route Trades", url: "#" },
+      { title: "Provide Liquidity", url: "#" },
+      { title: "UI Components", url: "#" },
+      { title: "Self Contract", url: "#" },
+    ],
   },
   {
-    title: "SDK reference",
-    Svg: require("@site/static/img/ri-github-fill.svg").default,
-    url: "https://rarimo.github.io/js-sdk/",
+    title: "Integrate your smart contract",
+    items: [
+      { title: "Self Contract", url: "#" },
+      { title: "Uniswap-v3-core", url: "#" },
+      { title: "Provide Liquidity", url: "#" },
+      { title: "UI Components", url: "#" },
+      { title: "Create a trade", url: "#" },
+      { title: "Route Trades", url: "#" },
+    ],
   },
   {
-    title: "Smart contract reference",
-    Svg: require("@site/static/img/ri-github-fill.svg").default,
-    url: "/developers/contracts",
-  },
-  {
-    title: "Rarimo on GitHub",
-    Svg: require("@site/static/img/ri-github-fill.svg").default,
-    url: "https://github.com/rarimo",
-  },
-  //TODO: add link
-  {
-    title: "Deployment Address",
-    Svg: require("@site/static/img/ri-github-fill.svg").default,
-    url: "#",
-  },
-  //TODO: add link
-  {
-    title: "Widgets",
-    Svg: require("@site/static/img/ri-github-fill.svg").default,
-    url: "#",
+    title: "Links for develoeprs",
+    items: [
+      { title: "Uniswap-v3-core", url: "#" },
+      { title: "Uniswap-v3-sdk", url: "#" },
+      { title: "Uniswap-v3-periphery", url: "#" },
+      { title: "Deployment adress", url: "#" },
+      { title: "Widgets", url: "#" },
+    ],
   },
 ];
 
-function DeveloperLink({ title, Svg, url }: LinkItem) {
+function DeveloperLink({ title, items }: LinkItem) {
+  const animationLine = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setIsVisible(entry.isIntersecting);
+        observer.disconnect();
+      }
+    });
+  });
+  useEffect(() => {
+    if (animationLine.current) {
+      observer.observe(animationLine.current);
+    }
+  }, [animationLine]);
+
   return (
-    <Link to={url} className={clsx("developerLink", styles.developerLink)}>
-      <div className="text--left">
-        <Svg className={styles.linkSvg} role="img" />
-      </div>
-      <span className={clsx("developerLinkTitle", styles.developerLinkTitle)}>
-        {title}
-      </span>
-      <div
+    <div className={clsx("developerLinkBlock", styles.developerLinkBlock)}>
+      <h3
         className={clsx(
-          "developerLinkSvgContainer",
-          styles.developerLinkSvgContainer
+          "developerLinkBlock__title",
+          styles.developerLinkBlockTitle
         )}
       >
-        <ArrowOutward role="img" />
-      </div>
-    </Link>
+        {title}
+        <span
+          className={clsx(
+            `developerLinkBlock__title-line ${
+              isVisible ? "developerLinkBlock__title-line-animation" : ""
+            }`,
+            styles.developerLinkBlockTitleLine
+          )}
+          ref={animationLine}
+        />
+      </h3>
+      {items.map(({ url, title }, idx) => (
+        <a
+          key={idx}
+          href={url}
+          className={clsx("developerLink", styles.developerLink)}
+        >
+          <span
+            className={clsx("developerLink__title", styles.developerLinkTitle)}
+          >
+            {title}
+          </span>
+          <div
+            className={clsx(
+              "developerLink__svg-container",
+              styles.developerLinkSvgContainer
+            )}
+          >
+            <ArrowOutward role="img" />
+          </div>
+        </a>
+      ))}
+    </div>
   );
 }
 
 export default function HomepageDeveloperLinks(): JSX.Element {
   return (
-    <section className={styles.developerLinks}>
+    <section className={clsx("developerLinks", styles.developerLinks)}>
       <div className="container">
-        <h3 className={clsx("developerLinksTitle", styles.developerLinksTitle)}>
-          Developer links
-        </h3>
-        <div>
+        <div
+          className={clsx(
+            "developerLinks__header",
+            styles.developerLinksHeader
+          )}
+        >
+          <div>
+            <h3
+              className={clsx(
+                "developerLinks__title",
+                styles.developerLinksTitle
+              )}
+            >
+              Helpfull Links
+            </h3>
+            <p
+              className={clsx(
+                "developerLinks__description",
+                styles.developerLinksDescription
+              )}
+            >
+              Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+              vulputate libero et velit interdum, ac aliquet odio mattis.
+            </p>
+          </div>
+          <button className={clsx("heroButton svgContainer")}>
+            Documentation
+            <ArrowSvg />
+          </button>
+        </div>
+        <div
+          className={clsx("developerLinks__body", styles.developerLinksBody)}
+        >
           {DeveloperLinksList.map((props, idx) => (
             <DeveloperLink key={idx} {...props} />
           ))}

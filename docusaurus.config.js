@@ -5,11 +5,11 @@
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 function getUrl() {
-  return process.env.URL || "https://docs.rarimo.com";
+  return process.env.URL || "https://rarimo.gitlab.io";
 }
 
 function getBaseUrl() {
-  return process.env.BASE_URL || "/";
+  return process.env.BASE_URL || "/docs/";
 }
 
 /** @type {import('@docusaurus/types').Config} */
@@ -147,7 +147,7 @@ module.exports = {
               },
               {
                 html: `
-           <span style="margin-top: 1rem">© ${new Date().getFullYear()}</span>
+           <span style="margin-left: 1rem; color: #8F8F8F">© ${new Date().getFullYear()}</span>
 `,
               },
             ],

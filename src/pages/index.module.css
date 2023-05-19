@@ -2,7 +2,7 @@
  * CSS files with the .module.css suffix will be treated as CSS modules
  * and scoped locally.
  */
-.heroBanner {
+.secondBanner {
   padding: 4rem 0;
   text-align: center;
   position: relative;
@@ -10,100 +10,94 @@
   background: initial;
   color: #ffffff;
 }
-.heroContent{
+.secondContent{
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--primary-bg-color);
+  background: transparent;
   padding: 4rem 0;
   max-width: 75%;
   position: relative;
   z-index: 0;
 }
+
+.secondSubtitle{
+  font-size: 0.875rem;
+  color: var(--primary-text-color);
+  max-width: 634px;
+  text-align: start;
+}
+
+.secondButtonContainer{
+  display: flex;
+  margin-top: 1rem;
+  justify-content: start;
+  width: 100%;
+}
+
+.secondTitle {
+  font-size: 3.5rem;
+  font-weight: 600;
+  color: var(--primary-text-color-light);
+  font-family: var(--primary-font-family);
+  text-transform: uppercase;
+  text-align: start;
+}
+
 .startBuildingSection{
   display: flex;
   flex-direction: column;
   align-items: center;
   background: var(--primary-bg-color);
-  padding: 3rem 9rem 3rem 2rem;
-  margin-right: 5rem;
+  padding: 0 4rem 0 2rem;
+  max-width: 40%;
   position: relative;
   z-index: 1;
 }
-.heroButton{
-  position: relative;
-  background: var(--primary-bg-color);
-  border: 1px solid #ffffff;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0 1.5rem 0 0;
-  cursor: pointer;
-  color: var(--primary-text-color-light);
-}
-.heroButton::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: transparent;
-  border: 1px solid #fff;
-  filter: drop-shadow(5px 5px 0px #fff);
-  z-index: -1;
-}
-.heroButtonSecondary{
-  border: none;
-  background: none;
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.84);
-  font-weight: 600;
-  cursor: pointer;
-}
-.heroSubtitle{
-  font-size: 1.25rem;
-  color: var(--primary-text-color);
-  max-width: 634px;
-}
-.buttonContainer{
-  display: flex;
-}
-.heroTitle {
-  font-size: 112px;
-  font-weight: 700;
-  color: var(--primary-text-color-light);
-  font-family: 'Oswald';
-  text-transform: uppercase;
-  text-align: center;
-}
-@media screen and (max-width: 625px) {
-  .heroTitle {
-    font-size: 54px;
-  }
-  .buttonContainer{
-    flex-direction: column;
-  }
-  .heroButton{
-    margin: 0 0 1.5rem 0;
-  }
-}
+
 .bottomContent {
   display: flex;
   justify-content: space-around;
   background: transparent;
+  margin: 10rem 0;
+}
+
+.bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth {
+  animation-delay: 1s;
+  animation-duration: 3.5s;
+  animation-iteration-count: infinite;
+}
+
+@media screen and (max-width: 1249px) {
+  .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 996px) {
-  .bgImage1, .bgImage2, .bgImage3, .bgImage4, .bgImage5, .bgImage6, .bgImage7, .bgImage8, .bgImage9{
+  .bgImageFirst, .bgImageSecond, .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
     display: none;
   }
-  .heroBanner {
+  .secondTitle{
+    font-size: 5rem;
+    text-align: center;
+  }
+  .secondSubtitle{
+    text-align: center;
+  }
+
+  .secondBanner {
     margin: 2rem;
   }
-  .heroContent{
+
+  .secondButtonContainer{
+    justify-content: center;
+  }
+
+  .secondContent{
     max-width: 100%;
   }
+
   .startBuildingSection{
     display: flex;
     flex-direction: column;
@@ -113,86 +107,99 @@
     margin-right: 0;
     position: relative;
     z-index: 1;
+    max-width: 100%  }
+  .bottomContent {
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1;
+    margin: 2rem 0;
   }
 }
-.svgContainer {
-  display: flex;
-  align-items: center;
+
+
+@media screen and (max-width: 625px) {
+  .secondTitle {
+    font-size: 2.625rem;
+    text-align: center;
+  }
+  .secondSubtitle{
+    text-align: center;
+  }
+
+  .secondButtonContainer{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .heroButton{
+    margin: 0 0 1.5rem 0;
+  }
+
 }
+
+.bgImageFirst{
+  background-color: var(--primary-bg-color);
+  background-image: linear-gradient(to right,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem),linear-gradient(to bottom,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem);
+  background-size: var(--primary-bg-rect-size) var(--primary-bg-rect-size);
+  background-repeat: repeat;
+  top: 0;
+  height: 770px;
+  width: 100%;
+  position: absolute;
+  z-index: -2;
+  opacity: 0.6;
+}
+
+.bgImageSecond{
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  height: 1400px;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.bgImageThird{
+  left: 4%;
+  top: 335px;
+  background: linear-gradient(180deg, #3A8B8F 0%, rgba(58, 139, 143, 0) 100%), #3A8B8F;
+  background-blend-mode: normal, overlay, normal;
+}
+
+.bgImageFourth{
+  left: 13%;
+  top: 471px;
+  background: linear-gradient(180deg, #FEB475 0%, rgba(254, 180, 117, 0) 100%), #FEB475;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.bgImageFifth{
+  right: 12%;
+  top: 269px;
+  background: linear-gradient(180deg, #FB7C3F 0%, rgba(251, 124, 63, 0) 100%), #FB7C3F;
+  background-blend-mode: normal, overlay, normal;
+}
+
+.bgImageSixth{
+  right: 4%;
+  top: 408px;
+  background: linear-gradient(180deg, #8AB5A4 0%, rgba(138, 181, 164, 0) 100%), #8AB5A4;
+  background-blend-mode: normal, overlay, normal;
+}
+
+
 .buttons {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.bgImage1{
-  width: 32px;
-  height: 97px;
-  left: 66px;
-  top: 130px;
-  position: absolute;
-  background-image: url("@site/static/img/bg-image-1.svg");
-}
-.bgImage2{
-  width: 32px;
-  height: 65px;
-  left: 97px;
-  top: 130px;
-  position: absolute;
-background-image: url("@site/static/img/bg-image-2-4.svg");
-}
-.bgImage3{
-  width: 32px;
-  height: 65px;
-  left: 66px;
-  top: 292px;
-  position: absolute;
-  background-image: url("@site/static/img/bg-image-3.svg");
-}
-.bgImage4{
-  width: 32px;
-  height: 65px;
-  left: 97px;
-  top: 260px;
-  position: absolute;
-  background-image: url("@site/static/img/bg-image-2-4.svg");
-}
-.bgImage5{
-  width: 32px;
-  height: 65px;
-  right: 111.5px;
-  top: 130px;
-  position: absolute;
-  background-image: url("@site/static/img/bg-image-5.svg");
-}
-.bgImage6{
-  width: 32px;
-  height:130px;
-  right: 80px;
-  top: 130px;
-  position: absolute;
-  background-image: url("@site/static/img/bg-image-6.svg");
-}
-.bgImage7{
-  width: 32px;
-  height: 32px;
-  right: 111.5px;
-  top: 228px;
-  position: absolute;
-  background-image: url("@site/static/img/bg-image-7-8.svg");
-}
-.bgImage8{
-  width: 32px;
-  height: 32px;
-  right: 111.5px;
-  top: 292px;
-  position: absolute;
-  background-image: url("@site/static/img/bg-image-7-8.svg");
-}
-.bgImage9{
-  width: 32px;
-  height: 65px;
-  right: 80px;
-  top: 292px;
-  position: absolute;
-  background-image: url("@site/static/img/bg-image-9.svg");
 }

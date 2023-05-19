@@ -1,0 +1,42 @@
+@keyframes LineAnimation {
+    0%   { width: 85%; }
+    100% { width: 100%; }
+}
+
+@keyframes SquareWaveDown {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes SquareWaveUp {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(15px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes SquareScroll {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-15px); }
+    100% { transform: translateY(-30px); }
+}
+
+.squareScrollAnimation {
+    animation-name: SquareScroll;
+    animation-timing-function: ease;
+}
+
+.squareWaveAnimationDown {
+    animation-name: SquareWaveDown;
+    animation-timing-function: ease-in-out;
+}
+
+.squareWaveAnimationUp {
+    animation-name: SquareWaveUp;
+    animation-timing-function: ease-in-out;
+
+}
+
+.developerLinkBlock__title-line-animation {
+    animation: LineAnimation 1.0s both;
+}

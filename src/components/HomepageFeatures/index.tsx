@@ -2,7 +2,6 @@
 
 import clsx from "clsx";
 import React from "react";
-import Link from "@docusaurus/Link";
 
 import styles from "./styles.module.css";
 
@@ -12,9 +11,6 @@ type FeatureItem = {
   description: JSX.Element;
   url: string;
 };
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 const FeatureList: FeatureItem[] = [
   {
     title: "Getting started",
@@ -25,7 +21,7 @@ const FeatureList: FeatureItem[] = [
         connect to wallets and create cross-chain transactions.
       </>
     ),
-    url: "/getting-started",
+    url: "/docs/overview",
   },
   {
     title: "Architecture",
@@ -37,7 +33,7 @@ const FeatureList: FeatureItem[] = [
         save fees.
       </>
     ),
-    url: "/overview/design",
+    url: "/docs/overview/design",
   },
   {
     title: "API reference",
@@ -49,7 +45,7 @@ const FeatureList: FeatureItem[] = [
         and tokens.
       </>
     ),
-    url: "/api",
+    url: "/docs/api",
   },
   {
     title: "SDK",
@@ -60,23 +56,30 @@ const FeatureList: FeatureItem[] = [
         from your applications.
       </>
     ),
-    url: "/sdk",
+    url: "/docs/sdk",
   },
 ];
 
 function Feature({ title, Svg, description, url }: FeatureItem) {
   return (
-    <Link to={url} className={clsx("feature", styles.feature)}>
+    <a
+      href={url}
+      rel="noopener"
+      className={clsx("feature", styles.feature)}
+      data-aos="fade-up"
+    >
       <div className="text--left padding--md">
         <Svg className={styles.featureSvg} role="img" />
       </div>
       <div className="text--left padding-horiz--md padding-top--lg">
-        <h3 className={clsx("featureTittle", styles.featureTittle)}>{title}</h3>
-        <p className={clsx("featureDescription", styles.featureDescription)}>
+        <h3 className={clsx("feature__tittle", styles.featureTittle)}>
+          {title}
+        </h3>
+        <p className={clsx("feature__description", styles.featureDescription)}>
           {description}
         </p>
       </div>
-    </Link>
+    </a>
   );
 }
 

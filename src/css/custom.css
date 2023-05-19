@@ -9,7 +9,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css2?family=Oswald');
 @import url('https://fonts.googleapis.com/css2?family=Inter');
-
+@import url('./animations.css');
 :root {
   --ifm-color-primary: #30d5c8;
   --ifm-color-primary-dark: #28c3b7;
@@ -21,9 +21,14 @@
   --ifm-font-family-base: 'Open Sans', 'Segoe UI', Tahoma, sans-serif;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --primary-bg-color: #131313;
+  --primary-bg-color: #0D0D0D;
+  --secondary-bg-color: rgba(255, 255, 255, 0.05);
   --primary-text-color-light: rgba(255, 255, 255, 0.84);
-
+  --secondary-text-color-light: #ffffff;
+  --primary-text-color-dark: #131313;
+  --primary-border: 1px solid var(--secondary-bg-color);
+  --primary-font-family: 'Oswald';
+  --secondary-font-family: 'Inter';
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -37,7 +42,7 @@
   --ifm-color-primary-lightest: #71e2d9;
   --bg-rect-border-color: rgba(255, 255, 255, 5%);
   --primary-text-color: #8f8f8f;
-  --primary-bg-rect-size: 2.33594rem;
+  --primary-bg-rect-size: 4.125rem;
   --ifm-navbar-link-color: var(--primary-text-color);
 }
 
@@ -47,42 +52,27 @@
 
 .navbar{
   margin: 0 2.5rem;
-  --ifm-navbar-background-color: var(--primary-bg-color);
+  --ifm-navbar-background-color: transparent;
+}
+.navbar--fixed-top{
+  position: static;
 }
 
 html {
   background-color: var(--primary-bg-color);
-  background-image: linear-gradient(to right,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem),linear-gradient(to bottom,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem);
-  background-size: var(--primary-bg-rect-size) var(--primary-bg-rect-size);
-  background-repeat: repeat;
 }
 .footer--dark {
-  --ifm-footer-background-color: var(--primary-bg-color);
-  background-image: url("@site/static/img/footer-bg.svg");
-  background-repeat: repeat;
-  margin: 0 2.5rem 5rem 2.5rem;
-  padding: 0;
+  --ifm-footer-background-color: transparent;
+  z-index: 1;
 }
 
 .footer__social-link {
   display: flex;
   align-items: center;
-  height: 24px;
+  height: 1.5rem;
   color: var(--primary-text-color);
 }
-@media screen and (max-width: 996px) {
-  .footer__social-link {
-    display: none;
-  }
-  .footer__items {
-    display: flex;
-    justify-content: space-between;
-  }
-  .footer--dark {
-    background: #131313;
-    height: 80px;
-  }
-}
+
 .footer__social-link svg {
   height:  16px;
   width: 16px;
@@ -104,25 +94,91 @@ html {
   margin-bottom: 0;
   display: flex;
   gap: 14px;
-  justify-content: center;
+  justify-content: start;
 }
 
 .footer__link-item {
-  height: 32px;
+  height: 2rem;
 }
 .footer__item{
   margin-top: 0.3rem;
 }
+
 .DocSearch.DocSearch-Button{
   border-radius: 0;
   border:  1px solid rgba(255, 255, 255, 0.2);
-  font-family: 'Inter';
+  font-family: var(--secondary-font-family);
 
 }
+
 .DocSearch-Button-Key{
   --docsearch-key-gradient: rgba(255, 255, 255, 0.1);
   --docsearch-key-shadow: none;
 }
+
 span.DocSearch-Button-Placeholder {
-  font-size: 12px
+  font-size: 0.75rem
+}
+
+.heroButton{
+  position: relative;
+  font-family: var(--secondary-font-family);
+  background: #8AB5A4;
+  padding: 1.0625rem 2.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 1.5rem 0 0;
+  cursor: pointer;
+  color: var(--primary-text-color-dark);
+  border: none;
+  white-space: nowrap;
+}
+
+.heroButton:hover{
+  color: var(--primary-text-color-dark);
+  text-decoration: none;
+}
+
+.heroButtonSecondary{
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-family: var(--secondary-font-family);
+  color: var(--primary-text-color-light);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.svgContainer {
+  display: flex;
+  align-items: center;
+}
+
+.col{
+  width: 20%;
+  flex: initial;
+}
+
+.lantern{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+@media screen and (max-width: 996px) {
+  .footer__social-link {
+    display: none;
+  }
+  .footer__items {
+    display: flex;
+    justify-content: start;
+  }
+  .footer--dark {
+    background: var(--primary-text-color-dark);
+    height: 100px;
+    overflow: hidden;
+  }
+  .col{
+    flex: 1 0;
+  }
 }

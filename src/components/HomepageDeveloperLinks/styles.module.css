@@ -1,40 +1,83 @@
 .developerLinks{
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--secondary-bg-color);
+    padding: 5rem 8rem;
+}
+.developerLinksHeader{
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 3rem 2rem;
-    background: var(--primary-bg-color);
+}
+.developerLinksTitle{
+    font-family: var(--primary-font-family);
+    font-weight: 500;
+    font-size: 2rem;
+    text-transform: capitalize;
+    color: var(--primary-text-color-light)
+}
+
+.developerLinksDescription {
+    font-family: var(--secondary-font-family);
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--primary-text-color);
+}
+
+.developerLinkBlockTitle{
+    margin-bottom: 2rem;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.developerLinkBlockTitleLine {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 2.5rem;
+    bottom: -0.125rem;
+    height: 0.0625rem;
+    background-color: var(--secondary-text-color-light);
+
+}
+
+
+.developerLinksBody{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5.5rem;
+}
+
+.developerLink{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-family: var(--secondary-font-family);
+    font-weight: 400;
+    font-size: 16px;
+    text-decoration-line: underline;
+    color: var(--primary-text-color);
+}
+
+.developerLinkBlock{
+    position: relative;
+    width: 30%;
+    margin-bottom: 1rem;
 }
 
 @media screen and (max-width: 996px) {
     .developerLinks{
-        display: none;
+        padding: 5rem 2rem;
     }
 }
-.developerLink{
-    display: flex;
-    cursor: pointer;
-    padding: 0.5rem 0;
-    color: var(--primary-text-color-light);
-    width: 100%;
-}
-.developerLinkTitle{
-    font-size: 1.25rem;
-    font-weight: 500;
-    font-family: 'Oswald';
-    text-transform: capitalize;
-    margin: 0 2rem;
-    flex: 1 0 auto;
-}
-.developerLinkSvgContainer {
-    display: flex;
-    align-items: center;
-}
-.developerLinksTitle {
-    font-family: 'Oswald';
-    text-transform: uppercase;
-    font-size: 1.25rem;
-}
-.linkSvg {
-    height: 32px;
-    width: 32px;
+@media screen and (max-width: 625px) {
+    .developerLinksBody{
+        flex-direction: column;
+    }
+    .developerLinkBlock{
+        width: 100%;
+    }
+    .developerLinksHeader{
+        flex-direction: column;
+    }
 }
