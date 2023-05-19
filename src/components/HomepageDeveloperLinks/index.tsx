@@ -130,14 +130,14 @@ export default function HomepageDeveloperLinks(): JSX.Element {
                 styles.developerLinksDescription
               )}
             >
-              Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              vulputate libero et velit interdum, ac aliquet odio mattis.
+              These links provide technical information to integrate the Rarimo
+              protocol
             </p>
           </div>
-          <button className={clsx("heroButton svgContainer")}>
+          <a href="/overview" className={clsx("heroButton svgContainer")}>
             Documentation
             <ArrowSvg />
-          </button>
+          </a>
         </div>
         <div
           className={clsx("developerLinks__body", styles.developerLinksBody)}
