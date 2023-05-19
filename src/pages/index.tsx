@@ -110,23 +110,25 @@ export default function Home(): JSX.Element {
             document.addEventListener("mousemove", function ({ pageX, pageY }) {
               const x = pageX;
               const y = pageY;
-              const spotlightSize = "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
+              const spotlightSize =
+                "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
               if (light.current) {
                 light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`;
               }
             });
-            return <>
-              <HomepageFeatures />
-              <HomepageDeveloperLinks />
-              <div className="container">
-                <div className={clsx("bottomContent", styles.bottomContent)}>
-                  <HomepageStartBuilding />
-                  <HomepageLinks />
+            return (
+              <>
+                <HomepageFeatures />
+                <HomepageDeveloperLinks />
+                <div className="container">
+                  <div className={clsx("bottomContent", styles.bottomContent)}>
+                    <HomepageStartBuilding />
+                    <HomepageLinks />
+                  </div>
                 </div>
-              </div>
-            </>
-          }
-          }
+              </>
+            );
+          }}
         </BrowserOnly>
       </main>
     </Layout>
