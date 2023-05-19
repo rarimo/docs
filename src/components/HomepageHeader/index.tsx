@@ -181,7 +181,7 @@ export default function HomepageHeader() {
         </p>
         <div className={clsx("buttonContainer", styles.buttonContainer)}>
           <a
-            href="/docs/overview"
+            href="/overview"
             className={clsx(
               "heroButton svgContainer",
               styles.heroButton,
