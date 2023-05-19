@@ -178,7 +178,7 @@ span.DocSearch-Button-Placeholder {
     height: 100px;
     overflow: hidden;
   }
-  .footer__links.col.col{
+  .footer__links.col{
     flex: 1 0;
   }
 }
