@@ -2,21 +2,22 @@
   display: flex;
   align-items: center;
   padding: 2rem 0;
+  margin-bottom: 8rem;
   width: 100%;
 }
 .feature {
-  background: var(--secondary-bg-color);
   border: var(--primary-border);
-  z-index: var(--z-index-default);
+  background:repeating-conic-gradient(#0000 0.000045%, #000d 0.0005%) var(--secondary-bg-color);
 }
 
 .featureTittle {
   font-size: 2rem;
-  text-transform: uppercase;
+  text-transform: capitalize;
   color: var(--primary-text-color-light);
   font-weight: 500;
   font-family: var(--primary-font-family);
 }
+
 .featureDescription {
   font-size: 1rem;
   color: var(--primary-text-color);
@@ -34,11 +35,6 @@
   grid-template-columns: repeat(2, 2fr);
   grid-template-rows: repeat(2, 1fr);
   grid-gap: 2rem;
-  margin: 0 5rem;
-}
-
-.featuresGridContainer .feature:nth-child(odd){
-  padding-right: 10rem;
 }
 
 @media screen and (max-width: 996px) {

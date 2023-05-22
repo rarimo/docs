@@ -18,7 +18,7 @@
   --ifm-color-primary-light: #46d9ce;
   --ifm-color-primary-lighter: #51dcd1;
   --ifm-color-primary-lightest: #71e2d9;
-  --ifm-font-family-base: 'Open Sans', 'Segoe UI', Tahoma, sans-serif;
+  --ifm-font-family-base: 'Inter', 'Segoe UI', Tahoma, sans-serif;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --primary-bg-color: #0D0D0D;
@@ -146,6 +146,7 @@ span.DocSearch-Button-Placeholder {
   color: var(--primary-bg-color);
   width: 1.25rem;
   height: 1.25rem;
+  margin-left: 0.75rem;
 }
 
 .heroButtonSecondary{

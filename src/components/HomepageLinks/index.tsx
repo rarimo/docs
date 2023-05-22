@@ -52,7 +52,10 @@ function Link({ title, Svg, description, url }: LinkItem) {
         </div>
       </div>
       <div className={clsx("link__svg-container", styles.linkSvgContainer)}>
-        <ArrowForward className={clsx("link__svg", styles.link__svg)} role="img" />
+        <ArrowForward
+          className={clsx("link__svg", styles.link__svg)}
+          role="img"
+        />
       </div>
     </a>
   );

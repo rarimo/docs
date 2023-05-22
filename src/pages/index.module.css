@@ -152,7 +152,7 @@
 .bgImageSecond{
   background-color: rgba(0, 0, 0, 0.6);
   top: 0;
-  height: 1400px;
+  height: 1425px;
   width: 100%;
   position: absolute;
   z-index: var(--z-index-background-image);

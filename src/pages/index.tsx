@@ -38,7 +38,7 @@ function HomepageStartBuilding() {
           rel="noreferrer"
         >
           Join Testnet
-          <ArrowSvg />
+          <ArrowSvg className={clsx("heroButton__svg")} />
         </a>
         <a
           className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
