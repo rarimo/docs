@@ -29,6 +29,9 @@
   --primary-border: 1px solid var(--secondary-bg-color);
   --primary-font-family: 'Oswald';
   --secondary-font-family: 'Inter';
+  --z-index-default: 1;
+  --z-index-background-images: -1;
+  --z-index-backdrop: -2;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -63,7 +66,7 @@ html {
 }
 .footer--dark {
   --ifm-footer-background-color: transparent;
-  z-index: 1;
+  z-index: var(--z-index-default);
 }
 
 .footer__social-link {
@@ -137,6 +140,12 @@ span.DocSearch-Button-Placeholder {
 .heroButton:hover{
   color: var(--primary-text-color-dark);
   text-decoration: none;
+}
+
+.heroButton__svg{
+  color: var(--primary-bg-color);
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .heroButtonSecondary{

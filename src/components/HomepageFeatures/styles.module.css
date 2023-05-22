@@ -6,7 +6,8 @@
 }
 .feature {
   background: var(--secondary-bg-color);
-  border: var(--primary-border)
+  border: var(--primary-border);
+  z-index: var(--z-index-default);
 }
 
 .featureTittle {
