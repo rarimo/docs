@@ -17,7 +17,7 @@ const LinksList: LinkItem[] = [
     url: "https://discord.gg/cfrH3Fe7ke",
   },
   {
-    title: "",
+    title: "Forum",
     Svg: require("@site/static/img/forum.svg").default,
     description: "Discuss governance and more",
     url: "https://scan.testnet.rarimo.com/proposals",
