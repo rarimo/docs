@@ -13,7 +13,7 @@ const LinksList: LinkItem[] = [
   {
     title: "Discord",
     Svg: require("@site/static/img/ri-discord-line.svg").default,
-    description: "Make your engineering workflow more efficient",
+    description: "Join the Developer Community",
     url: "https://discord.gg/cfrH3Fe7ke",
   },
   // TODO: add link to forum
@@ -26,7 +26,7 @@ const LinksList: LinkItem[] = [
   {
     title: "Github",
     Svg: require("@site/static/img/ri-github-fill.svg").default,
-    description: "View all Uniswap Responses",
+    description: "View all Rarimo repositories",
     url: "https://github.com/rarimo",
   },
 ];
