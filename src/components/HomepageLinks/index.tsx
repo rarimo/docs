@@ -26,7 +26,7 @@ const LinksList: LinkItem[] = [
   {
     title: "Github",
     Svg: require("@site/static/img/ri-github-fill.svg").default,
-    description: "View all Uniswap Responses",
+    description: "View all Uniswap responses",
     url: "https://github.com/rarimo",
   },
 ];
