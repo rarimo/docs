@@ -54,8 +54,7 @@
 }
 
 .navbar{
-  margin: 0 2.5rem;
-  --ifm-navbar-background-color: transparent;
+  background: transparent;
 }
 .navbar--fixed-top{
   position: static;
