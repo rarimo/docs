@@ -2,8 +2,7 @@
  * CSS files with the .module.css suffix will be treated as CSS modules
  * and scoped locally.
  */
-
-.heroBanner {
+.secondBanner {
   padding: 4rem 0;
   text-align: center;
   position: relative;
@@ -11,16 +10,192 @@
   background: initial;
   color: #ffffff;
 }
+.secondContent{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  padding: 4rem 0;
+  max-width: 75%;
+  position: relative;
+}
 
-.heroTitle {
-  font-size: 36px;
+.secondSubtitle{
+  font-size: 0.875rem;
+  color: var(--primary-text-color);
+  max-width: 634px;
+  text-align: start;
+}
+
+.secondButtonContainer{
+  display: flex;
+  margin-top: 1rem;
+  justify-content: start;
+  width: 100%;
+}
+
+.secondTitle {
+  font-size: 3.5rem;
+  font-weight: 600;
+  color: var(--primary-text-color-light);
+  font-family: var(--primary-font-family);
+  text-transform: uppercase;
+  text-align: start;
+}
+
+.startBuildingSection{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--primary-bg-color);
+  padding: 0 4rem 0 2rem;
+  max-width: 40%;
+  position: relative;
+  z-index: var(--z-index-default);
+}
+
+.bottomContent {
+  display: flex;
+  justify-content: space-around;
+  background: transparent;
+  margin: 10rem 0;
+}
+
+.bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth {
+  animation-delay: 1s;
+  animation-duration: 3.5s;
+  animation-iteration-count: infinite;
+}
+
+@media screen and (max-width: 1249px) {
+  .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
+  .bgImageFirst, .bgImageSecond, .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
+    display: none;
+  }
+  .secondTitle{
+    font-size: 5rem;
+    text-align: center;
+  }
+  .secondSubtitle{
+    text-align: center;
+  }
+
+  .secondBanner {
+    margin: 2rem;
+  }
+
+  .secondButtonContainer{
+    justify-content: center;
+  }
+
+  .secondContent{
+    max-width: 100%;
+  }
+
+  .startBuildingSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--primary-bg-color);
+    padding: 3rem 2rem 3rem 2rem;
+    margin-right: 0;
+    position: relative;
+    z-index: var(--z-index-default);
+    max-width: 100%  }
+  .bottomContent {
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1;
+    margin: 2rem 0;
   }
 }
+
+
+@media screen and (max-width: 625px) {
+  .secondTitle {
+    font-size: 2.625rem;
+    text-align: center;
+  }
+  .secondSubtitle{
+    text-align: center;
+  }
+
+  .secondButtonContainer{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .heroButton{
+    margin: 0 0 1.5rem 0;
+  }
+
+}
+
+.bgImageFirst{
+  background-color: var(--primary-bg-color);
+  background-image: linear-gradient(to right,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem),linear-gradient(to bottom,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem);
+  background-size: var(--primary-bg-rect-size) var(--primary-bg-rect-size);
+  background-repeat: repeat;
+  top: 0;
+  height: 770px;
+  width: 100%;
+  position: absolute;
+  z-index: var(--z-index-backdrop);
+  opacity: 0.6;
+}
+
+.bgImageSecond{
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  height: 1425px;
+  width: 100%;
+  position: absolute;
+  z-index: var(--z-index-background-image);
+  opacity: 0.6;
+}
+
+.bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.bgImageThird{
+  left: 4%;
+  top: 335px;
+  background: linear-gradient(180deg, #3A8B8F 0%, rgba(58, 139, 143, 0) 100%), #3A8B8F;
+  background-blend-mode: normal, overlay, normal;
+}
+
+.bgImageFourth{
+  left: 13%;
+  top: 471px;
+  background: linear-gradient(180deg, #FEB475 0%, rgba(254, 180, 117, 0) 100%), #FEB475;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.bgImageFifth{
+  right: 12%;
+  top: 269px;
+  background: linear-gradient(180deg, #FB7C3F 0%, rgba(251, 124, 63, 0) 100%), #FB7C3F;
+  background-blend-mode: normal, overlay, normal;
+}
+
+.bgImageSixth{
+  right: 4%;
+  top: 408px;
+  background: linear-gradient(180deg, #8AB5A4 0%, rgba(138, 181, 164, 0) 100%), #8AB5A4;
+  background-blend-mode: normal, overlay, normal;
+}
+
 
 .buttons {
   display: flex;

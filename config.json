@@ -1,10 +1,10 @@
 {
   "index_name": "rar",
   "start_urls": [
-    "https://rarimo.gitlab.io/docs/"
+    "https://docs.rarimo.com/"
   ],
   "sitemap_urls": [
-    "https://rarimo.gitlab.io/docs/sitemap.xml"
+    "https://docs.rarimo.com/sitemap.xml"
   ],
   "sitemap_alternate_links": true,
   "stop_urls": ["/tests"],

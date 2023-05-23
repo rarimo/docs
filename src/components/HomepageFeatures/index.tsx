@@ -9,66 +9,92 @@ type FeatureItem = {
   title: string;
   Svg: React.ComponentType<React.ComponentProps<"svg">>;
   description: JSX.Element;
+  url: string;
 };
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 const FeatureList: FeatureItem[] = [
   {
-    title: "NFT Settlement",
-    Svg: require("@site/static/img/settlement.svg").default,
+    title: "Getting started",
+    Svg: require("@site/static/img/flag.svg").default,
     description: (
       <>
-        Users can buy NFTs using their token of choice from any supported
-        blockchain in a single transaction — with the lowest fees.
+        Learn the basics of the protocol and create simple applications to
+        connect to wallets and create cross-chain transactions.
       </>
     ),
+    url: "/overview",
   },
   {
-    title: "Lending & Borrowing",
-    Svg: require("@site/static/img/lend-borr.svg").default,
+    title: "Architecture",
+    Svg: require("@site/static/img/arrow_top_right.svg").default,
     description: (
       <>
-        Rarimo integrates with lending platforms, enabling collateralized or
-        uncollateralized lending across different blockchain.
+        Read about how the protocol is structured, how its oracles and contracts
+        work, and how it bundles different events into a single transaction to
+        save fees.
       </>
     ),
+    url: "/overview/design",
   },
   {
-    title: "Asset verification",
-    Svg: require("@site/static/img/asset-verification.svg").default,
+    title: "API reference",
+    Svg: require("@site/static/img/extension.svg").default,
     description: (
       <>
-        Allowing to retrieve and publish timestamped proofs about an NFT’s state
-        and activities.
+        Refer to information about the Rarimo API, which provides information
+        about the protocol&apos;s smart contracts and its supported blockchains
+        and tokens.
       </>
     ),
+    url: "/api",
+  },
+  {
+    title: "SDK",
+    Svg: require("@site/static/img/flag.svg").default,
+    description: (
+      <>
+        Use the Rarimo JavaScript/TypeScript SDK to simplify using the protocol
+        from your applications.
+      </>
+    ),
+    url: "/sdk",
   },
 ];
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, Svg, description, url }: FeatureItem) {
   return (
-    <div className={clsx("col col--4")}>
-      <div className="text--center">
+    <a
+      href={url}
+      rel="noopener"
+      className={clsx("feature", styles.feature)}
+      data-aos="fade-up"
+    >
+      <div className="text--left padding--md">
         <Svg className={styles.featureSvg} role="img" />
       </div>
-      <div className="text--center padding-horiz--md">
-        <h3>{title}</h3>
-        <p>{description}</p>
+      <div className="text--left padding-horiz--md padding-top--sm">
+        <h3 className={clsx("feature__tittle", styles.featureTittle)}>
+          {title}
+        </h3>
+        <p className={clsx("feature__description", styles.featureDescription)}>
+          {description}
+        </p>
       </div>
-    </div>
+    </a>
   );
 }
 
 export default function HomepageFeatures(): JSX.Element {
   return (
     <section className={styles.features}>
-      <div className="container">
-        <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
-          ))}
-        </div>
+      <div
+        className={clsx(
+          "featuresGridContainer container",
+          styles.featuresGridContainer
+        )}
+      >
+        {FeatureList.map((props, idx) => (
+          <Feature key={idx} {...props} />
+        ))}
       </div>
     </section>
   );
