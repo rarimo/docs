@@ -122,7 +122,7 @@ export default function HomepageDeveloperLinks(): JSX.Element {
                 styles.developerLinksTitle
               )}
             >
-              Helpfull Links
+              Helpful Links
             </h3>
             <p
               className={clsx(
