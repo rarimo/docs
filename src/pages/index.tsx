@@ -117,7 +117,8 @@ export default function Home(): JSX.Element {
               />
               <main>
                 <HomepageFeatures />
-                <HomepageDeveloperLinks />
+                {/*Todo: Show developer links */}
+                {/*<HomepageDeveloperLinks />*/}
                 <div className="container">
                   <div className={clsx("bottomContent", styles.bottomContent)}>
                     <HomepageStartBuilding />
