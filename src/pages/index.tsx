@@ -1,6 +1,7 @@
 import "aos/dist/aos.css";
 
 import BrowserOnly from "@docusaurus/BrowserOnly";
+import { useLocation } from "@docusaurus/router";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";

@@ -54,7 +54,7 @@
 }
 
 .navbar{
-  background: transparent;
+  background: #000;
 }
 .navbar--fixed-top{
   position: static;
