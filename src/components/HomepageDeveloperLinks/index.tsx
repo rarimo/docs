@@ -134,7 +134,7 @@ export default function HomepageDeveloperLinks(): JSX.Element {
               protocol
             </p>
           </div>
-          <a href="/overview" className={clsx("heroButton svgContainer")}>
+          <a href="./overview" className={clsx("heroButton svgContainer")}>
             Documentation
             <ArrowSvg />
           </a>

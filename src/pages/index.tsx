@@ -42,8 +42,7 @@ function HomepageStartBuilding() {
         </a>
         <a
           className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
-          href="https://rarimo.gitlab.io/docs/docs/whitepaper"
-          target="_blank"
+          href="./whitepaper"
           rel="noreferrer"
         >
           Whitepaper
