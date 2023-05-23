@@ -16,12 +16,11 @@ const LinksList: LinkItem[] = [
     description: "Make your engineering workflow more efficient",
     url: "https://discord.gg/cfrH3Fe7ke",
   },
-  // TODO: add link to forum
   {
-    title: "Forum",
+    title: "",
     Svg: require("@site/static/img/forum.svg").default,
     description: "Discuss governance and more",
-    url: "#",
+    url: "https://scan.testnet.rarimo.com/proposals",
   },
   {
     title: "Github",
