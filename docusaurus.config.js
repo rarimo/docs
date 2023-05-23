@@ -156,28 +156,21 @@ module.exports = {
             items: [
               {
                 html: `
-                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Discord">
+                <a href="./overview/applications" class="footer__social-link" rel="noreferrer noopener" aria-label="Discord">
                 Use cases
                 </a>
               `,
               },
               {
                 html: `
-                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
-                Developers
-                </a>
-              `,
-              },
-              {
-                html: `
-                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
+                <a href="https://discord.gg/cfrH3Fe7ke" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
                 Community
                 </a>
               `,
               },
               {
                 html: `
-                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
+                <a href="mailto: support@rarimo.com" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
                 Contact
                 </a>
               `,
