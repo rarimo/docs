@@ -61,41 +61,48 @@ export default function Home(): JSX.Element {
       title={`${siteConfig.title}`}
       description="Description will go into a meta tag in <head />"
     >
-      <HomepageHeader />
-      <div className={clsx("bgImageFirst", styles.bgImageFirst)} />
-      <div
-        className={clsx("bgImageSecond", styles.bgImageSecond)}
-        ref={light}
-      />
-      <div
-        data-aos="fade-up"
-        className={clsx(
-          "bgImageThird squareWaveAnimationDown",
-          styles.bgImageThird
-        )}
-      />
-      <div
-        data-aos="fade-up"
-        className={clsx(
-          "bgImageFourth squareWaveAnimationUp",
-          styles.bgImageFourth
-        )}
-      />
-      <div
-        data-aos="fade-up"
-        className={clsx(
-          "bgImageFifth squareWaveAnimationUp",
-          styles.bgImageFifth
-        )}
-      />
-      <div
-        data-aos="fade-up"
-        className={clsx(
-          "bgImageSixth squareWaveAnimationDown",
-          styles.bgImageSixth
-        )}
-      />
-
+      <BrowserOnly>
+        {() => {
+          return (
+            <>
+              <HomepageHeader />
+              <div className={clsx("bgImageFirst", styles.bgImageFirst)} />
+              <div
+                className={clsx("bgImageSecond", styles.bgImageSecond)}
+                ref={light}
+              />
+              <div
+                data-aos="fade-up"
+                className={clsx(
+                  "bgImageThird squareWaveAnimationDown",
+                  styles.bgImageThird
+                )}
+              />
+              <div
+                data-aos="fade-up"
+                className={clsx(
+                  "bgImageFourth squareWaveAnimationUp",
+                  styles.bgImageFourth
+                )}
+              />
+              <div
+                data-aos="fade-up"
+                className={clsx(
+                  "bgImageFifth squareWaveAnimationUp",
+                  styles.bgImageFifth
+                )}
+              />
+              <div
+                data-aos="fade-up"
+                className={clsx(
+                  "bgImageSixth squareWaveAnimationDown",
+                  styles.bgImageSixth
+                )}
+              />
+            </>
+          );
+        }}
+      </BrowserOnly>
       <main>
         <BrowserOnly>
           {() => {

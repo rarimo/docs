@@ -30,7 +30,7 @@
   --primary-font-family: 'Oswald';
   --secondary-font-family: 'Inter';
   --z-index-default: 1;
-  --z-index-background-images: -1;
+  --z-index-background-image: -1;
   --z-index-backdrop: -2;
 }
 
