@@ -193,12 +193,11 @@ export default function HomepageHeader() {
               className={clsx("heroButton__svg", styles.heroButton__svg)}
             />
           </a>
-          {/*//Todo: add link to explore features*/}
           <a
             className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
             href="./overview/applications"
           >
-            Explore Features
+            Explore use cases
           </a>
         </div>
       </div>
