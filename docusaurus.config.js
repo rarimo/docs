@@ -20,7 +20,7 @@ module.exports = {
     "Learn the basics of the protocol and create simple applications to connect to wallets and create cross-chain transactions.",
   url: getUrl(),
   baseUrl: getBaseUrl(),
-  trailingSlash: false,
+  trailingSlash: true,
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/logo-icon.png",
