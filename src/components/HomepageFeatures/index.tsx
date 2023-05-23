@@ -21,7 +21,7 @@ const FeatureList: FeatureItem[] = [
         connect to wallets and create cross-chain transactions.
       </>
     ),
-    url: "/overview",
+    url: "./overview",
   },
   {
     title: "Architecture",
@@ -33,7 +33,7 @@ const FeatureList: FeatureItem[] = [
         save fees.
       </>
     ),
-    url: "/overview/design",
+    url: "./overview/design",
   },
   {
     title: "API reference",
@@ -45,7 +45,7 @@ const FeatureList: FeatureItem[] = [
         and tokens.
       </>
     ),
-    url: "/api",
+    url: "./api",
   },
   {
     title: "SDK",
@@ -56,7 +56,7 @@ const FeatureList: FeatureItem[] = [
         from your applications.
       </>
     ),
-    url: "/sdk",
+    url: "./sdk",
   },
 ];
 

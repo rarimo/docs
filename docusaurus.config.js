@@ -156,38 +156,6 @@ module.exports = {
             items: [
               {
                 html: `
-                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Discord">
-                Use cases
-                </a>
-              `,
-              },
-              {
-                html: `
-                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
-                Developers
-                </a>
-              `,
-              },
-              {
-                html: `
-                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
-                Community
-                </a>
-              `,
-              },
-              {
-                html: `
-                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
-                Contact
-                </a>
-              `,
-              },
-            ],
-          },
-          {
-            items: [
-              {
-                html: `
                 <a href="https://discord.gg/cfrH3Fe7ke" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Discord">
                 Discord <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="#D9D9D9"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="#8F8F8F"/></g></svg>
                 </a>
@@ -198,6 +166,13 @@ module.exports = {
             <a href="https://twitter.com/Rarimo_protocol" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Twitter" style="margin-top: 1rem">
             Twitter <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="#D9D9D9"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="#8F8F8F"/></g></svg>
             </a>`,
+              },
+              {
+                html: `
+                <a href="mailto: support@rarimo.com" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
+                Contact
+                </a>
+              `,
               },
             ],
           },
