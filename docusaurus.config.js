@@ -156,7 +156,7 @@ module.exports = {
             items: [
               {
                 html: `
-                <a href="./overview/applications" class="footer__social-link" rel="noreferrer noopener" aria-label="Discord">
+                <a href="./overview/applications" class="footer__social-link" rel="noreferrer noopener">
                 Use cases
                 </a>
               `,
