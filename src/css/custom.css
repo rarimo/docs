@@ -18,7 +18,7 @@
   --ifm-color-primary-light: #46d9ce;
   --ifm-color-primary-lighter: #51dcd1;
   --ifm-color-primary-lightest: #71e2d9;
-  --ifm-font-family-base: 'Open Sans', 'Segoe UI', Tahoma, sans-serif;
+  --ifm-font-family-base: 'Inter', 'Segoe UI', Tahoma, sans-serif;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --primary-bg-color: #0D0D0D;
@@ -29,6 +29,9 @@
   --primary-border: 1px solid var(--secondary-bg-color);
   --primary-font-family: 'Oswald';
   --secondary-font-family: 'Inter';
+  --z-index-default: 1;
+  --z-index-background-image: -1;
+  --z-index-backdrop: -2;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -63,7 +66,7 @@ html {
 }
 .footer--dark {
   --ifm-footer-background-color: transparent;
-  z-index: 1;
+  z-index: var(--z-index-default);
 }
 
 .footer__social-link {
@@ -137,6 +140,13 @@ span.DocSearch-Button-Placeholder {
 .heroButton:hover{
   color: var(--primary-text-color-dark);
   text-decoration: none;
+}
+
+.heroButton__svg{
+  color: var(--primary-bg-color);
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: 0.75rem;
 }
 
 .heroButtonSecondary{

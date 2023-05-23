@@ -188,7 +188,10 @@ export default function HomepageHeader() {
               styles.svgContainer
             )}
           >
-            Getting Started <ArrowSvg />
+            Getting Started{" "}
+            <ArrowSvg
+              className={clsx("heroButton__svg", styles.heroButton__svg)}
+            />
           </a>
           {/*//Todo: add link to explore features*/}
           <a

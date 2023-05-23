@@ -18,7 +18,6 @@
   padding: 4rem 0;
   max-width: 75%;
   position: relative;
-  z-index: 0;
 }
 
 .secondSubtitle{
@@ -52,7 +51,7 @@
   padding: 0 4rem 0 2rem;
   max-width: 40%;
   position: relative;
-  z-index: 1;
+  z-index: var(--z-index-default);
 }
 
 .bottomContent {
@@ -106,7 +105,7 @@
     padding: 3rem 2rem 3rem 2rem;
     margin-right: 0;
     position: relative;
-    z-index: 1;
+    z-index: var(--z-index-default);
     max-width: 100%  }
   .bottomContent {
     flex-direction: column;
@@ -139,7 +138,6 @@
 
 .bgImageFirst{
   background-color: var(--primary-bg-color);
-  display: flex;
   background-image: linear-gradient(to right,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem),linear-gradient(to bottom,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem);
   background-size: var(--primary-bg-rect-size) var(--primary-bg-rect-size);
   background-repeat: repeat;
@@ -147,17 +145,17 @@
   height: 770px;
   width: 100%;
   position: absolute;
-  z-index: -2;
+  z-index: var(--z-index-backdrop);
   opacity: 0.6;
 }
 
 .bgImageSecond{
   background-color: rgba(0, 0, 0, 0.6);
   top: 0;
-  height: 1400px;
+  height: 1425px;
   width: 100%;
   position: absolute;
-  z-index: -1;
+  z-index: var(--z-index-background-image);
   opacity: 0.6;
 }
 

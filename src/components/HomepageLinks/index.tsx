@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import styles from "@site/src/components/HomepageLinks/styles.module.css";
-import ArrowOutward from "@site/static/img/arrow_outward.svg";
+import ArrowForward from "@site/static/img/arrow_forward.svg";
 import clsx from "clsx";
 import React from "react";
 type LinkItem = {
@@ -52,7 +52,10 @@ function Link({ title, Svg, description, url }: LinkItem) {
         </div>
       </div>
       <div className={clsx("link__svg-container", styles.linkSvgContainer)}>
-        <ArrowOutward role="img" />
+        <ArrowForward
+          className={clsx("link__svg", styles.link__svg)}
+          role="img"
+        />
       </div>
     </a>
   );

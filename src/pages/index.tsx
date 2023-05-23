@@ -38,7 +38,7 @@ function HomepageStartBuilding() {
           rel="noreferrer"
         >
           Join Testnet
-          <ArrowSvg />
+          <ArrowSvg className={clsx("heroButton__svg")} />
         </a>
         <a
           className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
@@ -61,63 +61,61 @@ export default function Home(): JSX.Element {
       title={`${siteConfig.title}`}
       description="Description will go into a meta tag in <head />"
     >
-      <HomepageHeader />
-      <div className={clsx("bgImageFirst", styles.bgImageFirst)} />
-      <div
-        className={clsx("bgImageSecond", styles.bgImageSecond)}
-        ref={light}
-      />
-      <div
-        data-aos="fade-up"
-        className={clsx(
-          "bgImageThird squareWaveAnimationDown",
-          styles.bgImageThird
-        )}
-      />
-      <div
-        data-aos="fade-up"
-        className={clsx(
-          "bgImageFourth squareWaveAnimationUp",
-          styles.bgImageFourth
-        )}
-      />
-      <div
-        data-aos="fade-up"
-        className={clsx(
-          "bgImageFifth squareWaveAnimationUp",
-          styles.bgImageFifth
-        )}
-      />
-      <div
-        data-aos="fade-up"
-        className={clsx(
-          "bgImageSixth squareWaveAnimationDown",
-          styles.bgImageSixth
-        )}
-      />
-
-      <main>
-        <BrowserOnly>
-          {() => {
-            aos.init({
-              duration: 900,
-              easing: "ease",
-              offset: 0,
-              once: true,
-              mirror: false,
-              anchorPlacement: "center-bottom",
-            });
-            document.addEventListener("mousemove", function ({ pageX, pageY }) {
-              const x = pageX;
-              const y = pageY;
-              const spotlightSize =
-                "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
-              if (light.current) {
-                light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`;
-              }
-            });
-            return (
-              <>
+      <BrowserOnly>
+        {() => {
+          aos.init({
+            duration: 900,
+            easing: "ease",
+            offset: 0,
+            once: true,
+            mirror: false,
+            anchorPlacement: "center-bottom",
+          });
+          document.addEventListener("mousemove", function ({ pageX, pageY }) {
+            const x = pageX;
+            const y = pageY;
+            const spotlightSize = "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
+            if (light.current) {
+              light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`;
+            }
+          });
+          return (
+            <>
+              <HomepageHeader />
+              <div className={clsx("bgImageFirst", styles.bgImageFirst)} />
+              <div
+                className={clsx("bgImageSecond", styles.bgImageSecond)}
+                ref={light}
+              />
+              <div
+                data-aos="fade-up"
+                className={clsx(
+                  "bgImageThird squareWaveAnimationDown",
+                  styles.bgImageThird
+                )}
+              />
+              <div
+                data-aos="fade-up"
+                className={clsx(
+                  "bgImageFourth squareWaveAnimationUp",
+                  styles.bgImageFourth
+                )}
+              />
+              <div
+                data-aos="fade-up"
+                className={clsx(
+                  "bgImageFifth squareWaveAnimationUp",
+                  styles.bgImageFifth
+                )}
+              />
+              <div
+                data-aos="fade-up"
+                className={clsx(
+                  "bgImageSixth squareWaveAnimationDown",
+                  styles.bgImageSixth
+                )}
+              />
+              <main>
                 <HomepageFeatures />
                 <HomepageDeveloperLinks />
                 <div className="container">
@@ -126,11 +124,11 @@ export default function Home(): JSX.Element {
                     <HomepageLinks />
                   </div>
                 </div>
-              </>
-            );
-          }}
-        </BrowserOnly>
-      </main>
+              </main>
+            </>
+          );
+        }}
+      </BrowserOnly>
     </Layout>
   );
 }

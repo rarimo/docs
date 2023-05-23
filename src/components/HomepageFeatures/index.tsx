@@ -71,7 +71,7 @@ function Feature({ title, Svg, description, url }: FeatureItem) {
       <div className="text--left padding--md">
         <Svg className={styles.featureSvg} role="img" />
       </div>
-      <div className="text--left padding-horiz--md padding-top--lg">
+      <div className="text--left padding-horiz--md padding-top--sm">
         <h3 className={clsx("feature__tittle", styles.featureTittle)}>
           {title}
         </h3>
@@ -86,17 +86,15 @@ function Feature({ title, Svg, description, url }: FeatureItem) {
 export default function HomepageFeatures(): JSX.Element {
   return (
     <section className={styles.features}>
-      <div className="container">
-        <div
-          className={clsx(
-            "featuresGridContainer",
-            styles.featuresGridContainer
-          )}
-        >
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
-          ))}
-        </div>
+      <div
+        className={clsx(
+          "featuresGridContainer container",
+          styles.featuresGridContainer
+        )}
+      >
+        {FeatureList.map((props, idx) => (
+          <Feature key={idx} {...props} />
+        ))}
       </div>
     </section>
   );

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import styles from "@site/src/components/HomepageDeveloperLinks/styles.module.css";
 import ArrowSvg from "@site/static/img/arrow_forward.svg";
-import ArrowOutward from "@site/static/img/arrow_outward.svg";
 import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 type LinkItem = {
@@ -97,7 +96,10 @@ function DeveloperLink({ title, items }: LinkItem) {
               styles.developerLinkSvgContainer
             )}
           >
-            <ArrowOutward role="img" />
+            <ArrowSvg
+              role="img"
+              className={clsx("developerLink__svg", styles.developerLink__svg)}
+            />
           </div>
         </a>
       ))}
@@ -136,7 +138,7 @@ export default function HomepageDeveloperLinks(): JSX.Element {
           </div>
           <a href="/overview" className={clsx("heroButton svgContainer")}>
             Documentation
-            <ArrowSvg />
+            <ArrowSvg className={clsx("heroButton__svg")} />
           </a>
         </div>
         <div
