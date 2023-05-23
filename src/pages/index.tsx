@@ -63,6 +63,22 @@ export default function Home(): JSX.Element {
     >
       <BrowserOnly>
         {() => {
+          aos.init({
+            duration: 900,
+            easing: "ease",
+            offset: 0,
+            once: true,
+            mirror: false,
+            anchorPlacement: "center-bottom",
+          });
+          document.addEventListener("mousemove", function ({ pageX, pageY }) {
+            const x = pageX;
+            const y = pageY;
+            const spotlightSize = "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
+            if (light.current) {
+              light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`;
+            }
+          });
           return (
             <>
               <HomepageHeader />
@@ -99,32 +115,7 @@ export default function Home(): JSX.Element {
                   styles.bgImageSixth
                 )}
               />
-            </>
-          );
-        }}
-      </BrowserOnly>
-      <main>
-        <BrowserOnly>
-          {() => {
-            aos.init({
-              duration: 900,
-              easing: "ease",
-              offset: 0,
-              once: true,
-              mirror: false,
-              anchorPlacement: "center-bottom",
-            });
-            document.addEventListener("mousemove", function ({ pageX, pageY }) {
-              const x = pageX;
-              const y = pageY;
-              const spotlightSize =
-                "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
-              if (light.current) {
-                light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`;
-              }
-            });
-            return (
-              <>
+              <main>
                 <HomepageFeatures />
                 <HomepageDeveloperLinks />
                 <div className="container">
@@ -133,11 +124,11 @@ export default function Home(): JSX.Element {
                     <HomepageLinks />
                   </div>
                 </div>
-              </>
-            );
-          }}
-        </BrowserOnly>
-      </main>
+              </main>
+            </>
+          );
+        }}
+      </BrowserOnly>
     </Layout>
   );
 }
