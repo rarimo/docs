@@ -2,6 +2,7 @@ import "aos/dist/aos.css";
 
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import HomepageHeader from "@site/src/components/HomepageHeader";
 import HomepageLinks from "@site/src/components/HomepageLinks";
@@ -115,6 +116,7 @@ export default function Home(): JSX.Element {
               />
               <main>
                 <HomepageFeatures />
+                <HomepageDeveloperLinks />
                 <div className="container">
                   <div className={clsx("bottomContent", styles.bottomContent)}>
                     <HomepageStartBuilding />
