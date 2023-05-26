@@ -224,6 +224,22 @@ module.exports = {
         },
       },
     ],
+    // Redirects
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        id: "redirects-2",
+        // Both from and to must start with a slash.
+        // For redirects, do NOT use a trailing slash in `to`
+        // but DO use a trailing slash in `from`.
+        redirects: [
+          {
+            from: "/smorg",
+            to: "/overview",
+          },
+        ],
+      },
+    ],
   ],
 
   themes: ["docusaurus-theme-openapi-docs"], // Allows use of @theme/ApiItem and other components
