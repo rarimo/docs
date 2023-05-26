@@ -5,11 +5,11 @@
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 function getUrl() {
-  return process.env.URL || "https://rarimo.gitlab.io";
+  return process.env.URL || "https://docs.rarimo.com";
 }
 
 function getBaseUrl() {
-  return process.env.BASE_URL || "/docs/";
+  return process.env.BASE_URL || "/";
 }
 
 /** @type {import('@docusaurus/types').Config} */
