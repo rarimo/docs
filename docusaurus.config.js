@@ -1,6 +1,8 @@
 // @ts-check
 /* eslint-disable @typescript-eslint/no-var-requires */
 
+const path = require('path');
+
 // @TODO - make our own themes, i guess
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
@@ -236,6 +238,18 @@ module.exports = {
           {
             from: "/smorg",
             to: "/overview",
+          },
+        ],
+      },
+    ],
+    [
+      path.resolve(__dirname, 'src/plugin-dynamic-redirects/index.ts'),
+      { // this is the options object passed to the plugin
+        routes: [
+          { // using Route schema from react-router
+            path: '/testPluginRedirect',
+            exact: false, // this is needed for sub-routes to match!
+            component: '/src/components/DynamicRedirect', // <-- works, but how do I pass a param for the target page?
           },
         ],
       },
