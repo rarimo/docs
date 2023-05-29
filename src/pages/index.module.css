@@ -10,7 +10,7 @@
   background: initial;
   color: #ffffff;
 }
-.secondContent{
+.secondContent {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,17 +20,17 @@
   position: relative;
 }
 
-.secondSubtitle{
+.secondSubtitle {
   font-size: 0.875rem;
   color: var(--primary-text-color);
   max-width: 634px;
   text-align: start;
 }
 
-.secondButtonContainer{
+.secondButtonContainer {
   display: flex;
   margin-top: 1rem;
-  justify-content: start;
+  justify-content: flex-start;
   width: 100%;
 }
 
@@ -43,7 +43,7 @@
   text-align: start;
 }
 
-.startBuildingSection{
+.startBuildingSection {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,27 +61,38 @@
   margin: 10rem 0;
 }
 
-.bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth {
+.bgImageThird,
+.bgImageFourth,
+.bgImageFifth,
+.bgImageSixth {
   animation-delay: 1s;
   animation-duration: 3.5s;
   animation-iteration-count: infinite;
 }
 
 @media screen and (max-width: 1249px) {
-  .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth {
+  .bgImageThird,
+  .bgImageFourth,
+  .bgImageFifth,
+  .bgImageSixth {
     display: none;
   }
 }
 
 @media screen and (max-width: 996px) {
-  .bgImageFirst, .bgImageSecond, .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
+  .bgImageFirst,
+  .bgImageSecond,
+  .bgImageThird,
+  .bgImageFourth,
+  .bgImageFifth,
+  .bgImageSixth {
     display: none;
   }
-  .secondTitle{
+  .secondTitle {
     font-size: 5rem;
     text-align: center;
   }
-  .secondSubtitle{
+  .secondSubtitle {
     text-align: center;
   }
 
@@ -89,15 +100,15 @@
     margin: 2rem;
   }
 
-  .secondButtonContainer{
+  .secondButtonContainer {
     justify-content: center;
   }
 
-  .secondContent{
+  .secondContent {
     max-width: 100%;
   }
 
-  .startBuildingSection{
+  .startBuildingSection {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,7 +117,8 @@
     margin-right: 0;
     position: relative;
     z-index: var(--z-index-default);
-    max-width: 100%  }
+    max-width: 100%;
+  }
   .bottomContent {
     flex-direction: column;
     align-items: center;
@@ -115,30 +127,37 @@
   }
 }
 
-
 @media screen and (max-width: 625px) {
   .secondTitle {
     font-size: 2.625rem;
     text-align: center;
   }
-  .secondSubtitle{
+  .secondSubtitle {
     text-align: center;
   }
 
-  .secondButtonContainer{
+  .secondButtonContainer {
     flex-direction: column;
     align-items: center;
   }
 
-  .heroButton{
+  .heroButton {
     margin: 0 0 1.5rem 0;
   }
-
 }
 
-.bgImageFirst{
+.bgImageFirst {
   background-color: var(--primary-bg-color);
-  background-image: linear-gradient(to right,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem),linear-gradient(to bottom,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem);
+  background-image: linear-gradient(
+      to right,
+      var(--bg-rect-border-color) 0.0625rem,
+      transparent 0.0625rem
+    ),
+    linear-gradient(
+      to bottom,
+      var(--bg-rect-border-color) 0.0625rem,
+      transparent 0.0625rem
+    );
   background-size: var(--primary-bg-rect-size) var(--primary-bg-rect-size);
   background-repeat: repeat;
   top: 0;
@@ -149,7 +168,7 @@
   opacity: 0.6;
 }
 
-.bgImageSecond{
+.bgImageSecond {
   background-color: rgba(0, 0, 0, 0.6);
   top: 0;
   height: 1425px;
@@ -159,7 +178,10 @@
   opacity: 0.6;
 }
 
-.bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
+.bgImageThird,
+.bgImageFourth,
+.bgImageFifth,
+.bgImageSixth {
   position: absolute;
   width: 68px;
   height: 68px;
@@ -168,34 +190,37 @@
   border-color: rgba(255, 255, 255, 0.05);
 }
 
-.bgImageThird{
+.bgImageThird {
   left: 4%;
   top: 335px;
-  background: linear-gradient(180deg, #3A8B8F 0%, rgba(58, 139, 143, 0) 100%), #3A8B8F;
+  background: linear-gradient(180deg, #3a8b8f 0%, rgba(58, 139, 143, 0) 100%),
+    #3a8b8f;
   background-blend-mode: normal, overlay, normal;
 }
 
-.bgImageFourth{
+.bgImageFourth {
   left: 13%;
   top: 471px;
-  background: linear-gradient(180deg, #FEB475 0%, rgba(254, 180, 117, 0) 100%), #FEB475;
+  background: linear-gradient(180deg, #feb475 0%, rgba(254, 180, 117, 0) 100%),
+    #feb475;
   border-color: rgba(255, 255, 255, 0.05);
 }
 
-.bgImageFifth{
+.bgImageFifth {
   right: 12%;
   top: 269px;
-  background: linear-gradient(180deg, #FB7C3F 0%, rgba(251, 124, 63, 0) 100%), #FB7C3F;
+  background: linear-gradient(180deg, #fb7c3f 0%, rgba(251, 124, 63, 0) 100%),
+    #fb7c3f;
   background-blend-mode: normal, overlay, normal;
 }
 
-.bgImageSixth{
+.bgImageSixth {
   right: 4%;
   top: 408px;
-  background: linear-gradient(180deg, #8AB5A4 0%, rgba(138, 181, 164, 0) 100%), #8AB5A4;
+  background: linear-gradient(180deg, #8ab5a4 0%, rgba(138, 181, 164, 0) 100%),
+    #8ab5a4;
   background-blend-mode: normal, overlay, normal;
 }
-
 
 .buttons {
   display: flex;

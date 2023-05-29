@@ -6,10 +6,10 @@
 
 /* You can override the default Infima variables here. */
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
-@import url('https://fonts.googleapis.com/css2?family=Oswald');
-@import url('https://fonts.googleapis.com/css2?family=Inter');
-@import url('./animations.css');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans");
+@import url("https://fonts.googleapis.com/css2?family=Oswald");
+@import url("https://fonts.googleapis.com/css2?family=Inter");
+@import url("./animations.css");
 :root {
   --ifm-color-primary: #30d5c8;
   --ifm-color-primary-dark: #28c3b7;
@@ -18,24 +18,24 @@
   --ifm-color-primary-light: #46d9ce;
   --ifm-color-primary-lighter: #51dcd1;
   --ifm-color-primary-lightest: #71e2d9;
-  --ifm-font-family-base: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+  --ifm-font-family-base: "Inter", "Segoe UI", Tahoma, sans-serif;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --primary-bg-color: #0D0D0D;
+  --primary-bg-color: #0d0d0d;
   --secondary-bg-color: rgba(255, 255, 255, 0.05);
   --primary-text-color-light: rgba(255, 255, 255, 0.84);
   --secondary-text-color-light: #ffffff;
   --primary-text-color-dark: #131313;
   --primary-border: 1px solid var(--secondary-bg-color);
-  --primary-font-family: 'Oswald';
-  --secondary-font-family: 'Inter';
+  --primary-font-family: "Oswald";
+  --secondary-font-family: "Inter";
   --z-index-default: 1;
   --z-index-background-image: -1;
   --z-index-backdrop: -2;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
+[data-theme="dark"] {
   --ifm-color-primary: #30d5c8;
   --ifm-color-primary-dark: #28c3b7;
   --ifm-color-primary-darker: #25b8ad;
@@ -49,14 +49,14 @@
   --ifm-navbar-link-color: var(--primary-text-color);
 }
 
-.DocSearch-Button .DocSearch-Search-Icon{
+.DocSearch-Button .DocSearch-Search-Icon {
   --docsearch-text-color: var(--primary-text-color);
 }
 
-.navbar{
+.navbar {
   background: transparent;
 }
-.navbar--fixed-top{
+.navbar--fixed-top {
   position: static;
 }
 
@@ -76,14 +76,14 @@ html {
 }
 
 .footer__social-link svg {
-  height:  16px;
+  height: 16px;
   width: 16px;
   margin-left: 0.5rem;
   fill: rgb(116, 116, 116);
   opacity: 1;
 }
 
-.footer__social-link:hover svg  {
+.footer__social-link:hover svg {
   opacity: 0.7;
   color: transparent;
 }
@@ -96,36 +96,35 @@ html {
   margin-bottom: 0;
   display: flex;
   gap: 14px;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .footer__link-item {
   height: 2rem;
 }
-.footer__item{
+.footer__item {
   margin-top: 0.3rem;
 }
 
-.DocSearch.DocSearch-Button{
+.DocSearch.DocSearch-Button {
   border-radius: 0;
-  border:  1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   font-family: var(--secondary-font-family);
-
 }
 
-.DocSearch-Button-Key{
+.DocSearch-Button-Key {
   --docsearch-key-gradient: rgba(255, 255, 255, 0.1);
   --docsearch-key-shadow: none;
 }
 
 span.DocSearch-Button-Placeholder {
-  font-size: 0.75rem
+  font-size: 0.75rem;
 }
 
-.heroButton{
+.heroButton {
   position: relative;
   font-family: var(--secondary-font-family);
-  background: #8AB5A4;
+  background: #8ab5a4;
   padding: 1.0625rem 2.25rem;
   font-size: 1rem;
   font-weight: 600;
@@ -136,19 +135,19 @@ span.DocSearch-Button-Placeholder {
   white-space: nowrap;
 }
 
-.heroButton:hover{
+.heroButton:hover {
   color: var(--primary-text-color-dark);
   text-decoration: none;
 }
 
-.heroButton__svg{
+.heroButton__svg {
   color: var(--primary-bg-color);
   width: 1.25rem;
   height: 1.25rem;
   margin-left: 0.75rem;
 }
 
-.heroButtonSecondary{
+.heroButtonSecondary {
   display: flex;
   align-items: center;
   font-size: 1rem;
@@ -163,12 +162,12 @@ span.DocSearch-Button-Placeholder {
   align-items: center;
 }
 
-.footer__links.col{
+.footer__links.col {
   width: 20%;
   flex: initial;
 }
 
-.lantern{
+.lantern {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -180,14 +179,14 @@ span.DocSearch-Button-Placeholder {
   }
   .footer__items {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
   }
   .footer--dark {
     background: var(--primary-text-color-dark);
     height: 100px;
     overflow: hidden;
   }
-  .footer__links.col{
+  .footer__links.col {
     flex: 1 0;
   }
 }

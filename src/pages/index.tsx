@@ -1,4 +1,4 @@
-import "aos/dist/aos.css";
+// import "aos/dist/aos.css";
 
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -8,9 +8,12 @@ import HomepageHeader from "@site/src/components/HomepageHeader";
 import HomepageLinks from "@site/src/components/HomepageLinks";
 import ArrowSvg from "@site/static/img/arrow_forward.svg";
 import Layout from "@theme/Layout";
-import aos from "aos";
+// import aos from "aos";
 import clsx from "clsx";
-import React, { useEffect, useRef } from "react";
+import React, {
+  // useEffect,
+  useRef,
+} from "react";
 
 import styles from "./index.module.css";
 
@@ -56,29 +59,29 @@ export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   const light = useRef(null);
 
-  useEffect(() => {
-    // const onMousemove = ({ pageX, pageY }) => {
-    //   const x = pageX;
-    //   const y = pageY;
-    //   const spotlightSize = "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
-    //   if (light.current) {
-    //     light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`;
-    //   }
-    // };
-    aos.init({
-      duration: 900,
-      easing: "ease",
-      offset: 0,
-      once: true,
-      mirror: false,
-      anchorPlacement: "center-bottom",
-    });
-    // window.addEventListener("mousemove", onMousemove);
+  // useEffect(() => {
+  //   // const onMousemove = ({ pageX, pageY }) => {
+  //   //   const x = pageX;
+  //   //   const y = pageY;
+  //   //   const spotlightSize = "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
+  //   //   if (light.current) {
+  //   //     light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`;
+  //   //   }
+  //   // };
+  //   aos.init({
+  //     duration: 900,
+  //     easing: "ease",
+  //     offset: 0,
+  //     once: true,
+  //     mirror: false,
+  //     anchorPlacement: "center-bottom",
+  //   });
+  //   // window.addEventListener("mousemove", onMousemove);
 
-    // return () => {
-    //   window.removeEventListener("mousemove", onMousemove);
-    // };
-  }, []);
+  //   // return () => {
+  //   //   window.removeEventListener("mousemove", onMousemove);
+  //   // };
+  // }, []);
 
   return (
     <Layout
