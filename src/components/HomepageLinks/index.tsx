@@ -1,8 +1,12 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-import styles from "@site/src/components/HomepageLinks/styles.module.css";
 import ArrowForward from "@site/static/img/arrow_forward.svg";
+import ForumIcon from "@site/static/img/forum.svg";
+import DiscordIcon from "@site/static/img/ri-discord-line.svg";
+import GithubIcon from "@site/static/img/ri-github-fill.svg";
 import clsx from "clsx";
 import React from "react";
+
+import styles from "./styles.module.css";
+
 type LinkItem = {
   title: string;
   Svg: React.ComponentType<React.ComponentProps<"svg">>;
@@ -12,19 +16,19 @@ type LinkItem = {
 const LinksList: LinkItem[] = [
   {
     title: "Discord",
-    Svg: require("@site/static/img/ri-discord-line.svg").default,
+    Svg: DiscordIcon,
     description: "Join the Developer Community",
     url: "https://discord.gg/cfrH3Fe7ke",
   },
   {
     title: "Forum",
-    Svg: require("@site/static/img/forum.svg").default,
+    Svg: ForumIcon,
     description: "Discuss governance and more",
     url: "https://scan.testnet.rarimo.com/proposals",
   },
   {
     title: "Github",
-    Svg: require("@site/static/img/ri-github-fill.svg").default,
+    Svg: GithubIcon,
     description: "View all Rarimo repositories",
     url: "https://github.com/rarimo",
   },
