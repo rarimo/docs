@@ -1,6 +1,6 @@
 // import "aos/dist/aos.css";
 
-import BrowserOnly from "@docusaurus/BrowserOnly";
+// import BrowserOnly from "@docusaurus/BrowserOnly";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 // import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
@@ -10,10 +10,7 @@ import ArrowSvg from "@site/static/img/arrow_forward.svg";
 import Layout from "@theme/Layout";
 // import aos from "aos";
 import clsx from "clsx";
-import React, {
-  // useEffect,
-  useRef,
-} from "react";
+import React from "react"; // useRef, // useEffect,
 
 import styles from "./index.module.css";
 
@@ -57,7 +54,7 @@ function HomepageStartBuilding() {
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
-  const light = useRef(null);
+  // const light = useRef(null);
 
   // useEffect(() => {
   //   // const onMousemove = ({ pageX, pageY }) => {
@@ -88,57 +85,57 @@ export default function Home(): JSX.Element {
       title={`${siteConfig.title}`}
       description="Description will go into a meta tag in <head />"
     >
-      <BrowserOnly>
-        {() => (
-          <>
-            <HomepageHeader />
-            <div className={clsx("bgImageFirst", styles.bgImageFirst)} />
-            <div
-              className={clsx("bgImageSecond", styles.bgImageSecond)}
-              ref={light}
-            />
-            <div
-              data-aos="fade-up"
-              className={clsx(
-                "bgImageThird squareWaveAnimationDown",
-                styles.bgImageThird
-              )}
-            />
-            <div
-              data-aos="fade-up"
-              className={clsx(
-                "bgImageFourth squareWaveAnimationUp",
-                styles.bgImageFourth
-              )}
-            />
-            <div
-              data-aos="fade-up"
-              className={clsx(
-                "bgImageFifth squareWaveAnimationUp",
-                styles.bgImageFifth
-              )}
-            />
-            <div
-              data-aos="fade-up"
-              className={clsx(
-                "bgImageSixth squareWaveAnimationDown",
-                styles.bgImageSixth
-              )}
-            />
-            <main>
-              <HomepageFeatures />
-              {/*Todo: Show developer links */}
-              {/*<HomepageDeveloperLinks />*/}
-              <div className="container">
-                <div className={clsx("bottomContent", styles.bottomContent)}>
-                  <HomepageStartBuilding />
-                  <HomepageLinks />
-                </div>
-              </div>
-            </main>
-          </>
-        )}
-      </BrowserOnly>
+      {/* <BrowserOnly>
+        {() => ( */}
+      <>
+        <HomepageHeader />
+        <div className={clsx("bgImageFirst", styles.bgImageFirst)} />
+        <div
+          className={clsx("bgImageSecond", styles.bgImageSecond)}
+          // ref={light}
+        />
+        <div
+          data-aos="fade-up"
+          className={clsx(
+            "bgImageThird squareWaveAnimationDown",
+            styles.bgImageThird
+          )}
+        />
+        <div
+          data-aos="fade-up"
+          className={clsx(
+            "bgImageFourth squareWaveAnimationUp",
+            styles.bgImageFourth
+          )}
+        />
+        <div
+          data-aos="fade-up"
+          className={clsx(
+            "bgImageFifth squareWaveAnimationUp",
+            styles.bgImageFifth
+          )}
+        />
+        <div
+          data-aos="fade-up"
+          className={clsx(
+            "bgImageSixth squareWaveAnimationDown",
+            styles.bgImageSixth
+          )}
+        />
+        <main>
+          <HomepageFeatures />
+          {/*Todo: Show developer links */}
+          {/*<HomepageDeveloperLinks />*/}
+          <div className="container">
+            <div className={clsx("bottomContent", styles.bottomContent)}>
+              <HomepageStartBuilding />
+              <HomepageLinks />
+            </div>
+          </div>
+        </main>
+      </>
+      {/* )}
+      </BrowserOnly> */}
     </Layout>
   );
 }
