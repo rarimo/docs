@@ -1,8 +1,6 @@
----
----
-
+import React from 'react';
 import {Redirect} from '@docusaurus/router';
 
-const Home = () => {
+export default function Home(): JSX.Element {
   return <Redirect to="/overview" />;
 };
