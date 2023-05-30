@@ -234,7 +234,7 @@ module.exports = {
         // but DO use a trailing slash in `from`.
         redirects: [
           {
-            from: "/smorg",
+            from: "/smorg/",
             to: "/overview",
           },
         ],
