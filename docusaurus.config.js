@@ -238,6 +238,14 @@ module.exports = {
           content: "summary_large_image",
         },
         {
+          property: "twitter:image",
+          content: "https://docs.rarimo.com/img/og-img.jpg",
+        },
+        {
+          property: "twitter:card",
+          content: "summary_large_image",
+        },
+        {
           property: "og:image:height",
           content: "786",
         },
