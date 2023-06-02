@@ -34,7 +34,7 @@ const FeatureList: FeatureItem[] = [
         save fees.
       </>
     ),
-    url: "./overview/design",
+    url: "./architecture",
   },
   {
     title: "API reference",
