@@ -29,11 +29,11 @@ const sidebars = {
   ],
   applications: [
     "use-cases",
-    "use-cases/settlement-integration",
-    "use-cases/cross-chain-proofs",
-    "use-cases/cross-chain-minting",
-    "use-cases/cross-chain-staking",
-    "use-cases/usdc-integration",
+    "use-cases/nft-checkout",
+    "use-cases/proofs",
+    "use-cases/minting",
+    "use-cases/staking",
+    "use-cases/cctp",
   ],
   architecture: [
     {
