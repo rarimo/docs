@@ -82,14 +82,21 @@ For example, to work with Metamask or Coinbase wallets on EVM-compatible chains,
 1. Replace the contents of the automatically-generated file `src/App.tsx` with this code:
 
    ```tsx
-   import { createProvider } from '@rarimo/provider'
    import { MetamaskProvider } from '@rarimo/providers-evm'
+   import { useProvider } from '@rarimo/react-provider'
+   import { useEffect } from 'react'
 
    function App() {
-     const { provider } = useProvider(MetamaskProvider)
+     const { provider, ...rest } = useProvider(MetamaskProvider)
 
-     provider?.connect()
-     console.log(provider?.address)
+
+     useEffect(() => {
+       const connectToProvider = async () => {
+         await provider.connect()
+       }
+       if (!provider) connectToProvider()
+       if (provider?.address) console.log(provider.address)
+     }, [provider])
 
      return <div className="App">Wallet address: {provider?.address}</div>
    }
