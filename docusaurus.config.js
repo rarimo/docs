@@ -83,13 +83,13 @@ module.exports = {
           },
           {
             type: "doc",
-            docId: "overview/applications",
+            docId: "use-cases",
             position: "left",
             label: "Use cases",
           },
           {
             type: "doc",
-            docId: "overview/design",
+            docId: "architecture",
             position: "left",
             label: "Architecture",
           },
@@ -102,7 +102,7 @@ module.exports = {
               {
                 label: "Contracts",
                 type: "doc",
-                docId: "developers/contracts",
+                docId: "reference/contracts",
               },
               {
                 label: "API",

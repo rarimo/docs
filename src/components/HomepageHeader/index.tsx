@@ -195,7 +195,7 @@ export default function HomepageHeader() {
           </a>
           <a
             className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
-            href="./overview/applications"
+            href="./use-cases"
           >
             Explore use cases
           </a>
