@@ -3,53 +3,26 @@
 
 # Abstract
 
-Identity isn’t only about your physical or digital passport. Identity isn’t only about a single NFT issued on Ethereum
-that provides proof of your humanity. It’s not only about dozens of non-transferrable cryptographic badges and your
-social graphs built by different protocols. Identity isn’t only about what DeFi protocols know about you (credit
-history, reputation, financial portfolio, etc.).
+Many forces shape our identities; the communities we belong to, the activities we participate in, and the assets we own. Web3 identities are no different. A user 
+may hold identity artifacts such as an NFT that confers DAO membership, a Soul-Bound Token (SBT) that certifies their university degree, and cryptographic proof 
+that confirms their affiliations in some social graph.
 
-*Identity includes all mentioned aspects but doesn’t limit by them.*
+Unlike in real life, however, web3 identities are not yet cohesive. This is because the web3 ecosystem is dispersed across multiple blockchains. A user’s DAO NFT, 
+for instance, may be issued on Ethereum, their University Credential on Solana, and their social graph may be off-chain but reflecting interactions on a dApp on 
+Polygon. While a range of protocols brings interoperability to digital assets, none provide unique solutions to make digital identities and their myriad 
+components interoperable. 
 
-The problem is all these entities can exist in different environments (where they were issued or recorded). It's
-extremely difficult to provide part of your identity (with integrity and authenticity proof) to the destination system
-or protocol if they exist in another environment. The easiest example we can provide for highlighting this problem:
+Firstly, the various artifacts that compose digital identities all require bespoke solutions, and yet, it is also vital that they can be used interchangeably and 
+that the solutions meet certain standardizations. Secondly, identity providers generate credentials for their users. Age and residency, for instance, are two of 
+the most common. However, privacy concerns require users to reveal only specific aspects of their identity, like confirming residency without sharing their 
+precise address.
 
-> **A**: 	Imagine you must prove ownership of NFT allocated on Ethereum to dApp allocated on Polygon
+Rarimo is the only interoperability protocol that overcomes these challenges. It offers cross-chain identity, state, and digital asset management across chains 
+using embedded ZK proofs that ensure privacy. With the ability to mint and store credentials directly on the Rarimo chain, it enables cross-chain interaction and 
+integration of identity and social components across multiple networks.
 
-> **B**: 	Ok, no problem, we can use the NFT bridge for it
-
-> **A**: 	Imagine you don’t want to move this NFT and create replicas on other blockchains (because you have a  unique
-thing). Or you can’t do it physically if we are talking about SBT tokens
-
-> **B**: 	Hm, that’s more complex
-
-> **A**: 	Fine, and finally, you must prove the state of your account in some decentralized social network, your history
-of loans from a digital bank protocol, or proof of the non-existence of your profile in the blacklist registry. And all
-of this together.
-
-> **B**: 	Emmm, got it…
-
-Another point is approaches that are used for implementing digital identity. Different projects can create different
-infrastructures for the digital identities of their consumers:
-- Non-fungible tokens (Lens, layer3)
-- Soul-bound tokens (some POAPs or digital certificates)
-- Self-sovereign identities (Iden3)
-- Wallets and accounts (financial history)
-- Namespaces (ENS, Unstoppable domains)
-- Combinations of all mentioned
-
-So we need something that can operate: 1 - multichain; 2 - approach agnostically (able to operate not only with tokens
-but also with states and statements in a different form).
-
-Rarimo is the next-generation messaging protocol offering cross-chain data, identity, and digital asset management.
-Rarimo enables the free movement of assets and identities’ states across chains allowing users and dApps a choice that
-was not afforded before. With Rarimo, the future of multi-chain ecosystems and the network effect between them is
-unlocked. There are many advantages seen in using Rarimo. The first is that Rarimo provides high-security guarantees at
-a constant operation price (due to the use of TSS).
-
-The second is the ease of integrating messaging contracts with existing dApps. This saves users and developers of the
-application on top of the protocol from understanding the technical features of the systems between which such an
-interaction is made. The third advantage is that the architecture of the protocol allows the implementation of
-streamlined user flows: one action = result. The user can interact with decentralized applications directly through the
-messaging protocol. This feature opens up many use cases, such as single transaction cross-chain settlement, multichain
-social posting, multichain membership proofs, etc.
+**Rarimo**: As well as its identity-specific features, Rarimo has a range of characteristics that make it particularly secure, seamless, and cost-effective as a 
+general-use interoperability protocol. Firstly, using a Threshold Signature Scheme (TSS), Rarimo provides high-security guarantees at a constant operation price. 
+Secondly, its application layer means developers can effortlessly integrate messaging contracts from existing dApps without having to build notable amounts of 
+custom, use-case-specific logic. Thirdly, Rarimo supports streamlined, single-click, single-transaction flows. This means users can perform complex, multi-chain 
+activities, such as posting on dApps on multiple blockchains, with only a single click.

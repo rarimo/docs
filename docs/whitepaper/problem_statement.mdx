@@ -3,18 +3,17 @@
 
 # Problem Statement
 
-Most current multichain solutions focus on cases that presume tokens transferring (bridging). Only some of them are
-suitable for transferring different types of data, including cross-chain calls. But they only act the role of postmen
-for this data without adding an additional layer of optimization and aggregation.
+Most current multi-chain solutions focus on cases where token transfers (bridging) suffice. Only a handful of these solutions are suitable for transferring 
+different types of data, including cross-chain calls, but even then, they are only able to act as postmen for this data and cannot provide an additional layer of 
+optimization and aggregation.
 
-Imagine that instead of answering the request “Is there a certain entry in the registry?” - the system returns you the
-registry archive and asks you to figure it out on your own. This is exactly what messaging protocols usually do. They
-move data and guarantee its authenticity, but how useful and effective is this approach?
+*Imagine asking a registry if it has a particular entry and, instead of receiving confirmation, being returned to the archive and told to figure it out on your 
+own. This is how most messaging protocols operate. They move data and guarantee its authenticity, but the usefulness and effectiveness of this approach are 
+questionable.*
 
-Besides, many solutions for moving tokens or data across chains use a similar security model - **multisignature and a
-predefined set of trusted oracles**. It often leads to hacks and losing millions of dollars [2-4]. On the other hand, the
-complexity of the architecture and the increase in the level of security of the bridge clearly lead to an increase in
-the fees required to make transfer tokens or messages over networks.
+Furthermore, most solutions for cross-chain transfers of tokens or data use a similar security model - **multi-signature** and a **predefined set of trusted oracles**. 
+This model is notoriously vulnerable to hacks and has led to millions of dollars of losses [2-4], but safe alternatives are few and far between as increasing 
+security typically drives architectural complexity and user fees to unsustainable levels. 
 
 So, for now, the focus of innovation in the multichain messaging space is on:
 - **Flexibility** and adaptiveness for different cases
