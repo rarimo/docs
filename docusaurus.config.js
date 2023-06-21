@@ -55,7 +55,7 @@ module.exports = {
           customCss: require.resolve("./src/css/custom.css"),
         },
         gtag: {
-          trackingID: "GTM-PRLLH6W",
+          trackingID: "G-9R680YSTXW",
         },
       }),
     ],
