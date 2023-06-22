@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+import styles from "@site/src/components/HomepageDeveloperLinks/styles.module.css";
 import ArrowSvg from "@site/static/img/arrow_forward.svg";
 import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
-
-import styles from "./styles.module.css";
 type LinkItem = {
   title: string;
   items: { title: string; url: string }[];

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-around;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: start;
     width: 50%;
     position: relative;
 }
@@ -64,7 +64,7 @@
 
 .linkText {
     padding-left: 1.5rem;
-    align-items: flex-start;
+    align-items: start;
 }
 
 .bgImageSeventh{
@@ -130,12 +130,12 @@
         width: 100%;
     }
     .link{
-        align-items: flex-start;
+        align-items: start;
         width: 30%;
     }
     .linkWrapper{
         flex-direction: column;
-        align-items: flex-start;
+        align-items: start;
         padding-left: 1.5rem;
     }
     .linkText{

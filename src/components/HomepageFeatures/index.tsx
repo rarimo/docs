@@ -1,6 +1,5 @@
-import ArrowTopRightIcon from "@site/static/img/arrow_top_right.svg";
-import ExtensionIcon from "@site/static/img/extension.svg";
-import FlagIcon from "@site/static/img/flag.svg";
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 import clsx from "clsx";
 import React from "react";
 
@@ -15,7 +14,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: "Getting started",
-    Svg: FlagIcon,
+    Svg: require("@site/static/img/flag.svg").default,
     description: (
       <>
         Learn the basics of the protocol and create simple applications to
@@ -26,7 +25,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "Architecture",
-    Svg: ArrowTopRightIcon,
+    Svg: require("@site/static/img/arrow_top_right.svg").default,
     description: (
       <>
         Read about how the protocol is structured, how its oracles and contracts
@@ -38,7 +37,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "API reference",
-    Svg: ExtensionIcon,
+    Svg: require("@site/static/img/extension.svg").default,
     description: (
       <>
         Refer to information about the Rarimo API, which provides information
@@ -50,7 +49,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "SDK",
-    Svg: FlagIcon,
+    Svg: require("@site/static/img/flag.svg").default,
     description: (
       <>
         Use the Rarimo JavaScript/TypeScript SDK to simplify using the protocol

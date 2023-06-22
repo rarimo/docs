@@ -3,10 +3,21 @@
 
 # Problem Statement
 
-Almost all solutions for moving tokens or data across chains use a similar security model - multisignature and trusted oracles. It often leads to hacks and losing millions of dollars [2-4]. On the other hand, the complexity of the architecture and the increase in the level of security of the bridge clearly lead to an increase in the fees required to make transfer tokens or messages over networks.
+Most current multi-chain solutions focus on cases where token transfers (bridging) suffice. Only a handful of these solutions are suitable for transferring 
+different types of data, including cross-chain calls, but even then, they are only able to act as postmen for this data and cannot provide an additional layer of 
+optimization and aggregation.
 
-So for now the focus of innovation in the bridging space is on: 
-- Cost of bridging (all fees that should be paid for transferring assets)
-- Interoperability (how fast new networks and tokens can be added to the bridge)
-- Speed of transfer within the bridge
-- Security and Assurance in bridging
+*Imagine asking a registry if it has a particular entry and, instead of receiving confirmation, being returned to the archive and told to figure it out on your 
+own. This is how most messaging protocols operate. They move data and guarantee its authenticity, but the usefulness and effectiveness of this approach are 
+questionable.*
+
+Furthermore, most solutions for cross-chain transfers of tokens or data use a similar security model - **multi-signature** and a **predefined set of trusted oracles**. 
+This model is notoriously vulnerable to hacks and has led to millions of dollars of losses [2-4], but safe alternatives are few and far between as increasing 
+security typically drives architectural complexity and user fees to unsustainable levels. 
+
+So, for now, the focus of innovation in the multichain messaging space is on:
+- **Flexibility** and adaptiveness for different cases
+- **Cost** of the action
+- **Interoperability** (how fast new networks and tokens can be added to the protocol)
+- **Speed** of actions using the protocol
+- **Security** and Assurance of interaction

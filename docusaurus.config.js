@@ -5,11 +5,11 @@
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 function getUrl() {
-  return process.env.URL || "https://docs.rarimo.com";
+  return process.env.URL || "https://rarimo.gitlab.io";
 }
 
 function getBaseUrl() {
-  return process.env.BASE_URL || "/";
+  return process.env.BASE_URL || "/docs/";
 }
 
 /** @type {import('@docusaurus/types').Config} */
@@ -55,7 +55,7 @@ module.exports = {
           customCss: require.resolve("./src/css/custom.css"),
         },
         gtag: {
-          trackingID: "GTM-PRLLH6W",
+          trackingID: "G-9R680YSTXW",
         },
       }),
     ],
@@ -192,14 +192,74 @@ module.exports = {
         defaultLanguage: "javascript",
         additionalLangauges: ["json", "shell", "solidity"],
       },
+
       metadata: [
         {
           name: "title",
-          content: "Rarimo Docs",
+          content: "Rarimo Developer Documentation",
+        },
+        {
+          property: "og:title",
+          content: "Rarimo Developer Documentation",
+        },
+        {
+          property: "twitter:title",
+          content: "Rarimo Developer Documentation",
         },
         {
           name: "description",
-          content: "words words words",
+          content:
+            "Learn the basics of the protocol and create simple applications to connect to wallets and create cross-chain transactions.",
+        },
+        {
+          property: "og:description",
+          content:
+            "Learn the basics of the protocol and create simple applications to connect to wallets and create cross-chain transactions.",
+        },
+        {
+          property: "twitter:description",
+          content:
+            "Learn the basics of the protocol and create simple applications to connect to wallets and create cross-chain transactions.",
+        },
+        {
+          property: "og:url",
+          content: "https://docs.rarimo.com",
+        },
+        {
+          property: "og:image",
+          content: "https://docs.rarimo.com/img/og-img.jpg",
+        },
+        {
+          name: "twitter:image",
+          content: "https://docs.rarimo.com/img/og-img.jpg",
+        },
+        {
+          name: "twitter:card",
+          content: "summary_large_image",
+        },
+        {
+          property: "twitter:image",
+          content: "https://docs.rarimo.com/img/og-img.jpg",
+        },
+        {
+          property: "twitter:card",
+          content: "summary_large_image",
+        },
+        {
+          property: "og:image:height",
+          content: "786",
+        },
+        {
+          property: "og:image:width",
+          content: "1600",
+        },
+        {
+          property: "og:locale",
+          content: "en_GB",
+        },
+        {
+          property: "og:type",
+          content: "website",
         },
       ],
     }),

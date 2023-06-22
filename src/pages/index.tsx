@@ -1,7 +1,6 @@
 import "aos/dist/aos.css";
 
 import BrowserOnly from "@docusaurus/BrowserOnly";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 // import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import HomepageHeader from "@site/src/components/HomepageHeader";
@@ -10,7 +9,7 @@ import ArrowSvg from "@site/static/img/arrow_forward.svg";
 import Layout from "@theme/Layout";
 import aos from "aos";
 import clsx from "clsx";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
 import styles from "./index.module.css";
 
@@ -53,88 +52,77 @@ function HomepageStartBuilding() {
 }
 
 export default function Home(): JSX.Element {
-  const { siteConfig } = useDocusaurusContext();
   const light = useRef(null);
-
-  useEffect(() => {
-    const onMousemove = ({ pageX, pageY }) => {
-      const x = pageX;
-      const y = pageY;
-      const spotlightSize = "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
-      if (light.current) {
-        light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`;
-      }
-    };
-    aos.init({
-      duration: 900,
-      easing: "ease",
-      offset: 0,
-      once: true,
-      mirror: false,
-      anchorPlacement: "center-bottom",
-    });
-    window.addEventListener("mousemove", onMousemove);
-
-    return () => {
-      window.removeEventListener("mousemove", onMousemove);
-    };
-  }, []);
-
   return (
-    <Layout
-      title={`${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
-    >
+    <Layout>
       <BrowserOnly>
-        {() => (
-          <>
-            <HomepageHeader />
-            <div className={clsx("bgImageFirst", styles.bgImageFirst)} />
-            <div
-              className={clsx("bgImageSecond", styles.bgImageSecond)}
-              // ref={light}
-            />
-            <div
-              data-aos="fade-up"
-              className={clsx(
-                "bgImageThird squareWaveAnimationDown",
-                styles.bgImageThird
-              )}
-            />
-            <div
-              data-aos="fade-up"
-              className={clsx(
-                "bgImageFourth squareWaveAnimationUp",
-                styles.bgImageFourth
-              )}
-            />
-            <div
-              data-aos="fade-up"
-              className={clsx(
-                "bgImageFifth squareWaveAnimationUp",
-                styles.bgImageFifth
-              )}
-            />
-            <div
-              data-aos="fade-up"
-              className={clsx(
-                "bgImageSixth squareWaveAnimationDown",
-                styles.bgImageSixth
-              )}
-            />
-            <main>
-              <HomepageFeatures />
-              {/*Todo: Show developer links */}
-              {/*<HomepageDeveloperLinks />*/}
-              <div className="container">
-                <div className={clsx("bottomContent", styles.bottomContent)}>
-                  <HomepageStartBuilding />
-                  <HomepageLinks />
+        {() => {
+          aos.init({
+            duration: 900,
+            easing: "ease",
+            offset: 0,
+            once: true,
+            mirror: false,
+            anchorPlacement: "center-bottom",
+          });
+          document.addEventListener("mousemove", function ({ pageX, pageY }) {
+            const x = pageX;
+            const y = pageY;
+            const spotlightSize = "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
+            if (light.current) {
+              light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`;
+            }
+          });
+          return (
+            <>
+              <HomepageHeader />
+              <div className={clsx("bgImageFirst", styles.bgImageFirst)} />
+              <div
+                className={clsx("bgImageSecond", styles.bgImageSecond)}
+                ref={light}
+              />
+              <div
+                data-aos="fade-up"
+                className={clsx(
+                  "bgImageThird squareWaveAnimationDown",
+                  styles.bgImageThird
+                )}
+              />
+              <div
+                data-aos="fade-up"
+                className={clsx(
+                  "bgImageFourth squareWaveAnimationUp",
+                  styles.bgImageFourth
+                )}
+              />
+              <div
+                data-aos="fade-up"
+                className={clsx(
+                  "bgImageFifth squareWaveAnimationUp",
+                  styles.bgImageFifth
+                )}
+              />
+              <div
+                data-aos="fade-up"
+                className={clsx(
+                  "bgImageSixth squareWaveAnimationDown",
+                  styles.bgImageSixth
+                )}
+              />
+              <main>
+                <HomepageFeatures />
+                {/*Todo: Show developer links */}
+                {/*<HomepageDeveloperLinks />*/}
+                <div className="container">
+                  <div className={clsx("bottomContent", styles.bottomContent)}>
+                    <HomepageStartBuilding />
+                    <HomepageLinks />
+                  </div>
                 </div>
-              </div>
-            </main>
-          </>
-        )}
+              </main>
+            </>
+          );
+        }}
       </BrowserOnly>
     </Layout>
   );

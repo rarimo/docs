@@ -22,9 +22,24 @@ const sidebars = {
   overview: [
     "overview",
     "getting-started",
-    "overview/connecting-to-wallets",
-    "overview/swapping-tokens",
-    "overview/creating-transactions",
+    {
+      type: "category",
+      label: "Transactions",
+      items: [
+        "overview/connecting-to-wallets",
+        "overview/swapping-tokens",
+        "overview/creating-transactions",
+      ],
+    },
+    {
+      type: "category",
+      label: "Identity",
+      link: {
+        type: "doc",
+        id: "overview/identity",
+      },
+      items: ["overview/issuing-credentials", "overview/querying-credentials"],
+    },
     "glossary",
   ],
   applications: [
