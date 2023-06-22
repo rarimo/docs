@@ -54,10 +54,37 @@
 }
 
 .navbar{
-  background: var(--primary-bg-color)
+  background: transparent;
+  padding-bottom: 5rem;
 }
+
 .navbar--fixed-top{
   position: static;
+}
+
+.theme-doc-sidebar-container{
+  --ifm-navbar-height: 0;
+  --ifm-toc-border-color: #FFFFFF1A;
+}
+.menu__link--active{
+  --ifm-menu-color-background-active: #8AB5A41A;
+  --ifm-menu-color-active: #8AB5A4;
+}
+.menu__link{
+  font-family: var(--secondary-font-family);
+  font-weight: 500;
+  --ifm-menu-color: var(--primary-text-color);
+}
+
+.table-of-contents__left-border{
+  --ifm-toc-border-color: #FFFFFF1A;
+}
+
+.table-of-contents__link{
+  color: var(--primary-text-color);
+}
+.table-of-contents__link--active{
+  color: #8AB5A4;
 }
 
 html {
