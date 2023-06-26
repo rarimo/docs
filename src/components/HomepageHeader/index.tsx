@@ -1,10 +1,10 @@
+import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import ArrowSvg from "@site/static/img/arrow_forward.svg";
 import clsx from "clsx";
 import React from "react";
 
 import styles from "./styles.module.css";
-import Link from "@docusaurus/Link";
 const firstWord = [
   {
     delay: 0,
@@ -201,7 +201,6 @@ export default function HomepageHeader() {
             href="use-cases"
             type="doc"
             id="use-cases"
-
           >
             Explore use cases
           </Link>
