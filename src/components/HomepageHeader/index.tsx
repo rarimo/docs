@@ -4,6 +4,7 @@ import clsx from "clsx";
 import React from "react";
 
 import styles from "./styles.module.css";
+import Link from "@docusaurus/Link";
 const firstWord = [
   {
     delay: 0,
@@ -180,8 +181,10 @@ export default function HomepageHeader() {
           {siteConfig.tagline}
         </p>
         <div className={clsx("buttonContainer", styles.buttonContainer)}>
-          <a
-            href="./overview"
+          <Link
+            href="overview"
+            type="doc"
+            id="overview"
             className={clsx(
               "heroButton svgContainer",
               styles.heroButton,
@@ -192,13 +195,16 @@ export default function HomepageHeader() {
             <ArrowSvg
               className={clsx("heroButton__svg", styles.heroButton__svg)}
             />
-          </a>
-          <a
+          </Link>
+          <Link
             className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
-            href="./use-cases"
+            href="use-cases"
+            type="doc"
+            id="use-cases"
+
           >
             Explore use cases
-          </a>
+          </Link>
         </div>
       </div>
     </header>
