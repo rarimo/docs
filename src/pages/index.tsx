@@ -1,9 +1,7 @@
 import "aos/dist/aos.css";
 
 import BrowserOnly from "@docusaurus/BrowserOnly";
-import { useLocation } from "@docusaurus/router";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
+// import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import HomepageHeader from "@site/src/components/HomepageHeader";
 import HomepageLinks from "@site/src/components/HomepageLinks";
@@ -43,8 +41,7 @@ function HomepageStartBuilding() {
         </a>
         <a
           className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
-          href="https://rarimo.gitlab.io/docs/docs/whitepaper"
-          target="_blank"
+          href="./whitepaper"
           rel="noreferrer"
         >
           Whitepaper
@@ -55,13 +52,9 @@ function HomepageStartBuilding() {
 }
 
 export default function Home(): JSX.Element {
-  const { siteConfig } = useDocusaurusContext();
   const light = useRef(null);
   return (
-    <Layout
-      title={`${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
-    >
+    <Layout>
       <BrowserOnly>
         {() => {
           aos.init({
@@ -118,7 +111,8 @@ export default function Home(): JSX.Element {
               />
               <main>
                 <HomepageFeatures />
-                <HomepageDeveloperLinks />
+                {/*Todo: Show developer links */}
+                {/*<HomepageDeveloperLinks />*/}
                 <div className="container">
                   <div className={clsx("bottomContent", styles.bottomContent)}>
                     <HomepageStartBuilding />

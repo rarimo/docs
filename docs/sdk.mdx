@@ -1,21 +1,18 @@
 ---
 ---
 
-# NFT Checkout SDK
+# Rarimo SDK
 
-Rarimo's JavaScript/TypeScript SDK provides tools to interact with browser-based wallets such as Metamask, Near, and Phantom and send transactions from wallets to Rarimo's contracts.
+Rarimo's JavaScript/TypeScript SDK provides tools to interact with browser-based wallets and send transactions from wallets to Rarimo's contracts.
+
+For complete reference information about the SDK packages, see the [SDK reference](https://rarimo.github.io/js-sdk/index.html).
 
 ## Packages
 
-The SDK includes these packages.
-For more information about the main things that each package provides, click on the package name.
+The SDK provides these groups of packages:
 
-- [@rarimo/provider](sdk/provider): Tools that provide access to wallets
-- [@rarimo/nft-checkout](sdk/nft-checkout): Tools to get the estimated price of a transaction and to send transactions to Rarimo
-- [@rarimo/react-provider](sdk/react-provider): Tools that provide access to wallets in React applications
-- [@rarimo/react-nft-checkout](sdk/react-nft-checkout): React components that create transactions
-
-For complete reference information about the SDK packages, see the [SDK reference](https://rarimo.github.io/js-sdk/index.html).
+- [Packages that provide access to wallets](./sdk/packages-provider)
+- [Packages that send transactions to blockchains](./sdk/packages-checkout)
 
 ## Prerequisites
 
@@ -26,10 +23,5 @@ The SDK requires the [`ethers`](https://www.npmjs.com/package/ethers) package.
 To install the SDK, run `yarn add` and the names of the packages to install, as in this example:
 
 ```shell
-yarn add ethers @rarimo/provider @rarimo/nft-checkout
+yarn add ethers @rarimo/provider @rarimo/providers-evm @rarimo/nft-checkout
 ```
-
-## Usage
-
-- For information about working with wallets, see [@rarimo/provider](sdk/provider).
-- For information about creating transactions, see [@rarimo/nft-checkout](sdk/nft-checkout).

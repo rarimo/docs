@@ -1,19 +1,19 @@
 ---
 ---
 
-# Creating transactions
+# Creating NFT checkout transactions
 
 The easiest way to create Rarimo transactions is with the JavaScript/TypeScript SDK.
 See the following sections:
 
-- [Creating transactions in JavaScript/TypeScript applications](#javascript)
-- [Creating transactions with React components](#react-applications)
+- [Creating NFT checkout transactions in JavaScript/TypeScript applications](#javascript)
+- [Creating NFT checkout transactions with React components](#react-applications)
 
 ## Examples
 
 This example shows how to create a transaction in a React application: [transaction-react](https://github.com/rarimo/js-sdk-examples/tree/main/transaction-react).
 
-## Creating transactions in JavaScript/TypeScript applications {#javascript}
+## Creating NFT checkout transactions in JavaScript/TypeScript applications {#javascript}
 
 The [@rarimo/nft-checkout](https://www.npmjs.com/package/@rarimo/nft-checkout) package provides tools that create cross-chain transactions with on the Rarimo protocol.
 
@@ -29,14 +29,15 @@ Here is an example of creating a transaction on the Goerli test chain:
 
 ```ts
 import { createCheckoutOperation, EVMOperation, ChainNames } from '@rarimo/nft-checkout'
-import { createProvider, MetamaskProvider } from '@rarimo/provider'
+import { createProvider } from '@rarimo/provider'
+import { MetamaskProvider } from '@rarimo/providers-evm'
 import { utils } from "ethers";
 
 // Address of the NFT sale contract
 const NFT_CONTRACT_ADDRESS = "0x77fedfb705c8bac2e03aad2ad8a8fe83e3e20fa1"
 
 const sendTransaction = async () => {
-  // Connect to the Metamask wallet in the browser using Web3.js, using the MetamaskProvider interface to limit bundle size.
+  // Connect to the Metamask wallet in the browser, using the MetamaskProvider interface to limit bundle size.
   const provider = await createProvider(MetamaskProvider)
 
   // Initialize the object that represents the transaction operation, in this case on EVM.
@@ -129,12 +130,12 @@ const sendTransaction = async () => {
 
   // Get the transaction that unlocks tokens on the destination chain
   const destinationTx = await op.getDestinationTx(selectedChain!, String(txHash))
-  const destinationTxUrl = provider.getTxUrl(selectedChain!, destinationTx.hash)
+  const destinationTxUrl = provider.getTxUrl(destinationChain!, destinationTx.hash)
   console.log("Destination chain transaction:", destinationTxUrl)
 }
 ```
 
-## Creating transactions with React components {#react-applications}
+## Creating NFT checkout transactions with React components {#react-applications}
 
 The [@rarimo/react-nft-checkout](https://www.npmjs.com/package/@rarimo/react-nft-checkout) package provides React components that you can use in your UI to create cross-chain transactions with the Rarimo protocol.
 
@@ -249,4 +250,4 @@ export const App = () => {
 }
 ```
 
-For information about the flow of the components that appear through the checkout process, see [`@rarimo/react-nft-checkout`](../sdk/react-nft-checkout).
+For information about the flow of the components that appear through the checkout process, see [Checkout packages](../sdk/packages-checkout).

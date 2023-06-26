@@ -55,7 +55,7 @@ module.exports = {
           customCss: require.resolve("./src/css/custom.css"),
         },
         gtag: {
-          trackingID: "GTM-PRLLH6W",
+          trackingID: "G-PVC393K31J",
         },
       }),
     ],
@@ -83,13 +83,13 @@ module.exports = {
           },
           {
             type: "doc",
-            docId: "overview/applications",
+            docId: "use-cases",
             position: "left",
             label: "Use cases",
           },
           {
             type: "doc",
-            docId: "overview/design",
+            docId: "architecture",
             position: "left",
             label: "Architecture",
           },
@@ -102,7 +102,7 @@ module.exports = {
               {
                 label: "Contracts",
                 type: "doc",
-                docId: "developers/contracts",
+                docId: "reference/contracts",
               },
               {
                 label: "API",
@@ -156,38 +156,6 @@ module.exports = {
             items: [
               {
                 html: `
-                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Discord">
-                Use cases
-                </a>
-              `,
-              },
-              {
-                html: `
-                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
-                Developers
-                </a>
-              `,
-              },
-              {
-                html: `
-                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
-                Community
-                </a>
-              `,
-              },
-              {
-                html: `
-                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
-                Contact
-                </a>
-              `,
-              },
-            ],
-          },
-          {
-            items: [
-              {
-                html: `
                 <a href="https://discord.gg/cfrH3Fe7ke" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Discord">
                 Discord <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="#D9D9D9"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="#8F8F8F"/></g></svg>
                 </a>
@@ -198,6 +166,13 @@ module.exports = {
             <a href="https://twitter.com/Rarimo_protocol" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Twitter" style="margin-top: 1rem">
             Twitter <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="#D9D9D9"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="#8F8F8F"/></g></svg>
             </a>`,
+              },
+              {
+                html: `
+                <a href="mailto: support@rarimo.com" class="footer__social-link" target="_blank" rel="noreferrer noopener" style="margin-top: 1rem">
+                Contact
+                </a>
+              `,
               },
             ],
           },
@@ -217,14 +192,74 @@ module.exports = {
         defaultLanguage: "javascript",
         additionalLangauges: ["json", "shell", "solidity"],
       },
+
       metadata: [
         {
           name: "title",
-          content: "Rarimo Docs",
+          content: "Rarimo Developer Documentation",
+        },
+        {
+          property: "og:title",
+          content: "Rarimo Developer Documentation",
+        },
+        {
+          property: "twitter:title",
+          content: "Rarimo Developer Documentation",
         },
         {
           name: "description",
-          content: "words words words",
+          content:
+            "Learn the basics of the protocol and create simple applications to connect to wallets and create cross-chain transactions.",
+        },
+        {
+          property: "og:description",
+          content:
+            "Learn the basics of the protocol and create simple applications to connect to wallets and create cross-chain transactions.",
+        },
+        {
+          property: "twitter:description",
+          content:
+            "Learn the basics of the protocol and create simple applications to connect to wallets and create cross-chain transactions.",
+        },
+        {
+          property: "og:url",
+          content: "https://docs.rarimo.com",
+        },
+        {
+          property: "og:image",
+          content: "https://docs.rarimo.com/img/og-img.jpg",
+        },
+        {
+          name: "twitter:image",
+          content: "https://docs.rarimo.com/img/og-img.jpg",
+        },
+        {
+          name: "twitter:card",
+          content: "summary_large_image",
+        },
+        {
+          property: "twitter:image",
+          content: "https://docs.rarimo.com/img/og-img.jpg",
+        },
+        {
+          property: "twitter:card",
+          content: "summary_large_image",
+        },
+        {
+          property: "og:image:height",
+          content: "786",
+        },
+        {
+          property: "og:image:width",
+          content: "1600",
+        },
+        {
+          property: "og:locale",
+          content: "en_GB",
+        },
+        {
+          property: "og:type",
+          content: "website",
         },
       ],
     }),

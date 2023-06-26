@@ -41,153 +41,17 @@ Our bundled transactions handle these steps efficiently with a single request, i
 - Transaction bundling works only with EVM networks.
 - ERC1155 token transfers cannot use bundling.
 
-## Bundle salt
-
-To bundle transactions, Rarimo creates a temporary contract on the destination chain to unlock equivalent tokens and use them to buy NFTs.
-
-You don't usually need to access these temporary contracts, but if you want to, you can set the bundle salt for a transaction.
-Rarimo uses this salt as part of the Solidity create2 method to create proxy contracts.
-
-To set the bundle salt, specify a random 32-byte array and encode it into a hex string, as in this example:
-
-```ts
-const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
-```
-
-Then when you use this salt in Rarimo transactions, you can determine the address of the temporary contract with the `determineProxyAddress()` function, as in this example:
-
-```ts
-const tempContractAddress = determineProxyAddress(salt)
-```
-
 ## Creating bundled transactions
 
-You can add transactions to a bundle by using the [Web3.js](https://web3js.org/) library or by using the [NFT Checkout SDK](../sdk).
-
-### Bundling transactions with Web3.js
-
-To create a bundled transaction with Web3.js, you must install the [Web3.js](https://web3js.org/) and [ethers.js](https://ethers.org/) libraries to access the Ethereum API.
-The following examples use the [`web3.eth.abi.encodeParameters()`](https://web3js.readthedocs.io/en/v1.7.5/web3-eth-abi.html#encodeparameters) function to encode parameters into the bytes array.
-
-Follow these steps to bundle a transaction inside a Rarimo transaction:
-
-1. Set the price of the NFT as a string.
-   This example accepts the price as the `inputAmount` variable in ETH and converts it to gwei:
-
-   ```ts
-   const priceOfNft = ethers.utils
-    .parseUnits(inputAmount.toString(), "gwei")
-    .toString()
-  ```
-
-1. Using the [`encodeFunctionCall`](https://web3js.readthedocs.io/en/v1.7.5/web3-eth-abi.html#encodefunctioncall) function, encode the bundled transaction as a function that accepts the receiver's address as a parameter, buys the NFT, and sends it to the receiver's address, as in this example:
-
-   ```ts
-   const encodeBuyFunctionCall = (receiver: string) => web3.eth.abi.encodeFunctionCall(
-     {
-       inputs: [
-         { internalType: "address", name: "receiver_", type: "address" },
-       ],
-       name: "buy",
-       outputs: [],
-       stateMutability: "payable",
-       type: "function",
-     },
-     [receiver]
-   )
-   ```
-
-1. Using the [`encodeParameters`](https://web3js.readthedocs.io/en/v1.7.5/web3-eth-abi.html#encodeparameters) function, encode your function into a bundle.
-This function takes two parameters:
-
-   - An array of the Solidity types that Rarimo passes, which are:
-     - The NFT contract address that Rarimo calls to buy the NFT, which is `address[]`
-     - The calculated price of the NFT on the destination chain, which is `uint256[]`
-     - The encoded NFT contract buy function, which is `bytes[]`
-
-   - An array that includes the NFT contract address, the price of the NFT, and the encoded function.
-
-   Here is an example:
-
-   ```ts
-   // Address of the NFT sale contract
-   const NFT_CONTRACT_ADDRESS = "0x77fedfb705c8bac2e03aad2ad8a8fe83e3e20fa1"
-
-   const bundle = web3.eth.abi.encodeParameters(
-     ["address[]", "uint256[]", "bytes[]"],
-     [
-       [NFT_CONTRACT_ADDRESS],
-       [priceOfNft],
-       [encodeBuyFunctionCall(USER_WALLET_ADDRESS)],
-     ]
-   )
-   ```
-
-   To bundle multiple transactions, add their NFT contract addresses, prices, and encoded functions to the respective arrays.
-   For example, this code bundles two functions:
-
-   ```ts
-   const bundle = web3.eth.abi.encodeParameters(
-     ["address[]", "uint256[]", "bytes[]"],
-     [
-       [NFT_CONTRACT_ADDRESS_A, NFT_CONTRACT_ADDRESS_B],
-       [priceOfNftA, priceOfNftB],
-       [encodeBuyFunctionCallA(USER_WALLET_ADDRESS_A), encodeBuyFunctionCallB(USER_WALLET_ADDRESS_B)],
-     ]
-   )
-   ```
-
-1. Call the Rarify swap contract method and pass the bundle as a parameter.
-Optionally, you can include the bundle salt, as in this example:
-
-   ```ts
-   const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
-
-   const transaction = await swapContract.swapExactOutputSingleThenBridge(
-     amountOut, // 100000000000000000000 === 1*10^18 – one NFT
-     approvalAmount,
-     inputToken.address, // Address of the token to accept as payment
-     outputToken.address, // Address of the token to exchange to
-     USER_WALLET_ADDRESS,
-     "Sepolia", // Destination network
-     true, // isWrapped: whether the token to exchange is wrapped
-     { salt, bundle },
-   )
-   ```
-
-1. To get the address of the temporary contract, create an ethers.js `Contract` object to represent the bridge contract and use its `determineProxyAddress()` method.
-You need the address of the bridge contract, as in this example:
-
-   ```ts
-   import BRIDGE_ABI from "/path/to/bridge-abi.json"
-   import { ethers } from "ethers"
-
-   // Create RPC provider to be able to call contract methods
-   const rpc = new ethers.providers.JsonRpcProvider("https://chain-rpc-url.com")
-
-   // Create contract instance
-   const bridgeContract = new ethers.Contract(
-     "0x0000000000000000000000000000000000000000", // Bridge contract address
-     BRIDGE_ABI, // Bridge contract ABI
-     rpc,
-   )
-
-   const salt = ethers.utils.hexlify(ethers.utils.randomBytes(32))
-
-   // Call the contract method to get the temporary contract address
-   const tempContractAddress = await bridgeContract.determineProxyAddress(ethers.utils.hexlify(saltBytes))
-   ```
-
-### Bundling transactions with the Rarimo SDK
-
 To bundle transactions together with the SDK, follow these general steps.
-For a complete example, see [NFT Checkout SDK](../sdk).
+For a complete example, see [SDK](../sdk).
 
 1. Connect to a wallet and create a transaction operation with the [`createCheckoutOperation()`](https://rarimo.github.io/js-sdk/functions/_rarimo_nft_checkout.createCheckoutOperation.html) function:
 
    ```ts
    import { createCheckoutOperation, EVMOperation } from '@rarimo/nft-checkout'
-   import { createProvider, MetamaskProvider } from '@rarimo/provider'
+   import { createProvider } from '@rarimo/provider'
+   import { MetamaskProvider } from '@rarimo/providers-evm'
 
    const addTransactionToBundle = async () => {
     const provider = await createProvider(MetamaskProvider)
@@ -197,7 +61,7 @@ For a complete example, see [NFT Checkout SDK](../sdk).
    ```
 
 1. Initialize the operation as usual with the operation object's [`init()`](https://rarimo.github.io/js-sdk/interfaces/_rarimo_nft_checkout.INFTCheckoutOperation.html#init) method.
-This step assumes that you have set the target transaction and chain for the operation as described in [NFT Checkout SDK](../sdk):
+This step assumes that you have set the target transaction and chain for the operation as described in [SDK](../sdk):
 
    ```ts
    await op.init({

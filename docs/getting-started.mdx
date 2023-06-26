@@ -25,11 +25,20 @@ You can use the applications in [rarimo/js-sdk-examples](https://github.com/rari
 
 1. Run `cd my-rarimo-app` to go into the application folder.
 
-1. Run this command to install the React-related packages of the Rarimo SDK:
+1. Run this command to install the Rarimo SDK packages that work with wallets and with React applications:
 
    ```shell
    yarn add @rarimo/provider @rarimo/react-provider
    ```
+
+1. Install the Rarimo SDK package that works with the type of chain that you want to use.
+For example, to work with Metamask or Coinbase wallets on EVM-compatible chains, install the `@rarimo/providers-evm` package:
+
+   ```shell
+   yarn add @rarimo/providers-evm
+   ```
+
+   You can also install the `@rarimo/providers-solana` package to work with Phantom or Solflare wallets on Solana or the `@rarimo/providers-near` package to work with NEAR wallets on NEAR.
 
 1. Run this command to install the `craco` package as a development dependency:
 
@@ -73,14 +82,20 @@ You can use the applications in [rarimo/js-sdk-examples](https://github.com/rari
 1. Replace the contents of the automatically-generated file `src/App.tsx` with this code:
 
    ```tsx
-   import { MetamaskProvider } from '@rarimo/provider'
+   import { MetamaskProvider } from '@rarimo/providers-evm'
    import { useProvider } from '@rarimo/react-provider'
+   import { useEffect } from 'react'
 
    function App() {
-     const { provider } = useProvider(MetamaskProvider)
+     const { provider, ...rest } = useProvider(MetamaskProvider)
 
-     provider?.connect()
-     console.log(provider?.address)
+     useEffect(() => {
+       const connectToProvider = async () => {
+         await provider.connect()
+       }
+       if (!provider) connectToProvider()
+       if (provider?.address) console.log(provider.address)
+     }, [provider])
 
      return <div className="App">Wallet address: {provider?.address}</div>
    }
@@ -88,13 +103,13 @@ You can use the applications in [rarimo/js-sdk-examples](https://github.com/rari
    export default App
    ```
 
-1. In the `src/App.tsx` file, set the type of wallet that you want to use by changing the `MetamaskProvider` provider type to one of these provider types:
+1. In the `src/App.tsx` file, set the type of wallet and chain that you want to use by changing the `MetamaskProvider` provider type to one of these provider types:
 
-   - [`CoinbaseProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.CoinbaseProvider.html): Coinbase wallets
-   - [`MetamaskProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.MetamaskProvider.html): Metamask wallets
-   - [`NearProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.NearProvider.html): NEAR wallets
-   - [`PhantomProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.PhantomProvider.html): Phantom wallets
-   - [`SolflareProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.SolflareProvider.html): Solflare wallets
+   - [`CoinbaseProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_providers_evm.CoinbaseProvider.html): Coinbase wallets via the `@rarimo/providers-evm` package
+   - [`MetamaskProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_providers_evm.MetamaskProvider.html): Metamask wallets via the `@rarimo/providers-evm` package
+   - [`NearProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_provider.NearProvider.html): NEAR wallets via the `@rarimo/providers-near` package
+   - [`PhantomProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_providers_solana.PhantomProvider.html): Phantom wallets via the `@rarimo/providers-solana` package
+   - [`SolflareProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_providers_solana.SolflareProvider.html): Solflare wallets via the `@rarimo/providers-solana` package
 
 1. In the terminal, run `yarn start` and wait for the application to start.
 The application opens automatically in your default web browser, or you can open the page in a web browser by going to the URL `http://localhost:3000`.
@@ -106,4 +121,4 @@ If the application is working correctly, it prints the address of your wallet on
 ![The running application in a web browser, showing the wallet address](/img/getting-started-wallet-address.png)
 
 From here, you can set up cross-chain integrations, such as transactions.
-For an example, see [Creating transactions](./overview/creating-transactions).
+For an example, see [Creating NFT checkout transactions](./overview/creating-transactions).

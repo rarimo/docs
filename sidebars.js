@@ -22,41 +22,56 @@ const sidebars = {
   overview: [
     "overview",
     "getting-started",
-    "overview/connecting-to-wallets",
-    "overview/swapping-tokens",
-    "overview/creating-transactions",
+    {
+      type: "category",
+      label: "Transactions",
+      items: [
+        "overview/connecting-to-wallets",
+        "overview/swapping-tokens",
+        "overview/creating-transactions",
+      ],
+    },
+    {
+      type: "category",
+      label: "Identity",
+      link: {
+        type: "doc",
+        id: "overview/identity",
+      },
+      items: ["overview/issuing-credentials", "overview/querying-credentials"],
+    },
     "glossary",
   ],
   applications: [
-    "overview/applications",
-    "overview/applications/settlement-integration",
-    "overview/applications/cross-chain-proofs",
-    "overview/applications/cross-chain-minting",
-    "overview/applications/cross-chain-staking",
-    "overview/applications/usdc-integration",
+    "use-cases",
+    "use-cases/nft-checkout",
+    "use-cases/proofs",
+    "use-cases/minting",
+    "use-cases/staking",
+    "use-cases/cctp",
   ],
   architecture: [
     {
       type: "doc",
-      id: "overview/design",
+      id: "architecture",
     },
     {
       type: "doc",
       label: "Oracles",
-      id: "developers/oracles",
+      id: "architecture/oracles",
     },
     {
       type: "category",
       label: "Core",
       link: {
         type: "doc",
-        id: "developers/core",
+        id: "architecture/core",
       },
       collapsed: true,
       items: [
-        "developers/core/rarimocore",
-        "developers/core/tokenmanager",
-        "developers/core/oraclemanager",
+        "architecture/core/rarimocore",
+        "architecture/core/tokenmanager",
+        "architecture/core/oraclemanager",
       ],
     },
     {
@@ -64,10 +79,10 @@ const sidebars = {
       label: "TSS",
       link: {
         type: "doc",
-        id: "developers/tss",
+        id: "architecture/tss",
       },
       collapsed: true,
-      items: ["developers/tss/overview"],
+      items: ["architecture/tss/overview"],
     },
     {
       type: "doc",
@@ -96,29 +111,29 @@ const sidebars = {
       label: "Contracts",
       link: {
         type: "doc",
-        id: "developers/contracts",
+        id: "reference/contracts",
       },
       collapsed: true,
       items: [
         {
           type: "doc",
-          id: "smart-contracts/addresses",
+          id: "reference/contracts/addresses",
         },
         {
           type: "doc",
-          id: "developers/contracts/bridge",
+          id: "reference/contracts/bridge",
         },
         {
           type: "category",
           label: "Guides",
           link: {
             type: "doc",
-            id: "smart-contracts/guides",
+            id: "reference/contracts/guides",
           },
           collapsed: false,
           items: [
-            "smart-contracts/guides/moving-liquidity",
-            "smart-contracts/guides/transfer-nfts",
+            "reference/contracts/guides/moving-liquidity",
+            "reference/contracts/guides/transfer-nfts",
           ],
         },
         {
@@ -126,13 +141,13 @@ const sidebars = {
           label: "Interface",
           link: {
             type: "doc",
-            id: "smart-contracts/interface",
+            id: "reference/contracts/interface",
           },
           collapsed: false,
           items: [
-            "smart-contracts/interface/evm-reference",
-            "smart-contracts/interface/near-reference",
-            "smart-contracts/interface/solana-reference",
+            "reference/contracts/interface/evm-reference",
+            "reference/contracts/interface/near-reference",
+            "reference/contracts/interface/solana-reference",
           ],
         },
       ],
@@ -179,12 +194,7 @@ const sidebars = {
         id: "sdk",
       },
       collapsed: true,
-      items: [
-        "sdk/provider",
-        "sdk/nft-checkout",
-        "sdk/react-provider",
-        "sdk/react-nft-checkout",
-      ],
+      items: ["sdk/packages-provider", "sdk/packages-checkout"],
     },
   ],
   solutions: [

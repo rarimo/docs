@@ -1,3 +1,4 @@
+import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import ArrowSvg from "@site/static/img/arrow_forward.svg";
 import clsx from "clsx";
@@ -180,8 +181,10 @@ export default function HomepageHeader() {
           {siteConfig.tagline}
         </p>
         <div className={clsx("buttonContainer", styles.buttonContainer)}>
-          <a
-            href="/overview"
+          <Link
+            href="overview"
+            type="doc"
+            id="overview"
             className={clsx(
               "heroButton svgContainer",
               styles.heroButton,
@@ -192,14 +195,15 @@ export default function HomepageHeader() {
             <ArrowSvg
               className={clsx("heroButton__svg", styles.heroButton__svg)}
             />
-          </a>
-          {/*//Todo: add link to explore features*/}
-          <a
+          </Link>
+          <Link
             className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
-            href="#"
+            href="use-cases"
+            type="doc"
+            id="use-cases"
           >
-            Explore Features
-          </a>
+            Explore use cases
+          </Link>
         </div>
       </div>
     </header>

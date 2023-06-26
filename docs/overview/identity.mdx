@@ -1,0 +1,35 @@
+---
+---
+
+# Identity
+
+Rarimo provides support for decentralized identity across chains.
+Identity providers can publish information about users' identities to Rarimo and Rarimo syncs this identity metadata to other chains, including Ethereum, Solana, and Near.
+Then, applications can verify the users' identities on these other chains.
+
+Rarimo does this by supporting an embedded identity protocol, which allows uses to generate and verify zero-knowledge proofs (ZKPs).
+These ZKPs provide only a cryptographically secure verification that the user meets the requirements of the verification, without revealing any of the user's personal information.
+
+This identity protocol takes advantage of Rarimo's bridging protocol to make syncing the identity information across chains cheap and seamless.
+
+## Roles
+
+Identity verification involves three roles:
+
+- **Issuers**: Issuers create identities and issue them to identity holders.
+Some examples of issuers are:
+
+   - Government authorities creating identification documents
+   - Schools issuing degrees and certifications
+   - Organizations creating credentials for members and their roles
+
+   See [Issuing credentials](./issuing-credentials).
+
+- **Identity holders**: Identity holders are end users who receive identities from issuers, store them in their wallets, and use them to send ZKPs to verifiers.
+
+- **Verifiers**: Verifiers query identity holders via their wallets, verify that issuers are who they say they are, and validate the ZKPs that they receive.
+See [Querying credentials](./querying-credentials).
+
+This diagram shows the basic interactions in distributed identity in Rarimo via ZKPs:
+
+![The three roles in distributed identity, showing the issuer creating credentials and the verifier getting ZKPs from the identity holder](/img/Identity-actors.png)

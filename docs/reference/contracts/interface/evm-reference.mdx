@@ -28,7 +28,7 @@ The salt is used to determine a proxy address, while the bundle is an encoded tr
 ### Network Parameters
 
 To ensure that our protocol works with all blockchains, not just EVM-compatible ones, the destination network is a simple string.
-Make sure you pass in the correct spelling of the blockchain by using our [Get supported chain list endpoint](../../api/reference/get-chain-list.api.mdx).
+Make sure you pass in the correct spelling of the blockchain by using our [Get supported chain list endpoint](../../../api/reference/get-chain-list.api.mdx).
 
 ## DepositNative
 
@@ -205,5 +205,46 @@ await rarimoContract.depositERC1155(
   "near",
   "0x",
   true,
+);
+```
+
+## DepositSBT
+
+### Interface
+
+```solidity
+function depositSBT(
+  address token_,
+  uint256 tokenId_,
+  IBundler.Bundle calldata bundle_,
+  string calldata network_,
+  string calldata receiver_,
+) external;
+```
+
+### Parameters
+
+- `token_` source contract address for NFT contract
+- `tokenId_` which token is being transferred
+- `bundle_` used for transaction bundling *tuple (bytes32 salt, bytes bundle)*
+- `network_` network name destination of the transfer
+- `receiver_` receiver address in destination chain
+
+The `DepositSBT` method is used to mint a wrapped SBT on another chain. The token must follow the [ERC-5192 standard](https://eips.ethereum.org/EIPS/eip-5192).
+
+### Example
+
+Here's an example call in Javascript that will transfer an NFT from Binance to Ethereum by a raw transfer.
+
+```javascript
+await rarimoContract.depositSBT(
+  '0x12786C473E6d6bB78E554c90812772bEad18264e',
+  996800003035,
+  {
+    salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
+    bundle: "0x",
+  },
+  "ethereum",
+  "0x",
 );
 ```
