@@ -1,0 +1,37 @@
+---
+---
+
+# Swapping and bridging
+
+_Swapping_ is the process of exchanging one token for another on the same chain.
+
+_Bridging_ is the process of moving tokens from one chain to another.
+However, technically, Rarimo does not transfer the tokens themselves; instead, it locks tokens on the source chain and unlocks equivalent tokens on the destination chain.
+
+For examples of tokens that you can swap and bridge, see [Moving liquidity across chains](../reference/contracts/guides/moving-liquidity).
+
+## Swapping limitations
+
+Rarimo can swap ERC-20 tokens to native tokens and native tokens to ERC-20 tokens on the same chain.
+
+To swap tokens, Rarimo uses these decentralized exchanges (DEXs):
+
+- Uniswap
+- Pancakeswap
+- Quickswap
+- Trader Joe
+
+Therefore, Rarimo is limited by the swaps that these DEXs can do.
+
+## Bridging
+
+Rarimo bridges tokens via USDC tokens:
+
+1. It swaps the source tokens to USDC on the source chain.
+1. It locks the USDC on the source chain.
+1. It unlocks USDC on the destination chain.
+1. It swaps the USDC for the desired token on the destination chain.
+
+For example, this diagram shows the process of converting ETH on Ethereum to AVAX on Avalanche by using USDC to bridge the tokens:
+
+![Bridging via USDC](/img/usdc-bridge.png)

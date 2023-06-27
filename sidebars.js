@@ -86,6 +86,10 @@ const sidebars = {
     },
     {
       type: "doc",
+      id: "architecture/swap-bridge",
+    },
+    {
+      type: "doc",
       id: "overview/bundling",
     },
     {
