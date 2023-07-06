@@ -135,10 +135,7 @@ const sidebars = {
             id: "reference/contracts/guides",
           },
           collapsed: false,
-          items: [
-            "reference/contracts/guides/moving-liquidity",
-            "reference/contracts/guides/transfer-nfts",
-          ],
+          items: ["reference/contracts/guides/transfer-nfts"],
         },
         {
           type: "category",
