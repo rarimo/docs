@@ -49,6 +49,7 @@ const sidebars = {
     "use-cases/minting",
     "use-cases/staking",
     "use-cases/cctp",
+    "use-cases/polygon-id",
   ],
   architecture: [
     {
