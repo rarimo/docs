@@ -40,9 +40,11 @@ To complete the demo and claim a soulbound token on Ethereum follow these steps:
 
 >PolygonID x Rarimo integration is experimental and wasn't audited yet. Please refrain from using it in production applications for now!
 
-If you run an identity issuer for PolygonID and want to enable the usage of ZKPs on Ethereum or another EVM-compatible network, contact us at info@rarifylabs.com.
+If you run an identity issuer for PolygonID and want to enable the usage of ZKPs on Ethereum or another EVM-compatible network, contact us in [telegram](https://t.me/+m_vvj8nFk5g4NTgy).
 
 The integration will require the following steps:
-- Set up the Oracle to watch your State Contract on Polygon;
-- Deploying a lightweight State Contract and a Verifier to the target chain;
-- Set up a Relayer to work with your contracts;
+- Set up the Oracle to watch your issuer on Polygon;
+- Deploying a lightweight State Contract(if necessary) and a Verifier to the target chain;
+- Set up a Relayer to work with your issuer;
+
+Once the state replication is ready, the DApps can use the ZKPs by following the [Polygon's on-chain verification guide](https://0xpolygonid.github.io/tutorials/verifier/on-chain-verification/overview/#on-chain-verification-flow).
