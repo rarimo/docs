@@ -130,10 +130,6 @@
     align-items: center;
   }
 
-  .heroButton{
-    margin: 0 0 1.5rem 0;
-  }
-
 }
 
 .bgImageFirst{
@@ -199,6 +195,15 @@
 
 .buttons {
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.heroButtonSecondary{
+  border: 1px solid var(--primary-text-color-light);
+  min-height: 3.5rem;
+  width: 100%;
+  max-width: 13rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }

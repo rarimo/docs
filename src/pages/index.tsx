@@ -27,19 +27,6 @@ function HomepageStartBuilding() {
       <div
         className={clsx("secondButtonContainer", styles.secondButtonContainer)}
       >
-        <a
-          className={clsx(
-            "heroButton svgContainer",
-            styles.heroButton,
-            styles.svgContainer
-          )}
-          href="https://rarimo.com/testnet/sign-up"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Join Testnet
-          <ArrowSvg className={clsx("heroButton__svg")} />
-        </a>
         <Link
           className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
           href="whitepaper"
