@@ -60,7 +60,7 @@ For a complete example, see [SDK](../sdk).
    }
    ```
 
-1. Initialize the operation as usual with the operation object's [`init()`](https://rarimo.github.io/js-sdk/interfaces/_rarimo_nft_checkout.INFTCheckoutOperation.html#init) method.
+1. Initialize the operation as usual with the operation object's [`init()`](https://rarimo.github.io/js-sdk/interfaces/_rarimo_nft_checkout.CheckoutOperation.html#init) method.
 This step assumes that you have set the target transaction and chain for the operation as described in [SDK](../sdk):
 
    ```ts
@@ -121,7 +121,7 @@ The function takes these two parameters:
    )
    ```
 
-1. Call the operation's [`checkout()`](https://rarimo.github.io/js-sdk/interfaces/_rarimo_nft_checkout.INFTCheckoutOperation.html#checkout) method to run the transaction:
+1. Call the operation's [`checkout()`](https://rarimo.github.io/js-sdk/interfaces/_rarimo_nft_checkout.CheckoutOperation.html#checkout) method to run the transaction:
 
    ```ts
    const txHash = await op.checkout(estimatedPrice, { bundle })
