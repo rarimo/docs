@@ -196,7 +196,11 @@ const sidebars = {
         id: "sdk",
       },
       collapsed: true,
-      items: ["sdk/packages-provider", "sdk/packages-checkout"],
+      items: [
+        "sdk/packages-base",
+        "sdk/packages-provider",
+        "sdk/packages-checkout",
+      ],
     },
   ],
   solutions: [
