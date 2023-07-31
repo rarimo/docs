@@ -31,6 +31,7 @@ This connect step runs automatically if you initiate a transaction with the prov
 Here is an example that creates a MetamaskProvider object for a MetaMask wallet on an EVM-compatible chain and prints information about it:
 
 ```ts
+import { ChainTypes } from '@rarimo/shared'
 import { createProvider } from '@rarimo/provider'
 import { MetamaskProvider } from '@rarimo/providers-evm'
 
