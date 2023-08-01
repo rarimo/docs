@@ -147,6 +147,47 @@ const sendTransaction = async () => {
 sendTransaction()
 ```
 
+### Paying with multiple tokens
+
+If the user does not have enough of one token to complete the transaction, they can send more than one token.
+To accept more than one token, get the balances of tokens in the user's wallet as usual with the `getPaymentTokens()` method.
+Then, pass the tokens to pay with to the `estimatePrice()` method, as in this example:
+
+```ts
+// Set the parameters for the transaction.
+const params:CheckoutOperationParams = {
+  chainIdFrom: sourceChain.id,
+  chainIdTo: destinationChain.id,
+  price: priceOfNft,
+  recipient: provider.address,
+  isMultiplePayment: true, // Accept multiple tokens in the payment
+}
+
+// Initialize the transaction object as usual.
+await op.init(params)
+
+// Load the user's balance of payment tokens on the source chain.
+const paymentTokens = await op.getPaymentTokens()
+
+// Select the tokens to accept payment in on the source chain.
+// For example, you can allow the user to select payment tokens via your UI.
+const selectedTokens = paymentTokens?.filter(i => isSelectedOnUI(i.symbol))!
+
+// Get the estimated cost of the token swap for all selected tokens.
+const estimatedPrices = await op.estimatePrice(selectedTokens)
+
+// ...
+
+// Run the transaction with the prices for the selected tokens and the transaction bundle as usual.
+const txHash = await op.checkout(estimatedPrices, { bundle })
+```
+
+When you send multiple tokens to the transaction in this way, Rarimo takes tokens from the user's wallet in this order:
+
+1. If one of the tokens is the native token for the chain, the transaction uses those tokens first.
+1. If the transaction needs more tokens, it takes tokens from the wallet ordered alphabetically by the address of the contract that manages the token.
+1. The transaction keeps taking tokens until it has enough value to complete the transaction.
+
 ## Creating NFT checkout transactions with React components {#react-applications}
 
 The [@rarimo/react-nft-checkout](https://www.npmjs.com/package/@rarimo/react-nft-checkout) package provides React components that you can use in your UI to create cross-chain transactions with the Rarimo protocol.
