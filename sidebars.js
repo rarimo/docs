@@ -12,6 +12,7 @@ const sidebars = {
     "whitepaper/protocol-vision",
     "whitepaper/architecture-and-operating-principles",
     "whitepaper/main-flow-of-messages-transferring",
+    "whitepaper/rarimo-identity-sub-protocol",
     "whitepaper/light-wallet-supporting",
     "whitepaper/security-and-efficiency",
     "whitepaper/utilities-of-the-token",

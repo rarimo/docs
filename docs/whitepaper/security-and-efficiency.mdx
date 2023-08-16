@@ -2,26 +2,29 @@
 ---
 
 # Security and efficiency
-The security of the solution is based on the validator quorum (the set of validators that maintain the system). But at
-the same time, it should be understood that an increase in the number of validators who are responsible for managing the
-bridge leads to an increase in asset transfer time.
+The solution's security is based on the validator quorum (the set of validators that maintain the system). But at the
+same time, it should be understood that an increase in the number of validators responsible for managing the
+infrastructure leads to an increase in asset transfer time.
 
 ## Asset transfer time
-The time of migrating an asset or message is equal to the sum of 1)  block confirmation time in the parent blockchain; 2)
-consensus time in the Rarimo core; 3) block confirmation time in the destination blockchain. The time to reach
-consensus in the Rarimo core can be considered insignificant in relation to the time to reach consensus (about ensuring
+The time of migrating an asset or message is equal to the sum of 1)  block confirmation time in the parent
+blockchain, 2) consensus time in the Rarimo core, and 3) block confirmation time in the destination blockchain. The time
+to reach consensus in the Rarimo core can be considered insignificant to the time to reach consensus (about ensuring
 irreversibility) in external open networks (it will take approximately from 5 to 7 seconds).
 
 ## Threshold signature
-The threshold signature scheme t-of-n is a scheme that presumes the participation of t+1 parties for creating a valid signature value.
+The threshold signature scheme t-of-n is a scheme that presumes the participation of t+1 parties for creating a valid
+signature value.
 
 The threshold signature consists of 2 principal parts:
 1. Distributed Key Generation (DKG): Some secret key is constructed (from secrets of all parties). At the end of a DKG,
 every party possesses some secret share from which the main secret key can be recovered. Each participant doesn’t know
-about the shares of other parties. This process is performed in 4 rounds. It’s important to note that this scheme is
-different from the scheme with the trusted dealer, who has knowledge about the initial secret.
+about the shares of other parties. This process is performed in 4 rounds. It’s important to note that this scheme
+differs from the scheme with the trusted dealer, who knows the initial secret.
 2. Signing itself. Any t+1 parties can sign a message, producing a single valid signature. This process is performed in
 7 rounds (including 1 online) for the ECDSA signature scheme and in 3 rounds for EdDSA.
 
 Note that the size of the threshold signature (and the algorithm for its verification) doesn’t depend on the number of
-parties involved. It means that the cost of signature verification will be the same as in the case of a single signature.
+parties involved. It means that the cost of signature verification will be the same as in the case of a single
+signature.
+
