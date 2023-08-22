@@ -49,6 +49,29 @@ const getMetamaskWalletAddress = async () => {
 
 For information about the wallets that the SDK supports and other things that you can do with wallet providers, see [Provider packages](../sdk/packages-provider).
 
+As an alternative to using the wallet-specific provider types, you can connect to EVM wallets via ethers.js with this code:
+
+```ts
+import { ChainTypes } from '@rarimo/shared'
+import { Provider, Providers } from '@rarimo/provider'
+import { EthersProvider } from '@rarimo/providers-evm'
+import { providers } from 'ethers'
+
+const getEVMWalletAddress = async () => {
+  const web3Provider = new providers.Web3Provider(window.ethereum as providers.ExternalProvider, 'any')
+  const provider = new Provider(EthersProvider)
+  await provider.init({
+    name: Providers.Ethers,
+    instance: web3Provider,
+  })
+
+  // Get the address of the wallet
+  console.log('Address:', provider.address)
+  console.log('chainType:', ChainTypes[provider.chainType!])
+  console.log('providerType:', provider.providerType)
+}
+```
+
 ## Connecting to wallets in React applications {#react-applications}
 
 The [@rarimo/react-provider](https://www.npmjs.com/package/@rarimo/react-provider) package provides the `useProvider` hook, which allows React applications to access wallets.
