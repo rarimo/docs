@@ -55,6 +55,16 @@ EdDSA is a complex public key cryptography signature algorithm that is based on 
 A computation engine that is the foundation for EVM-compatible blockchains such as Ethereum and Polygon.
 See [ethereum.org](https://ethereum.org).
 
+**Iden3 protocol**
+
+The Iden3 protocol is a framework for issuers to create identities and for verifiers to verify claims about those identities using tools such as ZKPs.
+Rarimo's identity protocol is based on Iden3.
+
+**Identity state**
+
+In the Iden3 protocol, Identity State consists of multiple Sparse Merkle Trees(SMT) that describe the status of claims associated with an identity. The state is stored on-chain and is used during the ZKP verification.
+
+
 **Merkle tree**
 
 A Merkle tree stores hashes of data in a tree that allows you to verify the contents of the tree.
@@ -128,3 +138,13 @@ Validators are nodes that verify that transactions are valid before adding them 
 
 VCs represent claims such as proof of ownership of an account.
 They include a proof that allows users to verify that the credential is authentic.
+
+**Zero-Knowledge Proof (ZKP)**
+
+A ZKP is a cryptographically secure piece of information that proves that a certain user meets a certain requirement without revealing any specific information about the user.
+For example, a ZKP can verify that a user is above a certain age without revealing the user's actual age.
+
+**Zero-Knowledge Succinct Non-Interactive Argument of Knowledge (zk-SNARK)**
+
+A zk-SNARK is the type of ZKP that Rarimo Identity Protocol uses.
+One characteristic of zk-SNARKs is that they are non-interactive, meaning that the user and verifier interact only once, unlike some other types of ZKPs.
