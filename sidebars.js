@@ -12,6 +12,7 @@ const sidebars = {
     "whitepaper/protocol-vision",
     "whitepaper/architecture-and-operating-principles",
     "whitepaper/main-flow-of-messages-transferring",
+    "whitepaper/rarimo-identity-sub-protocol",
     "whitepaper/light-wallet-supporting",
     "whitepaper/security-and-efficiency",
     "whitepaper/utilities-of-the-token",
@@ -49,6 +50,7 @@ const sidebars = {
     "use-cases/minting",
     "use-cases/staking",
     "use-cases/cctp",
+    "use-cases/polygon-id",
   ],
   architecture: [
     {
@@ -83,6 +85,10 @@ const sidebars = {
       },
       collapsed: true,
       items: ["architecture/tss/overview"],
+    },
+    {
+      type: "doc",
+      id: "architecture/swap-bridge",
     },
     {
       type: "doc",
@@ -131,10 +137,7 @@ const sidebars = {
             id: "reference/contracts/guides",
           },
           collapsed: false,
-          items: [
-            "reference/contracts/guides/moving-liquidity",
-            "reference/contracts/guides/transfer-nfts",
-          ],
+          items: ["reference/contracts/guides/transfer-nfts"],
         },
         {
           type: "category",
@@ -194,7 +197,11 @@ const sidebars = {
         id: "sdk",
       },
       collapsed: true,
-      items: ["sdk/packages-provider", "sdk/packages-checkout"],
+      items: [
+        "sdk/packages-base",
+        "sdk/packages-provider",
+        "sdk/packages-checkout",
+      ],
     },
   ],
   solutions: [

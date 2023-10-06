@@ -1,0 +1,65 @@
+# Token-Agnostic Payments
+
+Sometimes Web3 payments may be overwhelming: so many popular tokens, chains, and steps involved. This abundance of options unnecessarily complicates your product and spoils the user experience. With Rarimo's token-agnostic payments, your customers can pay in any fungible token with just a few clicks. We handle the token swaps and bridging for you.
+
+Fundamentally, our product provides four capabilities:
+
+- Cross-chain bridging of assets backed by Rarimo Protocol;
+- Token swaps using liquidity from popular DEXes such as Uniswap, PancackeSwap, and TraderJoe;
+- [Rarimo's bundling technology](https://rarimo.gitlab.io/docs/docs/overview/bundling) allows the inclusion of custom logic into transactions. Rarimo contracts use this logic to run actions that follow an initial transaction, such as unlocking tokens on other chains and buying NFTs;
+- [Circle CCTP integration](https://rarimo.gitlab.io/docs/docs/overview/applications/usdc-integration#nft-checkout) provides USDC liquidity for all supported chains;
+
+By combining these features, developers can implement such cross-chain use cases as fungible token payments, NFT minting, staking, token swaps, etc.
+
+## User Journey
+
+Let’s walk through a [demo](https://nft-checkout.rarimo.com/) and buy an NFT priced in ETH with a fungible token stored on another chain to see how it works.
+
+1. Open the demo page [NFT Checkout demo](https://nft-checkout.rarimo.com/)
+    
+    > *To see full instructions for getting test UNI and using it to buy an NFT using Rarimo, click the “(?)Help” button at the top of the demo page.*
+    > 
+    
+    ![Token-agnostic page](/img/token-agnostic-page.png)
+    
+2. Click “Purchase with any token” and connect your Metamask
+    
+    ![Token-agnostic wallet](/img/token-agnostic-walletconnection.png)
+    
+3. Select the token you want to pay with(in our case it’s UNI)
+    
+    ![Token-agnostic tokens](/img/token-agnostic-tokens.png)
+    
+4. Check out the estimated fees and proceed to the checkout
+    
+    ![Token-agnostic reciept](/img/token-agnostic-receipt.png)
+    
+5. Approve the token spending for the Rarimo swap contract
+    
+    ![Token-agnostic swap](/img/token-agnostic-swap.png)
+    
+6. Confirm the swap of UNI to WETH
+    
+    ![Token-agnostic swap confirm](/img/token-agnostic-swap-confirm.png)
+    
+7. …and, that’s it! Rarimo Relayer will pick up the transaction and automatically complete the purchase of the NFT in the destination network
+    
+    ![Token-agnostic confirmation](/img/token-agnostic-confirmation.png)
+    
+
+## Integration
+
+Token-agnostic payments can be added to your DApp using one of these options:
+
+- Customizable react component: [https://rarimo.gitlab.io/docs/docs/overview/creating-transactions#react-applications](https://rarimo.gitlab.io/docs/docs/overview/creating-transactions#react-applications)
+    
+    ![Token-agnostic button for buying](/img/token-agnostic-button.png)
+    
+- TypeScript SDK: [https://rarimo.gitlab.io/docs/docs/overview/creating-transactions#javascript](https://rarimo.gitlab.io/docs/docs/overview/creating-transactions#javascript)
+
+## Fees
+
+The user pays fees and includes:
+
+- Network fees for the approval transaction and a call to the Rarimo bridge;
+- Fixed Rarimo fee in USDC or RMO token;

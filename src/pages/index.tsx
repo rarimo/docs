@@ -1,6 +1,7 @@
 import "aos/dist/aos.css";
 
 import BrowserOnly from "@docusaurus/BrowserOnly";
+import Link from "@docusaurus/Link";
 // import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import HomepageHeader from "@site/src/components/HomepageHeader";
@@ -26,26 +27,14 @@ function HomepageStartBuilding() {
       <div
         className={clsx("secondButtonContainer", styles.secondButtonContainer)}
       >
-        <a
-          className={clsx(
-            "heroButton svgContainer",
-            styles.heroButton,
-            styles.svgContainer
-          )}
-          href="https://rarimo.com/testnet/sign-up"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Join Testnet
-          <ArrowSvg className={clsx("heroButton__svg")} />
-        </a>
-        <a
+        <Link
           className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
-          href="./whitepaper"
-          rel="noreferrer"
+          href="whitepaper"
+          type="doc"
+          id="whitepaper"
         >
           Whitepaper
-        </a>
+        </Link>
       </div>
     </div>
   );

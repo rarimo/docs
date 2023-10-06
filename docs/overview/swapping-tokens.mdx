@@ -3,18 +3,29 @@
 
 # Swapping tokens
 
-You can use Rarimo to swap tokens on the same chain or on any other chain that Rarimo supports.
-Rarimo can make these token swaps:
+Rarimo can swap tokens on the same chain or it can include bridging to swap tokens on one supported chain to another.
+Rarimo can make these basic token swaps:
 
-- erc-20 tokens to other erc-20 tokens
-- Native tokens to erc-20 tokens
+- ERC-20 tokens to other ERC-20 tokens
+- Native tokens to ERC-20 tokens
+
+For more details and limitations about swaps, see [Swapping and bridging](../architecture/swap-bridge).
 
 To set up a token swap, create a Rarimo transaction and specify the token and amount that you want to receive, as in this example:
 
 ```ts
-import { createCheckoutOperation, EVMOperation, ChainName, Price } from '@rarimo/nft-checkout'
-import { createProvider } from '@rarimo/provider'
+import { ChainNames } from '@rarimo/shared'
+import { CheckoutOperationParams, createCheckoutOperation, EVMOperation, Price, BridgeChain } from '@rarimo/nft-checkout'
+import { createProvider, ProviderUserRejectedRequest } from '@rarimo/provider'
 import { MetamaskProvider } from '@rarimo/providers-evm'
+import { ethers } from "ethers"
+
+// Source and destination chains and tokens
+const sourceChainName = ChainNames.Goerli
+const destinationChainName = ChainNames.Fuji
+
+const sourceTokenSymbol = "UNI"
+const destinationTokenSymbol = "AVAX"
 
 const sendSwapTransaction = async () => {
   // Connect to the Metamask wallet in the browser, using the MetamaskProvider interface to limit bundle size.
@@ -24,37 +35,72 @@ const sendSwapTransaction = async () => {
   const op = createCheckoutOperation(EVMOperation, provider)
 
   // Get the chains that are supported from that chain type.
-  const chains = await op.supportedChains()
+  const chains = await op.getSupportedChains()
 
-  // Select the source chain.
-  // This example uses the Goerli chain, but your application can ask the user which chain to use.
-  const selectedChain = chains.find(i => i.name === ChainNames.Goerli)
+  // Select the source and destination chains.
+  // This example uses the Fuji chain, but your application can ask the user which chain to use.
+  const sourceChain: BridgeChain = chains.find(i => i.name === sourceChainName)!
+  const destinationChain: BridgeChain = chains.find(i => i.name === destinationChainName)!
 
   // Configure the swap transaction
-  const target = {
-      // Destination chain id
-      chainId: selectedChain!.id,
-      recipient: provider.address!.toString(),
-      // Amount of tokens to receive
-      price: Price.fromRaw("0.1", 18, "WETH"),
-      // The token to swap the source token to, in this case WETH
-      swapTargetTokenSymbol: "WETH",
-    }
+  const swapParams: CheckoutOperationParams = {
+    // Source and destination chains
+    chainIdFrom: sourceChain.id,
+    chainIdTo: destinationChain.id,
+    // Address to send the swapped tokens to
+    recipient: provider.address!.toString(),
+    // Amount of tokens to receive
+    price: Price.fromRaw("0.01", 18, destinationTokenSymbol),
+    isMultiplePayment: false, // Single payment token for a simple example
+  }
+
+  console.log('Swapping',
+    sourceTokenSymbol, 'on', sourceChainName,
+    'for', swapParams.price.toString(), destinationTokenSymbol,
+    'on', destinationChainName
+  )
 
   // Initialize the transaction
-  await op.init({
-    chainIdFrom: selectedChain!.id,
-    target,
-  })
+  await op.init(swapParams)
 
-  // Identify the tokens to exchange, in this case UNI
-  const tokens = await op.loadPaymentTokens(selectedChain!)
-  const paymentToken = tokens.find(({ symbol }) => symbol === "UNI")
-  const estimatedPrice = await op.estimatePrice(paymentToken!)
+  // Due to a limitation in the SDK, include an empty bundle for the transaction to work when the transactions are on the same chain/
+  // Remove this for cross-chain transactions.
+  const bundle = ethers.utils.defaultAbiCoder.encode(
+    ["address[]", "uint256[]","bytes[]"],
+    [
+      [],
+      [],
+      [],
+    ],
+  )
 
-  // Run the transaction
+  // Get the tokens that have enough balance to run the swap
+  const tokens = await op.getPaymentTokens(sourceChain!)
+  if (tokens.length === 0) {
+    console.log('No tokens in the wallet have a large enough balance to make the swap.')
+    return
+  }
+
+  // Make sure that the wallet has enough of the source token
+  const paymentToken = tokens.find(({ symbol }) => symbol === sourceTokenSymbol)
+  if (!paymentToken) {
+    console.log('You do not have enough', sourceTokenSymbol, 'to make the swap.')
+    return
+  }
+
+  // Get the estimated cost of the token swap, not the total cost to the user
+  const estimatedPrice = await op.estimatePrice(paymentToken)
+
+  // Run the transaction.
   // The `checkout()` method takes the parameters from the operation instance, gets approval from the user's wallet, and calls the Rarimo contract to handle the transaction.
-  const txHash = await op.checkout(estimatedPrice)
+  // Change the next line to await op.checkout(estimatedPrice, { bundle }) if the source and destination chains are the same:
+  await op.checkout(estimatedPrice)
+    .then((txHash) => {
+      console.log('Swap complete:', txHash)
+    })
+    .catch((e:ProviderUserRejectedRequest) => {
+      console.log('The user rejected the transaction.')
+    })
 }
 
 sendSwapTransaction()

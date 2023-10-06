@@ -6,30 +6,33 @@
 ## Design principles
 
 ### Security and cost efficiency
-Rarimo is built with the transfer cost of a centralized bridge and the security of multisignature bridges. By using a
-threshold signature mechanism for creating proofs for asset unlocking, it can offer a greater number of validators
-without a loss of speed and keep gas costs low.
+Rarimo is built with the transfer cost of a centralized messaging solution and the security of multisignature ones. By
+using a threshold signature mechanism for creating proofs for asset unlocking, it can offer a greater number of
+validators without a loss of speed and keep gas costs low.
 
 ### Scalability
 The Rarimo core has no limit on the number of blockchains connected to it. Systems can be added through voting by
-protocol users. Rewards are calculated depending on the number of networks that are supported by the validators.
+protocol users. There is a global pool designed for paying out for bringing the data from networks.  Rewards for a
+particular oracle (signer) are calculated depending on the number of networks they support.
 
 ### Simplicity
-The messaging service is designed to maximize smart-contract efficiency; users are able to complete asset migration or
-send messages over multiple networks with a minimum number of actions. In fact, the entire flow can be described in two
-phases:
-1. Sending a message or event to the Rarimo Contract on the initial network
-2. Claiming the appropriate proof of the action from the Rarimo core and transferring it to the destination network.
+The messaging service is designed to maximize smart-contract efficiency; users can complete asset migration or send
+messages over multiple networks with a minimum number of actions. The entire flow can be described in two phases:
+1) Sending a message or event to the Rarimo Contract on the initial network
+2) Claiming the appropriate proof of the action from the Rarimo core and transferring it to the destination network
+
+From the identity perspective, users can use their claims on any network on demand. They shouldn’t pay for migrating the
+particular artifact to all connected networks - protocol efficiently propagates states, and user claims their artifacts
+where and when they need.
 
 Accordingly, this approach:
 * Greatly simplifies the development of end applications that operate on Rarimo
-* Reduces the requirements for the device due to the possibility of using light client
+* Reduces the requirements for the device due to the possibility of using a light client
 * More cost-efficient, as it reduces gas consumption compared to solutions that use a lot of non-atomic calls
 
 ### Decentralization
 The system is based on a network of independent validators supporting the Rarimo core and oracles responsible for
 delivering messages over the network (both roles make sense and can be performed by the same network participant).
-Each validator is responsible for fetching an event from an initial chain and transferring it to the destination one.
 
 ## Infrastructure components and their orchestration
 The messaging infrastructure consists of the following components:
@@ -40,20 +43,23 @@ The messaging infrastructure consists of the following components:
 ![Rarimo architecture](rarimo-components.png)
 
 ### Rarimo core
-The Rarimo core is a decentralized blockchain-based system designated for timestamping events that are to be transferred
-through the networks. The Rarimo core is the source of information needed for the proper functioning of Rarimo Contracts.
-The Rarimo core is maintained by a set of validators that achieve consensus using the BFT-based consensus algorithm.
-It assumes that for consensus reaching (with fault tolerance) the max amount of faulty validators can be:
+The Rarimo Core is a decentralized blockchain-based system designated for timestamping events to be transferred through
+the networks. The Rarimo Core is the source of information needed for the proper functioning of Rarimo Contracts. The
+Rarimo core is maintained by a set of validators that achieve consensus using the BFT-based consensus algorithm. It
+assumes that for consensus reaching (with fault tolerance), the max amount of faulty validators can be:
 
-For the validator’s selection, Rarimo uses delegated Proof of Stake. Any user can propose themself as a validator; if
-other users trust the delegate, they can stake their own Tokens for them to become a validator. Delegates with the top
-staked balances are elected as validators for the next epoch.
+*N_fault = ⸤(N-1)/3⸥*
 
-As mentioned earlier logically the role of the validator is separated from the role of the oracle. But it is expected
-that a lot of nodes will support both functionalities. Additionally, the network can be expanded with existing oracle services.
+For the validator’s selection, Rarimo uses delegated Proof of Stake mechanism. Any user can propose themself as a
+validator; if other users trust the delegate, they can stake their tokens for them to become a validator. The delegates
+with the top staked balances are selected as validators.
+
+As mentioned earlier, logically, the role of the validator is separated from the role of the oracle. But it is expected
+that a lot of nodes will support both functionalities. Additionally, the network can be expanded with **existing Oracle
+services.**
 
 ### Rarimo Contract
-The contract is deployed on the particular smart contract platform and is needed for:
+These contracts are deployed on the particular smart contract platform and are needed for:
 1. Receiving events from the user in the source chain
 2. Sending events after receiving proof-of-action, generated by the Rarimo core
 
@@ -64,18 +70,22 @@ exchanges, applications for lending and borrowing, etc.
 ## Roles
 *Initiator* - the user that performs some action for transferring assets or messages over the networks.
 
-*Receiver* - the user or decentralized application that exists on the destination chain and should be updated due to performed action.
+*Receiver* - the user or decentralized application that exists on the destination chain and should be updated due to
+performed action.
 
-*Prover* - this role that can be acted by anyone. This role aims to provide proof generated by the Rarimo core for
-initiating events in the destination chain. Usually, this role is acted by oracles.
+*Prover* - this role that anyone can act. This role aims to provide proof generated by the Rarimo core for initiating
+events in the destination chain. Usually, this role is played by oracles.
 
-*Validator* - the maintainer of the bridge infrastructure. Together with other validators, it reaches a consensus
-according to the acceptance of new blocks and transactions. Also, validators need to listen to all connected networks
-for receiving events bound with NFT locking.
+*Validator* - the maintainer of the protocol infrastructure. It reaches a consensus with other validators according to
+the acceptance of new blocks and transactions. Also, validators must listen to all connected networks for receiving
+events bound with tokens locking.
+
+*Signers (oracles)* - the participant that can bring the data to/from Rarimo core and cosign this action with threshold
+digital signature.
 
 ## Rarimo message format
-The bridge has its own message format, which maintains compatibility with formats of the most common assets (standards)
-on existing blockchains as follows.
+Rarimo has its own message format, which maintains compatibility with formats of the most common assets (standards) on
+existing blockchains as follows.
 
 | Field | Purpose |
 |------:|---------|
@@ -87,8 +97,9 @@ on existing blockchains as follows.
 |Destination contract|Identifies the address (identifier) of the contract or the user who will receive the message and update his own state|
 
 ## Updating the state of Rarimo core
-For sending and confirming transactions Rarimo uses blockchain technology to keep a history of transactions associated
-with this bridge. This is especially important for NFT settlement. The block structure in the blockchain can be represented as follows:
+For sending and confirming transactions **Rarimo** uses blockchain technology to keep a history of transactions
+associated with the protocol These mechanisms are handy for recovering the full history and origin of the unique entity
+that travels over the web3.  The block structure in the blockchain can be represented as follows:
 
 | Field | Purpose |
 |------:|---------|
@@ -109,5 +120,5 @@ And for the transparency of processes, consider the structure of the block heade
 So when some transaction should be added to the blockchain, the proposer (the validator that initially forms the block
 and propagates it with all other validators) puts this transaction to the block (with other transactions), signs it, and
 distributes it through the network. The validator that left their signature on the block confirms that all included
-transactions are correct. After the round of consensus reaching is performed (all other validators agree to add the transaction)
-the block is connected to the blockchain and the state of the system (Rarimo core) is updated.
+transactions are correct. After the round of consensus reaching is performed (all other validators agree to add the
+transaction), the block is connected to the blockchain, and the state of the system (Rarimo core) is updated.

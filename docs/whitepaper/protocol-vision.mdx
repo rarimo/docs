@@ -3,43 +3,54 @@
 
 # Rarimo Protocol Vision
 
-In this document, the features and technical details of Rarimo will be shown. The primary goal of which	 is to ensure a
-high level of decentralization (dozens of validators) in the cross-chain transfers area and achieve a level of cost
-efficiency compared with existing decentralized solutions.
+In this document, the features and technical details of **Rarimo** will be shown.
+
+The primary goal is to ensure a high level of decentralization (dozens of validators) in the cross-chain area, achieve a
+level of cost efficiency compared with existing decentralized solutions, and expand the multichain interactions with new
+structures like **digital identity** and **social attributes**.
 
 Rarimo will be created as a cross-chain messaging protocol with a set of sub-protocols built on top. Such architecture
-will make the protocol more flexible and adapted for different use cases. As a base layer, a low-level cross-chain messaging
-protocol is used. On top of this messaging protocol, there is a bridging protocol that adds the functionality of securely
-locking/unlocking assets and has enough flexibility to build applications on top of this bridging logic. The third level
-will be applications that use the bridging protocol for different use cases.
+will make the protocol more flexible and adapted for different use cases.
 
-![image](layers.png)
+→ As a base layer, a low-level cross-chain messaging protocol is used.
 
-Security of Rarimo protocol will be handled by two main roles: Validators and Signers. Validators will be responsible for two main actions:
-* Security of Rarimo blockchain
-* Being Oracle that submits and checks events on connected chains
+→ On top of this messaging protocol, there are:
+* bridging protocol that adds the functionality of securely locking/unlocking assets and has enough flexibility to build
+applications on top of this bridging logic
+* identity protocol that allows issuing of digital identity artifacts and propagates them over connected networks
+* oracle layer is a decentralized service that brings data from connected chains (about assets, states, and statements)
 
-Signers will be responsible for producing a threshold signature based on the actions submitted to Rarimo blockchain that
-could be used in connected chains as proof of checking event in an external network.
+→ The third level will be applications that use the bridging protocol for different use cases.
+
+![image](protocol-layers.png)
+
+Security of the **Rarimo** protocol will be handled by two main roles: Validators and Signers. Validators will be
+responsible for two main aspects:
+* Maintenance of the Rarimo blockchain
+* Being an oracle that submits and checks events on connected chains (it’s presumed that the oracle role could be
+separated from the validator, but in the early stage, it is required to support the set of predefined chains by each
+validator)
+
+Signers are part of the oracles functionality responsible for producing a threshold signature based on the actions
+submitted to the Rarimo blockchain that could be used in connected chains as proof of checking events in an external
+network.
 
 ![image](validator.png)
 
 The messaging protocol architecture of Rarimo can support the following verticals:
 
-## Liquidity (Marketplaces, Defi & Lending)
+**Liquidity (Marketplaces, Defi & Lending)**
 * Streamlined cross-chain NFT purchases with any ERC20
 * Proof of Digital Asset Ownership and Reputation for Lending
-* Fractionalization
-* Optimized NFT pooling and staking
-* Bulk migration of NFTs from dying chains to thriving ones
+* Bulk migration of NFTs from dying chains to thriving one's
 
-## Compatibility (Metaverses, Gaming)
+**Compatibility (Metaverses, Gaming)**
 * Quickly scale assets across chains for different metaverses
 * Cross-chain NFT drops
 * Brand asset migration by end users
-* L1 <-> L2 asset swaps
 
-## Access (Identity & Reputation, DAO)
+**Access (Identity & Reputation, DAO)**
 * Proof of Identity across chains
 * Extension of voting rights in DAO based on holdings
 * Community-enabled key recovery permissions
+
