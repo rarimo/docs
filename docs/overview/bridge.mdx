@@ -35,8 +35,6 @@ Previously, Rarimo used different tokens to move liquidity.
 For example, if the source token existed on both chains, Rarimo locked the tokens on the source chain and unlocked the same type of tokens on the destination chain.
 If the token did not exist on both chains, Rarimo swapped the source tokens for a wrapped version of the destination chain's native token and bridged those wrapped tokens for native tokens on the destination chain.
 
-You can get the exact pairs of tokens that Rarimo supports with the [`/v1/tokens`](../api/reference/get-token-list.api.mdx) endpoint.
-
 For example, this diagram shows the process of converting ETH on Ethereum to AVAX on Avalanche by using USDC to bridge the tokens:
 
 ![Bridging via USDC](/img/usdc-bridge.png)

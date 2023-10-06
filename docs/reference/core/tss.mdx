@@ -1,7 +1,7 @@
 ---
 ---
 
-# TSS overview
+# Threshold Signature(TSS)
 
 All operations should be signed with ECDSA secp256k1 threshold (t-n) signature.
 This signature is produced by core multi-sig services depending on the core validated state.
@@ -16,6 +16,8 @@ Core operation entry contains the information about some data to sign. Operation
 - transfer operation (transfer token from one chain to another)
 - change key by adding party
 - change key by removing party
+
+The [tss-svc](https://gitlab.com/rarimo/tss/tss-svc) is a party implementation that is responsible for generating/resharing TSS keys and signing operations.
 
 ## Protocol
 

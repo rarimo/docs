@@ -12,10 +12,15 @@ function getBaseUrl() {
   return process.env.BASE_URL || "/docs/";
 }
 
+function isStaging() {
+  return process.env.STAGING === "true";
+}
+
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
   /** Meta information */
   title: "Rarimo Developer Documentation",
+  // TODO: better description
   tagline:
     "Learn the basics of the protocol and create simple applications to connect to wallets and create cross-chain transactions.",
   url: getUrl(),
@@ -23,6 +28,7 @@ module.exports = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/logo-icon.png",
+  noIndex: isStaging(),
 
   // @todo we'll use these when we move to github
   // organizationName: "rarimo",
@@ -71,7 +77,7 @@ module.exports = {
       },
       navbar: {
         logo: {
-          alt: "We are professionals",
+          alt: "Rarimo Logo",
           src: "img/logo-transparent.svg",
         },
         items: [
@@ -79,59 +85,31 @@ module.exports = {
             type: "doc",
             docId: "overview",
             position: "left",
-            label: "Getting started",
+            label: "Overview",
           },
           {
             type: "doc",
             docId: "use-cases",
             position: "left",
-            label: "Use cases",
+            label: "Use Cases",
           },
           {
             type: "doc",
-            docId: "architecture",
+            docId: "tutorials",
             position: "left",
-            label: "Architecture",
+            label: "Tutorials",
           },
           {
-            type: "dropdown",
-            docId: "reference",
+            type: "doc",
+            docId: "integration-guides",
             position: "left",
+            label: "Integration Guides",
+          },
+          {
+            type: "doc",
+            position: "right",
             label: "Reference",
-            items: [
-              {
-                label: "Contracts",
-                type: "doc",
-                docId: "reference/contracts",
-              },
-              {
-                label: "API",
-                type: "doc",
-                docId: "api",
-              },
-              {
-                label: "SDK",
-                type: "doc",
-                docId: "sdk",
-              },
-            ],
-          },
-          // {
-          //   type: "doc",
-          //   docId: "solutions",
-          //   position: "left",
-          //   label: "Solutions",
-          // },
-          {
-            type: "doc",
-            docId: "whitepaper",
-            position: "right",
-            label: "Whitepaper",
-          },
-          {
-            href: "https://github.com/rarimo",
-            label: "GitHub",
-            position: "right",
+            docId: "reference",
           },
         ],
       },
@@ -142,7 +120,7 @@ module.exports = {
             items: [
               {
                 html: `
-                <img src="img/logo-footer.svg" alt="We are professionals"/>
+                <img src="img/logo-footer.svg" alt="Rarimo Logo"/>
               `,
               },
               {
@@ -156,7 +134,14 @@ module.exports = {
             items: [
               {
                 html: `
-                <a href="https://discord.gg/cfrH3Fe7ke" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Discord">
+                <a href="https://github.com/rarimo" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="GitHub">
+                GitHub <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="#D9D9D9"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="#8F8F8F"/></g></svg>
+                </a>
+              `,
+              },
+              {
+                html: `
+                <a href="https://discord.gg/cfrH3Fe7ke" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Discord"  style="margin-top: 1rem">
                 Discord <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="#D9D9D9"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="#8F8F8F"/></g></svg>
                 </a>
               `,
@@ -265,26 +250,7 @@ module.exports = {
     }),
 
   /** Plugins https://docusaurus.io/docs/using-plugins */
-  plugins: [
-    [
-      /** OpenAPI Docs https://github.com/PaloAltoNetworks/docusaurus-openapi-docs */
-      "docusaurus-plugin-openapi-docs",
-      {
-        id: "apiDocs",
-        docsPluginId: "classic",
-        config: {
-          coreApi: {
-            specPath: "static/openapi/coreApi.json", // Path to designated spec file
-            outputDir: "docs/api/reference", // Output directory for generated .mdx docs
-            sidebarOptions: {
-              groupPathsBy: "tag",
-              sidebarCollapsed: false,
-            },
-          },
-        },
-      },
-    ],
-  ],
+  plugins: [],
 
   themes: ["docusaurus-theme-openapi-docs"], // Allows use of @theme/ApiItem and other components
 };

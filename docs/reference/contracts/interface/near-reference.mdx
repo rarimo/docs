@@ -1,5 +1,7 @@
 ---
 sidebar_label: NEAR Contract
+# TODO: add fungible & non-fungible token documentation
+# TODO: link to the package / github where the contracts are accessible
 ---
 
 # NEAR Contract Reference
@@ -8,8 +10,6 @@ Rarimo's smart contract interface on the NEAR blockchain is similar, but not ide
 You can pull our NEAR contract via `npm` and `github`.
 This page is a quick reference for the interface and capabilities of this contract.
 
-> TODO: link to the package / github where the contracts are accessible
-
 ## General Notes
 
 ### Emitted Events
@@ -17,17 +17,6 @@ This page is a quick reference for the interface and capabilities of this contra
 Each of these methods will emit an event in a standardized way.
 As an example, the `native_deposit` will emit an event of `native_deposited` when it is called.
 All of the parameters passed in will be part of the emitted event, in the same order.
-
-### Bundling
-
-Each method accepts a salt and a bundle parameter, which can be used for bundling on the destination chain.
-
-> TODO: Give some examples of how bundles work
-
-### Network Parameters
-
-To ensure that our protocol works with all blockchains, the destination network parameter is a string.
-Make sure you pass in the correct spelling of the blockchain by using our [Get supported chain list endpoint](../../../api/reference/get-chain-list.api.mdx).
 
 ## native_deposit
 
@@ -73,4 +62,3 @@ await wallet.callMethod({
 });
 ```
 
-> TODO: add fungible & non-fungible token documentation

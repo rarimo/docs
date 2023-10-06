@@ -36,18 +36,6 @@ const FeatureList: FeatureItem[] = [
     url: "./architecture",
   },
   {
-    title: "API reference",
-    Svg: require("@site/static/img/extension.svg").default,
-    description: (
-      <>
-        Refer to information about the Rarimo API, which provides information
-        about the protocol&apos;s smart contracts and its supported blockchains
-        and tokens.
-      </>
-    ),
-    url: "./api",
-  },
-  {
     title: "SDK",
     Svg: require("@site/static/img/flag.svg").default,
     description: (
@@ -56,7 +44,7 @@ const FeatureList: FeatureItem[] = [
         from your applications.
       </>
     ),
-    url: "./sdk",
+    url: "./reference/sdk",
   },
 ];
 

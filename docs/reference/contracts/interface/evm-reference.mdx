@@ -1,5 +1,6 @@
 ---
 sidebar_label: EVM Contract
+# TODO: link to the package / github where our ABIs are accessible
 ---
 
 # EVM Contract Reference
@@ -8,7 +9,7 @@ On each of the EVM-compatible blockchains that we support, the deployed smart co
 This interface is available for you on both `npm` and `github`.
 You can use this page to quickly reference the interface and capabilities of our deployed contracts.
 
-> TODO: link to the package / github where our ABIs are accessible
+
 
 ## General Notes
 
@@ -23,12 +24,9 @@ All of the parameters passed in will be part of the emitted event, in the same o
 Each method accepts a bundle parameter, which is a tuple of a salt and bundle.
 The salt is used to determine a proxy address, while the bundle is an encoded transaction bundle.
 
-> TODO: Give some examples of how bundles work
-
 ### Network Parameters
 
 To ensure that our protocol works with all blockchains, not just EVM-compatible ones, the destination network is a simple string.
-Make sure you pass in the correct spelling of the blockchain by using our [Get supported chain list endpoint](../../../api/reference/get-chain-list.api.mdx).
 
 ## DepositNative
 
