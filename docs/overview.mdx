@@ -1,35 +1,52 @@
 ---
 ---
 
-# Overview
+# About Rarimo
 
-Rarimo is a multi-chain protocol developed to solve the problems of **liquidity**, **access**, and **interoperability** across non-fungible and fungible use-cases.
-Rarimo makes it easier to work across different chains, allowing you to do things like transfer tokens, stake tokens, and provide proofs of ownership across chains.
+We believe in a multichain future for web3, and designed our protocol to enable this future.
+This gives our protocol fundamental advantages over other cross-chain providers available today.
 
-We have created a suite of tools, including an API and JavaScript/TypeScript SDK, that make it easy to build ground-breaking integrations on top of our technology.
+## Advantages
 
-- [Core concepts](./architecture) | How the protocol works and how it is structured
-- [Smart Contracts](./reference/contracts) | Rarimo's contracts on supported chains
-- [API](./api) | The Rarimo core API
-- [SDK](./sdk) | JavaScript/TypeScript SDK for handling transactions
+### Scalable Security
 
-All of our tools are open source and free to use.
-We welcome questions, feedback, and collaboration on all levels as we work together to build a platform-agnostic, untethered internet of the future.
+We use TSS (Threshold Signature Scheme) to provide cost-efficient security.
+Our network will scale with integrations and web3 adoption, all while maintaining first-class security and fixed transfer costs.
 
-## Use cases
+### Easy Integrations
 
-The primary purpose of the Rarimo protocol is to remove barriers between chains and token types.
-The protocol simplifies transactions that require converting one type of token into another, moving tokens from one chain to another, or maintaining pools of tokens on multiple chains.
+Existing contracts can be easily plugged into our callstack.
+You don't need to waste time or resources rewriting your contracts or dApp to interact with our protocol.
 
-You can use the protocol for many use multi-chain cases, including:
+### Bundling
 
-- Accepting any token from any chain as payment for NFT purchases
-- Creating seamless cross-chain token transfers
-- Building liquidity pools that allow you to work with many chains simultaneously
-- Allowing users to stake tokens across different chains
-- Airdropping NFTs to multiple chains
-- Proving ownership of tokens across chains
+Transactions on our protocol are bundled, so one user request will equal one transaction.
+This results in low costs for multi-step flows, clean integrations, and simple fallback mechanisms.
 
-## Examples
+## Sub-Protocols
 
-For example applications, see [rarimo/js-sdk-examples](https://github.com/rarimo/js-sdk-examples/) on GitHub.
+Rarimo has a general messaging protocol foundation with a set of sub-protocols built on top.
+We can easily adapt to emerging technologies and applications.
+One of these sub-protocols can securely lock and unlock assets, which dApps directly integrate with.
+
+![Rarimo Design](/img/rarimo-design.png)
+
+## Decentralization
+
+Our system is based on a network of independent validators and oracles.
+Validators work together to achieve secure consensus on events, and oracles deliver messages over the network.
+Each validator is responsible for moving events from the initial chain to the destination.
+
+# Architecture
+
+The Rarimo protocol architecture includes the following parts:
+
+- Rarimo Core (Blockchain core that stores validated state)
+- TSS service (Threshold signature producers that signs validated operations to provide proof for unlocking on the destination chain)
+- Vault (Stores the TSS service keys)
+- Saver services or Oracles (The oracles that observers the connected chains state, submits new events and vote for new events' correctness)
+- Broadcaster service (Running to broadcast transactions from different services by certain account)
+- Smart-contracts (Bridges)
+- BDJuno, Hasura and Explorer frontend
+- Horizon (Service that communicates with core and provides REST API for frontend integration)
+- Relayer service and contracts (Provides user with opportunity to pay for automatic transaction execution)

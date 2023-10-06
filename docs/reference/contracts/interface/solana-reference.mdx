@@ -1,5 +1,6 @@
 ---
 sidebar_label: Solana Program
+# TODO: add fungible & non-fungible token documentation
 ---
 
 # Solana Program Reference
@@ -8,24 +9,7 @@ The smart contract for interacting with the Rarimo protocol over Solana is simil
 You can view our contracts directly on `npm` and `github`.
 This page serves as a reference to the interface and a summary of the capabilities.
 
-> TODO: link to the package / github where the contracts are accessible
-
 ## General Notes
-
-### Emitted Events
-
-> TODO: once we have some functional examples, show how the [websocket events](https://docs.solana.com/developing/clients/jsonrpc-api#subscription-websocket) will look
-
-### Bundling
-
-Each method accepts a bundle_data and a bundle_seed parameter, which can be used for bundling transactions on the destination chain.
-
-> TODO: Give some examples of how bundles work
-
-### Network Parameters
-
-To ensure that our protocol works with all blockchains, the destination network parameter is a string.
-Make sure you pass in the correct spelling of the blockchain by using our [Get supported chain list endpoint](../../../api/reference/get-chain-list.api.mdx).
 
 ## deposit_native
 
@@ -82,5 +66,3 @@ await sendAndConfirmTransaction(
   [payer],
 );
 ```
-
-> TODO: add fungible & non-fungible token documentation
