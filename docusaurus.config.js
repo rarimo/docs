@@ -108,7 +108,7 @@ module.exports = {
           {
             type: "doc",
             position: "right",
-            label: "Reference",
+            label: "Technical Reference",
             docId: "reference",
           },
         ],

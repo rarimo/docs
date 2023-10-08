@@ -30,7 +30,7 @@ const sidebars = {
     },
     {
       type: "doc",
-      label: "Bridge Protocol",
+      label: "Bridging Protocol",
       id: "overview/bridge", // TODO: redirect from "architecture/swap-bridge"
     },
   ],
