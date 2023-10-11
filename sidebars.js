@@ -53,7 +53,12 @@ const sidebars = {
     "tutorials/creating-transactions", // TODO: redirect from "overview/creating-transactions"
     "tutorials/swapping-tokens", // TODO: redirect from "overview/swapping-tokens"
   ],
-  integrationGuides: ["integration-guides"],
+  integrationGuides: [
+    "integration-guides",
+    "integration-guides/poh-questn",
+    "integration-guides/poh-zealy",
+    "integration-guides/poh-galxe",
+  ],
   reference: [
     {
       type: "doc",
