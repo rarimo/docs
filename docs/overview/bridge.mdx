@@ -1,40 +1,62 @@
 ---
 ---
 
-# Swapping and bridging
+# Bridging Sub-Protocol
 
-_Swapping_ is the process of exchanging one token for another on the same chain.
+Bridging Sub-Protocol builds upon the base cross-chain messaging layer to facilitate asset transfers. It supports bridging native and fungible tokens, NFTs, and SBTs across all the supported chains.
 
-_Bridging_ is the process of moving tokens from one chain to another.
-However, technically, Rarimo does not transfer the tokens themselves; instead, it locks tokens on the source chain and unlocks equivalent tokens on the destination chain.
-Bridging is also referred to as _moving liquidity_.
+Currently, it's available for:
+- Ethereum;
+- Polygon;
+- Binance Smart Chain;
+- AVAX;
+- Solana;
+- Near;
 
-## Swapping limitations
 
-Rarimo can swap ERC-20 tokens to native tokens and native tokens to ERC-20 tokens on the same chain.
+Let's look at the inner workings of the sub-protocol in a real-world example: the user bridges funds from Ethereum to Polygon to buy an NFT.
+The diagram below describes the entire flow. Note that the user only submits a single transaction on the source chain to perform this complex cross-chain task.
 
-To swap tokens, Rarimo uses these decentralized exchanges (DEXs):
+![Bridging Flow](/img/bridging-flow.png)
 
-- Uniswap
-- Pancakeswap
-- Quickswap
-- Trader Joe
+## Sub-Protocol Features
 
-Therefore, Rarimo is limited by the swaps that these DEXs can do.
+### Relayer Service
 
-## Bridging
+The relayer automatically delivers the transfers to the destination chain. This way, the user doesn't need to switch networks, sign an additional transaction, and bother with funds to pay the gas fee on the destination chain.
 
-Rarimo bridges tokens via USDC tokens:
+### EVM Transaction Bundling
 
-1. It swaps the source tokens to USDC on the source chain.
-1. It locks the USDC on the source chain.
-1. It unlocks USDC on the destination chain.
-1. It swaps the USDC for the desired token on the destination chain.
+To support more complex flows on EVM chains, we allow the bundling one or more custom transactions into the transfer. These transactions will be executed on the destination chain once the transfer is completed.
+For example, a user can transfer funds and place an order on an NFT marketplace on the destination chain using a single transaction.
 
-Previously, Rarimo used different tokens to move liquidity.
-For example, if the source token existed on both chains, Rarimo locked the tokens on the source chain and unlocked the same type of tokens on the destination chain.
-If the token did not exist on both chains, Rarimo swapped the source tokens for a wrapped version of the destination chain's native token and bridged those wrapped tokens for native tokens on the destination chain.
+### Low Fees
 
-For example, this diagram shows the process of converting ETH on Ethereum to AVAX on Avalanche by using USDC to bridge the tokens:
+Thanks to the usage of the TSS for securing the transfers, the gas fee overhead for bridging on the destination chain is minimal.
 
-![Bridging via USDC](/img/usdc-bridge.png)
+<!-- TODO: add figures -->
+
+Rarimo's takes a fixed fee for every transfer in a token of choice. The price is negotiable.
+
+### USDC Liquidity
+
+>Coming Soon!
+
+Rarimo has integrated [Circle CCTP protocol](https://www.circle.com/en/cross-chain-transfer-protocol) to move USDC tokens between the chains without a need in the liquidity pools.
+
+
+##  Token-Agnostic Payments Widget
+
+With Rarimo's token-agnostic payments, your customers can consolidate funds from multiple chains and in various tokens to pay you with just a few clicks. We handle the token swaps and bridging for you.
+
+![Token Agnostic Payments Example](/img/token-agnostic-receipt.png)
+
+Fundamentally, the product provides four capabilities:
+
+- Rarimo's Bridging Sub-Protocol;
+- Token swaps using liquidity from popular DEXes such as Uniswap, PancackeSwap, and TraderJoe;
+- EVM transaction bundling for executing custom logic, such as placing orders for NFTs;
+- Circle CCTP integration provides USDC liquidity for all supported chains;
+- By combining these features, developers can implement such cross-chain use cases as fungible token payments, NFT minting, staking, token swaps, etc.
+
+The solution comes as a ready-to-use [React widget](/reference/sdk/packages-checkout#@rarimo/react-nft-checkout) that requires little effort for integration. Also, you can go fancy and build a custom integration using our [JS SDK](/reference/sdk/packages-checkout#@rarimo/nft-checkout).

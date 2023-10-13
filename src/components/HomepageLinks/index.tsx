@@ -20,7 +20,7 @@ const LinksList: LinkItem[] = [
     title: "Forum",
     Svg: require("@site/static/img/forum.svg").default,
     description: "Discuss governance and more",
-    url: "https://scan.testnet.rarimo.com/proposals",
+    url: "https://scan.rarimo.com/proposals",
   },
   {
     title: "Github",
