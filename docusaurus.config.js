@@ -28,7 +28,7 @@ module.exports = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/logo-icon.png",
-  noIndex: isStaging(),
+  noIndex: false,//isStaging(),
 
   // @todo we'll use these when we move to github
   // organizationName: "rarimo",
