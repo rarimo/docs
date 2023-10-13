@@ -101,9 +101,9 @@ module.exports = {
           },
           {
             type: "doc",
-            docId: "integration-guides",
+            docId: "how-to-guides",
             position: "left",
-            label: "Integration Guides",
+            label: "How-To Guides",
           },
           {
             type: "doc",

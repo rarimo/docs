@@ -1,7 +1,7 @@
 ---
 sidebar_label: On-chain ZKP Verification
 ---
-# How to Verify a Zero-Knowledge Proof in a Smart contract
+# How to Verify a Zero-Knowledge Proof in a Smart Contract
 
 ## On-chain verification flow
 ![On-chain verification flow](/img/zkp-verification.png)
@@ -109,7 +109,7 @@ All the files can be found here: <a href="https://github.com/iden3/contracts" ta
 
 The ZKPVerifier Contract provides 2 hooks: ```_beforeProofSubmit``` and ```_afterProofSubmit```.
 These hooks are called before and after any proof gets submitted and can be used to create certain logic inside your Smart Contract.
-Our ERC20Verifier contract must define at least a single `TRANSFER_REQUEST_ID`. 
+Our ERC20Verifier contract must define at least a single `TRANSFER_REQUEST_ID`.
 This is the Identifier of the request that the contract is posing to the user.
 
 To enable ZK Verification, we should add the following lines to our contract, namely two hooks with the logic, which you can change:
@@ -123,12 +123,12 @@ import "./interfaces/ICircuitValidator.sol";
 import "./verifiers/ZKPVerifier.sol";
 
 contract ERC20Verifier is IERC20, ZKPVerifier {
-   
+
     mapping(address => uint256) public addressToId;
 
     uint64 public constant TRANSFER_REQUEST_ID = 1;
     uint64 public constant TOKENS_TO_MINT = 100;
-       
+
     function _beforeProofSubmit(
         uint64, /* requestId */
         uint256[] memory inputs,
@@ -136,7 +136,7 @@ contract ERC20Verifier is IERC20, ZKPVerifier {
     ) internal view override {
         // your custom logic can be implemented here
 
-        // checks that the challenge input of the proof is equal to the msg.sender         
+        // checks that the challenge input of the proof is equal to the msg.sender
         address addr = GenesisUtils.int256ToAddress(
             inputs[validator.getInputOf("challenge")]
         );
@@ -165,7 +165,7 @@ contract ERC20Verifier is IERC20, ZKPVerifier {
         addressToId[msg.sender] = id;
         super._mint(msg.sender, TOKENS_TO_MINT);
     }
-    
+
     // all other ERC20 functions should be included too
 }
 ```
@@ -178,8 +178,8 @@ To do that, we must provide 6 inputs to the `setZKPRequest` function:
 
 1. `requestID`: the ID associated with the request (`1` in our contract).
 1. `validator`: the address of the `Validator Smart Contract`. It's type can be either `CredentialAtomicQuerySigValidator` or `CredentialAtomicQueryMTPValidator` depending on how the credentials were issued.
-1. `schema`: the bigInt representation of the schema of the requested credential. 
-1. `claimPathKey`: represents the path to the queries key inside the merklized credential (In our case it is the path to the `birthday` key). 
+1. `schema`: the bigInt representation of the schema of the requested credential.
+1. `claimPathKey`: represents the path to the queries key inside the merklized credential (In our case it is the path to the `birthday` key).
 1. `operator`: is either 1, 2, 3, 4, 5 or 6 (`less-than` operator, that we need is `2`).
 1. `value`: represents the threshold value you are querying (01/01/2000 date in our case).
 

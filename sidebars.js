@@ -55,12 +55,12 @@ const sidebars = {
     "tutorials/creating-transactions", // TODO: redirect from "overview/creating-transactions"
     "tutorials/swapping-tokens", // TODO: redirect from "overview/swapping-tokens"
   ],
-  integrationGuides: [
-    "integration-guides",
-    "integration-guides/poh-questn",
-    "integration-guides/poh-zealy",
-    "integration-guides/poh-galxe",
-    "integration-guides/zkp-verification",
+  howToGuides: [
+    "how-to-guides",
+    "how-to-guides/poh-questn",
+    "how-to-guides/poh-zealy",
+    "how-to-guides/poh-galxe",
+    "how-to-guides/zkp-verification",
   ],
   reference: [
     {
