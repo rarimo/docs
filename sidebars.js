@@ -39,6 +39,7 @@ const sidebars = {
   useCases: [
     "use-cases",
     "use-cases/ssi",
+    "use-cases/proof-of-humanity",
     "use-cases/token-agnostic", // TODO: redirect form NFT checkout
     "use-cases/polygon-id",
     "use-cases/social-graphs",
@@ -46,7 +47,6 @@ const sidebars = {
     "use-cases/gaming-profiles",
     "use-cases/cctp",
     "use-cases/proofs",
-    "use-cases/proof-of-humanity",
   ],
   tutorials: [
     "tutorials",
