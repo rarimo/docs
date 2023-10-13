@@ -1,35 +1,71 @@
 ---
+
+# TODO: add links to relevant guides
 ---
 
-# Identity
+# Identity Sub-Protocol
 
-Rarimo provides support for decentralized identity across chains.
-Identity providers can publish information about users' identities to Rarimo and Rarimo syncs this identity metadata to other chains, including Ethereum, Solana, and Near.
-Then, applications can verify the users' identities on these other chains.
+## Problem Statement
 
-Rarimo does this by supporting an embedded identity protocol, which allows uses to generate and verify zero-knowledge proofs (ZKPs).
-These ZKPs provide only a cryptographically secure verification that the user meets the requirements of the verification, without revealing any of the user's personal information.
+Decentralized identity is a crucial building block for Web 3 applications such as social graphs, games, regulation-compliant DeFi, and many more. Moving on from centralized solutions like OAuth, the crypto community has come up with several solutions:
+- Wallet Addresses;
+- Soulbound Tokens (SBT);
+- Ethereum Name Services (ENS) & similar solutions;
+- Self-Sovereign Identity(SSI) Protocols;
 
-This identity protocol takes advantage of Rarimo's bridging protocol to make syncing the identity information across chains cheap and seamless.
+However, they share some limitations:
+- **Identity fragmentation across chains.** DApps can verify identity only on the chain where it was issued;
+- **Integration friction.** There's no structured way for DApp developers to interact with different issuers and identity components;
+- **Privacy concerns.** SBTs and ENS-like services reveal all the data on-chain, which may be a critical issue for some sensitive identity data. Only protocols that incorporate Zero-Knowledge proofs properly address this issue;
 
-## Roles
+Rarimo Identity Sub-Protocol builds upon the base interchain layer to address these challenges.
 
-Identity verification involves three roles:
+## Features
 
-- **Issuers**: Issuers create identities and issue them to identity holders.
-Some examples of issuers are:
+### Own Your Identity
 
-   - Government authorities creating identification documents
-   - Schools issuing degrees and certifications
-   - Organizations creating credentials for members and their roles
+The Sub-Protocol implements the <a href="https://www.w3.org/TR/did-core/" target="_blank" rel="noreferrer noopener">W3C DID Self-Sovereign Identity standard</a>, meaning all your credentials stay on your device, and no third party can access them.
 
-   See [Issuing credentials](./issuing-credentials).
+### Keep Privacy With Zero-Knowledge Proofs
 
-- **Identity holders**: Identity holders are end users who receive identities from issuers, store them in their wallets, and use them to send ZKPs to verifiers.
+To enable the usage of your credentials in a privacy-preserving manner, we've integrated zero-knowledge proofs into the sub-protocol. DApps can verify specific attributes of your identity on-chain without compromising the sensitive data. For example, you can prove you're over 21 without revealing your age. The security is ensured by the proven <a href="https://docs.iden3.io/" target="_blank" rel="noreferrer noopener">Iden3 Protocol</a>.
 
-- **Verifiers**: Verifiers query identity holders via their wallets, verify that issuers are who they say they are, and validate the ZKPs that they receive.
-See [Querying credentials](./querying-credentials).
+![Cross-Chain Identity](/img/zkp.png)
 
-This diagram shows the basic interactions in distributed identity in Rarimo via ZKPs:
 
-![The three roles in distributed identity, showing the issuer creating credentials and the verifier getting ZKPs from the identity holder](/img/Identity-actors.png)
+### Use Your Identity Anywhere
+
+Rarimo's cross-chain messaging base layer ensures that all the metadata necessary for verifying zero-knowledge proofs is available on demand on any supported chains. A synergy of instant consensus finality and threshold signature(TSS) makes metadata replication fast, secure, and cheap.
+
+![Cross-Chain Identity](/img/identity-state-replication.png)
+
+### Enjoy Seamless UX With RariMe
+
+Self-sovereign identity is a paradigm shift that might be overwhelming for the users. We've developed RariMe(todo: link) to ensure a smooth transition. RariMe lives in your MetaMask and securely stores all your credentials. It brings a familiar and consistent user experience to all the DApps using our identity sub-protocol.
+
+<!-- TODO: add newer demo video -->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PwVu2I2XQ4U?si=JMfNLlnhCyugDy-p" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### Become an Identity Issuer
+
+We don't gatekeep the credential issuance and instead embrace the Triangle of Trust between the issuer, holder, and verifier. Any party can join and issue its own credentials. Any verifier can accept these credentials if he trusts the issuer.
+
+![Rarimo Sub-Protocols](/img/trust-triangle.png)
+
+### Integrate Identity in Your DApp
+
+We provide a structured and straightforward way to integrate identity verification in your DApp using a template smart contract and a flexible zero-knowledge query language.
+
+### Prove You Are Not A Bot With Rarimo's Proof of Humanity
+
+DApps are prone to abuse by bots and fake accounts. Currently, there are a few ways to address this issue:
+- Captchas
+- Linking social media accounts
+- Self-Sovereign Identity protocols(SSI)
+- Reputation systems
+
+However, neither of these covers the entire Web3 user base. On top of that, there is no interoperability between them.
+
+Rarimo’s [Proof of Humanity plugin](/use-cases/proof-of-humanity) improves upon these solutions by aggregating identity providers and facilitating zero-knowledge identity proofs on-chain. This way, users can choose from many options for proving their humanity while keeping their privacy.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-ASoTJUtEWU?si=SArSmxRpyhOwOyFK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

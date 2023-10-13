@@ -18,19 +18,21 @@ const sidebars = {
     "whitepaper/sources",
   ],
   overview: [
-    "overview",
     {
-      type: "category",
-      label: "Identity Protocol",
-      link: {
-        type: "doc",
-        id: "overview/identity",
-      },
-      items: ["overview/issuing-credentials", "overview/querying-credentials"],
+      type: "doc",
+      label: "About Rarimo",
+      id: "overview",
     },
     {
       type: "doc",
-      label: "Bridging Protocol",
+      label: "Identity Sub-Protocol",
+      id: "overview/identity",
+      // TODO: add redirects
+      //items: ["overview/issuing-credentials", "overview/querying-credentials"],
+    },
+    {
+      type: "doc",
+      label: "Bridging Sub-Protocol",
       id: "overview/bridge", // TODO: redirect from "architecture/swap-bridge"
     },
   ],

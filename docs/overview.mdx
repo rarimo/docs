@@ -3,50 +3,40 @@
 
 # About Rarimo
 
-We believe in a multichain future for web3, and designed our protocol to enable this future.
-This gives our protocol fundamental advantages over other cross-chain providers available today.
+## Rarimo Protocol
 
-## Advantages
+We strongly believe in a multichain future where each project brings its unique perspective and value proposition. However, this diversity introduces a plethora of interoperability, security, fragmentation, and other challenges. To address these issues, we've developed Rarimo Protocol, the base layer for decentralized interchain applications.
+
+## Design Principles
+
+### Decentralization
+
+The interchain layer must be as decentralized as the chains it connects, not to be the point of centralization. Our system is a network of dozens of independent validators and oracles. Oracles observe events in the outer world in a trustless way, and Validators collaborate to achieve secure consensus on the order of events.
+
+![Rarimo Sub-Protocols](/img/validator.png)
+
+
+### Extensibility
+
+The protocol provides a general messaging protocol foundation for cross-chain use cases. You can implement your own sub-protocols and submit them via the proposals mechanism. Rarimo offers ready-to-use [identity](/overview/identity) and [bridging](overview/bridge) sub-protocols.
+
+![Rarimo Sub-Protocols](/img/protocol-layers.png)
+
+Additionally, Rarimo Core supports EVM-compatible smart contracts for greater flexibility.
 
 ### Scalable Security
 
-We use TSS (Threshold Signature Scheme) to provide cost-efficient security.
-Our network will scale with integrations and web3 adoption, all while maintaining first-class security and fixed transfer costs.
+Rarimo uses TSS (Threshold Signature Scheme) to sign the outputs of our protocol. With TSS, the signature size doesn't depend on the number of signers(validator nodes) and remains constant. Thus, we can scale our pool of validators while keeping fees at the destination chains at a low, fixed rate.
 
-### Easy Integrations
+### Instant Finality
 
-Existing contracts can be easily plugged into our callstack.
-You don't need to waste time or resources rewriting your contracts or dApp to interact with our protocol.
+Every step in the cross-chain path adds an extra delay. Our protocol uses the proven Tendermint consensus mechanism with instant finality to minimize this overhead. It only takes an extra few seconds to ensure the protocol's security.
 
-### Bundling
+## Audits
 
-Transactions on our protocol are bundled, so one user request will equal one transaction.
-This results in low costs for multi-step flows, clean integrations, and simple fallback mechanisms.
+Our protocol and smart contracts have been audited by some of the industry's most trusted companies.
 
-## Sub-Protocols
+- [Halborn](https://www.halborn.com/)
+- [Ambisafe](https://ambisafe.com/)
 
-Rarimo has a general messaging protocol foundation with a set of sub-protocols built on top.
-We can easily adapt to emerging technologies and applications.
-One of these sub-protocols can securely lock and unlock assets, which dApps directly integrate with.
-
-![Rarimo Design](/img/rarimo-design.png)
-
-## Decentralization
-
-Our system is based on a network of independent validators and oracles.
-Validators work together to achieve secure consensus on events, and oracles deliver messages over the network.
-Each validator is responsible for moving events from the initial chain to the destination.
-
-# Architecture
-
-The Rarimo protocol architecture includes the following parts:
-
-- Rarimo Core (Blockchain core that stores validated state)
-- TSS service (Threshold signature producers that signs validated operations to provide proof for unlocking on the destination chain)
-- Vault (Stores the TSS service keys)
-- Saver services or Oracles (The oracles that observers the connected chains state, submits new events and vote for new events' correctness)
-- Broadcaster service (Running to broadcast transactions from different services by certain account)
-- Smart-contracts (Bridges)
-- BDJuno, Hasura and Explorer frontend
-- Horizon (Service that communicates with core and provides REST API for frontend integration)
-- Relayer service and contracts (Provides user with opportunity to pay for automatic transaction execution)
+<!-- TODO: link to audits page -->
