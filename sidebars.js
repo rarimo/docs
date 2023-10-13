@@ -58,6 +58,7 @@ const sidebars = {
     "integration-guides/poh-questn",
     "integration-guides/poh-zealy",
     "integration-guides/poh-galxe",
+    "integration-guides/zkp-verification",
   ],
   reference: [
     {
