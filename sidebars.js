@@ -61,6 +61,7 @@ const sidebars = {
     "how-to-guides/poh-zealy",
     "how-to-guides/poh-galxe",
     "how-to-guides/zkp-verification",
+    "how-to-guides/polygon-id-state-replication",
   ],
   reference: [
     {
