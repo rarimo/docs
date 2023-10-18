@@ -1,66 +1,20 @@
+---
+---
 # How to Verify a Zero-Knowledge Proof in a Smart Contract
 
-## On-chain verification flow
-![On-chain verification flow](/img/zkp-verification.png)
+The following guide will instruct you on integrating zero-knowledge proofs into an existing smart contract written in Solidity.
 
-At its core, every on-chain interactions between a Verifier and the Prover (usually a user's Wallet) follows this workflow:
-1. After having deployed a Verifier Smart Contract, the Verifier designs a Request for the users (usually used to check certain fields in the Iden3 claims). This has to be recorded on-chain inside the Verifier Smart Contract (via ```setZKPRequest``` function).
-1. Verifier DApp presents the Request to the user
-1. The user parses the request and generates a ZKP according to the request.
-1. The user sends the ZKP to the Verifier Smart Contract.
-1. The Verifier Smart Contract verifies the ZKP.
-1. If the verification is successful, the Verifier executes the logic defined in the Smart Contract.
+Let's assume we have a generic ERC-20 contract based on <a href="https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/token/ERC20" target="_blank" rel="noreferrer noopener">OpenZeppelin implementation</a>):
 
-An active action from the Verifier is only required at step 1. All the rest of the interaction is between the user and the Smart Contract.
-
-## Integrating a ZK Verifier Into Your Smart Contract
-
-Let's start by integrating ZKVerifier into the Smart Contract.
-Assume, that we have a default `ERC20` contract.
-We will add not a very useful restriction, but still — the mint can be done, only if user provided a proof that he was born before the `01/01/2000`.
-
-The default contract looks like this (all necessary files can be found here <a href="https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/token/ERC20" target="_blank" rel="noreferrer noopener">OpenZeppelin GitHub</a>):
-
-
-```
+```solidity
 pragma solidity ^0.8.16;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract ERC20 is IERC20 {
-    uint public totalSupply;
-    mapping(address => uint) public balanceOf;
-    mapping(address => mapping(address => uint)) public allowance;
-    string public name = "ExampleToken";
-    string public symbol = "EXTRRM";
-    uint8 public decimals = 18;
+    // ...skipping the ERC20 boilerplate...
 
-    function transfer(address recipient, uint amount) external returns (bool) {
-        balanceOf[msg.sender] -= amount;
-        balanceOf[recipient] += amount;
-        emit Transfer(msg.sender, recipient, amount);
-        return true;
-    }
-
-    function approve(address spender, uint amount) external returns (bool) {
-        allowance[msg.sender][spender] = amount;
-        emit Approval(msg.sender, spender, amount);
-        return true;
-    }
-
-    function transferFrom(
-        address sender,
-        address recipient,
-        uint amount
-    ) external returns (bool) {
-        allowance[sender][msg.sender] -= amount;
-        balanceOf[sender] -= amount;
-        balanceOf[recipient] += amount;
-        emit Transfer(sender, recipient, amount);
-        return true;
-    }
-
-    // We want the mint function to be executed only if the valid proof was provided
+    // We want to add the proof verification here
     function mint(uint amount) external {
         balanceOf[msg.sender] += amount;
         totalSupply += amount;
@@ -75,8 +29,9 @@ contract ERC20 is IERC20 {
 }
 ```
 
-As being said, the restriction would be `to be born before 01/01/2000`.
-Here is the example of Verifiable Credentials, and we want to check the `birthday` field here:
+We'll mint 100 tokens to every user born before 01/01/2000.
+
+Our users were issued verifiable credentials(VC) that contain the user's birthday date:
 
 ```json
   {
@@ -95,21 +50,23 @@ Here is the example of Verifiable Credentials, and we want to check the `birthda
     "credentialSubject": {
       "birthday": 19960424,
       "documentType": 2,
-      "id": "did:polygonid:polygon:mumbai:2qDDDKmo436EZGCBAvkqZjADYoNRJszkG7UymZeCHQ"
+      "id": "did:rarimo:2qDDDKmo436EZGCBAvkqZjADYoNRJszkG7UymZeCHQ"
     },
-    "userID": "did:polygonid:polygon:mumbai:2qFpPHotk6oyaX1fcrpQFT4BMnmg8YszUwxYtaoGoe"
+    "userID": "did:rarimo:2qFpPHotk6oyaX1fcrpQFT4BMnmg8YszUwxYtaoGoe"
   }
 ```
 
-We will work with the iden3 contracts (which are used in Rarimo), mainly with `ZKPVerifier` and all contracts that are imported in it (i.e. `ICircuitValidator`, `ArrayUtils`, etc).
-All the files can be found here: <a href="https://github.com/iden3/contracts" target="_blank" rel="noreferrer noopener">Iden3 GitHub</a>.
 
-The ZKPVerifier Contract provides 2 hooks: ```_beforeProofSubmit``` and ```_afterProofSubmit```.
-These hooks are called before and after any proof gets submitted and can be used to create certain logic inside your Smart Contract.
-Our ERC20Verifier contract must define at least a single `TRANSFER_REQUEST_ID`.
-This is the Identifier of the request that the contract is posing to the user.
 
-To enable ZK Verification, we should add the following lines to our contract, namely two hooks with the logic, which you can change:
+## Step 1: Implement the ZKPVerifier Hooks
+
+We need to import <a href="https://github.com/iden3/contracts" target="_blank" rel="noreferrer noopener">Iden3 contracts</a> and inherit the `ZKPVerifier` contract.
+
+The ZKPVerifier Contract provides two hooks: `_beforeProofSubmit` and `_afterProofSubmit`.
+These hooks are called before and after any proof gets submitted. We'll put our custom logic inside them.
+
+Our contract must also define at least a single `TRANSFER_REQUEST_ID`. It is the identifier of the ZKP Request that we will create in the next step.
+
 
 ```
 pragma solidity ^0.8.16;
@@ -123,23 +80,18 @@ contract ERC20Verifier is IERC20, ZKPVerifier {
 
     mapping(address => uint256) public addressToId;
 
-    uint64 public constant TRANSFER_REQUEST_ID = 1;
-    uint64 public constant TOKENS_TO_MINT = 100;
-
     function _beforeProofSubmit(
         uint64, /* requestId */
         uint256[] memory inputs,
         ICircuitValidator validator
     ) internal view override {
-        // your custom logic can be implemented here
-
         // checks that the challenge input of the proof is equal to the msg.sender
         address addr = GenesisUtils.int256ToAddress(
             inputs[validator.getInputOf("challenge")]
         );
         require(
             msg.sender == addr,
-            "sender address is not an address in the proof"
+            "sender address is not an address in the proof."
         );
     }
 
@@ -148,12 +100,12 @@ contract ERC20Verifier is IERC20, ZKPVerifier {
         uint256[] memory inputs,
         ICircuitValidator validator
     ) internal override {
-        // your custom logic can be implemented here
+        // your custom logic goes here
 
         // checks that proof was submitted only once by one user
         require(
             requestId == TRANSFER_REQUEST_ID && addressToId[msg.sender] == 0,
-            "proof can not be submitted more than once"
+            "proof can not be submitted more than once."
         );
 
         uint256 id = inputs[validator.getInputOf("challenge")];
@@ -163,21 +115,21 @@ contract ERC20Verifier is IERC20, ZKPVerifier {
         super._mint(msg.sender, TOKENS_TO_MINT);
     }
 
-    // all other ERC20 functions should be included too
+    // ...
 }
 ```
 
-## Set the ZKP Request
+## Step 2: Set the ZKP Request
 
-After that being done and the contract has been deployed, we should design a Request for our users through the `setZKPRequest` function.
+After the contract deployment, we should design a Request for our users and use it via the `setZKPRequest` function.
 
-To do that, we must provide 6 inputs to the `setZKPRequest` function:
+The `setZKPRequest` function has the following inputs:
 
 1. `requestID`: the ID associated with the request (`1` in our contract).
 1. `validator`: the address of the `Validator Smart Contract`. It's type can be either `CredentialAtomicQuerySigValidator` or `CredentialAtomicQueryMTPValidator` depending on how the credentials were issued.
 1. `schema`: the bigInt representation of the schema of the requested credential.
 1. `claimPathKey`: represents the path to the queries key inside the merklized credential (In our case it is the path to the `birthday` key).
-1. `operator`: is either 1, 2, 3, 4, 5 or 6 (`less-than` operator, that we need is `2`).
+1. `operator`: is either 1, 2, 3, 4, 5 or 6 (`less-than` operator we need is `2`).
 1. `value`: represents the threshold value you are querying (01/01/2000 date in our case).
 
 You can run https://go.dev/play/p/rnrRbxXTRY6 to get schema hash and claimPathKey using your schema.
@@ -191,7 +143,7 @@ This is how the example request would look like:
     "type": "https://iden3-communication.io/proofs/1.0/contract-invoke-request",
     "thid": "7f38a193-0918-4a48-9fac-36adfdb8b542",
     "body": {
-        "reason": <The reason why the proof is being asked, e.g. "airdrop participation">,
+        "reason": <The reason why the proof is being asked, e.g. "age-restricted mint">,
         "transaction_data": {
             "contract_address": "<YourVerifierAddress>",
             "method_id": "b68967e2",
@@ -220,4 +172,8 @@ This is how the example request would look like:
 }
 ```
 
-Finally, to check that everything works as expected, you should generate the proof, using your schema (and VC) and provide it to your Verifier contract. As a result, you should receive 100 minted tokens at your address.
+## Step 3: Teststing It Out
+
+<!-- TODO: add instruction how to generate a proof -->
+
+Finally, to check that everything works as expected, you should generate a proof and submit it using the [`submitZKPResponse`](https://github.com/iden3/contracts/blob/9d3a3e8f62bfbebb0c82b0145665c15471ebe9f6/contracts/verifiers/ZKPVerifier.sol#L40C14-L40C31) method. As a result, you should receive 100 minted tokens at your address.
