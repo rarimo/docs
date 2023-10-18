@@ -62,6 +62,7 @@ const sidebars = {
     "how-to-guides/poh-galxe",
     "how-to-guides/zkp-verification",
     "how-to-guides/polygon-id-state-replication",
+    "how-to-guides/validator-setup",
   ],
   reference: [
     {
