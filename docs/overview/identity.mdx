@@ -3,7 +3,7 @@
 # TODO: add links to relevant guides
 ---
 
-# Identity Sub-Protocol
+# Identity Protocol
 
 ## Problem Statement
 
@@ -18,13 +18,13 @@ However, they share some limitations:
 - **Integration friction.** There's no structured way for DApp developers to interact with different issuers and identity components;
 - **Privacy concerns.** SBTs and ENS-like services reveal all the data on-chain, which may be a critical issue for some sensitive identity data. Only protocols that incorporate Zero-Knowledge proofs properly address this issue;
 
-Rarimo Identity Sub-Protocol builds upon the base interchain layer to address these challenges.
+Rarimo Identity Protocol builds upon the base interchain layer to address these challenges.
 
 ## Features
 
 ### Own Your Identity
 
-The Sub-Protocol implements the <a href="https://www.w3.org/TR/did-core/" target="_blank" rel="noreferrer noopener">W3C DID Self-Sovereign Identity standard</a>, meaning all your credentials stay on your device, and no third party can access them.
+The Protocol implements the <a href="https://www.w3.org/TR/did-core/" target="_blank" rel="noreferrer noopener">W3C DID Self-Sovereign Identity standard</a>, meaning all your credentials stay on your device, and no third party can access them.
 
 ### Keep Privacy With Zero-Knowledge Proofs
 
@@ -50,7 +50,7 @@ Self-sovereign identity is a paradigm shift that might be overwhelming for the u
 
 We don't gatekeep the credential issuance and instead embrace the Triangle of Trust between the issuer, holder, and verifier. Any party can join and issue its own credentials. Any verifier can accept these credentials if he trusts the issuer.
 
-![Rarimo Sub-Protocols](/img/trust-triangle.png)
+![Trust Triangle](/img/trust-triangle.png)
 
 ### Integrate Identity in Your DApp
 

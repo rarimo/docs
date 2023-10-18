@@ -25,14 +25,14 @@ const sidebars = {
     },
     {
       type: "doc",
-      label: "Identity Sub-Protocol",
+      label: "Identity Protocol",
       id: "overview/identity",
       // TODO: add redirects
       //items: ["overview/issuing-credentials", "overview/querying-credentials"],
     },
     {
       type: "doc",
-      label: "Bridging Sub-Protocol",
+      label: "Bridging Protocol",
       id: "overview/bridge", // TODO: redirect from "architecture/swap-bridge"
     },
   ],
