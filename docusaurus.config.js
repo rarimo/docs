@@ -94,6 +94,12 @@ module.exports = {
             label: "Architecture",
           },
           {
+            type: "doc",
+            docId: "how-to-guides",
+            position: "left",
+            label: "How-To Guides",
+          },
+          {
             type: "dropdown",
             docId: "reference",
             position: "left",

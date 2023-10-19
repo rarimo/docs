@@ -107,6 +107,10 @@ const sidebars = {
       id: "glossary",
     },
   ],
+  howToGuides: [
+    "how-to-guides",
+    "how-to-guides/validator-setup",
+  ],
   reference: [
     {
       type: "doc",
