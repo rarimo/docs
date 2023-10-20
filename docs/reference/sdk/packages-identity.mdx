@@ -3,19 +3,18 @@
 
 # Identity packages
 
-The Rarimo SDK identity packages provide tools for identity and proofs functionality.
+The Rarimo SDK identity packages provide tools for the identity protocol.
 
 ## @rarimo/rarime-connector
 
-The [@rarimo/rarime-connector](https://www.npmjs.com/package/@rarimo/rarime-connector) package provides tools for calling snap on dApps and other applications.
-It provides functionality of all packages, that will be mentioned below and it is desired and recommended to use this package in most situations, while other packages should be used only for custom integrations or low-level stuff.
+The [@rarimo/rarime-connector](https://www.npmjs.com/package/@rarimo/rarime-connector) package provides an interface for interaction with the RariMe MetaMask snap. It is the recommended way of interacting with the identity protocol.
+Please use other packages only for custom integrations or low-level utilities.
 
-Installing snap and identity creation example:
+Usage example:
+
   ```
-  async function enableSnap(
-  snapOrigin?: string,
-  version?: string,
-  ): Promise<MetamaskSnap>
+  import { enableSnap } from '@rarimo/rarime-connector';
+
 
   // install snap and get connector
   const snap = await enableSnap();
@@ -29,7 +28,7 @@ Installing snap and identity creation example:
 
 ## @rarimo/shared-zkp-iden3
 
-The [@rarimo/shared-zkp-iden3](https://www.npmjs.com/package/@rarimo/shared-zkp-iden3) package provides constants, types and tools that other packages use for identity functionality.
+The [@rarimo/shared-zkp-iden3](https://www.npmjs.com/package/@rarimo/shared-zkp-iden3) package provides constants, types, and tools other packages used for identity functionality.
 
 ## @rarimo/auth-zkp-iden3
 
