@@ -1,0 +1,89 @@
+---
+---
+
+# What is Stake and how to delegate it
+
+This page will explain how validators are chosen in the system, how to become the validator (how to stake your coins), how to delegate your coins to the validator, how slashing works and why it is needed.
+At the high-level, Rarimo is built on top of Tendermint and inherit almost all mentioned characteristics, except minting (rewards). 
+
+## Validators
+
+Validators are responsible for securing the $RMO token and validating transactions on-chain.
+This is done through participation in a threshold signature which must be signed by k-of-n validators.
+
+As in the Cosmos (Tendermint), validators can have one of three statuses:
+- `Unbonded` - the validator cannot sign blocks and don't earn rewards, but they can receive delegations.
+- `Bonded` - the validator receives sufficient bonded tokens and now he signs blocks and receives rewards.
+They can receive further delegations and they can be slashed for misbehavior.
+- `Unbonding` - validator can leave the active set by his choice or due to slashing / jailing.
+At this point, all delegators tokens will be unbonded, i.e. returned to them.
+
+Only the top-stake validators will participate in block signing.
+Validators may change each block and their maximum amount is determined by `MaxValidators` variable, which currently equals 10.
+It is planned to be 50 later.
+
+## Staking and delegations
+
+The following [guide](/how-to-guides/validator-setup) explains how to setup a validator node and how to stake the tokens.
+The Validator **should** stake a required amount of tokens by himself, before token holders would be able to delegate their stake to this validator.
+
+
+When one delegates tokens to a Validator, they are issued a nunber of "shares" based on a dynamic exchange rate, calculated as:
+`Shares per Token = validator.TotalShares() / validator.Tokens()` 
+When a delegator then undelegates his tokens, the token amount is calculated as:
+`Tokens per Share = validator.Tokens() / validator.TotalShares() 
+`Shares` are an accounting mechanism, they are not a fungible asset.
+
+To delegate tokens to a validator, the holder can execute the following command:
+
+```bash
+rarimo-core tx staking delegate [validator-addr] [amount] --from mykey
+```
+
+To redelegate tokens, the holder can execute the following command:
+
+```bash
+rarimo-core tx staking redelegate [src-validator-addr] [dst-validator-addr] [amount] --from mykey
+```
+
+Finally, to take delegated tokens back, the holder can execute the following command:
+
+```bash
+rarimo-core tx staking unbond [validator-addr] [amount] --from mykey
+```
+
+## Rewards and distribution
+
+Rarimo uses a constant number of tokens being minted every block - `X`.
+The number of minted tokens can be adjusted and changed based on the DAO votes.
+Currently the `X` is set to 4.
+
+During the first four years, 107.374.182 tokens are reserved for validator awards.
+Newly issued tokens are distributed among the validators and their delegators (depending on the share of staked coins).
+Following the first four years, a portion of the transaction fees will be distributed among the validators and their delegates.
+
+![tokenomics](/img/tokenomics.png)
+
+Distribution mechanism operates as follows.
+Collected rewards are pooled globally and divided out passively to validators and delegators.
+Each validator has the opportunity to charge commission to the delegators on the rewards collected on behalf of the delegators.
+Fees are collected directly into a global reward pool and validator proposer-reward pool.
+
+The chart, that explains the Validator Rewards over Time:
+
+![rewards over time](/img/validator-rewards-time.png)
+
+## Slashing
+
+When a Validator is slashed, he loses some amount of tokens from his stake (and so, all delegators also lose a part of their tokens).
+Slashing is a mechanism, to prevent byzantine behaviour.
+
+Slashing the validator may include, but are not limited to:
+ - Burning some amount of their stake
+ - Removing their ability to vote on future blocks for a period of time (jailing).
+
+By default, there are only 2 types of violations that presume a 100% stake validator penalty - the signing of 2 or more blocks on the same height and a try to add conflicting transactions within one block.
+After being slashed (and jailed) the validator can wait and send the `Unjail` message, after which he can return to the validators pool.
+
+Because of the slashing, redelegation of tokens (or unbonding) may take some time (i.e. it is not instant) and this mechanism is inherited from the Tendermint.
+
