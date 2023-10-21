@@ -1,9 +1,8 @@
 ---
-sidebar_label: How to Set Up A Credentials Issuer
 ---
-# How to Set Up A Credentials Issuer
+# Setting Up A Credentials Issuer
 
-This article details the steps you can follow to set up your own Credentials Issuer, create your own credentials schema and issue the first credentials.
+This article details the steps to set up a Credentials Issuer, create your credentials schema, and issue the first credentials.
 
 ## Installation
 
@@ -11,24 +10,25 @@ Firstly, you will need to install <a href="https://www.docker.com/" target="_bla
 Running the app with Docker allows for minimal installation and a quick setup.
 Then, you will need to clone <a href="https://github.com/rarimo/issuer-node/tree/feature/inclusion-mtp" target="_blank" rel="noreferrer noopener">the repository</a> (branch=feature/inclusion-mtp):
 
+<!-- TODO: running with Docker -->
+
+
 ```git clone -b=feature/inclusion-mtp https://github.com/rarimo/issuer-node.git```
 
-After cloning the repository you should do the following:
+After cloning the repository, you should do the following:
 1. Generate Ethereum Private key for the Issuer Node (to sign on-chain transactions).
 1. In the folder you've cloned rename `.env-api.example` to `.env-api`, `.env-ui.example` to `.env-ui` and `.env-issuer.example` to `.env-issuer`.
     - `.env-api` is used to configure the api-ui.
-    This file allows the user to configure the basic auth of the api-ui, the server URL and others.
+    This file allows the user to configure the basic auth of the api-ui, the server URL, and others.
     - `.env-ui` is used to configure the api-ui.
-    This file allows the user to configure the basic auth of the api-ui, the server URL and others.
+    This file allows the user to configure the basic auth of the Issuer UI, the server URL, and others.
     - `.env-issuer` is used to configure the api-issuer.
-    It contains the needed configuration to start the node such as the infrastructure configuration (postgres/redis/vault), the blockchain variables in to be able to publish the state, the basic auth variables and other variables.
-1. In the `.env-issuer` file you need to modify 17th line (`ISSUER_ETHEREUM_URL=<Ethereum URL of the Issuer>`) and set it to yours Ethereum RPC provider.
+    It contains the needed configuration to start the node, such as the infrastructure configuration (postgres/redis/vault), the blockchain variables to be able to publish the state, the Basic Auth variables, and other variables.
+1. In the `.env-issuer` file, you need to set the variable `ISSUER_ETHEREUM_URL` to a Rarimo RPC endpoint.
+<!-- TODO: provide endpoints -->
 1. Run `sudo make build` in the cloned folder
-1. After everything has builded, run `sudo make private_key=YOUR_ETHEREUM_PRIVATE_KEY run-all` with generated Issuer's private key.
-
-You should be able to enter `localhost:3001` (Issuer) and `localhost:3002` (Issuer UI API) now. 
-We will use the first one in this guide.
-
+1. Run `sudo make private_key=YOUR_ETHEREUM_PRIVATE_KEY run-all` with the issuer's private key.
+1. Check that `localhost:3001` (Issuer API) and `localhost:3002` (Issuer UI) are available.
 
 ## How to create Credentials Schemas
 
@@ -39,54 +39,51 @@ If you need to create your own Credentials Schemas (some of the schemas can be f
 
 To create the schema using PolygonID Builder, follow these steps:
 
-1. Enter the title, type, version and description of your schema
+1. Enter the title, type, version, and description of your schema
 ![Schema data](/img/schema-builder-1.png)
 1. Define the attributes. Let's add the date of birth and the full name for this example.
 ![Schema attributes](/img/schema-builder-2.png)
-1. After clicking on "Add" button, new attribute will appear and you need to change it's name, title, type, description and set the checkbox, whether it is required or not
+1. After clicking on "Add" button, a new attribute will appear, and you need to change its name, title, type, and description and set the checkbox, whether it is required or not
 ![New Attribute](/img/schema-builder-3.png)
-1. You can also set additional restrictions by clicking on "Advanced" button
+1. You can also set additional restrictions by clicking on the "Advanced" button
 ![Advanced settings](/img/schema-builder-4.png)
-1. After you've finished, you can copy it from the right window or download by pressing on "Download JSON" button below the properties
+1. After you've finished, you can copy it from the right window or download it by pressing on the "Download JSON" button below the properties
 ![Receiving the Schema](/img/schema-builder-5.png)
-1. You should then post it somewhere (e.g. on GitHub) and paste the link into `url` field at the `Import JSON schema` in the Issuer UI API.
-You should also copy the type, title, description and version from the posted schema
+1. Publish it somewhere (e.g., on GitHub or IPFS) and paste the link into `url` field at the `Import JSON schema` in the Issuer UI API.
+You should also copy the type, title, description, and version from the posted schema
 ![Importing](/img/schema-builder-6.png)
 
 
 ## Issuing Credentials
 
-After the Issuer Node has been set up, we can issue our first credentials.
-API documentation can be found [here](https://github.com/rarimo/issuer-node/blob/main/api/api.yaml).
+Once the issuer is ready, we can issue our first credentials.
 
-Follow these steps:
+### Using the Issuer UI
 
 1. The Issuer is also an identity, so we need to create one.
 To do that, open `localhost:3001` and select "Create Identity" in the left sidebar.
 ![Identity Creation](/img/issuer-issue-1.png)
-1. Fill `method`, `blockchain` and `network`. 
+1. Fill `method`, `blockchain` and `network`.
 You can leave the last two empty, but the method should be specified.
-We will use method `iden3` without specifying blockchain and network.
-We will also create an identity for the user, so we can issue credentials to him.
+We will use the method `iden3` without specifying blockchain and network.
+We will also create an identity for the user so we can issue credentials to him.
 ![Identity Created, using iden3 method](/img/issuer-issue-2.png)
-1. After creating both identities (or receiving the user's identity from him), we can issue our first claim.
-To do that, press "Create Claim" button and paste the Issuer identifier (our firstly generated id) and user's id in the `id` field below:
+1. We can issue our first claim after creating both identities (or receiving the user's identity from him).
+To do that, press the "Create Claim" button and paste the Issuer identifier (our first generated id) and user's ID in the `id` field below:
 ![Create Claim](/img/issuer-issue-3.png)
-1. We can check our claim using "Get Claim" endpoint:
+1. We can check our claim using the "Get Claim" endpoint:
 ![Get Claim](/img/issuer-issue-4.png)
 1. The last thing we need to do is publish the state of our issuer on-chain
 ![State publishing](/img/issuer-issue-5.png)
 1. Now, we can send to the user MTP of Claim inclusion in the tree, using "Get Claim MTP"
 ![MTP Of Claim Inclusion](/img/issuer-issue-6.png)
 
-## Issuing via API
+### Issuing via API
 
-We can also issue credentials, using UI API.
-You can do this either by opening `localhost:3002` or via curl requests.
-UI API documentation can be found [here](https://github.com/rarimo/issuer-node/blob/main/api_ui/api.yaml).
+API documentation can be found [here](https://github.com/rarimo/issuer-node/blob/main/api/api.yaml).
 
 Follow these steps:
-1. Let's issue credentials to previously created identity:
+1. Let's issue credentials to the previously created identity:
     - the `authorization` field is Base64 encoded username and password
     - we will change the `id` (receiver's did), `birthday` and `expiration` fields
     ```
@@ -116,7 +113,7 @@ Follow these steps:
     ```
     curl -X POST "http://localhost:3002/v1/state/publish" \
     -H "accept: application/json"\
-    -H "authorization: Basic dXNlci1hcGk6cGFzc3dvcmQtYXBp" 
+    -H "authorization: Basic dXNlci1hcGk6cGFzc3dvcmQtYXBp"
     ```
     The response would be the new state, new tree roots and the txID:
     ```json
@@ -128,14 +125,14 @@ Follow these steps:
         "txID":"0xbde3732071c9947d43a46175e47b6604b924e273ce86898f76ff621b6e48691b"
     }
     ```
-1. Finally, we can do a request to the Issuer API and check that credentials exist in the tree and also receive MTP of existence:
+1. Finally, we can make a request to the Issuer API and check that credentials exist in the tree and also receive the MTP of existence:
 
    ```
     curl -X GET "http://localhost:3001/v1/claims/b326c436-6f58-11ee-8dab-0242ac120007/mtp" \
     -H "accept: application/json"
    ```
 
-    The response would be the information about issuer and mtp (of existence in our case):
+    The response would be the information about the issuer and MTP (of existence in our case):
 
     ```json
      {
