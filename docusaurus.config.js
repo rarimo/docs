@@ -16,13 +16,14 @@ function isStaging() {
   return process.env.STAGING === "true";
 }
 
+const metaDescription = "Rarimo developer documentation. Learn to use cross-chain self-sovereign identity protocol, zero-knowledge proofs, RariMe Snap, token bridging, and more."
+
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
   /** Meta information */
   title: "Rarimo Developer Documentation",
   // TODO: better description
-  tagline:
-    "Learn the basics of the protocol and create simple applications to connect to wallets and create cross-chain transactions.",
+  tagline: metaDescription,
   url: getUrl(),
   baseUrl: getBaseUrl(),
   onBrokenLinks: "throw",
@@ -193,18 +194,15 @@ module.exports = {
         },
         {
           name: "description",
-          content:
-            "Learn the basics of the protocol and create simple applications to connect to wallets and create cross-chain transactions.",
+          content: metaDescription,
         },
         {
           property: "og:description",
-          content:
-            "Learn the basics of the protocol and create simple applications to connect to wallets and create cross-chain transactions.",
+          content: metaDescription,
         },
         {
           property: "twitter:description",
-          content:
-            "Learn the basics of the protocol and create simple applications to connect to wallets and create cross-chain transactions.",
+          content: metaDescription,
         },
         {
           property: "og:url",
