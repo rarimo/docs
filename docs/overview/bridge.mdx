@@ -5,7 +5,7 @@
 
 Bridging Protocol builds upon the base cross-chain messaging layer to facilitate asset transfers. It supports bridging native and fungible tokens, NFTs, and SBTs across all the supported chains.
 
-Currently, it's available for:
+Currently, it is available for:
 - Ethereum;
 - Polygon;
 - Binance Smart Chain;
@@ -13,9 +13,7 @@ Currently, it's available for:
 - Solana;
 - Near;
 
-
-Let's look at the inner workings of the sub-protocol in a real-world example: the user bridges funds from Ethereum to Polygon to buy an NFT.
-The diagram below describes the entire flow. Note that the user only submits a single transaction on the source chain to perform this complex cross-chain task.
+Let's look at the inner workings of the protocol in a real-world example: a user bridges funds from Ethereum to Polygon to buy an NFT. The diagram below describes the entire flow. Note that a single transaction is submitted on the source chain to perform this complex cross-chain task.
 
 ![Bridging Flow](/img/bridging-flow.png)
 
@@ -23,12 +21,11 @@ The diagram below describes the entire flow. Note that the user only submits a s
 
 ### Relayer Service
 
-The relayer automatically delivers the transfers to the destination chain. This way, the user doesn't need to switch networks, sign an additional transaction, and bother with funds to pay the gas fee on the destination chain.
+The relayer automatically delivers the transfers to the destination chain. This way, users do not need to switch networks, sign additional transactions, and bother with funds to pay the gas fee on the destination chain.
 
 ### EVM Transaction Bundling
 
-To support more complex flows on EVM chains, we allow the bundling one or more custom transactions into the transfer. These transactions will be executed on the destination chain once the transfer is completed.
-For example, a user can transfer funds and place an order on an NFT marketplace on the destination chain using a single transaction.
+To support more complex flows on EVM chains, the protocol allows bundling one or more custom transactions into the transfer. Once the transfer is completed, these transactions will be executed on the destination chain. For example, a user can transfer funds and place an order on an NFT marketplace on the destination chain using a single transaction.
 
 ### Low Fees
 
@@ -36,27 +33,27 @@ Thanks to the usage of the TSS for securing the transfers, the gas fee overhead 
 
 <!-- TODO: add figures -->
 
-Rarimo's takes a fixed fee for every transfer in a token of choice. The price is negotiable.
+Rarimo takes a fixed fee for every transfer in a token of choice. The price is negotiable.
 
 ### USDC Liquidity
 
->Coming Soon!
+> Coming Soon!
 
-Rarimo has integrated [Circle CCTP protocol](https://www.circle.com/en/cross-chain-transfer-protocol) to move USDC tokens between the chains without a need in the liquidity pools.
-
+Rarimo has integrated the [Circle CCTP protocol](https://www.circle.com/en/cross-chain-transfer-protocol) to move USDC tokens between the chains without needing liquidity pools.
 
 ##  Token-Agnostic Payments Widget
 
-With Rarimo's token-agnostic payments, your customers can consolidate funds from multiple chains and in various tokens to pay you with just a few clicks. We handle the token swaps and bridging for you.
+With Rarimo's token-agnostic payments, customers can consolidate funds from multiple chains and in various tokens to make payments with just a few clicks. The system handles the token swaps and bridging.
 
 ![Token Agnostic Payments Example](/img/token-agnostic-receipt.png)
 
 Fundamentally, the product provides four capabilities:
 
 - Rarimo's Bridging Protocol;
-- Token swaps using liquidity from popular DEXes such as Uniswap, PancackeSwap, and TraderJoe;
+- Token swaps using liquidity from popular DEXes such as Uniswap, PancakeSwap, and TraderJoe;
 - EVM transaction bundling for executing custom logic, such as placing orders for NFTs;
-- Circle CCTP integration provides USDC liquidity for all supported chains;
-- By combining these features, developers can implement such cross-chain use cases as fungible token payments, NFT minting, staking, token swaps, etc.
+- Circle CCTP integration provides USDC liquidity for all supported chains.
 
-The solution comes as a ready-to-use [React widget](/reference/sdk/packages-checkout#@rarimo/react-nft-checkout) that requires little effort for integration. Also, you can go fancy and build a custom integration using our [JS SDK](/reference/sdk/packages-checkout#@rarimo/nft-checkout).
+By combining these features, developers can implement cross-chain use cases such as fungible token payments, NFT minting, staking, token swaps, and more.
+
+The solution is available as a ready-to-use [React widget](/reference/sdk/packages-checkout#@rarimo/react-nft-checkout) that requires little effort for integration. Alternatively, a custom integration can be built using the [JS SDK](/reference/sdk/packages-checkout#@rarimo/nft-checkout).
