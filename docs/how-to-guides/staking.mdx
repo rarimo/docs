@@ -1,7 +1,7 @@
 ---
 ---
 
-# How To Stake And Delegate $RMO Tokens
+# How To Stake And Delegate RMO Tokens
 
 This page will explain how validators are chosen in the system, how to become a validator and stake your coins, how to delegate your coins to a validator, how slashing works, and why it is needed.
 At the high level, Rarimo is built on top of Tendermint and inherits almost all mentioned characteristics, except minting (rewards).
@@ -73,15 +73,11 @@ The chart below describe the validator rewards over time:
 
 ## Slashing
 
-When a Validator is slashed, he loses some tokens from his stake (so all delegators also lose a part of their tokens).
-Slashing is a mechanism to prevent byzantine behavior.
+Slashing is a penalty for validator misbehavior and assumes a partial loss of the stake and other restrictions.
 
-Slashing the validator may include, but are not limited to:
- - Burning some amount of their stake
- - Removing their ability to vote on future blocks for a period of time (jailing).
+Two cases incur slashing:
 
-By default, only two types of violations presume a 100% stake validator penalty - signing two or more blocks on the same height and trying to add conflicting transactions within one block.
-After being slashed (and jailed) the validator can wait and send the `Unjail` message, after which he can return to the pool of validators.
+1. When a validator goes offline for a long time, the validator and the users who delegated their RMO token to it lose 1% of their stake. The validator also loses the ability to vote on future blocks for a period of time (jailing). After being jailed, the validator can wait and send the `Unjail` message, after which he can return to the pool of validators. The liveliness requirement for the validators is signing at least 50% of their blocks in the last 7200 blocks. You can fetch the current liveness and jailing parameters [here](https://rpc-api.mainnet.rarimo.com/cosmos/slashing/v1beta1/params).
+1. When a validator tries signing two or more blocks of the same height, the validator and the users who delegated their RMO token to it lose 5% of their stake.
 
-Because of the slashing, redelegation of tokens (or unbonding) may take some time (i.e., it is not instant), and this mechanism is inherited from the Tendermint.
-
+Because of the slashing, redelegating tokens (or unbonding) takes some time.
