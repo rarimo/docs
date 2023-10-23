@@ -110,6 +110,7 @@ const sidebars = {
   howToGuides: [
     "how-to-guides",
     "how-to-guides/validator-setup",
+    "how-to-guides/staking"
   ],
   reference: [
     {
