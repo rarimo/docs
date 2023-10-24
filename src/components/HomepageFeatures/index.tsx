@@ -13,38 +13,44 @@ type FeatureItem = {
 };
 const FeatureList: FeatureItem[] = [
   {
-    title: "Getting started",
-    Svg: require("@site/static/img/flag.svg").default,
+    title: "Getting Started",
+    Svg : require("@site/static/img/extension.svg").default,
     description: (
       <>
-        Learn the basics of the protocol and create simple applications to
-        connect to wallets and create cross-chain transactions.
+        Discover the fundamentals of Rarimo Protocol, its architecture, applications, and advantages. Get familiar with cross-chain identity and bridging capabilities.
       </>
     ),
     url: "./overview",
   },
   {
-    title: "Architecture",
+    title: "Tutorials",
     Svg: require("@site/static/img/arrow_top_right.svg").default,
     description: (
       <>
-        Read about how the protocol is structured, how its oracles and contracts
-        work, and how it bundles different events into a single transaction to
-        save fees.
+        Learn the ropes of identity protocol, zero-knowledge proofs, cross-chain token bridging, and other tech by building real DApps from scratch.
       </>
     ),
-    url: "./architecture",
+    url: "./tutorials",
   },
   {
-    title: "SDK",
+    title: "How-To Guides",
     Svg: require("@site/static/img/flag.svg").default,
     description: (
       <>
-        Use the Rarimo JavaScript/TypeScript SDK to simplify using the protocol
-        from your applications.
+        Integrate Rarimo products into your DApps, solve typical tasks, and troubleshoot common problems by following step-by-step instructions.
       </>
     ),
-    url: "./reference/sdk",
+    url: "./how-to-guides",
+  },
+  {
+    title: "Technical Reference",
+    Svg: require("@site/static/img/arrow_top_right.svg").default,
+    description: (
+      <>
+        Look up Rarimo's APIs, JavaScript libraries, and smart contracts. Dive deeper into the inner workings of the protocol.
+      </>
+    ),
+    url: "./reference",
   },
 ];
 
