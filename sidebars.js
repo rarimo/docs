@@ -27,20 +27,18 @@ const sidebars = {
       type: "doc",
       label: "Identity Protocol",
       id: "overview/identity",
-      // TODO: add redirects
-      //items: ["overview/issuing-credentials", "overview/querying-credentials"],
     },
     {
       type: "doc",
       label: "Bridging Protocol",
-      id: "overview/bridge", // TODO: redirect from "architecture/swap-bridge"
+      id: "overview/bridge",
     },
   ],
   useCases: [
     "use-cases",
     "use-cases/ssi",
     "use-cases/proof-of-humanity",
-    "use-cases/token-agnostic", // TODO: redirect form NFT checkout
+    "use-cases/token-agnostic",
     "use-cases/polygon-id",
     "use-cases/social-graphs",
     "use-cases/multi-chain-mint",
@@ -50,10 +48,10 @@ const sidebars = {
   ],
   tutorials: [
     "tutorials",
-    "tutorials/bundling", // TODO: redirect from "overview/bundling"
-    "tutorials/connecting-to-wallets", // TODO: redirect from "overview/connecting-to-wallets"
-    "tutorials/creating-transactions", // TODO: redirect from "overview/creating-transactions"
-    "tutorials/swapping-tokens", // TODO: redirect from "overview/swapping-tokens"
+    "tutorials/bundling",
+    "tutorials/connecting-to-wallets",
+    "tutorials/creating-transactions",
+    "tutorials/swapping-tokens",
   ],
   howToGuides: [
     "how-to-guides",
@@ -121,14 +119,13 @@ const sidebars = {
       items: [
         "reference/sdk/packages-base",
         "reference/sdk/packages-provider",
-        "reference/sdk/packages-bridge", // TODO: redirect from checkout
+        "reference/sdk/packages-bridge",
         "reference/sdk/packages-identity",
       ],
     },
     {
       type: "category",
       label: "Core",
-      // TODO: redirect from "reference/core"
       link: {
         type: "doc",
         id: "reference/core",
