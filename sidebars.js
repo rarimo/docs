@@ -121,7 +121,7 @@ const sidebars = {
       items: [
         "reference/sdk/packages-base",
         "reference/sdk/packages-provider",
-        "reference/sdk/packages-checkout",
+        "reference/sdk/packages-bridge", // TODO: redirect from checkout
         "reference/sdk/packages-identity",
       ],
     },
