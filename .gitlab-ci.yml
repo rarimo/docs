@@ -90,23 +90,6 @@ Build-staging:
   except: [schedules]
   interruptible: true
 
-
-pages:
-  stage: deploy
-  script:
-  - export URL="https://docs.rarimo.com"
-  - export BASE_URL="/"
-  - yarn install --frozen-lockfile --production
-  - yarn build
-  - rm -rf ./public/*
-  - mv ./build ./public
-  artifacts:
-    paths:
-    - public
-  rules:
-  - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
-
-
 Deploy to Staging:
   services:
       - docker:18-dind
