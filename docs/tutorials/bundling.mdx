@@ -1,0 +1,131 @@
+---
+---
+
+# Bundling
+
+Rarimo's multichain protocol bundles multiple related events into single contract calls or transactions.
+In this way, the protocol simplifies complex, multistep user actions.
+
+Bundling also allows Rarimo to include custom logic with transactions.
+Rarimo contracts use this logic to run actions that follow an initial transaction, such as unlocking tokens on other chains and buying NFTs by calling other contracts.
+
+When a transaction locks a token in a Rarimo contract, users can specify additional contracts and methods to call on the destination chain.
+The Rarimo contract signs and runs these additional transactions automatically.
+Methods that call custom contracts are not overridable, which protects transactions from re-entrancy attacks.
+
+## Example
+
+This high-level example demonstrates how bundling can simplify a user flow:
+
+Alice has an NFT on the Ethereum blockchain.
+They want to stake this NFT in a DeFi application on the Polygon blockchain.
+Normally, staking an NFT requires multiple transactions:
+
+1. Lock the NFT on the Ethereum network.
+1. Redeem the NFT on the Polygon network.
+1. Stake the NFT in the DeFi application.
+
+Separately, each of these transactions incur gas fees and can fail independently.
+This is why we designed Rarimo to bundle transactions on the destination chain.
+Our bundled transactions handle these steps efficiently with a single request, incurring a single gas fee and behaving atomically.
+
+## Benefits
+
+- Bundled transactions have a lower gas cost than the individual transactions.
+- Transactions on the destination chain succeed or fail together.
+- Bundling transactions makes your development flow simpler.
+- Any address can handle transaction calls and gas fees on behalf of the original requestor.
+
+## Limitations
+
+- Transaction bundling works only with EVM networks.
+- ERC1155 token transfers cannot use bundling.
+
+## Creating bundled transactions
+
+To bundle transactions together with the SDK, follow these general steps.
+For a complete example, see [SDK](../reference/sdk).
+
+1. Connect to a wallet and create a transaction operation with the [`createCheckoutOperation()`](https://rarimo.github.io/js-sdk/functions/_rarimo_nft_checkout.createCheckoutOperation.html) function:
+
+   ```ts
+   import { createCheckoutOperation, EVMOperation, CheckoutOperationParams } from '@rarimo/nft-checkout'
+   import { createProvider } from '@rarimo/provider'
+   import { MetamaskProvider } from '@rarimo/providers-evm'
+
+   const addTransactionToBundle = async () => {
+    const provider = await createProvider(MetamaskProvider)
+    const op = createCheckoutOperation(EVMOperation, provider)
+    // ...
+   }
+   ```
+
+1. Initialize the operation as usual with the operation object's [`init()`](https://rarimo.github.io/js-sdk/interfaces/_rarimo_nft_checkout.CheckoutOperation.html#init) method.
+This step assumes that you have set the target transaction and chain for the operation as described in [SDK](../reference/sdk):
+
+   ```ts
+    const params:CheckoutOperationParams = {
+      chainIdFrom: selectedChain!.id,
+      chainIdTo: destinationChain!.id,
+      price: Price.fromRaw("0.01", 18, 'ETH'),
+    }
+
+    await op.init(params)
+   ```
+
+1. Use the [Ethers](https://ethers.org/) interface to encode a transaction.
+This transaction accepts the receiver's address as a parameter, buys the NFT, and sends it to the receiver's address:
+
+   ```ts
+   const encodedFunctionData = new utils
+     .Interface(["function buy(address receiver_) payable"])
+     .encodeFunctionData("buy", [
+       USER_WALLET_ADDRESS,
+     ])
+   ```
+
+1. Add the transaction to the bundle with the Ethers `utils.defaultAbiCoder.encode()` function.
+The function takes these two parameters:
+
+   - An array of the Solidity types that Rarimo passes, which are:
+     - The NFT contract address that Rarimo calls to buy the NFT, which is `address[]`
+     - The calculated price of the NFT on the destination chain, which is `uint256[]`
+     - The encoded NFT contract buy function, which is `bytes[]`
+
+   - An array that includes the NFT contract address, the price of the NFT, and the encoded function.
+
+   Here is an example:
+
+   ```ts
+   // Address of the NFT sale contract
+   const NFT_CONTRACT_ADDRESS = "0x77fedfb705c8bac2e03aad2ad8a8fe83e3e20fa1"
+
+   const bundle = utils.defaultAbiCoder.encode(
+     ["address[]", "uint256[]", "bytes[]"],
+     [
+       [NFT_CONTRACT_ADDRESS],
+       [priceOfNft],
+       [encodeBuyFunctionCall(USER_WALLET_ADDRESS)],
+     ]
+   )
+   ```
+
+   To bundle multiple transactions, add their NFT contract addresses, prices, and encoded functions to the respective arrays.
+   For example, this code bundles two functions:
+
+   ```ts
+   const bundle = utils.defaultAbiCoder.encode(
+     ["address[]", "uint256[]", "bytes[]"],
+     [
+       [NFT_CONTRACT_ADDRESS_A, NFT_CONTRACT_ADDRESS_B],
+       [priceOfNftA, priceOfNftB],
+       [encodeBuyFunctionCallA(USER_WALLET_ADDRESS_A), encodeBuyFunctionCallB(USER_WALLET_ADDRESS_B)],
+     ]
+   )
+   ```
+
+1. Call the operation's [`checkout()`](https://rarimo.github.io/js-sdk/interfaces/_rarimo_nft_checkout.CheckoutOperation.html#checkout) method to run the transaction:
+
+   ```ts
+   const txHash = await op.checkout(estimatedPrice, { bundle })
+   ```

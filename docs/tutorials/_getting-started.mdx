@@ -1,0 +1,125 @@
+---
+TODO: do we even need this?
+---
+
+# Getting started
+
+The easiest way to get started with the protocol is to create a simple React application that can access users' wallets.
+
+You can use the applications in [rarimo/js-sdk-examples](https://github.com/rarimo/js-sdk-examples) or follow these steps to set up your own application locally:
+
+1. Make sure that Node.JS, NPX, and Yarn are installed.
+
+1. Install one of these wallets in your web browser if you don't have one already:
+
+   - Coinbase
+   - Metamask
+   - NEAR
+   - Phantom
+   - Solflare
+
+1. In your terminal, create a starter create-react-app application by running this command:
+
+   ```shell
+   npx create-react-app my-rarimo-app --template typescript
+   ```
+
+1. Run `cd my-rarimo-app` to go into the application folder.
+
+1. Run this command to install the Rarimo SDK packages that work with wallets and with React applications:
+
+   ```shell
+   yarn add @rarimo/provider @rarimo/react-provider
+   ```
+
+1. Install the Rarimo SDK package that works with the type of chain that you want to use.
+For example, to work with Metamask or Coinbase wallets on EVM-compatible chains, install the `@rarimo/providers-evm` package:
+
+   ```shell
+   yarn add @rarimo/providers-evm
+   ```
+
+   You can also install the `@rarimo/providers-solana` package to work with Phantom or Solflare wallets on Solana or the `@rarimo/providers-near` package to work with NEAR wallets on NEAR.
+
+1. Run this command to install the `craco` package as a development dependency:
+
+   ```shell
+   yarn add -D @craco/craco
+   ```
+
+1. In the root of the folder, where the `package.json` file is, create a file named `craco.config.js` add this code to it:
+
+   ```js
+   module.exports = {
+     webpack: {
+       configure: {
+         module: {
+           rules: [
+             {
+               test: /\.m?js$/,
+               resolve: {
+                 fullySpecified: false,
+               },
+             },
+           ],
+         },
+       },
+     },
+   }
+   ```
+
+1. In the `package.json` file, change the start, build, and test commands to use `craco`, as in this example:
+
+   ```json
+   {
+     "scripts": {
+       "start": "craco start",
+       "build": "craco build",
+       "test": "craco test"
+     }
+   }
+   ```
+
+1. Replace the contents of the automatically-generated file `src/App.tsx` with this code:
+
+   ```tsx
+   import { MetamaskProvider } from '@rarimo/providers-evm'
+   import { useProvider } from '@rarimo/react-provider'
+   import { useEffect } from 'react'
+
+   function App() {
+     const { provider, ...rest } = useProvider(MetamaskProvider)
+
+     useEffect(() => {
+       const connectToProvider = async () => {
+         await provider.connect()
+       }
+       if (!provider) connectToProvider()
+       if (provider?.address) console.log(provider.address)
+     }, [provider])
+
+     return <div className="App">Wallet address: {provider?.address}</div>
+   }
+
+   export default App
+   ```
+
+1. In the `src/App.tsx` file, set the type of wallet and chain that you want to use by changing the `MetamaskProvider` provider type to one of these provider types:
+
+   - [`CoinbaseProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_providers_evm.CoinbaseProvider.html): Coinbase wallets via the `@rarimo/providers-evm` package
+   - [`MetamaskProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_providers_evm.MetamaskProvider.html): Metamask wallets via the `@rarimo/providers-evm` package
+   - [`NearProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_providers_near.NearProvider.html): NEAR wallets via the `@rarimo/providers-near` package
+   - [`PhantomProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_providers_solana.PhantomProvider.html): Phantom wallets via the `@rarimo/providers-solana` package
+   - [`SolflareProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_providers_solana.SolflareProvider.html): Solflare wallets via the `@rarimo/providers-solana` package
+
+1. In the terminal, run `yarn start` and wait for the application to start.
+The application opens automatically in your default web browser, or you can open the page in a web browser by going to the URL `http://localhost:3000`.
+
+1. When the application prompts you to connect your wallet, log in to your wallet and allow the connection.
+
+If the application is working correctly, it prints the address of your wallet on the page, as in this picture:
+
+![The running application in a web browser, showing the wallet address](/img/getting-started-wallet-address.png)
+
+From here, you can set up cross-chain integrations, such as transactions.
+For an example, see [Creating NFT checkout transactions](./tutorials/creating-transactions).

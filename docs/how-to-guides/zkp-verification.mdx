@@ -1,0 +1,179 @@
+---
+---
+# Verifying Zero-Knowledge Proofs in Smart Contracts
+
+The following guide will instruct you on integrating zero-knowledge proofs into an existing smart contract written in Solidity.
+
+Let's assume we have a generic ERC-20 contract based on <a href="https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/token/ERC20" target="_blank" rel="noreferrer noopener">OpenZeppelin implementation</a>):
+
+```solidity
+pragma solidity ^0.8.16;
+
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
+contract ERC20 is IERC20 {
+    // ...skipping the ERC20 boilerplate...
+
+    // We want to add the proof verification here
+    function mint(uint amount) external {
+        balanceOf[msg.sender] += amount;
+        totalSupply += amount;
+        emit Transfer(address(0), msg.sender, amount);
+    }
+
+    function burn(uint amount) external {
+        balanceOf[msg.sender] -= amount;
+        totalSupply -= amount;
+        emit Transfer(msg.sender, address(0), amount);
+    }
+}
+```
+
+We'll mint 100 tokens to every user born before 01/01/2000.
+
+Our users were issued verifiable credentials(VC) that contain the user's birthday date:
+
+```json
+  {
+    "id": "8edd8112-c415-11ed-b036-debe37e1cbd6",
+    "proofTypes": [
+      "BJJSignature2021"
+    ],
+    "createdAt": "2023-03-20T11:54:01.110295+01:00",
+    "expiresAt": "2025-03-20T11:54:01.110295+01:00",
+    "expired": false,
+    "schemaHash": "c9b2370371b7fa8b3dab2a5ba81b6838",
+    "schemaType": "KYCAgeCredential",
+    "schemaUrl": "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json/KYCAgeCredential-v3.json",
+    "revoked": false,
+    "revNonce": 2136005230,
+    "credentialSubject": {
+      "birthday": 19960424,
+      "documentType": 2,
+      "id": "did:rarimo:2qDDDKmo436EZGCBAvkqZjADYoNRJszkG7UymZeCHQ"
+    },
+    "userID": "did:rarimo:2qFpPHotk6oyaX1fcrpQFT4BMnmg8YszUwxYtaoGoe"
+  }
+```
+
+
+
+## Step 1: Implement the ZKPVerifier Hooks
+
+We need to import <a href="https://github.com/iden3/contracts" target="_blank" rel="noreferrer noopener">Iden3 contracts</a> and inherit the `ZKPVerifier` contract.
+
+The ZKPVerifier Contract provides two hooks: `_beforeProofSubmit` and `_afterProofSubmit`.
+These hooks are called before and after any proof gets submitted. We'll put our custom logic inside them.
+
+Our contract must also define at least a single `TRANSFER_REQUEST_ID`. It is the identifier of the ZKP Request that we will create in the next step.
+
+
+```
+pragma solidity ^0.8.16;
+
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./lib/GenesisUtils.sol";
+import "./interfaces/ICircuitValidator.sol";
+import "./verifiers/ZKPVerifier.sol";
+
+contract ERC20Verifier is IERC20, ZKPVerifier {
+
+    mapping(address => uint256) public addressToId;
+
+    function _beforeProofSubmit(
+        uint64, /* requestId */
+        uint256[] memory inputs,
+        ICircuitValidator validator
+    ) internal view override {
+        // checks that the challenge input of the proof is equal to the msg.sender
+        address addr = GenesisUtils.int256ToAddress(
+            inputs[validator.getInputOf("challenge")]
+        );
+        require(
+            msg.sender == addr,
+            "sender address is not an address in the proof."
+        );
+    }
+
+    function _afterProofSubmit(
+        uint64 requestId,
+        uint256[] memory inputs,
+        ICircuitValidator validator
+    ) internal override {
+        // your custom logic goes here
+
+        // checks that proof was submitted only once by one user
+        require(
+            requestId == TRANSFER_REQUEST_ID && addressToId[msg.sender] == 0,
+            "proof can not be submitted more than once."
+        );
+
+        uint256 id = inputs[validator.getInputOf("challenge")];
+
+        // mint tokens
+        addressToId[msg.sender] = id;
+        super._mint(msg.sender, TOKENS_TO_MINT);
+    }
+
+    // ...
+}
+```
+
+## Step 2: Set the ZKP Request
+
+After the contract deployment, we should design a Request for our users and use it via the `setZKPRequest` function.
+
+The `setZKPRequest` function has the following inputs:
+
+1. `requestID`: the ID associated with the request (`1` in our contract).
+1. `validator`: the address of the `Validator Smart Contract`. It's type can be either `CredentialAtomicQuerySigValidator` or `CredentialAtomicQueryMTPValidator` depending on how the credentials were issued.
+1. `schema`: the bigInt representation of the schema of the requested credential.
+1. `claimPathKey`: represents the path to the queries key inside the merklized credential (In our case it is the path to the `birthday` key).
+1. `operator`: is either 1, 2, 3, 4, 5 or 6 (`less-than` operator we need is `2`).
+1. `value`: represents the threshold value you are querying (01/01/2000 date in our case).
+
+You can run https://go.dev/play/p/rnrRbxXTRY6 to get schema hash and claimPathKey using your schema.
+
+This is how the example request would look like:
+
+```json
+{
+    "id": "7f38a193-0918-4a48-9fac-36adfdb8b542",
+    "typ": "application/iden3comm-plain-json",
+    "type": "https://iden3-communication.io/proofs/1.0/contract-invoke-request",
+    "thid": "7f38a193-0918-4a48-9fac-36adfdb8b542",
+    "body": {
+        "reason": <The reason why the proof is being asked, e.g. "age-restricted mint">,
+        "transaction_data": {
+            "contract_address": "<YourVerifierAddress>",
+            "method_id": "b68967e2",
+            "chain_id": <chain_id where your contract has been deployed, e.g. 80001>,
+            "network": <the name of the network, where your the contract has been deployed, e.g. "polygon-mumbai">
+        },
+        "scope": [
+            {
+                "id": 2,
+                "circuitId": "credentialAtomicQuerySigV2OnChain",
+                "query": {
+                    "allowedIssuers": [
+                        "*"
+                    ],
+                    "context": "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v3.json-ld",
+                    "credentialSubject": {
+                        "birthday": {
+                            "$lt": 20000101
+                        }
+                    },
+                    "type": "KYCAgeCredential"
+                }
+            }
+        ]
+    }
+}
+```
+
+## Step 3: Teststing It Out
+
+<!-- TODO: add instruction how to generate a proof -->
+
+Finally, to check that everything works as expected, you should generate a proof and submit it using the [`submitZKPResponse`](https://github.com/iden3/contracts/blob/9d3a3e8f62bfbebb0c82b0145665c15471ebe9f6/contracts/verifiers/ZKPVerifier.sol#L40C14-L40C31) method. As a result, you should receive 100 minted tokens at your address.

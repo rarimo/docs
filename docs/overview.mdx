@@ -1,35 +1,42 @@
 ---
 ---
 
-# Overview
+# About Rarimo
 
-Rarimo is a multi-chain protocol developed to solve the problems of **liquidity**, **access**, and **interoperability** across non-fungible and fungible use-cases.
-Rarimo makes it easier to work across different chains, allowing you to do things like transfer tokens, stake tokens, and provide proofs of ownership across chains.
+## Rarimo Protocol
 
-We have created a suite of tools, including an API and JavaScript/TypeScript SDK, that make it easy to build ground-breaking integrations on top of our technology.
+We strongly believe in a multichain future where each project brings its unique perspective and value proposition. However, this diversity introduces a plethora of interoperability, security, fragmentation, and other challenges. To address these issues, we've developed Rarimo Protocol, the base layer for decentralized interchain applications.
 
-- [Core concepts](./architecture) | How the protocol works and how it is structured
-- [Smart Contracts](./reference/contracts) | Rarimo's contracts on supported chains
-- [API](./api) | The Rarimo core API
-- [SDK](./sdk) | JavaScript/TypeScript SDK for handling transactions
+## Design Principles
 
-All of our tools are open source and free to use.
-We welcome questions, feedback, and collaboration on all levels as we work together to build a platform-agnostic, untethered internet of the future.
+### Decentralization
 
-## Use cases
+The interchain layer must be as decentralized as the chains it connects, not to be the point of centralization. Our system is a network of dozens of independent validators and oracles. Oracles observe events in the outer world in a trustless way, and Validators collaborate to achieve secure consensus on the order of events.
 
-The primary purpose of the Rarimo protocol is to remove barriers between chains and token types.
-The protocol simplifies transactions that require converting one type of token into another, moving tokens from one chain to another, or maintaining pools of tokens on multiple chains.
+![Rarimo Sub-Protocols](/img/validator.png)
 
-You can use the protocol for many use multi-chain cases, including:
 
-- Accepting any token from any chain as payment for NFT purchases
-- Creating seamless cross-chain token transfers
-- Building liquidity pools that allow you to work with many chains simultaneously
-- Allowing users to stake tokens across different chains
-- Airdropping NFTs to multiple chains
-- Proving ownership of tokens across chains
+### Extensibility
 
-## Examples
+The protocol provides a general messaging protocol foundation for cross-chain use cases. You can implement your own sub-protocols and submit them via the proposals mechanism. Rarimo offers ready-to-use [identity](/overview/identity) and [bridging](overview/bridge) sub-protocols.
 
-For example applications, see [rarimo/js-sdk-examples](https://github.com/rarimo/js-sdk-examples/) on GitHub.
+![Rarimo Sub-Protocols](/img/protocol-layers.png)
+
+Additionally, Rarimo Core supports EVM-compatible smart contracts for greater flexibility.
+
+### Scalable Security
+
+Rarimo uses TSS (Threshold Signature Scheme) to sign the outputs of our protocol. With TSS, the signature size doesn't depend on the number of signers(validator nodes) and remains constant. Thus, we can scale our pool of validators while keeping fees at the destination chains at a low, fixed rate.
+
+### Instant Finality
+
+Every step in the cross-chain path adds an extra delay. Our protocol uses the proven Tendermint consensus mechanism with instant finality to minimize this overhead. It only takes an extra few seconds to ensure the protocol's security.
+
+## Audits
+
+Our protocol and smart contracts have been audited by some of the industry's most trusted companies.
+
+- [Halborn](https://www.halborn.com/)
+- [Ambisafe](https://ambisafe.com/)
+
+<!-- TODO: link to audits page -->

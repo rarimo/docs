@@ -1,0 +1,150 @@
+---
+---
+
+# Glossary
+
+**Bridge contract**
+
+Bridge contracts are a group of smart contracts that are deployed to different chains that enable you to transfer value from one chain to another
+The user submits a deposit transaction to the bridge contract on the source chain and the bridge contract on the target chain withdraws tokens on the target chain.
+See [Bridge overview](./reference/contracts/bridge).
+
+**Bundling**
+
+Bundling is the process of combining multiple transactions into a single transaction.
+See [Bundling](./tutorials/bundling).
+
+**Decentralized application (dApp)**
+
+A dApp is an application made of one or more smart contracts running on a blockchain and a user interface.
+
+**Decentralized exchange (DEX)**
+
+A service that exchanges one token for another on the same chain, like a currency exchange.
+
+**Decentralized identifier (DID)**
+
+A DID is a unique identifier that is registered with a distributed or decentralized network.
+
+**Delegated proof of stake**
+
+Delegated proof of stake is a way of using consensus to select validators.
+Users propose themselves as validators and other users that trust them stake tokens on their behalf.
+Users with the most staked tokens become validators for a certain length of time.
+
+**Digital autonomous organization (DAO)**
+
+A DAO is a member-owned community without centralized leadership or governing bodies.
+Rarimo uses a DAO to manage its threshold signature scheme.
+
+**Distributed key generation (DKG)**
+
+DKG is a method for creating a key by combining secrets from multiple parties.
+As a result, no individual party can construct the key without secrets from the other parties.
+
+**Elliptic Curve Digital Signature Algorithm (ECDSA)**
+
+ECDSA is a complex public key cryptography signature algorithm in which keys are generated via elliptic curve cryptography.
+
+**Edwards-curve Digital Signature Algorithm (EdDSA)**
+
+EdDSA is a complex public key cryptography signature algorithm that is based on Edwards curves.
+
+**Ethereum Virtual Machine (EVM)**
+
+A computation engine that is the foundation for EVM-compatible blockchains such as Ethereum and Polygon.
+See [ethereum.org](https://ethereum.org).
+
+**Iden3 protocol**
+
+The Iden3 protocol is a framework for issuers to create identities and for verifiers to verify claims about those identities using tools such as ZKPs.
+Rarimo's identity protocol is based on Iden3.
+
+**Identity state**
+
+In the Iden3 protocol, Identity State consists of multiple Sparse Merkle Trees(SMT) that describe the status of claims associated with an identity. The state is stored on-chain and is used during the ZKP verification.
+
+
+**Merkle tree**
+
+A Merkle tree stores hashes of data in a tree that allows you to verify the contents of the tree.
+You can use Merkle branches to follow the hashes through the tree to verify that a specific piece of data is in the tree.
+
+**Non-fungible token (NFT)**
+
+An NFT is a piece of data stored on a blockchain that certifies a digital asset to be unique and not interchangeable with any other asset.
+NFTs are different from fungible tokens such as BTC and ETH because fungible tokens are equivalent and interchangeable.
+
+**Oracle**
+
+In general blockchain terms, Oracles provide information from outside a blockchain to smart contracts on the blockchain.
+Rarimo oracles observe blockchains for events, deliver these events to the Rarimo core, and verify events from other oracles.
+See [Oracles](./reference/core/oracles).
+
+**Provider**
+
+A provider is an object that represents a user's wallet so you can interact with it in your code.
+See [Connecting to wallets](./tutorials/connecting-to-wallets).
+
+**Rarimo**
+
+Rarimo is a protocol for messaging data and bridging assets between different blockchain-based systems.
+Rarimo consists primarily of smart contracts, services, and oracles that automate these tasks.
+
+**Relayer**
+
+The Rarimo relayer service helps automate cross-chain operations.
+When one bridge contract locks tokens, it generates a witness to prove that it has the tokens.
+The relayer sees that witness and sends a transaction to another bridge contract to unlock tokens on another chain.
+
+**RMO**
+
+RMO is the Rarimo token.
+The RMO token is used for governance of the Rarimo project, among other things.
+Users can stake RMO tokens to become oracles.
+See [Governance](./whitepaper/governance).
+
+**Secp256k1**
+
+Secp256k1 refers to the parameters used in cryptography algorithms such as ECDSA.
+See [Secp256k1](https://en.bitcoin.it/wiki/Secp256k1).
+
+**Smart contract**
+
+Smart contracts are programs that run on EVM-compatible blockchains.
+They can provide public functions and accept transactions, such as selling NFTs or exchanging tokens.
+Smart contracts provide the logic for NFTs and decentralized applications.
+
+**Soulbound token (SBT)**
+
+Soulbound tokens are tokens that cannot be transferred.
+They often represent parts of a user's identity, history, or accomplishments.
+
+**Swap contract**
+
+Swap contracts are smart contracts that exchange one token for another token on the same chain via a decentralized exchange (DEX).
+
+**Threshold signature scheme (TSS)**
+
+TSS is a cryptographic method to produce a single signature from a pool of parties, none of which have access to all of the key to create the signature by themselves.
+This process uses distributed key generation (DKG) to generate the key.
+See [TSS](./reference/core/tss).
+
+**Validator**
+
+Validators are nodes that verify that transactions are valid before adding them to the blockchain.
+
+**Verifiable credential (VC)**
+
+VCs represent claims such as proof of ownership of an account.
+They include a proof that allows users to verify that the credential is authentic.
+
+**Zero-Knowledge Proof (ZKP)**
+
+A ZKP is a cryptographically secure piece of information that proves that a certain user meets a certain requirement without revealing any specific information about the user.
+For example, a ZKP can verify that a user is above a certain age without revealing the user's actual age.
+
+**Zero-Knowledge Succinct Non-Interactive Argument of Knowledge (zk-SNARK)**
+
+A zk-SNARK is the type of ZKP that Rarimo Identity Protocol uses.
+One characteristic of zk-SNARKs is that they are non-interactive, meaning that the user and verifier interact only once, unlike some other types of ZKPs.

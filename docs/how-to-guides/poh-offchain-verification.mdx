@@ -1,0 +1,52 @@
+# Using Proof of Humanity Off-Chain
+
+Off-chain applications such as Discord bots, quest platform backends, and many others can also benefit from Proof of Humanity(PoH) integration.
+
+## Option #1: GraphQL Endpoint(Recommended)
+
+Rarimo indexes the verified users using a subgraph. You can query its GraphQL endpoint to check the verification status like this:
+
+1. Run the following GraphQL query:
+
+	**Endpoint**:
+    https://api.thegraph.com/subgraphs/name/volodymyrzolotukhin/sbtidentityverifier-polygon
+
+    **Query**:
+
+    ```graphql
+    query info($address: String!) {
+        users(where:{senderAddr: $address}){
+            id
+        }
+    }
+    ```
+
+    Use this verified address for tests: `0x62019b7b8f7d5b58006c5001eb1ffa95ab191474`
+
+1. Verify that the response looks like this:
+	```json
+    {
+        "users": [
+            {
+                "id": ":"19643409028078272448762374992644569744201332795590556384983511405206634497"
+            }
+        ]
+    }
+	```
+
+    Assume the user is verified if the `users` array is non-empty.
+
+
+## Option #2: NFT Indexer
+
+If you operate an NFT indexer already, you can also use it to check the user verification. Just check that the user owns a PoH soulbound token.
+
+### Proof of Humanity SBT
+
+Network: Polygon Mainnet
+
+Contract Address: [0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373](https://polygonscan.com/address/0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373)
+
+
+
+

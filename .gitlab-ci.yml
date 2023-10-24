@@ -58,6 +58,7 @@ Build:
   script:
     - export URL="https://staging.docs.rarimo.com"
     - export BASE_URL="/"
+    - export STAGING="true"
     - type werf && source $(werf ci-env gitlab --as-file)
     - werf build --report-path=images-report.json
     - docker pull $(cat images-report.json | jq -r .Images.web.DockerImageName)
