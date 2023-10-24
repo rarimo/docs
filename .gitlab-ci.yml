@@ -52,13 +52,11 @@ Build:
           command: ["--tls=false"]
   stage: build-and-publish
   only:
-    refs:
-      - dev
+    - tags # todo: match v1.2.3 pattern
   <<: *before_script_templ
   script:
-    - export URL="https://staging.docs.rarimo.com"
+    - export URL="https://docs.rarimo.com"
     - export BASE_URL="/"
-    - export STAGING="true"
     - type werf && source $(werf ci-env gitlab --as-file)
     - werf build --report-path=images-report.json
     - docker pull $(cat images-report.json | jq -r .Images.web.DockerImageName)
@@ -67,7 +65,7 @@ Build:
   except: [schedules]
   interruptible: true
 
-Build-main:
+Build-staging:
   image:
       name: "tokend/werf:0.0.11"
       entrypoint: [""]
@@ -81,8 +79,9 @@ Build-main:
       - main
   <<: *before_script_templ
   script:
-    - export URL="https://docs.rarimo.com"
+    - export URL="https://staging.docs.rarimo.com"
     - export BASE_URL="/"
+    - export STAGING="true"
     - type werf && source $(werf ci-env gitlab --as-file)
     - werf build --report-path=images-report.json
     - docker pull $(cat images-report.json | jq -r .Images.web.DockerImageName)
@@ -115,7 +114,7 @@ Deploy to Staging:
   stage: deploy-kubernetes
   only:
     refs:
-      - dev
+      - main
   script:
     - mkdir ~/.kube/
     - echo ${k8sconfig} | base64 -d > config
@@ -129,8 +128,7 @@ Deploy to Production:
   image: dtzar/helm-kubectl:latest
   stage: deploy-kubernetes
   only:
-    refs:
-      - main
+    - tags
   script:
     - mkdir ~/.kube/
     - echo ${k8sconfig} | base64 -d > config
