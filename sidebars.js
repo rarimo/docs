@@ -65,11 +65,6 @@ const sidebars = {
     "how-to-guides/validator-setup",
     "how-to-guides/staking"
   ],
-  howToGuides: [
-    "how-to-guides",
-    "how-to-guides/validator-setup",
-    "how-to-guides/staking"
-  ],
   reference: [
     {
       type: "doc",
