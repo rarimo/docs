@@ -77,6 +77,27 @@ Usage example:
   }
 ```
 
+Somewhere in your app
+```ts
+const init = async () => {
+  try {
+    const { isMetamaskInstalled, isSnapInstalled } = await checkSnapStatus()
+
+    if (!isMetamaskInstalled) throw new TypeError('Metamask is not installed')
+
+    if (!isSnapInstalled) {
+      await connectOrInstallSnap()
+    }
+
+
+    // Now you able to create identity / generate proof or verifiable credentials by using corresponding methods, e. g.
+    const did = await createIdentity() // did:iden3:[...]
+  } catch (error) {
+    log.error(error)
+  }
+}
+```
+
 ## @rarimo/shared-zkp-iden3
 
 The [@rarimo/shared-zkp-iden3](https://www.npmjs.com/package/@rarimo/shared-zkp-iden3) package provides constants, types, and tools other packages used for identity functionality.
