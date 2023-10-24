@@ -75,27 +75,26 @@ Usage example:
       isSnapInstalled,
     }
   }
-```
 
-Somewhere in your app
-```ts
-const init = async () => {
-  try {
-    const { isMetamaskInstalled, isSnapInstalled } = await checkSnapStatus()
+  const init = async () => {
+    try {
+      const { isMetamaskInstalled, isSnapInstalled } = await checkSnapStatus()
 
-    if (!isMetamaskInstalled) throw new TypeError('Metamask is not installed')
+      if (!isMetamaskInstalled) throw new TypeError('Metamask is not installed')
 
-    if (!isSnapInstalled) {
-      await connectOrInstallSnap()
+      if (!isSnapInstalled) {
+        await connectOrInstallSnap()
+      }
+
+
+      // Now you are able to create identity / generate proof or verifiable credentials by using corresponding methods, e. g.
+      const did = await createIdentity() // did:iden3:[...]
+    } catch (error) {
+      log.error(error)
     }
-
-
-    // Now you able to create identity / generate proof or verifiable credentials by using corresponding methods, e. g.
-    const did = await createIdentity() // did:iden3:[...]
-  } catch (error) {
-    log.error(error)
   }
-}
+
+  init();
 ```
 
 ## @rarimo/shared-zkp-iden3
