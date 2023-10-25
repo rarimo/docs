@@ -90,6 +90,10 @@ const sidebars = {
         },
         {
           type: "doc",
+          id: "reference/contracts/poh-sbt",
+        },
+        {
+          type: "doc",
           id: "reference/contracts/bridge",
         },
         {
