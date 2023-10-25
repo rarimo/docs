@@ -21,10 +21,6 @@ Rarimo uses two types of state contracts:
 
 ### `StateV2`
 
-Full implementation can be found [here](https://gitlab.com/rarimo/identity/contracts/-/blob/master/contracts/State.sol?ref_type=heads).
-
-The primary contract interface:
-
 ```solidity
 function transitState(
         uint256 id_,
@@ -48,11 +44,9 @@ event StateTransited(
 - `transitState` - the primary function of the contract that performs state transitions. It receives the identity, two states (old and new), a boolean whether it is genesis or not, and ZK Proof, which proves that the state transition from old to new state of this identity is valid and fair;
 - `StateTransited` - Emited after every state transition. Rarimo's oracles use it to ingest the state transitions;
 
+Full implementation can be found [here](https://gitlab.com/rarimo/identity/contracts/-/blob/master/contracts/State.sol?ref_type=heads).
+
 ### `LightweightState`
-
-Full implementation can be found [here](https://gitlab.com/rarimo/identity/contracts/-/blob/master/contracts/LightweightState.sol?ref_type=heads).
-
-The primary contract interface:
 
 ```
 /* ... */
@@ -75,14 +69,14 @@ The primary contract interface:
 - `identitiesStatesRoot` - another tree root (made specifically for the Lightweight contract) that stores the issuer ID, its state, and timestamp of state change (gist doesn't have timestamps).
 - `signedTransitState()` - state transition function that requires TSS instead of ZKP. It verifies the signature and changes the roots to the ones provided. After that, the user can submit a ZKP using the new root on the destination chain.
 
+Full implementation can be found [here](https://gitlab.com/rarimo/identity/contracts/-/blob/master/contracts/LightweightState.sol?ref_type=heads).
+
 ## Verifier contracts
 
 Verifier contracts' main purpose is to verify ZK proof and then execute business logic that is specific for certain DApp.
 Rarimo has two types of verifier contracts: `BaseVerifier` and `IdentityVerifier'.
 
 ### `BaseVerifier`
-
-Full implementation can be found [here](https://gitlab.com/rarimo/identity/contracts/-/blob/master/contracts/verifiers/BaseVerifier.sol?ref_type=heads).
 
 `BaseVerifier` is an abstract contract that you can inherit and add your custom business logic.
 
@@ -115,10 +109,9 @@ This contract uses the `zkpQueriesStorage` contract to store query IDs and the `
 
 Using both functions, you can implement your custom business logic and only verified identity can use it. It is also possible to restrict certain issuers, i.e., credentials from them can't be proven because they are not on the allowed list.
 
-### `IdentityVerifier`
+Full implementation can be found [here](https://gitlab.com/rarimo/identity/contracts/-/blob/master/contracts/verifiers/BaseVerifier.sol?ref_type=heads).
 
-Full implementation can be found [here](
-https://gitlab.com/rarimo/identity/contracts/-/blob/master/contracts/verifiers/IdentityVerifier.sol?ref_type=heads)
+### `IdentityVerifier`
 
 `IdentityVerifier` inherits `BaseVerifier` and binds the address to identity after the verification.
 
@@ -140,3 +133,6 @@ contract IdentityVerifier is IIdentityVerifier, BaseVerifier {
 - `addressToIdentityId` - mapping of address to identity identifier;
 - `_identitiesProofInfo` - mapping of identity to the struct that stores address and boolean (whether the identity is proven or not);
 - `_proveIdentity(ProveIdentityParams calldata proveIdentityParams_)` - verifies the proof and stores the info in mentioned mappings and emits an `IdentityProved` event that contains the user's ID and address;
+
+Full implementation can be found [here](
+https://gitlab.com/rarimo/identity/contracts/-/blob/master/contracts/verifiers/IdentityVerifier.sol?ref_type=heads)
