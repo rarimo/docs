@@ -17,6 +17,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Invalid links in the Glossary;
 
+### Changed
+
+- Technical Rererence:
+  - Improved bridge contracts reference structure;
+
 ## [1.0.0] - 2023-10-24
 
 ### Changed

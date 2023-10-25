@@ -90,29 +90,25 @@ const sidebars = {
         },
         {
           type: "doc",
-          id: "reference/contracts/poh-sbt",
-        },
-        {
-          type: "doc",
-          id: "reference/contracts/bridge",
-        },
-        {
-          type: "doc",
           id: "reference/contracts/identity",
         },
         {
           type: "category",
-          label: "Interface",
-          // link: {
-          //   type: "doc",
-          //   id: "reference/contracts/interface",
-          // },
+          label: "Bridge Protocol Contracts",
+          link: {
+            type: "doc",
+            id: "reference/contracts/bridge",
+          },
           collapsed: false,
           items: [
-            "reference/contracts/interface/evm-reference",
-            "reference/contracts/interface/near-reference",
-            "reference/contracts/interface/solana-reference",
+            "reference/contracts/bridge/evm",
+            "reference/contracts/bridge/near",
+            "reference/contracts/bridge/solana",
           ],
+        },
+        {
+          type: "doc",
+          id: "reference/contracts/poh-sbt",
         },
       ],
     },
