@@ -16,7 +16,8 @@ function isStaging() {
   return process.env.STAGING === "true";
 }
 
-const metaDescription = "Rarimo developer documentation. Learn to use cross-chain self-sovereign identity protocol, zero-knowledge proofs, RariMe Snap, token bridging, and more."
+const metaDescription =
+  "Rarimo developer documentation. Learn to use cross-chain self-sovereign identity protocol, zero-knowledge proofs, RariMe Snap, token bridging, and more.";
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
