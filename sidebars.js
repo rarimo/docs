@@ -63,7 +63,7 @@ const sidebars = {
     "how-to-guides/setup-issuer",
     "how-to-guides/polygon-id-state-replication",
     "how-to-guides/validator-setup",
-    "how-to-guides/staking"
+    "how-to-guides/staking",
   ],
   reference: [
     {
@@ -91,6 +91,10 @@ const sidebars = {
         {
           type: "doc",
           id: "reference/contracts/bridge",
+        },
+        {
+          type: "doc",
+          id: "reference/contracts/identity",
         },
         {
           type: "category",
