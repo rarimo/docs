@@ -1,47 +1,31 @@
 ---
 ---
 
-# Identity Protocol contracts
+# Identity Protocol Contracts
 
-While Rarimo inherits a lot of identity contracts from iden3 with minor changes, it also has features, such as `LightweightState` contract.
-We will firstly describe the `State` contract (the one, inherited from the iden3) and changes that were done to it and then will move to `LightweightState` contract.
-Finally, verifiers contracts will be explained.
+Rarimo builds upon the basic [Iden3 smart contracts](https://github.com/iden3/contracts) and adapts them for cross-chain usage.
 
-## State contract
-The changes (the only one) will be described firstly, and then the contract itself.
-If you're familiar with the Iden3 protocol, you can skip the contract's description section and read only the .
+> Currently, identity smart contracts are available only for EVM-compatible chains.
 
-### Rarimo's changes to the contract
-The only thing that were added is the `StateTransited` event, that is important for Rarimo oracles. 
+Identity protocol uses two types of smart contracts:
 
-```Solidity
-event StateTransited(
-        uint256 gistRoot,
-        uint256 indexed id,
-        uint256 state,
-        uint256 timestamp,
-        uint256 blockNumber
-    );
-```
-It is emitted every time in `transitState` function and provides the following information:
-- `gistRoot` - global identity state tree root after the transition.
-- `id` - identity, which called the function
-- `state` - new state of the identity
-- `timestamp` - block timestamp of this block
-- `blockNumber` - block number (height) of this block
+- State Contracts hold iden3 identity states(sparse Merkle trees) that are required for on-chain ZKP verifications;
+- Verifiers are responsible for verifying zero-knowledge proofs on-chain. They fetch identity states for the State Contracts to check that the credential used to generate the proof wasn't revoked by the issuer;
 
-Oracles needed this information, to know who made the transition, it's new state, when (timestamp, height) and so on, so the event was added.
+##  State Contracts
 
-### State contract
+Rarimo uses two types of state contracts:
 
-As being said, the rest of the contract is the exact copy of [iden3](https://docs.iden3.io/contracts/state/) state contract.
+- `StateV2` holds the complete history of identity states. A single instance is deployed to the Rarimo chain and acts as a single source of truth;
+- `LightweightState` implements the state contract interface but doesn't hold the entire history. The identity states are updated on demand and are secured by a threshold signature from Rarimo's oracles. One instance of this contract is deployed to every supported target chain;
 
-```Solidity
-/* ... */
-IStateTransitionVerifier internal verifier;
-StateLib.Data internal _stateData;
-SmtLib.Data internal _gistData;
+### `StateV2`
 
+Full implementation can be found [here](https://gitlab.com/rarimo/identity/contracts/-/blob/master/contracts/State.sol?ref_type=heads).
+
+The primary contract interface:
+
+```solidity
 function transitState(
         uint256 id_,
         uint256 oldState_,
@@ -50,139 +34,95 @@ function transitState(
         uint256[2] memory a_,
         uint256[2][2] memory b_,
         uint256[2] memory c_
-    ) external
-/* ... */
+) external
+
+event StateTransited(
+        uint256 gistRoot,        // global identity state tree root after the transition.
+        uint256 indexed id,     // identity which called the function
+        uint256 state,              // new state of the identity
+        uint256 timestamp,     // block timestamp of this block
+        uint256 blockNumber // height of this block
+ );
 ```
 
-- `verifier` - address of the state transition verifier contract. It verifies the state transition ZKP.
-- `_stateData` - struct for storing all the state data. Contains a mapping of state history per each identity and state metadata of each state.
-- `_gistData` - struct for storing all gist data. Contains all the nodes in the tree and all roots history with timestamps and heights.
-- `transitState` - the main function of the contract, that performs state transition.
-It receives the identity, two states (old and new), boolean whether it is genesis or not and ZK Proof, that proves that state transition from old to new state of this identity is valid and fair. 
-- other minor functions, such as `getGISTRoot()` (returns latest GIST root) are not described, but all the contracts can be found [here](https://gitlab.com/rarimo/identity/contracts/-/tree/master/contracts).
-For more information about state contract we refer to [iden3 documentation](https://docs.iden3.io/contracts/state/).
+- `transitState` - the primary function of the contract that performs state transitions. It receives the identity, two states (old and new), a boolean whether it is genesis or not, and ZK Proof, which proves that the state transition from old to new state of this identity is valid and fair;
+- `StateTransited` - Emited after every state transition. Rarimo's oracles use it to ingest the state transitions;
 
+### `LightweightState`
 
-### LightweightState contract
+Full implementation can be found [here](https://gitlab.com/rarimo/identity/contracts/-/blob/master/contracts/LightweightState.sol?ref_type=heads).
 
-This contract is used on destination chains, that want to receive state data from the Rarimo.
-Once it is deployed, the state from source chain (Rarimo) can be transferred to destination chain (assume Ethereum) via ECDSA Threshold signature.
-It is done by the user (i.e. he can request such an action) if state transition is required at the destination chain.
+The primary contract interface:
 
-The contract and it's core elements:
 ```
 /* ... */
     address public override sourceStateContract;
     string public override sourceChainName;
     bytes32 public override identitiesStatesRoot;
-    uint256 internal _currentGistRoot;
-    mapping(uint256 => GistRootData) internal _gistsRootData;
-    mapping(bytes32 => IdentitiesStatesRootData) internal _identitiesStatesRootsData;
 
     function signedTransitState(
         bytes32 newIdentitiesStatesRoot_,
         GistRootData calldata gistData_,
-        bytes calldata proof_
-    ) external override { 
+        bytes calldata proof_ // TSS from Rarimo's oracles
+    ) external override {
         /* ... */
     }
 
-/* ... */
 ```
 
-- `sourceStateContract` - address of the contract on source chain (Rarimo in our case)
-- `sourceChainName` - the chain, where the source contract is deployed (Rarimo)
-- `identitiesStatesRoot` - another tree root (made specially for Lightweight contract), that stores issuer id, it's state and timestamp of state change (gist doesn't have timestamps).
-- `_currentGistRoot` - current root of the gist
-- `_gistsRootData` - history of gist roots with timestamps
-- `_identitiesStatesRootsData` - history of identities states rooots with timestamps
-- `signedTransitState()` - state transition function, that requires TSS instead of ZKP. 
-It verifies the signature and changes the roots to the ones provided.
-After that, user can provide proofs using the new root on destination chain.
-Inputs are:
-  - `newIdentitiesStatesRoot_` - new identities states root
-  - `gistData_` - new gist root and it's timestamp
-  - `proof_` - ECDSA threshold signature
+- `sourceStateContract` - address of the contract on the source chain (Rarimo in our case)
+- `sourceChainName` - the chain where the source contract is deployed (Rarimo)
+- `identitiesStatesRoot` - another tree root (made specifically for the Lightweight contract) that stores the issuer ID, its state, and timestamp of state change (gist doesn't have timestamps).
+- `signedTransitState()` - state transition function that requires TSS instead of ZKP. It verifies the signature and changes the roots to the ones provided. After that, the user can submit a ZKP using the new root on the destination chain.
 
 ## Verifier contracts
 
-Verifier contracts main purpose is to verify ZK proof and then execute business logic, that is specific for certain dApp.
-Rarimo has 3 types of verifier contracts: `BaseVerifier`, `IdentityVerifier` and `SBTIdentityVerifier`.
-The last one will be described in another page.
+Verifier contracts' main purpose is to verify ZK proof and then execute business logic that is specific for certain DApp.
+Rarimo has two types of verifier contracts: `BaseVerifier` and `IdentityVerifier'.
 
-### BaseVerifier contract
+### `BaseVerifier`
 
-`BaseVerifier` is an abstract contract, that you can inherit and add your custom business logic.
+Full implementation can be found [here](https://gitlab.com/rarimo/identity/contracts/-/blob/master/contracts/verifiers/BaseVerifier.sol?ref_type=heads).
+
+`BaseVerifier` is an abstract contract that you can inherit and add your custom business logic.
+
 It implements some of the core functions:
 
-```Solidity
+```solidity
 abstract contract BaseVerifier is IBaseVerifier, OwnableUpgradeable, UUPSUpgradeable {
     /* ... */
 
  function _transitState(TransitStateParams calldata transitStateParams_) internal {
-        ILightweightState lightweightState_ = zkpQueriesStorage.lightweightState();
-        ILightweightState.GistRootData memory currentGISTRootData_ = lightweightState_
-            .getCurrentGISTRootInfo();
-
-        if (
-            !lightweightState_.isIdentitiesStatesRootExists(
-                transitStateParams_.newIdentitiesStatesRoot
-            ) &&
-            currentGISTRootData_.createdAtTimestamp <
-            transitStateParams_.gistData.createdAtTimestamp
-        ) {
-            lightweightState_.signedTransitState(
-                transitStateParams_.newIdentitiesStatesRoot,
-                transitStateParams_.gistData,
-                transitStateParams_.proof
-            );
-        }
+     	// ...
     }
 
     function _verify(
         string memory queryId_,
         ProveIdentityParams calldata proveIdentityParams_
     ) internal view virtual {
-        require(
-            zkpQueriesStorage.isQueryExists(queryId_),
-            "BaseVerifier: ZKP Query does not exist for passed query id."
-        );
-
-        IQueryValidator queryValidator_ = IQueryValidator(
-            zkpQueriesStorage.getQueryValidator(queryId_)
-        );
-        uint256 queryHash_ = zkpQueriesStorage.getStoredQueryHash(queryId_);
-
-        queryValidator_.verify(
-            proveIdentityParams_.statesMerkleData,
-            proveIdentityParams_.inputs,
-            proveIdentityParams_.a,
-            proveIdentityParams_.b,
-            proveIdentityParams_.c,
-            queryHash_
-        );
-
-        _checkAllowedIssuer(queryId_, proveIdentityParams_.statesMerkleData.issuerId);
-        _checkChallenge(proveIdentityParams_.inputs[queryValidator_.getChallengeInputIndex()]);
+        // ...
     }
 
     /* ... */
 
 }
 ```
-This contract uses `zkpQueriesStorage` contract, to store query ids and `lightweightState` contract address.
+
+This contract uses the `zkpQueriesStorage` contract to store query IDs and the `lightweightState` contract's address.
+
 - `_transitState(TransitStateParams calldata transitStateParams_)` - calls the `lightweightState` contract from `zkpQueriesStorage` and transfers the state.
 - `_verify(string memory queryId_, ProveIdentityParams calldata proveIdentityParams_)` - verifies the proof, using the `QueryValidator` for stated `queryId_`
 
-Using both functions, you can implement your custom business logic and only verified identity will be able to use it.
-It is also possible to restrict certain issuers, i.e. credentials from them can't be proven, because they are not in allowed list.
+Using both functions, you can implement your custom business logic and only verified identity can use it. It is also possible to restrict certain issuers, i.e., credentials from them can't be proven because they are not on the allowed list.
 
+### `IdentityVerifier`
 
-### IdentityVerifier contract
+Full implementation can be found [here](
+https://gitlab.com/rarimo/identity/contracts/-/blob/master/contracts/verifiers/IdentityVerifier.sol?ref_type=heads)
 
-`IdentityVerifier` inherits `BaseVerifier` and binds the address to identity after the verification
+`IdentityVerifier` inherits `BaseVerifier` and binds the address to identity after the verification.
 
-```Solidity
+```solidity
 contract IdentityVerifier is IIdentityVerifier, BaseVerifier {
     /* ... */
 
@@ -191,35 +131,12 @@ contract IdentityVerifier is IIdentityVerifier, BaseVerifier {
     mapping(uint256 => IdentityProofInfo) internal _identitiesProofInfo;
 
     function _proveIdentity(ProveIdentityParams calldata proveIdentityParams_) internal {
-        _verify(IDENTITY_PROOF_QUERY_ID, proveIdentityParams_);
-
-        require(
-            addressToIdentityId[msg.sender] == 0,
-            "IdentityVerifier: Msg sender address has already been used to prove the another identity."
-        );
-
-        IQueryValidator queryValidator_ = IQueryValidator(
-            zkpQueriesStorage.getQueryValidator(IDENTITY_PROOF_QUERY_ID)
-        );
-
-        uint256 identityId_ = proveIdentityParams_.inputs[queryValidator_.getUserIdIndex()];
-
-        require(
-            !isIdentityProved(identityId_),
-            "IdentityVerifier: Identity has already been proven."
-        );
-
-        addressToIdentityId[msg.sender] = identityId_;
-        _identitiesProofInfo[identityId_] = IdentityProofInfo(msg.sender, true);
-
+	// ...
         emit IdentityProved(identityId_, msg.sender);
     }
-
-    /* ... */
-
 }
 ```
 
-- `addressToIdentityId` - mapping of address to identity identifier
-- `_identitiesProofInfo` - mapping of identity to the struct, that stores address and boolean (whether the identity isProven or not)
-- `_proveIdentity(ProveIdentityParams calldata proveIdentityParams_)` - verifies the proof and stores the info in mentioned mappings.
+- `addressToIdentityId` - mapping of address to identity identifier;
+- `_identitiesProofInfo` - mapping of identity to the struct that stores address and boolean (whether the identity is proven or not);
+- `_proveIdentity(ProveIdentityParams calldata proveIdentityParams_)` - verifies the proof and stores the info in mentioned mappings and emits an `IdentityProved` event that contains the user's ID and address;
