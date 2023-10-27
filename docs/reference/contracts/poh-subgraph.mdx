@@ -1,0 +1,57 @@
+---
+---
+
+# Proof of Humanity Subgraph
+
+Proof of Humanity subgraph that indexes the verified users from the `SBTIdentityVerifier` contract. It ingests the following events:
+
+```solidity
+event SBTIdentityProved(
+    uint256 indexed identityId,
+    address senderAddr,
+    address tokenAddr,
+    uint256 tokenID
+)
+```
+
+- `identityID` - identity identifier
+- `senderAddr` - sender (of the transaction) address
+- `tokenAddr` - address of the Souldbound token
+- `tokenID` - ID of the token that was issued to the user after he passed identity verification
+
+The graph stores the same information, including the transaction hash:
+
+```graphql
+type User @entity {
+  id: ID!
+  senderAddr: Bytes!
+  tokenAddr: Bytes!
+  tokenID: BigInt!
+  transactionHash: Bytes!
+}
+```
+
+Goerli endpoint(PoH testnet): https://api.thegraph.com/subgraphs/name/volodymyrzolotukhin/sbtidentityverifier/graphql
+
+Polygon endpoint(PoH mainnet): https://api.thegraph.com/subgraphs/name/volodymyrzolotukhin/sbtidentityverifier-polygon/graphql
+
+Use the following query (you should provide the sender address):
+
+```graphql
+query info($address: String!) {
+    users(where:{senderAddr: $address}){
+        id
+    }
+}
+```
+A non-empty response like this indicates that the user is verified:
+
+```json
+    {
+        "users": [
+            {
+                "id": ":"19643409028078272448762374992644569744201332795590556384983511405206634497"
+            }
+        ]
+    }
+```

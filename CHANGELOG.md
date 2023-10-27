@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Identity contracts reference;
   - Proof of Humanity SBT;
   - Identity Protocol contract addresses;
+  - PoH subgraph reference;
 
 ### Fixed
 
