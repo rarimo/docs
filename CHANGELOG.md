@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Technical Rererence:
   - Improved bridge contracts reference structure;
+- How-to-Guides:
+  - User Rarimo's verifier contracts in the on-chain ZKP verification guide;
 
 ## [1.0.0] - 2023-10-24
 

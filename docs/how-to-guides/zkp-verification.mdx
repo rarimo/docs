@@ -4,32 +4,31 @@
 
 The following guide will instruct you on integrating zero-knowledge proofs into an existing smart contract written in Solidity.
 
-Let's assume we have a generic ERC-20 contract based on <a href="https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/token/ERC20" target="_blank" rel="noreferrer noopener">OpenZeppelin implementation</a>):
+Let's assume we have a generic ERC-20 contract that has a `mint` method we want to make age-restricted:
 
 ```solidity
 pragma solidity ^0.8.16;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract ERC20 is IERC20 {
+contract AgeRestrictedERC20 is IERC20 {
+    string public name = "Age Restricted ERC20 Token";
+    string public symbol = "ART";
+    uint8 public decimals = 18;
+
+    // 100 tokens
+    uint256 public constant AIRDROP_AMOUNT = 100 * 10**uint256(decimals);
+
     // ...skipping the ERC20 boilerplate...
 
     // We want to add the proof verification here
-    function mint(uint amount) external {
-        balanceOf[msg.sender] += amount;
-        totalSupply += amount;
-        emit Transfer(address(0), msg.sender, amount);
-    }
-
-    function burn(uint amount) external {
-        balanceOf[msg.sender] -= amount;
-        totalSupply -= amount;
-        emit Transfer(msg.sender, address(0), amount);
+    function mint() external {
+        balanceOf[msg.sender] += AIRDROP_AMOUNT;
+        totalSupply += AIRDROP_AMOUNT;
+        emit Transfer(address(0), msg.sender, AIRDROP_AMOUNT);
     }
 }
 ```
-
-We'll mint 100 tokens to every user born before 01/01/2000.
 
 Our users were issued verifiable credentials(VC) that contain the user's birthday date:
 
@@ -56,124 +55,164 @@ Our users were issued verifiable credentials(VC) that contain the user's birthda
   }
 ```
 
+We'll mint 100 tokens to every user born before 01/01/2000.
 
+## Step 1:  Inherit the `BaseVerifier` Contract and Add the ZKP Verification
 
-## Step 1: Implement the ZKPVerifier Hooks
+We need to import the necessary [Rarimo identity contrcts](https://github.com/rarimo/identity-contracts/tree/master) and inherit the [`BaseVerifier`](https://github.com/rarimo/identity-contracts/blob/aeb929ccc3fa8ab508fd7576f9fa853a081e5010/contracts/verifiers/BaseVerifier.sol) contract.
 
-We need to import <a href="https://github.com/iden3/contracts" target="_blank" rel="noreferrer noopener">Iden3 contracts</a> and inherit the `ZKPVerifier` contract.
-
-The ZKPVerifier Contract provides two hooks: `_beforeProofSubmit` and `_afterProofSubmit`.
-These hooks are called before and after any proof gets submitted. We'll put our custom logic inside them.
-
-Our contract must also define at least a single `TRANSFER_REQUEST_ID`. It is the identifier of the ZKP Request that we will create in the next step.
-
+Then, we need to add the ZKP verification logic into our `mint` method. Our contract must also define the query ID; in our case, it's  `AGE_PROOF`. It is the identifier of the ZKP Request that we will create in the next step.
 
 ```
-pragma solidity ^0.8.16;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "./lib/GenesisUtils.sol";
-import "./interfaces/ICircuitValidator.sol";
-import "./verifiers/ZKPVerifier.sol";
 
-contract ERC20Verifier is IERC20, ZKPVerifier {
+import {IZKPQueriesStorage} from "../interfaces/IZKPQueriesStorage.sol";
+import {IQueryValidator} from "../interfaces/IQueryValidator.sol";
 
-    mapping(address => uint256) public addressToId;
+import {BaseVerifier} from "./BaseVerifier.sol";
 
-    function _beforeProofSubmit(
-        uint64, /* requestId */
-        uint256[] memory inputs,
-        ICircuitValidator validator
-    ) internal view override {
-        // checks that the challenge input of the proof is equal to the msg.sender
-        address addr = GenesisUtils.int256ToAddress(
-            inputs[validator.getInputOf("challenge")]
-        );
-        require(
-            msg.sender == addr,
-            "sender address is not an address in the proof."
-        );
-    }
-
-    function _afterProofSubmit(
-        uint64 requestId,
-        uint256[] memory inputs,
-        ICircuitValidator validator
-    ) internal override {
-        // your custom logic goes here
-
-        // checks that proof was submitted only once by one user
-        require(
-            requestId == TRANSFER_REQUEST_ID && addressToId[msg.sender] == 0,
-            "proof can not be submitted more than once."
-        );
-
-        uint256 id = inputs[validator.getInputOf("challenge")];
-
-        // mint tokens
-        addressToId[msg.sender] = id;
-        super._mint(msg.sender, TOKENS_TO_MINT);
-    }
-
+contract AgeRestrictedERC20 is BaseVerifier, IERC20 {
     // ...
-}
-```
+    string public constant AGE_PROOF_QUERY_ID = "AGE_PROOF";
 
-## Step 2: Set the ZKP Request
+    struct IdentityProofInfo {
+        address senderAddr;
+        bool isProved;
+    }
 
-After the contract deployment, we should design a Request for our users and use it via the `setZKPRequest` function.
+    mapping(address => uint256) public addressToIdentityId;
 
-The `setZKPRequest` function has the following inputs:
+    mapping(uint256 => IdentityProofInfo) internal _identitiesProofInfo;
 
-1. `requestID`: the ID associated with the request (`1` in our contract).
-1. `validator`: the address of the `Validator Smart Contract`. It's type can be either `CredentialAtomicQuerySigValidator` or `CredentialAtomicQueryMTPValidator` depending on how the credentials were issued.
-1. `schema`: the bigInt representation of the schema of the requested credential.
-1. `claimPathKey`: represents the path to the queries key inside the merklized credential (In our case it is the path to the `birthday` key).
-1. `operator`: is either 1, 2, 3, 4, 5 or 6 (`less-than` operator we need is `2`).
-1. `value`: represents the threshold value you are querying (01/01/2000 date in our case).
+    function __AgeRestrictedERC20_init(IZKPQueriesStorage zkpQueriesStorage_) external initializer {
+        __BaseVerifier_init(zkpQueriesStorage_);
+    }
 
-You can run https://go.dev/play/p/rnrRbxXTRY6 to get schema hash and claimPathKey using your schema.
+    function mint(ProveIdentityParams calldata proveIdentityParams_) external {
+        _verify(AGE_PROOF_QUERY_ID, proveIdentityParams_);
 
-This is how the example request would look like:
+        require(
+            addressToIdentityId[msg.sender] == 0,
+            "AgeRestrictedERC20: Msg sender address has already been used to prove the another identity."
+        );
 
-```json
-{
-    "id": "7f38a193-0918-4a48-9fac-36adfdb8b542",
-    "typ": "application/iden3comm-plain-json",
-    "type": "https://iden3-communication.io/proofs/1.0/contract-invoke-request",
-    "thid": "7f38a193-0918-4a48-9fac-36adfdb8b542",
-    "body": {
-        "reason": <The reason why the proof is being asked, e.g. "age-restricted mint">,
-        "transaction_data": {
-            "contract_address": "<YourVerifierAddress>",
-            "method_id": "b68967e2",
-            "chain_id": <chain_id where your contract has been deployed, e.g. 80001>,
-            "network": <the name of the network, where your the contract has been deployed, e.g. "polygon-mumbai">
-        },
-        "scope": [
-            {
-                "id": 2,
-                "circuitId": "credentialAtomicQuerySigV2OnChain",
-                "query": {
-                    "allowedIssuers": [
-                        "*"
-                    ],
-                    "context": "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v3.json-ld",
-                    "credentialSubject": {
-                        "birthday": {
-                            "$lt": 20000101
-                        }
-                    },
-                    "type": "KYCAgeCredential"
-                }
-            }
-        ]
+        IQueryValidator queryValidator_ = IQueryValidator(
+            zkpQueriesStorage.getQueryValidator(IDENTITY_PROOF_QUERY_ID)
+        );
+
+        uint256 identityId_ = proveIdentityParams_.inputs[queryValidator_.getUserIdIndex()];
+
+        require(
+            !isIdentityProved(identityId_),
+            "AgeRestrictedERC20: Identity has already been proven."
+        );
+
+        addressToIdentityId[msg.sender] = identityId_;
+        _identitiesProofInfo[identityId_] = IdentityProofInfo(msg.sender, true);
+
+        // custom logic is placed here
+	balanceOf[msg.sender] += AIRDROP_AMOUNT;
+        totalSupply += AIRDROP_AMOUNT;
+        emit Transfer(address(0), msg.sender, AIRDROP_AMOUNT);
+    }
+
+    function isIdentityProved(address userAddr_) external view returns (bool) {
+        return _identitiesProofInfo[addressToIdentityId[userAddr_]].isProved;
+    }
+
+    function isIdentityProved(uint256 identityId_) public view returns (bool) {
+        return _identitiesProofInfo[identityId_].isProved;
     }
 }
 ```
 
-## Step 3: Teststing It Out
+### Step 2: Deploy The Contracts
 
-<!-- TODO: add instruction how to generate a proof -->
+We need to deploy our `AgeRestrictedERC20` alongside `PoseidonFacade`, `ZKPQueriesStorage` и `QueryValidator` contracts. To do that, use the scripts and instructions provided [here](https://github.com/rarimo/identity-contracts/tree/master).
 
-Finally, to check that everything works as expected, you should generate a proof and submit it using the [`submitZKPResponse`](https://github.com/iden3/contracts/blob/9d3a3e8f62bfbebb0c82b0145665c15471ebe9f6/contracts/verifiers/ZKPVerifier.sol#L40C14-L40C31) method. As a result, you should receive 100 minted tokens at your address.
+## Step 3: Set the Proof Query
+
+After the contract deployment, we should design an [Iden3 proof query](https://docs.iden3.io/protocol/querylanguage/) specifying the zero-knowledge proof's inputs and operations.
+
+Here's a query that verifies that the user was born before 01/01/2000:
+
+```ts
+  const query = {
+    schema: ethers.BigNumber.from("74977327600848231385663280181476307657"),
+    claimPathKey: ethers.BigNumber.from(
+     "20376033832371109177683048456014525905119173674985843915445634726167450989630"
+    ),
+    operator: 2,
+    value: [20000101, ...new Array(63).fill(0).map((i) => 0)],
+    queryHash: "0",
+    circuitId: "credentialAtomicQueryMTPV2OnChain",
+  }
+```
+
+
+The query has the following fields:
+
+1. `schema`: hash of the credential schema;
+1. `claimPathKey`: represents the path to the query key inside the merklized credential (In our case, it is the path to the `birthday` key).
+1. `operator`: is either 1, 2, 3, 4, 5 or 6 (`less-than` operator we need is `2`);
+1. `credentialAtomicQueryMTPV2OnChain`:  ID of the [Iden3 circuit](https://docs.iden3.io/protocol/main-circuits/) used to evaluate the proof. Set to `credentialAtomicQueryMTPV2OnChain`
+1. `value`: represents the threshold value you are querying (01/01/2000 date in our case);
+
+You can run https://go.dev/play/p/rnrRbxXTRY6 to get schema hash and `claimPathKey` using your schema.
+
+To set the query for our smart contracts, use the following script:
+
+```ts
+import { ethers } from "hardhat";
+
+async function main() {
+  const poseidonFacadeAddr = "";      // Enter PoseidonFacade address
+  const zkpQueriesStorageAddr = "";   // Enter your ZKPQueriesStorage address
+  const queryValidatorAddr = "";      // Enter your QueryValidatorAddr
+  const queryId = "IDENTITY_PROOF";   // Enter query ID from your IdentityVerifier contract
+
+  const query = {
+    schema: ethers.BigNumber.from("74977327600848231385663280181476307657"),
+    claimPathKey: ethers.BigNumber.from(
+      "20376033832371109177683048456014525905119173674985843915445634726167450989630"
+    ),
+    operator: 2,
+    value: [20000101, ...new Array(63).fill(0).map((i) => 0)],
+    queryHash: "0",
+    circuitId: "credentialAtomicQueryMTPV2OnChain",
+  }
+
+  const ZKPQueriesStorageFactory = await ethers.getContractFactory("ZKPQueriesStorage", {
+    libraries: {
+      PoseidonFacade: poseidonFacadeAddr,
+    }
+  });
+
+  const zkpQueriesStorage = ZKPQueriesStorageFactory.attach(zkpQueriesStorageAddr);
+
+  const tx = await zkpQueriesStorage.setZKPQuery(
+    queryId,
+    {
+      queryValidator: queryValidatorAddr,
+      circuitQuery: query
+    }
+  );
+  await tx.wait();
+
+  console.log(`Your ZKPQuery - ${await zkpQueriesStorage.getQueryInfo(queryId)}`);
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
+```
+
+## Step 4: Testing It Out
+
+You need to integrate RariMe snap into your DApp to test the flow. Use [this snippet](https://github.com/rarimo/rarime/tree/main/packages/connector#send-proof-to-custom-verifier-contract) to generate and submit the proof inside your application.
+
+As a result, you should receive 100 minted tokens at your address.
