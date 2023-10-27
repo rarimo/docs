@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 27-10-2023
+
 ### Added
 
 - Technical Reference:
@@ -51,5 +53,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://gitlab.com/rarimo/docs/compare/v1.0.0...HEAD
+[Unreleased]: https://gitlab.com/rarimo/docs/compare/v1.1.0...HEAD
+[1.1.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.0.0...v1.1.0
 [1.0.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.0.0
