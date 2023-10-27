@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Improved bridge contracts reference structure;
 - How-to-Guides:
   - User Rarimo's verifier contracts in the on-chain ZKP verification guide;
+- Used re-designed charts;
 
 ## [1.0.0] - 2023-10-24
 
