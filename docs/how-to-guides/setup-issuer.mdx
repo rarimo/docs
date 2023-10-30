@@ -16,7 +16,10 @@ Then, you will need to clone <a href="https://github.com/rarimo/issuer-node/tree
 ```git clone -b=feature/inclusion-mtp https://github.com/rarimo/issuer-node.git```
 
 After cloning the repository, you should do the following:
-1. Generate Ethereum Private key for the Issuer Node (to sign on-chain transactions).
+1. Generate an Ethereum keypair for the Issuer Node. It will be used to sign state transitions on the Rarimo chain.
+
+>Currently, there is no network fee for the state transition transactions. To prevent network abuse, we maintain an allowlist of identity issuers. Contact us in [discord](https://discordapp.com/invite/rarimoprotocol) and provide the corresponding Ethereum address to get added to the allowlist.
+
 1. In the folder you've cloned rename `.env-api.example` to `.env-api`, `.env-ui.example` to `.env-ui` and `.env-issuer.example` to `.env-issuer`.
     - `.env-api` is used to configure the api-ui.
     This file allows the user to configure the basic auth of the api-ui, the server URL, and others.
@@ -63,13 +66,13 @@ Once the issuer is ready, we can issue our first credentials.
 1. The Issuer is also an identity, so we need to create one.
 To do that, open `localhost:3001` and select "Create Identity" in the left sidebar.
 ![Identity Creation](/img/issuer-issue-1.png)
-1. Fill `method`, `blockchain` and `network`.
-You can leave the last two empty, but the method should be specified.
+1. Fill in the `method`, `blockchain`, and `network` fields.
+The `method` field is required.
 We will use the method `iden3` without specifying blockchain and network.
 We will also create an identity for the user so we can issue credentials to him.
 ![Identity Created, using iden3 method](/img/issuer-issue-2.png)
 1. We can issue our first claim after creating both identities (or receiving the user's identity from him).
-To do that, press the "Create Claim" button and paste the Issuer identifier (our first generated id) and user's ID in the `id` field below:
+To do that, press the "Create Claim" button and paste the Issuer identifier (our first generated ID) and user's ID in the `id` field below:
 ![Create Claim](/img/issuer-issue-3.png)
 1. We can check our claim using the "Get Claim" endpoint:
 ![Get Claim](/img/issuer-issue-4.png)
@@ -92,21 +95,21 @@ Follow these steps:
     -H "authorization: Basic dXNlci1hcGk6cGFzc3dvcmQtYXBp"\
     -H "content-type: application/json" \
     -d '{
-        "credentialSchema":"https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json/KYCAgeCredential-v3.json",
-        "type":"KYCAgeCredential",
+        "credentialSchema": "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json/KYCAgeCredential-v3.json",
+        "type": "KYCAgeCredential",
         "credentialSubject":{
             "id":"did:iden3:tQdm5KtrBAsQApF5445Wo4p8f1D5QKmAEpKWSxQaG",
-            "birthday":20000101,
-            "documentType":2
+            "birthday": 20000101,
+            "documentType": 2
             },
-        "expiration":"2023-10-27T10:56:42.618Z",
-        "signatureProof":true,
-        "mtProof":true }'
+        "expiration": "2023-10-27T10:56:42.618Z",
+        "signatureProof": true,
+        "mtProof": true }'
     ```
-    The response would be the credentials id:
+    The response would be the credentials ID:
     ```
     {
-        "id":"b326c436-6f58-11ee-8dab-0242ac120007"
+        "id": "b326c436-6f58-11ee-8dab-0242ac120007"
     }
     ```
 1. After credentials are issued, we can publish our issuer's identity state on-chain:
@@ -118,11 +121,11 @@ Follow these steps:
     The response would be the new state, new tree roots and the txID:
     ```json
     {
-        "claimsTreeRoot":"c8d09a3e4fc89ce6407ac96ea6e007b68cdd2e853b945c5f9baf70af3faf0510",
-        "revocationTreeRoot":"0000000000000000000000000000000000000000000000000000000000000000",
-        "rootOfRoots":"2c2db5c1ef764b48ca0cdf186208f7de940114b1c42061a89d3851beeb956c28",
-        "state":"6f511e29380a28bb47cbc628ae6b20a1df2169c3cfec46fef07bc5c7ab3e6819",
-        "txID":"0xbde3732071c9947d43a46175e47b6604b924e273ce86898f76ff621b6e48691b"
+        "claimsTreeRoot": "c8d09a3e4fc89ce6407ac96ea6e007b68cdd2e853b945c5f9baf70af3faf0510",
+        "revocationTreeRoot": "0000000000000000000000000000000000000000000000000000000000000000",
+        "rootOfRoots": "2c2db5c1ef764b48ca0cdf186208f7de940114b1c42061a89d3851beeb956c28",
+        "state": "6f511e29380a28bb47cbc628ae6b20a1df2169c3cfec46fef07bc5c7ab3e6819",
+        "txID": "0xbde3732071c9947d43a46175e47b6604b924e273ce86898f76ff621b6e48691b"
     }
     ```
 1. Finally, we can make a request to the Issuer API and check that credentials exist in the tree and also receive the MTP of existence:
@@ -137,13 +140,13 @@ Follow these steps:
     ```json
      {
          "issuer":{
-             "claimTreeRoot":"c8d09a3e4fc89ce6407ac96ea6e007b68cdd2e853b945c5f9baf70af3faf0510",
-             "revocationTreeRoot":"0000000000000000000000000000000000000000000000000000000000000000",
-             "rootOfRoots":"2c2db5c1ef764b48ca0cdf186208f7de940114b1c42061a89d3851beeb956c28",
-             "state":"6f511e29380a28bb47cbc628ae6b20a1df2169c3cfec46fef07bc5c7ab3e6819"
+             "claimTreeRoot": "c8d09a3e4fc89ce6407ac96ea6e007b68cdd2e853b945c5f9baf70af3faf0510",
+             "revocationTreeRoot": "0000000000000000000000000000000000000000000000000000000000000000",
+             "rootOfRoots": "2c2db5c1ef764b48ca0cdf186208f7de940114b1c42061a89d3851beeb956c28",
+             "state": "6f511e29380a28bb47cbc628ae6b20a1df2169c3cfec46fef07bc5c7ab3e6819"
          },
          "mtp":{
-             "existence":true,
+             "existence": true,
              "siblings":[
                  "10737733873451827385669539393513485246847702080273815461038732999844382514192"
              ]
