@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Proof of Humanity SBT;
   - Identity Protocol contract addresses;
   - PoH subgraph reference;
+  - Added "Snap", "Slashing", "Jailing", "Tendermint", and "PoH" terms to the glossary;
 
 ### Fixed
 
