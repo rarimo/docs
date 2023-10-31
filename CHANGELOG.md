@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - How-to-Guides:
   - Mention the issuer allowlist;
 
+### Changed
+
+- Reference:
+  - Grouped smart contract deployments by the product and contract;
+
 
 ## [1.1.0] - 27-10-2023
 

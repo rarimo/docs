@@ -1,56 +1,62 @@
 ---
 ---
 
-# Smart Contract Addresses
-
-Here is a list of our contract addresses.
-
-Rarimo's mainnet State contact address: `0x5ac96945a771d417B155Cb07A3D7E4b8e2F33FdE`
-
-Rarimo's testnet State contract address: `0x753a8678c85d5fb70A97CFaE37c84CE2fD67EDE8`
+# Smart Contract Deployments
 
 ## Identity Protocol
 
-### Mainnet (Ethereum, chainId = 1)
+### `StateV2`
 
-The following table provides contracts for PolygonID Integration on Ethereum
+|Chain| ChainID| Address|
+| --- | --- | --- |
+| Rarimo Mainnet | `201411` | `0x5ac96945a771d417B155Cb07A3D7E4b8e2F33FdE` |
+| Rarimo Mainnet-Beta | `201411` | `0x753a8678c85d5fb70A97CFaE37c84CE2fD67EDE8` |
 
-| Contract (Link) | Address |
-| --- | --- |
-| QueryVerifier ([Etherscan](https://etherscan.io/address/0x22a5e6042DfcF480a5ABeB565165f1011d40fc0E#code)) | 0x22a5e6042DfcF480a5ABeB565165f1011d40fc0E |
-| VerifiedSBT ([Etherscan](https://etherscan.io/address/0x27e36Ca55B05300fA3c40AD4845Ad8195445F87e)) | 0x27e36Ca55B05300fA3c40AD4845Ad8195445F87e |
-| QueryMTPValidatorOffChain ([Etherscan](https://etherscan.io/address/0xAd2979dD85043d29b35553D3938Fb160c3c383D1)) | 0xAd2979dD85043d29b35553D3938Fb160c3c383D1 |
-| LightweightState ([Etherscan](https://etherscan.io/address/0xF3e2491627b9eF3816A4143010B39B2B67F33E55)) | 0xF3e2491627b9eF3816A4143010B39B2B67F33E55 |
+### `LightweightState`
 
-### Mainnet (Polygon, chainId = 137)
+|Chain| ChainID| Address|
+| --- | --- | --- |
+| Ethereum | `1` | `0xF3e2491627b9eF3816A4143010B39B2B67F33E55` \([Etherscan](https://etherscan.io/address/0xF3e2491627b9eF3816A4143010B39B2B67F33E55)\) |
+| Polygon | `137` | `0xf9bA419ad9c82451d31d89917db61253a1e46B3C` \([Polygonscan](https://polygonscan.com/address/0xf9bA419ad9c82451d31d89917db61253a1e46B3C)\) |
+| Sepolia | `11155111` | `0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315` \([Etherscan](https://sepolia.etherscan.io/address/0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315)\) |
+| Goerli | `5` | `0x0F08e8EA245E63F2090Bf3fF3772402Da9c047ee` \([Etherscan](https://goerli.etherscan.io/address/0x0F08e8EA245E63F2090Bf3fF3772402Da9c047ee)\) |
 
-The following table provides contracts for PoH (robotornot) Integration on Polygon
+### `SBTIdentityVerifier`
 
-| Contract (Link) | Address |
-| --- | --- |
-| VerifiedSBT ([Polygonscan](https://polygonscan.com/address/0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373)) | 0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373 |
-| IdentityVerifier ([Polygonscan](https://polygonscan.com/address/0xF584bE83DfB3dE1791CdbabD3e523BF2ebBdd8c3)) | 0xF584bE83DfB3dE1791CdbabD3e523BF2ebBdd8c3 |
-| SBTIdentityVerifier ([Polygonscan](https://polygonscan.com/address/0x7DdAde70efADf832A600ba483FAD26fCA477FE2A)) | 0x7DdAde70efADf832A600ba483FAD26fCA477FE2A |
-| LightweightState ([Polygonscan](https://polygonscan.com/address/0xf9bA419ad9c82451d31d89917db61253a1e46B3C)) | 0xf9bA419ad9c82451d31d89917db61253a1e46B3C |
+The verifier used by the Proof of Humanity DApp.
 
-### Testnet (Sepolia, chainId = 11155111)
+|Chain| ChainID| Address|
+| --- | --- | --- |
+| Polygon | `137` | `0x7DdAde70efADf832A600ba483FAD26fCA477FE2A` \([Polygonscan](https://polygonscan.com/address/0x7DdAde70efADf832A600ba483FAD26fCA477FE2A)\) |
+| Goerli | `5` | `0x86906AbAAfA7F58Fb4D3125BD1971Fcf04F52CDd` \([Etherscan](https://goerli.etherscan.io/address/0x86906AbAAfA7F58Fb4D3125BD1971Fcf04F52CDd)\) |
 
-The following table provides contracts for PolygonID Integration on Sepolia
+### `VerifiedSBT`
 
-| Contract (Link) | Address |
-| --- | --- |
-| QueryVerifier ([Etherscan](https://sepolia.etherscan.io/address/0xb95734f64f242E976E155594E1E15D39700Cbb26)) | 0xb95734f64f242E976E155594E1E15D39700Cbb26 |
-| VerifiedSBT ([Etherscan](https://sepolia.etherscan.io/address/0x8A55c9CfDCbCeDcA1A543295a3F54351C335A20f)) | 0x8A55c9CfDCbCeDcA1A543295a3F54351C335A20f |
-| LightweightState ([Etherscan](https://sepolia.etherscan.io/address/0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315)) | 0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315 |
+The SBT minted to users who completed the Proof of Humanity verification.
 
-### Testnet (Goerli, chainId = 5)
+|Chain| ChainID| Address|
+| --- | --- | --- |
+| Polygon | `137` | `0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373` \([Polygonscan](https://polygonscan.com/address/0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373)\) |
+| Goerli | `5` | `0xD7E2753d29c66056560A7Ab0d21BDC2F0368E669` \([Etherscan](https://goerli.etherscan.io/address/0xD7E2753d29c66056560A7Ab0d21BDC2F0368E669)\) |
 
-The following table provides contracts for PoH (robotornot) integration on Goerli
+## Polygon ID Integration
 
-| Contract (Link) | Address |
-| --- | --- |
-| SBTIdentityVerifier ([Etherscan](https://goerli.etherscan.io/address/0x86906AbAAfA7F58Fb4D3125BD1971Fcf04F52CDd)) | 0x86906AbAAfA7F58Fb4D3125BD1971Fcf04F52CDd |
-| LightweightState ([Etherscan](https://goerli.etherscan.io/address/0x0F08e8EA245E63F2090Bf3fF3772402Da9c047ee)) | 0x0F08e8EA245E63F2090Bf3fF3772402Da9c047ee |
+### `QueryVerifier`
+
+|Chain| ChainID| Address|
+| --- | --- | --- |
+| Ethereum | `1` | `0x22a5e6042DfcF480a5ABeB565165f1011d40fc0E` \([Etherscan](https://etherscan.io/address/0x22a5e6042DfcF480a5ABeB565165f1011d40fc0E)\) |
+| Sepolia | `11155111` | `0xb95734f64f242E976E155594E1E15D39700Cbb26` \([Etherscan](https://sepolia.etherscan.io/address/0xb95734f64f242E976E155594E1E15D39700Cbb26)\) |
+
+
+### `VerifiedSBT`
+
+An SBT minted as a reward for completing the Polygon ID cross-chain demo.
+
+|Chain| ChainID| Address|
+| --- | --- | --- |
+| Ethereum | `1` | `0x27e36Ca55B05300fA3c40AD4845Ad8195445F87e` \([Etherscan](https://etherscan.io/address/0x27e36Ca55B05300fA3c40AD4845Ad8195445F87e)\) |
+| Sepolia | `11155111` | `0x8A55c9CfDCbCeDcA1A543295a3F54351C335A20f` \([Etherscan](https://sepolia.etherscan.io/address/0x8A55c9CfDCbCeDcA1A543295a3F54351C335A20f)\) |
 
 
 ## Bridge Protocol
