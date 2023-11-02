@@ -110,11 +110,11 @@ const sidebars = {
             "reference/contracts/bridge/solana",
           ],
         },
-        {
-          type: "doc",
-          id: "reference/contracts/poh-sbt",
-        },
       ],
+    },
+    {
+      type: "doc",
+      id: "reference/proof-of-humanity",
     },
     {
       type: "category",

@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Reference:
   - Grouped smart contract deployments by the product and contract;
+  - Consolidated Proof of Humanity references into a single page;
 - Used new Proof of Humanity demo videos;
 
 
