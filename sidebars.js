@@ -71,11 +71,6 @@ const sidebars = {
       id: "reference",
     },
     {
-      label: "Whitepaper",
-      type: "link",
-      href: "/whitepaper",
-    },
-    {
       type: "category",
       label: "Contracts",
       link: {
