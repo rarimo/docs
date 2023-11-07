@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- How-to-Guides:
+  - Updated the QuestN x PoH integration guide;
+
 ### Removed
 
 - Whitepaper link from technical reference;
