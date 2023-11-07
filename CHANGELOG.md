@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - How-to-Guides:
   - Updated the QuestN x PoH integration guide;
+  - Updated the Zealy x PoH integration guide;
 
 ### Removed
 
