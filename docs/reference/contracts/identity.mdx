@@ -142,7 +142,7 @@ Full implementation can be found [here](https://github.com/rarimo/identity-contr
 
 It is a utility contract that stores ZK-related information, such as lightweight state contract address, available queries, and their ZK-validator addresses.
 
-```Solidity
+```solidity
 contract ZKPQueriesStorage is IZKPQueriesStorage, OwnableUpgradeable, UUPSUpgradeable {
     /* ... */
 
@@ -197,7 +197,7 @@ Full implementation can be found [here](https://github.com/rarimo/identity-contr
 It is responsible for ZKP verification (via calling the verifier contract).
 The contract takes the basic ideas and concepts from Iden3,  but in addition to checking the ZKP, it verifies the Merkle proof that the issuer state is in the tree. It also allows accepting proof for a recent state (not the last one) during a certain threshold.
 
-```Solidity
+```solidity
 abstract contract QueryValidator is IQueryValidator, OwnableUpgradeable, UUPSUpgradeable {
 
     ILightweightState public override lightweightState;
@@ -304,7 +304,7 @@ Functions call `poseidon(...)` linked to the facade.
 More information about that can be found [here](https://github.com/iden3/circomlibjs/blob/main/src/poseidon_gencontract.js).
 
 
-```Solidity
+```solidity
 library PoseidonFacade {
 
     /* ... */

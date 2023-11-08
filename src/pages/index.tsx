@@ -13,6 +13,7 @@ import React, { useRef } from "react";
 
 import styles from "./index.module.css";
 
+
 function HomepageStartBuilding() {
   return (
     <div className={clsx("startBuildingSection", styles.startBuildingSection)}>

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 08-11-2023
+
 ### Added
 
 - API Reference;
@@ -19,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - PoH subgraph reference;
+
+### Fixed
+
+- Solidity syntax highlight;
 
 ## [1.3.1] - 08-11-2023
 
@@ -107,7 +113,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://gitlab.com/rarimo/docs/compare/v1.3.0...HEAD
+[Unreleased]: https://gitlab.com/rarimo/docs/compare/v1.4.0...HEAD
+[1.4.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.3.1...v1.4.0
+[1.3.1]: https://gitlab.com/rarimo/docs/releases/tag/v1.3.0...v1.3.1
 [1.3.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.2.0...v1.3.0
 [1.2.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.1.0...v1.2.0
 [1.1.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.0.0...v1.1.0
