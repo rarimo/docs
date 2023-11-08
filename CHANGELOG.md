@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.1] - 08-11-2023
+
+### Fixed
+
+- Build errors caused by the Solidity syntax fix;
+
+
 ## [1.4.0] - 08-11-2023
 
 ### Added
@@ -114,7 +121,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://gitlab.com/rarimo/docs/compare/v1.4.0...HEAD
+[Unreleased]: https://gitlab.com/rarimo/docs/compare/v1.4.1...HEAD
+[1.4.1]: https://gitlab.com/rarimo/docs/releases/tag/v1.4.0...v1.4.1
 [1.4.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.3.1...v1.4.0
 [1.3.1]: https://gitlab.com/rarimo/docs/releases/tag/v1.3.0...v1.3.1
 [1.3.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.2.0...v1.3.0

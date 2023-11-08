@@ -4,7 +4,7 @@ import { Prism } from "prism-react-renderer";
 
 export default function FooterWrapper(props) {
   // This is a hack to get the Solidity syntax highlighting to work
-  window.Prism = Prism;
+  (typeof global !== "undefined" ? global : window).Prism = Prism;
   require("prismjs/components/prism-solidity");
 
   return (
