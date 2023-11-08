@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Solidity syntax highlight;
+- Used docusaurus admonitions;
 
 ## [1.3.1] - 08-11-2023
 
