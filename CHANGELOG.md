@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.1] - 08-11-2023
+
+- How-to-Guides:
+  - Use the new template name in the QuestN guide;
+
 ## [1.3.0] - 07-11-2023
 
 ### Changed
