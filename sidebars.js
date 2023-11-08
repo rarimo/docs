@@ -112,6 +112,10 @@ const sidebars = {
       id: "reference/proof-of-humanity",
     },
     {
+      type: "doc",
+      id: "reference/api",
+    },
+    {
       type: "category",
       label: "JavaScript SDK",
       link: {
