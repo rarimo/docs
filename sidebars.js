@@ -88,10 +88,6 @@ const sidebars = {
           id: "reference/contracts/identity",
         },
         {
-          type: "doc",
-          id: "reference/contracts/poh-subgraph",
-        },
-        {
           type: "category",
           label: "Bridge Protocol Contracts",
           link: {

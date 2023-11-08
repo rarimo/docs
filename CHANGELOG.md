@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Identity Contracts reference: added `ZKPQueriesStorage`, `QueryValidator` and `PoseidonFacade` contracts;
 
+### Removed
+
+- PoH subgraph reference;
+
 ## [1.3.1] - 08-11-2023
 
 ### Changed
