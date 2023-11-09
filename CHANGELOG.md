@@ -7,9 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.3] - 09-11-2023
+
 ### Added
 
 - Cache headers for static assets;
+
+### Changed
+
+- Use updated CCTP use case charts;
+- Minor wording changes in CCTP and Token-Agnostic Payments use cases;
+
 
 ## [1.4.2] - 09-11-2023
 
@@ -131,7 +139,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://gitlab.com/rarimo/docs/compare/v1.4.2...HEAD
+[Unreleased]: https://gitlab.com/rarimo/docs/compare/v1.4.3...HEAD
+[1.4.3]: https://gitlab.com/rarimo/docs/releases/tag/v1.4.2...v1.4.3
 [1.4.2]: https://gitlab.com/rarimo/docs/releases/tag/v1.4.1...v1.4.2
 [1.4.1]: https://gitlab.com/rarimo/docs/releases/tag/v1.4.0...v1.4.1
 [1.4.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.3.1...v1.4.0
