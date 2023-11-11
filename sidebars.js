@@ -81,10 +81,6 @@ const sidebars = {
       items: [
         {
           type: "doc",
-          id: "reference/contracts/addresses",
-        },
-        {
-          type: "doc",
           id: "reference/contracts/identity",
         },
         {

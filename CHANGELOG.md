@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Technical Reference: contract deployments near the definitions;
+
+### Removed
+
+- Technical Reference: smart contract addresses page;
+
 ## [1.4.3] - 09-11-2023
 
 ### Added

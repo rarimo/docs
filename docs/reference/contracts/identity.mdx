@@ -23,6 +23,15 @@ Rarimo uses two types of state contracts:
 
 ### `StateV2`
 
+#### Deployments
+
+|Chain| ChainID| Address|
+| --- | --- | --- |
+| Rarimo Mainnet | `201411` | `0x5ac96945a771d417B155Cb07A3D7E4b8e2F33FdE` |
+| Rarimo Mainnet-Beta | `201411` | `0x753a8678c85d5fb70A97CFaE37c84CE2fD67EDE8` |
+
+#### Interface
+
 ```solidity
 function transitState(
         uint256 id_,
@@ -48,13 +57,27 @@ event StateTransited(
 
 Full implementation can be found [here](https://github.com/rarimo/identity-contracts/blob/master/contracts/State.sol).
 
+
 ### `LightweightState`
 
-```
-/* ... */
+#### Deployments
+
+|Chain| ChainID| Address|
+| --- | --- | --- |
+| Ethereum | `1` | `0xF3e2491627b9eF3816A4143010B39B2B67F33E55` \([Etherscan](https://etherscan.io/address/0xF3e2491627b9eF3816A4143010B39B2B67F33E55)\) |
+| Polygon | `137` | `0xf9bA419ad9c82451d31d89917db61253a1e46B3C` \([Polygonscan](https://polygonscan.com/address/0xf9bA419ad9c82451d31d89917db61253a1e46B3C)\) |
+| Sepolia | `11155111` | `0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315` \([Etherscan](https://sepolia.etherscan.io/address/0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315)\) |
+| Goerli | `5` | `0x0F08e8EA245E63F2090Bf3fF3772402Da9c047ee` \([Etherscan](https://goerli.etherscan.io/address/0x0F08e8EA245E63F2090Bf3fF3772402Da9c047ee)\) |
+
+#### Interface
+
+```solidity
+contract LightweightState is ILightweightState, UUPSSignableUpgradeable, Signers {
     address public override sourceStateContract;
     string public override sourceChainName;
     bytes32 public override identitiesStatesRoot;
+
+    /* ... */
 
     function signedTransitState(
         bytes32 newIdentitiesStatesRoot_,
@@ -63,6 +86,7 @@ Full implementation can be found [here](https://github.com/rarimo/identity-contr
     ) external override {
         /* ... */
     }
+}
 
 ```
 

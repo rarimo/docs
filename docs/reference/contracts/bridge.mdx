@@ -1,42 +1,50 @@
 ---
+TODO:
+- rewrite this PoS
+- check addresses for Solana and Near
 ---
 
 # Bridge Protocol Contracts
 
-Rarimo decentralized bridge contract is responsible for managing deposits and withdrawals for Native, fungible and non-fungible tokens. All withdrawal operations are protected by ECDSA secp256k1 threshold (t-n) signature.
-This signature is produced by core multi-sig services depending on the validated core state.
+Rarimo decentralized bridge contract is responsible for managing deposits and withdrawals for native, fungible and non-fungible tokens. All withdrawal operations are protected by ECDSA secp256k1 threshold (t-n) signature.
 
-The core service stores information to be signed in `operation` entries. `Operation` data structure consist of the following fields:
-- index
-- operation type
-- details
-- is signed
-- creator address
-- timestamp
+## Deployments
 
+### Mainnet
 
-For token transfer there is an operation type `Type_TRANSFER` and the details field contain the following proto-encoded information:
-- origin hash (hash of tx, id and current network)
-- tx
-- event id (or operation id)
-- from chain
-- to chain
-- receiver
-- amount
-- bundle info (data and salt)
-- token information
+| Network (Link) | ChainId | Address |
+| --- | --- | --- |
+| Ethereum ([Etherscan](https://etherscan.io/address/0xF663a9EaC9CB9Fa3eC6f1d8a4E5716a41A1752b6)) | `1` | `0xF663a9EaC9CB9Fa3eC6f1d8a4E5716a41A1752b6` |
+| Polygon ([Polygonscan](https://polygonscan.com/address/0xECd1A7BdE5234d7FE50F1c0d99Fb66A7bbc10Df2)) | `137` | `0xECd1A7BdE5234d7FE50F1c0d99Fb66A7bbc10Df2` |
+| Avalanche ([Avascan](https://avascan.info/blockchain/all/address/0x5608DA4bD339A57E770ff74284c2aB93EFAcAe03)) | `43114` | `0x5608DA4bD339A57E770ff74284c2aB93EFAcAe03` |
+| Solana | 🚫 | coming later |
+| NEAR | 🚫 | coming later|
+| Binance Smart Chain ([BscScan](https://bscscan.com/address/0xF663a9EaC9CB9Fa3eC6f1d8a4E5716a41A1752b6)) | `56` | `0xF663a9EaC9CB9Fa3eC6f1d8a4E5716a41A1752b6` |
 
-For signing operations, the signature producer turns the operation content into special Merkle leaf content, creates a Merkle tree, signs its hash and submits the confirmation operation to the core. After, operation will be marked as signed and users can pool signature and operation information to submit into the bridge contract on the target chain. Smart-contract on the target chain should accept all information, perform validation, withdraw the corresponding token, and store information about the completed withdrawals to prevent double-spending.
+### Testnet
+
+| Network (Link) | ChainId | Address |
+| --- | --- | --- |
+| Görli ([Etherscan](https://goerli.etherscan.io/address/0x6EA0C45bAC29a2A2769ec14f4BCD959b07780106)) | `5` | `0x6EA0C45bAC29a2A2769ec14f4BCD959b07780106` |
+| Sepolia ([Etherscan](https://sepolia.etherscan.io/address/0x300f5Ee2409c999eBA1BfdaDb4cF5D16a45500Ac)) | `11155111` | `0x300f5Ee2409c999eBA1BfdaDb4cF5D16a45500Ac` |
+| Mumbai ([Polygonscan](https://mumbai.polygonscan.com/address/0xa651EdBbF77e1A2678DEfaE08A33c5004b491457)) | `80001` | `0xa651EdBbF77e1A2678DEfaE08A33c5004b491457` |
+| Fuji ([Avascan](https://testnet.avascan.info/blockchain/all/address/0x02e719d3a5030e95283923c00dbccf3c745740e8)) | `43113` | `0x02e719d3a5030e95283923c00dbccf3c745740e8` |
+| Solana DevNet | 🚫 | coming soon |
+| NEAR DevNet | 🚫 | coming soon |
+| Binance Testnet ([BscScan](https://testnet.bscscan.com/address/0xe48F562E01C909c17cb4BF0304C5Cb07A5158603)) | `97` | `0xe48F562E01C909c17cb4BF0304C5Cb07A5158603` |
+
 
 ## Signed content format
 
 Common transfer hash can be derived from the following sequence:
-`tokenAddress | tokenName | tokenId | uri | amount | imageUri | imageHash | tokenSymbol | tokenDecimals | salt | bundle | originHash | chainName | receiver | targetBridgeContractAddress`
+```
+tokenAddress | tokenName | tokenId | uri | amount | imageUri | imageHash | tokenSymbol | tokenDecimals | salt | bundle | originHash | chainName | receiver | targetBridgeContractAddress
+```
 
 OriginHash is a hash of `tx | eventId | current network`.
 Some parameters can be empty.
 
-On our bridge currently supports the following token types: Native / ERC20 / ERC721 / ERC1155 / MetaplexFT / MetaplexNFT / NearFT / NearNFT
+The bridge currently supports the following token types: Native / ERC20 / ERC721 / ERC1155 / MetaplexFT / MetaplexNFT / NearFT / NearNFT
 
 ## Smart contract requirements
 
@@ -53,7 +61,3 @@ On our bridge currently supports the following token types: Native / ERC20 / ERC
 4. Signature producers combine deposits into the Merkle tree, produce the threshold signature, and submit that info to the core. Core service performs the Merkle tree data and signature validation before adding it to the ledger.
 5. After signed deposit information appears in the core state it becomes possible to call the withdrawal operation on the target network.
 6. Smart-contract on the target network validates information about the deposit, Merkle path, and signature for the Merkle root, and performs a token withdrawal.
-
-
-
-
