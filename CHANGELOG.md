@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Polygon ID spelling;
+- Typos in Polygon ID integration charts;
 
 ## [1.4.3] - 09-11-2023
 
