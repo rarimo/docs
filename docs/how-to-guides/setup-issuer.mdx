@@ -16,9 +16,12 @@ Then, you will need to clone <a href="https://github.com/rarimo/issuer-node/tree
 ```git clone -b=feature/inclusion-mtp https://github.com/rarimo/issuer-node.git```
 
 After cloning the repository, you should do the following:
+
 1. Generate an Ethereum keypair for the Issuer Node. It will be used to sign state transitions on the Rarimo chain.
 
->Currently, there is no network fee for the state transition transactions. To prevent network abuse, we maintain an allowlist of identity issuers. Contact us in [discord](https://discordapp.com/invite/rarimoprotocol) and provide the corresponding Ethereum address to get added to the allowlist.
+    :::note
+    Currently, there is no network fee for the state transition transactions. To prevent network abuse, we maintain an allowlist of identity issuers. Contact us in [discord](https://discordapp.com/invite/rarimoprotocol) and provide the corresponding Ethereum address to get added to the allowlist.
+    :::
 
 1. In the folder you've cloned rename `.env-api.example` to `.env-api`, `.env-ui.example` to `.env-ui` and `.env-issuer.example` to `.env-issuer`.
     - `.env-api` is used to configure the api-ui.
