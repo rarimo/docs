@@ -55,15 +55,15 @@ const sidebars = {
   ],
   howToGuides: [
     "how-to-guides",
+    "how-to-guides/zkp-verification",
+    "how-to-guides/setup-issuer",
+    "how-to-guides/validator-setup",
+    "how-to-guides/staking",
+    "how-to-guides/poh-offchain-verification",
     "how-to-guides/poh-questn",
     "how-to-guides/poh-zealy",
     "how-to-guides/poh-galxe",
-    "how-to-guides/poh-offchain-verification",
-    "how-to-guides/zkp-verification",
-    "how-to-guides/setup-issuer",
     "how-to-guides/polygon-id-state-replication",
-    "how-to-guides/validator-setup",
-    "how-to-guides/staking",
   ],
   reference: [
     {

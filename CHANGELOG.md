@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Typos in Polygon ID integration charts;
 - Rust syntax highlight;
 
+### Changed
+
+- Reordered how-to guides by priority;
+
 ## [1.4.3] - 09-11-2023
 
 ### Added
