@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.1] - 16-11-2023
+
+### Changed
+
+- Issuer github link;
+- Updated screenshots in how-to/setup-issuer;
+
 ## [1.5.0] - 15-11-2023
 
 ### Added
@@ -159,7 +166,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://gitlab.com/rarimo/docs/compare/v1.5.0...HEAD
+[Unreleased]: https://gitlab.com/rarimo/docs/compare/v1.5.1...HEAD
+[1.5.1]: https://gitlab.com/rarimo/docs/releases/tag/v1.5.0...v1.5.1
 [1.5.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.4.3...v1.5.0
 [1.4.3]: https://gitlab.com/rarimo/docs/releases/tag/v1.4.2...v1.4.3
 [1.4.2]: https://gitlab.com/rarimo/docs/releases/tag/v1.4.1...v1.4.2
