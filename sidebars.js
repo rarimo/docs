@@ -140,6 +140,10 @@ const sidebars = {
     },
     {
       type: "doc",
+      id: "reference/audits",
+    },
+    {
+      type: "doc",
       id: "reference/glossary",
     },
   ],
