@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Updated Goerli Proof of Humanity SBT contract's address;
 - Use redesigned charts;
 
 ## [1.5.1] - 16-11-2023
