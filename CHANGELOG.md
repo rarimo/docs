@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Technical Reference: audits page
 
+### Changed
+
+- Use redesigned charts;
+
 ## [1.5.1] - 16-11-2023
 
 ### Changed
