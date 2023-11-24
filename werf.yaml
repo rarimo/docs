@@ -1,18 +1,21 @@
 configVersion: 1
 project: "docs-rarimo"
 ---
-image: builder 
+image: builder
 from: node:18.12.0
-git: 
-  - add: / 
-    to: /app 
-    stageDependencies: 
+git:
+  - add: /
+    to: /app
+    stageDependencies:
       install:
         - package.json
         - yarn.lock
       setup:
         - "**/*"
 shell:
+  beforeInstall:
+    # git is required for the showLastUpdate feature in docusaurus
+    - apk update && apk --no-cache add git
   install:
     - cd /app
     #- yarn autoclean --init
