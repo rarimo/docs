@@ -2,7 +2,7 @@ configVersion: 1
 project: "docs-rarimo"
 ---
 image: builder
-from: node:18.12.0
+from: node:18-alpine3.18
 git:
   - add: /
     to: /app
