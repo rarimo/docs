@@ -53,6 +53,7 @@ module.exports = {
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           breadcrumbs: false,
+          showLastUpdateTime: true,
           // @todo update when we move to github
           // editUrl: 'https://github.com/rarimo/rarimo-docs/blob/main',
           editUrl: "https://gitlab.com/rarimo/docs/-/tree/main",
