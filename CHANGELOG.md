@@ -16,6 +16,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated Goerli Proof of Humanity SBT contract's address;
 - Use redesigned charts;
 
+## [1.5.2] - 24-11-2023
+
+### Added
+
+- Solana bridge program fungible and non-fungible token documentation
+- Github links for Solana Bridge contracts
+### Changed
+
+- Refactored and updated Solana bridge program page;
+
 ## [1.5.1] - 16-11-2023
 
 ### Changed
