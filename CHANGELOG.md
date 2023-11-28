@@ -9,22 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Technical Reference: audits page
+- Technical Reference:
+  - audits page;
+  - fungible and non-fungible token documentation for the Near bridge;
+  - fungible and non-fungible token documentation for the Solana bridge;
 
 ### Changed
 
-- Updated Goerli Proof of Humanity SBT contract's address;
-- Use redesigned charts;
-
-## [1.5.2] - 24-11-2023
-
-### Added
-
-- Solana bridge program fungible and non-fungible token documentation
-- Github links for Solana Bridge contracts
-### Changed
-
-- Refactored and updated Solana bridge program page;
+- Unify chart styles;
+- Technical Reference:
+  - Updated Goerli Proof of Humanity SBT contract's address;
+  - Refactored Near Bridge Contract reference;
+  - Refactored and updated Solana bridge program reference;
 
 ## [1.5.1] - 16-11-2023
 
