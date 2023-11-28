@@ -1,12 +1,36 @@
----
-TODO:
-- rewrite this PoS
-- check addresses for Solana and Near
----
-
 # Bridge Protocol Contracts
 
-Rarimo decentralized bridge contract is responsible for managing deposits and withdrawals for native, fungible and non-fungible tokens. All withdrawal operations are protected by ECDSA secp256k1 threshold (t-n) signature.
+Rarimo's decentralized bridge contracts are responsible for managing deposits and withdrawals for native, fungible, and non-fungible tokens.
+
+Rarimo currently supports the following token types:
+
+- Native tokens;
+- ERC20 fungible tokens;
+- ERC721 non-fungible tokens(including SBT);
+- ERC1155 tokens;
+- MetaplexFT;
+- MetaplexNFT;
+- NearFT;
+- NearNFT;
+
+## General Bridging Flow
+
+At the high level, cross-chain token bridging consists of the following steps:
+
+1. The user deposits tokens to the bridge contract on the source chain;
+2. The bridge contract emits an event containing the deposit details;
+3. Rarimo oracles observe the deposit event on the source chain and submit it for processing;
+4. Rarimo validators form a threshold signature(TSS) to approve the deposit operation;
+5. A relayer picks up the signed deposit and calls the corresponding withdrawal method of the bridge contract on the destination chain;
+6. The bridge contract verifies the TSS signature and t the funds to the recipient address;
+
+## Implementations
+
+Currently, there are three implementations of a Rarimo bridge contract:
+
+- [EVM bridge](/reference/contracts/bridge/evm);
+- [Solana bridge](/reference/contracts/bridge/solana);
+- [Near bridge](/reference/contracts/bridge/near);
 
 ## Deployments
 
@@ -32,32 +56,3 @@ Rarimo decentralized bridge contract is responsible for managing deposits and wi
 | Solana DevNet | 🚫 | coming soon |
 | NEAR DevNet | 🚫 | coming soon |
 | Binance Testnet ([BscScan](https://testnet.bscscan.com/address/0xe48F562E01C909c17cb4BF0304C5Cb07A5158603)) | `97` | `0xe48F562E01C909c17cb4BF0304C5Cb07A5158603` |
-
-
-## Signed content format
-
-Common transfer hash can be derived from the following sequence:
-```
-tokenAddress | tokenName | tokenId | uri | amount | imageUri | imageHash | tokenSymbol | tokenDecimals | salt | bundle | originHash | chainName | receiver | targetBridgeContractAddress
-```
-
-OriginHash is a hash of `tx | eventId | current network`.
-Some parameters can be empty.
-
-The bridge currently supports the following token types: Native / ERC20 / ERC721 / ERC1155 / MetaplexFT / MetaplexNFT / NearFT / NearNFT
-
-## Smart contract requirements
-
-- Smart-contract should store ECDSA t-n public key
-- Changing of stored admins key requires t-n signature of the new key produced by the old key
-- Withdrawal operations should accept Merkle node content, Merkle path, and admin t-n signature for Merkle root.
-- Withdrawal operations should perform a check for Merkle path, signature, and other sensitive stuff
-
-## Bridging flow
-
-1. User wants to transfer the token from the current chain to the target one. For this, user submits a deposit transaction to the current chain bridge smart-contract.
-2. Any other external services (or users by themselves) submit deposit information into the core service. Core service performs transaction validation before adding them to the ledger.
-3. External services (signature producers) observe new operations in the core state and add them to the local pool.
-4. Signature producers combine deposits into the Merkle tree, produce the threshold signature, and submit that info to the core. Core service performs the Merkle tree data and signature validation before adding it to the ledger.
-5. After signed deposit information appears in the core state it becomes possible to call the withdrawal operation on the target network.
-6. Smart-contract on the target network validates information about the deposit, Merkle path, and signature for the Merkle root, and performs a token withdrawal.

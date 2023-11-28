@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Unify chart styles;
 - Technical Reference:
   - Updated Goerli Proof of Humanity SBT contract's address;
+  - Streamlined the bridge contracts reference;
   - Refactored Near Bridge Contract reference;
   - Refactored and updated Solana bridge program reference;
 
