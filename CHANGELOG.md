@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - audits page;
   - fungible and non-fungible token documentation for the Near bridge;
   - fungible and non-fungible token documentation for the Solana bridge;
+- How-to-Guides:
+  - added Zealy demo video;
 
 ### Changed
 
