@@ -1,0 +1,55 @@
+---
+---
+
+# Identity State Replication
+
+Most self-sovereign identity protocols rely on zero-knowledge proofs when interacting with smart contracts.
+This approach typically requires some stateful metadata (let's call it *the state*) available on-chain.
+
+![Replication flow in a nutshell](/img/zkp.png)
+
+Generally, this metadata falls into two categories:
+
+- Merkle tree roots
+- Nullifiers
+
+Iden3 protocol uses three sparse Merkle trees to track all the issued and revoked credentials.
+
+Galxe Protocol uses nullifiers for sybil resistance and Merkle trees for revocable credentials (they are irrevocable by default).
+
+WorldCoin keeps a Merkle tree of all identities and allows using nullifiers for sybil resistance.
+
+## Cross-Chain Identity Challenges
+
+The stateful nature of the on-chain identity protocols hinders the portability of credentials.
+The state must be replicated when submitting a zero-knowledge proof to any chain other than the primary one.
+
+The state replication process introduces a few challenges:
+
+1. It must be protected from spoofing of the metadata
+1. It must ensure that the replicas are always reasonably up-to-date
+1. It should be decentralized so there's no single point of failure
+1. It should minimize the gas fees on the target chains
+
+## Rarimo's Cross-Chain State Replication (on-demand)
+
+Rarimo has faced the same challenges when implementing its cross-chain identity protocol.
+As a result, an on-demand cross-chain state replication protocol was created.
+
+In a nutshell, it's a hub-and-spoke where the source chain is the single source of truth.
+Each target chain has a lightweight state contract updated on-demand when a user wants to submit proof.
+The state updates are protected from spoofing by a decentralized network of oracles observing the state updates on the source chain and a decentralized network of validators that secures these updates with a threshold signature (TSS).
+
+Let's look at its inner workings in more detail by following the state replication from Ethereum to Polygon:
+
+![State Replication flow from Ethereum to Polygon](/img/polygon-eth-replication.png)
+
+The key benefits of this solution are:
+
+- **Decentralization and resilience.**There's not a single point of centralization in the entire flow.
+- **Security**. The destination chains are protected from state spoofing by a decentralized network of oracles and validators with material incentives (PoS).
+- **Cost efficiency.** The solution can be scaled to any number of destination chains because the lightweight state contracts are lazily updated.
+The use of TSS makes the state updates as cheap as checking a single ECDSA signature.
+The fees can be paid either by the user or a relayer service.
+- **State relevancy.** The on-demand approach ensures that the state is always recent on any target chain.
+- **Support for any EVM-compatible destination chains.** WASM-based options can be reasonably easily added upon a request.

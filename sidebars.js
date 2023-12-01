@@ -45,6 +45,7 @@ const sidebars = {
     "use-cases/gaming-profiles",
     "use-cases/cctp",
     "use-cases/proofs",
+    "use-cases/state-replication",
   ],
   tutorials: [
     "tutorials",
