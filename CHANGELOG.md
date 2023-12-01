@@ -8,8 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Use-cases:
-  - Added the "Rarimo x Identity State Replication" documentation page
+
+- Use Cases:
+  - Added the "Identity State Replication" doc;
+
+### Changed
+
+- Updated the "Overview" doc;
 
 ## [1.6.0] - 28-11-2023
 

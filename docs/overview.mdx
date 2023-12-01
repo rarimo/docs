@@ -3,30 +3,40 @@
 
 # About Rarimo
 
-## Rarimo Protocol
+## The Identity Layer for Web3
 
-The crypto community strongly believes in a multichain future where each project brings its unique perspective and value proposition. However, this diversity introduces a plethora of interoperability, security, fragmentation, and other challenges. To address these issues, the Rarimo Protocol has been developed, serving as the base layer for decentralized interchain applications.
+Digital identity is crucial for bringing the next billion users to the Web3. As an emergent technology, it suffers from some growing pains. Primarily, it's the lack of interoperability among competing standards and fragmentation across the chains and ecosystems.
+
+Rarimo unlocks seamless portability by connecting DApps across multiple chains to a range of issuers and standards and provides enhanced privacy with Zero-Knowledge technology.
 
 ## Design Principles
 
+### Compatibility
+
+Rarimo aims to harmonize the de facto industry standards, such as W3C DID credentials, soulbound tokens(SBTs), and existing identity providers. All these identity formats have unique benefits, so the protocol provides tools for interoperability between them. You can use your credentials or tokens on any chain supported by Rarirmo.
+
+### Privacy
+
+The self-sovereign paradigm brings ownership over identities back to the users. No third party has access to the sensitive data. Only you decide what to share and when.
+
+Zero-knowledge technology enables privacy-preserving identity verification both on-chain and off-chain. You can prove specific facts about yourself to DApps without leaking sensitive data. For example, confirming that you're of legal age without disclosing your date of birth or the type of document used to prove it.
+
+The RariMe Split feature adds an extra layer of anonymity and security by allowing you to attach your credentials to separate profiles that can't be traced back to you.
+
 ### Decentralization
 
-The interchain layer must be as decentralized as the chains it connects, not to be the point of centralization. The system comprises a network of dozens of independent validators and oracles. Oracles observe events in the outer world in a trustless way, and Validators collaborate to achieve secure consensus on the order of events.
+The intermediate layer for Web3 must be decentralized so that it is not a single point of failure. The Rarimo base layer is a network of independent validators and oracles. Oracles observe events in the outer world in a trustless way, and validators collaborate to achieve a secure Proof of Stake consensus on the order of events.
 
-![Rarimo Sub-Protocols](/img/validator.png)
+### Cost Efficiency
 
-### Extensibility
+Cross-chain tech can get expensive for both DApp builders and end users, so the protocol was designed with gas cost optimization in mind.
 
-The protocol provides a general messaging protocol foundation for cross-chain use cases. Users can implement their own sub-protocols and submit them via the proposals mechanism. Rarimo offers ready-to-use [identity](/overview/identity) and [bridging](overview/bridge) sub-protocols.
+Rarimo employs TSS (Threshold Signature Scheme) to minimize the cost of cross-chain transactions. The overhead is as low as checking a single ECDSA signature.
 
-![Rarimo Sub-Protocols](/img/protocol-layers.png)
+The on-demand approach to syncing the necessary on-chain data ensures scaling to multiple networks is economically feasible. The identity metadata is lazily propagated to the destination chains only when needed, meaning the expenses depend only on usage, not the number of supported chains.
 
-Additionally, Rarimo Core supports EVM-compatible smart contracts for greater flexibility.
+The gas fees can be paid by either the DApp developer or the end user. As a developer, you have the freedom to balance the user experience and the operational costs.
 
-### Scalable Security
+### Monetization for Issuers
 
-Rarimo employs TSS (Threshold Signature Scheme) to sign the outputs of the protocol. With TSS, the signature size doesn't depend on the number of signers (validator nodes) and remains constant. Thus, the pool of validators can be scaled while keeping fees at the destination chains at a low, fixed rate.
-
-### Instant Finality
-
-Every step in the cross-chain path adds an extra delay. The protocol uses the proven Tendermint consensus mechanism with instant finality to minimize this overhead. It only takes an extra few seconds to ensure the protocol's security.
+Legacy identity providers have trouble monetizing their services in Web3. Rarimo offers tools for collecting usage-based fees, such as minting soulbond tokens with a limited lifespan.
