@@ -61,6 +61,6 @@ jobs:
             mkdir ~/.kube/
             echo "${{ secrets.K8SCONFIG_DEV }}" | base64 -d > config
             mv config ~/.kube/
-            helm upgrade -i "docs" ".helm" --set global.IngressDomain=staging.${DOMAIN} --set "image.repository=ghcr.io/${$GITHUB_REPOSITORY}" --set "image.tag=${GITHUB_SHA}"  --namespace docs-staging --dry-run --debug
+            helm upgrade -i "docs" ".helm" --set global.IngressDomain=${DOMAIN} --set "image.repository=ghcr.io/${GITHUB_REPOSITORY}" --set "image.tag=${GITHUB_SHA}"  --namespace docs-staging --dry-run --debug
 
   # --create-namespace
