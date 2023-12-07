@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated the "Overview" doc;
+- Transferred the project to GitHub;
 
 ## [1.6.0] - 28-11-2023
 
@@ -195,15 +196,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://gitlab.com/rarimo/docs/compare/v1.5.1...HEAD
-[1.5.1]: https://gitlab.com/rarimo/docs/releases/tag/v1.5.0...v1.5.1
-[1.5.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.4.3...v1.5.0
-[1.4.3]: https://gitlab.com/rarimo/docs/releases/tag/v1.4.2...v1.4.3
-[1.4.2]: https://gitlab.com/rarimo/docs/releases/tag/v1.4.1...v1.4.2
-[1.4.1]: https://gitlab.com/rarimo/docs/releases/tag/v1.4.0...v1.4.1
-[1.4.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.3.1...v1.4.0
-[1.3.1]: https://gitlab.com/rarimo/docs/releases/tag/v1.3.0...v1.3.1
-[1.3.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.2.0...v1.3.0
-[1.2.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.1.0...v1.2.0
-[1.1.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.0.0...v1.1.0
-[1.0.0]: https://gitlab.com/rarimo/docs/releases/tag/v1.0.0
+[Unreleased]: https://github.com/rarimo/docs/compare/v1.5.1...HEAD
+[1.5.1]: https://github.com/rarimo/docs/releases/tag/v1.5.0...v1.5.1
+[1.5.0]: https://github.com/rarimo/docs/releases/tag/v1.4.3...v1.5.0
+[1.4.3]: https://github.com/rarimo/docs/releases/tag/v1.4.2...v1.4.3
+[1.4.2]: https://github.com/rarimo/docs/releases/tag/v1.4.1...v1.4.2
+[1.4.1]: https://github.com/rarimo/docs/releases/tag/v1.4.0...v1.4.1
+[1.4.0]: https://github.com/rarimo/docs/releases/tag/v1.3.1...v1.4.0
+[1.3.1]: https://github.com/rarimo/docs/releases/tag/v1.3.0...v1.3.1
+[1.3.0]: https://github.com/rarimo/docs/releases/tag/v1.2.0...v1.3.0
+[1.2.0]: https://github.com/rarimo/docs/releases/tag/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/rarimo/docs/releases/tag/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/rarimo/docs/releases/tag/v1.0.0

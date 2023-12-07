@@ -5,7 +5,7 @@
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 function getUrl() {
-  return process.env.URL || "https://rarimo.gitlab.io";
+  return process.env.URL || "http://localhost:3000";
 }
 
 function getBaseUrl() {
@@ -22,7 +22,7 @@ const metaDescription =
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
   /** Meta information */
-  title: "Rarimo Developer Documentation",
+  title: "Rarimo Developer Portal",
   // TODO: better description
   tagline: metaDescription,
   url: getUrl(),
@@ -54,9 +54,7 @@ module.exports = {
           sidebarPath: require.resolve("./sidebars.js"),
           breadcrumbs: false,
           showLastUpdateTime: true,
-          // @todo update when we move to github
-          // editUrl: 'https://github.com/rarimo/rarimo-docs/blob/main',
-          editUrl: "https://gitlab.com/rarimo/docs/-/tree/main",
+          editUrl: "https://github.com/rarimo/docs/blob/main",
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem",
         },
