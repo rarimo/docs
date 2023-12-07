@@ -40,18 +40,27 @@ jobs:
           . $(werf ci-env github --as-file)
           werf export --dev web --tag $IMAGE_NAME
 
-  # deploy:
-  #     name: Deploy
-  #     needs: converge
-  #     runs-on: ubuntu-latest
-  #     steps:
-  #       - name: Checkout code
-  #         uses: actions/checkout@v3
-  #         with:
-  #           fetch-depth: 0
-  #       - name: ConfigCreate
-  #         run: |
-  #           mkdir ~/.kube/
-  #           echo "${{ secrets.K8SCONFIG_DEV }}" | base64 -d > config
-  #           mv config ~/.kube/
-  #           helm upgrade -i "docs" ".helm" --set global.IngressDomain=staging.${DOMAIN} --set "image.repository=ghcr.io/${$GITHUB_REPOSITORY}" --set "image.tag=${GITHUB_SHA}" --create-namespace --namespace docs-staging
+  deploy:
+      name: Deploy
+      needs: converge
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+          with:
+            fetch-depth: 0
+        - name: Install Helm
+          uses: azure/setup-helm@v3
+          with:
+            version: '<version>' # default is latest (stable)
+            token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
+          id: install
+
+        - name: ConfigCreate
+          run: |
+            mkdir ~/.kube/
+            echo "${{ secrets.K8SCONFIG_DEV }}" | base64 -d > config
+            mv config ~/.kube/
+            helm upgrade -i "docs" ".helm" --set global.IngressDomain=staging.${DOMAIN} --set "image.repository=ghcr.io/${$GITHUB_REPOSITORY}" --set "image.tag=${GITHUB_SHA}"  --namespace docs-staging --dry-run --debug
+
+  # --create-namespace
