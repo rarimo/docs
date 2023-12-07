@@ -27,7 +27,7 @@ jobs:
           echo $GITHUB_SHA
       - name: Run Build
         env:
-          IMAGE_NAME: ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
+          IMAGE_NAME: ghcr.io/${{ github.repository }}:${{github.sha}}
           URL: "https://staging.docs.rarimo.com"
           DOMAIN: staging.docs.rarimo.com
         run: |
