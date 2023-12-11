@@ -37,8 +37,11 @@ jobs:
           BASE_URL: "/"
           STAGING: "true"
         run: |
+          export URL="https://staging.docs.rarimo.com"
+          export BASE_URL="/"
+          export STAGING="true"
           . $(werf ci-env github --as-file)
-          werf export --dev web --tag $IMAGE_NAME
+          werf export --dev web --tag ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
 
   deploy:
       name: Deploy
@@ -59,8 +62,7 @@ jobs:
         - name: ConfigCreate
           run: |
             mkdir ~/.kube/
-            echo "${{ secrets.K8SCONFIG_DEV }}" | base64 -d > config
+            echo "${{ secrets.K8SCONFIG }}" | base64 -d > config
             mv config ~/.kube/
-            helm upgrade -i "docs" ".helm" --set global.IngressDomain=${DOMAIN} --set "image.repository=ghcr.io/${GITHUB_REPOSITORY}" --set "image.tag=${GITHUB_SHA}"  --namespace docs-staging --dry-run --debug
+            helm upgrade -i "docs" ".helm" --set global.IngressDomain=staging.docs.rarimo.com --set "image.repository=ghcr.io/${GITHUB_REPOSITORY}" --set "image.tag=${GITHUB_SHA}"  --namespace docs-staging
 
-  # --create-namespace

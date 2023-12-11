@@ -34,30 +34,30 @@ jobs:
           echo $GITHUB_REF_NAME
       - name: Run Build
         run: |
+          export URL="https://docs.rarimo.com"
+          export BASE_URL="/"
           . $(werf ci-env github --as-file)
-          werf export --dev web --tag $IMAGE_NAME
+          werf export --dev web --tag ghcr.io/$GITHUB_REPOSITORY:$GITHUB_REF_NAME
 
-  # deploy:
-  #     name: Deploy
-  #     needs: converge
-  #     runs-on: ubuntu-latest
-  #     steps:
-  #       - name: Checkout code
-  #         uses: actions/checkout@v3
-  #         with:
-  #           fetch-depth: 0
+  deploy:
+      name: Deploy
+      needs: converge
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+          with:
+            fetch-depth: 0
 
-  #       - name: Install Helm
-  #         uses: azure/setup-helm@v3
-  #         with:
-  #           token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
-  #         id: install
+        - name: Install Helm
+          uses: azure/setup-helm@v3
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
+          id: install
 
-  #       - name: ConfigCreate
-  #         run: |
-  #           mkdir ~/.kube/
-  #           echo "${{ secrets.K8SCONFIG_MAIN }}" | base64 -d > config
-  #           mv config ~/.kube/
-  #           helm upgrade -i "docs" ".helm" --set global.IngressDomain=staging.${DOMAIN} --set "image.repository=ghcr.io/${$GITHUB_REPOSITORY}" --set "image.tag=${GITHUB_SHA}" --create-namespace --namespace docs-prod
-
-  #           kubectl set image deployment rarimo-web template=ghcr.io/$GITHUB_REPOSITORY:$GITHUB_REF_NAME -n robotornot
+        - name: ConfigCreate
+          run: |
+            mkdir ~/.kube/
+            echo "${{ secrets.K8SCONFIG }}" | base64 -d > config
+            mv config ~/.kube/
+            helm upgrade -i "docs" ".helm" --set global.IngressDomain=docs.rarimo.com --set "image.repository=ghcr.io/${GITHUB_REPOSITORY}" --set "image.tag=${GITHUB_REF_NAME}"  --namespace docs-prod

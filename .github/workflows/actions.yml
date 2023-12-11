@@ -26,10 +26,9 @@ jobs:
           echo $GITHUB_REPOSITORY
           echo $GITHUB_SHA
       - name: Run Build
-        env:
-          IMAGE_NAME: ghcr.io/${{ github.repository }}:${{github.sha}}
-          URL: "https://staging.docs.rarimo.com"
-          DOMAIN: staging.docs.rarimo.com
         run: |
+          export URL="https://staging.docs.rarimo.com"
+          export BASE_URL="/"
+          export STAGING="true"
           . $(werf ci-env github --as-file)
-          werf export --dev web --tag $IMAGE_NAME
+          werf export --dev web --tag ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
