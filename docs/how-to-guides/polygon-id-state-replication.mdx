@@ -25,12 +25,14 @@ docker pull registry.gitlab.com/rarimo/polygonid/relayer-svc:cca1632497291b16a69
 573
 ```
 
-Or clone the  [repository](https://gitlab.com/rarimo/polygonid/relayer-svc) and build it from the source:
+Or clone the  [repository](https://github.com/rarimo/relayer-svc) and build it from the source:
 
 <!-- TODO: fix docker image -->
 
 ```sh
-git clone git@gitlab.com:rarimo/polygonid/relayer-svc.git
+git clone git@github.com:rarimo/relayer-svc.git
+
+#after changing clone link from gitlab to github checkout should be removed probably?
 git checkout -b feature/submit-on-request # on-demand replication is not merged to the main yet
 
 CGO_ENABLED=1 go build .
