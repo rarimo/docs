@@ -1,0 +1,64 @@
+# Protecting Your Discord Server from Bots with Proof of Humanity and Collab.Land
+
+A typical crypto discord server is constantly attacked by bots shilling scams. Banning them manually wastes your mods' and users' time. Basic protection measures, like captcha verification, do little good, either.
+
+TODO: screenshot
+
+Rarimo has developed a free plugin for the popular token-gating bot [Collab.Land](https://www.collab.land/) to fight this menace. It allows the server admin to set up channels for verified humans only.
+
+## Configuring the Collab.Land Bot
+
+### Prerequisites
+
+Invite the Collab.Land bot to your server by following this [guide](https://collabland.freshdesk.com/support/solutions/articles/70000036689-discord-bot-walkthrough
+).
+
+### Step #1:  Create a Discord Role for Humans
+
+Colla.Land's token gating rules are based on discord roles, so we need to create a role for the verified users by following this [guide](https://support.discord.com/hc/en-us/articles/206029707-Setting-Up-Permissions-FAQ#h_01FFTVYQ38W9TVCTM6YZHZXFFA).
+
+Let's call our role `Certified Human✅`.
+
+### Step #2: Add the Proof of Humanity Action
+
+1. Open the Collab.Land dashboard https://cc.collab.land/login:
+1. Log in via Discord:
+1. Click on the "Marketplace" tab:
+1. Install the Proof of Humanity action by clicking on the "Install" button:
+
+
+### Step #3: Set Up a Token-Gating Rule
+
+1. Click on the "TGRs" tab in the Collab.Land console:
+1. Click on the "Select Role" button:
+1. Select the role you created in Step #1 and click "Apply":
+1. Fill in the following fields and verify that the screenshot below matches your form:
+    - Chain: `Polygon`;
+    - Token Type: `ERC721`;
+    - Addresses: `0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373`([reference](/reference/proof-of-humanity#deployments));
+1. Click "Save" and verify that you see the following screen:
+
+
+### Step #4: Configure the Channels
+
+
+
+## Verification Guide for Users
+
+### Step #1: Start the Verification
+
+Call the `/verify` command to start the verification process:
+
+### Step #2: Complete the Proof of Humanity Verification
+
+:::tip
+Users who completed the Proof of Humanity verification earlier can skip this step.
+:::
+
+### Step #3:
+
+Go to the `#collabland-join` channel and click on the "Let's go" button to obtain your verified role:
+
+### Step #4: Enjoy the Qualtiy Discussions
+
+You can now access the channels that require the `Certified Human✅` role. Have fun with your fellow humans!
