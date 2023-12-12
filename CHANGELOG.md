@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Use Cases:
   - Added the "Identity State Replication" doc;
+- How-to-Guides:
+  - Added the Collab.Land integration doc;
 
 ### Changed
 
