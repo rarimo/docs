@@ -58,7 +58,7 @@ Let's describe the flow more accurately:
 
 ## Library
 
-In `gitlab.com/rarimo/savers/saver-grpc-lib` we defined the common utils for all oracles.
+In `github.com/rarimo/saver-grpc-lib` we defined the common utils for all oracles.
 Every oracle should implement `verifiers.TransferOperator` interface for every supported token type
 and put that implementations into the `voter.Subscriber` and `voter.Catchupper` using `verifiers.TransferVerifier` wrapper.
 
