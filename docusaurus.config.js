@@ -32,9 +32,8 @@ module.exports = {
   favicon: "img/logo-icon.png",
   noIndex: isStaging(),
 
-  // @todo we'll use these when we move to github
-  // organizationName: "rarimo",
-  // projectName: "rarimo-docs",
+  organizationName: "rarimo",
+  projectName: "docs",
 
   /** Localization */
   i18n: {
