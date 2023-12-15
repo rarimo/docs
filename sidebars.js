@@ -98,6 +98,10 @@ const sidebars = {
             "reference/contracts/bridge/solana",
           ],
         },
+        {
+          type: "doc",
+          id: "reference/contracts/polygonid",
+        },
       ],
     },
     {

@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Reference:
+  - Added the "PolygonID x Rarimo contracts" page;
 - Use Cases:
   - Added the "Identity State Replication" doc;
 - How-to-Guides:
@@ -19,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated links from gitlab to github in the whole documentation;
 - Updated the "Overview" doc;
 - Transferred the project to GitHub;
+- Added the "PolygonID x Rarimo API" info to "Api reference" doc;
 
 ## [1.6.0] - 28-11-2023
 
