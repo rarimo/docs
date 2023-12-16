@@ -98,15 +98,15 @@ const sidebars = {
             "reference/contracts/bridge/solana",
           ],
         },
-        {
-          type: "doc",
-          id: "reference/contracts/polygonid",
-        },
       ],
     },
     {
       type: "doc",
       id: "reference/proof-of-humanity",
+    },
+    {
+      type: "doc",
+      id: "reference/polygonid-state-replication",
     },
     {
       type: "doc",

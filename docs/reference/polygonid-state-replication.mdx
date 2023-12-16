@@ -1,14 +1,34 @@
 ---
-sidebar_label: PolygonID x Rarimo Contracts
+sidebar_label: Polygon ID State Replication
 ---
 
-# PolygonID x Rarimo Reference
+# Polygon ID State Replication
 
-This page contains technical resources related to the PolygonID x Rarimo contracts.
+This page contains technical resources related to the Polygon ID State Replication.
+
+## User-Facing DApp
+
+Users can get verified using the following DApps:
+
+- Mainnet(Polygon): https://polygon.rarimo.com
+
+<!-- Should be rechecked whether it is Sepolia or not. Where do we transfer state from Sepolia? -->
+
+- Testnet(Sepolia): https://polygon.mainnet-beta.rarimo.com/
+
+## Identity Relayer
+
+This service is responsible for transferring GIST roots and identity states from Rarimo to other chains.
+
+Github: https://github.com/rarimo/identity-relayer-svc
+
+Documentation: https://rarimo.github.io/rarimo-core/docs/common/bridging/002-identity.html
 
 ##  Smart Contracts
 
-PolygonID x Rarimo integration contracts are slightly different from our other [identity contracts](/reference/contracts/identity) in order to be compatible with PolygonID Wallet, but the logic remains same.  
+<!-- TODO: Add mainnet contracts addresses -->
+
+Polygon ID State Replication contracts are slightly different from our other [identity contracts](/reference/contracts/identity) in order to be compatible with Polygon ID Wallet, but the logic remains same.  
 
 ### `LightweightStateV2`
 
@@ -184,7 +204,7 @@ Full implementation can be found [here](https://github.com/rarimo/polygonid-inte
 
 ### `VerifiedSBT`
 
-The SBT awarded to users who complete the PolygonID x Rarimo KYC verification.
+The SBT awarded to users who complete the Polygon ID x Rarimo demo.
 
 #### Deployments
 
@@ -239,11 +259,3 @@ contract VerifiedSBT is
 - `_beforeTokenTransfer(...)` — prevents the token from being transferred (only burn and mint are available);
 
 Full implementation can be found [here](https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/VerifiedSBT.sol).
-
-### Other contracts
-
-Rarimo uses Iden3 validator and verifier contracts.
-Validators perform some necessary checks and call the required verifier contract, which in turn verifies the proof.
-Verifiers are generated from circom schemes.
-They store the verification key and `verifyProof()` function.
-`ZKPVerifier` operates on top of them, by storing the requests, their IDs and other information.
