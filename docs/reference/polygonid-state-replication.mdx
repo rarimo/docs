@@ -8,9 +8,7 @@ This page contains technical resources related to the [Polygon ID State Replicat
 
 ## Demo DApp
 
-Users can check out how the state replication works using our demo DApp.
-By leveraging the state replication, it lets users submit a Polygon ID zero-knowledge proof on Ethereum.
-Users get an SBT as a reward.
+Users can check out how the state replication works using our demo DApp. Leveraging the state replication lets users submit a Polygon ID zero-knowledge proof on Ethereum. Users get an SBT as a reward.
 
 Testnet(Sepolia): https://polygon.mainnet-beta.rarimo.com/
 
@@ -29,7 +27,7 @@ To perform state publishing, you can execute POST `/integrations/relayer/state/r
 
 ```json
 {
-  "chain": "Ethereum", 
+  "chain": "Ethereum",
   "hash": "0x212bc6f8194aa63eee97b0566b7cd65c66bb57cc4936c11e611f1042bb0b7118",
   "waitConfirm": true
 }
@@ -47,11 +45,11 @@ To perform GIST publishing, you can execute POST `/integrations/relayer/gist/rel
 
 - `"chain": "chain_name"` - chain, to which the state (or gist) will be relayed;
 - `"hash": "0x..."` - hash of the state (or gist) to relay. Same as on the state contract in 0x... hex format;
-- `"waitConfirm": true` indicates, whether request should wait until the transaction is included in the block (`false` by default);
+- `"waitConfirm": true` indicates whether the request should wait until the transaction is included in the block (`false` by default);
 
 The response codes:
 - `200` - successful relay, body contains tx hash;
-- `404` - state is not transferred yet, try to repeat the request later;
+- `404` - the state is not transferred yet; try to repeat the request later;
 - `400` - state has been relayed before;
 
 ##  Smart Contracts
