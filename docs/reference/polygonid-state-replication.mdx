@@ -4,43 +4,33 @@ sidebar_label: Polygon ID State Replication
 
 # Polygon ID State Replication
 
-This page contains technical resources related to the Polygon ID State Replication.
+This page contains technical resources related to the [Polygon ID State Replication](/use-cases/polygon-id).
 
-## User-Facing DApp
+## Demo DApp
 
-Users can get verified using the following DApps:
+Users can check out how the state replication works using our demo DApp. By leveraging the state replication, it lets users submit a Polygon ID zero-knowledge proof on Ethereum. Users get an SBT as a reward.
 
-- Mainnet(Polygon): https://polygon.rarimo.com
-
-<!-- Should be rechecked whether it is Sepolia or not. Where do we transfer state from Sepolia? -->
-
-- Testnet(Sepolia): https://polygon.mainnet-beta.rarimo.com/
+Testnet(Sepolia): https://polygon.mainnet-beta.rarimo.com/
 
 ## Identity Relayer
 
-This service is responsible for transferring GIST roots and identity states from Rarimo to other chains.
+This service replicates GIST roots and identity states on demand. Call it before submitting proof on the destination chain.
 
-Github: https://github.com/rarimo/identity-relayer-svc
-
-Documentation: https://rarimo.github.io/rarimo-core/docs/common/bridging/002-identity.html
+- Github: https://github.com/rarimo/identity-relayer-svc
+- API Reference: https://rarimo.github.io/rarimo-core/docs/common/bridging/002-identity.html
 
 ##  Smart Contracts
 
 <!-- TODO: Add mainnet contracts addresses -->
 
-Polygon ID State Replication contracts are slightly different from our other [identity contracts](/reference/contracts/identity) in order to be compatible with Polygon ID Wallet, but the logic remains same.  
-
 ### `LightweightStateV2`
 
-It's a modified state contract, that requires TSS instead of ZKP to transit the state.
-This contract is deployed on destination chains and states from Rarimo are transferred on demand to this contract.
-In comparison with other `LightweightState` contracts (identity contracts on other chains), this contract stores more information about identities.
+It's a modified state contract meant for the destination chains. It checks a TSS from the Rarimo validators instead of a ZKP to transit the state and only holds a partial history. The relayer service lazily updates the contract whenever a user wants to submit ZKP on a particular chain.
 
 #### Deployments
 
 |Chain| ChainID| Address|
 | --- | --- | --- |
-| Ethereum | `1` | `?` \([Polygonscan](?)\) |
 | Sepolia | `11155111` | `0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315` \([Etherscan](https://sepolia.etherscan.io/address/0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315)\) |
 
 #### Interface
@@ -60,24 +50,7 @@ contract LightweightStateV2 is ILightweightStateV2, UUPSSignableUpgradeable, Sig
         GistRootData calldata gistData_,
         bytes calldata proof_
     ) external override {
-        _checkMerkleSignature(_getGISTSignHash(gistData_, prevGist_), proof_);
-
-        require(
-            _gistsRootData[gistData_.root].createdAtTimestamp == 0,
-            "LightweightStateV2: unable to update already stored gist data"
-        );
-
-        if (gistData_.createdAtTimestamp > _gistsRootData[_currentGistRoot].createdAtTimestamp) {
-            _currentGistRoot = gistData_.root;
-        }
-
-        GistRootData storage _newGistRootData = _gistsRootData[gistData_.root];
-
-        _newGistRootData.root = gistData_.root;
-        _newGistRootData.createdAtTimestamp = gistData_.createdAtTimestamp;
-        _newGistRootData.createdAtBlock = gistData_.createdAtBlock;
-
-        _gistsRootData[prevGist_].replacedByRoot = gistData_.root;
+        // ...
 
         emit SignGISTDataTransited(gistData_.root, prevGist_);
     }
@@ -87,27 +60,7 @@ contract LightweightStateV2 is ILightweightStateV2, UUPSSignableUpgradeable, Sig
         StateData calldata stateData_,
         bytes calldata proof_
     ) external override {
-        _checkMerkleSignature(_getStateSignHash(stateData_, prevState_), proof_);
-
-        IdentityInfo storage _identityInfo = _identitiesInfo[stateData_.id];
-
-        require(
-            _identityInfo.statesData[stateData_.state].createdAtTimestamp == 0,
-            "LightweightStateV2: unable to update already stored states"
-        );
-
-        if (stateData_.createdAtTimestamp > _getLastStateData(stateData_.id).createdAtTimestamp) {
-            _identityInfo.lastState = stateData_.state;
-        }
-
-        StateData storage _newStateData = _identityInfo.statesData[stateData_.state];
-
-        _newStateData.id = stateData_.id;
-        _newStateData.state = stateData_.state;
-        _newStateData.createdAtTimestamp = stateData_.createdAtTimestamp;
-        _newStateData.createdAtBlock = stateData_.createdAtBlock;
-
-        _identityInfo.statesData[prevState_].replacedByState = stateData_.state;
+        // ...
 
         emit SignStateDataTransited(stateData_.id, stateData_.state, prevState_);
     }
@@ -121,28 +74,24 @@ contract LightweightStateV2 is ILightweightStateV2, UUPSSignableUpgradeable, Sig
 Data stores two roots, one that replaced the other, timestamp and block number;
 - `_identitiesInfo` — mapping of the identity IDs to the information about this identity.
 Information has the latest identity state and the history of the states with timestamps;
-- `signedTransitGISTData()` — one of two main functions of the contract.
-Adds the GIST root to the history and changes the current root variable if the proposed one is newer;
-- `signedTransitStateData(...)` — second main function.
-Adds the state to the history and sets the last state of the identity to the provided one if it's newer;
+- `signedTransitGISTData()` — adds the GIST root to the history and changes the current root variable if the proposed one is newer;
+- `signedTransitStateData(...)` — adds the state to the history and sets the last state of the identity to the provided one if it's newer;
 
-Both functions require the proof of changes — TSS of Rarimo signature providers.
-Also, core functions emit events, which contains the data about changes: 
+Both functions require proof of change — TSS of Rarimo signature providers.
+Also, core functions emit events, which contain the data about changes:
 - `SignGISTDataTransited` contains the data about roots, the previous one and the provided one;
-- `SignStateDataTransited` contains the provided identity state, previous state and identity ID;
+- `SignStateDataTransited` contains the provided identity state, previous state, and identity ID;
 
 Full implementation can be found [here](https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/LightweightStateV2.sol).
 
 ### `QueryVerifier`
 
-It's an implementation of a verifier contract, that inherits Iden3 [ZKPVerifier](https://github.com/iden3/contracts/blob/master/contracts/verifiers/ZKPVerifier.sol) and additionally mints an SBT after the verification.
-Currently it is hard-coded for one possible request - KYC demo.
+It's an implementation of a verifier contract that inherits Iden3 [ZKPVerifier](https://github.com/iden3/contracts/blob/master/contracts/verifiers/ZKPVerifier.sol) that mints an SBT. It is configured to work with the KYCAge demo credential.
 
 #### Deployments
 
 |Chain| ChainID| Address|
 | --- | --- | --- |
-| Ethereum | `1` | `0x22a5e6042DfcF480a5ABeB565165f1011d40fc0E` \([Polygonscan](https://etherscan.io/address/0x22a5e6042DfcF480a5ABeB565165f1011d40fc0E)\) |
 | Sepolia | `11155111` | `0xb95734f64f242E976E155594E1E15D39700Cbb26` \([Etherscan](https://sepolia.etherscan.io/address/0xb95734f64f242E976E155594E1E15D39700Cbb26)\) |
 
 #### Interface
@@ -190,27 +139,25 @@ contract QueryVerifier is IQueryVerifier, ZKPVerifier {
 }
 ```
 
-- `AGE_VERIFY_REQUEST_ID` — hard-coded KYC demo request id;
+- `AGE_VERIFY_REQUEST_ID` — hard-coded KYC demo request ID;
 - `sbtContract` — address of the SBT contract, which will be called to mint Soulbound token;
-- `addressToUserId` — mapping of addresses to user's identity id;
-- `_verificationsInfo` — mapping of user's identity id to the verification information, which contains the prover address and minted token ID;
+- `addressToUserId` — mapping of addresses to user's identity ID;
+- `_verificationsInfo` — mapping of user's identity ID to the verification information, which contains the prover address and minted token ID;
 - `_beforeProofSubmit` — hook that performs some necessary security checks;
 - `_afterProofSubmit` — another hook, which mints the SBT in case of valid verification;
 
-The most important function, that verifies the ZKP - `verify(...)` is inherited from the `ZKPVerifier` contract.
-This contract adds necessary logic for our needs.
+The function that verifies the ZKP - `verify(...)` is inherited from the [ZKPVerifier](https://github.com/iden3/contracts/blob/master/contracts/verifiers/ZKPVerifier.sol) contract.
 
 Full implementation can be found [here](https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/QueryVerifier.sol).
 
 ### `VerifiedSBT`
 
-The SBT awarded to users who complete the Polygon ID x Rarimo demo.
+The SBT is awarded to users who complete the Polygon ID x Rarimo demo.
 
 #### Deployments
 
 |Chain| ChainID| Address|
 | --- | --- | --- |
-| Ethereum | `1` | `0x27e36Ca55B05300fA3c40AD4845Ad8195445F87e` \([Polygonscan](https://etherscan.io/address/0x27e36Ca55B05300fA3c40AD4845Ad8195445F87e)\) |
 | Sepolia | `11155111` | `0x8A55c9CfDCbCeDcA1A543295a3F54351C335A20f` \([Etherscan](https://sepolia.etherscan.io/address/0x8A55c9CfDCbCeDcA1A543295a3F54351C335A20f)\) |
 
 #### Interface
@@ -226,14 +173,9 @@ contract VerifiedSBT is
     uint256 public override nextTokenId;
     string public override tokensURI;
 
-    modifier onlyVerifier() {
-        require(msg.sender == verifier, "VerifiedSBT: only verifier can call this function");
-        _;
-    }
+    // ...
 
-    function mint(address recipientAddr_) external override onlyVerifier {
-        _mint(recipientAddr_, nextTokenId++);
-    }
+    function mint(address recipientAddr_) external override onlyVerifier {}
 
     function _beforeTokenTransfer(
         address from_,
@@ -241,12 +183,7 @@ contract VerifiedSBT is
         uint256 firstTokenId_,
         uint256 batchSize_
     ) internal override {
-        require(
-            from_ == address(0) || to_ == address(0),
-            "VerifiedSBT: token transfers are not allowed"
-        );
-
-        super._beforeTokenTransfer(from_, to_, firstTokenId_, batchSize_);
+    // ...
     }
 }
 ```
