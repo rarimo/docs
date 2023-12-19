@@ -8,13 +8,16 @@ This page contains technical resources related to the [Polygon ID State Replicat
 
 ## Demo DApp
 
-Users can check out how the state replication works using our demo DApp. By leveraging the state replication, it lets users submit a Polygon ID zero-knowledge proof on Ethereum. Users get an SBT as a reward.
+Users can check out how the state replication works using our demo DApp.
+By leveraging the state replication, it lets users submit a Polygon ID zero-knowledge proof on Ethereum.
+Users get an SBT as a reward.
 
 Testnet(Sepolia): https://polygon.mainnet-beta.rarimo.com/
 
 ## Identity Relayer
 
-This service replicates GIST roots and identity states on demand. Call it before submitting proof on the destination chain.
+This service replicates GIST roots and identity states on demand.
+Call it before submitting proof on the destination chain.
 
 - Github: https://github.com/rarimo/identity-relayer-svc
 - API Reference: https://rarimo.github.io/rarimo-core/docs/common/bridging/002-identity.html
@@ -53,7 +56,9 @@ The response codes:
 
 ### `LightweightStateV2`
 
-It's a modified state contract meant for the destination chains. It checks a TSS from the Rarimo validators instead of a ZKP to transit the state and only holds a partial history. The relayer service lazily updates the contract whenever a user wants to submit ZKP on a particular chain.
+It's a modified state contract meant for the destination chains.
+It checks a TSS from the Rarimo validators instead of a ZKP to transit the state and only holds a partial history.
+The relayer service lazily updates the contract whenever a user wants to submit ZKP on a particular chain.
 
 #### Deployments
 
@@ -114,7 +119,8 @@ Full implementation can be found [here](https://github.com/rarimo/polygonid-inte
 
 ### `QueryVerifier`
 
-It's an implementation of a verifier contract that inherits Iden3 [ZKPVerifier](https://github.com/iden3/contracts/blob/master/contracts/verifiers/ZKPVerifier.sol) that mints an SBT. It is configured to work with the KYCAge demo credential.
+It's an implementation of a verifier contract that inherits Iden3 [ZKPVerifier](https://github.com/iden3/contracts/blob/master/contracts/verifiers/ZKPVerifier.sol) that mints an SBT.
+It is configured to work with the KYCAge demo credential.
 
 #### Deployments
 
