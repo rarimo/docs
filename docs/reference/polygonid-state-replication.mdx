@@ -28,22 +28,25 @@ To perform state publishing, you can execute POST `/integrations/relayer/state/r
 
 ```json
 {
-  "chain": "Name of the chain into which it is relayed according to the service configuration",
-  "hash": "The state hash (the same as on state contract) in 0x... hex format",
+  "chain": "Ethereum", 
+  "hash": "0x212bc6f8194aa63eee97b0566b7cd65c66bb57cc4936c11e611f1042bb0b7118",
   "waitConfirm": true
 }
 ```
 
 To perform GIST publishing, you can execute POST `/integrations/relayer/gist/relay` request with the following body:
+
 ```json
 {
-  "chain": "Name of the chain into which it is relayed according to the service configuration",
-  "hash": "The GIST hash (the same as on state contract) in 0x... hex format",
+  "chain": "Ethereum",
+  "hash": "0x1e4b74c14388fbfca27496828d24c248637792eb0286e7519860abb3ec01bc70",
   "waitConfirm": true
 }
 ```
 
-- `"waitConfirm": true` indicates, whether request should wait until the transaction is included in the block (`false` by default).
+- `"chain": "chain_name"` - chain, to which the state (or gist) will be relayed;
+- `"hash": "0x..."` - hash of the state (or gist) to relay. Same as on the state contract in 0x... hex format;
+- `"waitConfirm": true` indicates, whether request should wait until the transaction is included in the block (`false` by default);
 
 The response codes:
 - `200` - successful relay, body contains tx hash;
