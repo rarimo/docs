@@ -19,6 +19,34 @@ This service replicates GIST roots and identity states on demand. Call it before
 - Github: https://github.com/rarimo/identity-relayer-svc
 - API Reference: https://rarimo.github.io/rarimo-core/docs/common/bridging/002-identity.html
 
+### Relayer endpoints
+
+To perform state publishing, you can execute POST `/integrations/relayer/state/relay` request with the following body:
+
+```json
+{
+  "chain": "Name of the chain into which it is relayed according to the service configuration",
+  "hash": "The state hash (the same as on state contract) in 0x... hex format",
+  "waitConfirm": true
+}
+```
+
+To perform GIST publishing, you can execute POST `/integrations/relayer/gist/relay` request with the following body:
+```json
+{
+  "chain": "Name of the chain into which it is relayed according to the service configuration",
+  "hash": "The GIST hash (the same as on state contract) in 0x... hex format",
+  "waitConfirm": true
+}
+```
+
+- `"waitConfirm": true` indicates, whether request should wait until the transaction is included in the block (`false` by default).
+
+The response codes:
+- `200` - successful relay, body contains tx hash;
+- `404` - state is not transferred yet, try to repeat the request later;
+- `400` - state has been relayed before;
+
 ##  Smart Contracts
 
 <!-- TODO: Add mainnet contracts addresses -->
