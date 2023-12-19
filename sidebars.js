@@ -106,6 +106,10 @@ const sidebars = {
     },
     {
       type: "doc",
+      id: "reference/polygonid-state-replication",
+    },
+    {
+      type: "doc",
       id: "reference/api",
     },
     {
