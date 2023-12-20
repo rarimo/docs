@@ -16,9 +16,10 @@
 }
 
 .heroSubtitle{
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     color: var(--primary-text-color);
-    max-width: 39.625rem;
+    max-width: 44.3125rem;
+    line-height: 1.4444;
 }
 
 .buttonContainer{

@@ -199,11 +199,12 @@
   justify-content: center;
 }
 .heroButtonSecondary{
-  border: 1px solid var(--primary-text-color-light);
-  min-height: 3.5rem;
-  width: 100%;
-  max-width: 13rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  border: 0;
+  text-transform: uppercase;
+}
+
+.homepageBaseLayerBlockchains {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.75rem;
 }

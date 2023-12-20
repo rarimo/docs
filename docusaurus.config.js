@@ -82,34 +82,23 @@ module.exports = {
         },
         items: [
           {
-            type: "doc",
-            docId: "overview",
-            position: "left",
-            label: "Overview",
-          },
-          {
-            type: "doc",
-            docId: "use-cases",
-            position: "left",
-            label: "Use Cases",
-          },
-          {
-            type: "doc",
-            docId: "tutorials",
-            position: "left",
-            label: "Tutorials",
-          },
-          {
-            type: "doc",
-            docId: "how-to-guides",
-            position: "left",
-            label: "How-To Guides",
-          },
-          {
-            type: "doc",
+            href: "https://discord.gg/cfrH3Fe7ke",
+            label: "Discord",
             position: "right",
-            label: "Technical Reference",
-            docId: "reference",
+          },
+          {
+            href: "https://github.com/rarimo",
+            label: "GitHub",
+            position: "right",
+          },
+          {
+            href: "https://google.com",
+            html: `
+              <button class="heroButton heroButton_src-components-HomepageHeader-styles-module" style="margin: 0; max-height: 36px; padding-top: 0.5rem; padding-bottom: 0.5rem">
+                Launch App
+                </button>
+                `,
+            position: "right",
           },
         ],
       },

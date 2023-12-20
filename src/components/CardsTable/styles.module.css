@@ -1,0 +1,34 @@
+.cardsTable {
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+    margin-bottom: 8rem;
+    width: 100%;
+}
+
+.cardsTableTitle {
+    font-size: 2.625rem;
+    text-align: center;
+    color: var(--primary-text-color-light);
+    font-weight: 500;
+}
+  
+  .cardsTableContainer {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 2rem;
+  }
+
+  .cardsTableCard {
+    flex: 0 calc(50% - 1rem);
+  }
+
+  .cardsTableCard:last-child:nth-child(odd) {
+    flex: 0 100%;
+  }
+  
+  @media screen and (max-width: 625px) {
+    .cardsTableCard {
+      flex: 0 100%;
+    }
+  }

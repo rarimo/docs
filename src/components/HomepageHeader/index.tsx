@@ -196,14 +196,6 @@ export default function HomepageHeader() {
               className={clsx("heroButton__svg", styles.heroButton__svg)}
             />
           </Link>
-          <Link
-            className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
-            href="use-cases"
-            type="doc"
-            id="use-cases"
-          >
-            Explore use cases
-          </Link>
         </div>
       </div>
     </header>

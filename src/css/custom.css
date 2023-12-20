@@ -153,7 +153,7 @@ span.DocSearch-Button-Placeholder {
   position: relative;
   font-family: var(--secondary-font-family);
   background: #8AB5A4;
-  padding: 1.0625rem 2.25rem;
+  padding: 0.875rem 1.5rem;
   font-size: 1rem;
   font-weight: 600;
   margin: 0 1.5rem 0 0;
@@ -175,12 +175,14 @@ span.DocSearch-Button-Placeholder {
   margin-left: 0.75rem;
 }
 
-.heroButtonSecondary{
+.heroButtonSecondary {
   display: flex;
   align-items: center;
   font-size: 1rem;
   font-family: var(--secondary-font-family);
-  color: var(--primary-text-color-light);
+  color: #8AB5A4;
+  border: 1px solid #8AB5A4;
+  border-color: #8AB5A4;
   font-weight: 600;
   cursor: pointer;
 }

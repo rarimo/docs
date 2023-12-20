@@ -1,0 +1,58 @@
+.cardWithList {
+  border: var(--primary-border);
+  background:repeating-conic-gradient(#0000 0.000045%, #000d 0.0005%) var(--secondary-bg-color);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.cardWithListHeadingWrp {
+  display: flex;
+  justify-content: space-between;
+  align-self: stretch;
+}
+
+.cardWithListIconWrp {
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  max-height: 3.375rem;
+}
+
+.cardWithListTitle {
+  font-size: 2rem;
+  text-transform: capitalize;
+  color: var(--primary-text-color-light);
+  font-weight: 500;
+  font-family: var(--primary-font-family);
+}
+
+.cardWithListDescription {
+  font-size: 1rem;
+  color: var(--primary-text-color);
+  font-family: var(--secondary-font-family);
+  font-weight: 400;
+  font-style: normal;
+}
+
+.cardWithListSvg {
+  height: 54px;
+  width: 54px;
+}
+
+.heroButtonSecondary {
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  width: auto;
+}
+
+.cardWithListButtonWrp {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.cardWithListDescriptionWrp {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
