@@ -23,16 +23,16 @@ const sidebars = {
       label: "About Rarimo",
       id: "overview",
     },
-    // {
-    //   type: "doc",
-    //   label: "Identity Protocol",
-    //   id: "overview/identity",
-    // },
-    // {
-    //   type: "doc",
-    //   label: "Bridging Protocol",
-    //   id: "overview/bridge",
-    // },
+    {
+      type: "doc",
+      label: "Identity Protocol",
+      id: "overview/identity",
+    },
+    {
+      type: "doc",
+      label: "Bridging Protocol",
+      id: "overview/bridge",
+    },
   ],
   useCases: [
     "use-cases",
