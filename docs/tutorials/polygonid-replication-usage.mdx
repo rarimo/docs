@@ -1,0 +1,185 @@
+---
+title: Polygon ID Replication Usage
+---
+
+# Polygon ID x Rarimo Collaboration
+<!-- TODO: refactor, it's just a very early version of the document. It may changed unpredictably -->
+
+Rarimo has an integration with Polygon ID, that allows replication of the state to other chains.
+For example, the issuer, whose state exists on Polygon, can be replicated so that the claims he issued can be proven in Ethereum DApp.
+
+## Polygon ID State Replication flow
+
+Polygon ID was one of the first projects that introduced the framework to work with identity.
+All artifacts are stored on Polygon network, which may be uncomfortable to use, when your DApp is deployed on other chains.
+Having the Issuer, that works with Polygon and DApp on Ethereum creates some problems.
+
+Luckily for us, Rarimo has a solution that solves these problems.
+This tutorials is intended to show the DApp example, that will use Rarimo x Polygon State Replication to interact with claims, that were issued on Polygon and replicated to Ethereum.
+
+## DApp creation
+
+Let's write a simple DApp, that will consist of 2 parts:
+- front-end, that contains the QR-code (that can be scanned with Polygon ID Wallet), which asks for the proof, e.g. that the user was born before `2000/01/01`;
+- smart contracts, concretely the verifier and sbt contracts;
+
+After providing the valid proof, user will be rewarded with the soul-bound token.
+
+
+### Smart Contracts
+
+Let's write a simple set of contracts, that will require the user to provide a proof (credentials), that he was born before the `2000/01/01`.
+To do that we need to write:
+- `SBT` contract, that will mint the soul-bound token to the user;
+- `Verifier` contract, that can be extended with your business logic, but in our case it will just verify the proof and mint an SBT;
+
+#### `VerifiedSBT`
+
+Let's start from writing our SBT contract.
+On successful verification verifier's contract will call it to mint the SBT for the verified user.
+To do that, we will add a modifier `onlyVerifier`, so only the verifier's contract can call mint function and make NFT non-transferable by modifying `_beforeTokenTransfer` hook.
+<!-- TODO: rewrite the contract, probably remove all "upgradeable" stuff --->
+```solidity
+pragma solidity 0.8.16;
+
+import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+
+import "./interfaces/IVerifiedSBT.sol";
+
+contract VerifiedSBT is
+    IVerifiedSBT,
+    UUPSUpgradeable,
+    ERC721EnumerableUpgradeable,
+    OwnableUpgradeable
+{
+    address public override verifier;
+    uint256 public override nextTokenId;
+    string public override tokensURI;
+
+    /* ... setters and getters should be here ...*/
+
+//highlight-start
+    modifier onlyVerifier() {
+        require(msg.sender == verifier, "VerifiedSBT: only verifier can call this function");
+        _;
+    }
+//highlight-end
+
+    function __VerifiedSBT_init(
+        address verifier_,
+        string memory name_,
+        string memory symbol_,
+        string memory tokensURI_
+    ) external override initializer {
+        __ERC721_init(name_, symbol_);
+        __Ownable_init();
+
+        verifier = verifier_;
+        tokensURI = tokensURI_;
+    }
+
+    function mint(address recipientAddr_) external override onlyVerifier {
+        _mint(recipientAddr_, nextTokenId++);
+    }
+
+//highlight-start
+    function _beforeTokenTransfer(
+        address from_,
+        address to_,
+        uint256 firstTokenId_,
+        uint256 batchSize_
+    ) internal override {
+        require(
+            from_ == address(0) || to_ == address(0),
+            "VerifiedSBT: token transfers are not allowed"
+        );
+
+        super._beforeTokenTransfer(from_, to_, firstTokenId_, batchSize_);
+    }
+//highlight-end
+
+    function _authorizeUpgrade(address) internal override onlyOwner {}
+}
+```
+
+You can modify the hook, so the token won't be burnable, by removing the `to_ == address(0)` requirement.
+
+The full code can be found [here](link).
+
+
+#### `QueryVerifier`
+
+This contract inherits iden3 `ZKPVerifier` that has two hooks - `_beforeProofSubmit(...)` and `_afterProofSubmit(...)`, which are called before and after proof verification respectively.
+We will override them and add our SBT-minting logic to them.
+We should specify at least one request id for our proofs (in our case – `AGE_VERIFY_REQUEST_ID`).
+
+```solidity
+pragma solidity 0.8.16;
+
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+
+import "@iden3/contracts/verifiers/ZKPVerifier.sol";
+import "@iden3/contracts/lib/GenesisUtils.sol";
+import "@iden3/contracts/interfaces/ICircuitValidator.sol";
+
+import "./interfaces/IQueryVerifier.sol";
+import "./interfaces/IVerifiedSBT.sol";
+
+contract QueryVerifier is IQueryVerifier, ZKPVerifier {
+    uint256 public constant AGE_VERIFY_REQUEST_ID = 1;
+
+    // address of the SBT Contract, that we discussed above
+    IVerifiedSBT public override sbtContract;
+
+    // mapping of addresses to identities
+    mapping(address => uint256) public override addressToUserId;
+
+    // VerificationInfo – struct, that stores the information about verification (sender address and minted token id)
+    mapping(uint256 => VerificationInfo) internal _verificationsInfo;
+
+    /* ... setters and getters should be here ...*/
+
+    function isUserVerified(uint256 userId_) public view override returns (bool) {
+        return _verificationsInfo[userId_].senderAddr != address(0);
+    }
+
+//highlight-start
+    function _beforeProofSubmit(
+        uint64,
+        uint256[] memory inputs_,
+        ICircuitValidator
+    ) internal override {
+        require(
+            !isUserVerified(_getIdentityId(inputs_)),
+            "QueryVerifier: identity with this identifier has already been verified"
+        );
+        require(
+            addressToUserId[msg.sender] == 0,
+            "QueryVerifier: current address has already been used to verify another identity"
+        );
+    }
+//highlight-end
+
+//highlight-start
+    function _afterProofSubmit(
+        uint64,
+        uint256[] memory inputs_,
+        ICircuitValidator
+    ) internal override {
+        uint256 tokenId_ = sbtContract.nextTokenId();
+        uint256 userId_ = _getIdentityId(inputs_);
+
+        _verificationsInfo[userId_] = VerificationInfo(msg.sender, tokenId_);
+        addressToUserId[msg.sender] = userId_;
+
+        sbtContract.mint(msg.sender);
+
+        emit Verified(userId_, msg.sender, tokenId_);
+    }
+}
+//highlight-end
+```
+
+The full code can be found [here](link).

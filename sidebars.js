@@ -52,6 +52,7 @@ const sidebars = {
     "tutorials/connecting-to-wallets",
     "tutorials/creating-transactions",
     "tutorials/swapping-tokens",
+    "tutorials/polygonid-replication-usage",
   ],
   howToGuides: [
     "how-to-guides",
