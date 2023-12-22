@@ -13,14 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added the "Polygon ID State Replication" page;
 - Use Cases:
   - Added the "Identity State Replication" doc;
-- How-to-Guides:
-  - Added the Collab.Land integration doc;
 - Contribution guide to the README;
 
 ### Changed
 
 - Updated links from gitlab to github in the whole documentation;
-- Updated the "Overview" doc;
 - Transferred the project to GitHub;
 
 ## [1.6.0] - 28-11-2023
