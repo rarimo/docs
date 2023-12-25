@@ -6,6 +6,7 @@ import Link from "@docusaurus/Link";
 import CardsTable from "@site/src/components/CardsTable";
 import HomepageHeader from "@site/src/components/HomepageHeader";
 import HomepageLinks from "@site/src/components/HomepageLinks";
+import HomepageUseCases from "@site/src/components/HomepageUseCases";
 import Avalanche from "@site/static/img/avalanche-avax-logo.svg";
 import Badge from "@site/static/img/Badge.svg";
 import BNB from "@site/static/img/bnb-logo.svg";
@@ -163,6 +164,7 @@ const secondCards = [
         "Cost-efficient scalability with on-demand state replication;",
       ],
     ],
+    url: "https://google.com",
   },
 ] as Card[];
 
@@ -253,7 +255,8 @@ export default function Home(): JSX.Element {
               <main>
                 <CardsTable cards={firstCards} title="Learn The Base Layer" />
                 <CardsTable cards={secondCards} title="Explore Ecosystem" />
-                {/*Todo: Show developer links */}
+                <HomepageUseCases />
+                {/*Todo: Show developer links*/}
                 {/*<HomepageDeveloperLinks />*/}
                 <div className="container">
                   <div className={clsx("bottomContent", styles.bottomContent)}>

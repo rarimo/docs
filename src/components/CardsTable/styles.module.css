@@ -11,6 +11,7 @@
     text-align: center;
     color: var(--primary-text-color-light);
     font-weight: 500;
+    text-transform: uppercase;
 }
   
   .cardsTableContainer {

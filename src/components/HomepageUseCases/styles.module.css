@@ -1,0 +1,142 @@
+.homepageUseCases {
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+    margin-bottom: 8rem;
+    width: 100%;
+}
+
+.homepageUseCasesTitle {
+    font-size: 2.625rem;
+    text-align: center;
+    color: var(--primary-text-color-light);
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.homepageUseCasesContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1.5rem;
+}
+
+.homepageUseCasesCard {
+    border: var(--primary-border);
+    background-color: var(--primary-bg-color);
+    background-image: radial-gradient(
+      117.02% 117.02% at 50% -17.02%,
+      rgba(255, 255, 255, 6%) 0%,
+      rgba(255, 255, 255, 0%) 100%
+    );
+    overflow: hidden;
+}
+
+.homepageUseCasesCardInner {
+  position: relative;
+  top: -0.0625rem;
+  left: -0.0625rem;
+  background-image: linear-gradient(to right,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem),linear-gradient(to bottom,var(--bg-rect-border-color) 0.0625rem,transparent 0.0625rem);
+  background-size: 3rem 3rem;
+  background-repeat: repeat;
+}
+
+.homepageUseCasesCardContent {
+  padding: 3rem;
+  padding-bottom: 6rem;
+  background-image: linear-gradient(180deg,rgba(0, 0, 0,0%) 0%,rgba(0, 0, 0,100%) 100%);
+  position: relative;
+  height: 100%;
+  cursor: pointer;
+  min-height: 14rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.homepageUseCasesCardContent:before {
+  content: "";
+  position: absolute;
+  top: -3rem;
+  right: 0;
+  bottom: 0;
+  left: -3rem;
+  background-image: url('/static/img/noise.png');
+  background-repeat: repeat;
+  background-size: 100vw 37.5rem;
+}
+
+.homepageUserCasesCaseItemContent {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transform: translateY(1rem);
+}
+
+.homepageUseCasesCaseItemImg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+.homepageUseCasesCaseItemTitle {
+  width: 100%;
+  color: var(--ifm-menu-color-active);
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.homepageUseCasesCaseItemTitleYellow {
+  color: #FEE1B9;
+}
+
+.homepageUseCasesCaseItemText {
+  bottom: -4rem;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.6, 1);
+  position: absolute;
+  color: var(--primary-text-color);
+  font-size: 0.8rem; 
+  line-height: 1.4;
+}
+
+@media all and (hover: hover) {
+    .homepageUserCasesCaseItemContent {
+        transition: transform 0.2s cubic-bezier(0.4, 0, 0.6, 1);
+    }
+
+    .homepageUseCasesCard:hover .homepageUserCasesCaseItemContent {
+        transform: translateY(-1.5rem);
+    }
+
+    .homepageUseCasesCaseItemText {
+        opacity: 0;
+        pointer-events: none;
+        bottom: -3rem;
+    }
+
+    .homepageUseCasesCard:hover .homepageUseCasesCaseItemText {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .homepageUseCasesCardContent {
+      padding-bottom: 3rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .homepageUseCasesContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .homepageUseCasesContainer {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
