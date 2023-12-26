@@ -181,6 +181,7 @@ span.DocSearch-Button-Placeholder {
   font-size: 1rem;
   font-family: var(--secondary-font-family);
   color: #8AB5A4;
+  padding: 0.5rem 1rem;
   border: 1px solid #8AB5A4;
   border-color: #8AB5A4;
   font-weight: 600;

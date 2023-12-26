@@ -54,17 +54,196 @@
   z-index: var(--z-index-default);
 }
 
-.bottomContent {
-  display: flex;
-  justify-content: space-around;
-  background: transparent;
-  margin: 10rem 0;
-}
-
 .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth {
   animation-delay: 1s;
   animation-duration: 3.5s;
   animation-iteration-count: infinite;
+}
+
+.buildingWrp {
+  background-color: #0F0F0F;
+  padding: 3rem 12rem 3rem 6rem;
+  margin: 0;
+  max-width: 100%;
+}
+
+.building {
+  display: flex;
+  justify-content: space-between;
+  gap: 8rem;
+  align-items: center;
+  background: transparent;
+  margin: 10rem 0;
+}
+
+.buildingDescription {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.buildingTitle {
+  color: var(rgba(255, 255, 255, 0.90));
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.buildingText {
+  color: rgba(255, 255, 255, 0.60);
+  line-height: 1.4;
+  font-size: 1.125rem;
+}
+
+.buildingImg {
+  max-width: 26.25rem;
+  width: 100%;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 0 1.5rem;
+}
+
+.linksTitle {
+  font-size: 2.625rem;
+  text-align: center;
+  color: var(--primary-text-color-light);
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-top: 8.75rem
+}
+
+.linksContent {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.linksItem {
+  border: var(--primary-border);
+  background:repeating-conic-gradient(#0000 0.000045%, #000d 0.0005%) var(--secondary-bg-color);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1.5rem;
+  color: #fff;
+  max-width: 18.75rem;
+  width: 100%;
+}
+
+.news {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+.newsTitle {
+  font-size: 2.625rem;
+  text-align: center;
+  color: var(--primary-text-color-light);
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-top: 8.75rem
+}
+
+.newsViewAll {
+  text-transform: capitalize;
+  color: rgba(255, 255, 255, 0.60);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.newsContent { 
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 3rem;
+  padding: 0 4.5rem;
+}
+
+.newsItem {
+  border: var(--primary-border);
+  background:repeating-conic-gradient(#0000 0.000045%, #000d 0.0005%) var(--secondary-bg-color);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  color: #fff;
+  width: 100%;
+  text-transform: capitalize;
+  min-height: 14rem;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.subscribe {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14rem 6rem 0 6rem;
+}
+
+.subscribeText {
+  display: flex;
+  flex-direction: column;
+}
+
+.subscribeTitle {
+  font-size: 2rem;
+  color: var(--primary-text-color-light);
+  font-weight: 500;
+}
+
+.subscribeDescription {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.60);
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.subscribeInputWrp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: var(--primary-border);
+  padding: 1rem;
+  width: 100%;
+  max-width: 20rem;
+}
+
+.subscribeInput {
+  background: 0;
+  border: 0;
+}
+
+.subscribeInput:focus {
+  outline: none;
+}
+
+.subscribeButton {
+  text-transform: uppercase;
+  color: var(--primary-text-color-light);
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  background: 0;
+  outline: none;
+  margin: 0;
+}
+
+.subscribeButton:hover {
+  color: var(--primary-text-color-light);
 }
 
 @media screen and (max-width: 1249px) {
@@ -112,6 +291,20 @@
     align-items: center;
     flex: 1 1;
     margin: 2rem 0;
+  }
+
+  .buildingWrp {
+    padding: 3.5rem 4rem;
+  }
+
+  .building {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .buildingDescription {
+    align-items: center;
+    text-align: center;
   }
 }
 
@@ -198,7 +391,8 @@
   align-items: center;
   justify-content: center;
 }
-.heroButtonSecondary{
+
+.linksButton {
   border: 0;
   text-transform: uppercase;
 }

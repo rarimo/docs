@@ -5,24 +5,26 @@ import Link from "@docusaurus/Link";
 // import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
 import CardsTable from "@site/src/components/CardsTable";
 import HomepageHeader from "@site/src/components/HomepageHeader";
-import HomepageLinks from "@site/src/components/HomepageLinks";
 import HomepageUseCases from "@site/src/components/HomepageUseCases";
 import Avalanche from "@site/static/img/avalanche-avax-logo.svg";
 import Badge from "@site/static/img/Badge.svg";
 import BNB from "@site/static/img/bnb-logo.svg";
 import Chain from "@site/static/img/chain.svg";
+import Discord from "@site/static/img/discord-icon.svg";
 import Ethereum from "@site/static/img/ethereum-classic-logo.svg";
 import ForEveryHuman from "@site/static/img/for-every-human.svg";
 import Layers from "@site/static/img/layers.svg";
+import LinkIcon from "@site/static/img/link-icon.svg";
 import Near from "@site/static/img/near-protocol-near-logo.svg";
 import Polygon from "@site/static/img/polygon-matic-logo.svg";
 import PolygonWhite from "@site/static/img/PolygonWhite.svg";
 import Shield from "@site/static/img/Shield.svg";
 import Solana from "@site/static/img/solana-sol-logo.svg";
+import Telegram from "@site/static/img/telegram-icon.svg";
 import Layout from "@theme/Layout";
 import aos from "aos";
 import clsx from "clsx";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import { Card } from "../types";
 import styles from "./index.module.css";
@@ -98,14 +100,14 @@ const firstCards = [
         <a
           href={"https://google.com/"}
           rel="noopener"
-          className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
+          className={clsx("heroButtonSecondary", styles.linksButton)}
         >
           Whitepaper
         </a>
         <a
           href={"https://google.com/"}
           rel="noopener"
-          className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
+          className={clsx("heroButtonSecondary", styles.linksButton)}
         >
           Protocol Proposals
         </a>
@@ -168,28 +170,170 @@ const secondCards = [
   },
 ] as Card[];
 
-function HomepageStartBuilding() {
+const news = [
+  {
+    title: "Indisputably Wise Insights into the Future of Digital",
+    url: "https://google.com/",
+  },
+  {
+    title: "worldcoin community on the successful launch of WorldID 2.0!",
+    url: "https://google.com/",
+  },
+  {
+    title: "All WorldID-verified users can now claim their credentials",
+    url: "https://google.com/",
+  },
+  {
+    title:
+      "roof of Humanity flow and gain access to exclusive humanity Discord channel",
+    url: "https://google.com/",
+  },
+];
+
+const submitFormSubscription = (
+  e: React.FormEvent<HTMLFormElement>,
+  email: string
+) => {
+  e.preventDefault();
+  console.log(email);
+};
+
+function Building(): JSX.Element {
   return (
-    <div className={clsx("startBuildingSection", styles.startBuildingSection)}>
-      <h1 className={clsx("second__title", styles.secondTitle)}>
-        Start Building with rarimo
-      </h1>
-      <p className={clsx("second__subtitle", styles.secondSubtitle)}>
-        Our community is here to help! Enjoy support tailored to the unique
-        needs of your project
-      </p>
-      <div
-        className={clsx("secondButtonContainer", styles.secondButtonContainer)}
-      >
-        <Link
-          className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
-          href="whitepaper"
-          type="doc"
-          id="whitepaper"
+    <div className={clsx("container building__wrp", styles.buildingWrp)}>
+      <div className={clsx("building", styles.building)}>
+        <img
+          className={clsx("building__img", styles.buildingImg)}
+          src="img/building-image.png"
+          data-aos="fade-up"
+        />
+        <div
+          className={clsx("building__description", styles.buildingDescription)}
         >
-          Whitepaper
-        </Link>
+          <h2
+            className={clsx("building__title", styles.buildingTitle)}
+            data-aos="fade-up"
+          >
+            Build fast with developer dashboard
+          </h2>
+          <p
+            className={clsx("building__text", styles.buildingText)}
+            data-aos="fade-up"
+          >
+            Build no-code and low-code identity enabled dApps with Rarimo
+            Developer Dashboard
+          </p>
+          <Link
+            className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
+            to="https://google.com/"
+            data-aos="fade-up"
+          >
+            LAUNCH
+          </Link>
+        </div>
       </div>
+    </div>
+  );
+}
+
+function Links(): JSX.Element {
+  return (
+    <div className={clsx("links", styles.links)}>
+      <p className={clsx("links__title", styles.linksTitle)} data-aos="fade-up">
+        Join the community
+      </p>
+      <div className={clsx("links__content", styles.linksContent)}>
+        <a
+          className={clsx("links__item", styles.linksItem)}
+          href="https://google.com/"
+        >
+          <Discord />
+          Discord
+        </a>
+        <a
+          className={clsx("links__item", styles.linksItem)}
+          href="https://google.com/"
+        >
+          <Telegram />
+          Telegram
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function News(): JSX.Element {
+  return (
+    <div className={clsx("news", styles.news)}>
+      <p className={clsx("news__title", styles.newsTitle)} data-aos="fade-up">
+        Latest news
+      </p>
+      <a
+        className={clsx("news__view-all", styles.newsViewAll)}
+        href="https://google.com/"
+        data-aos="fade-up"
+      >
+        View all
+      </a>
+      <div className={clsx("news__content", styles.newsContent)}>
+        {news.map((item, idx) => (
+          <a
+            className={clsx("news__item", styles.newsItem)}
+            href={item.url}
+            key={idx}
+            data-aos="fade-up"
+          >
+            <LinkIcon />
+            {item.title}
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Subscribe(): JSX.Element {
+  const [email, setEmail] = useState("");
+
+  return (
+    <div className={clsx("subscribe", styles.subscribe)}>
+      <div className={clsx("subscribe__text", styles.subscribeText)}>
+        <p
+          className={clsx("subscribe__title", styles.subscribeTitle)}
+          data-aos="fade-up"
+        >
+          Subscribe to our newsletter
+        </p>
+        <p
+          className={clsx(
+            "subscribe__description",
+            styles.subscribeDescription
+          )}
+          data-aos="fade-up"
+        >
+          Stay up-to-date about new features and supported apps
+        </p>
+      </div>
+      <form
+        onSubmit={(e) => submitFormSubscription(e, email)}
+        className={clsx("subscribe__input-wrp", styles.subscribeInputWrp)}
+        data-aos="fade-up"
+      >
+        <input
+          onInput={(e) => setEmail(e.currentTarget.value)}
+          className={clsx("subscribe__input", styles.subscribeInput)}
+          placeholder="Email"
+        />
+        <button
+          className={clsx(
+            "subscribe__button heroButton",
+            styles.subscribeButton
+          )}
+          type="submit"
+        >
+          Subscribe
+        </button>
+      </form>
     </div>
   );
 }
@@ -258,12 +402,10 @@ export default function Home(): JSX.Element {
                 <HomepageUseCases />
                 {/*Todo: Show developer links*/}
                 {/*<HomepageDeveloperLinks />*/}
-                <div className="container">
-                  <div className={clsx("bottomContent", styles.bottomContent)}>
-                    <HomepageStartBuilding />
-                    <HomepageLinks />
-                  </div>
-                </div>
+                <Building />
+                <Links />
+                <News />
+                <Subscribe />
               </main>
             </>
           );
