@@ -1,4 +1,5 @@
 import "aos/dist/aos.css";
+import "swiper/css";
 
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import Link from "@docusaurus/Link";
@@ -6,6 +7,7 @@ import Link from "@docusaurus/Link";
 import CardsTable from "@site/src/components/CardsTable";
 import HomepageHeader from "@site/src/components/HomepageHeader";
 import HomepageUseCases from "@site/src/components/HomepageUseCases";
+import { paramsMobile } from "@site/src/const";
 import Avalanche from "@site/static/img/avalanche-avax-logo.svg";
 import Badge from "@site/static/img/Badge.svg";
 import BNB from "@site/static/img/bnb-logo.svg";
@@ -24,10 +26,13 @@ import Telegram from "@site/static/img/telegram-icon.svg";
 import Layout from "@theme/Layout";
 import aos from "aos";
 import clsx from "clsx";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { register } from "swiper/element";
 
 import { Card } from "../types";
 import styles from "./index.module.css";
+
+register();
 
 const blockchains = [Ethereum, BNB, Solana, Near, Avalanche, Polygon];
 
@@ -263,6 +268,14 @@ function Links(): JSX.Element {
 }
 
 function News(): JSX.Element {
+  const swiperRef = useRef(null);
+
+  useEffect(() => {
+    Object.assign(swiperRef.current, paramsMobile);
+
+    swiperRef.current.initialize();
+  }, [swiperRef.current]);
+
   return (
     <div className={clsx("news", styles.news)}>
       <p className={clsx("news__title", styles.newsTitle)} data-aos="fade-up">
@@ -288,6 +301,29 @@ function News(): JSX.Element {
           </a>
         ))}
       </div>
+      <swiper-container
+        ref={swiperRef}
+        // should use class here, instead of className
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        class={clsx("news__swiper", styles.newsSwiper)}
+        init={false}
+        data-aos="fade-up"
+      >
+        {news.map((item, idx) => (
+          <swiper-slide
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            class={clsx("news__swiper-slide", styles.newsSwiperSlide)}
+            key={idx}
+          >
+            <a className={clsx("news__item", styles.newsItem)} href={item.url}>
+              <LinkIcon />
+              {item.title}
+            </a>
+          </swiper-slide>
+        ))}
+      </swiper-container>
     </div>
   );
 }

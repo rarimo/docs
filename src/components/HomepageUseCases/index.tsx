@@ -1,5 +1,8 @@
+import "swiper/css";
+
+import { paramsMobile } from "@site/src/const";
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import styles from "./styles.module.css";
 
@@ -13,7 +16,7 @@ type UseCase = {
   path: string;
 };
 
-export const useCasesList = [
+const useCasesList = [
   {
     img: "img/homepage-use-cases/mints.webp",
     modifier: "mints",
@@ -63,6 +66,14 @@ export const useCasesList = [
 ] as UseCase[];
 
 export default function HomepageUseCases() {
+  const swiperRef = useRef(null);
+
+  useEffect(() => {
+    Object.assign(swiperRef.current, paramsMobile);
+
+    swiperRef.current.initialize();
+  }, [swiperRef.current]);
+
   return (
     <>
       <p
@@ -139,6 +150,86 @@ export default function HomepageUseCases() {
             </div>
           ))}
         </div>
+        <swiper-container
+          ref={swiperRef}
+          // should use class here, instead of className
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          class={clsx(
+            "homepage-use-cases__swiper",
+            styles.homepageUseCasesSwiper
+          )}
+          init={false}
+          data-aos="fade-up"
+        >
+          {useCasesList.map((item, idx) => (
+            <swiper-slide
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              class={clsx(
+                "homepage-use-cases__swiper-slide",
+                styles.homepageUseCasesSwiperSlide
+              )}
+              key={idx}
+            >
+              <div
+                className={clsx(
+                  "homepage-use-cases__card",
+                  styles.homepageUseCasesCard
+                )}
+                key={idx}
+                data-aos="fade-up"
+              >
+                <div
+                  className={clsx(
+                    "homepage-use-cases__card-inner",
+                    styles.homepageUseCasesCardInner
+                  )}
+                >
+                  <div
+                    className={clsx(
+                      "homepage-use-cases__card-content",
+                      styles.homepageUseCasesCardContent
+                    )}
+                  >
+                    <img
+                      className={clsx(
+                        "homepage-use-cases__case-item-img",
+                        styles.homepageUseCasesCaseItemImg
+                      )}
+                      src={item.img}
+                      alt=""
+                    />
+                    <div
+                      className={clsx(
+                        "homepage-use-cases__case-item-content",
+                        styles.homepageUserCasesCaseItemContent
+                      )}
+                    >
+                      <h6
+                        className={clsx({
+                          [styles.homepageUseCasesCaseItemTitle]: true,
+                          [styles.homepageUseCasesCaseItemTitleYellow]:
+                            item.isYellow,
+                        })}
+                      >
+                        {item.title}
+                      </h6>
+                      <p
+                        className={clsx(
+                          "homepage-use-cases__case-item-text",
+                          styles.homepageUseCasesCaseItemText
+                        )}
+                      >
+                        {item.text}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </swiper-slide>
+          ))}
+        </swiper-container>
       </section>
     </>
   );

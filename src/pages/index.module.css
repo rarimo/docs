@@ -159,7 +159,7 @@
 }
 
 .newsContent { 
-  display: flex;
+  display: none;
   gap: 1.5rem;
   justify-content: center;
   margin-top: 3rem;
@@ -187,8 +187,10 @@
 .subscribe {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 14rem 6rem 0 6rem;
+  padding: 2rem 1.5rem;
+  gap: 1.5rem;
 }
 
 .subscribeText {
@@ -244,6 +246,35 @@
 
 .subscribeButton:hover {
   color: var(--primary-text-color-light);
+}
+
+.newsSwiper {
+  display: block;
+  overflow: hidden;
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.newsSwiperSlide {
+  display: flex;
+  justify-content: center;
+  max-width: 100vw;
+  width: 100vw;
+}
+
+@media all and (hover: hover) {
+  .newsContent {
+    display: flex;
+  }
+
+  .newsSwiper {
+    display: none
+  }
+
+  .subscribe {
+    padding: 14rem 6rem 0 6rem;
+    flex-direction: row;
+  }
 }
 
 @media screen and (max-width: 1249px) {
@@ -323,6 +354,12 @@
     align-items: center;
   }
 
+}
+
+@media screen and (max-width: 480px) {
+  .newsSwiperSlide {
+      max-width: calc(100vw - 3rem);
+  }
 }
 
 .bgImageFirst{
