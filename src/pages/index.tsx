@@ -11,6 +11,7 @@ import { paramsMobile } from "@site/src/const";
 import Avalanche from "@site/static/img/avalanche-avax-logo.svg";
 import Badge from "@site/static/img/Badge.svg";
 import BNB from "@site/static/img/bnb-logo.svg";
+import Brackets from "@site/static/img/brackets-icon.svg";
 import Chain from "@site/static/img/chain.svg";
 import Discord from "@site/static/img/discord-icon.svg";
 import Ethereum from "@site/static/img/ethereum-classic-logo.svg";
@@ -23,6 +24,7 @@ import PolygonWhite from "@site/static/img/PolygonWhite.svg";
 import Shield from "@site/static/img/Shield.svg";
 import Solana from "@site/static/img/solana-sol-logo.svg";
 import Telegram from "@site/static/img/telegram-icon.svg";
+import User from "@site/static/img/user-icon.svg";
 import Layout from "@theme/Layout";
 import aos from "aos";
 import clsx from "clsx";
@@ -39,7 +41,7 @@ const blockchains = [Ethereum, BNB, Solana, Near, Avalanche, Polygon];
 const firstCards = [
   {
     title: "Indentity Protocol",
-    Svg: Layers,
+    Svg: User,
     list: [
       [
         "Implements W3C DID standard;",
@@ -53,7 +55,7 @@ const firstCards = [
   },
   {
     title: "Bridging Protocol",
-    Svg: Chain,
+    Svg: Brackets,
     list: [
       [
         "Cross-chain transfers of NFTs, FTs, native coins;",

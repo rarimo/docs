@@ -34,15 +34,6 @@
   width: 100%;
 }
 
-.secondTitle {
-  font-size: 3.5rem;
-  font-weight: 600;
-  color: var(--primary-text-color-light);
-  font-family: var(--primary-font-family);
-  text-transform: uppercase;
-  text-align: start;
-}
-
 .startBuildingSection{
   display: flex;
   flex-direction: column;
@@ -62,9 +53,11 @@
 
 .buildingWrp {
   background-color: #0F0F0F;
-  padding: 3rem 12rem 3rem 6rem;
+  padding: 5rem 10rem;
   margin: 0;
   max-width: 100%;
+  border-top: var(--primary-border);
+  border-bottom: var(--primary-border);
 }
 
 .building {
@@ -73,7 +66,6 @@
   gap: 8rem;
   align-items: center;
   background: transparent;
-  margin: 10rem 0;
 }
 
 .buildingDescription {
@@ -108,7 +100,7 @@
 }
 
 .linksTitle {
-  font-size: 2.625rem;
+  font-size: 2rem;
   text-align: center;
   color: var(--primary-text-color-light);
   font-weight: 500;
@@ -143,7 +135,7 @@
 }
 
 .newsTitle {
-  font-size: 2.625rem;
+  font-size: 2rem;
   text-align: center;
   color: var(--primary-text-color-light);
   font-weight: 500;
@@ -191,6 +183,7 @@
   align-items: center;
   padding: 2rem 1.5rem;
   gap: 1.5rem;
+  border-bottom: var(--primary-border);
 }
 
 .subscribeText {
@@ -233,7 +226,7 @@
 
 .subscribeButton {
   text-transform: uppercase;
-  color: var(--primary-text-color-light);
+  color: var(--primary-text-color);
   padding: 0;
   font-size: 1rem;
   font-weight: 600;
@@ -245,7 +238,7 @@
 }
 
 .subscribeButton:hover {
-  color: var(--primary-text-color-light);
+  color: var(--primary-text-color);
 }
 
 .newsSwiper {
@@ -272,7 +265,7 @@
   }
 
   .subscribe {
-    padding: 14rem 6rem 0 6rem;
+    padding: 14rem 6rem 4.5rem 6rem;
     flex-direction: row;
   }
 }
@@ -286,10 +279,6 @@
 @media screen and (max-width: 996px) {
   .bgImageFirst, .bgImageSecond, .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
     display: none;
-  }
-  .secondTitle{
-    font-size: 5rem;
-    text-align: center;
   }
   .secondSubtitle{
     text-align: center;
@@ -341,10 +330,6 @@
 
 
 @media screen and (max-width: 625px) {
-  .secondTitle {
-    font-size: 2.625rem;
-    text-align: center;
-  }
   .secondSubtitle{
     text-align: center;
   }

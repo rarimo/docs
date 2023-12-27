@@ -7,7 +7,7 @@
 }
 
 .homepageUseCasesTitle {
-    font-size: 2.625rem;
+    font-size: 2rem;
     text-align: center;
     color: var(--primary-text-color-light);
     font-weight: 500;
@@ -88,7 +88,7 @@
 
 .homepageUseCasesCaseItemTitle {
   width: 100%;
-  color: var(--ifm-menu-color-active);
+  color: #8AB5A4;
   font-size: 1rem;
   font-weight: 500;
   text-transform: capitalize;
