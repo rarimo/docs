@@ -11,7 +11,7 @@
     color: var(--primary-text-color-light);
     font-weight: 600;
     text-transform: uppercase;
-    margin-bottom: 3rem;
+    margin: 0 3rem 3rem 3rem;
 }
   
   .cardsTableContainer {
@@ -31,5 +31,10 @@
   @media screen and (max-width: 625px) {
     .cardsTableCard {
       flex: 0 100%;
+    }
+
+    .cardsTableTitle {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
     }
   }

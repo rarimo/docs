@@ -251,6 +251,10 @@ span.DocSearch-Button-Placeholder {
     margin-bottom: 0;
   }
 
+  .col ~ .col {
+    display: none;
+  }
+
   .footer__item {
     display: flex;
     justify-content: center;

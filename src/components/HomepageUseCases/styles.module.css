@@ -12,6 +12,7 @@
     color: var(--primary-text-color-light);
     font-weight: 600;
     text-transform: uppercase;
+    margin: 0 3rem 3rem 3rem;
 }
 
 .homepageUseCasesContainer {
@@ -157,6 +158,13 @@
     .homepageUseCasesContainer {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+  
+@media screen and (max-width: 625px) {
+  .homepageUseCasesTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
 }
 
 @media screen and (max-width: 480px) {
