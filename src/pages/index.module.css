@@ -195,6 +195,7 @@
   font-size: 2rem;
   color: var(--primary-text-color-light);
   font-weight: 500;
+  margin: 0 0 0.5rem 0;
 }
 
 .subscribeDescription {
