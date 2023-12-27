@@ -3,7 +3,7 @@ title: Polygon ID Replication Usage
 ---
 
 # Polygon ID x Rarimo Collaboration
-<!-- TODO: refactor, it's just a very early version of the document. It may changed unpredictably -->
+<!-- it's just a very early version of the document. It may changed unpredictably -->
 
 Rarimo has an integration with Polygon ID, that allows replication of the state to other chains.
 For example, the issuer, whose state exists on Polygon, can be replicated to another chain, e.g. Ethereum, so that the claims he issued can be proven in Ethereum DApp.
@@ -39,7 +39,7 @@ It is desired to make them upgradeable, but we will try to make them as simple a
 
 Let's start from writing our SBT contract.
 Our goal, as stated before - to mint an SBT on successful verification.
-Here is the template of the contract, that we will fill (we will use [OpenZeppelin](link) ERC721 contracts, don't forget to clone them):
+Here is the template of the contract, that we will fill (we will use [OpenZeppelin](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/v4.4.0/contracts/token/ERC721/extensions) ERC721 contracts, don't forget to clone them):
 
 ```solidity
 pragma solidity 0.8.16;
@@ -140,7 +140,6 @@ contract VerifiedSBT is ERC721Enumerable {
 Great! Now we need to write a `QueryVerifier` and we are ready to use Polygon ID State Replication.
 You can modify the hook, so the token won't be burnable, by removing the `to_ == address(0)` requirement.
 
-The full code can be found [here](link).
 
 #### `QueryVerifier`
 
@@ -161,7 +160,7 @@ import "@iden3/contracts/interfaces/ICircuitValidator.sol";
 
 import "./interfaces/IVerifiedSBT.sol";
 
-contract MyVerifier is ZKPVerifier {
+contract QueryVerifier is ZKPVerifier {
     //the request id, which will be used in the proofs
     uint256 public constant AGE_VERIFY_REQUEST_ID = 1;
 
@@ -265,5 +264,163 @@ contract QueryVerifier is ZKPVerifier {
 }
 ```
 
-The full code can be found [here](link).
+The full code can be found [here](https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/QueryVerifier.sol).
 Note, that created above contracts are "education-only", and are slightly different from our production implementation.
+
+### Front-end
+
+The Front-end requests the QR-code from the back-end service and shows it on the page.
+User can scan this QR-code with his Polygon ID Wallet and generate a proof, if he possess the valid credentials.
+After that, user can use the relayer to transit the state from Polygon to Ethereum.
+
+Let's start by writing the function that creates the request to the back-end service.
+The service will return the QR-code in JSON format, which we will display.
+We should specify the following information in the request:
+- `id` – identifier stored on the wallet SDK;
+- `thid` – id of the message thread;
+- `from` –  from where the authentication request comes, i.e. the identifier of the identity from which a Verifier requests proof (`VITE_REQUEST_BUILD_SENDER` in environment files);
+- `typ` – iden3comm Media Type, i.e. file format for the type field. (For example, JSON)
+- `type` – type of iden3comm Protocol Message; type of request; it could be an auth request, proof request, or a credential offer
+- `body`, that consists of: 
+    - `reason` – reason of authentication (it could be age verification or simply a test flow)
+    - `message` – message to be signed; can be left blank
+    - `callbackUrl` – URI to which requested information is sent and response is received
+    - `scope` – information related to the proof request and the requirements to be fulfilled by the proof generated and shared from mobile.
+    It is in the form of an array of proofs that the SDK generates.
+
+You can provide other information as well, for more explanation, check [this](https://devs.polygonid.com/docs/wallet/wallet-sdk/polygonid-sdk/iden3comm/auth-requests/).
+
+The code may look like this:
+```ts
+import { config } from '@config'
+import { v4 as uuidv4 } from 'uuid'
+
+import { api } from '@/api'
+import {
+  CLAIM_TYPES_MAP_OFF_CHAIN,
+  CLAIM_TYPES_MAP_ON_CHAIN,
+} from '@/contexts/ZkpContext/consts'
+import { ClaimTypes } from '@/contexts/ZkpContext/enums'
+
+export const createRequestOnChain = (
+  reason: string,
+  message: string,
+  sender: string,
+  callbackUrl: string,
+) => {
+  const uuid = uuidv4()
+
+  return {
+    id: uuid,
+    thid: uuid,
+    from: sender,
+    typ: 'application/iden3comm-plain-json',
+    type: 'https://iden3-communication.io/authorization/1.0/request',
+    body: {
+      reason: reason,
+      // message: message,
+      callbackUrl: callbackUrl,
+      scope: [],
+    },
+  }
+}
+
+export const buildRequestOnChain = async (
+  callbackBaseUrl: string,
+  claimType: ClaimTypes, // we have defined this enum in another file. it's equal to a string 'KYCAgeCredential' in this demo.
+) => {
+  const { data } = await api.get<{
+    verification_id: string
+    jwt: string
+  }>('/integrations/verify-proxy/v1/public/verify/request')
+
+  const request = createRequestOnChain(
+    'SBT airdrop',
+    '', 
+    config.REQUEST_BUILD_SENDER,
+    `${callbackBaseUrl}/integrations/verify-proxy/v1/public/verify/callback/${data.verification_id}`,
+  )
+
+  return {
+    request: {
+      ...request,
+      id: data.verification_id,
+      thid: data.verification_id,
+      body: {
+        ...request.body,
+        scope: [CLAIM_TYPES_MAP_ON_CHAIN[claimType]],
+      },
+    },
+    jwtToken: data.jwt,
+  }
+}
+
+export const getJWZ = async (jwtToken: string, verificationId: string) => {
+  const { data } = await api.get<{
+    jwz: string
+  }>(`/integrations/verify-proxy/v1/public/verify/response/${verificationId}`, {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  })
+
+  return data.jwz
+}
+```
+
+After getting a JWZ from `getJWZ(...)` function, we can submit our proof to the on-chain contract using the following code:
+
+```ts
+/* ... */
+
+const submitZkp = useCallback(async () => {
+    setIsSubmitting(true)
+
+    try {
+        if (!jwzToken) throw new TypeError('ZKP is not defined')
+
+        const zkProofPayload = JSON.parse(jwzToken.getPayload())
+
+        const zkProof = zkProofPayload.body.scope[0] as ZKProof
+
+        const txBody = getProveIdentityTxBody(
+            '1',
+            zkProof.pub_signals.map(el => BigInt(el)),
+            [zkProof.proof.pi_a[0], zkProof.proof.pi_a[1]],
+            [
+            [zkProof.proof.pi_b[0][1], zkProof.proof.pi_b[0][0]],
+            [zkProof.proof.pi_b[1][1], zkProof.proof.pi_b[1][0]],
+            ],
+            [zkProof.proof.pi_c[0], zkProof.proof.pi_c[1]],
+        )
+
+        const tx = await provider?.signAndSendTx?.({
+            to: config?.[
+                `QUERY_VERIFIER_CONTRACT_ADDRESS_${selectedChainToPublish}`
+            ],
+            ...txBody,
+        })
+
+        verificationSuccessTx.set((tx as EthTransactionResponse).transactionHash)
+
+        navigate(RoutesPaths.authSuccess)
+        } catch (error) {
+        ErrorHandler.process(error)
+        }
+
+        setIsSubmitting(false)
+    }, [
+        getProveIdentityTxBody,
+        jwzToken,
+        navigate,
+        provider,
+        selectedChainToPublish,
+        verificationSuccessTx,
+    ])
+
+/* ... */
+```
+
+It is enough to process the "proof flow" and mint an SBT for the user.
+For the whole code example with the UI visit the [GitHub](https://github.com/rarimo/web-client-polygonid/tree/main).
+
