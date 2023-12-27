@@ -1,11 +1,11 @@
 .subscribe {
   display: flex;
   justify-content: space-between;
-  flex-direction: column;
   align-items: center;
-  padding: 2rem 1.5rem;
   gap: 1.5rem;
   border-bottom: var(--primary-border);
+  padding: 14rem 6rem 4.5rem 6rem;
+  flex-direction: row;
 }
 
 .subscribeText {
@@ -64,10 +64,10 @@
   color: var(--primary-text-color);
 }
 
-@media all and (hover: hover) {
+@media screen and (max-width: 768px) {
   .subscribe {
-    padding: 14rem 6rem 4.5rem 6rem;
-    flex-direction: row;
+    padding: 2rem 1.5rem;
+    flex-direction: column;
   }
 }
 
