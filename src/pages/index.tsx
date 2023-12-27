@@ -82,7 +82,15 @@ const firstCards = [
         "Cost-efficient signature scheme (TSS);",
       ],
       [
-        "Supported Blockchain",
+        <span
+          className={clsx(
+            "homepage-base-layer__text",
+            styles.homepageBaseLayerText
+          )}
+          key={0}
+        >
+          Supported Blockchain
+        </span>,
         <span
           className={clsx(
             "homepage-base-layer__blockchains",
@@ -226,8 +234,9 @@ function Building(): JSX.Element {
             className={clsx("building__text", styles.buildingText)}
             data-aos="fade-up"
           >
-            Build no-code and low-code identity enabled dApps with Rarimo
-            Developer Dashboard
+            {
+              "Build no-code and low-code identity enabled dApps with \nRarimo Developer Dashboard"
+            }
           </p>
           <Link
             className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}

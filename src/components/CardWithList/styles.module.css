@@ -56,4 +56,5 @@
   display: flex;
   gap: 3rem;
   flex-wrap: wrap;
+  margin-bottom: 0.75rem;
 }

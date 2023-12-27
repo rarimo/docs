@@ -85,6 +85,7 @@
   color: rgba(255, 255, 255, 0.60);
   line-height: 1.4;
   font-size: 1.125rem;
+  white-space: pre-line;
 }
 
 .buildingImg {
@@ -103,14 +104,14 @@
   font-size: 2rem;
   text-align: center;
   color: var(--primary-text-color-light);
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   margin-top: 8.75rem
 }
 
 .linksContent {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   justify-content: center;
 }
 
@@ -138,7 +139,7 @@
   font-size: 2rem;
   text-align: center;
   color: var(--primary-text-color-light);
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   margin-top: 8.75rem
 }
@@ -194,7 +195,7 @@
 .subscribeTitle {
   font-size: 2rem;
   color: var(--primary-text-color-light);
-  font-weight: 500;
+  font-weight: 600;
   margin: 0 0 0.5rem 0;
 }
 
@@ -416,7 +417,7 @@
 }
 
 .linksButton {
-  border: 0;
+  border: 1px solid transparent;
   text-transform: uppercase;
 }
 
@@ -424,4 +425,12 @@
   display: flex;
   gap: 1rem;
   margin-top: 1.75rem;
+}
+
+.homepageBaseLayerText {
+  font-size: 0.875rem;
+  color: var(--primary-text-color);
+  font-family: var(--secondary-font-family);
+  font-weight: 400;
+  font-style: normal;
 }

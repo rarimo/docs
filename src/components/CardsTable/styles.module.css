@@ -1,8 +1,7 @@
 .cardsTable {
     display: flex;
     align-items: center;
-    padding: 2rem 0;
-    margin-bottom: 8rem;
+    margin-bottom: 8.75rem;
     width: 100%;
 }
 
@@ -10,8 +9,9 @@
     font-size: 2rem;
     text-align: center;
     color: var(--primary-text-color-light);
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
+    margin-bottom: 3rem;
 }
   
   .cardsTableContainer {

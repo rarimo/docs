@@ -102,6 +102,12 @@ html {
   color: var(--primary-text-color);
 }
 
+.footer__items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .footer__social-link svg {
   height:  16px;
   width: 16px;
@@ -110,9 +116,13 @@ html {
   opacity: 1;
 }
 
+.footer__social-link:hover {
+  color: #8AB5A4;
+  text-decoration: none;
+}
+
 .footer__social-link:hover svg  {
-  opacity: 0.7;
-  color: transparent;
+  color: #8AB5A4;
 }
 
 .footer__link-separator {
@@ -128,9 +138,6 @@ html {
 
 .footer__link-item {
   height: 2rem;
-}
-.footer__item{
-  margin-top: 0.3rem;
 }
 
 .DocSearch.DocSearch-Button{
@@ -161,11 +168,14 @@ span.DocSearch-Button-Placeholder {
   color: var(--primary-text-color-dark);
   border: none;
   white-space: nowrap;
+  transition: 0.1s;
 }
+
 
 .heroButton:hover{
   color: var(--primary-text-color-dark);
   text-decoration: none;
+  background-color: #62aa8c;
 }
 
 .heroButton__svg{
@@ -186,6 +196,13 @@ span.DocSearch-Button-Placeholder {
   border-color: #8AB5A4;
   font-weight: 600;
   cursor: pointer;
+  transition: 0.1s;
+}
+
+.heroButtonSecondary:hover{
+  text-decoration: none;
+  color: #8AB5A4;
+  background-color: rgba(138, 181, 164, 0.1)
 }
 
 .svgContainer {
@@ -205,19 +222,21 @@ span.DocSearch-Button-Placeholder {
 }
 
 @media screen and (max-width: 996px) {
-  .footer__social-link {
-    display: none;
-  }
   .footer__items {
     display: flex;
     justify-content: start;
   }
   .footer--dark {
     background: var(--primary-text-color-dark);
-    height: 100px;
     overflow: hidden;
   }
-  .footer__links.col{
-    flex: 1 0;
+
+  .footer__links .col {
+    margin-bottom: 0;
+  }
+
+  .footer__item {
+    display: flex;
+    justify-content: center;
   }
 }

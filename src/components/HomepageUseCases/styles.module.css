@@ -10,7 +10,7 @@
     font-size: 2rem;
     text-align: center;
     color: var(--primary-text-color-light);
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
 }
 
@@ -90,7 +90,7 @@
   width: 100%;
   color: #8AB5A4;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: capitalize;
 }
 
@@ -141,7 +141,7 @@
     }
 
     .homepageUseCasesCardContent {
-      padding: 3rem;
+      padding: 2rem;
     }
 
     .homepageUseCasesContainer {
