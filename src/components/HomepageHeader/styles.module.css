@@ -29,6 +29,10 @@
     width: 100%;
 }
 
+.heroWordWrp {
+    display: inline;
+}
+
 .heroTitle {
     font-size: 5rem;
     font-weight: 700;
@@ -53,6 +57,10 @@
 
     .heroContent{
         max-width: 100%;
+    }
+    
+    .heroWordWrp {
+        display: block;
     }
 }
 

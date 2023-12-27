@@ -136,32 +136,36 @@ export default function HomepageHeader() {
       <div className={clsx("hero__content container", styles.heroContent)}>
         <h1 className={clsx("hero__title", styles.heroTitle)}>
           <div>
-            {firstWord.map(({ text, delay }, idx) => (
-              <span
-                key={idx}
-                style={{ display: "inline-block" }}
-                data-aos="fade-up"
-                data-aos-delay={delay}
-                data-aos-duration="400"
-              >
-                {text}
-              </span>
-            ))}
+            <div className={clsx("hero__word-wrp", styles.heroWordWrp)}>
+              {firstWord.map(({ text, delay }, idx) => (
+                <span
+                  key={idx}
+                  style={{ display: "inline-block" }}
+                  data-aos="fade-up"
+                  data-aos-delay={delay}
+                  data-aos-duration="400"
+                >
+                  {text}
+                </span>
+              ))}
+            </div>
 
             <span data-aos="fade-up" data-aos-delay="700">
               {" "}
             </span>
-            {secondWord.map(({ text, delay }, idx) => (
-              <span
-                key={idx}
-                style={{ display: "inline-block" }}
-                data-aos="fade-up"
-                data-aos-delay={delay}
-                data-aos-duration="400"
-              >
-                {text}
-              </span>
-            ))}
+            <div className={clsx("hero__word-wrp", styles.heroWordWrp)}>
+              {secondWord.map(({ text, delay }, idx) => (
+                <span
+                  key={idx}
+                  style={{ display: "inline-block" }}
+                  data-aos="fade-up"
+                  data-aos-delay={delay}
+                  data-aos-duration="400"
+                >
+                  {text}
+                </span>
+              ))}
+            </div>
           </div>
           <div>
             {thirdWord.map(({ text, delay }, idx) => (
