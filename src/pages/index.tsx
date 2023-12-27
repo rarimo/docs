@@ -12,7 +12,6 @@ import Avalanche from "@site/static/img/avalanche-avax-logo.svg";
 import Badge from "@site/static/img/Badge.svg";
 import BNB from "@site/static/img/bnb-logo.svg";
 import Brackets from "@site/static/img/brackets-icon.svg";
-import Chain from "@site/static/img/chain.svg";
 import Discord from "@site/static/img/discord-icon.svg";
 import Ethereum from "@site/static/img/ethereum-classic-logo.svg";
 import ForEveryHuman from "@site/static/img/for-every-human.svg";
