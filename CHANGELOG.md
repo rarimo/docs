@@ -23,6 +23,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated the "Overview" doc;
 - Transferred the project to GitHub;
 
+### Fixed
+
+- Minor markup fix in Proof of Humanity tech reference;
+
 ## [1.6.0] - 28-11-2023
 
 ### Added
