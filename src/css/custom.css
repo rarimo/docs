@@ -136,6 +136,10 @@ html {
   justify-content: start;
 }
 
+.footer__title {
+  margin: 0;
+}
+
 .footer__links .footer__col:first-child .footer__items {
   justify-content: space-between;
   height: 100%;
