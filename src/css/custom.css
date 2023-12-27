@@ -136,6 +136,11 @@ html {
   justify-content: start;
 }
 
+.footer__links .footer__col:first-child .footer__items {
+  justify-content: space-between;
+  height: 100%;
+}
+
 .footer__link-item {
   height: 2rem;
 }
