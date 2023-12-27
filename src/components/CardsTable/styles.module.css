@@ -11,7 +11,7 @@
     color: var(--primary-text-color-light);
     font-weight: 600;
     text-transform: uppercase;
-    margin: 0 3rem 3rem 3rem;
+    margin: 6rem 3rem 3rem 3rem;
 }
   
   .cardsTableContainer {
@@ -26,6 +26,32 @@
 
   .cardsTableCard:last-child:nth-child(odd) {
     flex: 0 100%;
+  }
+
+  .cardsTableSwiper {
+    display: none;
+    padding: 0 1.5rem;
+  }
+
+  .cardsTableSwiperSlide {
+    height: 100%;
+    max-width: calc(100vw - 3rem);
+    width: 100%;
+  }
+
+  .cardsTableSwiperSlide .cardsTableCard {
+    height: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .cardsTableMobile {
+      display: none;
+    }
+
+    .cardsTableSwiper {
+      display: flex;
+      align-items: stretch;
+    }
   }
   
   @media screen and (max-width: 625px) {

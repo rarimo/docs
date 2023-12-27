@@ -33,11 +33,6 @@
   width: 100%;
 }
 
-.linksButton {
-  border: 1px solid transparent;
-  text-transform: uppercase;
-}
-
 @media screen and (max-width: 625px) {
   .linksTitle {
     font-size: 1.5rem;

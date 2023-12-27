@@ -27,7 +27,7 @@ import Layout from "@theme/Layout";
 import aos from "aos";
 import clsx from "clsx";
 import React, { useRef } from "react";
-import { register } from "swiper/element";
+import { register } from "swiper/element/bundle";
 
 import { Card } from "../types";
 import styles from "./index.module.css";
@@ -243,7 +243,11 @@ export default function Home(): JSX.Element {
               />
               <main>
                 <CardsTable cards={firstCards} title="Learn The Base Layer" />
-                <CardsTable cards={secondCards} title="Explore Ecosystem" />
+                <CardsTable
+                  cards={secondCards}
+                  title="Explore The Ecosystem"
+                  isSwiperOnMobile={true}
+                />
                 <HomepageUseCases />
                 {/*Todo: Show developer links*/}
                 {/*<HomepageDeveloperLinks />*/}
