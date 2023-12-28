@@ -53,6 +53,8 @@
 
     .heroBanner {
         margin: 2rem;
+        margin-bottom: 0;
+        padding-bottom: 0;
     }
 
     .heroContent{

@@ -12,7 +12,7 @@
     color: var(--primary-text-color-light);
     font-weight: 600;
     text-transform: uppercase;
-    margin: 6rem 3rem 3rem 3rem;
+    margin: 3rem;
 }
 
 .homepageUseCasesContainer {
@@ -186,6 +186,10 @@
 }
   
 @media screen and (max-width: 625px) {
+  .homepageUseCases {
+    margin-bottom: 1.5rem;
+  }
+
   .homepageUseCasesTitle {
     font-size: 1.5rem;
     margin-bottom: 1rem;

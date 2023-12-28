@@ -36,5 +36,6 @@
 @media screen and (max-width: 625px) {
   .linksTitle {
     font-size: 1.5rem;
+    margin-top: 3.5rem;
   }
 }
