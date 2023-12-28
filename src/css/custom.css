@@ -58,6 +58,7 @@
   --swiper-pagination-bullet-horizontal-gap: 0.275rem;
   --swiper-pagination-bullet-border-radius: 0;
   --swiper-pagination-bullet-inactive-color: rgba(255, 255, 255, 0.38);
+  --swiper-pagination-bullet-inactive-opacity: 1;
   --swiper-pagination-color: var(--primary-main);
 }
 
@@ -227,7 +228,7 @@ span.DocSearch-Button-Placeholder {
   font-family: var(--secondary-font-family);
   color: var(--primary-main);
   padding: 0.5rem 1rem;
-  border: 1px solid var(--primary-main);
+  border: 1px solid rgba(138, 181, 164, 0.5);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease-out;
@@ -290,6 +291,10 @@ span.DocSearch-Button-Placeholder {
     margin-right: 3.75rem;
     width: 2.5rem;
     height: 2.5rem;
+  }
+
+  .heroButton {
+    padding: 1rem 2.25rem;
   }
 
   .navbar__toggle {

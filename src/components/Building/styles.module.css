@@ -73,5 +73,10 @@
 
   .buildingText {
     white-space: normal;
+    font-size: 0.875rem;
+  }
+
+  .buildingImg {
+    padding: 0 1.5rem;
   }
 }

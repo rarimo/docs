@@ -17,7 +17,7 @@ function isStaging() {
 }
 
 const metaDescription =
-  "Rarimo developer documentation. Learn to use cross-chain self-sovereign identity protocol, zero-knowledge proofs, RariMe Snap, token bridging, and more.";
+  "Learn to use cross-chain self-sovereign identity protocol, zero-knowledge proofs, RariMe Snap, token bridging, and more.";
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
@@ -83,12 +83,18 @@ module.exports = {
         items: [
           {
             href: "https://discord.gg/cfrH3Fe7ke",
-            label: "Discord",
+            html: `
+            <a class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Twitter">
+            Discord <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="currentColor"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="currentColor"/></g></svg>
+            </a>`,
             position: "right",
           },
           {
             href: "https://github.com/rarimo",
-            label: "GitHub",
+            html: `
+            <a class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Twitter">
+            GitHub <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="currentColor"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="currentColor"/></g></svg>
+            </a>`,
             position: "right",
           },
         ],
@@ -114,7 +120,7 @@ module.exports = {
             items: [
               {
                 html: `
-                <span>Navigation</span>`,
+                <span style="font-weight: 500">Navigation</span>`,
               },
               {
                 html: `
@@ -138,7 +144,7 @@ module.exports = {
             items: [
               {
                 html: `
-                <span>Follow Us</span>`,
+                <span style="font-weight: 500">Follow Us</span>`,
               },
               {
                 html: `

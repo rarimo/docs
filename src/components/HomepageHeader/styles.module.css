@@ -1,5 +1,5 @@
 .heroBanner {
-    padding: 4rem 0;
+    padding: 4rem 0 0 0;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -17,6 +17,7 @@
     max-width: 75%;
     position: relative;
     z-index: var(--z-index-default);
+    padding: 0;
 }
 
 .heroSubtitle{
@@ -28,9 +29,9 @@
 
 .buttonContainer{
     display: flex;
-    margin-top: 1rem;
     justify-content: center;
     width: 100%;
+    margin-top: 1.75rem;
 }
 
 .heroFirstLineWrp {
@@ -51,6 +52,7 @@
     font-family: var(--primary-font-family);
     text-transform: uppercase;
     text-align: center;
+    margin-bottom: 2rem;
 }
 .heroButton__svg{
     color: var(--primary-bg-color);
@@ -63,7 +65,7 @@
     }
 
     .heroBanner {
-        margin: 2rem;
+        margin: 2rem 1.5rem;
         margin-bottom: 0;
         padding-bottom: 0;
     }

@@ -137,8 +137,8 @@
 
 .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
   position: absolute;
-  width: 68px;
-  height: 68px;
+  width: 3rem;
+  height: 3rem;
   border-width: 0 1px 1px 0;
   border-style: solid;
   border-color: rgba(255, 255, 255, 0.05);

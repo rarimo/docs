@@ -27,7 +27,7 @@ export default function HomeCard(card: HomeCardType) {
         )}
       >
         {card.list.map((innerList, idx) => (
-          <p key={idx}>
+          <ul key={idx}>
             {innerList.map((item, idx) =>
               typeof item === "string" ? (
                 <li
@@ -43,7 +43,7 @@ export default function HomeCard(card: HomeCardType) {
                 item
               )
             )}
-          </p>
+          </ul>
         ))}
       </div>
       <div className={clsx("home-card__button-wrp", styles.homeCardButtonWrp)}>
