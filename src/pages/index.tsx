@@ -31,7 +31,7 @@ register();
 
 const baseLayerCards: HomeCard[] = [
   {
-    title: "Indentity Protocol",
+    title: "Identity Protocol",
     IconName: UserIcon,
     list: [
       [

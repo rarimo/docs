@@ -119,6 +119,31 @@ a:hover {
 html {
   background-color: var(--primary-bg-color);
 }
+
+.header__social-link {
+  display: flex;
+  align-items: center;
+  height: 1.5rem;
+  color: var(--primary-text-color);
+}
+
+.header__social-link svg {
+  height:  16px;
+  width: 16px;
+  margin-left: 0.5rem;
+  fill: rgb(116, 116, 116);
+  opacity: 1;
+}
+
+.header__social-link:hover {
+  color: var(--primary-main);
+  text-decoration: none;
+}
+
+.header__social-link:hover svg  {
+  color: var(--primary-main);
+}
+
 .footer--dark {
   --ifm-footer-background-color: transparent;
   z-index: var(--z-index-default);

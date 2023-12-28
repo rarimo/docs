@@ -11,6 +11,7 @@
   display: flex;
   justify-content: space-between;
   align-self: stretch;
+  margin-bottom: 1rem;
 }
 
 .homeCardIconWrp {

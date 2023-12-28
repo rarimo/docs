@@ -88,4 +88,12 @@
     .subscribeTitle {
       font-size: 1.5rem;
     }
+
+    .subscribeForm {
+      padding: 1rem;
+    }
+
+    .subscribeButton {
+      padding: 0;
+    }
 }
