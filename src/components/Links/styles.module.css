@@ -11,7 +11,8 @@
   color: var(--primary-text-color-light);
   font-weight: 600;
   text-transform: uppercase;
-  margin-top: 8.75rem
+  margin-top: 8.75rem;
+  margin-bottom: 0;
 }
 
 .linksContent {

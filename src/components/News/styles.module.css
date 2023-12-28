@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 1.5rem;
 }
 
 .newsTitle {
@@ -27,7 +26,6 @@
   gap: 1.5rem;
   justify-content: center;
   margin-top: 3rem;
-  padding: 0 4.5rem;
 }
 
 .newsItem {
@@ -82,6 +80,11 @@
 @media screen and (max-width: 625px) {
   .newsTitle {
     font-size: 1.5rem;
+    line-height: normal;
     margin-top: 3.5rem;
+  }
+
+  .newsSwiper {
+    margin-top: 2rem;
   }
 }

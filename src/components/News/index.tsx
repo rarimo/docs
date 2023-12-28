@@ -35,7 +35,7 @@ export default function News(): JSX.Element {
   }, [swiperRef.current]);
 
   return (
-    <div className={clsx("news", styles.news)}>
+    <div className={clsx("news container", styles.news)}>
       <p className={clsx("news__title", styles.newsTitle)} data-aos="fade-up">
         Latest news
       </p>

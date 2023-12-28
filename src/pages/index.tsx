@@ -176,6 +176,56 @@ export default function Home(): JSX.Element {
   const light = useRef(null);
   return (
     <Layout>
+      <HomepageHeader />
+      <div className={clsx("bgImageFirst", styles.bgImageFirst)} />
+      <div
+        className={clsx("bgImageSecond", styles.bgImageSecond)}
+        ref={light}
+      />
+      <div
+        data-aos="fade-up"
+        className={clsx(
+          "bgImageThird squareWaveAnimationDown",
+          styles.bgImageThird
+        )}
+      />
+      <div
+        data-aos="fade-up"
+        className={clsx(
+          "bgImageFourth squareWaveAnimationUp",
+          styles.bgImageFourth
+        )}
+      />
+      <div
+        data-aos="fade-up"
+        className={clsx(
+          "bgImageFifth squareWaveAnimationUp",
+          styles.bgImageFifth
+        )}
+      />
+      <div
+        data-aos="fade-up"
+        className={clsx(
+          "bgImageSixth squareWaveAnimationDown",
+          styles.bgImageSixth
+        )}
+      />
+      <main>
+        <CardsSection cards={baseLayerCards} title="Learn The Base Layer" />
+        <CardsSection
+          cards={ecosystemCards}
+          title="Explore The Ecosystem"
+          isSwiperOnMobile={true}
+        />
+        <HomepageUseCases />
+        {/*Todo: Show developer links*/}
+        {/*<HomepageDeveloperLinks />*/}
+        <Building />
+        <Links />
+        <News />
+        <Subscribe />
+      </main>
+
       <BrowserOnly>
         {() => {
           aos.init({
@@ -189,67 +239,14 @@ export default function Home(): JSX.Element {
           document.addEventListener("mousemove", function ({ pageX, pageY }) {
             const x = pageX;
             const y = pageY;
-            const spotlightSize = "transparent 80px, rgba(0, 0, 0, 0.6) 200px)";
+            const spotlightSize =
+              "rgba(255, 255, 255, 0.02) 80px, var(--primary-bg-color) 200px)";
             if (light.current) {
               light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`;
             }
           });
-          return (
-            <>
-              <HomepageHeader />
-              <div className={clsx("bgImageFirst", styles.bgImageFirst)} />
-              <div
-                className={clsx("bgImageSecond", styles.bgImageSecond)}
-                ref={light}
-              />
-              <div
-                data-aos="fade-up"
-                className={clsx(
-                  "bgImageThird squareWaveAnimationDown",
-                  styles.bgImageThird
-                )}
-              />
-              <div
-                data-aos="fade-up"
-                className={clsx(
-                  "bgImageFourth squareWaveAnimationUp",
-                  styles.bgImageFourth
-                )}
-              />
-              <div
-                data-aos="fade-up"
-                className={clsx(
-                  "bgImageFifth squareWaveAnimationUp",
-                  styles.bgImageFifth
-                )}
-              />
-              <div
-                data-aos="fade-up"
-                className={clsx(
-                  "bgImageSixth squareWaveAnimationDown",
-                  styles.bgImageSixth
-                )}
-              />
-              <main>
-                <CardsSection
-                  cards={baseLayerCards}
-                  title="Learn The Base Layer"
-                />
-                <CardsSection
-                  cards={ecosystemCards}
-                  title="Explore The Ecosystem"
-                  isSwiperOnMobile={true}
-                />
-                <HomepageUseCases />
-                {/*Todo: Show developer links*/}
-                {/*<HomepageDeveloperLinks />*/}
-                <Building />
-                <Links />
-                <News />
-                <Subscribe />
-              </main>
-            </>
-          );
+
+          return null;
         }}
       </BrowserOnly>
     </Layout>

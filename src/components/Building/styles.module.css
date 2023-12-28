@@ -1,18 +1,15 @@
 .buildingWrp {
   background-color: #0F0F0F;
-  padding: 5rem 10rem;
-  margin: 0;
-  max-width: 100%;
   border-top: var(--primary-border);
   border-bottom: var(--primary-border);
 }
 
 .building {
   display: flex;
-  justify-content: space-between;
   gap: 8rem;
   align-items: center;
   background: transparent;
+  padding: 5rem;
 }
 
 .buildingDescription {
@@ -50,6 +47,8 @@
     .building {
       flex-direction: column;
       align-items: center;
+      padding: 2rem;
+      gap: 4rem;
     } 
     
     .buildingDescription {
@@ -65,6 +64,7 @@
 
   .building {
     gap: 3.5rem;
+    padding: 1rem;
   }
 
   .buildingTitle {
@@ -77,7 +77,7 @@
   }
 
   .buildingImg {
-    padding: 0 1.5rem;
+    padding: 0 1rem;
     object-fit: scale-down;
   }
 }

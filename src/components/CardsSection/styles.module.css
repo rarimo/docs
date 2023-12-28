@@ -56,12 +56,16 @@
   }
   
   @media screen and (max-width: 625px) {
+    .cardsSectionContainer {
+      grid-gap: 1.5rem;
+    }
+
     .cardsSectionCard {
       flex: 0 100%;
     }
 
     .cardsSectionTitle {
       font-size: 1.5rem;
-      margin: 6.5rem 1.5rem 1rem 1.5rem;
+      margin: 4rem 1.5rem 2rem 1.5rem;
     }
   }

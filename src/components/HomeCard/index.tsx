@@ -13,7 +13,7 @@ export default function HomeCard(card: HomeCardType) {
       <div
         className={clsx("home-card__heading-wrp", styles.homeCardHeadingWrp)}
       >
-        <h3 className={clsx("home-card__title", styles.homeCardTittle)}>
+        <h3 className={clsx("home-card__title", styles.homeCardTitle)}>
           {card.title}
         </h3>
         <div className={clsx("home-card__icon-wrp", styles.homeCardIconWrp)}>

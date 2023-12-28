@@ -1,7 +1,6 @@
 .homepageUseCases {
     display: flex;
     align-items: center;
-    padding: 2rem 0;
     margin-bottom: 8rem;
     width: 100%;
 }
@@ -12,7 +11,7 @@
     color: var(--primary-text-color-light);
     font-weight: 600;
     text-transform: uppercase;
-    margin: 3rem;
+    margin: 8.75rem 3rem 3rem 3rem;
 }
 
 .homepageUseCasesContainer {

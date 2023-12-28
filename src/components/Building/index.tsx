@@ -6,8 +6,8 @@ import styles from "./styles.module.css";
 
 export default function Building(): JSX.Element {
   return (
-    <div className={clsx("container building__wrp", styles.buildingWrp)}>
-      <div className={clsx("building", styles.building)}>
+    <div className={clsx("building__wrp", styles.buildingWrp)}>
+      <div className={clsx("building container", styles.building)}>
         <img
           className={clsx("building__img", styles.buildingImg)}
           src="img/building-image.png"

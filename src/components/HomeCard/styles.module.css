@@ -10,6 +10,7 @@
 .homeCardHeadingWrp {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   align-self: stretch;
   margin-bottom: 1rem;
 }
@@ -21,11 +22,7 @@
 }
 
 .homeCardTitle {
-  font-size: 2rem;
-  text-transform: capitalize;
-  color: var(--primary-text-color-light);
-  font-weight: 500;
-  font-family: var(--primary-font-family);
+  margin-bottom: 0;
 }
 
 .homeCardDescription {
