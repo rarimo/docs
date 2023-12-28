@@ -37,6 +37,7 @@ export default function Subscribe(): JSX.Element {
       >
         <input
           onInput={(e) => setEmail(e.currentTarget.value)}
+          value={email}
           className={clsx("subscribe__input", styles.subscribeInput)}
           placeholder="Email"
         />
