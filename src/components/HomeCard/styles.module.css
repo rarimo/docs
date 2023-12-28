@@ -1,4 +1,4 @@
-.cardWithList {
+.homeCard {
   border: var(--primary-border);
   background: #0f0f0f;
   padding: 2rem;
@@ -7,19 +7,19 @@
   align-items: start;
 }
 
-.cardWithListHeadingWrp {
+.homeCardHeadingWrp {
   display: flex;
   justify-content: space-between;
   align-self: stretch;
 }
 
-.cardWithListIconWrp {
+.homeCardIconWrp {
   border-radius: 2px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   max-height: 3.375rem;
 }
 
-.cardWithListTitle {
+.homeCardTitle {
   font-size: 2rem;
   text-transform: capitalize;
   color: var(--primary-text-color-light);
@@ -27,7 +27,7 @@
   font-family: var(--primary-font-family);
 }
 
-.cardWithListDescription {
+.homeCardDescription {
   font-size: 0.875rem;
   color: var(--primary-text-color);
   font-family: var(--secondary-font-family);
@@ -35,7 +35,7 @@
   font-style: normal;
 }
 
-.cardWithListSvg {
+.homeCardSvg {
   height: 54px;
   width: 54px;
 }
@@ -45,14 +45,14 @@
   width: auto;
 }
 
-.cardWithListButtonWrp {
+.homeCardButtonWrp {
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
   margin-top: auto;
 }
 
-.cardWithListDescriptionWrp {
+.homeCardDescriptionWrp {
   display: flex;
   gap: 3rem;
   flex-wrap: wrap;

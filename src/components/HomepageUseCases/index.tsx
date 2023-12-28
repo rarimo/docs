@@ -16,7 +16,7 @@ type UseCase = {
   path: string;
 };
 
-const useCasesList = [
+const useCasesList: UseCase[] = [
   {
     img: "img/homepage-use-cases/mints.webp",
     modifier: "mints",
@@ -63,7 +63,7 @@ const useCasesList = [
     isYellow: true,
     path: "https://google.com/",
   },
-] as UseCase[];
+];
 
 export default function HomepageUseCases() {
   const swiperRef = useRef(null);
@@ -153,9 +153,6 @@ export default function HomepageUseCases() {
         </div>
         <swiper-container
           ref={swiperRef}
-          // should use class here, instead of className
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           class={clsx(
             "homepage-use-cases__swiper",
             styles.homepageUseCasesSwiper
@@ -165,8 +162,6 @@ export default function HomepageUseCases() {
         >
           {useCasesList.map((item, idx) => (
             <swiper-slide
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
               class={clsx(
                 "homepage-use-cases__swiper-slide",
                 styles.homepageUseCasesSwiperSlide

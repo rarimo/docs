@@ -4,27 +4,27 @@ import "swiper/css";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import Building from "@site/src/components/Building";
 // import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
-import CardsTable from "@site/src/components/CardsTable";
+import CardsSection from "@site/src/components/CardsSection";
 import HomepageHeader from "@site/src/components/HomepageHeader";
 import HomepageUseCases from "@site/src/components/HomepageUseCases";
 import Links from "@site/src/components/Links";
 import News from "@site/src/components/News";
 import Subscribe from "@site/src/components/Subscribe";
 import { blockchains } from "@site/src/const";
-import Badge from "@site/static/img/Badge.svg";
-import Brackets from "@site/static/img/brackets-icon.svg";
-import ForEveryHuman from "@site/static/img/for-every-human.svg";
-import Layers from "@site/static/img/layers.svg";
-import PolygonWhite from "@site/static/img/PolygonWhite.svg";
-import Shield from "@site/static/img/Shield.svg";
-import User from "@site/static/img/user-icon.svg";
+import { HomeCard } from "@site/src/types";
+import BadgeIcon from "@site/static/img/Badge.svg";
+import BracketsIcon from "@site/static/img/brackets-icon.svg";
+import ForEveryHumanIcon from "@site/static/img/for-every-human.svg";
+import LayersIcon from "@site/static/img/layers.svg";
+import PolygonWhiteIcon from "@site/static/img/PolygonWhite.svg";
+import ShieldIcon from "@site/static/img/Shield.svg";
+import UserIcon from "@site/static/img/user-icon.svg";
 import Layout from "@theme/Layout";
 import aos from "aos";
 import clsx from "clsx";
 import React, { useRef } from "react";
 import { register } from "swiper/element/bundle";
 
-import { HomeCard } from "../types";
 import styles from "./index.module.css";
 
 register();
@@ -32,7 +32,7 @@ register();
 const baseLayerCards: HomeCard[] = [
   {
     title: "Indentity Protocol",
-    Svg: User,
+    IconName: UserIcon,
     list: [
       [
         "Implements W3C DID standard;",
@@ -46,7 +46,7 @@ const baseLayerCards: HomeCard[] = [
   },
   {
     title: "Bridging Protocol",
-    Svg: Brackets,
+    IconName: BracketsIcon,
     list: [
       [
         "Cross-chain transfers of NFTs, FTs, native coins;",
@@ -61,7 +61,7 @@ const baseLayerCards: HomeCard[] = [
   },
   {
     title: "Rarimo Protocol",
-    Svg: Layers,
+    IconName: LayersIcon,
     list: [
       [
         "Base layer for cross-chain applications;",
@@ -91,11 +91,7 @@ const baseLayerCards: HomeCard[] = [
           key={1}
         >
           {blockchains.map((Blockchain, idx) => (
-            <Blockchain
-              key={idx}
-              className={styles.cardWithListSvg}
-              role="img"
-            />
+            <Blockchain key={idx} className={styles.homeCardSvg} role="img" />
           ))}
         </span>,
       ],
@@ -125,7 +121,7 @@ const baseLayerCards: HomeCard[] = [
 const ecosystemCards: HomeCard[] = [
   {
     title: "RariMe",
-    Svg: Shield,
+    IconName: ShieldIcon,
     list: [
       [
         "Universal wallet for digital indentites;",
@@ -139,7 +135,7 @@ const ecosystemCards: HomeCard[] = [
   },
   {
     title: "Proof Of Humanity",
-    Svg: Badge,
+    IconName: BadgeIcon,
     list: [
       [
         "Aggregates five identy providers;",
@@ -153,7 +149,7 @@ const ecosystemCards: HomeCard[] = [
   },
   {
     title: "WorldCoin Cross-Chain ZKP Solution",
-    Svg: ForEveryHuman,
+    IconName: ForEveryHumanIcon,
     list: [
       [
         "Use your World ID on any EVM-compatible chain;",
@@ -164,7 +160,7 @@ const ecosystemCards: HomeCard[] = [
   },
   {
     title: "Polygon ID Cross-Chain ZKP Solution",
-    Svg: PolygonWhite,
+    IconName: PolygonWhiteIcon,
     list: [
       [
         "Prove your identity on any EVM-compatible chain;",
@@ -235,11 +231,11 @@ export default function Home(): JSX.Element {
                 )}
               />
               <main>
-                <CardsTable
+                <CardsSection
                   cards={baseLayerCards}
                   title="Learn The Base Layer"
                 />
-                <CardsTable
+                <CardsSection
                   cards={ecosystemCards}
                   title="Explore The Ecosystem"
                   isSwiperOnMobile={true}

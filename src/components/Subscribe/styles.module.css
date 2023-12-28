@@ -8,7 +8,7 @@
   flex-direction: row;
 }
 
-.subscribeText {
+.subscribeHead {
   display: flex;
   flex-direction: column;
 }

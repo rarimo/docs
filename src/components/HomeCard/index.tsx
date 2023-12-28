@@ -1,39 +1,29 @@
-import { Card } from "@site/src/types";
+import { HomeCard as HomeCardType } from "@site/src/types";
 import clsx from "clsx";
 import React from "react";
 
 import styles from "./styles.module.css";
 
-export default function CardWithList(card: Card) {
+export default function HomeCard(card: HomeCardType) {
   return (
     <div
-      className={clsx("card-with-list", styles.cardWithList, card.className)}
+      className={clsx("home-card", styles.homeCard, card.className)}
       data-aos="fade-up"
     >
       <div
-        className={clsx(
-          "card-with-list__heading-wrp",
-          styles.cardWithListHeadingWrp
-        )}
+        className={clsx("home-card__heading-wrp", styles.homeCardHeadingWrp)}
       >
-        <h3
-          className={clsx("card-with-list__title", styles.cardWithListTittle)}
-        >
+        <h3 className={clsx("home-card__title", styles.homeCardTittle)}>
           {card.title}
         </h3>
-        <div
-          className={clsx(
-            "card-with-list__icon-wrp",
-            styles.cardWithListIconWrp
-          )}
-        >
-          <card.Svg className={styles.cardWithListSvg} role="img" />
+        <div className={clsx("home-card__icon-wrp", styles.homeCardIconWrp)}>
+          <card.IconName className={styles.homeCardSvg} role="img" />
         </div>
       </div>
       <div
         className={clsx(
-          "card-with-list__description-wrp",
-          styles.cardWithListDescriptionWrp
+          "home-card__description-wrp",
+          styles.homeCardDescriptionWrp
         )}
       >
         {card.list.map((innerList, idx) => (
@@ -43,8 +33,8 @@ export default function CardWithList(card: Card) {
                 <li
                   key={idx}
                   className={clsx(
-                    "card-with-list__description",
-                    styles.cardWithListDescription
+                    "home-card__description",
+                    styles.homeCardDescription
                   )}
                 >
                   {item}
@@ -56,12 +46,7 @@ export default function CardWithList(card: Card) {
           </p>
         ))}
       </div>
-      <div
-        className={clsx(
-          "card-with-list__button-wrp",
-          styles.cardWithListButtonWrp
-        )}
-      >
+      <div className={clsx("home-card__button-wrp", styles.homeCardButtonWrp)}>
         <a
           href={card.url}
           rel="noopener"

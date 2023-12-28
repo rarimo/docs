@@ -13,7 +13,7 @@ export default function Subscribe(): JSX.Element {
 
   return (
     <div className={clsx("subscribe", styles.subscribe)}>
-      <div className={clsx("subscribe__text", styles.subscribeText)}>
+      <div className={clsx("subscribe__head", styles.subscribeHead)}>
         <p
           className={clsx("subscribe__title", styles.subscribeTitle)}
           data-aos="fade-up"

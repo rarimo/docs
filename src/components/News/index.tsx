@@ -1,5 +1,5 @@
 import { SWIPER_CONTAINER_OPTIONS } from "@site/src/const";
-import Link from "@site/static/img/link-icon.svg";
+import LinkIcon from "@site/static/img/link-icon.svg";
 import clsx from "clsx";
 import React, { useEffect, useRef } from "react";
 
@@ -54,29 +54,24 @@ export default function News(): JSX.Element {
             key={idx}
             data-aos="fade-up"
           >
-            <Link />
+            <LinkIcon />
             {item.title}
           </a>
         ))}
       </div>
       <swiper-container
         ref={swiperRef}
-        // should use class here, instead of className
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         class={clsx("news__swiper", styles.newsSwiper)}
         init={false}
         data-aos="fade-up"
       >
         {news.map((item, idx) => (
           <swiper-slide
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
             class={clsx("news__swiper-slide", styles.newsSwiperSlide)}
             key={idx}
           >
             <a className={clsx("news__item", styles.newsItem)} href={item.url}>
-              <Link />
+              <LinkIcon />
               {item.title}
             </a>
           </swiper-slide>

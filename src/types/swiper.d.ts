@@ -7,11 +7,11 @@ declare global {
       "swiper-container": React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLElement> & SwiperProps,
         HTMLElement
-      >;
+      > & { class?: string };
       "swiper-slide": React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLElement> & SwiperSlideProps,
         HTMLElement
-      >;
+      > & { class?: string };
     }
   }
 }

@@ -207,7 +207,6 @@ span.DocSearch-Button-Placeholder {
   transition: all 0.25s ease-out;
 }
 
-
 .heroButton:hover{
   color: var(--primary-text-color-dark);
   text-decoration: none;

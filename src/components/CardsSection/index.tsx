@@ -1,18 +1,22 @@
-import CardWithList from "@site/src/components/CardWithList";
+import Card from "@site/src/components/HomeCard";
 import { SWIPER_CONTAINER_OPTIONS } from "@site/src/const";
-import { Card } from "@site/src/types";
+import { HomeCard } from "@site/src/types";
 import clsx from "clsx";
 import React, { useEffect, useRef } from "react";
 
 import styles from "./styles.module.css";
 
 type Props = {
-  cards: Card[];
+  cards: HomeCard[];
   title: string;
   isSwiperOnMobile?: boolean;
 };
 
-export default function CardsTable({ cards, title, isSwiperOnMobile }: Props) {
+export default function CardsSection({
+  cards,
+  title,
+  isSwiperOnMobile,
+}: Props) {
   const swiperRef = useRef(null);
 
   useEffect(() => {
@@ -21,30 +25,30 @@ export default function CardsTable({ cards, title, isSwiperOnMobile }: Props) {
     Object.assign(swiperRef.current, SWIPER_CONTAINER_OPTIONS);
 
     swiperRef.current.initialize();
-  }, [swiperRef.current]);
+  }, [swiperRef.current, isSwiperOnMobile]);
 
   return (
-    <>
+    <section>
       <p
-        className={clsx("cards-table__title", styles.cardsTableTitle)}
+        className={clsx("cards-section__title", styles.cardsSectionTitle)}
         data-aos="fade-up"
       >
         {title}
       </p>
       <section
         className={
-          (styles.cardsTable, isSwiperOnMobile && styles.cardsTableMobile)
+          (styles.cardsSection, isSwiperOnMobile && styles.cardsSectionMobile)
         }
       >
         <div
           className={clsx(
-            "cardsTableContainer container",
-            styles.cardsTableContainer
+            "cardsSectionContainer container",
+            styles.cardsSectionContainer
           )}
         >
           {cards.map((props, idx) => (
-            <CardWithList
-              className={clsx("cards-table__card", styles.cardsTableCard)}
+            <Card
+              className={clsx("cards-section__card", styles.cardsSectionCard)}
               key={idx}
               {...props}
             />
@@ -54,25 +58,20 @@ export default function CardsTable({ cards, title, isSwiperOnMobile }: Props) {
       {isSwiperOnMobile && (
         <swiper-container
           ref={swiperRef}
-          // should use class here, instead of className
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          class={clsx("cards-table__swiper", styles.cardsTableSwiper)}
+          class={clsx("cards-section__swiper", styles.cardsSectionSwiper)}
           init={false}
           data-aos="fade-up"
         >
           {cards.map((props, idx) => (
             <swiper-slide
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
               class={clsx(
-                "cards-table__swiper-slide",
-                styles.cardsTableSwiperSlide
+                "cards-section__swiper-slide",
+                styles.cardsSectionSwiperSlide
               )}
               key={idx}
             >
-              <CardWithList
-                className={clsx("cards-table__card", styles.cardsTableCard)}
+              <Card
+                className={clsx("cards-section__card", styles.cardsSectionCard)}
                 key={idx}
                 {...props}
               />
@@ -80,6 +79,6 @@ export default function CardsTable({ cards, title, isSwiperOnMobile }: Props) {
           ))}
         </swiper-container>
       )}
-    </>
+    </section>
   );
 }
