@@ -35,7 +35,7 @@ export default function Subscribe(): JSX.Element {
       </div>
       <form
         onSubmit={(e) => submitFormSubscription(e, email)}
-        className={clsx("subscribe__input-wrp", styles.subscribeInputWrp)}
+        className={clsx("subscribe__form", styles.subscribeForm)}
         data-aos="fade-up"
       >
         <input

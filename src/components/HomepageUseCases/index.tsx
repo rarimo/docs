@@ -1,6 +1,6 @@
 import "swiper/css";
 
-import { paramsMobile } from "@site/src/const";
+import { SWIPER_CONTAINER_OPTIONS } from "@site/src/const";
 import clsx from "clsx";
 import React, { useEffect, useRef } from "react";
 
@@ -69,7 +69,7 @@ export default function HomepageUseCases() {
   const swiperRef = useRef(null);
 
   useEffect(() => {
-    Object.assign(swiperRef.current, paramsMobile);
+    Object.assign(swiperRef.current, SWIPER_CONTAINER_OPTIONS);
 
     swiperRef.current.initialize();
   }, [swiperRef.current]);
@@ -93,13 +93,14 @@ export default function HomepageUseCases() {
           )}
         >
           {useCasesList.map((item, idx) => (
-            <div
+            <a
               className={clsx(
                 "homepage-use-cases__card",
                 styles.homepageUseCasesCard
               )}
               key={idx}
               data-aos="fade-up"
+              href={item.path}
             >
               <div
                 className={clsx(
@@ -147,7 +148,7 @@ export default function HomepageUseCases() {
                   </div>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
         <swiper-container
@@ -172,13 +173,14 @@ export default function HomepageUseCases() {
               )}
               key={idx}
             >
-              <div
+              <a
                 className={clsx(
                   "homepage-use-cases__card",
                   styles.homepageUseCasesCard
                 )}
                 key={idx}
                 data-aos="fade-up"
+                href={item.path}
               >
                 <div
                   className={clsx(
@@ -226,7 +228,7 @@ export default function HomepageUseCases() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             </swiper-slide>
           ))}
         </swiper-container>

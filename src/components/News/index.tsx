@@ -1,4 +1,4 @@
-import { paramsMobile } from "@site/src/const";
+import { SWIPER_CONTAINER_OPTIONS } from "@site/src/const";
 import Link from "@site/static/img/link-icon.svg";
 import clsx from "clsx";
 import React, { useEffect, useRef } from "react";
@@ -29,7 +29,7 @@ export default function News(): JSX.Element {
   const swiperRef = useRef(null);
 
   useEffect(() => {
-    Object.assign(swiperRef.current, paramsMobile);
+    Object.assign(swiperRef.current, SWIPER_CONTAINER_OPTIONS);
 
     swiperRef.current.initialize();
   }, [swiperRef.current]);

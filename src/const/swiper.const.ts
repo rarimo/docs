@@ -1,4 +1,4 @@
-export const paramsMobile = {
+export const SWIPER_CONTAINER_OPTIONS = {
   slidesPerView: "auto",
   pagination: true,
   autoHeight: true,

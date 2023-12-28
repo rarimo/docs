@@ -28,7 +28,7 @@
   margin: 0;
 }
 
-.subscribeInputWrp {
+.subscribeForm {
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -28,7 +28,7 @@
   flex-direction: column;
   align-items: start;
   gap: 1.5rem;
-  color: #fff;
+  color: var(--white);
   max-width: 18.75rem;
   width: 100%;
 }

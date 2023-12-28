@@ -105,7 +105,7 @@ module.exports = {
               },
               {
                 html: `
-           <span style="color: #8F8F8F">© ${new Date().getFullYear()}</span>
+           <span style="color: var(--primary-text-color)">© ${new Date().getFullYear()}</span>
 `,
               },
             ],

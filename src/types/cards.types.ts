@@ -1,7 +1,7 @@
-export type Card = {
+export type HomeCard = {
   title: string;
   Svg: React.ComponentType<React.ComponentProps<"svg">>;
-  list: (string | JSX.Element)[][];
+  list: React.ReactNode[][];
   url: string;
   after?: JSX.Element;
   className?: string;

@@ -8,7 +8,7 @@
   position: relative;
   overflow: hidden;
   background: initial;
-  color: #ffffff;
+  color: var(--white)fff;
 }
 .secondContent{
   display: flex;
@@ -168,7 +168,7 @@
 .bgImageSixth{
   right: 4%;
   top: 408px;
-  background: linear-gradient(180deg, #8AB5A4 0%, rgba(138, 181, 164, 0) 100%), #8AB5A4;
+  background: linear-gradient(180deg, var(--primary-main) 0%, rgba(138, 181, 164, 0) 100%), var(--primary-main);
   background-blend-mode: normal, overlay, normal;
 }
 

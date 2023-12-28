@@ -39,7 +39,7 @@
   align-items: start;
   justify-content: space-between;
   gap: 1.5rem;
-  color: #fff;
+  color: var(--white);
   width: 100%;
   text-transform: capitalize;
   min-height: 14rem;

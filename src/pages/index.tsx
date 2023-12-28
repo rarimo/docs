@@ -10,18 +10,13 @@ import HomepageUseCases from "@site/src/components/HomepageUseCases";
 import Links from "@site/src/components/Links";
 import News from "@site/src/components/News";
 import Subscribe from "@site/src/components/Subscribe";
-import Avalanche from "@site/static/img/avalanche-avax-logo.svg";
+import { blockchains } from "@site/src/const";
 import Badge from "@site/static/img/Badge.svg";
-import BNB from "@site/static/img/bnb-logo.svg";
 import Brackets from "@site/static/img/brackets-icon.svg";
-import Ethereum from "@site/static/img/ethereum-classic-logo.svg";
 import ForEveryHuman from "@site/static/img/for-every-human.svg";
 import Layers from "@site/static/img/layers.svg";
-import Near from "@site/static/img/near-protocol-near-logo.svg";
-import Polygon from "@site/static/img/polygon-matic-logo.svg";
 import PolygonWhite from "@site/static/img/PolygonWhite.svg";
 import Shield from "@site/static/img/Shield.svg";
-import Solana from "@site/static/img/solana-sol-logo.svg";
 import User from "@site/static/img/user-icon.svg";
 import Layout from "@theme/Layout";
 import aos from "aos";
@@ -29,14 +24,12 @@ import clsx from "clsx";
 import React, { useRef } from "react";
 import { register } from "swiper/element/bundle";
 
-import { Card } from "../types";
+import { HomeCard } from "../types";
 import styles from "./index.module.css";
 
 register();
 
-const blockchains = [Ethereum, BNB, Solana, Near, Avalanche, Polygon];
-
-const firstCards = [
+const baseLayerCards: HomeCard[] = [
   {
     title: "Indentity Protocol",
     Svg: User,
@@ -127,9 +120,9 @@ const firstCards = [
       </>
     ),
   },
-] as Card[];
+];
 
-const secondCards = [
+const ecosystemCards: HomeCard[] = [
   {
     title: "RariMe",
     Svg: Shield,
@@ -181,7 +174,7 @@ const secondCards = [
     ],
     url: "https://google.com",
   },
-] as Card[];
+];
 
 export default function Home(): JSX.Element {
   const light = useRef(null);
@@ -242,9 +235,12 @@ export default function Home(): JSX.Element {
                 )}
               />
               <main>
-                <CardsTable cards={firstCards} title="Learn The Base Layer" />
                 <CardsTable
-                  cards={secondCards}
+                  cards={baseLayerCards}
+                  title="Learn The Base Layer"
+                />
+                <CardsTable
+                  cards={ecosystemCards}
                   title="Explore The Ecosystem"
                   isSwiperOnMobile={true}
                 />

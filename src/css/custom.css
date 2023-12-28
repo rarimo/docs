@@ -18,13 +18,15 @@
   --ifm-color-primary-light: #46d9ce;
   --ifm-color-primary-lighter: #51dcd1;
   --ifm-color-primary-lightest: #71e2d9;
+  --primary-main: #8AB5A4;
+  --white: #ffffff;
   --ifm-font-family-base: 'Inter', 'Segoe UI', Tahoma, sans-serif;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --primary-bg-color: #0D0D0D;
   --secondary-bg-color: rgba(255, 255, 255, 0.05);
   --primary-text-color-light: rgba(255, 255, 255, 0.84);
-  --secondary-text-color-light: #ffffff;
+  --secondary-text-color-light: var(--white)fff;
   --primary-text-color-dark: #131313;
   --primary-border: 1px solid var(--secondary-bg-color);
   --primary-font-family: 'Oswald';
@@ -50,13 +52,13 @@
 }
 
 * {
-  --swiper-pagination-bottom: -0rem;
+  --swiper-pagination-bottom: 0;
   --swiper-pagination-bullet-width: 0.5rem;
   --swiper-pagination-bullet-height: 0.5rem;
   --swiper-pagination-bullet-horizontal-gap: 0.275rem;
   --swiper-pagination-bullet-border-radius: 0;
-  --swiper-pagination-bullet-inactive-color: #ffffff;
-  --swiper-pagination-color: #8AB5A4;
+  --swiper-pagination-bullet-inactive-color: var(--white)fff;
+  --swiper-pagination-color: var(--primary-main);
 }
 
 .DocSearch-Button .DocSearch-Search-Icon{
@@ -86,7 +88,7 @@
 }
 .menu__link--active{
   --ifm-menu-color-background-active: #8AB5A41A;
-  --ifm-menu-color-active: #8AB5A4;
+  --ifm-menu-color-active: var(--primary-main);
 }
 .menu__link{
   font-family: var(--secondary-font-family);
@@ -102,7 +104,7 @@
   color: var(--primary-text-color);
 }
 .table-of-contents__link--active{
-  color: #8AB5A4;
+  color: var(--primary-main);
 }
 
 html {
@@ -135,12 +137,12 @@ html {
 }
 
 .footer__social-link:hover {
-  color: #8AB5A4;
+  color: var(--primary-main);
   text-decoration: none;
 }
 
 .footer__social-link:hover svg  {
-  color: #8AB5A4;
+  color: var(--primary-main);
 }
 
 .footer__link-separator {
@@ -185,7 +187,7 @@ span.DocSearch-Button-Placeholder {
 .heroButton{
   position: relative;
   font-family: var(--secondary-font-family);
-  background: #8AB5A4;
+  background: var(--primary-main);
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   font-weight: 700;
@@ -194,7 +196,7 @@ span.DocSearch-Button-Placeholder {
   color: var(--primary-text-color-dark);
   border: none;
   white-space: nowrap;
-  transition: 0.1s;
+  transition: all 0.1s ease;
 }
 
 
@@ -216,18 +218,17 @@ span.DocSearch-Button-Placeholder {
   align-items: center;
   font-size: 1rem;
   font-family: var(--secondary-font-family);
-  color: #8AB5A4;
+  color: var(--primary-main);
   padding: 0.5rem 1rem;
-  border: 1px solid #8AB5A4;
-  border-color: #8AB5A4;
+  border: 1px solid var(--primary-main);
   font-weight: 600;
   cursor: pointer;
-  transition: 0.1s;
+  transition: all 0.1s ease;
 }
 
 .heroButtonSecondary:hover{
   text-decoration: none;
-  color: #8AB5A4;
+  color: var(--primary-main);
   background-color: rgba(138, 181, 164, 0.1)
 }
 
@@ -290,8 +291,8 @@ span.DocSearch-Button-Placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background: #8AB5A4; */
-    background: #8AB5A4;
+    /* background: var(--ifm-menu-color-active); */
+    background: var(--primary-main);
     z-index: 1;
     position: relative;
   }

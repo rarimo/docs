@@ -1,5 +1,5 @@
 import CardWithList from "@site/src/components/CardWithList";
-import { paramsMobile } from "@site/src/const";
+import { SWIPER_CONTAINER_OPTIONS } from "@site/src/const";
 import { Card } from "@site/src/types";
 import clsx from "clsx";
 import React, { useEffect, useRef } from "react";
@@ -18,7 +18,7 @@ export default function CardsTable({ cards, title, isSwiperOnMobile }: Props) {
   useEffect(() => {
     if (!isSwiperOnMobile) return;
 
-    Object.assign(swiperRef.current, paramsMobile);
+    Object.assign(swiperRef.current, SWIPER_CONTAINER_OPTIONS);
 
     swiperRef.current.initialize();
   }, [swiperRef.current]);
