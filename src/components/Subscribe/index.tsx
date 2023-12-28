@@ -3,16 +3,13 @@ import React, { useState } from "react";
 
 import styles from "./styles.module.css";
 
-const submitFormSubscription = (
-  e: React.FormEvent<HTMLFormElement>,
-  email: string
-) => {
-  e.preventDefault();
-  console.log(email);
-};
-
 export default function Subscribe(): JSX.Element {
   const [email, setEmail] = useState("");
+
+  const submitFormSubscription = (e: React.FormEvent<HTMLFormElement>) => {
+    // TODO: implement
+    e.preventDefault();
+  };
 
   return (
     <div className={clsx("subscribe", styles.subscribe)}>
@@ -34,7 +31,7 @@ export default function Subscribe(): JSX.Element {
         </p>
       </div>
       <form
-        onSubmit={(e) => submitFormSubscription(e, email)}
+        onSubmit={(e) => submitFormSubscription(e)}
         className={clsx("subscribe__form", styles.subscribeForm)}
         data-aos="fade-up"
       >
