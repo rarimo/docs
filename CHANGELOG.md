@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added the Collab.Land integration doc;
 - Contribution guide to the README;
 - Tutorials:
-  - Added the Polygon ID Integration usage tutorial;
+  - Added the Polygon ID Integration usage page;
 ### Changed
 
 - Updated links from gitlab to github in the whole documentation;
