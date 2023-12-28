@@ -78,5 +78,6 @@
 
   .buildingImg {
     padding: 0 1.5rem;
+    object-fit: scale-down;
   }
 }
