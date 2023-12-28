@@ -7,15 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0] - 28-12-2023
+
 ### Added
 
 - Use Cases:
   - Added the "Identity State Replication" doc;
 - How-to-Guides:
   - Added the Collab.Land integration doc;
+- Subscription form (w/o functionality)
+- Mobile sliders
 
 ### Changed
 
+- Design
 - Updated links from gitlab to github in the whole documentation;
 - Updated the "Overview" doc;
 - Transferred the project to GitHub;
@@ -199,7 +204,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://github.com/rarimo/docs/compare/v1.5.1...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/rarimo/docs/releases/tag/v1.6.0...v1.7.0
+[1.6.0]: https://github.com/rarimo/docs/releases/tag/v1.5.1...v1.6.0
 [1.5.1]: https://github.com/rarimo/docs/releases/tag/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/rarimo/docs/releases/tag/v1.4.3...v1.5.0
 [1.4.3]: https://github.com/rarimo/docs/releases/tag/v1.4.2...v1.4.3
