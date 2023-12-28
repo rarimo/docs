@@ -7,7 +7,7 @@
 }
 .feature {
   border: var(--primary-border);
-  background:repeating-conic-gradient(#0000 0.000045%, #000d 0.0005%) var(--secondary-bg-color);
+  background: #0f0f0f;
 }
 
 .featureTittle {

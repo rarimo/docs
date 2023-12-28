@@ -1,5 +1,5 @@
 .developerLinks{
-    background: repeating-conic-gradient(#0000 0.000045%, #000d 0.0005%) rgba(255, 255, 255, 0.02);
+    background: #0f0f0f;
     border: 1px solid var(--secondary-bg-color);
     padding: 5rem 8rem;
 }
