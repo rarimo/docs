@@ -63,7 +63,7 @@
 }
 
 @media screen and (max-width: 996px) {
-  .bgImageFirst, .bgImageSecond, .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
+  .bgImageSecond, .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
     display: none;
   }
   .secondSubtitle{

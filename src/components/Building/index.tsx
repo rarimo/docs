@@ -20,7 +20,7 @@ export default function Building(): JSX.Element {
             className={clsx("building__title", styles.buildingTitle)}
             data-aos="fade-up"
           >
-            Build fast with developer dashboard
+            Build Fast With Developer Dashboard
           </h2>
           <p
             className={clsx("building__text", styles.buildingText)}

@@ -135,7 +135,9 @@ export default function HomepageHeader() {
     >
       <div className={clsx("hero__content container", styles.heroContent)}>
         <h1 className={clsx("hero__title", styles.heroTitle)}>
-          <div>
+          <div
+            className={clsx("hero__first-line-wrp", styles.heroFirstLineWrp)}
+          >
             <div className={clsx("hero__word-wrp", styles.heroWordWrp)}>
               {firstWord.map(({ text, delay }, idx) => (
                 <span
@@ -150,7 +152,11 @@ export default function HomepageHeader() {
               ))}
             </div>
 
-            <span data-aos="fade-up" data-aos-delay="700">
+            <span
+              className={clsx("hero__space", styles.heroSpace)}
+              data-aos="fade-up"
+              data-aos-delay="700"
+            >
               {" "}
             </span>
             <div className={clsx("hero__word-wrp", styles.heroWordWrp)}>
