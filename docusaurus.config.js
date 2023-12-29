@@ -56,6 +56,9 @@ module.exports = {
           editUrl: "https://github.com/rarimo/docs/blob/main",
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem",
+          remarkPlugins: [
+            [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
+          ],
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),

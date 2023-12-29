@@ -7,14 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.7.0] - 28-12-2023
+## [1.7.0] - 29-12-2023
 
 ### Added
 
+- Reference:
+  - Added the "Polygon ID State Replication" page;
 - Use Cases:
   - Added the "Identity State Replication" doc;
 - How-to-Guides:
   - Added the Collab.Land integration doc;
+  - Added RariMe guide for issuers;
+- Contribution guide to the README;
 - Subscription form (w/o functionality)
 - Mobile sliders
 
@@ -24,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated links from gitlab to github in the whole documentation;
 - Updated the "Overview" doc;
 - Transferred the project to GitHub;
+
+### Fixed
+
+- Minor markup fix in Proof of Humanity tech reference;
 
 ## [1.6.0] - 28-11-2023
 

@@ -23,16 +23,16 @@ const sidebars = {
       label: "About Rarimo",
       id: "overview",
     },
-    // {
-    //   type: "doc",
-    //   label: "Identity Protocol",
-    //   id: "overview/identity",
-    // },
-    // {
-    //   type: "doc",
-    //   label: "Bridging Protocol",
-    //   id: "overview/bridge",
-    // },
+    {
+      type: "doc",
+      label: "Identity Protocol",
+      id: "overview/identity",
+    },
+    {
+      type: "doc",
+      label: "Bridging Protocol",
+      id: "overview/bridge",
+    },
   ],
   useCases: [
     "use-cases",
@@ -65,6 +65,7 @@ const sidebars = {
     "how-to-guides/poh-galxe",
     "how-to-guides/proof-of-humanity-collabland-discord",
     "how-to-guides/polygon-id-state-replication",
+    "how-to-guides/add-rarimo-credentials-to-rarime",
   ],
   reference: [
     {
@@ -103,6 +104,10 @@ const sidebars = {
     {
       type: "doc",
       id: "reference/proof-of-humanity",
+    },
+    {
+      type: "doc",
+      id: "reference/polygonid-state-replication",
     },
     {
       type: "doc",
