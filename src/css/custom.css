@@ -27,7 +27,7 @@
   --primary-bg-color: #0D0D0D;
   --secondary-bg-color: rgba(255, 255, 255, 0.05);
   --primary-text-color-light: rgba(255, 255, 255, 0.84);
-  --secondary-text-color-light: var(--white)fff;
+  --secondary-text-color-light: var(--white);
   --primary-text-color-dark: #131313;
   --primary-border: 1px solid var(--secondary-bg-color);
   --primary-font-family: 'Oswald';
@@ -48,13 +48,79 @@
   --ifm-color-primary-lightest: var(--primary-main);
   --bg-rect-border-color: rgba(255, 255, 255, 5%);
   --primary-text-color: #8f8f8f;
+  --primary-text-color-light: rgba(255, 255, 255, 0.9);
   --primary-bg-rect-size: 4.125rem;
+  --ifm-font-color: rgba(255, 255, 255, 0.84);
   --ifm-navbar-link-color: var(--primary-text-color);
+  --ifm-heading-color: var(--ifm-font-color);
+  --ifm-font-color-base: var(--ifm-font-color);
+  --ifm-color-content-secondary: var(--ifm-font-color) !important;
+  --background-light: #0f0f0f;
+  --secondary-text-color-dark: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme='dark'] .theme-code-block {
+  background: 0;
+}
+
+[data-theme='dark'] .prism-code {
+  --ifm-pre-background: rgba(255, 255, 255, 0.05);
 }
 
 [data-theme='dark'] .DocSearch {
   --docsearch-modal-background: var(--primary-bg-color);
   --docsearch-footer-background: var(--secondary-bg-color);
+}
+
+[data-theme='light'] {
+  --primary-text-color-dark: #FFF;
+  --primary-text-color: #0d0d0d;
+  --primary-text-color-light: #8f8f8f;
+  --primary-bg-color: #FFF;
+  --primary-bg-color-light: #F5F5F5;
+  --bg-rect-border-color: rgba(0, 0, 0, 5%);
+  --secondary-text-color-dark: rgba(0, 0, 0, 0.6);
+  --primary-border: 1px solid rgba(0, 0, 0, 0.05);
+  --primary-border-light: 1px solid rgba(0, 0, 0, 0.2);
+  --background-light: #f0f0f0;
+  --ifm-navbar-link-color: var(--primary-text-color);
+  --ifm-heading-color: var(--primary-text-color);
+  --ifm-font-color-base: var(--primary-text-color);
+  --ifm-color-content-secondary: var(--primary-text-color-light) !important;
+}
+
+[data-theme='light'] .DocSearch.DocSearch-Button {
+  --docsearch-searchbox-background: #FFF;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='light'] .theme-code-block {
+  background: 0;
+  box-shadow: none;
+}
+
+[data-theme='light'] .prism-code {
+  --ifm-pre-background: #0D0D0D0D;
+}
+
+[data-theme='light'] .heroButton {
+  color: var(--primary-text-color-dark)
+}
+
+[data-theme='light'] .bgImageSecond {
+  display: none;
+}
+
+[data-theme='light'] .footer__logo {
+  display: none;
+}
+
+[data-theme='light'] .footer__logo--black {
+  display: block;
+}
+
+[data-theme='light'] .footer {
+  --ifm-footer-color: rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -66,6 +132,11 @@
   --swiper-pagination-bullet-inactive-color: rgba(255, 255, 255, 0.38);
   --swiper-pagination-bullet-inactive-opacity: 1;
   --swiper-pagination-color: var(--primary-main);
+}
+
+code {
+  padding: 0.5rem;
+  border: 0;
 }
 
 a {
@@ -96,6 +167,7 @@ a:hover {
   width: 100%;
   margin: 0 auto;
   font-size: 0.875rem;
+  box-shadow: none;
 }
 
 .navbar--fixed-top{
@@ -158,6 +230,15 @@ html {
 .footer--dark {
   --ifm-footer-background-color: transparent;
   z-index: var(--z-index-default);
+}
+
+.footer__logo {
+  max-width: 5.8125rem;
+  display: block;
+}
+
+.footer__logo--black {
+  display: none;
 }
 
 .footer__social-link {

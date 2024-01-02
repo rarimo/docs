@@ -3,6 +3,7 @@
 
 // @TODO - make our own themes, i guess
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const lightCodeTheme = require("prism-react-renderer/themes/github");
 
 function getUrl() {
   return process.env.URL || "http://localhost:3000";
@@ -76,12 +77,12 @@ module.exports = {
     ({
       colorMode: {
         defaultMode: "dark",
-        disableSwitch: true,
       },
       navbar: {
         logo: {
           alt: "Rarimo Logo",
-          src: "img/logo-transparent.svg",
+          src: "img/logo-black.svg",
+          srcDark: "img/logo-white.svg",
         },
         items: [
           {
@@ -109,7 +110,8 @@ module.exports = {
             items: [
               {
                 html: `
-                <img src="img/logo-footer.svg" alt="Rarimo Logo"/>
+                <img class="footer__logo" src="img/logo-white.svg" alt="Rarimo Logo"/>
+                <img class="footer__logo footer__logo--black" src="img/logo-black.svg" alt="Rarimo Logo"/>
               `,
               },
               {
@@ -180,7 +182,8 @@ module.exports = {
         searchPagePath: "search",
       },
       prism: {
-        theme: darkCodeTheme,
+        theme: lightCodeTheme,
+        darkTheme: darkCodeTheme,
         defaultLanguage: "javascript",
         additionalLangauges: ["json", "shell", "solidity"],
       },

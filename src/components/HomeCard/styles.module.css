@@ -1,6 +1,6 @@
 .homeCard {
   border: var(--primary-border);
-  background: #0f0f0f;
+  background: var(--background-light);
   padding: 2rem;
   display: flex;
   flex-direction: column;

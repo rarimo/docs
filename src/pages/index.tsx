@@ -16,7 +16,7 @@ import BadgeIcon from "@site/static/img/Badge.svg";
 import BracketsIcon from "@site/static/img/brackets-icon.svg";
 import ForEveryHumanIcon from "@site/static/img/for-every-human.svg";
 import LayersIcon from "@site/static/img/layers.svg";
-import PolygonWhiteIcon from "@site/static/img/PolygonWhite.svg";
+import PolygonIcon from "@site/static/img/Polygon.svg";
 import ShieldIcon from "@site/static/img/Shield.svg";
 import UserIcon from "@site/static/img/user-icon.svg";
 import Layout from "@theme/Layout";
@@ -167,7 +167,7 @@ const ecosystemCards: HomeCard[] = [
   },
   {
     title: "Polygon ID Cross-Chain ZKP Solution",
-    IconName: PolygonWhiteIcon,
+    IconName: PolygonIcon,
     list: [
       [
         "Prove your identity on any EVM-compatible chain;",

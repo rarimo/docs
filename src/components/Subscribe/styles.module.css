@@ -34,7 +34,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.20);
+  border: var(--primary-border);
   padding: 1rem;
   width: 100%;
   max-width: 20rem;
@@ -71,6 +71,14 @@
 .subscribeButton:hover {
   color: var(--primary-text-color-light);
   background: none;
+}
+
+[data-theme='light'] .subscribeButton {
+  color: var(--primary-text-color-light);
+}
+
+[data-theme='light'] .subscribeButton:hover {
+  color: var(--primary-text-color);
 }
 
 @media screen and (max-width: 768px) {
