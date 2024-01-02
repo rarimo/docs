@@ -35,6 +35,8 @@ export default function Building(): JSX.Element {
             // TODO: dummy link
             to="#"
             data-aos="fade-up"
+            target="_blank"
+            rel="noreferrer noopener"
           >
             LAUNCH
           </Link>

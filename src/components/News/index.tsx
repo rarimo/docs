@@ -58,6 +58,8 @@ export default function News(): JSX.Element {
             href={item.url}
             key={idx}
             data-aos="fade-up"
+            target="_blank"
+            rel="nofollow noopener noreferrer"
           >
             <LinkIcon />
             {item.title}
