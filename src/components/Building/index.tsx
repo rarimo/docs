@@ -32,7 +32,8 @@ export default function Building(): JSX.Element {
           </p>
           <Link
             className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
-            to="https://google.com/"
+            // TODO: dummy link
+            to="#"
             data-aos="fade-up"
           >
             LAUNCH

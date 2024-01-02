@@ -8,20 +8,24 @@ import styles from "./styles.module.css";
 const news = [
   {
     title: "Indisputably Wise Insights into the Future of Digital",
-    url: "https://google.com/",
+    // TODO: dummy link
+    url: "#",
   },
   {
     title: "worldcoin community on the successful launch of WorldID 2.0!",
-    url: "https://google.com/",
+    // TODO: dummy link
+    url: "#",
   },
   {
     title: "All WorldID-verified users can now claim their credentials",
-    url: "https://google.com/",
+    // TODO: dummy link
+    url: "#",
   },
   {
     title:
       "roof of Humanity flow and gain access to exclusive humanity Discord channel",
-    url: "https://google.com/",
+    // TODO: dummy link
+    url: "#",
   },
 ];
 
@@ -41,7 +45,8 @@ export default function News(): JSX.Element {
       </p>
       <a
         className={clsx("news__view-all", styles.newsViewAll)}
-        href="https://google.com/"
+        // TODO: dummy link
+        href="#"
         data-aos="fade-up"
       >
         View all

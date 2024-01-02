@@ -57,7 +57,7 @@ module.exports = {
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem",
           remarkPlugins: [
-            [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
+            [require("@docusaurus/remark-plugin-npm2yarn"), { sync: true }],
           ],
         },
         theme: {
@@ -126,20 +126,24 @@ module.exports = {
                 <span style="font-weight: 500">Navigation</span>`,
               },
               {
+                // TODO: dummy link
                 html: `
-                <a href="https://google.com/" class="footer__social-link" target="_blank" rel="noreferrer noopener">Use cases</a>`,
+                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener">Use cases</a>`,
               },
               {
+                // TODO: dummy link
                 html: `
-                <a href="https://google.com/" class="footer__social-link" target="_blank" rel="noreferrer noopener">Developers</a>`,
+                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener">Developers</a>`,
               },
               {
+                // TODO: dummy link
                 html: `
-                <a href="https://google.com/" class="footer__social-link" target="_blank" rel="noreferrer noopener">Community</a>`,
+                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener">Community</a>`,
               },
               {
+                // TODO: dummy link
                 html: `
-                <a href="https://google.com/" class="footer__social-link" target="_blank" rel="noreferrer noopener">Contact</a>`,
+                <a href="#" class="footer__social-link" target="_blank" rel="noreferrer noopener">Contact</a>`,
               },
             ],
           },

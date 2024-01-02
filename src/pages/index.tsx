@@ -42,7 +42,8 @@ const baseLayerCards: HomeCard[] = [
         "Monetization for identity providers (coming soon);",
       ],
     ],
-    url: "https://google.com/",
+    // TODO: dummy link
+    url: "#",
   },
   {
     title: "Bridging Protocol",
@@ -57,7 +58,8 @@ const baseLayerCards: HomeCard[] = [
         "CCTP integrations (coming soon);",
       ],
     ],
-    url: "https://google.com/",
+    // TODO: dummy link
+    url: "#",
   },
   {
     title: "Rarimo Protocol",
@@ -96,20 +98,22 @@ const baseLayerCards: HomeCard[] = [
         </span>,
       ],
     ],
-    url: "https://google.com/",
+    // TODO: dummy link
+    url: "#",
     after: (
       <>
         <a
-          href={"https://google.com/"}
-          rel="noopener"
+          href={"/whitepaper"}
           className={clsx("heroButtonSecondary", styles.linksButton)}
         >
           Whitepaper
         </a>
         <a
-          href={"https://google.com/"}
-          rel="noopener"
+          // TODO: dummy link
+          href={"#"}
+          rel="noopener noreferrer"
           className={clsx("heroButtonSecondary", styles.linksButton)}
+          target="_blank"
         >
           Protocol Proposals
         </a>
@@ -131,7 +135,8 @@ const ecosystemCards: HomeCard[] = [
         "Split identity for added privacy;",
       ],
     ],
-    url: "https://google.com/",
+    // TODO: dummy link
+    url: "#",
   },
   {
     title: "Proof Of Humanity",
@@ -145,7 +150,8 @@ const ecosystemCards: HomeCard[] = [
         "Protect your discord server with Collab.Land plugin;",
       ],
     ],
-    url: "https://google.com/",
+    // TODO: dummy link
+    url: "#",
   },
   {
     title: "WorldCoin Cross-Chain ZKP Solution",
@@ -156,7 +162,8 @@ const ecosystemCards: HomeCard[] = [
         "Cost-efficient scalability with on-demand state replication;",
       ],
     ],
-    url: "https://google.com/",
+    // TODO: dummy link
+    url: "#",
   },
   {
     title: "Polygon ID Cross-Chain ZKP Solution",
@@ -168,7 +175,8 @@ const ecosystemCards: HomeCard[] = [
         "Cost-efficient scalability with on-demand state replication;",
       ],
     ],
-    url: "https://google.com",
+    // TODO: dummy link
+    url: "#",
   },
 ];
 

@@ -22,14 +22,16 @@ const useCasesList: UseCase[] = [
     modifier: "mints",
     title: "Multi-Chain Mints",
     text: "Issue non-fungible tokens (NFTs) or SBTs on any chain",
-    path: "https://google.com/",
+    // TODO: dummy link
+    path: "#",
   },
   {
     img: "img/homepage-use-cases/gaming-profiles.webp",
     modifier: "gaming-profiles",
     title: "Gaming Profiles",
     text: "Build out player profile that can be used by third-party dApps",
-    path: "https://google.com/",
+    // TODO: dummy link
+    path: "#",
   },
   {
     img: "img/homepage-use-cases/ssi.webp",
@@ -38,7 +40,8 @@ const useCasesList: UseCase[] = [
     text: "Use data in the web3 world using ZK-proofs for identity verification",
     isBig: true,
     isYellow: true,
-    path: "https://google.com/",
+    // TODO: dummy link
+    path: "#",
   },
   {
     img: "img/homepage-use-cases/social-graphs.webp",
@@ -46,14 +49,16 @@ const useCasesList: UseCase[] = [
     title: "Social Graphs",
     text: "Use data in the web3 world using ZK-proofs for identity verification",
     isYellow: true,
-    path: "https://google.com/",
+    // TODO: dummy link
+    path: "#",
   },
   {
     img: "img/homepage-use-cases/token-agnostic.webp",
     modifier: "token-agnostic",
     title: "Token-Agnostic Payments",
     text: "Users can pay for transactions with their preferred tokens",
-    path: "https://google.com/",
+    // TODO: dummy link
+    path: "#",
   },
   {
     img: "img/homepage-use-cases/name-servers.webp",
@@ -61,7 +66,8 @@ const useCasesList: UseCase[] = [
     title: "Name Servers",
     text: "Issue credentials for the users and build their social identity",
     isYellow: true,
-    path: "https://google.com/",
+    // TODO: dummy link
+    path: "#",
   },
 ];
 

@@ -14,14 +14,18 @@ export default function Links(): JSX.Element {
       <div className={clsx("links__content", styles.linksContent)}>
         <a
           className={clsx("links__item", styles.linksItem)}
-          href="https://google.com/"
+          href="https://discord.gg/cfrH3Fe7ke"
+          target="_blank"
+          rel="nofollow noopener noreferrer"
         >
           <Discord />
           Discord
         </a>
         <a
           className={clsx("links__item", styles.linksItem)}
-          href="https://google.com/"
+          href="https://t.me/rarimoprotocol"
+          target="_blank"
+          rel="nofollow noopener noreferrer"
         >
           <Telegram />
           Telegram
