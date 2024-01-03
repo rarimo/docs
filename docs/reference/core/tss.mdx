@@ -1,4 +1,5 @@
 ---
+sidebar_position: 5
 ---
 
 # Threshold Signature(TSS)
@@ -13,6 +14,7 @@ After that some set of operations will be extracted from the mempool and signed 
 After producing the signature the confirmation message will be sent to the core with the information about the signed operation.
 
 Core operation entry contains the information about some data to sign. Operation can have the following types:
+
 - transfer operation (transfer token from one chain to another)
 - change key by adding party
 - change key by removing party
@@ -25,6 +27,7 @@ The [tss-svc](https://github.com/rarimo/tss-svc) is a party implementation that 
 
 To reach the consensus and prevent system failures all steps should depend on any time source. Unfortunately, using timestamps is not possible because it can create lots of troubles with defining current time between parties, so we will use block number from core to define the time position of the current step. Every party should be connected to the core validator and synchronize their block number to use it like a timestamp in the whole process.
 Also, all steps will have strongly defined time bounds in blocks. We will define the following time bounds:
+
 - Waiting for the pool from proposer
 - Waiting for the acceptances
 - Waiting for the signing rounds
@@ -47,22 +50,27 @@ Let’s define the function `f(prev_sign, parties, session_id)` that accepts the
 Every party will calculate that value and accept the pool only from the defined proposer. If the party has not received the pool from the proposer, it will catch up with the other parties and sleep until they finish that session.
 
 ### Accepting the pool
+
 After receiving the pool every party shares with other parties their acceptances - the ECDSA signed pool hash with the party private key. For processing the next step parties should receive minimum t exceptions.
 If party has not received a minimum amount of acceptances, it will catch up with the other parties and sleep until they finish that session.
 
 ## Communication
 
 Every party should have the following public endpoints:
+
 - Get current session information (pool, proposer, steps with time bounds, accepted parties list, signed parties list, status) - for example /session/current
 - Get session by id information. (pool, proposer, steps with time bounds, accepted parties list, signed parties list, status) - for example /session/{id}
 
 Every party should have the following protected endpoints (reachable by other parties with their ECDSA signature)
--  Submit request.
+
+- Submit request.
 
 From the core side, every party should have an opportunity to fetch the last block information and last produced signature and also, submit the confirmation message.
 
 ### Requests
+
 Every submit request will contain next values: sender (derived from signature), request type, request body. Parties will parse request body using request type descriptor. Supported request types are:
+
 - Pool proposal
 - Pool acceptance
 - Sign steps operations

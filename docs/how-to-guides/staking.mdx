@@ -1,4 +1,5 @@
 ---
+sidebar_position: 5
 ---
 
 # Staking And Delegating RMO Tokens
@@ -11,11 +12,12 @@ At the high level, Rarimo is built on top of Tendermint and inherits almost all 
 Validators are responsible for securing the RMO token and validating transactions on-chain. This is done through participation in a threshold signature(TSS), which k-of-n validators must sign.
 
 As in the Cosmos (Tendermint), validators can have one of three statuses:
+
 - `Unbonded` - the validator cannot sign blocks and doesn't earn rewards, but they can receive delegations.
 - `Bonded` - the validator receives sufficient bonded tokens; now, he signs blocks and receives rewards.
-They can receive further delegations, and they can be slashed for misbehavior.
+  They can receive further delegations, and they can be slashed for misbehavior.
 - `Unbonding` - validator can leave the active set by his choice or due to slashing / jailing.
-At this point, all delegator's tokens will be unbonded, i.e., returned to them.
+  At this point, all delegator's tokens will be unbonded, i.e., returned to them.
 
 Only the top-stake validators will participate in block signing.
 Validators may change each block, and their maximum amount is determined by `MaxValidators` variable, which currently equals 10.
@@ -29,8 +31,7 @@ The validator **should** stake a required amount of tokens by himself before tok
 When one delegates tokens to a Validator, they are issued a number of "shares" based on a dynamic exchange rate, calculated as:
 `Shares per Token = validator.TotalShares() / validator.Tokens()`
 When a delegator then undelegated his tokens, the token amount is calculated as:
-`Tokens per Share = validator.Tokens() / validator.TotalShares()
-`Shares` are an accounting mechanism, not a fungible asset.
+`Tokens per Share = validator.Tokens() / validator.TotalShares() `Shares` are an accounting mechanism, not a fungible asset.
 
 To delegate tokens to a validator, the holder can execute the following command:
 

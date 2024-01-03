@@ -1,3 +1,7 @@
+---
+sidebar_position: 4
+---
+
 # Solana Bridge Program
 
 The Solana Bridge Contracts provide deposit and withdrawal functions for native, fungible, and non-fungible tokens.
@@ -11,6 +15,7 @@ Before any `deposit_` function can be called, the user should pay the commission
 The user can specify the token in which he wants to pay the commission (it can be a native SOL or fungible token from the available list), and once it is paid, the `deposit_` function will be called.
 
 The following two instructions can be used to pay commission, either in native SOL or in fungible tokens:
+
 ```rust
 pub fn charge_commission_native(
     program_id: Pubkey,
@@ -73,7 +78,9 @@ pub fn charge_commission_ft(
     }
 }
 ```
+
 It accepts the following data:
+
 - `token` either native or fungible token with associated pubkey
 - `deposit_token` type of deposited token
 - `deposit_token_amount` amount of deposited tokens
@@ -124,7 +131,6 @@ pub fn deposit_native(
 - `bundle_seed` seed for decoding the bundle and determining the addresses
 
 The `deposit_native` method transfers native coins from the Solana blockchain to a destination chain.
-
 
 ## `deposit_ft`
 
@@ -184,7 +190,6 @@ pub fn deposit_ft(
 - `bundle_seed` seed for decoding the bundle and determining the addresses
 
 The `deposit_ft` method transfers fungible tokens from the Solana blockchain to the destination chain.
-
 
 ## `deposit_nft`
 

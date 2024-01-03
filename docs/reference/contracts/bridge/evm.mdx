@@ -1,4 +1,5 @@
 ---
+sidebar_position: 2
 # TODO: link to the package / github where our ABIs are accessible
 ---
 
@@ -6,8 +7,6 @@
 
 We use the same contract interfaces for all EVM-compatible blockchains we support. These interfaces are available on `npm` and `github`.
 You can use this page to reference the interface and capabilities of our deployed contracts quickly.
-
-
 
 ## General Notes
 
@@ -54,7 +53,7 @@ struct DepositNativeParameters {
   - `feeToken` is the address of the fee token
 - `depositParams_` struct, which represents native deposit parameters, consists of:
   - `amount` the amount of deposited native tokens
-  - `bundle` used for transaction bundling *tuple (bytes32 salt, bytes bundle)*
+  - `bundle` used for transaction bundling _tuple (bytes32 salt, bytes bundle)_
   - `network` network name destination of the transfer
   - `receiver` receiver address in the destination chain
 
@@ -76,7 +75,7 @@ await rarimoContract.despositNative(
   {
     gasLimit: 50000,
     value: 100000,
-  },
+  }
 );
 ```
 
@@ -112,7 +111,7 @@ struct DepositERC20Parameters {
 - `depositParams_` struct, which represents ERC20 deposit parameters, consists of:
   - `token` source contract address for the fungible tokens being transferred
   - `amount` how many tokens are being transferred
-  - `bundle` used for transaction bundling *tuple (bytes32 salt, bytes bundle)*
+  - `bundle` used for transaction bundling _tuple (bytes32 salt, bytes bundle)_
   - `network` network name destination of the transfer
   - `receiver` receiver address in the destination chain
   - `isWrapped` whether the tokens will be burned (true) or transferred (false)
@@ -126,7 +125,7 @@ Here's an example call in Javascript that will transfer 10 USDT from Avalanche t
 
 ```javascript
 await rarimoContract.depositERC20(
-  '0xc7198437980c041c805a1edcba50c1ce5db95118',
+  "0xc7198437980c041c805a1edcba50c1ce5db95118",
   10,
   {
     salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
@@ -134,7 +133,7 @@ await rarimoContract.depositERC20(
   },
   "solana",
   "0x",
-  true,
+  true
 );
 ```
 
@@ -169,7 +168,7 @@ struct DepositERC721Parameters {
 - `depositParams_` struct, which represents ERC721 deposit parameters, consists of:
   - `token` source contract address for NFT contract
   - `tokenId` id of the token to be transferred
-  - `bundle` used for transaction bundling *tuple (bytes32 salt, bytes bundle)*
+  - `bundle` used for transaction bundling _tuple (bytes32 salt, bytes bundle)_
   - `network` network name destination of the transfer
   - `receiver` receiver address in the destination chain
   - `isWrapped` whether the tokens will be burned (true) or transferred (false)
@@ -183,7 +182,7 @@ Here's an example call in Javascript that will transfer an NFT from Binance to E
 
 ```javascript
 await rarimoContract.depositERC721(
-  '0x12786C473E6d6bB78E554c90812772bEad18264e',
+  "0x12786C473E6d6bB78E554c90812772bEad18264e",
   996800003035,
   {
     salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
@@ -191,7 +190,7 @@ await rarimoContract.depositERC721(
   },
   "ethereum",
   "0x",
-  false,
+  false
 );
 ```
 
@@ -228,7 +227,7 @@ struct DepositERC1155Parameters {
   - `token` source contract address for NFT contract
   - `tokenId`, which token is being transferred
   - `amount` how many fungible tokens to include
-  - `bundle` used for transaction bundling *tuple (bytes32 salt, bytes bundle)*
+  - `bundle` used for transaction bundling _tuple (bytes32 salt, bytes bundle)_
   - `network` network name destination of the transfer
   - `receiver` receiver address in the destination chain
   - `isWrapped` whether the tokens will be burned (true) or transferred (false)
@@ -242,7 +241,7 @@ Here's an example call in Javascript that will transfer 10 SLI fungible tokens f
 
 ```javascript
 await rarimoContract.depositERC1155(
-  '0x22d5f9B75c524Fec1D6619787e582644CD4D7422',
+  "0x22d5f9B75c524Fec1D6619787e582644CD4D7422",
   0,
   10,
   {
@@ -251,7 +250,7 @@ await rarimoContract.depositERC1155(
   },
   "near",
   "0x",
-  true,
+  true
 );
 ```
 
@@ -285,7 +284,7 @@ struct DepositSBTParameters {
 - `depositParams_` struct, which represents SBT deposit parameters, consists of:
   - `token` source contract address for NFT contract
   - `tokenId` which token is being transferred
-  - `bundle` used for transaction bundling *tuple (bytes32 salt, bytes bundle)*
+  - `bundle` used for transaction bundling _tuple (bytes32 salt, bytes bundle)_
   - `network` network name destination of the transfer
   - `receiver` receiver address in the destination chain
 
@@ -297,13 +296,13 @@ Here's an example call in Javascript that will transfer an NFT from Binance to E
 
 ```javascript
 await rarimoContract.depositSBT(
-  '0x12786C473E6d6bB78E554c90812772bEad18264e',
+  "0x12786C473E6d6bB78E554c90812772bEad18264e",
   996800003035,
   {
     salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
     bundle: "0x",
   },
   "ethereum",
-  "0x",
+  "0x"
 );
 ```
