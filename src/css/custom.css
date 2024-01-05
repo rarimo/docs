@@ -6,25 +6,28 @@
 
 /* You can override the default Infima variables here. */
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
-@import url('https://fonts.googleapis.com/css2?family=Oswald');
-@import url('https://fonts.googleapis.com/css2?family=Inter');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import url('./animations.css');
 :root {
-  --ifm-color-primary: #30d5c8;
+  --primary-main: #8AB5A4;
+  --ifm-color-primary: var(--primary-main);
   --ifm-color-primary-dark: #28c3b7;
   --ifm-color-primary-darker: #25b8ad;
   --ifm-color-primary-darkest: #1f988e;
   --ifm-color-primary-light: #46d9ce;
   --ifm-color-primary-lighter: #51dcd1;
-  --ifm-color-primary-lightest: #71e2d9;
+  --ifm-color-primary-lightest: var(--primary-main);
+  --white: #ffffff;
   --ifm-font-family-base: 'Inter', 'Segoe UI', Tahoma, sans-serif;
   --ifm-code-font-size: 95%;
+  --ifm-container-width: 1280px;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --primary-bg-color: #0D0D0D;
   --secondary-bg-color: rgba(255, 255, 255, 0.05);
   --primary-text-color-light: rgba(255, 255, 255, 0.84);
-  --secondary-text-color-light: #ffffff;
+  --secondary-text-color-light: var(--white)fff;
   --primary-text-color-dark: #131313;
   --primary-border: 1px solid var(--secondary-bg-color);
   --primary-font-family: 'Oswald';
@@ -36,26 +39,63 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #30d5c8;
+  --ifm-color-primary: var(--primary-main);
   --ifm-color-primary-dark: #28c3b7;
   --ifm-color-primary-darker: #25b8ad;
   --ifm-color-primary-darkest: #1f988e;
   --ifm-color-primary-light: #46d9ce;
   --ifm-color-primary-lighter: #51dcd1;
-  --ifm-color-primary-lightest: #71e2d9;
+  --ifm-color-primary-lightest: var(--primary-main);
   --bg-rect-border-color: rgba(255, 255, 255, 5%);
   --primary-text-color: #8f8f8f;
   --primary-bg-rect-size: 4.125rem;
   --ifm-navbar-link-color: var(--primary-text-color);
 }
 
+[data-theme='dark'] .DocSearch {
+  --docsearch-modal-background: var(--primary-bg-color);
+  --docsearch-footer-background: var(--secondary-bg-color);
+}
+
+* {
+  --swiper-pagination-bottom: 0;
+  --swiper-pagination-bullet-width: 0.5rem;
+  --swiper-pagination-bullet-height: 0.5rem;
+  --swiper-pagination-bullet-horizontal-gap: 0.275rem;
+  --swiper-pagination-bullet-border-radius: 0;
+  --swiper-pagination-bullet-inactive-color: rgba(255, 255, 255, 0.38);
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-color: var(--primary-main);
+}
+
+a {
+  transition: all 0.25s ease-out;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 .DocSearch-Button .DocSearch-Search-Icon{
   --docsearch-text-color: var(--primary-text-color);
+  width: 0.8rem;
+}
+
+.navbar-sidebar__backdrop {
+  z-index: 2;
+}
+
+.navbar-sidebar {
+  z-index: 2;
 }
 
 .navbar{
   background: transparent;
   padding-bottom: 5rem;
+  max-width: var(--ifm-container-width);
+  width: 100%;
+  margin: 0 auto;
+  font-size: 0.875rem;
 }
 
 .navbar--fixed-top{
@@ -68,7 +108,7 @@
 }
 .menu__link--active{
   --ifm-menu-color-background-active: #8AB5A41A;
-  --ifm-menu-color-active: #8AB5A4;
+  --ifm-menu-color-active: var(--primary-main);
 }
 .menu__link{
   font-family: var(--secondary-font-family);
@@ -84,12 +124,37 @@
   color: var(--primary-text-color);
 }
 .table-of-contents__link--active{
-  color: #8AB5A4;
+  color: var(--primary-main);
 }
 
 html {
   background-color: var(--primary-bg-color);
 }
+
+.header__social-link {
+  display: flex;
+  align-items: center;
+  height: 1.5rem;
+  color: var(--primary-text-color);
+}
+
+.header__social-link svg {
+  height:  16px;
+  width: 16px;
+  margin-left: 0.5rem;
+  fill: rgb(116, 116, 116);
+  opacity: 1;
+}
+
+.header__social-link:hover {
+  color: var(--primary-main);
+  text-decoration: none;
+}
+
+.header__social-link:hover svg  {
+  color: var(--primary-main);
+}
+
 .footer--dark {
   --ifm-footer-background-color: transparent;
   z-index: var(--z-index-default);
@@ -102,6 +167,12 @@ html {
   color: var(--primary-text-color);
 }
 
+.footer__items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .footer__social-link svg {
   height:  16px;
   width: 16px;
@@ -110,9 +181,13 @@ html {
   opacity: 1;
 }
 
+.footer__social-link:hover {
+  color: var(--primary-main);
+  text-decoration: none;
+}
+
 .footer__social-link:hover svg  {
-  opacity: 0.7;
-  color: transparent;
+  color: var(--primary-main);
 }
 
 .footer__link-separator {
@@ -126,23 +201,30 @@ html {
   justify-content: start;
 }
 
+.footer__title {
+  margin: 0;
+}
+
+.footer__links .footer__col:first-child .footer__items {
+  justify-content: space-between;
+  height: 100%;
+}
+
 .footer__link-item {
   height: 2rem;
-}
-.footer__item{
-  margin-top: 0.3rem;
 }
 
 .DocSearch.DocSearch-Button{
   border-radius: 0;
   border:  1px solid rgba(255, 255, 255, 0.2);
   font-family: var(--secondary-font-family);
-
 }
 
 .DocSearch-Button-Key{
   --docsearch-key-gradient: rgba(255, 255, 255, 0.1);
   --docsearch-key-shadow: none;
+
+  top: 0 !important;
 }
 
 span.DocSearch-Button-Placeholder {
@@ -152,20 +234,22 @@ span.DocSearch-Button-Placeholder {
 .heroButton{
   position: relative;
   font-family: var(--secondary-font-family);
-  background: #8AB5A4;
-  padding: 1.0625rem 2.25rem;
+  background: var(--primary-main);
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   margin: 0 1.5rem 0 0;
   cursor: pointer;
   color: var(--primary-text-color-dark);
   border: none;
   white-space: nowrap;
+  transition: all 0.25s ease-out;
 }
 
 .heroButton:hover{
   color: var(--primary-text-color-dark);
   text-decoration: none;
+  background-color: #62aa8c;
 }
 
 .heroButton__svg{
@@ -175,14 +259,23 @@ span.DocSearch-Button-Placeholder {
   margin-left: 0.75rem;
 }
 
-.heroButtonSecondary{
+.heroButtonSecondary {
   display: flex;
   align-items: center;
   font-size: 1rem;
   font-family: var(--secondary-font-family);
-  color: var(--primary-text-color-light);
+  color: var(--primary-main);
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(138, 181, 164, 0.5);
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.25s ease-out;
+}
+
+.heroButtonSecondary:hover{
+  text-decoration: none;
+  color: var(--primary-main);
+  background-color: rgba(138, 181, 164, 0.1)
 }
 
 .svgContainer {
@@ -202,19 +295,78 @@ span.DocSearch-Button-Placeholder {
 }
 
 @media screen and (max-width: 996px) {
-  .footer__social-link {
-    display: none;
-  }
   .footer__items {
     display: flex;
     justify-content: start;
   }
   .footer--dark {
     background: var(--primary-text-color-dark);
-    height: 100px;
     overflow: hidden;
   }
-  .footer__links.col{
-    flex: 1 0;
+
+  .footer__links .col {
+    margin-bottom: 0;
+  }
+
+  .col ~ .col {
+    display: none;
+  }
+
+  .footer__item {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar__items {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .DocSearch.DocSearch-Button {
+    margin-right: 3.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    justify-content: center;
+  }
+
+  .heroButton {
+    padding: 1rem 2.25rem;
+  }
+
+  .navbar__toggle {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background: var(--ifm-menu-color-active); */
+    background: var(--primary-main);
+    z-index: 1;
+    position: relative;
+  }
+
+  .navbar__toggle svg {
+    opacity: 0;
+  }
+
+  .navbar__toggle:before {
+    top: 45%;
+  }
+
+  .navbar__toggle:after {
+    top: 55%;
+  }
+
+  .navbar__toggle:before, .navbar__toggle:after {
+    content: "";
+    height: 0.125rem;
+    width: 1rem;
+    background: black;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }

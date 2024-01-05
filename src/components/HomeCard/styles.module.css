@@ -1,0 +1,77 @@
+.homeCard {
+  border: var(--primary-border);
+  background: #0f0f0f;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.homeCardHeadingWrp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  margin-bottom: 1rem;
+}
+
+.homeCardIconWrp {
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  max-height: 3.375rem;
+}
+
+.homeCardTitle {
+  margin-bottom: 0;
+}
+
+.homeCardDescription {
+  font-size: 0.875rem;
+  color: var(--primary-text-color);
+  font-family: var(--secondary-font-family);
+  font-weight: 400;
+  font-style: normal;
+}
+
+.homeCardSvg {
+  height: 54px;
+  width: 54px;
+}
+
+.heroButtonSecondary {
+  text-transform: uppercase;
+  width: auto;
+}
+
+.homeCardButtonWrp {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.homeCardDescriptionWrp {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.homeCardDescriptionWrp ul {
+  padding-left: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .homeCardDescriptionWrp {
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .homeCardDescriptionWrp p {
+    margin: 0;
+  }
+
+  .homeCard {
+    padding: 1rem;
+  }
+}

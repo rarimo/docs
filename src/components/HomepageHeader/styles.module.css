@@ -1,40 +1,58 @@
 .heroBanner {
-    padding: 4rem 0;
+    padding: 4rem 0 0 0;
     text-align: center;
     position: relative;
     overflow: hidden;
     color: var(--secondary-text-color-light);
 }
+
+.heroSpace {
+    width: 0.375rem;
+}
+
 .heroContent{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 4rem 0;
     max-width: 75%;
     position: relative;
     z-index: var(--z-index-default);
+    padding: 0;
 }
 
 .heroSubtitle{
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     color: var(--primary-text-color);
-    max-width: 39.625rem;
+    max-width: 44.3125rem;
+    line-height: 1.4444;
 }
 
 .buttonContainer{
     display: flex;
-    margin-top: 1rem;
     justify-content: center;
     width: 100%;
+    margin-top: 1.75rem;
+}
+
+.heroFirstLineWrp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.heroWordWrp {
+    display: inline;
 }
 
 .heroTitle {
-    font-size: 6.25rem;
+    font-size: 5rem;
     font-weight: 700;
     color: var(--primary-text-color-light);
     font-family: var(--primary-font-family);
     text-transform: uppercase;
     text-align: center;
+    margin-bottom: 2rem;
 }
 .heroButton__svg{
     color: var(--primary-bg-color);
@@ -47,16 +65,26 @@
     }
 
     .heroBanner {
-        margin: 2rem;
+        margin: 2rem 1.5rem;
+        margin-bottom: 0;
+        padding-bottom: 0;
     }
 
     .heroContent{
         max-width: 100%;
     }
+    
+    .heroWordWrp {
+        display: block;
+    }
 }
 
 
 @media screen and (max-width: 625px) {
+    .heroBanner {
+        padding: 3rem 0 0 0;
+    }
+
     .heroTitle {
         font-size: 2.625rem;
     }

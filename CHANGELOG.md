@@ -17,9 +17,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added the Collab.Land integration doc;
   - Added RariMe guide for issuers;
 - Contribution guide to the README;
+- Subscription form (w/o functionality)
+- Mobile sliders
 
 ### Changed
 
+- Design:
+  - Header
+  - Fonts and texts (where needed)
+  - All sections:
+    - Base Layer Section;
+    - Ecosystem Section;
+    - Use Cases Section;
+    - Build Section;
+    - Community (Links) Section;
+    - News Section;
+  - Footer
 - Updated links from gitlab to github in the whole documentation;
 - Updated the "Overview" doc;
 - Transferred the project to GitHub;
@@ -207,7 +220,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://github.com/rarimo/docs/compare/v1.5.1...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/rarimo/docs/releases/tag/v1.5.1...v1.6.0
 [1.5.1]: https://github.com/rarimo/docs/releases/tag/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/rarimo/docs/releases/tag/v1.4.3...v1.5.0
 [1.4.3]: https://github.com/rarimo/docs/releases/tag/v1.4.2...v1.4.3
