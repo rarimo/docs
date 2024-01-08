@@ -92,7 +92,7 @@
   --background-light: #fafafa;
   --ifm-navbar-link-color: var(--primary-text-color);
   --ifm-heading-color: var(--primary-text-color-light);
-  --ifm-font-color-base: var(--primary-text-color);
+  --ifm-font-color-base: var(--primary-text-color-light);
   --ifm-color-content-secondary: var(--primary-text-color-light) !important;
 }
 
@@ -154,6 +154,10 @@
   color: var(--primary-text-color-light);
 }
 
+[data-theme='light'] .clean-btn {
+  color: var(--primary-text-color);
+}
+
 * {
   --swiper-pagination-bottom: 0;
   --swiper-pagination-bullet-width: 0.5rem;
@@ -167,10 +171,11 @@
 
 pre code {
   background-color: var(--ifm-code-background);
+  padding: 0.5rem;
 }
 
 code {
-  padding: 0.5rem;
+  padding: 0.25rem;
   border: 0;
 }
 
@@ -248,6 +253,7 @@ a:hover {
 
 .navbar--fixed-top{
   position: static;
+  padding-bottom: 3rem;
 }
 
 .theme-doc-sidebar-container{
@@ -257,6 +263,7 @@ a:hover {
 
 .menu.thin-scrollbar {
   padding-right: 1.5rem;
+  padding-top: 1.5rem;
 }
 
 .theme-doc-sidebar-item-link .menu__link:not(.menu__link--active) {
