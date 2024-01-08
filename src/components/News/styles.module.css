@@ -16,7 +16,7 @@
 
 .newsViewAll {
   text-transform: capitalize;
-  color: rgba(255, 255, 255, 0.60);
+  color: var(--secondary-text-color-dark);
   font-size: 1rem;
   font-weight: 600;
 }
