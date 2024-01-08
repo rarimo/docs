@@ -21,6 +21,10 @@
   max-height: 3.375rem;
 }
 
+[data-theme='light'] .homeCardIconWrp {
+  color: var(--primary-text-color-light);
+}
+
 .homeCardTitle {
   margin-bottom: 0;
 }

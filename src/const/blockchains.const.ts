@@ -7,27 +7,27 @@ import Solana from "@site/static/img/solana-sol-logo.svg";
 
 export const blockchains = [
   {
-    Blockchain: Ethereum,
+    IconComponent: Ethereum,
     alt: "Ethereum",
   },
   {
-    Blockchain: BNB,
+    IconComponent: BNB,
     alt: "Binance Smart Chain",
   },
   {
-    Blockchain: Solana,
+    IconComponent: Solana,
     alt: "Solana",
   },
   {
-    Blockchain: Near,
+    IconComponent: Near,
     alt: "Near",
   },
   {
-    Blockchain: Avalanche,
+    IconComponent: Avalanche,
     alt: "Avalanche",
   },
   {
-    Blockchain: Polygon,
+    IconComponent: Polygon,
     alt: "Polygon",
   },
 ];

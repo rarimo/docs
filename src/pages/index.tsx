@@ -92,8 +92,8 @@ const baseLayerCards: HomeCard[] = [
           )}
           key={1}
         >
-          {blockchains.map(({ Blockchain, alt }, idx) => (
-            <Blockchain
+          {blockchains.map(({ IconComponent, alt }, idx) => (
+            <IconComponent
               key={idx}
               className={styles.homeCardSvg}
               role="img"

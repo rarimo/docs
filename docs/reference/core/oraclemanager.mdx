@@ -53,7 +53,10 @@ The following list full describes system rules and architecture:
    - Increase violations counter for oracles that have submitted a `Vote` with answer `YES` for `NotApproved` operation.
    - Increase violations counter for oracles that have created a `NotApproved` operation.
 
-Also, EndBlock method will iterate over all oracles and: - if oracle reaches max_violation_count its status will be set as `Freezed`. Freezed oracle accounts will not be able to create operations and vote for the created one. - if oracle reaches max_missed_count its status will be set as `Jailed`. Jailed oracle accounts will not be able to create operations and vote for the created one.
+Also, EndBlock method will iterate over all oracles and:
+
+- if oracle reaches max_violation_count its status will be set as `Freezed`. Freezed oracle accounts will not be able to create operations and vote for the created one.
+- if oracle reaches max_missed_count its status will be set as `Jailed`. Jailed oracle accounts will not be able to create operations and vote for the created one.
 
 7. After freezing the oracle owner can create a proposal to unfreeze his account
    (`CreateOracleUnfreezeProposal` transaction on `oraclemanager` module) and if it becomes accepted the oracle account

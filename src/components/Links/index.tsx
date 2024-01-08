@@ -11,13 +11,15 @@ export default function Links(): JSX.Element {
       <p className={clsx("links__title", styles.linksTitle)} data-aos="fade-up">
         Join the community
       </p>
-      <div className={clsx("links__content", styles.linksContent)}>
+      <div
+        className={clsx("links__content", styles.linksContent)}
+        data-aos="fade-up"
+      >
         <a
           className={clsx("links__item", styles.linksItem)}
           href="https://discord.gg/cfrH3Fe7ke"
           target="_blank"
           rel="nofollow noopener noreferrer"
-          data-aos="fade-up"
         >
           <Discord />
           Discord
@@ -27,7 +29,6 @@ export default function Links(): JSX.Element {
           href="https://t.me/rarimoprotocol"
           target="_blank"
           rel="nofollow noopener noreferrer"
-          data-aos="fade-up"
         >
           <Telegram />
           Telegram

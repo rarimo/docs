@@ -126,7 +126,7 @@
 }
 
 .bgImageSecond{
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--secondary-text-color-dark);
   top: 0;
   height: 1425px;
   width: 100%;

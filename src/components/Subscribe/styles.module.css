@@ -41,7 +41,7 @@
 }
 
 .subscribeInput {
-  background: 0;
+  background: none;
   border: 0;
   height: 1.5rem;
   width: calc(100% - 2rem);
@@ -63,7 +63,7 @@
   font-weight: 600;
   line-height: 1.4;
   cursor: pointer;
-  background: 0;
+  background: none;
   outline: none;
   margin: 0;
 }

@@ -11,7 +11,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import url('./animations.css');
 :root {
-  --primary-main: #8AB5A4;
+  --primary-main: #4E9E7F;
   --ifm-color-primary: var(--primary-main);
   --ifm-color-primary-dark: #28c3b7;
   --ifm-color-primary-darker: #25b8ad;
@@ -41,6 +41,7 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
+  --primary-main: #8ab5a4;
   --ifm-color-primary: var(--primary-main);
   --ifm-color-primary-dark: #28c3b7;
   --ifm-color-primary-darker: #25b8ad;
@@ -62,7 +63,7 @@
 }
 
 [data-theme='dark'] .theme-code-block {
-  background: 0;
+  background: none;
 }
 
 [data-theme='dark'] .prism-code {
@@ -74,13 +75,17 @@
   --docsearch-footer-background: var(--secondary-bg-color);
 }
 
+[data-theme='dark'] .clean-btn {
+  color: var(--secondary-text-color-dark)
+}
+
 [data-theme='light'] {
-  --primary-text-color-dark: #FFF;
+  --primary-text-color-dark: #fff;
   --primary-text-color: #8f8f8f;
   --primary-text-color-light: #0d0d0d;
-  --primary-bg-color: #FFF;
-  --primary-bg-color-light: #F5F5F5;
-  --bg-rect-border-color: rgba(0, 0, 0, 5%);
+  --primary-bg-color: #fff;
+  --primary-bg-color-light: #f5f5f5;
+  --bg-rect-border-color: rgba(0, 0, 0, 0.05);
   --secondary-text-color-dark: rgba(0, 0, 0, 0.6);
   --primary-border: 1px solid rgba(0, 0, 0, 0.05);
   --primary-border-light: 1px solid rgba(0, 0, 0, 0.2);
@@ -92,7 +97,7 @@
 }
 
 [data-theme='light'] .DocSearch.DocSearch-Button {
-  --docsearch-searchbox-background: #FFF;
+  --docsearch-searchbox-background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -101,12 +106,12 @@
 }
 
 [data-theme='light'] .theme-code-block {
-  background: 0;
+  background: none;
   box-shadow: none;
 }
 
 [data-theme='light'] .prism-code {
-  --ifm-pre-background: #0D0D0D0D;
+  --ifm-pre-background: rgba(208, 208, 208, 0.82);
 }
 
 [data-theme='light'] .heroButton {
@@ -130,19 +135,19 @@
 }
 
 [data-theme='light'] .theme-doc-sidebar-container{
-  --ifm-toc-border-color: #0000001A;
+  --ifm-toc-border-color: rgba(0, 0, 0, 0.1);
 }
 
 [data-theme='light'] .main-wrapper {
-  border-color: #0000001A;
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 [data-theme='light'] .table-of-contents__left-border{
-  --ifm-toc-border-color: #0000001A;
+  --ifm-toc-border-color: rgba(0, 0, 0, 0.1);
 }
 
 [data-theme='light'] .main-wrapper:has(.theme-doc-sidebar-container) {
-  border-color: #0000001A;
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 [data-theme='light'] .footer__item:first-child {
