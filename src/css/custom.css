@@ -233,6 +233,10 @@ a:hover {
   color: var(--primary-text-color-light);
 }
 
+.menu__link:after {
+  transform: rotate(0deg);
+}
+
 .navbar-sidebar__backdrop {
   z-index: 2;
 }
@@ -272,7 +276,7 @@ a:hover {
 }
 
 .menu__list-item--collapsed .menu__link--sublist:after {
-  transform: rotateZ(0deg);
+  transform: rotate(180deg);
 }
 
 .theme-doc-sidebar-item-link .menu__link:not(.menu__link--active) {
