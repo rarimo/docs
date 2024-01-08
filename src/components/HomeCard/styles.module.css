@@ -17,7 +17,7 @@
 
 .homeCardIconWrp {
   border-radius: 2px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: var(--primary-border);
   max-height: 3.375rem;
 }
 

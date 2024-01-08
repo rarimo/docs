@@ -17,6 +17,7 @@ export default function Links(): JSX.Element {
           href="https://discord.gg/cfrH3Fe7ke"
           target="_blank"
           rel="nofollow noopener noreferrer"
+          data-aos="fade-up"
         >
           <Discord />
           Discord
@@ -26,6 +27,7 @@ export default function Links(): JSX.Element {
           href="https://t.me/rarimoprotocol"
           target="_blank"
           rel="nofollow noopener noreferrer"
+          data-aos="fade-up"
         >
           <Telegram />
           Telegram
