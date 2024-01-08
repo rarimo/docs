@@ -66,6 +66,7 @@ const sidebars = {
     "how-to-guides/proof-of-humanity-collabland-discord",
     "how-to-guides/polygon-id-state-replication",
     "how-to-guides/add-rarimo-credentials-to-rarime",
+    "how-to-guides/worldcoin-state-replication",
   ],
   reference: [
     {
