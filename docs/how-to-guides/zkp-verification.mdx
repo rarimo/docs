@@ -141,15 +141,15 @@ Here's a query that verifies that the user was born before 01/01/2000:
 
 ```ts
 const query = {
-  schema: ethers.BigNumber.from("74977327600848231385663280181476307657"),
+  schema: ethers.BigNumber.from('74977327600848231385663280181476307657'),
   claimPathKey: ethers.BigNumber.from(
-    "20376033832371109177683048456014525905119173674985843915445634726167450989630"
+    '20376033832371109177683048456014525905119173674985843915445634726167450989630'
   ),
   operator: 2,
   value: [20000101, ...new Array(63).fill(0).map((i) => 0)],
-  queryHash: "0",
-  circuitId: "credentialAtomicQueryMTPV2OnChain",
-};
+  queryHash: '0',
+  circuitId: 'credentialAtomicQueryMTPV2OnChain',
+}
 ```
 
 The query has the following fields:
@@ -165,53 +165,53 @@ You can run https://go.dev/play/p/rnrRbxXTRY6 to get schema hash and `claimPathK
 To set the query for our smart contracts, use the following script:
 
 ```ts
-import { ethers } from "hardhat";
+import { ethers } from 'hardhat'
 
 async function main() {
-  const poseidonFacadeAddr = ""; // Enter PoseidonFacade address
-  const zkpQueriesStorageAddr = ""; // Enter your ZKPQueriesStorage address
-  const queryValidatorAddr = ""; // Enter your QueryValidatorAddr
-  const queryId = "IDENTITY_PROOF"; // Enter query ID from your IdentityVerifier contract
+  const poseidonFacadeAddr = '' // Enter PoseidonFacade address
+  const zkpQueriesStorageAddr = '' // Enter your ZKPQueriesStorage address
+  const queryValidatorAddr = '' // Enter your QueryValidatorAddr
+  const queryId = 'IDENTITY_PROOF' // Enter query ID from your IdentityVerifier contract
 
   const query = {
-    schema: ethers.BigNumber.from("74977327600848231385663280181476307657"),
+    schema: ethers.BigNumber.from('74977327600848231385663280181476307657'),
     claimPathKey: ethers.BigNumber.from(
-      "20376033832371109177683048456014525905119173674985843915445634726167450989630"
+      '20376033832371109177683048456014525905119173674985843915445634726167450989630'
     ),
     operator: 2,
     value: [20000101, ...new Array(63).fill(0).map((i) => 0)],
-    queryHash: "0",
-    circuitId: "credentialAtomicQueryMTPV2OnChain",
-  };
+    queryHash: '0',
+    circuitId: 'credentialAtomicQueryMTPV2OnChain',
+  }
 
   const ZKPQueriesStorageFactory = await ethers.getContractFactory(
-    "ZKPQueriesStorage",
+    'ZKPQueriesStorage',
     {
       libraries: {
         PoseidonFacade: poseidonFacadeAddr,
       },
     }
-  );
+  )
 
   const zkpQueriesStorage = ZKPQueriesStorageFactory.attach(
     zkpQueriesStorageAddr
-  );
+  )
 
   const tx = await zkpQueriesStorage.setZKPQuery(queryId, {
     queryValidator: queryValidatorAddr,
     circuitQuery: query,
-  });
-  await tx.wait();
+  })
+  await tx.wait()
 
   console.log(
     `Your ZKPQuery - ${await zkpQueriesStorage.getQueryInfo(queryId)}`
-  );
+  )
 }
 
 main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+  console.error(error)
+  process.exitCode = 1
+})
 ```
 
 ## Step 4: Testing It Out

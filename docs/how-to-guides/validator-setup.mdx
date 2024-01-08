@@ -84,13 +84,13 @@ rarimo-core keys show $LOCAL_VALIDATOR_ADDRESS --keyring-backend test --home=$RA
 
 ```yaml
 - name: DAEMON_NAME
-  value: "rarimo-core"
+  value: 'rarimo-core'
 
 - name: DAEMON_HOME
   value: $RARIMO_HOME
 
 - name: DAEMON_ALLOW_DOWNLOAD_BINARIES
-  value: "true"
+  value: 'true'
 ```
 
 1. Use the following command to start your node:
@@ -122,18 +122,18 @@ listener:
 
 ## PostgreSQL database connect
 db:
-  url: "postgres://broadcaster:broadcaster@broadcaster-db/broadcaster?sslmode=disable"
+  url: 'postgres://broadcaster:broadcaster@broadcaster-db/broadcaster?sslmode=disable'
 
 key:
   ## Rarimo account private key in Hex format: 0x123fab...
-  sender_prv_hex: ""
+  sender_prv_hex: ''
   ## Rarimo chain id
-  chain_id: "rarimo_201411-1"
+  chain_id: 'rarimo_201411-1'
   ## Base coin name
-  coin_name: "urmo"
+  coin_name: 'urmo'
 
 cosmos:
-  addr: "validator:9090"
+  addr: 'validator:9090'
 ```
 
 1. You will also need some environment variables to run the service:
@@ -170,9 +170,9 @@ listener:
 
 evm:
   ## State contract for listening
-  contract_addr: "0x624ce98D2d27b20b8f8d521723Df8fC4db71D79D"
+  contract_addr: '0x624ce98D2d27b20b8f8d521723Df8fC4db71D79D'
   ## Polygon websocket address
-  rpc: ""
+  rpc: ''
   ## Start block to listen events. (0 - listen from current). Used to catchup old events. Be careful to use.
   start_from_block: 0
   ## According to network name in Rarimo core. Example: Polygon
@@ -182,9 +182,9 @@ evm:
 
 broadcaster:
   ## address of broadcaster-svc
-  addr: ""
+  addr: ''
   ## sender account address (rarimo..)
-  sender_account: ""
+  sender_account: ''
 
 ## Rarimo chain connections
 
@@ -203,7 +203,7 @@ profiler:
 ## Issuer information
 
 state_contract_cfg:
-  issuer_id: [""]
+  issuer_id: ['']
   disable_filtration: true
 ```
 
@@ -286,7 +286,7 @@ log:
 ## PostreSQL connection
 
 db:
-  url: "postgres://tss:tss@tss-2-db:5432/tss?sslmode=disable"
+  url: 'postgres://tss:tss@tss-2-db:5432/tss?sslmode=disable'
 
 ## Port to listen for incoming GRPC requests
 
@@ -316,8 +316,8 @@ swagger:
 ## Chain configuration
 
 chain:
-  chain_id: "rarimo_201411-1"
-  coin_name: "urmo"
+  chain_id: 'rarimo_201411-1'
+  coin_name: 'urmo'
 ```
 
 1. Set up host environment:

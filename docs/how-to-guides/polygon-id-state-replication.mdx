@@ -63,7 +63,7 @@ listener:
 
 # PostgreSQL DB connect
 db:
-  url: "postgres://relayer:relayer@relayer-db:5432/relayer?sslmode=disable"
+  url: 'postgres://relayer:relayer@relayer-db:5432/relayer?sslmode=disable'
 
 # Rarimo core RPCs
 core:
@@ -74,11 +74,11 @@ cosmos:
 
 evm:
   chains:
-    - name: "Ethereum"
+    - name: 'Ethereum'
       ## Address of the modified state contract on target chain
-      contract_address: ""
+      contract_address: ''
       ## Private key HEX (without leading 0x) that will pay the tx fee
-      submitter_private_key: ""
+      submitter_private_key: ''
       ##  RPC address. Example https://mainnet.infura.io/v3/11111
       rpc:
       ## Target chain id
@@ -106,7 +106,7 @@ relay:
 1. Create `./docker-compose.yml`:
 
    ```yaml
-   version: "3.7"
+   version: '3.7'
 
    services:
      relayer-db:
@@ -124,7 +124,7 @@ relay:
        image: registry.gitlab.com/rarimo/polygonid/relayer-svc:cca1632497291b16a696df42eb8fe5649407df0746002d9c402dc978-1697195756716
        restart: on-failure
        ports:
-         - "8000:8000"
+         - '8000:8000'
        depends_on:
          - relayer-db
        volumes:
@@ -138,10 +138,9 @@ relay:
 
 1. Run the service:
 
-
-    ```sh
-    docker-compose up
-    ```
+   ```sh
+   docker-compose up
+   ```
 
 ## Using Service
 
