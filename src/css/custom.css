@@ -76,17 +76,17 @@
 
 [data-theme='light'] {
   --primary-text-color-dark: #FFF;
-  --primary-text-color: #0d0d0d;
-  --primary-text-color-light: #8f8f8f;
+  --primary-text-color: #8f8f8f;
+  --primary-text-color-light: #0d0d0d;
   --primary-bg-color: #FFF;
   --primary-bg-color-light: #F5F5F5;
   --bg-rect-border-color: rgba(0, 0, 0, 5%);
   --secondary-text-color-dark: rgba(0, 0, 0, 0.6);
   --primary-border: 1px solid rgba(0, 0, 0, 0.05);
   --primary-border-light: 1px solid rgba(0, 0, 0, 0.2);
-  --background-light: #f0f0f0;
+  --background-light: #fafafa;
   --ifm-navbar-link-color: var(--primary-text-color);
-  --ifm-heading-color: var(--primary-text-color);
+  --ifm-heading-color: var(--primary-text-color-light);
   --ifm-font-color-base: var(--primary-text-color);
   --ifm-color-content-secondary: var(--primary-text-color-light) !important;
 }
@@ -94,6 +94,10 @@
 [data-theme='light'] .DocSearch.DocSearch-Button {
   --docsearch-searchbox-background: #FFF;
   border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='light'] .DocSearch-Button-Key {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 [data-theme='light'] .theme-code-block {
@@ -141,6 +145,10 @@
   border-color: #0000001A;
 }
 
+[data-theme='light'] .footer__item:first-child {
+  color: var(--primary-text-color-light);
+}
+
 * {
   --swiper-pagination-bottom: 0;
   --swiper-pagination-bullet-width: 0.5rem;
@@ -155,10 +163,6 @@
 code {
   padding: 0.5rem;
   border: 0;
-}
-
-a {
-  transition: all 0.25s ease-out;
 }
 
 a:hover {
@@ -182,7 +186,7 @@ a:hover {
 }
 
 a {
-  transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out !important;
 }
 
 a:hover {
