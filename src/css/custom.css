@@ -137,6 +137,10 @@
   --ifm-toc-border-color: #0000001A;
 }
 
+[data-theme='light'] .main-wrapper:has(.theme-doc-sidebar-container) {
+  border-color: #0000001A;
+}
+
 * {
   --swiper-pagination-bottom: 0;
   --swiper-pagination-bullet-width: 0.5rem;
@@ -168,6 +172,9 @@ a:hover {
 
 .main-wrapper {
   width: 100%;
+}
+
+.main-wrapper:has(.theme-doc-sidebar-container) {
   border-top: 1px solid #FFFFFF1A;
 }
 

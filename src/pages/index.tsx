@@ -83,7 +83,7 @@ const baseLayerCards: HomeCard[] = [
           )}
           key={0}
         >
-          Supported Blockchain
+          Supported chains
         </span>,
         <span
           className={clsx(
@@ -92,8 +92,13 @@ const baseLayerCards: HomeCard[] = [
           )}
           key={1}
         >
-          {blockchains.map((Blockchain, idx) => (
-            <Blockchain key={idx} className={styles.homeCardSvg} role="img" />
+          {blockchains.map(({ Blockchain, alt }, idx) => (
+            <Blockchain
+              key={idx}
+              className={styles.homeCardSvg}
+              role="img"
+              aria-label={alt}
+            />
           ))}
         </span>,
       ],
@@ -109,8 +114,7 @@ const baseLayerCards: HomeCard[] = [
           Whitepaper
         </a>
         <a
-          // TODO: dummy link
-          href={"#"}
+          href={"https://scan.rarimo.com/proposals"}
           rel="noopener noreferrer"
           className={clsx("heroButtonSecondary", styles.linksButton)}
           target="_blank"
