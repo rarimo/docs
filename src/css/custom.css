@@ -165,6 +165,10 @@
   --swiper-pagination-color: var(--primary-main);
 }
 
+pre code {
+  background-color: var(--ifm-code-background);
+}
+
 code {
   padding: 0.5rem;
   border: 0;
