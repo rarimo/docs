@@ -230,7 +230,7 @@ a:hover {
 }
 
 .menu__link--sublist.menu__link--active {
-  color: var(--primary-text-color);
+  color: var(--primary-text-color-light);
 }
 
 .navbar-sidebar__backdrop {
@@ -277,7 +277,7 @@ a:hover {
 .menu__link{
   font-family: var(--secondary-font-family);
   font-weight: 500;
-  --ifm-menu-color: var(--primary-text-color);
+  --ifm-menu-color: var(--primary-text-color-light);
 }
 
 .table-of-contents__left-border{
@@ -289,6 +289,7 @@ a:hover {
 }
 .table-of-contents__link--active{
   color: var(--primary-main);
+  font-weight: 500;
 }
 
 html {
