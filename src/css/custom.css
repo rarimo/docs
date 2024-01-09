@@ -97,6 +97,10 @@
   --ifm-color-content-secondary: var(--primary-text-color-light) !important;
 }
 
+[data-theme='light'] .navbar__toggle:before, [data-theme='light'] .navbar__toggle:after {
+  background: var(--white);
+}
+
 [data-theme='light'] .DocSearch.DocSearch-Button {
   --docsearch-searchbox-background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -429,6 +433,10 @@ html {
   border-radius: 0;
   border:  1px solid rgba(255, 255, 255, 0.2);
   font-family: var(--secondary-font-family);
+}
+
+.DocSearch.DocSearch-Button:focus, .DocSearch.DocSearch-Button:hover {
+  box-shadow: none;
 }
 
 .DocSearch-Button-Key{
