@@ -111,6 +111,10 @@ const sidebars = {
     },
     {
       type: "doc",
+      id: "reference/world-id-state-replication",
+    },
+    {
+      type: "doc",
       id: "reference/api",
     },
     {

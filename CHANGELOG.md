@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Reference:
   - Added the "Polygon ID State Replication" page;
+  - Added the "World ID State Replication" page;
 - Use Cases:
   - Added the "Identity State Replication" doc;
 - How-to-Guides:
