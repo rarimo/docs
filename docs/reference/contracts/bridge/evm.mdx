@@ -1,5 +1,4 @@
 ---
-sidebar_position: 2
 # TODO: link to the package / github where our ABIs are accessible
 ---
 
@@ -67,16 +66,16 @@ Here's an example call in Javascript that could transfer 100000 WEI from Ethereu
 ```javascript
 await rarimoContract.despositNative(
   {
-    salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
-    bundle: "0x",
+    salt: '0x0000000000000000000000000000000000000000000000000000000000000001',
+    bundle: '0x',
   },
-  "polygon",
-  "0x",
+  'polygon',
+  '0x',
   {
     gasLimit: 50000,
     value: 100000,
   }
-);
+)
 ```
 
 ## DepositERC20
@@ -125,16 +124,16 @@ Here's an example call in Javascript that will transfer 10 USDT from Avalanche t
 
 ```javascript
 await rarimoContract.depositERC20(
-  "0xc7198437980c041c805a1edcba50c1ce5db95118",
+  '0xc7198437980c041c805a1edcba50c1ce5db95118',
   10,
   {
-    salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
-    bundle: "0x",
+    salt: '0x0000000000000000000000000000000000000000000000000000000000000001',
+    bundle: '0x',
   },
-  "solana",
-  "0x",
+  'solana',
+  '0x',
   true
-);
+)
 ```
 
 ## DepositERC721
@@ -182,16 +181,16 @@ Here's an example call in Javascript that will transfer an NFT from Binance to E
 
 ```javascript
 await rarimoContract.depositERC721(
-  "0x12786C473E6d6bB78E554c90812772bEad18264e",
+  '0x12786C473E6d6bB78E554c90812772bEad18264e',
   996800003035,
   {
-    salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
-    bundle: "0x",
+    salt: '0x0000000000000000000000000000000000000000000000000000000000000001',
+    bundle: '0x',
   },
-  "ethereum",
-  "0x",
+  'ethereum',
+  '0x',
   false
-);
+)
 ```
 
 ## DepositERC1155
@@ -241,17 +240,17 @@ Here's an example call in Javascript that will transfer 10 SLI fungible tokens f
 
 ```javascript
 await rarimoContract.depositERC1155(
-  "0x22d5f9B75c524Fec1D6619787e582644CD4D7422",
+  '0x22d5f9B75c524Fec1D6619787e582644CD4D7422',
   0,
   10,
   {
-    salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
-    bundle: "0x",
+    salt: '0x0000000000000000000000000000000000000000000000000000000000000001',
+    bundle: '0x',
   },
-  "near",
-  "0x",
+  'near',
+  '0x',
   true
-);
+)
 ```
 
 ## DepositSBT
@@ -296,13 +295,13 @@ Here's an example call in Javascript that will transfer an NFT from Binance to E
 
 ```javascript
 await rarimoContract.depositSBT(
-  "0x12786C473E6d6bB78E554c90812772bEad18264e",
+  '0x12786C473E6d6bB78E554c90812772bEad18264e',
   996800003035,
   {
-    salt: "0x0000000000000000000000000000000000000000000000000000000000000001",
-    bundle: "0x",
+    salt: '0x0000000000000000000000000000000000000000000000000000000000000001',
+    bundle: '0x',
   },
-  "ethereum",
-  "0x"
-);
+  'ethereum',
+  '0x'
+)
 ```

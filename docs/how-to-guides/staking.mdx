@@ -1,5 +1,4 @@
 ---
-sidebar_position: 5
 ---
 
 # Staking And Delegating RMO Tokens
@@ -31,8 +30,7 @@ The validator **should** stake a required amount of tokens by himself before tok
 When one delegates tokens to a Validator, they are issued a number of "shares" based on a dynamic exchange rate, calculated as:
 `Shares per Token = validator.TotalShares() / validator.Tokens()`
 When a delegator then undelegated his tokens, the token amount is calculated as:
-`Tokens per Share = validator.Tokens() / validator.TotalShares()
-`Shares` are an accounting mechanism, not a fungible asset.
+`Tokens per Share = validator.Tokens() / validator.TotalShares() `Shares` are an accounting mechanism, not a fungible asset.
 
 To delegate tokens to a validator, the holder can execute the following command:
 

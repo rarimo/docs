@@ -76,7 +76,7 @@ module.exports = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       colorMode: {
-        defaultMode: 'dark',
+        respectPrefersColorScheme: true,
       },
       navbar: {
         logo: {
