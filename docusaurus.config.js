@@ -113,8 +113,8 @@ module.exports = {
             items: [
               {
                 html: `
-                <img class="footer__logo" src="img/logo-white.svg" alt="Rarimo Logo"/>
-                <img class="footer__logo footer__logo--black" src="img/logo-black.svg" alt="Rarimo Logo"/>
+                <img class="footer__logo" src="/docs/img/logo-white.svg" alt="Rarimo Logo"/>
+                <img class="footer__logo footer__logo--black" src="/docs/img/logo-black.svg" alt="Rarimo Logo"/>
               `,
               },
               {
