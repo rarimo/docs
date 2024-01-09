@@ -40,10 +40,7 @@ The response codes:
 
 ### `IdentityManager`
 
-
-
 <!-- TODO: add Deployments -->
-
 
 It's a modified identity contract meant for the destination chains.
 It checks a TSS from the Rarimo validators to transit the state and only holds a partial history.
@@ -60,7 +57,7 @@ contract IdentityManager is IIdentityManager, Signers {
     address public sourceStateContract;
 
     uint256 internal _latestRoot;
-    
+
     uint256 internal _latestTimestamp;
 
     mapping(uint256 => RootData) internal _roots;
@@ -71,54 +68,32 @@ contract IdentityManager is IIdentityManager, Signers {
         uint256 replacedAt_,
         bytes calldata proof_
     ) external override {
-        RootData storage _prevRoot = _roots[prevRoot_];
-
-        require(prevRoot_ != postRoot_, "IdentityManager: same prev and post roots");
-        require(_prevRoot.replacedAt == 0, "IdentityManager: can't update already stored root");
-
-        _checkMerkleSignature(_getSignHash(prevRoot_, postRoot_, replacedAt_), proof_);
-
-        if (_prevRoot.replacedBy != 0) {
-            _roots[postRoot_].replacedBy = _prevRoot.replacedBy;
-        }
-
-        if (replacedAt_ >= _latestTimestamp) {
-            _roots[_latestRoot].replacedBy = postRoot_;
-
-            _latestRoot = postRoot_;
-            _latestTimestamp = replacedAt_;
-        }
-
-        _prevRoot.replacedAt = replacedAt_;
-        _prevRoot.replacedBy = postRoot_;
+	// ...
 
         emit SignedRootTransited(prevRoot_, postRoot_, replacedAt_, _latestRoot);
     }
-} 
+}
 ```
 
-- `ROOT_EXPIRATION_TIME` — a fixed time, after which the root is considered "expired", i.e. proofs with it are considered invalid after that;
+- `ROOT_EXPIRATION_TIME` — a fixed time after which the root is considered "expired", i.e., proofs with it are considered invalid after that;
 - `sourceStateContract` — address of the state contract on the source chain (Rarimo);
 - `_latestRoot` — latest (and newest) transited root;
 - `_latestTimestamp` — timestamp of latest root replacement;
-- `_roots` — mapping of roots to data about these roots (replacement timestamp and root, that replaced this one).
+- `_roots` — mapping of roots to data about these roots (replacement timestamp and root that replaced this one).
 It is updated after the transition is done;
-- `signedTransitRoot(...)` — the main function, that adds the information to the history (`_roots`).
+- `signedTransitRoot(...)` — the main function that adds the information to the history (`_roots`).
 It changes the `_latestRoot` if `postRoot_` is newer.
 Requires the threshold signature of Rarimo signature providers.
-Also, emits the `SignedRootTransited` event, that contains information about the transition (both roots, timestamp of replacement, and current latest root);
+Also, emits the `SignedRootTransited` event, which contains information about the transition (both roots, timestamp of replacement, and current latest root);
 
 For the full implementation, see [IdentityManager.sol](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/IdentityManager.sol) at the GitHub.
 
 ### `Verifier`
 
-
 <!-- TODO: add Deployments -->
 
-
-
 It's an implementation of a verifier contract.
-You can add your business logic to it, by modifying (or overriding) two hooks – `_beforeProofSubmit` and `_afterProofSubmit`;
+You can add your business logic to it by modifying (or overriding) two hooks – `_beforeProofSubmit` and `_afterProofSubmit`;
 
 
 #### Interface
@@ -136,10 +111,7 @@ contract Verifier is IVerifier, Initializable {
         uint256 externalNullifierHash_,
         uint256[8] calldata proof_
     ) public virtual override {
-        require(
-            !IIdentityManager(identityManager).isExpiredRoot(root_),
-            "Verifier: root is expired"
-        );
+        // ...
 
         _beforeProofValidation();
 
@@ -158,28 +130,23 @@ contract Verifier is IVerifier, Initializable {
 
 ```
 
-- `semaphoreVerifier` — address of the `SemaphoreVerifier` contract, that will be calle to verify the proof;
-- `identityManager` — address of the `IdentityManager` contract that was introduced before;
-- `verifyProof(...)` — main function, that verifies user's proof.
-It calls the `IdentityManager` to verify, whether the root is actual and `SemaphoreVerifier` to verify the proof itself;
+- `semaphoreVerifier` — address of the `SemaphoreVerifier` contract that verifies the proof;
+- `identityManager` — address of the `IdentityManager` contract;
+- `verifyProof(...)` —  the main function that verifies the user's proof.
+It calls the `IdentityManager` to verify whether the root is actual and `SemaphoreVerifier` to verify the proof itself;
 - `_beforeProofValidation()` — hook that should be executed before the `verifyProof(...)`;
-- `_afterProofValidation()` — another hook, that should be executed after the `verifyProof(...)`;
+- `_afterProofValidation()` — hook that gets executed after the `verifyProof(...)` call;
 
-Both hooks should be modified for specific DApp business logic.
-
-For the full implementation, see [Verifier.sol](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/Verifier.sol) at the GitHub.
+Full implementation can be found [here](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/Verifier.sol).
 
 ### `SemaphoreVerifier`
 
-
 <!-- TODO: add Deployments -->
 
-
-
 This contract is responsible for verifying the ZKP.
-It has some necessary math functions and constants, together with the main `verifyProof(...)` function.
-It allows to verify proofs in uncompressed or compressed form.
-Usually, uncompressed form is used, see [BN254 Point Compression (opens in a new tab)](https://2π.com/23/bn254-compression) for further explanation.
+It has some necessary math functions, constants, and the primary `verifyProof(...)` function.
+It allows proofs to be verified in uncompressed or compressed form.
+Usually, uncompressed form is used, see [this](https://2π.com/23/bn254-compression) for further explanation.
 
 #### Interface
 
@@ -192,94 +159,16 @@ contract SemaphoreVerifier is ISemaphoreVerifier {
         uint256[4] calldata compressedProof,
         uint256[4] calldata input
     ) public view {
-        (uint256 Ax, uint256 Ay) = decompress_g1(compressedProof[0]);
-        (uint256 Bx0, uint256 Bx1, uint256 By0, uint256 By1) = decompress_g2(
-            compressedProof[2],
-            compressedProof[1]
-        );
-        (uint256 Cx, uint256 Cy) = decompress_g1(compressedProof[3]);
-        (uint256 Lx, uint256 Ly) = publicInputMSM(input);
-
-        uint256[24] memory pairings;
-
-        pairings[0] = Ax;
-        pairings[1] = Ay;
-        pairings[2] = Bx1;
-        pairings[3] = Bx0;
-        pairings[4] = By1;
-        pairings[5] = By0;
-
-        pairings[6] = Cx;
-        pairings[7] = Cy;
-        pairings[8] = DELTA_NEG_X_1;
-        pairings[9] = DELTA_NEG_X_0;
-        pairings[10] = DELTA_NEG_Y_1;
-        pairings[11] = DELTA_NEG_Y_0;
-
-        pairings[12] = ALPHA_X;
-        pairings[13] = ALPHA_Y;
-        pairings[14] = BETA_NEG_X_1;
-        pairings[15] = BETA_NEG_X_0;
-        pairings[16] = BETA_NEG_Y_1;
-        pairings[17] = BETA_NEG_Y_0;
-
-        pairings[18] = Lx;
-        pairings[19] = Ly;
-        pairings[20] = GAMMA_NEG_X_1;
-        pairings[21] = GAMMA_NEG_X_0;
-        pairings[22] = GAMMA_NEG_Y_1;
-        pairings[23] = GAMMA_NEG_Y_0;
-
-        bool success;
-        uint256[1] memory output;
-        assembly ("memory-safe") {
-            success := staticcall(gas(), PRECOMPILE_VERIFY, pairings, 0x300, output, 0x20)
-        }
-        if (!success || output[0] != 1) {
-            revert ProofInvalid();
-        }
+        // ...
     }
 
     function verifyProof(uint256[8] calldata proof, uint256[4] calldata input) public view {
-        (uint256 x, uint256 y) = publicInputMSM(input);
-
-        bool success;
-        assembly ("memory-safe") {
-            let f := mload(0x40) 
-
-            calldatacopy(f, proof, 0x100)
-
-            mstore(add(f, 0x100), DELTA_NEG_X_1)
-            mstore(add(f, 0x120), DELTA_NEG_X_0)
-            mstore(add(f, 0x140), DELTA_NEG_Y_1)
-            mstore(add(f, 0x160), DELTA_NEG_Y_0)
-            mstore(add(f, 0x180), ALPHA_X)
-            mstore(add(f, 0x1a0), ALPHA_Y)
-            mstore(add(f, 0x1c0), BETA_NEG_X_1)
-            mstore(add(f, 0x1e0), BETA_NEG_X_0)
-            mstore(add(f, 0x200), BETA_NEG_Y_1)
-            mstore(add(f, 0x220), BETA_NEG_Y_0)
-            mstore(add(f, 0x240), x)
-            mstore(add(f, 0x260), y)
-            mstore(add(f, 0x280), GAMMA_NEG_X_1)
-            mstore(add(f, 0x2a0), GAMMA_NEG_X_0)
-            mstore(add(f, 0x2c0), GAMMA_NEG_Y_1)
-            mstore(add(f, 0x2e0), GAMMA_NEG_Y_0)
-
-
-            success := staticcall(gas(), PRECOMPILE_VERIFY, f, 0x300, f, 0x20)
-
-            success := and(success, mload(f))
-        }
-        if (!success) {
-            revert ProofInvalid();
-        }
+        // ...
     }
 }
 ```
 
-- `verifyCompressedProof(...)` — one of two main function, that verifies the compressed proof;
-- `verifyProof(...)` — second main function, that is used much more often.
-Verifies the uncompressed ZKP;
+- `verifyCompressedProof(...)` —  verifies a compressed proof;
+- `verifyProof(...)` — verifies an uncompressed proof;
 
 For the full implementation, see [SemaphoreVerifier.sol](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/vendor/worldcoin/world-id-contracts/SemaphoreVerifier.sol) at the GitHub.
