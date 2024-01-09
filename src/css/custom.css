@@ -283,6 +283,10 @@ a:hover {
   color: #8f8f8f;
 }
 
+.menu__list-item-collapsible {
+  border-radius: 0.75rem;
+}
+
 .menu__link--active{
   --ifm-menu-color-background-active: rgba(78, 158, 127, 0.08);
   --ifm-menu-color-active: var(--primary-main);
@@ -291,6 +295,7 @@ a:hover {
   font-family: var(--secondary-font-family);
   font-weight: 500;
   --ifm-menu-color: var(--primary-text-color-light);
+  border-radius: 0.75rem;
 }
 
 .table-of-contents__left-border{
@@ -333,7 +338,34 @@ html {
   color: var(--primary-main);
 }
 
+.container.padding-top--md.padding-bottom--lg {
+  padding-top: 0 !important;
+}
+
+.theme-doc-toc-desktop {
+  top: var(--ifm-navbar-height) !important;
+}
+
+.col.col--12 ul {
+  font-weight: 500;
+}
+
+.footer--dark .container-fluid.container {
+  border-top: var(--primary-border);
+  padding-top: 2rem;
+}
+
+div .clean-btn {
+  border-radius: 0.75rem !important;
+  padding: 0.375rem;
+  border: 1px solid rgba(8, 8, 8, 0.20);
+  height: 2.25rem;
+  width: 2.25rem;
+  transform: translate(-0.125rem, -0.125rem);
+}
+
 .footer--dark {
+  padding-top: 0;
   --ifm-footer-background-color: transparent;
   z-index: var(--z-index-default);
 }
@@ -402,7 +434,7 @@ html {
 }
 
 .DocSearch.DocSearch-Button{
-  border-radius: 0;
+  border-radius: 0.75rem;
   border:  1px solid rgba(255, 255, 255, 0.2);
   font-family: var(--secondary-font-family);
 }

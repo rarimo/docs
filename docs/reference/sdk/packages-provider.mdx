@@ -36,19 +36,19 @@ After you connect, you can access information about the wallet with these proper
 Here is an example that creates a MetamaskProvider object for a MetaMask wallet on an EVM-compatible chain and prints information about it:
 
 ```ts
-import { createProvider } from "@rarimo/provider";
-import { MetamaskProvider } from "@rarimo/providers-evm";
+import { createProvider } from '@rarimo/provider'
+import { MetamaskProvider } from '@rarimo/providers-evm'
 
 const getMetamaskWalletAddress = async () => {
   // Connect to the Metamask wallet in the browser, using the MetamaskProvider interface to limit bundle size.
-  const provider = await createProvider(MetamaskProvider);
-  await provider.connect();
+  const provider = await createProvider(MetamaskProvider)
+  await provider.connect()
 
   // Get the address of the wallet
-  console.log("Address:", provider.address);
-  console.log("chainType:", ChainTypes[provider.chainType!]);
-  console.log("providerType:", provider.providerType);
-};
+  console.log('Address:', provider.address)
+  console.log('chainType:', ChainTypes[provider.chainType!])
+  console.log('providerType:', provider.providerType)
+}
 ```
 
 Many other methods and properties are available.
@@ -62,23 +62,23 @@ This package supports the same chain and wallet types as the [@rarimo/provider](
 However, instead of using the `createProvider()` function, you use the `useProvider()` function in React applications, as in this example
 
 ```ts
-import { MetamaskProvider } from "@rarimo/providers-evm";
-import { useProvider } from "@rarimo/react-provider";
-import { useEffect } from "react";
+import { MetamaskProvider } from '@rarimo/providers-evm'
+import { useProvider } from '@rarimo/react-provider'
+import { useEffect } from 'react'
 
 function App() {
-  const { provider, ...rest } = useProvider(MetamaskProvider);
+  const { provider, ...rest } = useProvider(MetamaskProvider)
 
   useEffect(() => {
     const connectToProvider = async () => {
-      await provider.connect();
-    };
-    if (!provider) connectToProvider();
-    if (provider?.address) console.log(provider.address);
-  }, [provider]);
+      await provider.connect()
+    }
+    if (!provider) connectToProvider()
+    if (provider?.address) console.log(provider.address)
+  }, [provider])
 
-  return <div className="App">Wallet address: {provider?.address}</div>;
+  return <div className="App">Wallet address: {provider?.address}</div>
 }
 
-export default App;
+export default App
 ```
