@@ -12,7 +12,7 @@ This service replicates identity states on demand.
 It should be called before submitting proof on the destination chain.
 
 For the full implementation, see our [GitHub repository](https://github.com/rarimo/worldcoin-relayer-svc).
-For more information about API, see [Identity transfers (opens in a new tab)](https://rarimo.github.io/rarimo-core/docs/common/bridging/002-identity.html).
+For more information about API, see [Identity transfers](https://rarimo.github.io/rarimo-core/docs/common/bridging/002-identity.html).
 
 ### Relayer endpoints
 
@@ -137,7 +137,7 @@ It calls the `IdentityManager` to verify whether the root is actual and `Semapho
 - `_beforeProofValidation()` — hook that should be executed before the `verifyProof(...)`;
 - `_afterProofValidation()` — hook that gets executed after the `verifyProof(...)` call;
 
-Full implementation can be found [here](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/Verifier.sol).
+For the full implementation, see [Verifier.sol](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/Verifier.sol) at the GitHub.
 
 ### `SemaphoreVerifier`
 
@@ -146,7 +146,7 @@ Full implementation can be found [here](https://github.com/rarimo/worldid-integr
 This contract is responsible for verifying the ZKP.
 It has some necessary math functions, constants, and the primary `verifyProof(...)` function.
 It allows proofs to be verified in uncompressed or compressed form.
-Usually, uncompressed form is used, see [this](https://2π.com/23/bn254-compression) for further explanation.
+Usually, uncompressed form is used, see [BN254 Point Compression](https://2π.com/23/bn254-compression) for further explanation.
 
 #### Interface
 
