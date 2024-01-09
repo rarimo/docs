@@ -61,6 +61,9 @@ module.exports = {
             [require("@docusaurus/remark-plugin-npm2yarn"), { sync: true }],
           ],
         },
+        blog: {
+          showReadingTime: true,
+        },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
