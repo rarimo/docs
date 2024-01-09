@@ -1,5 +1,4 @@
 ---
-title: Polygon ID x Rarimo Collaboration
 ---
 
 # Polygon ID x Rarimo Collaboration
@@ -7,6 +6,7 @@ title: Polygon ID x Rarimo Collaboration
 Polygon ID is a self-sovereign identity protocol that allows users to use zero-knowledge proofs to interact with smart contracts based on rich Verifiable Credentials. However, the on-chain usage is limited to the chain to which the credentials are anchored. To explore the synergy between the protocols, a demo that showcases cross-chain Zero-Knowledge Proofs using existing Polygon ID identities was built.
 
 The goals of this demo are:
+
 - Enable usage of Polygon ID ZK proofs on Ethereum Mainnet;
 - Use the Polygon chain as the single source of truth;
 - Keep the gas costs for syncing the state reasonably low;
@@ -30,6 +30,7 @@ The user then generates a ZKP using the Polygon ID Wallet app and submits it to 
 ## Demo Walkthrough
 
 To complete the demo and claim a soulbound token on Ethereum's Sepolia Testnet, follow these steps:
+
 1. Install Polygon ID Wallet from [AppStore](https://apps.apple.com/us/app/polygon-id/id1629870183) or [Play Market](https://play.google.com/store/apps/details?id=com.polygonid.wallet&hl=en_US) and create an identity;
 2. Get a KYC Age credential by scanning a QR code [here](https://admin-panel.polygon.mainnet-beta.rarimo.com/credentials/scan-link/ade26bde-af43-445b-be72-907693fe6cfd) with your Polygon ID Wallet. Then, wait 2 minutes for the identity provider state to be committed and propagated on-chain;
 3. Open the [Demo DApp](https://polygon.mainnet-beta.rarimo.com/) and scan the QR-code with your Polygon ID Wallet. Confirm the proof generation;

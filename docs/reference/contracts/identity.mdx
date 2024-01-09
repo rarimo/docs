@@ -14,7 +14,7 @@ Identity protocol uses two types of smart contracts:
 - State Contracts hold iden3 identity states(sparse Merkle trees) that are required for on-chain ZKP verifications;
 - Verifiers are responsible for verifying zero-knowledge proofs on-chain. They fetch identity states for the State Contracts to check that the credential used to generate the proof wasn't revoked by the issuer;
 
-##  State Contracts
+## State Contracts
 
 Rarimo uses two types of state contracts:
 
@@ -25,9 +25,9 @@ Rarimo uses two types of state contracts:
 
 #### Deployments
 
-|Chain| ChainID| Address|
-| --- | --- | --- |
-| Rarimo Mainnet | `201411` | `0x5ac96945a771d417B155Cb07A3D7E4b8e2F33FdE` |
+| Chain               | ChainID  | Address                                      |
+| ------------------- | -------- | -------------------------------------------- |
+| Rarimo Mainnet      | `201411` | `0x5ac96945a771d417B155Cb07A3D7E4b8e2F33FdE` |
 | Rarimo Mainnet-Beta | `201411` | `0x753a8678c85d5fb70A97CFaE37c84CE2fD67EDE8` |
 
 #### Interface
@@ -57,17 +57,16 @@ event StateTransited(
 
 Full implementation can be found [here](https://github.com/rarimo/identity-contracts/blob/master/contracts/State.sol).
 
-
 ### `LightweightState`
 
 #### Deployments
 
-|Chain| ChainID| Address|
-| --- | --- | --- |
-| Ethereum | `1` | `0xF3e2491627b9eF3816A4143010B39B2B67F33E55` \([Etherscan](https://etherscan.io/address/0xF3e2491627b9eF3816A4143010B39B2B67F33E55)\) |
-| Polygon | `137` | `0xf9bA419ad9c82451d31d89917db61253a1e46B3C` \([Polygonscan](https://polygonscan.com/address/0xf9bA419ad9c82451d31d89917db61253a1e46B3C)\) |
-| Sepolia | `11155111` | `0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315` \([Etherscan](https://sepolia.etherscan.io/address/0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315)\) |
-| Goerli | `5` | `0x0F08e8EA245E63F2090Bf3fF3772402Da9c047ee` \([Etherscan](https://goerli.etherscan.io/address/0x0F08e8EA245E63F2090Bf3fF3772402Da9c047ee)\) |
+| Chain    | ChainID    | Address                                                                                                                                       |
+| -------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ethereum | `1`        | `0xF3e2491627b9eF3816A4143010B39B2B67F33E55` \([Etherscan](https://etherscan.io/address/0xF3e2491627b9eF3816A4143010B39B2B67F33E55)\)         |
+| Polygon  | `137`      | `0xf9bA419ad9c82451d31d89917db61253a1e46B3C` \([Polygonscan](https://polygonscan.com/address/0xf9bA419ad9c82451d31d89917db61253a1e46B3C)\)    |
+| Sepolia  | `11155111` | `0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315` \([Etherscan](https://sepolia.etherscan.io/address/0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315)\) |
+| Goerli   | `5`        | `0x0F08e8EA245E63F2090Bf3fF3772402Da9c047ee` \([Etherscan](https://goerli.etherscan.io/address/0x0F08e8EA245E63F2090Bf3fF3772402Da9c047ee)\)  |
 
 #### Interface
 
@@ -221,7 +220,7 @@ Full implementation can be found [here](https://github.com/rarimo/identity-contr
 ### `QueryValidator`
 
 It is responsible for ZKP verification (via calling the verifier contract).
-The contract takes the basic ideas and concepts from Iden3,  but in addition to checking the ZKP, it verifies the Merkle proof that the issuer state is in the tree. It also allows accepting proof for a recent state (not the last one) during a certain threshold.
+The contract takes the basic ideas and concepts from Iden3, but in addition to checking the ZKP, it verifies the Merkle proof that the issuer state is in the tree. It also allows accepting proof for a recent state (not the last one) during a certain threshold.
 
 ```solidity
 abstract contract QueryValidator is IQueryValidator, OwnableUpgradeable, UUPSUpgradeable {
@@ -316,7 +315,7 @@ abstract contract QueryValidator is IQueryValidator, OwnableUpgradeable, UUPSUpg
 - `lightweightState` stores the address of the Lightweight State contract via the interface.
 - `verifier` - address of the verifier contract, which verifies the ZKP.
 - `identitesStatesUpdateTime` - the period during which proofs are valid for recent states (set to one hour currently).
-    It means that the user can provide proof for not the latest state, and it will still be valid.
+  It means that the user can provide proof for not the latest state, and it will still be valid.
 - `verify` verifies the ZKP (via verifier call) and Merkle proof with additional checks on ZKP, such as checking that the query hash is correct.
 
 Full implementation can be found [here](https://github.com/rarimo/identity-contracts/blob/master/contracts/validators/QueryValidator.sol).
@@ -328,7 +327,6 @@ Solidity implementation allows hashing up to 6 `uint256` elements.
 
 Functions call `poseidon(...)` linked to the facade.
 More information about that can be found [here](https://github.com/iden3/circomlibjs/blob/main/src/poseidon_gencontract.js).
-
 
 ```solidity
 library PoseidonFacade {

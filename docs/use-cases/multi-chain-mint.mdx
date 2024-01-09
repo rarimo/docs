@@ -1,3 +1,6 @@
+---
+---
+
 # Multi-Chain Mints
 
 Community management solutions enable you to design quests and reward users with points, credentials, tokens for completing them. Furthermore, users may form on-chain reputations via non-fungible tokens (NFTs) or SBTs issued as a result of achieving certain objectives.
@@ -18,22 +21,20 @@ Community protocols can benefit from the integration of the Rarimo protocol beca
 
 - **The SBT on demand -** feature allows users to independently choose the network where they want to mint their SBT, if they choose to do so. Subsequently, the user provides proof of the SBT's existence to the contract and mints the SBT to the required account. This functionality is crucial when the target contract necessitates on-chain SBT ownership verification or displaying on OpenSea.
 
-    ![Cross-chain mint Rarimo SBT scheme](/img/cross-chain-mint-SBT.png)
-
+  ![Cross-chain mint Rarimo SBT scheme](/img/cross-chain-mint-SBT.png)
 
 - **The Proof on demand -** feature enables users to provide proof of the existence of their SBT on Rarimo directly to the destination contract, provided the target dApp is connected to the Rarimo integrator contract. The integrator contract stores the state defined by the Rarimo protocol and the mechanism used for verification, which is not memory-intensive and can contain thousands of proofs-of-existence. Additionally, this approach can be utilized during off-chain verification procedures, such as providing proof of a certificate's existence to a university.
 
-    ![Cross-chain mint Rarimo Proof scheme](/img/cross-chain-mint-proof.png)
-
+  ![Cross-chain mint Rarimo Proof scheme](/img/cross-chain-mint-proof.png)
 
 ## Fees Options
 
 1. Rarimo pays for updated states on destination networks.
-    1. SBT issuers mint claims on Rarimo protocol and pays network fee
-    1. After some intervals, Rarimo updates the claims state in connected networks:
-        1. It can be daily, hourly, etc.
-        1. It can be updated after each new claim is created
-    1. Users can generate proof of ownership SBT on Rarimo and request the required contract on the destination chain. The user pays the fee for proof verification.
+   1. SBT issuers mint claims on Rarimo protocol and pays network fee
+   1. After some intervals, Rarimo updates the claims state in connected networks:
+      1. It can be daily, hourly, etc.
+      1. It can be updated after each new claim is created
+   1. Users can generate proof of ownership SBT on Rarimo and request the required contract on the destination chain. The user pays the fee for proof verification.
 1. User pays for receiving state from Rarimo
-    1. SBT issuers mint claims on Rarimo protocol and pays network fee
-    1. The user requests the required contract and provides proof to the dApp. dApp calls Rarimo with the required state and verifies the user’s proof (through a verifier contract).
+   1. SBT issuers mint claims on Rarimo protocol and pays network fee
+   1. The user requests the required contract and provides proof to the dApp. dApp calls Rarimo with the required state and verifies the user’s proof (through a verifier contract).

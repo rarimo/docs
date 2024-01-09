@@ -15,17 +15,12 @@ export default function Building(): JSX.Element {
         />
         <div
           className={clsx("building__description", styles.buildingDescription)}
+          data-aos="fade-up"
         >
-          <h2
-            className={clsx("building__title", styles.buildingTitle)}
-            data-aos="fade-up"
-          >
+          <h2 className={clsx("building__title", styles.buildingTitle)}>
             Build Fast With Developer Dashboard
           </h2>
-          <p
-            className={clsx("building__text", styles.buildingText)}
-            data-aos="fade-up"
-          >
+          <p className={clsx("building__text", styles.buildingText)}>
             {
               "Build no-code and low-code identity enabled dApps with \nRarimo Developer Dashboard"
             }
@@ -34,7 +29,6 @@ export default function Building(): JSX.Element {
             className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
             // TODO: dummy link
             to="#"
-            data-aos="fade-up"
             target="_blank"
             rel="noreferrer noopener"
           >

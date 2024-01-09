@@ -16,7 +16,7 @@
 
 .newsViewAll {
   text-transform: capitalize;
-  color: rgba(255, 255, 255, 0.60);
+  color: var(--secondary-text-color);
   font-size: 1rem;
   font-weight: 600;
 }
@@ -30,14 +30,14 @@
 
 .newsItem {
   border: var(--primary-border);
-  background: #0f0f0f;
+  background: var(--background-light);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: space-between;
   gap: 1.5rem;
-  color: var(--white);
+  color: var(--primary-text-color-light);
   width: 100%;
   text-transform: capitalize;
   min-height: 14rem;

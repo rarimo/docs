@@ -15,10 +15,11 @@ will make the protocol more flexible and adapted for different use cases.
 → As a base layer, a low-level cross-chain messaging protocol is used.
 
 → On top of this messaging protocol, there are:
-* bridging protocol that adds the functionality of securely locking/unlocking assets and has enough flexibility to build
-applications on top of this bridging logic
-* identity protocol that allows issuing of digital identity artifacts and propagates them over connected networks
-* oracle layer is a decentralized service that brings data from connected chains (about assets, states, and statements)
+
+- bridging protocol that adds the functionality of securely locking/unlocking assets and has enough flexibility to build
+  applications on top of this bridging logic
+- identity protocol that allows issuing of digital identity artifacts and propagates them over connected networks
+- oracle layer is a decentralized service that brings data from connected chains (about assets, states, and statements)
 
 → The third level will be applications that use the bridging protocol for different use cases.
 
@@ -26,10 +27,11 @@ applications on top of this bridging logic
 
 Security of the **Rarimo** protocol will be handled by two main roles: Validators and Signers. Validators will be
 responsible for two main aspects:
-* Maintenance of the Rarimo blockchain
-* Being an oracle that submits and checks events on connected chains (it’s presumed that the oracle role could be
-separated from the validator, but in the early stage, it is required to support the set of predefined chains by each
-validator)
+
+- Maintenance of the Rarimo blockchain
+- Being an oracle that submits and checks events on connected chains (it’s presumed that the oracle role could be
+  separated from the validator, but in the early stage, it is required to support the set of predefined chains by each
+  validator)
 
 Signers are part of the oracles functionality responsible for producing a threshold signature based on the actions
 submitted to the Rarimo blockchain that could be used in connected chains as proof of checking events in an external
@@ -40,17 +42,19 @@ network.
 The messaging protocol architecture of Rarimo can support the following verticals:
 
 **Liquidity (Marketplaces, Defi & Lending)**
-* Streamlined cross-chain NFT purchases with any ERC20
-* Proof of Digital Asset Ownership and Reputation for Lending
-* Bulk migration of NFTs from dying chains to thriving one's
+
+- Streamlined cross-chain NFT purchases with any ERC20
+- Proof of Digital Asset Ownership and Reputation for Lending
+- Bulk migration of NFTs from dying chains to thriving one's
 
 **Compatibility (Metaverses, Gaming)**
-* Quickly scale assets across chains for different metaverses
-* Cross-chain NFT drops
-* Brand asset migration by end users
+
+- Quickly scale assets across chains for different metaverses
+- Cross-chain NFT drops
+- Brand asset migration by end users
 
 **Access (Identity & Reputation, DAO)**
-* Proof of Identity across chains
-* Extension of voting rights in DAO based on holdings
-* Community-enabled key recovery permissions
 
+- Proof of Identity across chains
+- Extension of voting rights in DAO based on holdings
+- Community-enabled key recovery permissions

@@ -39,15 +39,12 @@ export default function News(): JSX.Element {
   }, [swiperRef.current]);
 
   return (
-    <div className={clsx("news container", styles.news)}>
-      <p className={clsx("news__title", styles.newsTitle)} data-aos="fade-up">
-        Latest news
-      </p>
+    <div className={clsx("news container", styles.news)} data-aos="fade-up">
+      <p className={clsx("news__title", styles.newsTitle)}>Latest news</p>
       <a
         className={clsx("news__view-all", styles.newsViewAll)}
         // TODO: dummy link
         href="#"
-        data-aos="fade-up"
       >
         View all
       </a>
@@ -57,7 +54,6 @@ export default function News(): JSX.Element {
             className={clsx("news__item", styles.newsItem)}
             href={item.url}
             key={idx}
-            data-aos="fade-up"
             target="_blank"
             rel="nofollow noopener noreferrer"
           >

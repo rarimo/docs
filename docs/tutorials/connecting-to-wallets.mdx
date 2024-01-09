@@ -58,7 +58,10 @@ import { EthersProvider } from '@rarimo/providers-evm'
 import { providers } from 'ethers'
 
 const getEVMWalletAddress = async () => {
-  const web3Provider = new providers.Web3Provider(window.ethereum as providers.ExternalProvider, 'any')
+  const web3Provider = new providers.Web3Provider(
+    window.ethereum as providers.ExternalProvider,
+    'any'
+  )
   const provider = new Provider(EthersProvider)
   await provider.init({
     name: Providers.Ethers,
@@ -81,7 +84,10 @@ import { EthersProvider } from '@rarimo/providers-evm'
 import { providers } from 'ethers'
 
 const getEVMWalletAddress = async () => {
-  const web3Provider = new providers.Web3Provider(window.ethereum as providers.ExternalProvider, 'any')
+  const web3Provider = new providers.Web3Provider(
+    window.ethereum as providers.ExternalProvider,
+    'any'
+  )
   const provider = new Provider(EthersProvider)
   await provider.init({
     name: Providers.Ethers,

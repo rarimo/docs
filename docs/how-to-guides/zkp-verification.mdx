@@ -1,5 +1,6 @@
 ---
 ---
+
 # Verifying Zero-Knowledge Proofs in Smart Contracts
 
 The following guide will instruct you on integrating zero-knowledge proofs into an existing smart contract written in Solidity.
@@ -33,35 +34,33 @@ contract AgeRestrictedERC20 is IERC20 {
 Our users were issued verifiable credentials(VC) that contain the user's birthday date:
 
 ```json
-  {
-    "id": "8edd8112-c415-11ed-b036-debe37e1cbd6",
-    "proofTypes": [
-      "BJJSignature2021"
-    ],
-    "createdAt": "2023-03-20T11:54:01.110295+01:00",
-    "expiresAt": "2025-03-20T11:54:01.110295+01:00",
-    "expired": false,
-    "schemaHash": "c9b2370371b7fa8b3dab2a5ba81b6838",
-    "schemaType": "KYCAgeCredential",
-    "schemaUrl": "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json/KYCAgeCredential-v3.json",
-    "revoked": false,
-    "revNonce": 2136005230,
-    "credentialSubject": {
-      "birthday": 19960424,
-      "documentType": 2,
-      "id": "did:rarimo:2qDDDKmo436EZGCBAvkqZjADYoNRJszkG7UymZeCHQ"
-    },
-    "userID": "did:rarimo:2qFpPHotk6oyaX1fcrpQFT4BMnmg8YszUwxYtaoGoe"
-  }
+{
+  "id": "8edd8112-c415-11ed-b036-debe37e1cbd6",
+  "proofTypes": ["BJJSignature2021"],
+  "createdAt": "2023-03-20T11:54:01.110295+01:00",
+  "expiresAt": "2025-03-20T11:54:01.110295+01:00",
+  "expired": false,
+  "schemaHash": "c9b2370371b7fa8b3dab2a5ba81b6838",
+  "schemaType": "KYCAgeCredential",
+  "schemaUrl": "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json/KYCAgeCredential-v3.json",
+  "revoked": false,
+  "revNonce": 2136005230,
+  "credentialSubject": {
+    "birthday": 19960424,
+    "documentType": 2,
+    "id": "did:rarimo:2qDDDKmo436EZGCBAvkqZjADYoNRJszkG7UymZeCHQ"
+  },
+  "userID": "did:rarimo:2qFpPHotk6oyaX1fcrpQFT4BMnmg8YszUwxYtaoGoe"
+}
 ```
 
 We'll mint 100 tokens to every user born before 01/01/2000.
 
-## Step 1:  Inherit the `BaseVerifier` Contract and Add the ZKP Verification
+## Step 1: Inherit the `BaseVerifier` Contract and Add the ZKP Verification
 
 We need to import the necessary [Rarimo identity contrcts](https://github.com/rarimo/identity-contracts/tree/master) and inherit the [`BaseVerifier`](https://github.com/rarimo/identity-contracts/blob/aeb929ccc3fa8ab508fd7576f9fa853a081e5010/contracts/verifiers/BaseVerifier.sol) contract.
 
-Then, we need to add the ZKP verification logic into our `mint` method. Our contract must also define the query ID; in our case, it's  `AGE_PROOF`. It is the identifier of the ZKP Request that we will create in the next step.
+Then, we need to add the ZKP verification logic into our `mint` method. Our contract must also define the query ID; in our case, it's `AGE_PROOF`. It is the identifier of the ZKP Request that we will create in the next step.
 
 ```
 // SPDX-License-Identifier: MIT
@@ -140,25 +139,24 @@ After the contract deployment, we should design an [Iden3 proof query](https://d
 Here's a query that verifies that the user was born before 01/01/2000:
 
 ```ts
-  const query = {
-    schema: ethers.BigNumber.from("74977327600848231385663280181476307657"),
-    claimPathKey: ethers.BigNumber.from(
-     "20376033832371109177683048456014525905119173674985843915445634726167450989630"
-    ),
-    operator: 2,
-    value: [20000101, ...new Array(63).fill(0).map((i) => 0)],
-    queryHash: "0",
-    circuitId: "credentialAtomicQueryMTPV2OnChain",
-  }
+const query = {
+  schema: ethers.BigNumber.from('74977327600848231385663280181476307657'),
+  claimPathKey: ethers.BigNumber.from(
+    '20376033832371109177683048456014525905119173674985843915445634726167450989630'
+  ),
+  operator: 2,
+  value: [20000101, ...new Array(63).fill(0).map((i) => 0)],
+  queryHash: '0',
+  circuitId: 'credentialAtomicQueryMTPV2OnChain',
+}
 ```
-
 
 The query has the following fields:
 
 1. `schema`: hash of the credential schema;
 1. `claimPathKey`: represents the path to the query key inside the merklized credential (In our case, it is the path to the `birthday` key).
 1. `operator`: is either 1, 2, 3, 4, 5 or 6 (`less-than` operator we need is `2`);
-1. `credentialAtomicQueryMTPV2OnChain`:  ID of the [Iden3 circuit](https://docs.iden3.io/protocol/main-circuits/) used to evaluate the proof. Set to `credentialAtomicQueryMTPV2OnChain`
+1. `credentialAtomicQueryMTPV2OnChain`: ID of the [Iden3 circuit](https://docs.iden3.io/protocol/main-circuits/) used to evaluate the proof. Set to `credentialAtomicQueryMTPV2OnChain`
 1. `value`: represents the threshold value you are querying (01/01/2000 date in our case);
 
 You can run https://go.dev/play/p/rnrRbxXTRY6 to get schema hash and `claimPathKey` using your schema.
@@ -166,49 +164,53 @@ You can run https://go.dev/play/p/rnrRbxXTRY6 to get schema hash and `claimPathK
 To set the query for our smart contracts, use the following script:
 
 ```ts
-import { ethers } from "hardhat";
+import { ethers } from 'hardhat'
 
 async function main() {
-  const poseidonFacadeAddr = "";      // Enter PoseidonFacade address
-  const zkpQueriesStorageAddr = "";   // Enter your ZKPQueriesStorage address
-  const queryValidatorAddr = "";      // Enter your QueryValidatorAddr
-  const queryId = "IDENTITY_PROOF";   // Enter query ID from your IdentityVerifier contract
+  const poseidonFacadeAddr = '' // Enter PoseidonFacade address
+  const zkpQueriesStorageAddr = '' // Enter your ZKPQueriesStorage address
+  const queryValidatorAddr = '' // Enter your QueryValidatorAddr
+  const queryId = 'IDENTITY_PROOF' // Enter query ID from your IdentityVerifier contract
 
   const query = {
-    schema: ethers.BigNumber.from("74977327600848231385663280181476307657"),
+    schema: ethers.BigNumber.from('74977327600848231385663280181476307657'),
     claimPathKey: ethers.BigNumber.from(
-      "20376033832371109177683048456014525905119173674985843915445634726167450989630"
+      '20376033832371109177683048456014525905119173674985843915445634726167450989630'
     ),
     operator: 2,
     value: [20000101, ...new Array(63).fill(0).map((i) => 0)],
-    queryHash: "0",
-    circuitId: "credentialAtomicQueryMTPV2OnChain",
+    queryHash: '0',
+    circuitId: 'credentialAtomicQueryMTPV2OnChain',
   }
 
-  const ZKPQueriesStorageFactory = await ethers.getContractFactory("ZKPQueriesStorage", {
-    libraries: {
-      PoseidonFacade: poseidonFacadeAddr,
-    }
-  });
-
-  const zkpQueriesStorage = ZKPQueriesStorageFactory.attach(zkpQueriesStorageAddr);
-
-  const tx = await zkpQueriesStorage.setZKPQuery(
-    queryId,
+  const ZKPQueriesStorageFactory = await ethers.getContractFactory(
+    'ZKPQueriesStorage',
     {
-      queryValidator: queryValidatorAddr,
-      circuitQuery: query
+      libraries: {
+        PoseidonFacade: poseidonFacadeAddr,
+      },
     }
-  );
-  await tx.wait();
+  )
 
-  console.log(`Your ZKPQuery - ${await zkpQueriesStorage.getQueryInfo(queryId)}`);
+  const zkpQueriesStorage = ZKPQueriesStorageFactory.attach(
+    zkpQueriesStorageAddr
+  )
+
+  const tx = await zkpQueriesStorage.setZKPQuery(queryId, {
+    queryValidator: queryValidatorAddr,
+    circuitQuery: query,
+  })
+  await tx.wait()
+
+  console.log(
+    `Your ZKPQuery - ${await zkpQueriesStorage.getQueryInfo(queryId)}`
+  )
 }
 
 main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+  console.error(error)
+  process.exitCode = 1
+})
 ```
 
 ## Step 4: Testing It Out
