@@ -11,8 +11,8 @@ This page contains technical resources related to the World ID State Replication
 This service replicates identity states on demand.
 It should be called before submitting proof on the destination chain.
 
-- Github: https://github.com/rarimo/worldcoin-relayer-svc
-- API Reference: https://rarimo.github.io/rarimo-core/docs/common/bridging/002-identity.html
+For the full implementation, see our [GitHub repository](https://github.com/rarimo/worldcoin-relayer-svc).
+For more information about API, see [Identity transfers (opens in a new tab)](https://rarimo.github.io/rarimo-core/docs/common/bridging/002-identity.html).
 
 ### Relayer endpoints
 
@@ -20,7 +20,7 @@ To perform state publishing, you can execute POST `/integrations/relayer/state/r
 
 ```json
 {
-  "chain": "Ethereum",
+  "chain": "Avalanche",
   "hash": "0x212bc6f8194aa63eee97b0566b7cd65c66bb57cc4936c11e611f1042bb0b7118",
   "waitConfirm": true
 }
@@ -46,7 +46,7 @@ The response codes:
 
 
 It's a modified identity contract meant for the destination chains.
-It checks a TSS from the Rarimo validators instead of a ZKP to transit the state and only holds a partial history.
+It checks a TSS from the Rarimo validators to transit the state and only holds a partial history.
 The relayer service lazily updates the contract whenever a user wants to submit ZKP on a particular chain.
 
 
@@ -108,12 +108,9 @@ It changes the `_latestRoot` if `postRoot_` is newer.
 Requires the threshold signature of Rarimo signature providers.
 Also, emits the `SignedRootTransited` event, that contains information about the transition (both roots, timestamp of replacement, and current latest root);
 
-Full implementation can be found [here](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/IdentityManager.sol).
+For the full implementation, see [IdentityManager.sol](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/IdentityManager.sol) at the GitHub.
 
 ### `Verifier`
-
-
-
 
 
 <!-- TODO: add Deployments -->
@@ -170,7 +167,7 @@ It calls the `IdentityManager` to verify, whether the root is actual and `Semaph
 
 Both hooks should be modified for specific DApp business logic.
 
-Full implementation can be found [here](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/Verifier.sol).
+For the full implementation, see [Verifier.sol](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/Verifier.sol) at the GitHub.
 
 ### `SemaphoreVerifier`
 
@@ -182,7 +179,7 @@ Full implementation can be found [here](https://github.com/rarimo/worldid-integr
 This contract is responsible for verifying the ZKP.
 It has some necessary math functions and constants, together with the main `verifyProof(...)` function.
 It allows to verify proofs in uncompressed or compressed form.
-Usually, uncompressed form is used, see [this](https://2π.com/23/bn254-compression) for further explanation.
+Usually, uncompressed form is used, see [BN254 Point Compression (opens in a new tab)](https://2π.com/23/bn254-compression) for further explanation.
 
 #### Interface
 
@@ -285,4 +282,4 @@ contract SemaphoreVerifier is ISemaphoreVerifier {
 - `verifyProof(...)` — second main function, that is used much more often.
 Verifies the uncompressed ZKP;
 
-Full implementation can be found [here](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/vendor/worldcoin/world-id-contracts/SemaphoreVerifier.sol).
+For the full implementation, see [SemaphoreVerifier.sol](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/vendor/worldcoin/world-id-contracts/SemaphoreVerifier.sol) at the GitHub.
