@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Themes (light and dark);
 - Reference:
   - Added the "Polygon ID State Replication" page;
 - Use Cases:
@@ -33,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Community (Links) Section;
     - News Section;
   - Footer
+  - Docs page design (product based navigation)
 - Updated links from gitlab to github in the whole documentation;
 - Updated the "Overview" doc;
 - Transferred the project to GitHub;
