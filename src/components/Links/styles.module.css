@@ -23,13 +23,13 @@
 
 .linksItem {
   border: var(--primary-border);
-  background: #0f0f0f;
+  background: var(--background-light);
   padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 1.5rem;
-  color: var(--white);
+  color: var(--primary-text-color-light);
   max-width: 18.75rem;
   width: 100%;
   font-weight: 600;

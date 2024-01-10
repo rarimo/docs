@@ -21,7 +21,7 @@ Sending a transaction with the SDK includes these main steps:
 
 1. Connect to the wallet with the `createProvider()` function, which creates a wallet provider that represents the wallet.
 1. Use the `createCheckoutOperation()` function to create an object that implements the `INFTCheckoutOperation` interface.
-This object represents the transaction operation and provides methods to access a specific type of chain, estimate the transaction price, and complete the checkout process.
+   This object represents the transaction operation and provides methods to access a specific type of chain, estimate the transaction price, and complete the checkout process.
 1. Bundle the data for the contracts to call as part of the transaction.
 1. Run the transaction operation's `checkout()` method, which starts the transaction.
 
@@ -37,11 +37,11 @@ import {
 } from '@rarimo/nft-checkout'
 import { createProvider } from '@rarimo/provider'
 import { MetamaskProvider } from '@rarimo/providers-evm'
-import { ethers } from "ethers"
+import { ethers } from 'ethers'
 
 // Address of the NFT sale contracts for test purposes
 const MARKETPLACES: { [key in ChainNames]?: string } = {
-  [ChainNames.Goerli]: "0x7711a35F092ec0941C0C58012c508814D3F9d43E",
+  [ChainNames.Goerli]: '0x7711a35F092ec0941C0C58012c508814D3F9d43E',
   [ChainNames.Chapel]: '0x22d6A6946874F8Df79Bc9574e4cB72729c2d0c75',
   [ChainNames.Fuji]: '0xd5aA2aD7900da549cb029A5cff5E9396630B2EBC',
   [ChainNames.Ethereum]: '0x746689a27507839a6BD71fd3678169D3B4a28893',
@@ -55,7 +55,7 @@ const selectedChainName = ChainNames.Goerli
 const destinationChainName = ChainNames.Fuji
 
 // Token to accept payment in
-const paymentToken = "ETH"
+const paymentToken = 'ETH'
 
 const sendTransaction = async () => {
   // Connect to the Metamask wallet in the browser, using the MetamaskProvider interface to limit bundle size.
@@ -69,22 +69,26 @@ const sendTransaction = async () => {
 
   // Select the chain to pay from.
   // This example uses the Goerli chain, but your application can ask the user which chain to use.
-  const selectedChain = chains.find((i: BridgeChain) => i.name === selectedChainName)!
+  const selectedChain = chains.find(
+    (i: BridgeChain) => i.name === selectedChainName
+  )!
 
   // Select the chain to pay on.
   // In this case, the NFT contract is on the Fuji chain.
-  const destinationChain = chains.find((i: BridgeChain) => i.name === destinationChainName)!
+  const destinationChain = chains.find(
+    (i: BridgeChain) => i.name === destinationChainName
+  )!
 
   // Set the price and convert to wei
   const priceOfNft = Price.fromRaw('0.01', 18, destinationChain.token.symbol)
 
   // Set the parameters for the transaction, including source and destination chain.
-  const params:CheckoutOperationParams = {
+  const params: CheckoutOperationParams = {
     chainIdFrom: sourceChain.id,
     chainIdTo: destinationChain.id,
     price: priceOfNft,
     recipient: provider.address,
-    isMultiplePayment: false // Single payment token for a simple example
+    isMultiplePayment: false, // Single payment token for a simple example
   }
 
   // Initialize the transaction object
@@ -97,7 +101,7 @@ const sendTransaction = async () => {
 
   // Select the token to accept payment in on the source chain.
   // This example hard-codes ETH, but your application can ask the user which token to pay with.
-  const selectedToken = paymentTokens?.find(i => i.symbol === paymentToken)!
+  const selectedToken = paymentTokens?.find((i) => i.symbol === paymentToken)!
 
   // Get the estimated cost of the token swap, not the total cost to the user
   const estimatedPrices = await op.estimatePrice([selectedToken])
@@ -109,11 +113,9 @@ const sendTransaction = async () => {
   // First, use the Ethers Interface to encode a command to add to the bundle.
   // This example encodes a command that purchases the NFT on the destination chain via the NFT contract's Application Binary Interface (ABI).
   // You can include other custom logic in the bundle.
-  const encodedFunctionData = new ethers.utils
-    .Interface(["function buy(address receiver_) payable"])
-    .encodeFunctionData("buy", [
-      provider.address,
-    ])
+  const encodedFunctionData = new ethers.utils.Interface([
+    'function buy(address receiver_) payable',
+  ]).encodeFunctionData('buy', [provider.address])
 
   // Then, create a bundle and add the purchase function.
   // The first parameter is the Solidity types of the values in the second parameter.
@@ -122,13 +124,13 @@ const sendTransaction = async () => {
   // 2) The price of the NFT on the destination chain (`uint256[]`)
   // 3) The encoded purchase function (`bytes[]`)
   const bundle = ethers.utils.defaultAbiCoder.encode(
-      ["address[]", "uint256[]", "bytes[]"],
-      [
-        [MARKETPLACES[destinationChainName]],
-        [params.price.value],
-        [encodedFunctionData],
-      ]
-  );
+    ['address[]', 'uint256[]', 'bytes[]'],
+    [
+      [MARKETPLACES[destinationChainName]],
+      [params.price.value],
+      [encodedFunctionData],
+    ]
+  )
 
   // Call the asynchronous checkout method to run the transaction.
   // The `checkout()` method takes the parameters from the operation instance, gets approval from the user's wallet, and calls the Rarimo contract to handle the transaction.
@@ -136,12 +138,18 @@ const sendTransaction = async () => {
 
   // Get the transaction on the source chain
   const sourceTxUrl = provider.getTxUrl(selectedChain!, String(txHash))
-  console.log("Source chain transaction:", sourceTxUrl)
+  console.log('Source chain transaction:', sourceTxUrl)
 
   // Get the transaction that unlocks tokens on the destination chain
-  const destinationTx = await op.getDestinationTx(selectedChain!, String(txHash))
-  const destinationTxUrl = provider.getTxUrl(destinationChain!, destinationTx.hash)
-  console.log("Destination chain transaction:", destinationTxUrl)
+  const destinationTx = await op.getDestinationTx(
+    selectedChain!,
+    String(txHash)
+  )
+  const destinationTxUrl = provider.getTxUrl(
+    destinationChain!,
+    destinationTx.hash
+  )
+  console.log('Destination chain transaction:', destinationTxUrl)
 }
 
 sendTransaction()
@@ -155,7 +163,7 @@ Then, pass the tokens to pay with to the `estimatePrice()` method, as in this ex
 
 ```ts
 // Set the parameters for the transaction.
-const params:CheckoutOperationParams = {
+const params: CheckoutOperationParams = {
   chainIdFrom: sourceChain.id,
   chainIdTo: destinationChain.id,
   price: priceOfNft,
@@ -171,7 +179,7 @@ const paymentTokens = await op.getPaymentTokens()
 
 // Select the tokens to accept payment in on the source chain.
 // For example, you can allow the user to select payment tokens via your UI.
-const selectedTokens = paymentTokens?.filter(i => isSelectedOnUI(i.symbol))!
+const selectedTokens = paymentTokens?.filter((i) => isSelectedOnUI(i.symbol))!
 
 // Get the estimated cost of the token swap for all selected tokens.
 const estimatedPrices = await op.estimatePrice(selectedTokens)
@@ -200,12 +208,12 @@ To create a transaction with the React components, follow these general steps:
    import { CheckoutOperationParams, Price } from '@rarimo/nft-checkout'
 
    // Buyer's address to send the bought NFT to
-   const USER_WALLET_ADDRESS = "0x0000000000000000000000000000000000000000"
+   const USER_WALLET_ADDRESS = '0x0000000000000000000000000000000000000000'
 
    // Set the price as 0.1 ETH and convert to wei
-   const priceOfNft = Price.fromRaw("0.01", 18, "ETH")
+   const priceOfNft = Price.fromRaw('0.01', 18, 'ETH')
 
-   const params:CheckoutOperationParams = {
+   const params: CheckoutOperationParams = {
      // Source chain: Goerli
      chainIdFrom: 5,
      // Destination chain: Fuji
@@ -216,16 +224,16 @@ To create a transaction with the React components, follow these general steps:
    ```
 
 1. Create a callback function to create the transaction bundle based on the recipient's wallet address, which the React component passes.
-The function returns at least one bundled transaction, as in the non-react transaction example in the previous section:
+   The function returns at least one bundled transaction, as in the non-react transaction example in the previous section:
 
 1. Create a bundle of transactions that includes at least the target NFT transaction.
-The object includes the address and price of the NFT and the buyer's wallet address, as in this example:
+   The object includes the address and price of the NFT and the buyer's wallet address, as in this example:
 
    ```tsx
-   import { ethers } from "ethers"
+   import { ethers } from 'ethers'
 
    // Address of the NFT sale contract
-   const NFT_CONTRACT_ADDRESS = "0xd5aA2aD7900da549cb029A5cff5E9396630B2EBC"
+   const NFT_CONTRACT_ADDRESS = '0xd5aA2aD7900da549cb029A5cff5E9396630B2EBC'
 
    const createCheckoutTransactionBundle = useRef((recipient: string) => {
      const encodedFunctionData = new ethers.utils.Interface([
@@ -234,7 +242,7 @@ The object includes the address and price of the NFT and the buyer's wallet addr
 
      return ethers.utils.defaultAbiCoder.encode(
        ['address[]', 'uint256[]', 'bytes[]'],
-       [[NFT_CONTRACT_ADDRESS], [priceOfNft], [encodedFunctionData]],
+       [[NFT_CONTRACT_ADDRESS], [priceOfNft], [encodedFunctionData]]
      )
    }).current
    ```
@@ -244,9 +252,11 @@ The object includes the address and price of the NFT and the buyer's wallet addr
 1. Add the `DappContextProvider` and `RarimoPayButton` components to the page and pass the parameters and the transaction bundle function:
 
 ```tsx
-import { DappContextProvider, RarimoPayButton } from "@rarimo/react-nft-checkout"
-
-<div className="app">
+import {
+  DappContextProvider,
+  RarimoPayButton,
+} from '@rarimo/react-nft-checkout'
+;<div className="app">
   <DappContextProvider
     params={params}
     createCheckoutTransactionBundleCb={createCheckoutTransactionBundle}
@@ -263,19 +273,21 @@ Now when the application loads, the pay button appears on the page, as in this s
 Here is a complete example:
 
 ```tsx
-import { ethers} from 'ethers'
+import { ethers } from 'ethers'
 import { useRef, useEffect } from 'react'
 
 import { CheckoutOperationParams, Price } from '@rarimo/nft-checkout'
-import { RarimoPayButton, DappContextProvider } from '@rarimo/react-nft-checkout'
+import {
+  RarimoPayButton,
+  DappContextProvider,
+} from '@rarimo/react-nft-checkout'
 import { MetamaskProvider } from '@rarimo/providers-evm'
 import { useProvider } from '@rarimo/react-provider'
 
 // Address of the NFT sale contract
-const NFT_CONTRACT_ADDRESS = "0xd5aA2aD7900da549cb029A5cff5E9396630B2EBC"
+const NFT_CONTRACT_ADDRESS = '0xd5aA2aD7900da549cb029A5cff5E9396630B2EBC'
 
 const App = () => {
-
   // Get the user's wallet information
   const { provider } = useProvider(MetamaskProvider)
   useEffect(() => {
@@ -288,7 +300,7 @@ const App = () => {
   // Set the price as 0.1 ETH and convert to wei
   const priceOfNft = Price.fromRaw('0.01', 18, 'ETH')
 
-  const params:CheckoutOperationParams = {
+  const params: CheckoutOperationParams = {
     // Source chain: Goerli
     chainIdFrom: 5,
     // Destination chain: Fuji
@@ -304,7 +316,7 @@ const App = () => {
 
     return ethers.utils.defaultAbiCoder.encode(
       ['address[]', 'uint256[]', 'bytes[]'],
-      [[NFT_CONTRACT_ADDRESS], [priceOfNft], [encodedFunctionData]],
+      [[NFT_CONTRACT_ADDRESS], [priceOfNft], [encodedFunctionData]]
     )
   }).current
 

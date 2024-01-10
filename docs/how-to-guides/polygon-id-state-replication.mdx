@@ -1,3 +1,6 @@
+---
+---
+
 # Setting Up Cross-Chain Identity State Replication for Polygon ID
 
 In this guide, we'll set up the cross-chain identity state replication for Polygon ID. It enables the usage of Polygon ID zero-knowledge proofs on any chain supported by Rarimo.
@@ -9,6 +12,7 @@ For more information about how the Polygon ID identity state transfer works, vis
 Before getting started, please contact us in [discord](https://discordapp.com/invite/rarimoprotocol) to ensure that the issuer is added to the allowlist and that a lightweight state contract is already deployed to the destination chain;
 
 Other pre-requisites:
+
 - [Postgres DB 13+](https://www.postgresql.org/download/) instance for the relayer service;
 - [Docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/) (optional)
 
@@ -24,7 +28,7 @@ You can pull the pre-build docker image:
 docker pull ghcr.io/rarimo/identity-relayer-svc:v1.0.3
 ```
 
-Or clone the  [repository]( https://github.com/rarimo/identity-relayer-svc) and build it from the source:
+Or clone the [repository](https://github.com/rarimo/identity-relayer-svc) and build it from the source:
 
 <!-- TODO: fix docker image -->
 
@@ -57,7 +61,7 @@ listener:
 
 # PostgreSQL DB connect
 db:
-  url: "postgres://relayer:relayer@relayer-db:5432/relayer?sslmode=disable"
+  url: 'postgres://relayer:relayer@relayer-db:5432/relayer?sslmode=disable'
 
 # Rarimo core RPCs
 core:
@@ -68,11 +72,11 @@ cosmos:
 
 evm:
   chains:
-    - name: "Ethereum"
+    - name: 'Ethereum'
       ## Address of the modified state contract on target chain
-      contract_address: ""
+      contract_address: ''
       ## Private key HEX (without leading 0x) that will pay the tx fee
-      submitter_private_key: ""
+      submitter_private_key: ''
       ##  RPC address. Example https://mainnet.infura.io/v3/11111
       rpc:
       ## Target chain id
@@ -83,7 +87,7 @@ relay:
   catchup_disabled: true
 ```
 
-----
+---
 
 ## Run
 
@@ -98,42 +102,43 @@ relay:
 
 1. Put the config at `./config.yaml`
 1. Create `./docker-compose.yml`:
-    ```yaml
-      version: "3.7"
 
-      services:
-        relayer-db:
-          image: postgres:13
-          restart: unless-stopped
-          environment:
-            - POSTGRES_USER=relayer
-            - POSTGRES_PASSWORD=relayer
-            - POSTGRES_DB=relayer
-            - PGDATA=/pgdata
-          volumes:
-            - relayer-data:/pgdata
+   ```yaml
+   version: '3.7'
 
-        relayer:
-          image: ghcr.io/rarimo/identity-relayer-svc:v1.0.3
-          restart: on-failure
-          ports:
-            - "8000:8000"
-          depends_on:
-            - relayer-db
-          volumes:
-            - ./config.yaml:/config.yaml
-          environment:
-            - KV_VIPER_FILE=/config.yaml
-          entrypoint: sh -c "relayer-svc migrate up && relayer-svc run all"
-      volumes:
-        relayer-data:
-    ```
+   services:
+     relayer-db:
+       image: postgres:13
+       restart: unless-stopped
+       environment:
+         - POSTGRES_USER=relayer
+         - POSTGRES_PASSWORD=relayer
+         - POSTGRES_DB=relayer
+         - PGDATA=/pgdata
+       volumes:
+         - relayer-data:/pgdata
 
-  1. Run the service:
+     relayer:
+       image: ghcr.io/rarimo/identity-relayer-svc:v1.0.3
+       restart: on-failure
+       ports:
+         - '8000:8000'
+       depends_on:
+         - relayer-db
+       volumes:
+         - ./config.yaml:/config.yaml
+       environment:
+         - KV_VIPER_FILE=/config.yaml
+       entrypoint: sh -c "relayer-svc migrate up && relayer-svc run all"
+   volumes:
+     relayer-data:
+   ```
 
-    ```sh
-    docker-compose up
-    ```
+1. Run the service:
+
+   ```sh
+   docker-compose up
+   ```
 
 ## Using Service
 
@@ -141,8 +146,8 @@ Execute the POST `/integrations/relayer/relay` request with the following body t
 
 ```json
 {
-    "chain": "Sepolia",
-    "state": "0x24d76fbb1ba771df400f4d61d161a4a761675f14a2f35faf6d6d67e6d8be5fe6"
+  "chain": "Sepolia",
+  "state": "0x24d76fbb1ba771df400f4d61d161a4a761675f14a2f35faf6d6d67e6d8be5fe6"
 }
 ```
 
@@ -150,4 +155,4 @@ The response will be:
 
 - `200` – successful relay, tx hash in the response body;
 - `404` – the state wasn't ingested by Rarimo Core yet; wait a little and repeat the request;
-- `400` – the state has been relayed before;  <!-- TODO: fix me -->
+- `400` – the state has been relayed before; <!-- TODO: fix me -->

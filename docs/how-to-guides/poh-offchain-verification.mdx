@@ -1,3 +1,6 @@
+---
+---
+
 # Using Proof of Humanity Off-Chain
 
 Off-chain applications like Discord bots, quest platform backends, and many others can benefit from Proof of Humanity(PoH) integration.
@@ -10,34 +13,34 @@ Rarimo indexes the verified users using a subgraph. You can query its GraphQL en
 
 1. Run the following GraphQL query:
 
-    **Endpoint**:
-    https://api.thegraph.com/subgraphs/name/volodymyrzolotukhin/sbtidentityverifier-polygon
+   **Endpoint**:
+   https://api.thegraph.com/subgraphs/name/volodymyrzolotukhin/sbtidentityverifier-polygon
 
-    **Query**:
+   **Query**:
 
-    ```graphql
-    query info($address: String!) {
-        users(where:{senderAddr: $address}){
-            id
-        }
-    }
-    ```
+   ```graphql
+   query info($address: String!) {
+     users(where: { senderAddr: $address }) {
+       id
+     }
+   }
+   ```
 
-    Use this verified address for tests: `0x62019b7b8f7d5b58006c5001eb1ffa95ab191474`
+   Use this verified address for tests: `0x62019b7b8f7d5b58006c5001eb1ffa95ab191474`
 
 1. Verify that the response looks like this:
-    ```json
-    {
-        "users": [
-            {
-                "id": ": "19643409028078272448762374992644569744201332795590556384983511405206634497"
-            }
-        ]
-    }
-    ```
 
-    Assume the user is verified if the `users` array is non-empty.
+   ```json
+   {
+       "users": [
+           {
+               "id": ": "19643409028078272448762374992644569744201332795590556384983511405206634497"
+           }
+       ]
+   }
+   ```
 
+   Assume the user is verified if the `users` array is non-empty.
 
 ## Option #2: NFT Indexer
 

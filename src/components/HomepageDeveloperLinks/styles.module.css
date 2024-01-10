@@ -1,5 +1,5 @@
 .developerLinks{
-    background: #0f0f0f;
+    background: var(--background-light);
     border: 1px solid var(--secondary-bg-color);
     padding: 5rem 8rem;
 }
