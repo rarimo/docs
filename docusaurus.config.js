@@ -10,7 +10,7 @@ function getUrl() {
 }
 
 function getBaseUrl() {
-  return process.env.BASE_URL || '/docs/'
+  return process.env.BASE_URL || '/'
 }
 
 function isStaging() {
@@ -110,8 +110,8 @@ module.exports = {
             items: [
               {
                 html: `
-                <img class="footer__logo" src="img/logo-white.svg" alt="Rarimo Logo"/>
-                <img class="footer__logo footer__logo--black" src="img/logo-black.svg" alt="Rarimo Logo"/>
+                <img class="footer__logo" src="/img/logo-white.svg" alt="Rarimo Logo"/>
+                <img class="footer__logo footer__logo--black" src="/img/logo-black.svg" alt="Rarimo Logo"/>
               `,
               },
               {
