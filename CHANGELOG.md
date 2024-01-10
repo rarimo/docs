@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Minor markup fix in Proof of Humanity tech reference;
+- Minor markup fix in "Setting up validator" guide;
 
 ## [1.6.0] - 28-11-2023
 
