@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - How-to-Guides:
   - Added the Collab.Land integration doc;
   - Added RariMe guide for issuers;
+  - World ID State Replication setup guide;
 - Contribution guide to the README;
 - Subscription form (w/o functionality)
 - Mobile sliders
