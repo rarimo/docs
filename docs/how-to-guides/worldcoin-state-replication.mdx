@@ -2,9 +2,6 @@
 
 In this guide, we'll set up the cross-chain identity state replication for World ID. It enables the usage of World ID zero-knowledge proofs on any chain supported by Rarimo.
 
-<!-- TODO: Does this link applies to World ID as well? -->
-For more information about how the World ID identity state transfer works, visit [rarimo-core docs](https://github.com/rarimo/rarimo-core/blob/master/docs/common/bridging/002-identity.md).
-
 ## Pre-Requisites
 
 Before getting started, please contact us in [discord](https://discordapp.com/invite/rarimoprotocol) to ensure that the issuer is added to the allowlist and that a lightweight identity manager contract is already deployed to the destination chain;
@@ -26,8 +23,6 @@ docker pull ghcr.io/rarimo/worldcoin-relayer-svc:v0.1.0
 ```
 
 Or clone the  [repository](https://github.com/rarimo/worldcoin-relayer-svc) and build it from the source:
-
-<!-- TODO: fix docker image -->
 
 ```sh
 git clone git@github.com:rarimo/worldcoin-relayer-svc.git
@@ -69,7 +64,7 @@ cosmos:
 
 evm:
   chains:
-    - name: "Ethereum"
+    - name: "Avalanche"
       ## Address of the modified state contract on target chain
       contract_address: ""
       ## Private key HEX (without leading 0x) that will pay the tx fee
@@ -137,11 +132,10 @@ relay:
 ## Using Service
 
 Execute the POST `/integrations/relayer/state/relay` request with the following body to fetch state publishing:
-<!-- todo: Hash state is just an example, as in Polygon ID Replication and maybe should be changed -->
 ```json
 {
-    "chain": "Sepolia",
-    "hash": "0x24d76fbb1ba771df400f4d61d161a4a761675f14a2f35faf6d6d67e6d8be5fe6",
+    "chain": "Avalanche",
+    "hash": "0x1851e2c82ba946e9ba978a40571e4c1294a282d24912ff26496106445299f099",
     "waitConfirm": true
 }
 ```
