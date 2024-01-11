@@ -152,7 +152,7 @@ To set up EVM identity saver service, follow these steps:
 
 1. Download (EVM Identity Saver service binary)[https://storage.googleapis.com/rarimo-mainnet/1.0.4/evm-identity-saver-svc]
 
-2. The following configuration `config.yaml` file should be provided to launch your oracle:
+1. The following configuration `config.yaml` file should be provided to launch your oracle:
 
   ```yaml
   log:
@@ -202,16 +202,16 @@ To set up EVM identity saver service, follow these steps:
     disable_filtration: true
   ```
 
-3. Some environment variables will be needed to run
+1. Add the path to your config file to the environment variables:
 
   ```yaml
-  - name: KV_VIPER_FILE
-    value: /config/config.yaml # the path to your config file
+    - name: KV_VIPER_FILE
+      value: /config/config.yaml # the path to your config file
   ```
 
   Oracle service requires the staking of some RMO tokens in the Rarimo chain.
 
-4. To start the service (in vote mode), use the following command:
+1. To start the service (in vote mode), use the following command:
 
   ```bash
   evm-identity-saver-svc run state-update-voter

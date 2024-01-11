@@ -15,17 +15,23 @@ To set up a token swap, create a Rarimo transaction and specify the token and am
 
 ```ts
 import { ChainNames } from '@rarimo/shared'
-import { CheckoutOperationParams, createCheckoutOperation, EVMOperation, Price, BridgeChain } from '@rarimo/nft-checkout'
+import {
+  CheckoutOperationParams,
+  createCheckoutOperation,
+  EVMOperation,
+  Price,
+  BridgeChain,
+} from '@rarimo/nft-checkout'
 import { createProvider, ProviderUserRejectedRequest } from '@rarimo/provider'
 import { MetamaskProvider } from '@rarimo/providers-evm'
-import { ethers } from "ethers"
+import { ethers } from 'ethers'
 
 // Source and destination chains and tokens
 const sourceChainName = ChainNames.Goerli
 const destinationChainName = ChainNames.Fuji
 
-const sourceTokenSymbol = "UNI"
-const destinationTokenSymbol = "AVAX"
+const sourceTokenSymbol = 'UNI'
+const destinationTokenSymbol = 'AVAX'
 
 const sendSwapTransaction = async () => {
   // Connect to the Metamask wallet in the browser, using the MetamaskProvider interface to limit bundle size.
@@ -39,8 +45,12 @@ const sendSwapTransaction = async () => {
 
   // Select the source and destination chains.
   // This example uses the Fuji chain, but your application can ask the user which chain to use.
-  const sourceChain: BridgeChain = chains.find(i => i.name === sourceChainName)!
-  const destinationChain: BridgeChain = chains.find(i => i.name === destinationChainName)!
+  const sourceChain: BridgeChain = chains.find(
+    (i) => i.name === sourceChainName
+  )!
+  const destinationChain: BridgeChain = chains.find(
+    (i) => i.name === destinationChainName
+  )!
 
   // Configure the swap transaction
   const swapParams: CheckoutOperationParams = {
@@ -50,14 +60,20 @@ const sendSwapTransaction = async () => {
     // Address to send the swapped tokens to
     recipient: provider.address!.toString(),
     // Amount of tokens to receive
-    price: Price.fromRaw("0.01", 18, destinationTokenSymbol),
+    price: Price.fromRaw('0.01', 18, destinationTokenSymbol),
     isMultiplePayment: false, // Single payment token for a simple example
   }
 
-  console.log('Swapping',
-    sourceTokenSymbol, 'on', sourceChainName,
-    'for', swapParams.price.toString(), destinationTokenSymbol,
-    'on', destinationChainName
+  console.log(
+    'Swapping',
+    sourceTokenSymbol,
+    'on',
+    sourceChainName,
+    'for',
+    swapParams.price.toString(),
+    destinationTokenSymbol,
+    'on',
+    destinationChainName
   )
 
   // Initialize the transaction
@@ -66,25 +82,27 @@ const sendSwapTransaction = async () => {
   // Due to a limitation in the SDK, include an empty bundle for the transaction to work when the transactions are on the same chain/
   // Remove this for cross-chain transactions.
   const bundle = ethers.utils.defaultAbiCoder.encode(
-    ["address[]", "uint256[]","bytes[]"],
-    [
-      [],
-      [],
-      [],
-    ],
+    ['address[]', 'uint256[]', 'bytes[]'],
+    [[], [], []]
   )
 
   // Get the tokens that have enough balance to run the swap
   const tokens = await op.getPaymentTokens(sourceChain!)
   if (tokens.length === 0) {
-    console.log('No tokens in the wallet have a large enough balance to make the swap.')
+    console.log(
+      'No tokens in the wallet have a large enough balance to make the swap.'
+    )
     return
   }
 
   // Make sure that the wallet has enough of the source token
   const paymentToken = tokens.find(({ symbol }) => symbol === sourceTokenSymbol)
   if (!paymentToken) {
-    console.log('You do not have enough', sourceTokenSymbol, 'to make the swap.')
+    console.log(
+      'You do not have enough',
+      sourceTokenSymbol,
+      'to make the swap.'
+    )
     return
   }
 
@@ -94,11 +112,12 @@ const sendSwapTransaction = async () => {
   // Run the transaction.
   // The `checkout()` method takes the parameters from the operation instance, gets approval from the user's wallet, and calls the Rarimo contract to handle the transaction.
   // Change the next line to await op.checkout(estimatedPrice, { bundle }) if the source and destination chains are the same:
-  await op.checkout(estimatedPrice)
+  await op
+    .checkout(estimatedPrice)
     .then((txHash) => {
       console.log('Swap complete:', txHash)
     })
-    .catch((e:ProviderUserRejectedRequest) => {
+    .catch((e: ProviderUserRejectedRequest) => {
       console.log('The user rejected the transaction.')
     })
 }

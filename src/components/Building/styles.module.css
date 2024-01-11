@@ -1,5 +1,5 @@
 .buildingWrp {
-  background-color: #0F0F0F;
+  background-color: var(--background-light);
   border-top: var(--primary-border);
   border-bottom: var(--primary-border);
 }
@@ -19,7 +19,7 @@
 }
 
 .buildingTitle {
-  color: var(rgba(255, 255, 255, 0.90));
+  color: var(--primary-text-color-light);
   font-size: 2rem;
   font-weight: 600;
   line-height: 1.2;
@@ -27,7 +27,7 @@
 }
 
 .buildingText {
-  color: rgba(255, 255, 255, 0.60);
+  color: var(--secondary-text-color-dark);
   line-height: 1.4;
   font-size: 1.125rem;
   white-space: pre-line;

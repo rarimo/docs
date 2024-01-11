@@ -9,8 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Themes (light and dark);
 - Reference:
   - Added the "Polygon ID State Replication" page;
+  - Added the "World ID State Replication" page;
 - Use Cases:
   - Added the "Identity State Replication" doc;
 - How-to-Guides:
@@ -34,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Community (Links) Section;
     - News Section;
   - Footer
+  - Docs page design (product based navigation)
 - Updated links from gitlab to github in the whole documentation;
 - Updated the "Overview" doc;
 - Transferred the project to GitHub;
@@ -41,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Minor markup fix in Proof of Humanity tech reference;
+- Minor markup fix in "Setting up validator" guide;
 
 ## [1.6.0] - 28-11-2023
 

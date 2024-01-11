@@ -1,0 +1,174 @@
+---
+sidebar_label: World ID State Replication
+---
+
+# World ID State Replication
+
+This page contains technical resources related to the World ID State Replication.
+
+## Identity Relayer
+
+This service replicates identity states on demand.
+It should be called before submitting proof on the destination chain.
+
+For the full implementation, see our [GitHub repository](https://github.com/rarimo/worldcoin-relayer-svc).
+For more information about API, see [Identity transfers](https://rarimo.github.io/rarimo-core/docs/common/bridging/002-identity.html).
+
+### Relayer endpoints
+
+To perform state publishing, you can execute POST `/integrations/relayer/state/relay` request with the following body:
+
+```json
+{
+  "chain": "Avalanche",
+  "hash": "0x212bc6f8194aa63eee97b0566b7cd65c66bb57cc4936c11e611f1042bb0b7118",
+  "waitConfirm": true
+}
+```
+
+- `"chain": "chain_name"` - chain, to which the state will be relayed;
+- `"hash": "0x..."` - hash of the state to relay. Same as on the state contract in 0x... hex format;
+- `"waitConfirm": true` indicates whether the request should wait until the transaction is included in the block (`false` by default);
+
+The response codes:
+- `200` - successful relay, body contains tx hash;
+- `404` - the state is not transferred yet; try to repeat the request later;
+- `400` - state has been relayed before;
+
+##  Smart Contracts
+
+
+### `IdentityManager`
+
+<!-- TODO: add Deployments -->
+
+It's a modified identity contract meant for the destination chains.
+It checks a TSS from the Rarimo validators to transit the state and only holds a partial history.
+The relayer service lazily updates the contract whenever a user wants to submit ZKP on a particular chain.
+
+
+#### Interface
+
+```solidity
+contract IdentityManager is IIdentityManager, Signers {
+
+    uint256 public constant ROOT_EXPIRATION_TIME = 1 hours;
+
+    address public sourceStateContract;
+
+    uint256 internal _latestRoot;
+
+    uint256 internal _latestTimestamp;
+
+    mapping(uint256 => RootData) internal _roots;
+
+    function signedTransitRoot(
+        uint256 prevRoot_,
+        uint256 postRoot_,
+        uint256 replacedAt_,
+        bytes calldata proof_
+    ) external override {
+	// ...
+
+        emit SignedRootTransited(prevRoot_, postRoot_, replacedAt_, _latestRoot);
+    }
+}
+```
+
+- `ROOT_EXPIRATION_TIME` — a fixed time after which the root is considered "expired", i.e., proofs with it are considered invalid after that;
+- `sourceStateContract` — address of the state contract on the source chain (Rarimo);
+- `_latestRoot` — latest (and newest) transited root;
+- `_latestTimestamp` — timestamp of latest root replacement;
+- `_roots` — mapping of roots to data about these roots (replacement timestamp and root that replaced this one).
+It is updated after the transition is done;
+- `signedTransitRoot(...)` — the main function that adds the information to the history (`_roots`).
+It changes the `_latestRoot` if `postRoot_` is newer.
+Requires the threshold signature of Rarimo signature providers.
+Also, emits the `SignedRootTransited` event, which contains information about the transition (both roots, timestamp of replacement, and current latest root);
+
+For the full implementation, see [IdentityManager.sol](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/IdentityManager.sol) at the GitHub.
+
+### `Verifier`
+
+<!-- TODO: add Deployments -->
+
+It's an implementation of a verifier contract.
+You can add your business logic to it by modifying (or overriding) two hooks – `_beforeProofSubmit` and `_afterProofSubmit`;
+
+
+#### Interface
+
+```solidity
+contract Verifier is IVerifier, Initializable {
+
+    address public semaphoreVerifier;
+    address public identityManager;
+
+    function verifyProof(
+        uint256 root_,
+        uint256 signalHash_,
+        uint256 nullifierHash_,
+        uint256 externalNullifierHash_,
+        uint256[8] calldata proof_
+    ) public virtual override {
+        // ...
+
+        _beforeProofValidation();
+
+        ISemaphoreVerifier(semaphoreVerifier).verifyProof(
+            proof_,
+            [root_, nullifierHash_, signalHash_, externalNullifierHash_]
+        );
+
+        _afterProofValidation();
+    }
+
+    function _beforeProofValidation() internal virtual {}
+
+    function _afterProofValidation() internal virtual {}
+}
+
+```
+
+- `semaphoreVerifier` — address of the `SemaphoreVerifier` contract that verifies the proof;
+- `identityManager` — address of the `IdentityManager` contract;
+- `verifyProof(...)` —  the main function that verifies the user's proof.
+It calls the `IdentityManager` to verify whether the root is actual and `SemaphoreVerifier` to verify the proof itself;
+- `_beforeProofValidation()` — hook that should be executed before the `verifyProof(...)`;
+- `_afterProofValidation()` — hook that gets executed after the `verifyProof(...)` call;
+
+For the full implementation, see [Verifier.sol](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/Verifier.sol) at the GitHub.
+
+### `SemaphoreVerifier`
+
+<!-- TODO: add Deployments -->
+
+This contract is responsible for verifying the ZKP.
+It has some necessary math functions, constants, and the primary `verifyProof(...)` function.
+It allows proofs to be verified in uncompressed or compressed form.
+Usually, uncompressed form is used, see [BN254 Point Compression](https://2π.com/23/bn254-compression) for further explanation.
+
+#### Interface
+
+```solidity
+contract SemaphoreVerifier is ISemaphoreVerifier {
+
+    /* ... */
+
+    function verifyCompressedProof(
+        uint256[4] calldata compressedProof,
+        uint256[4] calldata input
+    ) public view {
+        // ...
+    }
+
+    function verifyProof(uint256[8] calldata proof, uint256[4] calldata input) public view {
+        // ...
+    }
+}
+```
+
+- `verifyCompressedProof(...)` —  verifies a compressed proof;
+- `verifyProof(...)` — verifies an uncompressed proof;
+
+For the full implementation, see [SemaphoreVerifier.sol](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/vendor/worldcoin/world-id-contracts/SemaphoreVerifier.sol) at the GitHub.
