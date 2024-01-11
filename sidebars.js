@@ -52,7 +52,7 @@ const sidebars = {
     "tutorials/connecting-to-wallets",
     "tutorials/creating-transactions",
     "tutorials/swapping-tokens",
-    "tutorials/polygonid-replication-usage",
+    "tutorials/using-polygon-id-zero-knowledge-proofs-in-ethereum-dapp",
   ],
   howToGuides: [
     "how-to-guides",
