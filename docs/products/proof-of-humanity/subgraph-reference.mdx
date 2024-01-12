@@ -1,0 +1,69 @@
+# Subgraph Reference
+
+## Subgraph
+
+Subgraph indexes the verified users from the `SBTIdentityVerifier` contract and serves the data via a GraphQL API.
+
+### Deployments
+
+GraphQL endpoints:
+
+- Mainnet(indexes events from Polygon): https://api.thegraph.com/subgraphs/name/volodymyrzolotukhin/sbtidentityverifier-polygon/graphql
+
+- Testnet(indexes events from Goerli testnet): https://api.thegraph.com/subgraphs/name/volodymyrzolotukhin/sbtidentityverifier/graphql
+
+### Querying
+
+The subgraph contains the following entity:
+
+```graphql
+type User @entity {
+  id: ID!
+  senderAddr: Bytes!
+  tokenAddr: Bytes!
+  tokenID: BigInt!
+  transactionHash: Bytes!
+}
+```
+
+Use the following query (you should provide the sender address):
+
+```graphql
+query info($address: String!) {
+  users(where: { senderAddr: $address }) {
+    id
+  }
+}
+```
+
+A non-empty response like this indicates that the user is verified:
+
+```json
+    {
+        "users": [
+            {
+                "id": ":"19643409028078272448762374992644569744201332795590556384983511405206634497"
+            }
+        ]
+    }
+```
+
+### Data Source
+
+The subgraph ingests the following events:
+
+```solidity
+event SBTIdentityProved(
+    uint256 indexed identityId,
+    address senderAddr,
+    address tokenAddr,
+    uint256 tokenID
+)
+```
+
+- `identityID` - identity identifier
+- `senderAddr` - sender (of the transaction) address
+- `tokenAddr` - address of the Souldbound token
+- `tokenID` - ID of the token that was issued to the user after he passed identity verification
+
+The subgraph stores the same information plus the transaction hash.

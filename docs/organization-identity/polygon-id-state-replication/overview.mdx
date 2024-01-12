@@ -1,0 +1,47 @@
+---
+---
+
+# Overview
+
+Polygon ID is a self-sovereign identity protocol that allows users to use zero-knowledge proofs to interact with smart contracts based on rich Verifiable Credentials. However, the on-chain usage is limited to the chain to which the credentials are anchored. To explore the synergy between the protocols, a demo that showcases cross-chain Zero-Knowledge Proofs using existing Polygon ID identities was built.
+
+The goals of this demo are:
+
+- Enable usage of Polygon ID ZK proofs on Ethereum Mainnet;
+- Use the Polygon chain as the single source of truth;
+- Keep the gas costs for syncing the state reasonably low;
+
+The Iden3 Identity State(pictured below) is proposed to make the ZK Proofs feasible on other chains. However, replicating each state change to each supported chain is unreliable and costly.
+
+![Iden3 State](/img/iden3-state.png)
+
+On-demand state replication using Rarimo's cross-chain infrastructure is proposed to mitigate these issues. Rarimo oracles will replicate the complete identity state history to a State Contract on the Rarimo Protocol chain. State Contracts on the other chains will be modified to accept lazy state updates. The updates will be secured by Rarimo's TSS instead of the state transition proofs used by Iden3.
+
+![Polygon ID Integration Architecture](/img/polygon-id-integration.png)
+
+In order to prove a statement on the Ethereum chain, the relayer will fetch a state update transaction from the Rarimo API and submit it just before the user submits the ZKP. This way, the state will be used only when it's needed.
+
+![Polygon ID State Replication Flow](/img/polygon-id-state-replication.png)
+
+The user then generates a ZKP using the Polygon ID Wallet app and submits it to the verifier contract using Metamask.
+
+![Polygon ID ZKP Generation Flow](/img/polygon-id-zkp-flow.png)
+
+## Demo Walkthrough
+
+To complete the demo and claim a soulbound token on Ethereum's Sepolia Testnet, follow these steps:
+
+1. Install Polygon ID Wallet from [AppStore](https://apps.apple.com/us/app/polygon-id/id1629870183) or [Play Market](https://play.google.com/store/apps/details?id=com.polygonid.wallet&hl=en_US) and create an identity;
+2. Get a KYC Age credential by scanning a QR code [here](https://admin-panel.polygon.mainnet-beta.rarimo.com/credentials/scan-link/ade26bde-af43-445b-be72-907693fe6cfd) with your Polygon ID Wallet. Then, wait 2 minutes for the identity provider state to be committed and propagated on-chain;
+3. Open the [Demo DApp](https://polygon.mainnet-beta.rarimo.com/) and scan the QR-code with your Polygon ID Wallet. Confirm the proof generation;
+4. Once the DApp receives the proof, submit it to the Verifier Contract using MetaMask;
+
+## Trying It Out With Your Identity Issuer
+
+:::info
+Polygon ID x Rarimo integration is experimental and hasn't been audited yet. Please refrain from using it in production applications for now!
+:::
+
+If you run an identity issuer for Polygon ID and want to enable the usage of ZKPs on Ethereum or another EVM-compatible network, follow this [guide](/how-to-guides/polygon-id-state-replication).
+
+Once the state replication is ready, the DApps can use the ZKPs by following the [Polygon's on-chain verification guide](https://0xpolygonid.github.io/tutorials/verifier/on-chain-verification/overview/#on-chain-verification-flow).

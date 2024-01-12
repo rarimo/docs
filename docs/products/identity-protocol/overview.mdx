@@ -1,0 +1,77 @@
+---
+# TODO: add links to relevant guides
+---
+
+# Overview
+
+## Problem Statement
+
+Decentralized identity is a crucial building block for Web 3 applications such as social graphs, games, regulation-compliant DeFi, and many more. Moving on from centralized solutions like OAuth, the crypto community has come up with several solutions:
+
+- Wallet Addresses;
+- Soulbound Tokens (SBT);
+- Ethereum Name Services (ENS) & similar solutions;
+- Self-Sovereign Identity(SSI) Protocols;
+
+However, they share some limitations:
+
+- **Identity fragmentation across chains.** DApps can verify identity only on the chain where it was issued;
+- **Integration friction.** There's no structured way for DApp developers to interact with different issuers and identity components;
+- **Privacy concerns.** SBTs and ENS-like services reveal all the data on-chain, which may be a critical issue for some sensitive identity data. Only protocols that incorporate Zero-Knowledge proofs properly address this issue;
+
+The Rarimo Identity Protocol builds upon the base interchain layer to address these challenges.
+
+## Features
+
+### Own Your Identity
+
+The Protocol implements the <a href="https://www.w3.org/TR/did-core/" target="_blank" rel="noreferrer noopener">W3C DID Self-Sovereign Identity standard</a>, meaning all credentials stay on the user's device, and no third party can access them.
+
+### Keep Privacy With Zero-Knowledge Proofs
+
+To enable the usage of user credentials in a privacy-preserving manner, zero-knowledge proofs have been integrated into the protocol. DApps can verify specific attributes of user identity on-chain without compromising the sensitive data. For example, users can prove they're over 21 without revealing their age. The security is ensured by the proven <a href="https://docs.iden3.io/" target="_blank" rel="noreferrer noopener">Iden3 Protocol</a>.
+
+![Cross-Chain Identity](/img/zkp.png)
+
+### Use Your Identity Anywhere
+
+Rarimo's cross-chain messaging base layer ensures that all the metadata necessary for verifying zero-knowledge proofs is available on demand on any supported chains. A synergy of instant consensus finality and threshold signature(TSS) makes metadata replication fast, secure, and cheap.
+
+![Cross-Chain Identity](/img/identity-state-replication.png)
+
+### Enjoy Seamless UX With RariMe
+
+Self-sovereign identity is a paradigm shift that might be overwhelming for the users. <a href="https://rarime.com" target="_blank" rel="noreferrer noopener">RariMe</a> has been developed to ensure a smooth transition. RariMe lives in the user's MetaMask and securely stores all user credentials. It brings a familiar and consistent user experience to all the DApps using the identity protocol.
+
+### Become an Identity Issuer
+
+The Rarimo Identity Protocol doesn't gatekeep the credential issuance and instead embraces the Triangle of Trust between the issuer, holder, and verifier. Any party can join and issue its own credentials. Any verifier can accept these credentials if they trust the issuer.
+
+![Trust Triangle](/img/trust-triangle.png)
+
+### Integrate Identity in Your DApp
+
+The protocol provides a structured and straightforward way to integrate identity verification in a DApp using a template smart contract and a flexible zero-knowledge query language.
+
+### Prove You Are Not A Bot With Rarimo's Proof of Humanity
+
+DApps are prone to abuse by bots and fake accounts. Currently, there are a few ways to address this issue:
+
+- Captchas
+- Linking social media accounts
+- Self-Sovereign Identity protocols(SSI)
+- Reputation systems
+
+However, none of these solutions cover the entire Web3 user base. On top of that, there is no interoperability between them.
+
+Rarimo’s [Proof of Humanity plugin](/use-cases/proof-of-humanity) improves upon these solutions by aggregating identity providers and facilitating zero-knowledge identity proofs on-chain. This way, users can choose from many options for proving their humanity while keeping their privacy.
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/Up8yQSZfs0k?si=aqL0K7GoX5PYV-5F"
+  title="YouTube video player"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowFullScreen
+></iframe>

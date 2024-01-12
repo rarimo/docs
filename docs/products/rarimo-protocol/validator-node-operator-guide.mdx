@@ -1,0 +1,370 @@
+---
+---
+
+# Validator Node Operator Guide
+
+The following guide will instruct you on setting up the Rarimo node and stake the tokens to become the validator.
+We will also set up a broadcaster service, TSS service, and EVM identity saver service.
+
+## Node (rarimo-core)
+
+To run the node, follow these steps:
+
+1. Download the following:
+   [genesis file](https://storage.cloud.google.com/rarimo-mainnet/core/genesis.json),
+   [address book](https://storage.googleapis.com/rarimo-mainnet/core/addrbook.json),
+   [APP file](https://storage.googleapis.com/rarimo-mainnet/core/app.toml) and
+   [rarimo core binary file](https://storage.googleapis.com/rarimo-mainnet/core/rarimo-core)
+
+1. Generate validator configs using `rarimo-core` binary
+
+1. Connect to `34.66.205.183`.
+   This IP address is used for submitting TXs and p2p connections.
+
+1. Connect to the RPC node: `39072210913bb52a6444543ad160b04668d58210@34.66.205.183:26656`
+
+1. Execute script to set environments:
+
+```bash
+export MONIKER_NAME=YOU_VALIDATOR_NAME
+export RARIMO_HOME=YOU_RARIMO_HOME_PATH
+export RARIMO_NODE=tcp://34.66.205.183:26657
+```
+
+1. This script will init folder structure:
+
+```bash
+rarimo-core init $MONIKER_NAME --chain-id=rarimo_201411-1 --home=$RARIMO_HOME
+```
+
+1. Paste `genesis.json` and `app.toml` (downloaded before) in `$RARIMO_HOME/config/` folder.
+
+1. Create validator's private key:
+
+```bash
+rarimo-core keys add <key-name> --keyring-backend test --home=$RARIMO_HOME
+```
+
+Remember to save your mnemonic and address.
+
+1. Use your mnemonic to get ECDSA private key:
+
+```bash
+rarimo-core tx rarimocore parse-mnemonic 'mnemonic phrase'
+```
+
+1. Add environment var with created address:
+
+```bash
+export LOCAL_VALIDATOR_ADDRESS=rarimo...
+```
+
+1. Backup the following files and folders:
+
+```bash
+$RARIMO_HOME/config/priv_validator_key.json
+$RARIMO_HOME/config/node_key.json
+$RARIMO_HOME/keyring-test
+```
+
+1. Check validator seed:
+
+```bash
+rarimo-core tendermint show-node-id --home=$RARIMO_HOME
+```
+
+1. Check that the key exists in the keystore:
+
+```bash
+rarimo-core keys show $LOCAL_VALIDATOR_ADDRESS --keyring-backend test --home=$RARIMO_HOME
+```
+
+1. To run, use environment variables:
+
+```yaml
+- name: DAEMON_NAME
+  value: 'rarimo-core'
+
+- name: DAEMON_HOME
+  value: $RARIMO_HOME
+
+- name: DAEMON_ALLOW_DOWNLOAD_BINARIES
+  value: 'true'
+```
+
+1. Use the following command to start your node:
+
+```bash
+mkdir -p $DAEMON_HOME/cosmovisor/genesis/bin && cp YOU_STORE_CORE_BIN(name rarimo-core) $DAEMON_HOME/cosmovisor/genesis/bin && cosmovisor run start --home=$RARIMO_HOME --rpc.laddr tcp://0.0.0.0:26657
+```
+
+That address will be used for your validator staking and your oracles.
+
+## Broadcaster service (broadcaster-svc)
+
+To set up the broadcaster service, you will need your previously generated private key (you can get it via mnemonic).
+
+Follow these steps:
+
+1. Download the [broadcaster server binary](https://storage.googleapis.com/rarimo-mainnet/modules/broadcaster-svc)
+
+The following configuration `config.yaml` file should be provided to launch your broadcaster service (paste your private key in hex format):
+
+```yaml
+log:
+  disable_sentry: true
+  level: debug
+
+## Port to listen incoming requests
+listener:
+  addr: :80
+
+## PostgreSQL database connect
+db:
+  url: 'postgres://broadcaster:broadcaster@broadcaster-db/broadcaster?sslmode=disable'
+
+key:
+  ## Rarimo account private key in Hex format: 0x123fab...
+  sender_prv_hex: ''
+  ## Rarimo chain id
+  chain_id: 'rarimo_201411-1'
+  ## Base coin name
+  coin_name: 'urmo'
+
+cosmos:
+  addr: 'validator:9090'
+```
+
+1. You will also need some environment variables to run the service:
+
+```yaml
+name: KV_VIPER_FILE
+value: /config/config.yaml # The path to your config file
+```
+
+1. Finally, perform migrations and start the service:
+
+```bash
+broadcaster-svc migrate up && broadcaster-svc run all
+```
+
+## EVM identity saver
+
+Currently, it should be one instance per account only for Polygon.
+
+To set up EVM identity saver service, follow these steps:
+
+1. Download (EVM Identity Saver service binary)[https://storage.googleapis.com/rarimo-mainnet/1.0.4/evm-identity-saver-svc]
+
+1. The following configuration `config.yaml` file should be provided to launch your oracle:
+
+```yaml
+log:
+  disable_sentry: true
+  level: debug
+
+## Port to listen incoming requests (used to trigger revote for some operation - rare flow)
+listener:
+  addr: :8000
+
+evm:
+  ## State contract for listening
+  contract_addr: '0x624ce98D2d27b20b8f8d521723Df8fC4db71D79D'
+  ## Polygon websocket address
+  rpc: ''
+  ## Start block to listen events. (0 - listen from current). Used to catchup old events. Be careful to use.
+  start_from_block: 0
+  ## According to network name in Rarimo core. Example: Polygon
+  network_name: Polygon
+  ## How many blocks should be created after event to fetch it.
+  block_window: 20
+
+broadcaster:
+  ## address of broadcaster-svc
+  addr: ''
+  ## sender account address (rarimo..)
+  sender_account: ''
+
+## Rarimo chain connections
+
+core:
+  addr: tcp://validator:26657
+
+cosmos:
+  addr: validator:9090
+
+## Profiling
+
+profiler:
+  enabled: false
+  addr: :8080
+
+## Issuer information
+
+state_contract_cfg:
+  issuer_id: ['']
+  disable_filtration: true
+```
+
+1. Add the path to your config file to the environment variables:
+
+```yaml
+- name: KV_VIPER_FILE
+  value: /config/config.yaml # the path to your config file
+```
+
+Oracle service requires the staking of some RMO tokens in the Rarimo chain.
+
+1. To start the service (in vote mode), use the following command:
+
+```bash
+evm-identity-saver-svc run state-update-voter
+```
+
+## TSS
+
+To become an active TSS party, you need to follow these steps:
+
+1. Download (TSS service binary)[https://storage.googleapis.com/rarimo-mainnet/1.0.4/tss-svc]
+
+1. Generate TSS account (it is recommended to generate the new one and not use it in other services):
+
+```shell
+rarimo-core keys add <key-name> --keyring-backend test --home=$TSS_HOME
+```
+
+Also, you need to parse the mnemonic to get the corresponding private key:
+
+```shell
+rarimo-core tx rarimocore parse-mnemonic 'mnemonic phrase'
+```
+
+1. Pre-setup secret parameters, execute and save response JSON:
+
+```shell
+tss-svc run paramgen
+```
+
+1. Generate trial ECDSA private key, execute and store results:
+
+```shell
+tss-svc run prvgen
+```
+
+1. Set up the Vault service and create a secret for your TSS (type KV version 2). The secret should contain the following credentials:
+
+```
+  * "data": "Leave empty"
+
+  * "pre": "Generated pre params JSON"
+
+  * "account": "Your Rarimo account hex key"
+
+  * "trial": "Generated Trial ECDSA private key hex"
+```
+
+JSON example:
+
+```json
+{
+  "tls": true,
+  "data": "",
+  "pre": "pre-generated-secret-data",
+  "account": "rarimo-account-private-key-hex-leading-0x",
+  "trial": "trial-ecdsa-private-key-hex-leading-0x"
+}
+```
+
+1. Create a configuration file `config.yaml` with the following structure:
+
+```yaml
+log:
+  disable_sentry: true
+  level: debug
+
+## PostreSQL connection
+
+db:
+  url: 'postgres://tss:tss@tss-2-db:5432/tss?sslmode=disable'
+
+## Port to listen for incoming GRPC requests
+
+listener:
+  addr: :9000
+
+## Core connections
+
+core:
+  addr: tcp://validator:26657
+
+cosmos:
+  addr: validator:9090
+
+## Session configuration (should be the same for all services across the system)
+
+session:
+  start_block: 100
+  start_session_id: 0
+
+## Swagger doc configuration
+
+swagger:
+  addr: :1313
+  enabled: false
+
+## Chain configuration
+
+chain:
+  chain_id: 'rarimo_201411-1'
+  coin_name: 'urmo'
+```
+
+1. Set up host environment:
+
+```yaml
+  - name: KV_VIPER_FILE
+  value: /config/config.yaml # is the path to your config file
+  - name: VAULT_PATH
+  value: http://vault-internal:8200 # your vault endpoint
+  - name: VAULT_TOKEN
+  value: "" # your vault token ("root"/"read/write")
+  - name: MOUNT_PATH
+  value: secret
+  - name: SECRET_PATH
+  value: tss # name of the secret path vault (type KV version 2)
+```
+
+1. To launch the service, use the following command.
+
+```shell
+tss-svc migrate up && tss-svc run service
+```
+
+Note that your TSS service should be accessible only using a secure TLS connection.
+
+After some period, your TSS will generate new keys together with other active parties and become an active party.
+
+## Finishing with validator
+
+Execute the command to stake tokens and become a validator.
+You need to stake exactly 1000000urmo, which is equal to 1 RMO.
+
+```bash
+rarimo-core tx staking create-validator
+	--amount 1000000urmo \
+	--commission-max-change-rate "0.01" \
+	--commission-max-rate "0.2" \
+	--commission-rate "0.1" \
+	--min-self-delegation "1" \
+	--details "Meet new Rarimo validator" \
+	--pubkey $(rarimo-core tendermint show-validator --home=$RARIMO_HOME) \
+	--moniker $MONIKER_NAME \
+	--chain-id rarimo_201411-1 \
+	--fees 0urmo \
+	--from $LOCAL_VALIDATOR_ADDRESS \
+	--home=$RARIMO_HOME \
+	--node=$RARIMO_NODE \
+	--keyring-backend=test \
+```
+
+**Congratulations, you are a Rarimo Mainnet validator!**

@@ -1,0 +1,50 @@
+---
+---
+
+# API Reference
+
+The Rarimo SDK checkout packages provide tools to send transactions to blockchains.
+
+For information about creating transactions, see [Creating NFT checkout transactions](/tutorials/creating-transactions).
+
+For example applications, see [rarimo/js-sdk-examples](https://github.com/rarimo/js-sdk-examples/) on GitHub.
+
+## @rarimo/nft-checkout
+
+The [@rarimo/nft-checkout](https://www.npmjs.com/package/@rarimo/nft-checkout) package provides tools that swap tokens and create cross-chain transactions based on the Rarimo protocol.
+
+For information about swapping tokens, see [Swapping tokens](/tutorials/swapping-tokens).
+
+## @rarimo/react-nft-checkout
+
+The [@rarimo/react-nft-checkout](https://www.npmjs.com/package/@rarimo/react-nft-checkout) package provides React components that you can use in your UI to create cross-chain transactions with the Rarimo protocol.
+
+For information about creating transactions with this package, see [Creating NFT checkout transactions](/tutorials/creating-transactions).
+
+For example applications, see [rarimo/js-sdk-examples](https://github.com/rarimo/js-sdk-examples/) on GitHub.
+
+### React transaction flow
+
+The transaction flow starts with the `DappContextProvider` and `RarimoPayButton` components:
+
+![The Rarimo pay button](/img/sdk/RarimoPayButton.png)
+
+When a user clicks the button, the `RarimoPayDialog` component opens, prompting the user to select the wallet to use.
+It includes the `PaymentWallets` and `CheckoutModal` components, which list the wallets detected in the browser:
+
+![The Rarimo pay dialog, with an embedded list of wallets](/img/sdk/RarimoPayDialog-wallets.png)
+
+When the user selects a wallet and logs in to it, the `RarimoPayDialog` component shows the `BridgeChainSelect` component, which prompts the user to select a chain:
+
+![The Rarimo pay dialog, with a list of chains](/img/sdk/RarimoPayDialog-chains.png)
+
+When the user selects a chain, the dialog updates to show the tokens in the wallet in the `PaymentTokensList` component:
+
+![The Rarimo pay dialog, with an embedded list of tokens in the selected wallet and chain](/img/sdk/RarimoPayDialog-tokens.png)
+
+When the user clicks a token, the dialog opens a `LoadingIndicator` component as it retrieves prices.
+Then the dialog shows the price of the transaction and the fees involved.
+
+If the wallet has enough of the selected token, the dialog shows the transaction fees and prompts the user to complete the transaction, as in this example:
+
+![The Rarimo pay dialog, showing the selected token, the price conversion, and the fees](/img/sdk/RarimoPayDialog-checkout.png)

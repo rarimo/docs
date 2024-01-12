@@ -1,0 +1,307 @@
+---
+# TODO: link to the package / github where our ABIs are accessible
+---
+
+# EVM
+
+We use the same contract interfaces for all EVM-compatible blockchains we support. These interfaces are available on `npm` and `github`.
+You can use this page to reference the interface and capabilities of our deployed contracts quickly.
+
+## General Notes
+
+### Emitted Events
+
+Each of these methods will emit an event in a standardized way.
+For example, the `DepositNative` will emit an event of `DepositedNative` when called.
+All parameters passed in will be part of the emitted event in the same order, except the bundle parameter - this will be unwrapped and logged as two separate parameters (salt and bundle).
+
+### Bundling
+
+Each method accepts a bundle parameter, a tuple of salt, and a bundle.
+The salt determines a proxy address, while the bundle is an encoded transaction bundle.
+
+### Network Parameters
+
+To ensure that our protocol works with all blockchains, not just EVM-compatible ones, the destination network is a simple string.
+
+## DepositNative
+
+### Interface
+
+```solidity
+function depositNative(
+  DepositFeeNativeParameters calldata feeParams_,
+  IBridge.DepositNativeParameters calldata depositParams_
+) external payable;
+
+struct DepositFeeNativeParameters {
+  address feeToken;
+}
+
+struct DepositNativeParameters {
+  uint256 amount;
+  IBundler.Bundle bundle;
+  string network;
+  string receiver;
+}
+```
+
+### Parameters
+
+- `feeParams_` struct, which represents fee parameters for the native deposit, consists of:
+  - `feeToken` is the address of the fee token
+- `depositParams_` struct, which represents native deposit parameters, consists of:
+  - `amount` the amount of deposited native tokens
+  - `bundle` used for transaction bundling _tuple (bytes32 salt, bytes bundle)_
+  - `network` network name destination of the transfer
+  - `receiver` receiver address in the destination chain
+
+As the `DepositNative` method is called to transfer native coins from a source to a destination, the method signature is essential.
+You will need to pass in the amount of native coin in the `depositParams_` structure that you want to send to the protocol.
+
+### Example
+
+Here's an example call in Javascript that could transfer 100000 WEI from Ethereum to Polygon (where it could be withdrawn as Wrapped ETH ERC20).
+
+```javascript
+await rarimoContract.despositNative(
+  {
+    salt: '0x0000000000000000000000000000000000000000000000000000000000000001',
+    bundle: '0x',
+  },
+  'polygon',
+  '0x',
+  {
+    gasLimit: 50000,
+    value: 100000,
+  }
+)
+```
+
+## DepositERC20
+
+### Interface
+
+```solidity
+
+function depositERC20(
+  DepositFeeERC20Parameters calldata feeParams_,
+  IBridge.DepositERC20Parameters calldata depositParams_
+) external payable;
+
+struct DepositFeeERC20Parameters {
+  address feeToken;
+}
+
+struct DepositERC20Parameters {
+  address token;
+  uint256 amount;
+  IBundler.Bundle bundle;
+  string network;
+  string receiver;
+  bool isWrapped;
+}
+```
+
+### Parameters
+
+- `feeParams_` struct, which represents fee parameters for the ERC20 deposit, consists of:
+  - `feeToken` the address of the fee token
+- `depositParams_` struct, which represents ERC20 deposit parameters, consists of:
+  - `token` source contract address for the fungible tokens being transferred
+  - `amount` how many tokens are being transferred
+  - `bundle` used for transaction bundling _tuple (bytes32 salt, bytes bundle)_
+  - `network` network name destination of the transfer
+  - `receiver` receiver address in the destination chain
+  - `isWrapped` whether the tokens will be burned (true) or transferred (false)
+
+You can use the `DepositERC20` method to move fungible tokens from a source to a destination.
+When you call this, you must decide if you want to burn or attempt an actual transfer.
+
+### Example
+
+Here's an example call in Javascript that will transfer 10 USDT from Avalanche to Solana by burning & minting tokens in each chain.
+
+```javascript
+await rarimoContract.depositERC20(
+  '0xc7198437980c041c805a1edcba50c1ce5db95118',
+  10,
+  {
+    salt: '0x0000000000000000000000000000000000000000000000000000000000000001',
+    bundle: '0x',
+  },
+  'solana',
+  '0x',
+  true
+)
+```
+
+## DepositERC721
+
+### Interface
+
+```solidity
+function depositERC721(
+  DepositFeeERC721Parameters calldata feeParams_,
+  IBridge.DepositERC721Parameters calldata depositParams_
+) external payable;
+
+struct DepositFeeERC721Parameters {
+  address feeToken;
+}
+
+struct DepositERC721Parameters {
+  address token;
+  uint256 tokenId;
+  IBundler.Bundle bundle;
+  string network;
+  string receiver;
+  bool isWrapped;
+}
+```
+
+### Parameters
+
+- `feeParams_` struct, which represents fee parameters for the ERC721 deposit, consists of:
+  - `feeToken` is the address of the fee token
+- `depositParams_` struct, which represents ERC721 deposit parameters, consists of:
+  - `token` source contract address for NFT contract
+  - `tokenId` id of the token to be transferred
+  - `bundle` used for transaction bundling _tuple (bytes32 salt, bytes bundle)_
+  - `network` network name destination of the transfer
+  - `receiver` receiver address in the destination chain
+  - `isWrapped` whether the tokens will be burned (true) or transferred (false)
+
+The `DepositERC721` method is used to move a single NFT from a contract to another chain.
+Similar to ERC20s, when you call this, you need to decide if you want to burn or attempt a true transfer.
+
+### Example
+
+Here's an example call in Javascript that will transfer an NFT from Binance to Ethereum by a raw transfer.
+
+```javascript
+await rarimoContract.depositERC721(
+  '0x12786C473E6d6bB78E554c90812772bEad18264e',
+  996800003035,
+  {
+    salt: '0x0000000000000000000000000000000000000000000000000000000000000001',
+    bundle: '0x',
+  },
+  'ethereum',
+  '0x',
+  false
+)
+```
+
+## DepositERC1155
+
+### Interface
+
+```solidity
+function depositERC1155(
+  DepositFeeERC1155Parameters calldata feeParams_,
+  IBridge.DepositERC1155Parameters calldata depositParams_
+) external payable;
+
+struct DepositFeeERC1155Parameters {
+  address feeToken;
+}
+
+struct DepositERC1155Parameters {
+  address token;
+  uint256 tokenId;
+  uint256 amount;
+  IBundler.Bundle bundle;
+  string network;
+  string receiver;
+  bool isWrapped;
+}
+```
+
+### Parameters
+
+- `feeParams_` struct, which represents fee parameters for the ERC1155 deposit, consists of:
+  - `feeToken` is the address of the fee token
+- `depositParams_` struct, which represents ERC1155 deposit parameters, consists of:
+  - `token` source contract address for NFT contract
+  - `tokenId`, which token is being transferred
+  - `amount` how many fungible tokens to include
+  - `bundle` used for transaction bundling _tuple (bytes32 salt, bytes bundle)_
+  - `network` network name destination of the transfer
+  - `receiver` receiver address in the destination chain
+  - `isWrapped` whether the tokens will be burned (true) or transferred (false)
+
+The `DepositERC1155` method is used to move either non-fungible or fungible tokens from an ERC1155.
+Predictably, the interface is a combination of the ERC20 and ERC721 methods.
+
+### Example
+
+Here's an example call in Javascript that will transfer 10 SLI fungible tokens from Polygon to NEAR by burning & minting.
+
+```javascript
+await rarimoContract.depositERC1155(
+  '0x22d5f9B75c524Fec1D6619787e582644CD4D7422',
+  0,
+  10,
+  {
+    salt: '0x0000000000000000000000000000000000000000000000000000000000000001',
+    bundle: '0x',
+  },
+  'near',
+  '0x',
+  true
+)
+```
+
+## DepositSBT
+
+### Interface
+
+```solidity
+function depositSBT(
+  DepositFeeSBTParameters calldata feeParams_,
+  IBridge.DepositSBTParameters calldata depositParams_
+) external payable;
+
+struct DepositFeeSBTParameters {
+  address feeToken;
+}
+
+struct DepositSBTParameters {
+  address token;
+  uint256 tokenId;
+  IBundler.Bundle bundle;
+  string network;
+  string receiver;
+}
+```
+
+### Parameters
+
+- `feeParams_` struct, which represents fee parameters for the SBT deposit, consists of:
+  - `feeToken` is the address of the fee token
+- `depositParams_` struct, which represents SBT deposit parameters, consists of:
+  - `token` source contract address for NFT contract
+  - `tokenId` which token is being transferred
+  - `bundle` used for transaction bundling _tuple (bytes32 salt, bytes bundle)_
+  - `network` network name destination of the transfer
+  - `receiver` receiver address in the destination chain
+
+The `depositSBT` method mints a wrapped SBT on another chain. The token must follow the [ERC-5192 standard](https://eips.ethereum.org/EIPS/eip-5192).
+
+### Example
+
+Here's an example call in Javascript that will transfer an NFT from Binance to Ethereum by a raw transfer.
+
+```javascript
+await rarimoContract.depositSBT(
+  '0x12786C473E6d6bB78E554c90812772bEad18264e',
+  996800003035,
+  {
+    salt: '0x0000000000000000000000000000000000000000000000000000000000000001',
+    bundle: '0x',
+  },
+  'ethereum',
+  '0x'
+)
+```
