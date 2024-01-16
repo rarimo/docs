@@ -1,0 +1,37 @@
+---
+---
+
+# Utilities of the Token
+
+## Fees
+
+Payment of fees inside the Rarimo protocol - main utility function of the Token. The DAO will set the exact types of
+fees and their structure. It is suggested, as for now, that the Rarimo protocol may have the following 2 types of fees:
+
+1. fee that should be paid in RMO Token. This fee covers operations with transferring Tokens and messages over the
+   connected networks
+2. fees that can be paid in the platform-supported assets. This kind of fee covers transfers of ERC20 tokens through the
+   bridge
+
+## Governance
+
+As described below, Tokens will be used as a governance tool for the DAO.
+
+## Selecting validators of the Rarimo core
+
+The token is also designed to achieve Rarimo security. The smart contract sets a minimum RMO to send the transaction for
+being a validator. As soon as a node has a set amount of staked RMO, other Token holders can stake some amount of their
+Tokens for this node. The nodes for which the most Tokens were staked become the guarantors of the protocol. This way,
+you can get a truly democratic choice of protocol validators. The DAO may change the described rules.
+
+If the verifier did some violation - any user can report that (on-chain transaction). If other users approve the fact of
+the violation (via voting procedure) - the stake of the validator transfers to the community pool. By default, there are
+only 2 types of violations that presume a 100% stake validator penalty - the signing of 2 or more blocks of the same
+height and an attempt to add conflicting transactions within one block.
+
+## Payments for signers for bringing and confirming external data
+
+The last significant reason the RMO token exists is - a reward for bringing the data to the Rarimo core from connected
+networks. In this condition, the level of decentralization of the Oracle layer really matters. Separating (on the
+technical and economic layers) this role from the validator node allows everyone to select accounting systems for
+indexing based on their existing infrastructure and other assumptions.

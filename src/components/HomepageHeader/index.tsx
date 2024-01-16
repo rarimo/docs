@@ -192,7 +192,7 @@ export default function HomepageHeader() {
         </p>
         <div className={clsx("buttonContainer", styles.buttonContainer)}>
           <Link
-            href="overview"
+            href="/overview/about-rarimo"
             type="doc"
             id="overview"
             className={clsx(
