@@ -22,6 +22,7 @@ const sidebars = {
         'use-cases/identity-protocol-state-replication',
         'use-cases/cross-chain-proofs',
         'use-cases/self-sovereign-identities',
+        'use-cases/organizational-access-control',
       ],
     },
     {
@@ -186,7 +187,7 @@ const sidebars = {
       label: 'Whitepaper',
       collapsed: true,
       items: [
-        'whitepaper/overview-of-whitepaper',
+        'whitepaper/abstract',
         'whitepaper/problem_statement',
         'whitepaper/protocol-vision',
         'whitepaper/architecture-and-operating-principles',
