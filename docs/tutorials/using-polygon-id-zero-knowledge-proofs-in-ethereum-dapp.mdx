@@ -300,13 +300,13 @@ For the full implementation, see [QueryVerifier.sol](https://github.com/rarimo/p
 ### Front-end
 
 The Front-end requests the QR-code from the back-end service and shows it on the page.
-![The pay button](/img/polygon-id-integration-qr-code.png)
+![Proof request QR-code](/img/polygon-id-integration-qr-code.png)
 
 User can scan this QR-code with his Polygon ID Wallet and generate a proof, if he possess the valid credentials.
-![The pay button](/img/polygon-id-integration-generated.png)
+![Proof generated, connect wallet to proceed](/img/polygon-id-integration-generated.png)
 
 After that, the relayer can be called to transit the state from Polygon to Ethereum.
-![The pay button](/img/polygon-id-integration-relay.png)
+![Performing state transition](/img/polygon-id-integration-relay.png)
 
 We will use the following stack of technologies:
 - [React](https://github.com/facebook/react/releases)
