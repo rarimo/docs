@@ -1,0 +1,130 @@
+---
+title: World ID Replication Usage
+---
+
+<!-- todo: change Polygon to another chain (e.g, Avalanche), remove Polygon mentions from the full doc -->
+
+# Tutorial: Using World ID zero-knowledge proofs in Polygon DApp
+
+In this tutorial we are going to build a dApp, that will ask the user to provide a proof of personhood, using the World App.
+So, having the contracts deployed on Ethereum, we can replicate the state to another chain, e.g. Polygon, so that the proofs can be used in Polygon dApp.
+
+## DApp creation
+
+Our simple DApp will consist of 2 parts:
+- front-end, that contains the QR-code (can be scanned with the World App), which asks for the proof of personhood;
+- verifier smart contract;
+
+### Smart Contracts
+
+Let's start from writing a simple verifier contract, that will verify user's proof of personhood.
+We should also have the `IdentityManager` contract deployed on destination chain, but that's the job of the Rarimo team.
+
+#### `Verifier`
+
+`Verifier` has two hooks - `_beforeProofSubmit(...)` and `_afterProofSubmit(...)`, which are called before and after proof verification respectively.
+You can override them with business logic you need.
+Contract also uses [Initializable from OpenZeppelin](link) and [SemaphoreVerifier from World ID](link), that is fully forked.
+
+So here is the template for our `Verifier` contract:
+
+```solidity
+pragma solidity 0.8.20;
+
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+
+import "./vendor/worldcoin/world-id-contracts/interfaces/ISemaphoreVerifier.sol";
+
+import "./interfaces/IIdentityManager.sol";
+import "./interfaces/IVerifier.sol";
+
+contract Verifier is IVerifier, Initializable {
+    address public semaphoreVerifier;
+    address public identityManager;
+
+    function __Verifier_init(
+        address semaphoreVerifier_,
+        address identityManager_
+    ) external initializer {
+        /* ... */
+    }
+
+    function verifyProof(
+        uint256 root_,
+        uint256 signalHash_,
+        uint256 nullifierHash_,
+        uint256 externalNullifierHash_,
+        uint256[8] calldata proof_
+    ) public virtual override {
+        /* ... */
+    }
+
+    function _beforeProofValidation() internal virtual {}
+
+    function _afterProofValidation() internal virtual {}
+}
+```
+
+Functions should have the following functionality:
+- `__Verifier_init(...)` – sets the `semaphoreVerifier` and `identityManager` variables with provided ones;
+- `verifyProof(...)` – checks, whether the root is expired, calls the proof verification function (IdentityManager functionality) and executes both hooks, before and after proof verification respectively;
+- `_beforeProofValidation(...)` – hook, that should be executed before proof verification.
+Any logic you want can be executed, usually some security checks are performed;
+- `_afterProofValidation(...)` – hook, that should be executed after proof verification.
+As previous hook, contains any logic you want.
+
+The filled version of the contract should look like this:
+
+```solidity
+pragma solidity 0.8.20;
+
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+
+import "./vendor/worldcoin/world-id-contracts/interfaces/ISemaphoreVerifier.sol";
+
+import "./interfaces/IIdentityManager.sol";
+import "./interfaces/IVerifier.sol";
+
+contract Verifier is IVerifier, Initializable {
+    address public semaphoreVerifier;
+    address public identityManager;
+
+    function __Verifier_init(
+        address semaphoreVerifier_,
+        address identityManager_
+    ) external initializer {
+        semaphoreVerifier = semaphoreVerifier_;
+        identityManager = identityManager_;
+    }
+
+    function verifyProof(
+        uint256 root_,
+        uint256 signalHash_,
+        uint256 nullifierHash_,
+        uint256 externalNullifierHash_,
+        uint256[8] calldata proof_
+    ) public virtual override {
+        require(
+            !IIdentityManager(identityManager).isExpiredRoot(root_),
+            "Verifier: root is expired"
+        );
+
+        _beforeProofValidation();
+
+        ISemaphoreVerifier(semaphoreVerifier).verifyProof(
+            proof_,
+            [root_, nullifierHash_, signalHash_, externalNullifierHash_]
+        );
+
+        _afterProofValidation();
+    }
+
+    function _beforeProofValidation() internal virtual {}
+
+    function _afterProofValidation() internal virtual {}
+}
+```
+
+We have not filled hooks, their logic is up to you.
+
+For the full implementation, see [Verifier.sol](link) at the GitHub.

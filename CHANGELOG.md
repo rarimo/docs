@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Themes (light and dark);
+- Tutorial, how to use World ID Integration in Avalanche DApp;
 - Reference:
   - Added the "Polygon ID State Replication" page;
   - Added the "World ID State Replication" page;
