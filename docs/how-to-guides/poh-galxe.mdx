@@ -19,7 +19,15 @@ Rarimo’s Proof of Human plugin improves upon these solutions by aggregating id
 
 To see it in action, checkout the walkthrough video:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/AAGWJE8pjG0?si=ID7WiY2LIyXhujcy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/AAGWJE8pjG0?si=ID7WiY2LIyXhujcy"
+  title="YouTube video player"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowFullScreen
+></iframe>
 
 ## Adding Proof of Human to Your Galxe Campaign
 
@@ -27,65 +35,65 @@ To add Proof of Human check, set up your campaign using the instructions below. 
 
 1. Set up a new Credentials Group:
 
-    ![New Credentials Group](/img/galxe-step-1.png)
+   ![New Credentials Group](/img/galxe-step-1.png)
 
 2. Select the On-Chain type:
 
-    ![Select type](/img/galxe-step-2.png)
+   ![Select type](/img/galxe-step-2.png)
 
 3. Select the Subgraph Credential
 
-    ![Subgraph Credential](/img/galxe-step-3.png)
+   ![Subgraph Credential](/img/galxe-step-3.png)
 
 4. Verify that you see this form:
 
-    ![Verify the form](/img/galxe-step-4.png)
+   ![Verify the form](/img/galxe-step-4.png)
 
 5. Fill it using these values:
 
-    Endpoint: https://api.thegraph.com/subgraphs/name/volodymyrzolotukhin/sbtidentityverifier-polygon
+   Endpoint: https://api.thegraph.com/subgraphs/name/volodymyrzolotukhin/sbtidentityverifier-polygon
 
-    Query:
+   Query:
 
-    ```graphql
-    query info($address: String!) {
-        users(where:{senderAddr: $address}){
-            id
-        }
-    }
-    ```
+   ```graphql
+   query info($address: String!) {
+     users(where: { senderAddr: $address }) {
+       id
+     }
+   }
+   ```
 
-    Test address:
+   Test address:
 
-    ```
-    0x62019b7b8f7d5b58006c5001eb1ffa95ab191474
-    ```
+   ```
+   0x62019b7b8f7d5b58006c5001eb1ffa95ab191474
+   ```
 
-    Expression:
+   Expression:
 
-    ```jsx
-    function(resp) {
-      if (resp != null && (resp.users != null && resp.users.length > 0)) {
-         return 1
-      }
-      return 0
-    }
-    ```
+   ```jsx
+   function(resp) {
+     if (resp != null && (resp.users != null && resp.users.length > 0)) {
+        return 1
+     }
+     return 0
+   }
+   ```
 
-    Call-to-Action Link: https://robotornot.rarimo.com
+   Call-to-Action Link: https://robotornot.rarimo.com
 
-    Reach out to us at <a href="https://discord.com/channels/1034798419614629908/1034798420713553966/1063164663216484473" target="_blank" rel="noreferrer noopener">discord</a> and provide the name of your company name and logo to get a link with a customized greeting like this:
+   Reach out to us at <a href="https://discord.com/channels/1034798419614629908/1034798420713553966/1063164663216484473" target="_blank" rel="noreferrer noopener">discord</a> and provide the name of your company name and logo to get a link with a customized greeting like this:
 
-    ![Customized greeting](/img/poh-greeting.png)
+   ![Customized greeting](/img/poh-greeting.png)
 
 6. Verify that the filled form looks like this and hit “Save”:
 
-    ![Verify and Save](/img/galxe-step-6.png)
+   ![Verify and Save](/img/galxe-step-6.png)
 
 7. Save the Credential Group:
 
-    ![Save the Group](/img/galxe-step-7.png)
+   ![Save the Group](/img/galxe-step-7.png)
 
 8. After you are done with the rest of the details for your campaign, you should see the Proof of Human step on the campaign page:
 
-    ![Proof of Human step should be visible now](/img/galxe-step-8.png)
+   ![Proof of Human step should be visible now](/img/galxe-step-8.png)

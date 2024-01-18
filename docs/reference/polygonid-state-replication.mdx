@@ -1,5 +1,4 @@
 ---
-sidebar_label: Polygon ID State Replication
 ---
 
 # Polygon ID State Replication
@@ -19,7 +18,7 @@ Call it before submitting proof on the destination chain.
 
 - Github: https://github.com/rarimo/identity-relayer-svc
 - API Reference: https://rarimo.github.io/rarimo-core/docs/common/bridging/002-identity.html
-- Testnet URI: https://api.mainnet-beta.rarimo.com
+- Testnet URI: https://api.mainnet-beta.rarimo.com/integrations/relayer/
 
 ### Relayer endpoints
 
@@ -48,11 +47,12 @@ To perform GIST publishing, you can execute POST `/integrations/relayer/gist/rel
 - `"waitConfirm": true` indicates whether the request should wait until the transaction is included in the block (`false` by default);
 
 The response codes:
+
 - `200` - successful relay, body contains tx hash;
 - `404` - the state is not transferred yet; try to repeat the request later;
 - `400` - state has been relayed before;
 
-##  Smart Contracts
+## Smart Contracts
 
 <!-- TODO: Add mainnet contracts addresses -->
 
@@ -64,8 +64,8 @@ The relayer service lazily updates the contract whenever a user wants to submit 
 
 #### Deployments
 
-|Chain| ChainID| Address|
-| --- | --- | --- |
+| Chain   | ChainID    | Address                                                                                                                                       |
+| ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | Sepolia | `11155111` | `0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315` \([Etherscan](https://sepolia.etherscan.io/address/0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315)\) |
 
 #### Interface
@@ -106,14 +106,15 @@ contract LightweightStateV2 is ILightweightStateV2, UUPSSignableUpgradeable, Sig
 - `sourceStateContract` — address of the state contract on the source chain (Rarimo);
 - `_currentGistRoot` — the latest transferred GIST root;
 - `_gistsRootData` — mapping of the GIST roots to their data.
-Data stores two roots, one that replaced the other, timestamp and block number;
+  Data stores two roots, one that replaced the other, timestamp and block number;
 - `_identitiesInfo` — mapping of the identity IDs to the information about this identity.
-Information has the latest identity state and the history of the states with timestamps;
+  Information has the latest identity state and the history of the states with timestamps;
 - `signedTransitGISTData()` — adds the GIST root to the history and changes the current root variable if the proposed one is newer;
 - `signedTransitStateData(...)` — adds the state to the history and sets the last state of the identity to the provided one if it's newer;
 
 Both functions require proof of change — TSS of Rarimo signature providers.
 Also, core functions emit events, which contain the data about changes:
+
 - `SignGISTDataTransited` contains the data about roots, the previous one and the provided one;
 - `SignStateDataTransited` contains the provided identity state, previous state, and identity ID;
 
@@ -126,8 +127,8 @@ It is configured to work with the KYCAge demo credential.
 
 #### Deployments
 
-|Chain| ChainID| Address|
-| --- | --- | --- |
+| Chain   | ChainID    | Address                                                                                                                                       |
+| ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | Sepolia | `11155111` | `0xb95734f64f242E976E155594E1E15D39700Cbb26` \([Etherscan](https://sepolia.etherscan.io/address/0xb95734f64f242E976E155594E1E15D39700Cbb26)\) |
 
 #### Interface
@@ -192,8 +193,8 @@ The SBT is awarded to users who complete the Polygon ID x Rarimo demo.
 
 #### Deployments
 
-|Chain| ChainID| Address|
-| --- | --- | --- |
+| Chain   | ChainID    | Address                                                                                                                                       |
+| ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | Sepolia | `11155111` | `0x8A55c9CfDCbCeDcA1A543295a3F54351C335A20f` \([Etherscan](https://sepolia.etherscan.io/address/0x8A55c9CfDCbCeDcA1A543295a3F54351C335A20f)\) |
 
 #### Interface

@@ -8,7 +8,7 @@
   position: relative;
   overflow: hidden;
   background: initial;
-  color: #ffffff;
+  color: var(--white);
 }
 .secondContent{
   display: flex;
@@ -34,15 +34,6 @@
   width: 100%;
 }
 
-.secondTitle {
-  font-size: 3.5rem;
-  font-weight: 600;
-  color: var(--primary-text-color-light);
-  font-family: var(--primary-font-family);
-  text-transform: uppercase;
-  text-align: start;
-}
-
 .startBuildingSection{
   display: flex;
   flex-direction: column;
@@ -54,11 +45,9 @@
   z-index: var(--z-index-default);
 }
 
-.bottomContent {
-  display: flex;
-  justify-content: space-around;
-  background: transparent;
-  margin: 10rem 0;
+.linksButton {
+  border: 1px solid transparent;
+  text-transform: uppercase;
 }
 
 .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth {
@@ -74,12 +63,8 @@
 }
 
 @media screen and (max-width: 996px) {
-  .bgImageFirst, .bgImageSecond, .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
+  .bgImageSecond, .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
     display: none;
-  }
-  .secondTitle{
-    font-size: 5rem;
-    text-align: center;
   }
   .secondSubtitle{
     text-align: center;
@@ -117,10 +102,6 @@
 
 
 @media screen and (max-width: 625px) {
-  .secondTitle {
-    font-size: 2.625rem;
-    text-align: center;
-  }
   .secondSubtitle{
     text-align: center;
   }
@@ -129,7 +110,6 @@
     flex-direction: column;
     align-items: center;
   }
-
 }
 
 .bgImageFirst{
@@ -146,7 +126,6 @@
 }
 
 .bgImageSecond{
-  background-color: rgba(0, 0, 0, 0.6);
   top: 0;
   height: 1425px;
   width: 100%;
@@ -157,8 +136,8 @@
 
 .bgImageThird, .bgImageFourth, .bgImageFifth, .bgImageSixth{
   position: absolute;
-  width: 68px;
-  height: 68px;
+  width: 3rem;
+  height: 3rem;
   border-width: 0 1px 1px 0;
   border-style: solid;
   border-color: rgba(255, 255, 255, 0.05);
@@ -188,7 +167,7 @@
 .bgImageSixth{
   right: 4%;
   top: 408px;
-  background: linear-gradient(180deg, #8AB5A4 0%, rgba(138, 181, 164, 0) 100%), #8AB5A4;
+  background: linear-gradient(180deg, var(--primary-main) 0%, rgba(138, 181, 164, 0) 100%), var(--primary-main);
   background-blend-mode: normal, overlay, normal;
 }
 
@@ -198,12 +177,17 @@
   align-items: center;
   justify-content: center;
 }
-.heroButtonSecondary{
-  border: 1px solid var(--primary-text-color-light);
-  min-height: 3.5rem;
-  width: 100%;
-  max-width: 13rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+
+.homepageBaseLayerBlockchains {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.homepageBaseLayerText {
+  font-size: 0.875rem;
+  color: var(--primary-text-color);
+  font-family: var(--secondary-font-family);
+  font-weight: 400;
+  font-style: normal;
 }
