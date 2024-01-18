@@ -4,12 +4,7 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   sidebar: [
-    {
-      type: 'category',
-      label: 'Overview',
-      collapsed: true,
-      items: ['overview/about-rarimo'],
-    },
+    'overview',
     {
       type: 'category',
       label: 'Use Cases',
@@ -99,76 +94,77 @@ const sidebars = {
             'products/proof-of-humanity/resources',
           ],
         },
-      ],
-    },
-    {
-      type: 'category',
-      // TODO: come up with a better name
-      label: 'Polygon ID State Replication',
-      collapsed: true,
-      items: [
-        'polygon-id-state-replication/overview',
-        'polygon-id-state-replication/smart-contracts-reference',
-        'polygon-id-state-replication/guide-how-to-set-up-polygon-id-state-replication',
-        // TODO: come up with a good example DApp
-        'polygon-id-state-replication/tutorial-verifying-polygon-id-credentials-in-ethereum-dapp',
-        'polygon-id-state-replication/api-reference',
-        'polygon-id-state-replication/resources',
-      ],
-    },
-    {
-      type: 'category',
-      // TODO: come up with a better name
-      label: 'WorldCoin State Replication',
-      collapsed: true,
-      items: [
-        'worldcoin-state-replication/overview',
-        'worldcoin-state-replication/smart-contracts-reference',
-        // TODO example DApp
-        'worldcoin-state-replication/tutorial-verifying-polygon-id-credentials-in-avalanche-dapp',
-        'worldcoin-state-replication/api-reference',
-        'worldcoin-state-replication/resources',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Bridging Protocol',
-      collapsed: true,
-      items: [
-        'bridging-protocol/overview',
-        'bridging-protocol/circle-cctp-integration',
-        'bridging-protocol/tutorial-cross-chain-proof-of-sbt-ownership',
-        'bridging-protocol/guide-how-to-bundle-transactions',
-        'bridging-protocol/connecting-to-wallets',
-        'bridging-protocol/creating-nft-checkout-transactions',
-        'bridging-protocol/swapping-tokens',
-        'bridging-protocol/packages-base',
-        'bridging-protocol/bridge-protocol-contracts',
         {
           type: 'category',
-          label: 'Smart Contracts Reference',
+          // TODO: come up with a better name
+          label: 'Polygon ID State Replication',
           collapsed: true,
           items: [
-            'bridging-protocol/smart-contracts-reference/evm',
-            'bridging-protocol/smart-contracts-reference/solana',
-            'bridging-protocol/smart-contracts-reference/near',
+            'products/polygon-id-state-replication/overview',
+            'products/polygon-id-state-replication/smart-contracts-reference',
+            'products/polygon-id-state-replication/guide-how-to-set-up-polygon-id-state-replication',
+            // TODO: come up with a good example DApp
+            'products/polygon-id-state-replication/tutorial-verifying-polygon-id-credentials-in-ethereum-dapp',
+            'products/polygon-id-state-replication/api-reference',
+            'products/polygon-id-state-replication/resources',
           ],
         },
-        'bridging-protocol/js-sdk-reference',
-        'bridging-protocol/api-reference',
-        'bridging-protocol/resources',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Token Agnostic Payments',
-      collapsed: true,
-      items: [
-        'token-agnostic-payments/overview',
-        'token-agnostic-payments/tutorial-creating-nft-marketplace-token-agnostic-payments',
-        'token-agnostic-payments/js-sdk-reference',
-        'token-agnostic-payments/api-reference',
-        'token-agnostic-payments/resources',
+        {
+          type: 'category',
+          // TODO: come up with a better name
+          label: 'WorldCoin State Replication',
+          collapsed: true,
+          items: [
+            'products/worldcoin-state-replication/overview',
+            'products/worldcoin-state-replication/smart-contracts-reference',
+            // TODO example DApp
+            'products/worldcoin-state-replication/tutorial-verifying-polygon-id-credentials-in-avalanche-dapp',
+            'products/worldcoin-state-replication/guide-state-replication-for-world-id',
+            'products/worldcoin-state-replication/api-reference',
+            'products/worldcoin-state-replication/resources',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Bridging Protocol',
+          collapsed: true,
+          items: [
+            'products/bridging-protocol/overview',
+            'products/bridging-protocol/circle-cctp-integration',
+            'products/bridging-protocol/tutorial-cross-chain-proof-of-sbt-ownership',
+            'products/bridging-protocol/guide-how-to-bundle-transactions',
+            'products/bridging-protocol/connecting-to-wallets',
+            'products/bridging-protocol/creating-nft-checkout-transactions',
+            'products/bridging-protocol/swapping-tokens',
+            'products/bridging-protocol/packages-base',
+            'products/bridging-protocol/bridge-protocol-contracts',
+            {
+              type: 'category',
+              label: 'Smart Contracts Reference',
+              collapsed: true,
+              items: [
+                'products/bridging-protocol/smart-contracts-reference/evm',
+                'products/bridging-protocol/smart-contracts-reference/solana',
+                'products/bridging-protocol/smart-contracts-reference/near',
+              ],
+            },
+            'products/bridging-protocol/js-sdk-reference',
+            'products/bridging-protocol/api-reference',
+            'products/bridging-protocol/resources',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Token Agnostic Payments',
+          collapsed: true,
+          items: [
+            'products/token-agnostic-payments/overview',
+            'products/token-agnostic-payments/tutorial-creating-nft-marketplace-token-agnostic-payments',
+            'products/token-agnostic-payments/js-sdk-reference',
+            'products/token-agnostic-payments/api-reference',
+            'products/token-agnostic-payments/resources',
+          ],
+        },
       ],
     },
     {
