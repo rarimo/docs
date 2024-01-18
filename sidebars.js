@@ -40,7 +40,7 @@ const sidebars = {
         'tutorials/connecting-to-wallets',
         'tutorials/creating-transactions',
         'tutorials/swapping-tokens',
-        "tutorials/using-polygon-id-zero-knowledge-proofs-in-ethereum-dapp",
+        "tutorials/using-polygon-id-state-replication-in-a-dapp",
       ],
     },
     {

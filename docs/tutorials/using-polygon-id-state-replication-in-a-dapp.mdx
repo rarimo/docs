@@ -1,20 +1,32 @@
 ---
-title: Polygon ID Replication Usage
+title: Polygon ID State Replication Usage
 ---
 
-# Tutorial: Using Polygon ID zero-knowledge proofs in Ethereum DApp
+# Tutorial: Using Polygon ID State Replication in a DApp
 
-In this tutorial, we will build the DApp that mints an NFT if the user was born before some date. Given an issuer anchored to Polygon, we can replicate its state to another chain, e.g., Ethereum, to use zero-knowledge proofs in a DApp.
+In this tutorial, we will build the DApp that mints an NFT if the user was born before some date. Given an issuer anchored to Polygon, we can replicate its state to another chain(in our case, Ethereum) to use zero-knowledge proofs in a DApp.
 
-<!-- TODO: -->
+## User flow
+
+1. The front-end requests the QR code from the back-end service and shows it on the page.
+
+  ![Proof request QR-code](/img/polygon-id-integration-qr-code.png)
+
+1. The user can scan this QR code with his Polygon ID Wallet and generate proof that he possesses valid credentials.
+
+  ![Proof generated, connect wallet to proceed](/img/polygon-id-integration-generated.png)
+
+1. After that, the relayer will be called to replicate the state from Polygon to Ethereum.
+
+  ![Performing state transition](/img/polygon-id-integration-relay.png)
+
+<!-- TODO: add a success screen with the SBT -->
 
 ## DApp creation
 
 Our simple DApp will consist of 2 parts:
 - front-end, which contains a QR-code for the Polygon ID Wallet, that contains a request for a zero-knowledge proof that the user was born before `2000/01/01`;
 - the verifier and SBT smart contracts;
-
-After providing valid proof, the user will be rewarded with the soul-bound token.
 
 ### Smart Contracts
 
@@ -294,28 +306,22 @@ contract QueryVerifier is ZKPVerifier {
 
 For the full implementation, see [QueryVerifier.sol](https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/QueryVerifier.sol) at the GitHub.
 
+<!-- TODO: add deployment and configuration instructions>
+
 ### Front-end
 
-<!-- move this stuff to the top -->
-
-The front-end requests the QR code from the back-end service and shows it on the page.
-![Proof request QR-code](/img/polygon-id-integration-qr-code.png)
-
-The user can scan this QR code with his Polygon ID Wallet and generate proof that he possesses valid credentials.
-
-![Proof generated, connect wallet to proceed](/img/polygon-id-integration-generated.png)
-
-After that, the relayer can be called to transit the state from Polygon to Ethereum.
-![Performing state transition](/img/polygon-id-integration-relay.png)
-
-We will use the following stack of technologies:
+We will use the following tech stack:
 - [React](https://github.com/facebook/react/releases)
 - [Vite.js](https://github.com/vitejs/vite/releases)
 - [Distributed Lab web-kit](https://github.com/distributed-lab/web-kit/tree/main)
-- [crypto](https://github.com/iden3/js-crypto), [jwz](https://github.com/iden3/js-jwz), [core](https://github.com/iden3/js-iden3-core), [jsonld-merklization](https://github.com/iden3/js-jsonld-merklization), [merkletree](https://github.com/iden3/js-merkletree) libraries from iden3
+- [crypto](https://github.com/iden3/js-crypto), [jwz](https://github.com/iden3/js-jwz), [core](https://github.com/iden3/js-iden3-core), [jsonld-merklization](https://github.com/iden3/js-jsonld-merklization), [merkletree](https://github.com/iden3/js-merkletree) iden3 libraries from
 - [Yarn](https://github.com/yarnpkg) as a package manager
 
-Let's start by writing the function that creates the request for the back-end service.
+For the full front-end implementation, see [GitHub](https://github.com/rarimo/web-client-polygonid/tree/main).
+
+<!-- TODO: add instructions how to generate a QR-code -->
+
+Let's go through the core business logic. For a start, we'll write a function that creates the request for the back-end service.
 The service will return the QR code in JSON format, which we will display.
 The request should contain the following information:
 - `id` – identifier stored on the wallet SDK;
@@ -327,8 +333,7 @@ The request should contain the following information:
   - `reason` – reason of authentication (it could be age verification or simply a test flow);
   - `message` – message to be signed; can be left blank;
   - `callbackUrl` – URI to which requested information is sent, and response is received;
-  - `scope` – information related to the proof request and the requirements to be fulfilled by the proof generated and shared from mobile.
-  It is in the form of an array of proofs that the SDK generates.
+  - `scope` – information related to the proof request and the requirements to be fulfilled by the proof generated and shared from mobile. It is in the form of an array of proofs that the SDK generates.
 
 You can provide other information as well. See [Polygon ID Wallet-SDK Docs](https://devs.polygonid.com/docs/wallet/wallet-sdk/polygonid-sdk/iden3comm/auth-requests/) for more details.
 
@@ -516,4 +521,4 @@ const submitZkp = useCallback(async () => {
 /* ... */
 ```
 
-For the full front-end implementation, see [GitHub](https://github.com/rarimo/web-client-polygonid/tree/main).
+<!-- TODO: Add instructions for extending the logic -->
