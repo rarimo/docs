@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added RariMe guide for issuers;
   - World ID State Replication setup guide;
 - Contribution guide to the README;
+- Tutorials:
+  - Added the Polygon ID Integration usage page;
 - Subscription form (w/o functionality)
 - Mobile sliders
 
