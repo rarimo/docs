@@ -4,31 +4,33 @@ title: Polygon ID Replication Usage
 
 # Tutorial: Using Polygon ID zero-knowledge proofs in Ethereum DApp
 
-In this tutorial we are going to build the DApp, that verifies the age of the user and mints SBT after that.
-Given an issuer whose state exists on Polygon, we can replicate that state to another chain, e.g. Ethereum, so that the claims he issued can be proven in Ethereum Dapp.
+In this tutorial, we will build the DApp that mints an NFT if the user was born before some date. Given an issuer anchored to Polygon, we can replicate its state to another chain, e.g., Ethereum, to use zero-knowledge proofs in a DApp.
+
+<!-- TODO: -->
 
 ## DApp creation
 
 Our simple DApp will consist of 2 parts:
-- front-end, that contains the QR-code (that can be scanned with Polygon ID Wallet), which asks for the proof, e.g. that the user was born before `2000/01/01`;
-- smart contracts, concretely the verifier and SBT contracts;
+- front-end, which contains a QR-code for the Polygon ID Wallet, that contains a request for a zero-knowledge proof that the user was born before `2000/01/01`;
+- the verifier and SBT smart contracts;
 
-After providing the valid proof, user will be rewarded with the soul-bound token.
+After providing valid proof, the user will be rewarded with the soul-bound token.
 
 ### Smart Contracts
 
-Let's start from writing a simple set of contracts, that will require the user to provide a proof (credentials), that he was born before the `2000/01/01`.
-To do that we need to write:
-- `VerifiedSBT` contract, that is the implementation of Souldbound token;
-- `QueryVerifier` contract, that will verify the proof and call the SBT contract to mint the token on successful verification;
+Let's start by writing a simple set of contracts that will require the user to provide proof (credentials) that he was born before `2000/01/01`.
 
-It is desired to make them upgradeable, but we will try to make them as simple as possible for understanding.
+To do that, we need to implement:
+- `VerifiedSBT`: a basic SBT contract;
+- `QueryVerifier`: contract that verifies the proof and calls the SBT contract to mint the token on successful verification;
+
+These contracts should be upgradable, but we omit this part now for simplicity's sake.
 
 #### `VerifiedSBT`
 
-Let's start from writing our SBT contract.
-Our goal, as stated before - to mint an SBT on successful age verification.
-Here is the template of the contract, that we should fill (we will use [OpenZeppelin ERC721](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/v4.4.0/contracts/token/ERC721/extensions) contracts, don't forget to clone them):
+Let's start by writing our SBT contract.
+Our goal is to mint an SBT on successful age verification.
+Here is the template of the contract that we should fill (we will use [OpenZeppelin ERC721](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/v4.4.0/contracts/token/ERC721/extensions) contracts, don't forget to clone them):
 
 ```solidity
 pragma solidity 0.8.16;
@@ -38,16 +40,16 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 contract VerifiedSBT is ERC721Enumerable {
 
     address public verifier; // the address of our verifier contract
-    uint256 public nextTokenId; // nonce, that should be increment with every new minted SBT
+    uint256 public nextTokenId; // nonce that should be increment with every newly minted SBT
     string public tokensURI; // token URI as in NFTs
 
-    // may be leaved as it, or u can additionally ask for a tokensURI and set it in the constructor
+    // may be left as it is, or you can additionally ask for a tokensURI and set it in the constructor
     constructor() ERC721("Name", "Symbol") {}
 
-    // modifier, that makes mint function callable only by the verifier contract
-    modifier onlyVerifier() {} 
+    // modifier, which makes the mint function callable only by the verifier contract
+    modifier onlyVerifier() {}
 
-    // getter function, returns current `nextTokenId`
+    // getter function returns current `nextTokenId`
     function getNextTokenId() view external returns (uint256) {}
 
     // sets the verifier
@@ -56,20 +58,20 @@ contract VerifiedSBT is ERC721Enumerable {
     // sets the tokensURI
     function setTokensURI(string calldata newTokensURI_) external {}
 
-    // main function, that mints the token
+    // main function that mints the token
     function mint(address recipientAddr_) external onlyVerifier() {}
 
-    // hook, that should be modified, so the tokens can't be transferred
+    // hook that should be modified, so the tokens can't be transferred
     function _beforeTokenTransfer(address from,address to, uint256 tokenId) internal override {}
 
 }
 ```
 
-Provided functions are empty, so we need to fill them:
-- `onlyVerifier()` – checks, whether the sender is the same as `verifier` variable and proceeds in such a case;
+The provided functions are empty, so we need to fill them in:
+- `onlyVerifier()` – checks whether the sender is the same as the `verifier` variable and proceeds in such a case;
 - `getNextTokenId()` – returns the next token id;
 - `setVerifier(...)`, `setTokensURI(...)` – set the corresponding value to the provided one;
-- `mint(...)` – mints the token to the provided address, with next token id (hint: call the ERC721 parent function `_mint`);
+- `mint(...)` – mints the token to the provided address, with the next token id (hint: call the ERC721 parent function `_mint`);
 - `_beforeTokenTransfer(...)` – restricts the user from transferring the token;
 
 The final contract should look like this:
@@ -79,9 +81,9 @@ pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
-contract VerifiedSBT is 
-    IVerifiedSBT, 
-    ERC721Enumerable 
+contract VerifiedSBT is
+    IVerifiedSBT,
+    ERC721Enumerable
 {
     address public verifier;
     uint256 public nextTokenId;
@@ -94,10 +96,7 @@ contract VerifiedSBT is
         _;
     }
 
-    // it is better to make set functions callable only be the owner of the contract;
-    // you can add it by yourself, but for our studying purposes it is not needed
-
-    function setVerifier(address newVerifier_) external {
+    function setVerifier(address newVerifier_) external onlyOwner {
         verifier = verifier_;
     }
 
@@ -113,7 +112,7 @@ contract VerifiedSBT is
         _mint(recipientAddr_, nextTokenId++);
     }
 
-    //You can modify this hook, so the token won't be burnable, by removing the `to_ == address(0)` requirement.
+    //You can modify this hook so the token won't be burnable by removing the `to_ == address(0)` requirement.
     function _beforeTokenTransfer(
         address from_,
         address to_,
@@ -130,13 +129,8 @@ contract VerifiedSBT is
 }
 ```
 
-Great! Now we need to write a `QueryVerifier` and we are almost ready to use Polygon ID State Replication.
-As said before, this contract will verify the proof and call `VerifiedSBT` contract to mint the SBT for the user.
-Additionally, it will store the mapping of addresses to identifiers that are verified and vice versa (identifiers to addresses).
-We need both mappings, so one address would be able to pass the verification only once and one identity can be verified only by one address.
-
-We will also need the interface for `VerifiedSBT` contract, that contains all the functions we created:
-
+<--! TODO: add file names to snippets -->
+We will also need the interface for the `VerifiedSBT` contract:
 ```solidity
 pragma solidity 0.8.16;
 
@@ -160,7 +154,7 @@ interface IVerifiedSBT {
 
     /**
      * @notice Function for minting new tokens
-     * @dev Only verifier contract can call this function
+     * @dev Only the verifier contract can call this function
      * @param recipientAddr_ the address of the token recipient
      */
     function mint(address recipientAddr_) external;
@@ -177,8 +171,12 @@ For the full implementation, see [VerifiedSBT.sol](https://github.com/rarimo/pol
 
 #### `QueryVerifier`
 
-We don't need to implement the main `verify(...)` function, because our contract inherits iden3 `ZKPVerifier`, that already has it and does all the job.
-`QueryVerifier` has two hooks - `_beforeProofSubmit(...)` and `_afterProofSubmit(...)`, which are called before and after proof verification respectively.
+Now, we need to write a `QueryVerifier`  that will verify the proof and call the `VerifiedSBT` contract to mint the SBT for the user.
+Additionally, it will store the mapping of addresses to identifiers that are verified and vice versa (identifiers to addresses).
+We need both mappings so that one address can pass the verification only once and one identity can be verified only by one address.
+
+We don't need to implement the main `verify(...)` function because our contract inherits iden3 `ZKPVerifier,` which already has it and does all the jobs.
+`QueryVerifier` has two hooks - `_beforeProofSubmit(...)` and `_afterProofSubmit(...)`, which are called before and after proof verification, respectively.
 We will override them and add our SBT-minting logic to them.
 So here is the template for our `QueryVerifier` contract:
 
@@ -192,23 +190,22 @@ import "@iden3/contracts/interfaces/ICircuitValidator.sol";
 import "./interfaces/IVerifiedSBT.sol";
 
 contract QueryVerifier is ZKPVerifier {
-    // the request id, which will be used in the proofs
-    // we should specify at least one request id for our proofs
+    // the request ID, which will be used in the proofs
+    // we should specify at least one request ID for our proofs
     uint256 public constant AGE_VERIFY_REQUEST_ID = 1;
 
     // our sbtContract that we created before
     IVerifiedSBT public sbtContract;
 
-    // mapping of addresses to users identities
+    // mapping of addresses to users' identities
     mapping(address => uint256) public addressToUserId;
 
-    // mapping of users identities to addresses
+    // mapping of users' identities to addresses
     mapping (uint256 => address) public userIdToAddress;
-    
-    // sets the destination of sbtContract 
+
+    // sets the destination of sbtContract
     function setSBTContract(address sbtContract_) external {}
 
-    // returns boolean, whether the identity is verified
     function isUserVerified(uint256 userId_) public view returns (bool) {}
 
     // hook that is executed before proof verification and does some security checks
@@ -229,15 +226,15 @@ contract QueryVerifier is ZKPVerifier {
 ```
 
 Functions should have the following functionality:
-- `setSBTContract(...)` – sets the destination of SBT contract;
+- `setSBTContract(...)` – sets the SBT contract instance;
 - `isUserVerified(...)` – returns the boolean, whether the provided identity is verified;
-- `_beforeProofSubmit(...)` – checks, whether the identity from inputs (inputs_[1] in our case) is verified and whether the msg.sender hasn't verified any identity yet.
+- `_beforeProofSubmit(...)` – checks whether the identity from inputs (`inputs_[1]` in our case) is verified and whether the `msg.sender` hasn't verified any identity yet.
 Returns if any of the requirements are not met;
-- `_afterProofSubmit(...)` – fills both mappings (with userID and msg.sender) and calls the sbt contract to mint the token for the sender; 
+- `_afterProofSubmit(...)` – fills both mappings (with `userID` and `msg.sender`) and calls the SBT contract to mint the token for the sender;
 
-We want to "bind" addresses to user identities and vice versa, so that one address can't prove multiple identities and one identity can't be proven by two or more addresses, that's why we define two mappings.
+We want to "bind" addresses to user identities and vice versa so that one address can't prove multiple identities and one identity can't be associated with two or more addresses.
 
-The filled version of the contract should look like this:
+The final version of the contract should look like this:
 
 ```solidity
 pragma solidity 0.8.16;
@@ -299,10 +296,11 @@ For the full implementation, see [QueryVerifier.sol](https://github.com/rarimo/p
 
 ### Front-end
 
-The Front-end requests the QR-code from the back-end service and shows it on the page.
+The front-end requests the QR code from the back-end service and shows it on the page.
 ![Proof request QR-code](/img/polygon-id-integration-qr-code.png)
 
-User can scan this QR-code with his Polygon ID Wallet and generate a proof, if he possess the valid credentials.
+The user can scan this QR code with his Polygon ID Wallet and generate proof that he possesses valid credentials.
+
 ![Proof generated, connect wallet to proceed](/img/polygon-id-integration-generated.png)
 
 After that, the relayer can be called to transit the state from Polygon to Ethereum.
@@ -315,24 +313,25 @@ We will use the following stack of technologies:
 - [crypto](https://github.com/iden3/js-crypto), [jwz](https://github.com/iden3/js-jwz), [core](https://github.com/iden3/js-iden3-core), [jsonld-merklization](https://github.com/iden3/js-jsonld-merklization), [merkletree](https://github.com/iden3/js-merkletree) libraries from iden3
 - [Yarn](https://github.com/yarnpkg) as a package manager
 
-Let's start by writing the function that creates the request to the back-end service.
-The service will return the QR-code in JSON format, which we will display.
+Let's start by writing the function that creates the request for the back-end service.
+The service will return the QR code in JSON format, which we will display.
 The request should contain the following information:
 - `id` – identifier stored on the wallet SDK;
 - `thid` – id of the message thread;
-- `from` –  from where the authentication request comes, i.e. the identifier of the identity from which a Verifier requests proof (`VITE_REQUEST_BUILD_SENDER` in environment files);
-- `typ` – iden3comm Media Type, i.e. file format for the type field. (For example, JSON);
-- `type` – type of iden3comm Protocol Message; type of request; it could be an auth request, proof request, or a credential offer;
-- `body`, that consists of: 
+- `from` –  from where the authentication request comes, i.e., the identifier of the identity from which a Verifier requests proof (`VITE_REQUEST_BUILD_SENDER` in environment files);
+- `typ` – iden3comm Media Type, i.e., file format for the type field. (For example, JSON);
+- `type` – a type of iden3comm Protocol Message; type of request; it could be an auth request, proof request, or a credential offer;
+- `body`, that consists of:
   - `reason` – reason of authentication (it could be age verification or simply a test flow);
   - `message` – message to be signed; can be left blank;
-  - `callbackUrl` – URI to which requested information is sent and response is received;
+  - `callbackUrl` – URI to which requested information is sent, and response is received;
   - `scope` – information related to the proof request and the requirements to be fulfilled by the proof generated and shared from mobile.
   It is in the form of an array of proofs that the SDK generates.
 
-You can provide other information as well, for background, see [Polygon ID Wallet-SDK Docs](https://devs.polygonid.com/docs/wallet/wallet-sdk/polygonid-sdk/iden3comm/auth-requests/).
+You can provide other information as well. See [Polygon ID Wallet-SDK Docs](https://devs.polygonid.com/docs/wallet/wallet-sdk/polygonid-sdk/iden3comm/auth-requests/) for more details.
 
 The final code may look like this:
+
 ```ts
 import { config } from '@config'
 import { v4 as uuidv4 } from 'uuid'
@@ -378,7 +377,7 @@ export const buildRequestOnChain = async (
 
   const request = createRequestOnChain(
     'SBT airdrop',
-    '', 
+    '',
     config.REQUEST_BUILD_SENDER,
     `${callbackBaseUrl}/integrations/verify-proxy/v1/public/verify/callback/${data.verification_id}`,
   )
@@ -410,10 +409,7 @@ export const getJWZ = async (jwtToken: string, verificationId: string) => {
 }
 ```
 
-After getting a JWZ from `getJWZ(...)` function, we can submit our proof to the on-chain contract, but it may not be accepted if the state wasn't transited.
-To be sure, that the state exists on destination chain, we should call the relayer.
-
-The following code can be used for that:
+After getting a JWZ from `getJWZ(...)` function, we can submit our proof to the on-chain contract, but it may not be accepted if the state wasn't replicated yet. We should call the relayer to ensure that the state exists on the destination chain:
 
 ```ts
   const isClaimStateValid = useCallback(
@@ -465,7 +461,7 @@ The following code can be used for that:
   )
 ```
 
-Finally, after transiting the state and getting the JWZ we can submit the proof, so it can be verified:
+Finally, after transiting the state and getting the JWZ, we can submit the proof:
 
 ```ts
 /* ... */
