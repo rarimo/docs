@@ -40,6 +40,7 @@ const sidebars = {
         'tutorials/connecting-to-wallets',
         'tutorials/creating-transactions',
         'tutorials/swapping-tokens',
+        "tutorials/using-polygon-id-state-replication-in-a-dapp",
         'tutorials/using-world-id-zero-knowledge-proofs-in-avalanche-dapp'
       ],
     },
