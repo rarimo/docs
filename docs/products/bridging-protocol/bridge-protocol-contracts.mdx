@@ -1,0 +1,61 @@
+---
+---
+
+# Bridge Protocol Contracts
+
+Rarimo's decentralized bridge contracts are responsible for managing deposits and withdrawals for native, fungible, and non-fungible tokens.
+
+Rarimo currently supports the following token types:
+
+- Native tokens;
+- ERC20 fungible tokens;
+- ERC721 non-fungible tokens(including SBT);
+- ERC1155 tokens;
+- MetaplexFT;
+- MetaplexNFT;
+- NearFT;
+- NearNFT;
+
+## General Bridging Flow
+
+At the high level, cross-chain token bridging consists of the following steps:
+
+1. The user deposits tokens to the bridge contract on the source chain;
+2. The bridge contract emits an event containing the deposit details;
+3. Rarimo oracles observe the deposit event on the source chain and submit it for processing;
+4. Rarimo validators form a threshold signature(TSS) to approve the deposit operation;
+5. A relayer picks up the signed deposit and calls the corresponding withdrawal method of the bridge contract on the destination chain;
+6. The bridge contract verifies the TSS signature and t the funds to the recipient address;
+
+## Implementations
+
+Currently, there are three implementations of a Rarimo bridge contract:
+
+- [EVM bridge](bridging-protocol/smart-contracts-reference/evm);
+- [Solana bridge](bridging-protocol/smart-contracts-reference/solana);
+- [Near bridge](bridging-protocol/smart-contracts-reference/near);
+
+## Deployments
+
+### Mainnet
+
+| Network (Link)                                                                                                | ChainId | Address                                      |
+| ------------------------------------------------------------------------------------------------------------- | ------- | -------------------------------------------- |
+| Ethereum ([Etherscan](https://etherscan.io/address/0xF663a9EaC9CB9Fa3eC6f1d8a4E5716a41A1752b6))               | `1`     | `0xF663a9EaC9CB9Fa3eC6f1d8a4E5716a41A1752b6` |
+| Polygon ([Polygonscan](https://polygonscan.com/address/0xECd1A7BdE5234d7FE50F1c0d99Fb66A7bbc10Df2))           | `137`   | `0xECd1A7BdE5234d7FE50F1c0d99Fb66A7bbc10Df2` |
+| Avalanche ([Avascan](https://avascan.info/blockchain/all/address/0x5608DA4bD339A57E770ff74284c2aB93EFAcAe03)) | `43114` | `0x5608DA4bD339A57E770ff74284c2aB93EFAcAe03` |
+| Solana                                                                                                        | 🚫      | coming later                                 |
+| NEAR                                                                                                          | 🚫      | coming later                                 |
+| Binance Smart Chain ([BscScan](https://bscscan.com/address/0xF663a9EaC9CB9Fa3eC6f1d8a4E5716a41A1752b6))       | `56`    | `0xF663a9EaC9CB9Fa3eC6f1d8a4E5716a41A1752b6` |
+
+### Testnet
+
+| Network (Link)                                                                                                   | ChainId    | Address                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------- | -------------------------------------------- |
+| Görli ([Etherscan](https://goerli.etherscan.io/address/0x6EA0C45bAC29a2A2769ec14f4BCD959b07780106))              | `5`        | `0x6EA0C45bAC29a2A2769ec14f4BCD959b07780106` |
+| Sepolia ([Etherscan](https://sepolia.etherscan.io/address/0x300f5Ee2409c999eBA1BfdaDb4cF5D16a45500Ac))           | `11155111` | `0x300f5Ee2409c999eBA1BfdaDb4cF5D16a45500Ac` |
+| Mumbai ([Polygonscan](https://mumbai.polygonscan.com/address/0xa651EdBbF77e1A2678DEfaE08A33c5004b491457))        | `80001`    | `0xa651EdBbF77e1A2678DEfaE08A33c5004b491457` |
+| Fuji ([Avascan](https://testnet.avascan.info/blockchain/all/address/0x02e719d3a5030e95283923c00dbccf3c745740e8)) | `43113`    | `0x02e719d3a5030e95283923c00dbccf3c745740e8` |
+| Solana DevNet                                                                                                    | 🚫         | coming soon                                  |
+| NEAR DevNet                                                                                                      | 🚫         | coming soon                                  |
+| Binance Testnet ([BscScan](https://testnet.bscscan.com/address/0xe48F562E01C909c17cb4BF0304C5Cb07A5158603))      | `97`       | `0xe48F562E01C909c17cb4BF0304C5Cb07A5158603` |
