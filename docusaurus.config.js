@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 // @TODO - make our own themes, i guess
-const darkCodeTheme = require('prism-react-renderer/themes/dracula')
-const lightCodeTheme = require('prism-react-renderer/themes/github')
+const darkCodeTheme = require('prism-react-renderer').themes.dracula
+const lightCodeTheme = require('prism-react-renderer').themes.github
 
 function getUrl() {
   return process.env.URL || 'http://localhost:3000'
@@ -55,8 +55,6 @@ module.exports = {
           breadcrumbs: false,
           showLastUpdateTime: true,
           editUrl: 'https://github.com/rarimo/docs/blob/main',
-          docLayoutComponent: '@theme/DocPage',
-          docItemComponent: '@theme/ApiItem',
           remarkPlugins: [
             [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
           ],
@@ -258,6 +256,4 @@ module.exports = {
 
   /** Plugins https://docusaurus.io/docs/using-plugins */
   plugins: [],
-
-  themes: ['docusaurus-theme-openapi-docs'], // Allows use of @theme/ApiItem and other components
 }
