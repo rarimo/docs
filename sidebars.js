@@ -21,11 +21,17 @@ const sidebars = {
       ],
     },
     {
-      type: 'category',
-      label: 'Products',
-      collapsed: false,
-      collapsible: false,
-      items: [
+      type: 'html',
+      value: `
+        <span class="menu__link menu__link--no-hover">Products</span>
+      `
+    },
+    // {
+      // type: 'category',
+      // label: 'Products',
+      // collapsed: false,
+      // collapsible: false,
+      // items: [
         {
           type: 'category',
           label: 'Rarimo Protocol',
@@ -167,8 +173,8 @@ const sidebars = {
             'products/token-agnostic-payments/resources',
           ],
         },
-      ],
-    },
+      // ],
+    // },
     {
       type: 'category',
       label: 'Resources',

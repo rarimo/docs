@@ -212,6 +212,10 @@ a:hover {
   text-decoration: none;
 }
 
+.menu__link--no-hover:hover {
+  background: none;
+}
+
 .DocSearch-Button .DocSearch-Search-Icon{
   --docsearch-text-color: var(--primary-text-color);
   width: 0.8rem;
