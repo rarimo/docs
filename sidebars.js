@@ -133,6 +133,7 @@ const sidebars = {
             'products/bridging-protocol/overview',
             'products/bridging-protocol/circle-cctp-integration',
             'products/bridging-protocol/tutorial-cross-chain-proof-of-sbt-ownership',
+            'products/bridging-protocol/tutorial-using-polygon-id-state-replication-in-a-dapp',
             'products/bridging-protocol/guide-how-to-bundle-transactions',
             'products/bridging-protocol/connecting-to-wallets',
             'products/bridging-protocol/creating-nft-checkout-transactions',
