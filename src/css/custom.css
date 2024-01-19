@@ -163,6 +163,10 @@
   color: var(--primary-text-color);
 }
 
+[data-theme='light'] .menu__splitter {
+  background: rgba(0, 0, 0, 0.1);
+}
+
 * {
   --swiper-pagination-bottom: 0;
   --swiper-pagination-bullet-width: 0.5rem;
@@ -210,6 +214,16 @@ a {
 
 a:hover {
   text-decoration: none;
+}
+
+.menu__link--no-hover:hover {
+  background: none;
+}
+
+.menu__splitter {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0.75rem 1rem;
 }
 
 .DocSearch-Button .DocSearch-Search-Icon{
