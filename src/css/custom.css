@@ -163,6 +163,10 @@
   color: var(--primary-text-color);
 }
 
+[data-theme='light'] pre code {
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
 [data-theme='light'] .menu__splitter {
   background: rgba(0, 0, 0, 0.1);
 }
@@ -179,6 +183,7 @@
 }
 
 pre code {
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
   background-color: var(--ifm-code-background);
   padding: 0.5rem;
 }

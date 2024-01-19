@@ -44,6 +44,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated the "Overview" doc;
 - Transferred the project to GitHub;
 - Navigation system to product-based;
+- Docusaurus version to 3.1.0 (and all packages);
+- Color of highlighted line in <code> block;
 
 ### Fixed
 
