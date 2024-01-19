@@ -22,7 +22,7 @@ const FeatureList: FeatureItem[] = [
         bridging capabilities.
       </>
     ),
-    url: "./overview/about-rarimo",
+    url: "./overview",
   },
   {
     title: "Tutorials",

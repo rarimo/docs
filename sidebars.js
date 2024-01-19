@@ -23,7 +23,8 @@ const sidebars = {
     {
       type: 'category',
       label: 'Products',
-      collapsed: true,
+      collapsed: false,
+      collapsible: false,
       items: [
         {
           type: 'category',
