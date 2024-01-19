@@ -23,6 +23,12 @@ const sidebars = {
     {
       type: 'html',
       value: `
+        <div class="menu__splitter"></div>
+      `
+    },
+    {
+      type: 'html',
+      value: `
         <span class="menu__link menu__link--no-hover">Products</span>
       `
     },
