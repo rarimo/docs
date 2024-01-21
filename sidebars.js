@@ -129,6 +129,7 @@ const sidebars = {
         'products/worldcoin-state-replication/guide-state-replication-for-world-id',
         'products/worldcoin-state-replication/api-reference',
         'products/worldcoin-state-replication/resources',
+        'products/worldcoin-state-replication/using-world-id-zero-knowledge-proofs-in-avalanche-dapp'
       ],
     },
     {
