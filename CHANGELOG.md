@@ -21,10 +21,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - World ID State Replication setup guide;
 - Contribution guide to the README;
 - Tutorials:
+  - Added the World ID Integration usage page;
   - Added the Polygon ID Integration usage page;
 - Subscription form (w/o functionality)
-- Mobile sliders
+- Mobile sliders;
 - Redirects from old navigation links to new;
+- Syntax highlights for TSX and bash;
 
 ### Changed
 

@@ -123,10 +123,9 @@ const sidebars = {
       collapsed: true,
       items: [
         'products/worldcoin-state-replication/overview',
-        'products/worldcoin-state-replication/smart-contracts-reference',
-        // TODO example DApp
-        'products/worldcoin-state-replication/tutorial-verifying-polygon-id-credentials-in-avalanche-dapp',
+        'products/worldcoin-state-replication/tutorial-using-world-id-zero-knowledge-proofs-in-avalanche-dapp',
         'products/worldcoin-state-replication/guide-state-replication-for-world-id',
+        'products/worldcoin-state-replication/smart-contracts-reference',
         'products/worldcoin-state-replication/api-reference',
         'products/worldcoin-state-replication/resources',
       ],
