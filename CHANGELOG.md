@@ -24,8 +24,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added the World ID Integration usage page;
   - Added the Polygon ID Integration usage page;
 - Subscription form (w/o functionality)
-- Mobile sliders
+- Mobile sliders;
 - Redirects from old navigation links to new;
+- Syntax highlights for TSX and bash;
 
 ### Changed
 

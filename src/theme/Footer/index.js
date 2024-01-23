@@ -7,6 +7,8 @@ export default function FooterWrapper(props) {
   (typeof global !== "undefined" ? global : window).Prism = Prism;
   require("prismjs/components/prism-solidity");
   require("prismjs/components/prism-rust");
+  require("prismjs/components/prism-bash");
+  require("prismjs/components/prism-tsx");
 
   return (
     <>
