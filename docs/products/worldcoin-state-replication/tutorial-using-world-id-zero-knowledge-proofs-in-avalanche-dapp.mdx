@@ -1,13 +1,11 @@
 ---
-title: World ID State Replication Usage
+title: Using World ID State Replication in a DApp
 ---
 
-# Tutorial: Using World ID zero-knowledge proofs in Polygon DApp
-
-<!-- todo: change Polygon to another chain (e.g., Avalanche), remove Polygon mentions from the full doc -->
+# Tutorial: Using World ID State Replication in a DApp
 
 In this tutorial, we will build the DApp, asking the user to provide proof of personhood using the World App.
-So, having the Worldcoin issuer and state contract anchored on Ethereum, we can replicate its state to another chain, e.g., Polygon, so that the proofs can be used in Polygon DApp.
+So, having the Worldcoin issuer and state contract anchored on Ethereum, we can replicate its state to another chain, e.g., Avalanche, so that the proofs can be used in Avalanche DApp.
 
 ## User flow
 
@@ -20,7 +18,7 @@ So, having the Worldcoin issuer and state contract anchored on Ethereum, we can 
 
     ![QR Code, that can be scanned with World App](/img/world-id-qr-code.png)
 
-1. After successful proof generation, the relayer will be called to replicate the state from Ethereum to Polygon.
+1. After successful proof generation, the relayer will be called to replicate the state from Ethereum to Avalanche.
 
     ![Proof Generated, transiting the state, using the relayer](/img/world-id-proof-generated.png)
 
@@ -34,7 +32,7 @@ Our simple DApp will consist of 2 parts:
 - front-end, which contains the QR-code for the World App, that contains a request for a proof of personhood;
 - verifier smart contract;
 
-### Smart Contracts
+### Smart contracts
 
 Let's start by writing a verifier contract verifying the user's proof of personhood.
 We should also have the `IdentityManager` contract deployed on the destination chain, but that's the job of the Rarimo team.
