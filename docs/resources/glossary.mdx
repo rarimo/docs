@@ -188,3 +188,10 @@ For example, a ZKP can verify that a user is above a certain age without reveali
 
 A zk-SNARK is the type of ZKP that Rarimo Identity Protocol uses.
 One characteristic of zk-SNARKs is that they are non-interactive, meaning that the user and verifier interact only once, unlike some other types of ZKPs.
+
+## JSON Web Zero-knowledge (JWZ)
+
+A JWZ is an open standard for representing and sending secure messages backed by zero-knowledge technology, based on the existing secure messaging standards, namely, JWM (JSON Web Message) and JWT (JSON Web Token).
+It is a novel way of providing interaction between two parties that intend to exchange messages while keeping the sender's public keys hidden.
+The proof that the wallet generates is packed in the JWZ format and sent to the Verifier using callbackUrl.
+JWZ consists of three parts – header (defines the feature of the token), payload message (contains the message that needs to be shared with another party.), proof (represents a ZK authentication proof based on the auth circuit).
