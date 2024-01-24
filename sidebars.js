@@ -17,7 +17,6 @@ const sidebars = {
         'use-cases/identity-protocol-state-replication',
         'use-cases/cross-chain-proofs',
         'use-cases/self-sovereign-identities',
-        'use-cases/organizational-access-control',
       ],
     },
     {
@@ -38,15 +37,13 @@ const sidebars = {
       collapsed: true,
       items: [
         'products/rarimo-protocol/overview',
-        'products/rarimo-protocol/validator-node-operator-guide',
-        'products/rarimo-protocol/staking-guide',
-        'products/rarimo-protocol/tutorial-extending-rarimo-protocol',
         'products/rarimo-protocol/oracles',
         'products/rarimo-protocol/oraclemanager',
         'products/rarimo-protocol/threshold-signature',
         'products/rarimo-protocol/tokenmanager-module',
+        'products/rarimo-protocol/validator-node-operator-guide',
+        'products/rarimo-protocol/staking-guide',
         'products/rarimo-protocol/api-reference',
-        'products/rarimo-protocol/resources',
       ],
     },
     {
@@ -56,13 +53,10 @@ const sidebars = {
       items: [
         'products/identity-protocol/overview',
         'products/identity-protocol/guide-how-to-set-up-credentials-issuer',
-        'products/identity-protocol/guide-issuing-timed-sbt',
         'products/identity-protocol/guide-how-to-verify-zero-knowledge-proof-in-a-smart-contract',
-        'products/identity-protocol/tutorial-verify-users-age-on-chain-using-zero-knowledge-proofs',
         'products/identity-protocol/api-reference',
         'products/identity-protocol/smart-contracts-reference',
         'products/identity-protocol/js-sdk-reference',
-        'products/identity-protocol/resources',
       ],
     },
     {
@@ -72,9 +66,7 @@ const sidebars = {
       items: [
         'products/rarime/overview',
         'products/rarime/js-library-reference',
-        'products/rarime/guide-adding-using-external-credentials',
         'products/rarime/guide-for-issuers',
-        'products/rarime/resources',
       ],
     },
     {
@@ -95,25 +87,21 @@ const sidebars = {
             'products/proof-of-humanity/guides/collab-land-setup',
           ],
         },
-        'products/proof-of-humanity/tutorial-using-proof-of-humanity-to-protect-an-airdrop-dapp-from-bots',
         'products/proof-of-humanity/smart-contracts-reference',
         'products/proof-of-humanity/subgraph-reference',
-        'products/proof-of-humanity/resources',
       ],
     },
     {
       type: 'category',
-      // TODO: come up with a better name
       label: 'Polygon ID State Replication',
       collapsed: true,
       items: [
         'products/polygon-id-state-replication/overview',
-        'products/polygon-id-state-replication/smart-contracts-reference',
         'products/polygon-id-state-replication/guide-how-to-set-up-polygon-id-state-replication',
         // TODO: come up with a good example DApp
         'products/polygon-id-state-replication/tutorial-verifying-polygon-id-credentials-in-ethereum-dapp',
+        'products/polygon-id-state-replication/smart-contracts-reference',
         'products/polygon-id-state-replication/api-reference',
-        'products/polygon-id-state-replication/resources',
       ],
     },
     {
@@ -123,11 +111,10 @@ const sidebars = {
       collapsed: true,
       items: [
         'products/worldcoin-state-replication/overview',
-        'products/worldcoin-state-replication/tutorial-using-world-id-zero-knowledge-proofs-in-avalanche-dapp',
         'products/worldcoin-state-replication/guide-state-replication-for-world-id',
+        'products/worldcoin-state-replication/tutorial-using-world-id-zero-knowledge-proofs-in-avalanche-dapp',
         'products/worldcoin-state-replication/smart-contracts-reference',
         'products/worldcoin-state-replication/api-reference',
-        'products/worldcoin-state-replication/resources',
       ],
     },
     {
@@ -137,8 +124,6 @@ const sidebars = {
       items: [
         'products/bridging-protocol/overview',
         'products/bridging-protocol/circle-cctp-integration',
-        'products/bridging-protocol/tutorial-cross-chain-proof-of-sbt-ownership',
-        'products/bridging-protocol/tutorial-using-polygon-id-state-replication-in-a-dapp',
         'products/bridging-protocol/guide-how-to-bundle-transactions',
         'products/bridging-protocol/connecting-to-wallets',
         'products/bridging-protocol/creating-nft-checkout-transactions',
@@ -157,7 +142,6 @@ const sidebars = {
         },
         'products/bridging-protocol/js-sdk-reference',
         'products/bridging-protocol/api-reference',
-        'products/bridging-protocol/resources',
       ],
     },
     {
@@ -166,10 +150,8 @@ const sidebars = {
       collapsed: true,
       items: [
         'products/token-agnostic-payments/overview',
-        'products/token-agnostic-payments/tutorial-creating-nft-marketplace-token-agnostic-payments',
         'products/token-agnostic-payments/js-sdk-reference',
         'products/token-agnostic-payments/api-reference',
-        'products/token-agnostic-payments/resources',
       ],
     },
     {
@@ -185,8 +167,6 @@ const sidebars = {
       items: [
         'resources/audits',
         'resources/glossary',
-        'resources/release-notes',
-        'resources/mediakit',
       ],
     },
     {
