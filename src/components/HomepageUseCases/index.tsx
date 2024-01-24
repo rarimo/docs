@@ -22,16 +22,14 @@ const useCasesList: UseCase[] = [
     modifier: "mints",
     title: "Multi-Chain Mints",
     text: "Issue non-fungible tokens (NFTs) or SBTs on any chain",
-    // TODO: dummy link
-    path: "#",
+    path: "/use-cases/multi-chain-mints",
   },
   {
     img: "img/homepage-use-cases/gaming-profiles.webp",
     modifier: "gaming-profiles",
     title: "Gaming Profiles",
     text: "Build out player profile that can be used by third-party dApps",
-    // TODO: dummy link
-    path: "#",
+    path: "/use-cases/gaming-profiles",
   },
   {
     img: "img/homepage-use-cases/ssi.webp",
@@ -39,9 +37,7 @@ const useCasesList: UseCase[] = [
     title: "Self-Sovereign Identities (SSI)",
     text: "Use data in the web3 world using ZK-proofs for identity verification",
     isBig: true,
-    isYellow: true,
-    // TODO: dummy link
-    path: "#",
+    path: "/use-cases/self-sovereign-identities",
   },
   {
     img: "img/homepage-use-cases/social-graphs.webp",
@@ -49,25 +45,23 @@ const useCasesList: UseCase[] = [
     title: "Social Graphs",
     text: "Use data in the web3 world using ZK-proofs for identity verification",
     isYellow: true,
-    // TODO: dummy link
-    path: "#",
+    path: "/use-cases/social-graphs",
   },
   {
     img: "img/homepage-use-cases/token-agnostic.webp",
-    modifier: "token-agnostic",
-    title: "Token-Agnostic Payments",
-    text: "Users can pay for transactions with their preferred tokens",
-    // TODO: dummy link
-    path: "#",
+    modifier: "token-agnostic", // TODO: change image
+    title: "Cross-Chain Proofs",
+    text: "Prove ownership of non-fungible tokens on any chain",
+    path: "/use-cases/cross-chain-proofs",
+    isYellow: true,
   },
   {
     img: "img/homepage-use-cases/name-servers.webp",
-    modifier: "name-servers",
-    title: "Name Servers",
-    text: "Issue credentials for the users and build their social identity",
+    modifier: "name-servers", // TODO: change image
+    title: "Identity Protocol State Replication",
+    text: "Make your ZKP-based identity protocol available on any chain",
     isYellow: true,
-    // TODO: dummy link
-    path: "#",
+    path: "/use-cases/identity-protocol-state-replication",
   },
 ];
 
