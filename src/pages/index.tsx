@@ -3,7 +3,6 @@ import "swiper/css";
 
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import Building from "@site/src/components/Building";
-// import HomepageDeveloperLinks from "@site/src/components/HomepageDeveloperLinks";
 import CardsSection from "@site/src/components/CardsSection";
 import HomepageHeader from "@site/src/components/HomepageHeader";
 import HomepageUseCases from "@site/src/components/HomepageUseCases";
@@ -35,45 +34,42 @@ const baseLayerCards: HomeCard[] = [
     IconName: UserIcon,
     list: [
       [
-        "Implements W3C DID standard;",
-        "Enhanced privacy with zero-knowledge proofs;",
-        "On-chain ZKPs available on any supported EVM chain;",
-        "Timed SBTs for interoperability with existing platforms;",
-        "Monetization for identity providers (coming soon);",
+        "Implements W3C DID standard",
+        "Enhanced privacy with zero-knowledge proofs",
+        "On-chain ZKPs available on any supported EVM chain",
+        "Timed SBTs for interoperability with existing platforms",
       ],
     ],
-    // TODO: dummy link
-    url: "#",
+    url: "/products/identity-protocol",
   },
   {
     title: "Bridging Protocol",
     IconName: BracketsIcon,
     list: [
       [
-        "Cross-chain transfers of NFTs, FTs, native coins;",
-        "Cross-chain SBT ownership proofs;",
-        "Available on EVM-compatible chains, Solana and Near;",
-        "EVM transactions bundling;",
-        "Low gas fees;",
-        "CCTP integrations (coming soon);",
+        "Cross-chain transfers of NFTs, FTs, native coins",
+        "Cross-chain SBT ownership proofs",
+        "Available on EVM-compatible chains, Solana and Near",
+        "EVM transactions bundling",
+        "Low gas fees",
+        "CCTP integrations (coming soon)",
       ],
     ],
-    // TODO: dummy link
-    url: "#",
+    url: "/products/bridging-protocol",
   },
   {
     title: "Rarimo Protocol",
     IconName: LayersIcon,
     list: [
       [
-        "Base layer for cross-chain applications;",
-        "Decentralized Oracles;",
-        "Proof of Stake Consensus;",
+        "Base layer for cross-chain applications",
+        "Decentralized Oracles",
+        "Proof of Stake Consensus",
       ],
       [
-        "EVM-compatible smart contracts;",
-        "Instant finality;",
-        "Cost-efficient signature scheme (TSS);",
+        "EVM-compatible smart contracts",
+        "Instant finality",
+        "Cost-efficient signature scheme (TSS)",
       ],
       [
         <span
@@ -103,8 +99,7 @@ const baseLayerCards: HomeCard[] = [
         </span>,
       ],
     ],
-    // TODO: dummy link
-    url: "#",
+    url: "/products/rarimo-protocol",
     after: (
       <>
         <a
@@ -132,55 +127,51 @@ const ecosystemCards: HomeCard[] = [
     IconName: ShieldIcon,
     list: [
       [
-        "Universal wallet for digital indentites;",
-        "Lives in your MetaMask;",
-        "Zero-Knowledge proofs of identity;",
-        "Dashboard for managing your credentials, SBTs and more;",
-        "Split identity for added privacy;",
+        "Universal wallet for digital indentites",
+        "Lives in your MetaMask",
+        "Zero-Knowledge proofs of identity",
+        "Dashboard for managing your credentials, SBTs and more",
+        "Split identity for added privacy",
       ],
     ],
-    // TODO: dummy link
-    url: "#",
+    url: "/products/rarime",
   },
   {
     title: "Proof Of Humanity",
     IconName: BadgeIcon,
     list: [
       [
-        "Aggregates five identy providers;",
-        "Secured by zero-knowledge proof technology;",
-        "DApp developers can verify humanity both off-chain and on-chain;",
-        "Seamless integration with major community building platforms;",
-        "Protect your discord server with Collab.Land plugin;",
+        "Aggregates five identy providers",
+        "Secured by zero-knowledge proof technology",
+        "DApp developers can verify humanity both off-chain and on-chain",
+        "Seamless integration with major community building platforms",
+        "Protect your discord server with Collab.Land plugin",
       ],
     ],
-    // TODO: dummy link
-    url: "#",
+    url: "/products/proof-of-humanity",
   },
   {
-    title: "WorldCoin Cross-Chain ZKP Solution",
+    title: "WorldCoin Cross-Chain State Replication",
     IconName: ForEveryHumanIcon,
     list: [
       [
-        "Use your World ID on any EVM-compatible chain;",
-        "Cost-efficient scalability with on-demand state replication;",
+        "Use your World ID on any EVM-compatible chain",
+        "Cost-efficient scalability with on-demand state replication",
       ],
     ],
-    // TODO: dummy link
-    url: "#",
+    url: "/products/worldcoin-state-replication",
   },
   {
-    title: "Polygon ID Cross-Chain ZKP Solution",
+    title: "Polygon ID Cross-Chain State Replication",
     IconName: PolygonIcon,
     list: [
       [
-        "Prove your identity on any EVM-compatible chain;",
-        "Compatible with Polygon ID Wallet;",
-        "Cost-efficient scalability with on-demand state replication;",
+        "Prove your identity on any EVM-compatible chain",
+        "Compatible with Polygon ID Wallet",
+        "Cost-efficient scalability with on-demand state replication",
       ],
     ],
-    // TODO: dummy link
-    url: "#",
+    url: "/products/polygon-id-state-replication",
   },
 ];
 

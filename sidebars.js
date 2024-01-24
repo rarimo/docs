@@ -181,7 +181,7 @@ const sidebars = {
       label: 'Whitepaper',
       link: {
         type: 'generated-index',
-        title: 'Whitepaper',
+        title: 'Rarimo Whitepaper',
         slug: '/whitepaper',
       },
       collapsed: true,

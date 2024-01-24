@@ -50,8 +50,6 @@ export default function HomeCard(card: HomeCardType) {
         <a
           href={card.url}
           className={clsx("heroButtonSecondary", styles.heroButtonSecondary)}
-          target="_blank"
-          rel="nofollow noopener noreferrer"
         >
           Explore
         </a>
