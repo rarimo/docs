@@ -8,9 +8,9 @@ const sidebars = {
     {
       type: 'category',
       label: 'Use Cases',
+      link: {type: 'doc', id: 'use-cases'},
       collapsed: true,
       items: [
-        'use-cases/overview-of-use-cases',
         'use-cases/gaming-profiles',
         'use-cases/social-graphs',
         'use-cases/multi-chain-mints',
@@ -173,9 +173,10 @@ const sidebars = {
     {
       type: 'category',
       label: 'Whitepaper',
+      link: {type: 'doc', id: 'whitepaper'},
       collapsed: true,
       items: [
-        'whitepaper',
+        'whitepaper/abstract',
         'whitepaper/problem_statement',
         'whitepaper/protocol-vision',
         'whitepaper/architecture-and-operating-principles',
