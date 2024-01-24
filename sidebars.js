@@ -8,7 +8,12 @@ const sidebars = {
     {
       type: 'category',
       label: 'Use Cases',
-      link: {type: 'doc', id: 'use-cases'},
+      link: {
+        type: 'generated-index',
+        title: 'Use Cases',
+        description: 'Learn about the different use cases for Rarimo Protocol',
+        slug: '/use-cases',
+      },
       collapsed: true,
       items: [
         'use-cases/gaming-profiles',
@@ -34,9 +39,9 @@ const sidebars = {
     {
       type: 'category',
       label: 'Rarimo Protocol',
+      link: {type: 'doc', id: 'products/rarimo-protocol/overview'},
       collapsed: true,
       items: [
-        'products/rarimo-protocol/overview',
         'products/rarimo-protocol/oracles',
         'products/rarimo-protocol/oraclemanager',
         'products/rarimo-protocol/threshold-signature',
@@ -49,9 +54,9 @@ const sidebars = {
     {
       type: 'category',
       label: 'Identity Protocol',
+      link: {type: 'doc', id: 'products/identity-protocol/overview'},
       collapsed: true,
       items: [
-        'products/identity-protocol/overview',
         'products/identity-protocol/guide-how-to-set-up-credentials-issuer',
         'products/identity-protocol/guide-how-to-verify-zero-knowledge-proof-in-a-smart-contract',
         'products/identity-protocol/api-reference',
@@ -62,9 +67,9 @@ const sidebars = {
     {
       type: 'category',
       label: 'RariMe',
+      link: {type: 'doc', id: 'products/rarime/overview'},
       collapsed: true,
       items: [
-        'products/rarime/overview',
         'products/rarime/js-library-reference',
         'products/rarime/guide-for-issuers',
       ],
@@ -72,9 +77,9 @@ const sidebars = {
     {
       type: 'category',
       label: 'Proof of Humanity',
+      link: {type: 'doc', id: 'products/proof-of-humanity/overview'},
       collapsed: true,
       items: [
-        'products/proof-of-humanity/overview',
         {
           type: 'category',
           label: 'Guides',
@@ -94,9 +99,9 @@ const sidebars = {
     {
       type: 'category',
       label: 'Polygon ID State Replication',
+      link: {type: 'doc', id: 'products/polygon-id-state-replication/overview'},
       collapsed: true,
       items: [
-        'products/polygon-id-state-replication/overview',
         'products/polygon-id-state-replication/guide-how-to-set-up-polygon-id-state-replication',
         // TODO: come up with a good example DApp
         'products/polygon-id-state-replication/tutorial-verifying-polygon-id-credentials-in-ethereum-dapp',
@@ -108,9 +113,9 @@ const sidebars = {
       type: 'category',
       // TODO: come up with a better name
       label: 'WorldCoin State Replication',
+      link: {type: 'doc', id: 'products/worldcoin-state-replication/overview'},
       collapsed: true,
       items: [
-        'products/worldcoin-state-replication/overview',
         'products/worldcoin-state-replication/guide-state-replication-for-world-id',
         'products/worldcoin-state-replication/tutorial-using-world-id-zero-knowledge-proofs-in-avalanche-dapp',
         'products/worldcoin-state-replication/smart-contracts-reference',
@@ -120,9 +125,9 @@ const sidebars = {
     {
       type: 'category',
       label: 'Bridging Protocol',
+      link: {type: 'doc', id: 'products/bridging-protocol/overview'},
       collapsed: true,
       items: [
-        'products/bridging-protocol/overview',
         'products/bridging-protocol/circle-cctp-integration',
         'products/bridging-protocol/guide-how-to-bundle-transactions',
         'products/bridging-protocol/connecting-to-wallets',
@@ -133,6 +138,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Smart Contracts Reference',
+          link: {type: 'doc', id: 'products/bridging-protocol/smart-contracts-reference/overview'},
           collapsed: true,
           items: [
             'products/bridging-protocol/smart-contracts-reference/evm',
@@ -147,9 +153,9 @@ const sidebars = {
     {
       type: 'category',
       label: 'Token Agnostic Payments',
+      link: {type: 'doc', id: 'products/token-agnostic-payments/overview'},
       collapsed: true,
       items: [
-        'products/token-agnostic-payments/overview',
         'products/token-agnostic-payments/js-sdk-reference',
         'products/token-agnostic-payments/api-reference',
       ],
@@ -173,7 +179,11 @@ const sidebars = {
     {
       type: 'category',
       label: 'Whitepaper',
-      link: {type: 'doc', id: 'whitepaper'},
+      link: {
+        type: 'generated-index',
+        title: 'Whitepaper',
+        slug: '/whitepaper',
+      },
       collapsed: true,
       items: [
         'whitepaper/abstract',
