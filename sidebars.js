@@ -134,7 +134,6 @@ const sidebars = {
         'products/bridging-protocol/creating-nft-checkout-transactions',
         'products/bridging-protocol/swapping-tokens',
         'products/bridging-protocol/packages-base',
-        'products/bridging-protocol/bridge-protocol-contracts',
         {
           type: 'category',
           label: 'Smart Contracts Reference',
