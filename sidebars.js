@@ -169,12 +169,13 @@ const sidebars = {
         'resources/glossary',
       ],
     },
+
     {
       type: 'category',
       label: 'Whitepaper',
       collapsed: true,
       items: [
-        'whitepaper/abstract',
+        'whitepaper',
         'whitepaper/problem_statement',
         'whitepaper/protocol-vision',
         'whitepaper/architecture-and-operating-principles',
