@@ -16,12 +16,12 @@ const sidebars = {
       },
       collapsed: true,
       items: [
+        'use-cases/self-sovereign-identities',
+        'use-cases/identity-protocol-state-replication',
         'use-cases/gaming-profiles',
         'use-cases/social-graphs',
-        'use-cases/multi-chain-mints',
-        'use-cases/identity-protocol-state-replication',
         'use-cases/cross-chain-proofs',
-        'use-cases/self-sovereign-identities',
+        'use-cases/multi-chain-mints',
       ],
     },
     {

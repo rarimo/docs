@@ -28,7 +28,7 @@ const useCasesList: UseCase[] = [
     img: "img/homepage-use-cases/gaming-profiles.webp",
     modifier: "gaming-profiles",
     title: "Gaming Profiles",
-    text: "Build out player profile that can be used by third-party dApps",
+    text: "Build out player profile that can be used by third-party DApps",
     path: "/use-cases/gaming-profiles",
   },
   {
@@ -43,7 +43,7 @@ const useCasesList: UseCase[] = [
     img: "img/homepage-use-cases/social-graphs.webp",
     modifier: "social-graphs",
     title: "Social Graphs",
-    text: "Use data in the web3 world using ZK-proofs for identity verification",
+    text: "Connect social graphs across multiple chains",
     isYellow: true,
     path: "/use-cases/social-graphs",
   },

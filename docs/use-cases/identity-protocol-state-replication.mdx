@@ -1,4 +1,5 @@
 ---
+desription: 'Make your ZKP-based identity protocol available on any chain'
 ---
 
 # Identity State Replication
@@ -19,7 +20,7 @@ Galxe Protocol uses nullifiers for sybil resistance and Merkle trees for revocab
 
 WorldCoin keeps a Merkle tree of all identities and allows using nullifiers for sybil resistance.
 
-## Cross-Chain Identity Challenges
+## Cross-chain identity challenges
 
 The stateful nature of the on-chain identity protocols hinders the portability of credentials.
 The state must be replicated when submitting a zero-knowledge proof to any chain other than the primary one.
@@ -31,7 +32,7 @@ The state replication process introduces a few challenges:
 1. It should be decentralized so there's no single point of failure
 1. It should minimize the gas fees on the target chains
 
-## Rarimo's Cross-Chain State Replication (on-demand)
+## Rarimo's cross-chain state replication on-demand
 
 Rarimo has faced the same challenges when implementing its cross-chain identity protocol.
 As a result, an on-demand cross-chain state replication protocol was created.
