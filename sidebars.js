@@ -116,6 +116,7 @@ const sidebars = {
       link: {type: 'doc', id: 'products/worldcoin-state-replication/overview'},
       collapsed: true,
       items: [
+        'products/worldcoin-state-replication/overview',
         'products/worldcoin-state-replication/guide-state-replication-for-world-id',
         'products/worldcoin-state-replication/tutorial-using-world-id-zero-knowledge-proofs-in-avalanche-dapp',
         'products/worldcoin-state-replication/smart-contracts-reference',
