@@ -85,6 +85,12 @@ const sidebars = {
           type: 'category',
           label: 'Guides',
           collapsed: true,
+          link: {
+            type: 'generated-index',
+            title: 'Proof of Humanity integration guides',
+            description: 'Follow these step-by-step guides to integrate Proof of Humanity into your application.',
+            slug: '/products/proof-of-humanity/guides',
+          },
           items: [
             'products/proof-of-humanity/guides/using-proof-of-humanity-off-chain',
             'products/proof-of-humanity/guides/using-rarimos-proof-of-humanity-plugin-for-questn',
