@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Redirects from old navigation links to new;
 - Syntax highlights for TSX and bash;
 - Added the "World Coin state replication overview" page;
+- Added the "Rarimo protocol overview" page;
 
 ### Changed
 
