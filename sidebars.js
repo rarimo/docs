@@ -42,6 +42,7 @@ const sidebars = {
       link: {type: 'doc', id: 'products/rarimo-protocol/overview'},
       collapsed: true,
       items: [
+        'products/rarimo-protocol/overview',
         'products/rarimo-protocol/oracles',
         'products/rarimo-protocol/oraclemanager',
         'products/rarimo-protocol/threshold-signature',

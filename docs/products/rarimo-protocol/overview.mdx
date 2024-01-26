@@ -1,5 +1,42 @@
 ---
 slug: /products/rarimo-protocol
+description: Rarimo Protocol is a decentralized interchain messaging protocol.
 ---
 
 # Rarimo Protocol
+
+The crypto community strongly believes in a multichain future where each project brings its unique perspective and value proposition.
+However, this diversity introduces a plethora of interoperability, security, fragmentation, and other challenges.
+To address these issues, the Rarimo Protocol has been developed, serving as the base layer for decentralized interchain applications.
+
+## Design principles
+
+### Decentralization
+
+The interchain layer must be as decentralized as the chains it connects, not to be the point of centralization.
+The system comprises a network of dozens of independent validators and oracles.
+Oracles observe events in the outer world in a trustless way, and Validators collaborate to achieve secure consensus on the order of events.
+
+![Rarimo Sub-Protocols](/img/validator.png)
+
+### Extensibility
+
+The protocol provides a general messaging protocol foundation for cross-chain use cases.
+Users can implement their own sub-protocols and submit them via the proposals mechanism.
+Rarimo offers ready-to-use [identity](/products/identity-protocol) and [bridging](/products/bridging-protocol) sub-protocols.
+
+![Rarimo Sub-Protocols](/img/protocol-layers.png)
+
+Additionally, Rarimo Core supports EVM-compatible smart contracts for greater flexibility.
+
+### Scalable security
+
+Rarimo employs TSS (Threshold Signature Scheme) to sign the outputs of the protocol.
+With TSS, the signature size doesn't depend on the number of signers (validator nodes) and remains constant.
+Thus, the pool of validators can be scaled while keeping fees at the destination chains at a low, fixed rate.
+
+### Instant finality
+
+Every step in the cross-chain path adds an extra delay.
+The protocol uses the proven Tendermint consensus mechanism with instant finality to minimize this overhead.
+It only takes an extra few seconds to ensure the protocol's security.
