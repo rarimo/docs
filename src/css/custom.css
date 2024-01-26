@@ -246,6 +246,7 @@ a:hover {
 
 .main-wrapper > div {
   max-width: var(--ifm-container-width);
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -294,7 +295,8 @@ a:hover {
   padding-top: 1.5rem;
 }
 
-.menu__link--sublist-caret:after {
+.menu__link--sublist-caret:after,
+.menu__caret::before {
   --background-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgba(0,0,0,var(--primary-text-color-light))" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
   background: var(--background-icon) 50% / 1.5rem 1.5rem;
 }
@@ -303,12 +305,26 @@ a:hover {
   transform: rotate(180deg);
 }
 
+.menu__list-item .menu__caret {
+  transform: rotate(180deg);
+  display: flex;
+  justify-content: center;
+  margin-right: 0.5rem;
+  background-color: transparent;
+  border: none;
+}
+
+.menu__list-item--collapsed .menu__caret {
+  transform: rotate(90deg);
+}
+
 .theme-doc-sidebar-item-link .menu__link:not(.menu__link--active) {
   color: #8f8f8f;
 }
 
 .menu__list-item-collapsible {
   border-radius: 0.75rem;
+  align-items: center;
 }
 
 .menu__link--active{
