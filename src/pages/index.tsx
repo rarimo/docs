@@ -43,6 +43,19 @@ const baseLayerCards: HomeCard[] = [
     url: "/products/identity-protocol",
   },
   {
+    title: "RariMe",
+    IconName: ShieldIcon,
+    list: [
+      [
+        "Universal wallet for digital indentites",
+        "Lives in your MetaMask",
+        "Zero-Knowledge proofs of identity",
+        "Dashboard for managing your credentials, SBTs and more",
+      ],
+    ],
+    url: "/products/rarime",
+  },
+  {
     title: "Bridging Protocol",
     IconName: BracketsIcon,
     list: [
@@ -122,20 +135,7 @@ const baseLayerCards: HomeCard[] = [
 ];
 
 const ecosystemCards: HomeCard[] = [
-  {
-    title: "RariMe",
-    IconName: ShieldIcon,
-    list: [
-      [
-        "Universal wallet for digital indentites",
-        "Lives in your MetaMask",
-        "Zero-Knowledge proofs of identity",
-        "Dashboard for managing your credentials, SBTs and more",
-        "Split identity for added privacy",
-      ],
-    ],
-    url: "/products/rarime",
-  },
+
   {
     title: "Proof Of Humanity",
     IconName: BadgeIcon,
@@ -163,6 +163,18 @@ const ecosystemCards: HomeCard[] = [
   },
   {
     title: "Polygon ID Cross-Chain State Replication",
+    IconName: PolygonIcon,
+    list: [
+      [
+        "Prove your identity on any EVM-compatible chain",
+        "Compatible with Polygon ID Wallet",
+        "Cost-efficient scalability with on-demand state replication",
+      ],
+    ],
+    url: "/products/polygon-id-state-replication",
+  },
+    {
+    title: "Token Agnostic Payments",
     IconName: PolygonIcon,
     list: [
       [
@@ -214,7 +226,7 @@ export default function Home(): JSX.Element {
         )}
       />
       <main>
-        <CardsSection cards={baseLayerCards} title="Learn The Base Layer" />
+        <CardsSection cards={baseLayerCards} title="Learn The Core Products" />
         <CardsSection
           cards={ecosystemCards}
           title="Explore The Ecosystem"

@@ -67,6 +67,33 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Bridging Protocol',
+      link: { type: 'doc', id: 'products/bridging-protocol/overview' },
+      collapsed: true,
+      items: [
+        'products/bridging-protocol/circle-cctp-integration',
+        'products/bridging-protocol/guide-how-to-bundle-transactions',
+        'products/bridging-protocol/connecting-to-wallets',
+        'products/bridging-protocol/creating-nft-checkout-transactions',
+        'products/bridging-protocol/swapping-tokens',
+        'products/bridging-protocol/packages-base',
+        {
+          type: 'category',
+          label: 'Smart Contracts Reference',
+          link: { type: 'doc', id: 'products/bridging-protocol/smart-contracts-reference/overview' },
+          collapsed: true,
+          items: [
+            'products/bridging-protocol/smart-contracts-reference/evm',
+            'products/bridging-protocol/smart-contracts-reference/solana',
+            'products/bridging-protocol/smart-contracts-reference/near',
+          ],
+        },
+        'products/bridging-protocol/js-sdk-reference',
+        'products/bridging-protocol/api-reference',
+      ],
+    },
+    {
+      type: 'category',
       label: 'RariMe',
       link: {type: 'doc', id: 'products/rarime/overview'},
       collapsed: true,
@@ -74,6 +101,19 @@ const sidebars = {
         'products/rarime/js-library-reference',
         'products/rarime/guide-for-issuers',
       ],
+    },
+
+    {
+      type: 'html',
+      value: `
+        <div class="menu__splitter"></div>
+      `
+    },
+    {
+      type: 'html',
+      value: `
+        <span class="menu__link menu__link--no-hover">Ecosystem</span>
+      `
     },
     {
       type: 'category',
@@ -128,33 +168,6 @@ const sidebars = {
         'products/worldcoin-state-replication/tutorial-using-world-id-zero-knowledge-proofs-in-avalanche-dapp',
         'products/worldcoin-state-replication/smart-contracts-reference',
         'products/worldcoin-state-replication/api-reference',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Bridging Protocol',
-      link: {type: 'doc', id: 'products/bridging-protocol/overview'},
-      collapsed: true,
-      items: [
-        'products/bridging-protocol/circle-cctp-integration',
-        'products/bridging-protocol/guide-how-to-bundle-transactions',
-        'products/bridging-protocol/connecting-to-wallets',
-        'products/bridging-protocol/creating-nft-checkout-transactions',
-        'products/bridging-protocol/swapping-tokens',
-        'products/bridging-protocol/packages-base',
-        {
-          type: 'category',
-          label: 'Smart Contracts Reference',
-          link: {type: 'doc', id: 'products/bridging-protocol/smart-contracts-reference/overview'},
-          collapsed: true,
-          items: [
-            'products/bridging-protocol/smart-contracts-reference/evm',
-            'products/bridging-protocol/smart-contracts-reference/solana',
-            'products/bridging-protocol/smart-contracts-reference/near',
-          ],
-        },
-        'products/bridging-protocol/js-sdk-reference',
-        'products/bridging-protocol/api-reference',
       ],
     },
     {
