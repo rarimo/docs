@@ -233,8 +233,6 @@ export default function Home(): JSX.Element {
           isSwiperOnMobile={true}
         />
         <HomepageUseCases />
-        {/*Todo: Show developer links*/}
-        {/*<HomepageDeveloperLinks />*/}
         <Building />
         <Links />
         <News />
