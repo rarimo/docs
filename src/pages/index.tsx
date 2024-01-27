@@ -178,12 +178,13 @@ const ecosystemCards: HomeCard[] = [
     IconName: PolygonIcon,
     list: [
       [
-        "Prove your identity on any EVM-compatible chain",
-        "Compatible with Polygon ID Wallet",
-        "Cost-efficient scalability with on-demand state replication",
+        "Swap, bridge, and buy crypto assets in a single click",
+        "Pay with multiple tokens at once",
+        "Easily integrate into your DApp using a customizable React component",
+        "Go custom with a  TypeScript SDK",
       ],
     ],
-    url: "/products/polygon-id-state-replication",
+    url: "/products/token-agnostic-payments",
   },
 ];
 
