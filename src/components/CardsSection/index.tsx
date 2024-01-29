@@ -1,36 +1,40 @@
-import Card from "@site/src/components/HomeCard";
-import { SWIPER_CONTAINER_OPTIONS } from "@site/src/const";
-import { HomeCard } from "@site/src/types";
-import clsx from "clsx";
-import React, { useEffect, useRef } from "react";
+import Card from '@site/src/components/HomeCard'
+import { SWIPER_CONTAINER_OPTIONS } from '@site/src/const'
+import { HomeCard } from '@site/src/types'
+import clsx from 'clsx'
+import React, { CSSProperties, useEffect, useRef } from 'react'
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css'
 
 type Props = {
-  cards: HomeCard[];
-  title: string;
-  isSwiperOnMobile?: boolean;
-};
+  cards: HomeCard[]
+  title: string
+  columns?: number
+  gridTemplate?: string
+  isSwiperOnMobile?: boolean
+}
 
 export default function CardsSection({
   cards,
   title,
   isSwiperOnMobile,
+  columns = 2,
+  gridTemplate = '',
 }: Props) {
-  const swiperRef = useRef(null);
+  const swiperRef = useRef(null)
 
   useEffect(() => {
-    if (!isSwiperOnMobile) return;
+    if (!isSwiperOnMobile) return
 
-    Object.assign(swiperRef.current, SWIPER_CONTAINER_OPTIONS);
+    Object.assign(swiperRef.current, SWIPER_CONTAINER_OPTIONS)
 
-    swiperRef.current.initialize();
-  }, [swiperRef.current, isSwiperOnMobile]);
+    swiperRef.current.initialize()
+  }, [swiperRef.current, isSwiperOnMobile])
 
   return (
     <section>
       <p
-        className={clsx("cards-section__title", styles.cardsSectionTitle)}
+        className={clsx('cards-section__title', styles.cardsSectionTitle)}
         data-aos="fade-up"
       >
         {title}
@@ -42,13 +46,19 @@ export default function CardsSection({
       >
         <div
           className={clsx(
-            "cardsSectionContainer container",
+            'cardsSectionContainer container',
             styles.cardsSectionContainer
           )}
+          style={
+            {
+              '--cards-section-grid-template-columns': `repeat(${columns}, 1fr)`,
+              '--cards-section-grid-template': gridTemplate,
+            } as CSSProperties
+          }
         >
           {cards.map((props, idx) => (
             <Card
-              className={clsx("cards-section__card", styles.cardsSectionCard)}
+              className={clsx('cards-section__card', styles.cardsSectionCard)}
               key={idx}
               {...props}
             />
@@ -58,20 +68,20 @@ export default function CardsSection({
       {isSwiperOnMobile && (
         <swiper-container
           ref={swiperRef}
-          class={clsx("cards-section__swiper", styles.cardsSectionSwiper)}
+          class={clsx('cards-section__swiper', styles.cardsSectionSwiper)}
           init={false}
           data-aos="fade-up"
         >
           {cards.map((props, idx) => (
             <swiper-slide
               class={clsx(
-                "cards-section__swiper-slide",
+                'cards-section__swiper-slide',
                 styles.cardsSectionSwiperSlide
               )}
               key={idx}
             >
               <Card
-                className={clsx("cards-section__card", styles.cardsSectionCard)}
+                className={clsx('cards-section__card', styles.cardsSectionCard)}
                 key={idx}
                 {...props}
               />
@@ -80,5 +90,5 @@ export default function CardsSection({
         </swiper-container>
       )}
     </section>
-  );
+  )
 }

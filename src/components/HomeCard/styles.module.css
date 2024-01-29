@@ -1,4 +1,5 @@
 .homeCard {
+  grid-area: var(--home-card-grid-area);
   border: var(--primary-border);
   background: var(--background-light);
   padding: 2rem;
@@ -76,6 +77,7 @@
   }
 
   .homeCard {
+    grid-area: initial;
     padding: 1rem;
   }
 }
