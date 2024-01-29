@@ -151,7 +151,7 @@ const ecosystemCards: HomeCard[] = [
         'Protect your discord server with Collab.Land plugin',
       ],
     ],
-    url: '/products/proof-of-humanity',
+    url: '/ecosystem/proof-of-humanity',
   },
   {
     title: 'WorldCoin Cross-Chain State Replication',
@@ -162,7 +162,7 @@ const ecosystemCards: HomeCard[] = [
         'Cost-efficient scalability with on-demand state replication',
       ],
     ],
-    url: '/products/worldcoin-state-replication',
+    url: '/ecosystem/worldcoin-state-replication',
   },
   {
     title: 'Polygon ID Cross-Chain State Replication',
@@ -174,7 +174,7 @@ const ecosystemCards: HomeCard[] = [
         'Cost-efficient scalability with on-demand state replication',
       ],
     ],
-    url: '/products/polygon-id-state-replication',
+    url: '/ecosystem/polygon-id-state-replication',
   },
   {
     title: 'Token Agnostic Payments',
@@ -186,7 +186,7 @@ const ecosystemCards: HomeCard[] = [
         'Cost-efficient scalability with on-demand state replication',
       ],
     ],
-    url: '/products/polygon-id-state-replication',
+    url: '/ecosystem/polygon-id-state-replication',
   },
 ]
 
