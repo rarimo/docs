@@ -15,13 +15,10 @@
 }
   
   .cardsSectionContainer {
-    display: flex;
-    flex-wrap: wrap;
-    grid-gap: 2rem;
-  }
-
-  .cardsSectionCard {
-    flex: 0 calc(50% - 1rem);
+    display: grid;
+    gap: 2rem;
+    grid-template: var(--cards-section-grid-template);
+    grid-template-columns: var(--cards-section-grid-template-columns, 1fr 1fr);
   }
 
   .cardsSectionCard:last-child:nth-child(odd) {
@@ -45,6 +42,11 @@
   }
 
   @media screen and (max-width: 768px) {
+    .cardsSectionContainer {
+      grid-template: initial;
+      grid-template-columns: 1fr;
+    }
+
     .cardsSectionMobile {
       display: none;
     }
@@ -57,7 +59,7 @@
   
   @media screen and (max-width: 625px) {
     .cardsSectionContainer {
-      grid-gap: 1.5rem;
+      gap: 1.5rem;
     }
 
     .cardsSectionCard {
