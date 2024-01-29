@@ -189,6 +189,10 @@ const sidebars = {
     {
       type: 'category',
       label: 'Resources',
+      link: {
+        type: 'generated-index',
+        slug: '/resources',
+      },
       collapsed: true,
       items: [
         'resources/audits',
