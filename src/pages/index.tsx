@@ -120,7 +120,7 @@ const baseLayerCards: HomeCard[] = [
     after: (
       <>
         <a
-          href={'/whitepaper'}
+          href={'/resources/whitepaper'}
           className={clsx('heroButtonSecondary', styles.linksButton)}
         >
           Whitepaper
