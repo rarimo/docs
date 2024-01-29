@@ -98,8 +98,8 @@ const sidebars = {
       link: {type: 'doc', id: 'products/rarime/overview'},
       collapsed: true,
       items: [
-        'products/rarime/js-library-reference',
         'products/rarime/guide-for-issuers',
+        'products/rarime/js-connector-reference',
       ],
     },
 
