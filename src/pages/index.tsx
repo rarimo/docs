@@ -193,9 +193,7 @@ const ecosystemCards: HomeCard[] = [
 export default function Home(): JSX.Element {
   const light = useRef(null)
   return (
-    <Layout>
-      <HomepageHeader />
-
+    <>
       <div className="bgImage">
         <div className={clsx('bgImageFirst', styles.bgImageFirst)} />
         <div
@@ -232,50 +230,54 @@ export default function Home(): JSX.Element {
         />
       </div>
 
-      <main>
-        <CardsSection
-          cards={baseLayerCards}
-          columns={3}
-          gridTemplate={`"${baseLayerCards[0].id} ${baseLayerCards[1].id} ${baseLayerCards[2].id}" "${baseLayerCards[3].id} ${baseLayerCards[3].id} ${baseLayerCards[3].id}"`}
-          title="Learn The Core Products"
-        />
-        <CardsSection
-          cards={ecosystemCards}
-          title="Explore The Ecosystem"
-          isSwiperOnMobile={true}
-        />
-        <HomepageUseCases />
-        {/*Todo: Show developer links*/}
-        {/*<HomepageDeveloperLinks />*/}
-        <Building />
-        <Links />
-        <News />
-        <Subscribe />
-      </main>
+      <Layout>
+        <HomepageHeader />
 
-      <BrowserOnly>
-        {() => {
-          aos.init({
-            duration: 900,
-            easing: 'ease',
-            offset: 0,
-            once: true,
-            mirror: false,
-            anchorPlacement: 'center-bottom',
-          })
-          document.addEventListener('mousemove', function ({ pageX, pageY }) {
-            const x = pageX
-            const y = pageY
-            const spotlightSize =
-              'rgba(255, 255, 255, 0.02) 80px, var(--primary-bg-color) 200px)'
-            if (light.current) {
-              light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`
-            }
-          })
+        <main>
+          <CardsSection
+            cards={baseLayerCards}
+            columns={3}
+            gridTemplate={`"${baseLayerCards[0].id} ${baseLayerCards[1].id} ${baseLayerCards[2].id}" "${baseLayerCards[3].id} ${baseLayerCards[3].id} ${baseLayerCards[3].id}"`}
+            title="Learn The Core Products"
+          />
+          <CardsSection
+            cards={ecosystemCards}
+            title="Explore The Ecosystem"
+            isSwiperOnMobile={true}
+          />
+          <HomepageUseCases />
+          {/*Todo: Show developer links*/}
+          {/*<HomepageDeveloperLinks />*/}
+          <Building />
+          <Links />
+          <News />
+          <Subscribe />
+        </main>
 
-          return null
-        }}
-      </BrowserOnly>
-    </Layout>
+        <BrowserOnly>
+          {() => {
+            aos.init({
+              duration: 900,
+              easing: 'ease',
+              offset: 0,
+              once: true,
+              mirror: false,
+              anchorPlacement: 'center-bottom',
+            })
+            document.addEventListener('mousemove', function ({ pageX, pageY }) {
+              const x = pageX
+              const y = pageY
+              const spotlightSize =
+                'rgba(255, 255, 255, 0.02) 80px, var(--primary-bg-color) 200px)'
+              if (light.current) {
+                light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`
+              }
+            })
+
+            return null
+          }}
+        </BrowserOnly>
+      </Layout>
+    </>
   )
 }
