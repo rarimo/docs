@@ -68,8 +68,8 @@
 }
 
 .subscribeButton:hover {
-  color: var(--primary-text-color-light);
-  background: none;
+  color: var(--primary-text-color-light) !important;
+  background: none !important;
 }
 
 [data-theme='light'] .subscribeButton {
