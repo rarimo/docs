@@ -74,12 +74,12 @@ const baseLayerCards: HomeCard[] = [
     url: '/products/bridging-protocol',
   },
   {
-    id: 'rarimo-protocol',
-    title: 'Rarimo Protocol',
+    id: 'base-layer',
+    title: 'Base Layer',
     IconName: LayersIcon,
     list: [
       [
-        'Base layer for cross-chain applications',
+        'Efficient cross-chain messaging',
         'Decentralized Oracles',
         'Proof of Stake Consensus',
       ],
@@ -116,7 +116,7 @@ const baseLayerCards: HomeCard[] = [
         </span>,
       ],
     ],
-    url: '/products/rarimo-protocol',
+    url: '/products/base-layer',
     after: (
       <>
         <a
