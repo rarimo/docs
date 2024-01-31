@@ -1,66 +1,78 @@
+---
+image: /img/zealy-guide/opengraph.png
+---
+
 # Using Rarimo’s Proof of Humanity Plugin for Zealy
 
 ## Why Proof of Human?
 
-Community-building platforms like Zealy facilitate reward-based loyalty programs for crypto projects. Such platforms are prone to abuse by bots and fake accounts. Currently there are a few ways to address this issue:
+Proof of Humanity provides an easy and robust way to prevent bots from participating in your Zealy quests. It is a free and open-source plugin that you can use to verify that your users are humans.
 
-- Captchas;
-- Linking social media accounts;
-- Self-Sovereign Identity protocols(SSI);
-- Reputation systems;
 
-However, neither of these covers the entire Web3 user base. Also they are tricky to integrate into a Zealy quest.
+To see it in action, check out the walkthrough video:
 
-Rarimo’s Proof of Human plugin improves upon these solutions by aggregating identity providers and facilitating zero-knowledge identity proofs on-chain. This way, users can choose from many options for proving their humanity while keeping their privacy.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/asQ7zOYaKLs?si=hl7D32ZgwuiB3BNv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-To see it in action, checkout our walkthrough video:
+## Configuring your Zealy quest
 
-<iframe
-  width="560"
-  height="315"
-  src="https://www.youtube.com/embed/-ASoTJUtEWU?si=DgZ-mxyZcVMU6NQn"
-  title="YouTube video player"
-  frameBorder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowFullScreen
-></iframe>
+To add Proof of Human check, set up your quest using the instructions below. No coding or prerequisites are required.
 
-## Adding Proof of Human to Your Zealy Quest
+1. Create a helper quest that leads users to the Proof of Humanity DApp:
 
-To add Proof of Human check, set up your quest using the instructions below. No coding or prerequisites required.
+    ![Extra quest](/img/zealy-guide/step-1.png)
 
-1. Create a new quest:
+1. Click on the **Mission** field:
 
-   ![New Quest](/img/guide-zealy/Zealy_Step_1.png)
+    ![Mission field](/img/zealy-guide/step-2.png)
 
-2. Add an NFT access condition:
+1. Set the **Quest Type** field to **Empty**:
 
-   ![NFT Access Condition](/img/guide-zealy/Zealy_Step_2.png)
+    ![Quest type](/img/zealy-guide/step-3.png)
 
-3. Click “Configure NFT”:
+1. Turn on the **Auto-validate** toggle:
 
-   ![Configure NFT](/img/guide-zealy/Zealy_Step_3.png)
+    ![Auto-validate](/img/zealy-guide/step-4.png)
 
-4. Put this address into the “Contract Address” field:
+1. Put an instruction and the call-to-action link into the **Description** textbox:
 
-   ```
-   0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373
-   ```
+    ```plain
+    Prove your humanity at https://robotornot.rarimo.com to complete this quest!
+    ```
 
-   ![Contract Address](/img/guide-zealy/Zealy_Step_4.png)
+    ![Instruction to visit the DApp](/img/zealy-guide/step-5.png)
 
-5. Put an instruction and the call-to-action link into the description:
+    Reach out to us at <a href="https://discord.com/channels/1034798419614629908/1034798420713553966/1063164663216484473" target="_blank" rel="noreferrer noopener">discord</a> and provide the name of your company name and logo to get a link with a customized greeting like this:
 
-   ```
-   Prove your humanity at https://robotornot.rarimo.com to complete this quest!
-   ```
+    ![Customized greeting](/img/poh-greeting.png)
 
-   ![Prove your humanity](/img/guide-zealy/Zealy_Step_5.png)
+1. Publish the helper quest:
 
-   Reach out to us at [discord](https://discord.com/channels/1034798419614629908/1034798420713553966/1063164663216484473) and provide the name of your company name and logo to get a link with a customized greeting like this:
+    ![Publishing the helper quest](/img/zealy-guide/step-6.png)
 
-   ![Greeting](/img/guide-zealy/Zealy_Step_6.png)
+1. Verify that the helper quest looks like this:
 
-6. After you are done with the rest of the details for your quest, it should look like this:
+    ![Helper quest](/img/zealy-guide/step-7.png)
 
-   ![Done](/img/guide-zealy/Zealy_Step_7.png)
+1. Create your main quest:
+
+    ![New quest creation](/img/zealy-guide/step-8.png)
+
+1. Select **NFT** in the  **Add Access** dropdown:
+
+    ![NFT access condition](/img/zealy-guide/step-9.png)
+
+1. Click **Configure NFT**:
+
+    ![Configure NFT](/img/zealy-guide/step-10.png)
+
+1. Put this address into the **Contract Address** field:
+
+    ```
+    0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373
+    ```
+
+    ![Contract Address insertion](/img/zealy-guide/step-11.png)
+
+1. After you are done with the rest of the details for your quest, it should look like this:
+
+    ![The final view](/img/zealy-guide/step-12.png)

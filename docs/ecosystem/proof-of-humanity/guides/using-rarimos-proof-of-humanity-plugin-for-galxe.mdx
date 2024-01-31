@@ -1,72 +1,57 @@
-# Using Rarimo’s Proof of Humanity Plugin for Galxe
+---
+image: /img/galxe-guide/opengraph.png
+description: Learn how to use Rarimo’s Proof of Humanity plugin for Galxe to prevent bots from participating in your campaigns.
+---
 
-## Why Proof of Human?
+# Using Rarimo’s Proof of Humanity plugin for Galxe
 
-Community-building platforms like Galxe facilitate reward-based loyalty programs for crypto projects. Such platforms are prone to abuse by bots and fake accounts. Currently, there are a few ways to address this issue:
+Proof of Humanity provides an easy and robust way to prevent bots from participating in your Galxe campaigns. It is a free and open-source plugin that you can use to verify that your users are humans.
 
-- Captchas;
-- Linking social media accounts;
-- Self-Sovereign Identity protocols(SSI);
-- Reputation systems;
+To see it in action, checkout the walkthrough video:
 
-However, neither of these covers the entire Web3 user base. Also, they are tricky to integrate into a Galxe campaign.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AAGWJE8pjG0?si=ID7WiY2LIyXhujcy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-Rarimo’s Proof of Human plugin improves upon these solutions by aggregating identity providers and facilitating zero-knowledge identity proofs on-chain. This way, users can choose from many options for proving their humanity while keeping their privacy.
-
-To see it in action, checkout our walkthrough video:
-
-<iframe
-  width="560"
-  height="315"
-  src="https://www.youtube.com/embed/-ASoTJUtEWU?si=DgZ-mxyZcVMU6NQn"
-  title="YouTube video player"
-  frameBorder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowFullScreen
-></iframe>
-
-## Adding Proof of Human to Your Galxe Campaign
+## Configuring your campaign
 
 To add Proof of Human check, set up your campaign using the instructions below. No coding or prerequisites required.
 
-1. Set up a new Credentials Group:
+1. Set up a new **Credentials Group**:
 
-   ![New Credentials Group](/img/guide-galxe/Galxe_Step_1.png)
+    ![New Credentials Group](/img/galxe-guide/step-1.png)
 
-2. Select the On-Chain type:
+2. Select the **On-Chain** type:
 
-   ![Select type](/img/guide-galxe/Galxe_Step_2.png)
+    ![Select type](/img/galxe-guide/step-2.png)
 
-3. Select the Subgraph Credential
+3. Select the **Subgraph Credential**
 
-   ![Subgraph Credential](/img/guide-galxe/Galxe_Step_3.png)
+    ![Subgraph Credential](/img/galxe-guide/step-3.png)
 
 4. Verify that you see this form:
 
-   ![Verify the form](/img/guide-galxe/Galxe_Step_4.png)
+    ![Verify the form](/img/galxe-guide/step-4.png)
 
 5. Fill it using these values:
 
-   Endpoint:
-   https://api.thegraph.com/subgraphs/name/volodymyrzolotukhin/sbtidentityverifier-polygon
+   **Endpoint**: https://api.thegraph.com/subgraphs/name/volodymyrzolotukhin/sbtidentityverifier-polygon
 
-   Query:
+   **Query**:
 
    ```graphql
    query info($address: String!) {
-     users(where: { senderAddr: $address }) {
-       id
-     }
+       users(where:{senderAddr: $address}){
+           id
+       }
    }
    ```
 
-   Test address:
+   **Test address**:
 
    ```
    0x62019b7b8f7d5b58006c5001eb1ffa95ab191474
    ```
 
-   Expression:
+   **Expression**:
 
    ```jsx
    function(resp) {
@@ -77,20 +62,20 @@ To add Proof of Human check, set up your campaign using the instructions below. 
    }
    ```
 
-   Call-to-Action Link: [https://robotornot.rarimo.com](https://robotornot.rarimo.com/).
+   **Call-to-Action Link**: https://robotornot.rarimo.com
 
-   Reach out to us at [discord](https://discord.com/channels/1034798419614629908/1034798420713553966/1063164663216484473) and provide the name of your company name and logo to get a link with a customized greeting like this:
+   Reach out to us at <a href="https://discord.com/channels/1034798419614629908/1034798420713553966/1063164663216484473" target="_blank" rel="noreferrer noopener">discord</a> and provide the name of your company name and logo to get a link with a customized greeting like this:
 
-   ![Customized greeting](/img/guide-galxe/Galxe_Step_5.png)
+   ![Customized greeting](/img/poh-greeting.png)
 
-6. Verify that the filled form looks like this and hit “Save”:
+6. Verify that the filled form looks like this and hit **Save**:
 
-   ![Verify and Save](/img/guide-galxe/Galxe_Global_1.png)
+   ![Verify and Save](/img/galxe-guide/step-6.png)
 
-7. Save the Credential Group:
+7. Save the **Credential Group**:
 
-   ![Save the Group](/img/guide-galxe/Galxe_Step_6.png)
+   ![Save the Group](/img/galxe-guide/step-7.png)
 
 8. After you are done with the rest of the details for your campaign, you should see the Proof of Human step on the campaign page:
 
-   ![Proof of Human step should be visible now](/img/guide-galxe/Galxe_Step_7.png)
+   ![Proof of Human step should be visible now](/img/galxe-guide/step-8.png)
