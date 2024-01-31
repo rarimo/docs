@@ -16,7 +16,7 @@ const sidebars = {
       },
       collapsed: true,
       items: [
-        'use-cases/self-sovereign-identities',
+        'use-cases/self-sovereign-identity',
         'use-cases/identity-protocol-state-replication',
         'use-cases/gaming-profiles',
         'use-cases/social-graphs',
