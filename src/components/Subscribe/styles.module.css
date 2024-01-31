@@ -30,6 +30,7 @@
 }
 
 .subscribeForm {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -70,6 +71,26 @@
 .subscribeButton:hover {
   color: var(--primary-text-color-light) !important;
   background: none !important;
+}
+
+.subscribeButton:disabled {
+  cursor: not-allowed;
+  color: var(--primary-text-color) !important;
+}
+
+.subscribeError {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  color: var(--error-main);
+}
+
+.subscribeSuccess {
+  padding: 1rem;
+  width: 100%;
+  max-width: 20rem;
+  margin: 0;
+  font-weight: 500;
 }
 
 [data-theme='light'] .subscribeButton {
