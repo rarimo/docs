@@ -1,39 +1,49 @@
-import Discord from "@site/static/img/discord-icon.svg";
-import Telegram from "@site/static/img/telegram-icon.svg";
-import clsx from "clsx";
-import React from "react";
+import Link from '@docusaurus/Link'
+import DiscordIcon from '@site/static/img/discord-icon.svg'
+import TelegramIcon from '@site/static/img/telegram-icon.svg'
+import XIcon from '@site/static/img/x-icon.svg'
+import clsx from 'clsx'
+import React from 'react'
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css'
 
 export default function Links(): JSX.Element {
   return (
-    <div className={clsx("links", styles.links)}>
-      <p className={clsx("links__title", styles.linksTitle)} data-aos="fade-up">
+    <div className={clsx('links', styles.links)}>
+      <p className={clsx('links__title', styles.linksTitle)} data-aos="fade-up">
         Join the community
       </p>
       <div
-        className={clsx("links__content", styles.linksContent)}
+        className={clsx('links__content', styles.linksContent)}
         data-aos="fade-up"
       >
-        <a
-          className={clsx("links__item", styles.linksItem)}
+        <Link
+          className={clsx('links__item', styles.linksItem)}
           href="https://discord.gg/cfrH3Fe7ke"
           target="_blank"
           rel="nofollow noopener noreferrer"
         >
-          <Discord />
+          <DiscordIcon />
           Discord
-        </a>
-        <a
-          className={clsx("links__item", styles.linksItem)}
+        </Link>
+        <Link
+          className={clsx('links__item', styles.linksItem)}
           href="https://t.me/rarimoprotocol"
           target="_blank"
           rel="nofollow noopener noreferrer"
         >
-          <Telegram />
+          <TelegramIcon />
           Telegram
-        </a>
+        </Link>
+        <Link
+          className={clsx('links__item', styles.linksItem)}
+          href="https://twitter.com/Rarimo_protocol"
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+        >
+          <XIcon />Х (Twitter)
+        </Link>
       </div>
     </div>
-  );
+  )
 }

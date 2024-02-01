@@ -16,9 +16,12 @@
 }
 
 .linksContent {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  justify-content: center;
+  max-width: 56rem;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .linksItem {
@@ -30,8 +33,6 @@
   align-items: start;
   gap: 1.5rem;
   color: var(--primary-text-color-light);
-  max-width: 18.75rem;
-  width: 100%;
   font-weight: 600;
 }
 
@@ -44,5 +45,15 @@
     font-size: 1.5rem;
     margin-top: 3.5rem;
     margin-bottom: 2rem;
+  }
+
+  .linksContent {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .linksItem {
+    padding: 1rem;
+    flex-direction: row;
   }
 }
