@@ -199,7 +199,7 @@ export default function HomepageUseCases() {
                         styles.homepageUseCasesCaseItemImg
                       )}
                       src={item.img}
-                      alt=""
+                      alt={item.title}
                     />
                     <div
                       className={clsx(

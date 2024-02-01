@@ -11,6 +11,7 @@ export default function Building(): JSX.Element {
         <img
           className={clsx("building__img", styles.buildingImg)}
           src="img/building-image.png"
+          alt="Developer Console"
           data-aos="fade-up"
         />
         <div
