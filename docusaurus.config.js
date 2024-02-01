@@ -132,7 +132,7 @@ module.exports = {
               {
                 html: `
                 <a href="/use-cases" class="footer__social-link">Use cases</a>`,
-              }
+              },
             ],
           },
           {
