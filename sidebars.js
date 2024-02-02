@@ -71,9 +71,6 @@ const sidebars = {
         'products/bridging-protocol/circle-cctp-integration',
         'products/bridging-protocol/guide-how-to-bundle-transactions',
         'products/bridging-protocol/connecting-to-wallets',
-        'products/bridging-protocol/creating-nft-checkout-transactions',
-        'products/bridging-protocol/swapping-tokens',
-        'products/bridging-protocol/packages-base',
         {
           type: 'category',
           label: 'Smart Contracts Reference',
@@ -86,7 +83,6 @@ const sidebars = {
           ],
         },
         'products/bridging-protocol/js-sdk-reference',
-        'products/bridging-protocol/api-reference',
       ],
     },
     {
@@ -171,6 +167,8 @@ const sidebars = {
       link: {type: 'doc', id: 'ecosystem/token-agnostic-payments/overview'},
       collapsed: true,
       items: [
+        'ecosystem/token-agnostic-payments/creating-nft-checkout-transactions',
+        'ecosystem/token-agnostic-payments/swapping-tokens',
         'ecosystem/token-agnostic-payments/js-sdk-reference',
       ],
     },
