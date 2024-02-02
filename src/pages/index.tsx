@@ -153,17 +153,17 @@ const ecosystemCards: HomeCard[] = [
     ],
     url: '/ecosystem/proof-of-humanity',
   },
-  {
-    title: 'WorldCoin Cross-Chain State Replication',
-    IconName: ForEveryHumanIcon,
-    list: [
-      [
-        'Use your World ID on any EVM-compatible chain',
-        'Cost-efficient scalability with on-demand state replication',
-      ],
-    ],
-    url: '/ecosystem/worldcoin-state-replication',
-  },
+  // {
+  //   title: 'WorldCoin Cross-Chain State Replication',
+  //   IconName: ForEveryHumanIcon,
+  //   list: [
+  //     [
+  //       'Use your World ID on any EVM-compatible chain',
+  //       'Cost-efficient scalability with on-demand state replication',
+  //     ],
+  //   ],
+  //   url: '/ecosystem/worldcoin-state-replication',
+  // },
   {
     title: 'Polygon ID Cross-Chain State Replication',
     IconName: PolygonIcon,
