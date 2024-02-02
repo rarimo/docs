@@ -20,17 +20,17 @@ Let's look at the inner workings of the protocol in a real-world example: a user
 
 ![Bridging Flow](/img/bridging-flow.png)
 
-## Protocol Features
+## Protocol features
 
-### Relayer Service
+### Relayer service
 
 The relayer automatically delivers the transfers to the destination chain. This way, users do not need to switch networks, sign additional transactions, and bother with funds to pay the gas fee on the destination chain.
 
-### EVM Transaction Bundling
+### EVM transaction bundling
 
 To support more complex flows on EVM chains, the protocol allows bundling one or more custom transactions into the transfer. Once the transfer is completed, these transactions will be executed on the destination chain. For example, a user can transfer funds and place an order on an NFT marketplace on the destination chain using a single transaction.
 
-### Low Fees
+### Low fees
 
 Thanks to the usage of the TSS for securing the transfers, the gas fee overhead for bridging on the destination chain is minimal.
 
@@ -38,7 +38,7 @@ Thanks to the usage of the TSS for securing the transfers, the gas fee overhead 
 
 Rarimo takes a fixed fee for every transfer in a token of choice. The price is negotiable.
 
-### USDC Liquidity
+### USDC liquidity
 
 :::info
 
@@ -48,7 +48,7 @@ Coming Soon!
 
 Rarimo has integrated the [Circle CCTP protocol](https://www.circle.com/en/cross-chain-transfer-protocol) to move USDC tokens between the chains without needing liquidity pools.
 
-## Token-Agnostic Payments Widget
+## Token-Agnostic Payments widget
 
 With Rarimo's token-agnostic payments, customers can consolidate funds from multiple chains and in various tokens to make payments with just a few clicks. The system handles the token swaps and bridging.
 

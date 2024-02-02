@@ -1,13 +1,14 @@
 ---
+description: Learn how to set up Polygon ID State Replication for cross-chain identity state transfer.
 ---
 
-# Guide: How to Set Up Polygon ID State Replication
+# Guide: How to set up Polygon ID State Replication
 
 In this guide, we'll set up the cross-chain identity state replication for Polygon ID. It enables the usage of Polygon ID zero-knowledge proofs on any chain supported by Rarimo.
 
 For more information about how the Polygon ID identity state transfer works, visit [rarimo-core docs](https://github.com/rarimo/rarimo-core/blob/master/docs/common/bridging/002-identity.md).
 
-## Pre-Requisites
+## Pre-requisites
 
 Before getting started, please contact us in [discord](https://discordapp.com/invite/rarimoprotocol) to ensure that the issuer is added to the allowlist and that a lightweight state contract is already deployed to the destination chain;
 
@@ -16,7 +17,7 @@ Other pre-requisites:
 - [Postgres DB 13+](https://www.postgresql.org/download/) instance for the relayer service;
 - [Docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/) (optional)
 
-## Setting Up Relayer
+## Setting up relayer
 
 The Relayer service is responsible for replicating the Polygon ID state on demand. It exposes a REST endpoint for the DApps that performs the state replication to the target chain.
 
@@ -91,7 +92,7 @@ relay:
 
 ## Run
 
-### Binary Built From Source
+### Binary built from source
 
 ```sh
 # apply DB migrations and run the service
@@ -140,7 +141,7 @@ relay:
    docker-compose up
    ```
 
-## Using Service
+## Using service
 
 Execute the POST `/integrations/relayer/relay` request with the following body to fetch state publishing:
 
