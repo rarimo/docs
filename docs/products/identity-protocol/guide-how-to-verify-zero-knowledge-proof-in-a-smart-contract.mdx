@@ -1,7 +1,7 @@
 ---
 ---
 
-# Guide: How to Verify a Zero-Knowledge Proof in a Smart Contract
+# Guide: How to verify a zero knowledge proof in a smart contract
 
 The following guide will instruct you on integrating zero-knowledge proofs into an existing smart contract written in Solidity.
 
@@ -54,15 +54,15 @@ Our users were issued verifiable credentials(VC) that contain the user's birthda
 }
 ```
 
-We'll mint 100 tokens to every user born before 01/01/2000.
+We'll mint 100 tokens to every user born before `01/01/2000`.
 
-## Step 1: Inherit the `BaseVerifier` Contract and Add the ZKP Verification
+## Step 1: Inherit the `BaseVerifier` contract and add the ZKP verification
 
-We need to import the necessary [Rarimo identity contrcts](https://github.com/rarimo/identity-contracts/tree/master) and inherit the [`BaseVerifier`](https://github.com/rarimo/identity-contracts/blob/aeb929ccc3fa8ab508fd7576f9fa853a081e5010/contracts/verifiers/BaseVerifier.sol) contract.
+We need to import the necessary [Rarimo identity contracts](https://github.com/rarimo/identity-contracts/tree/master) and inherit the [`BaseVerifier`](https://github.com/rarimo/identity-contracts/blob/aeb929ccc3fa8ab508fd7576f9fa853a081e5010/contracts/verifiers/BaseVerifier.sol) contract.
 
 Then, we need to add the ZKP verification logic into our `mint` method. Our contract must also define the query ID; in our case, it's `AGE_PROOF`. It is the identifier of the ZKP Request that we will create in the next step.
 
-```
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
 
@@ -128,11 +128,11 @@ contract AgeRestrictedERC20 is BaseVerifier, IERC20 {
 }
 ```
 
-### Step 2: Deploy The Contracts
+### Step 2: Deploy the contracts
 
 We need to deploy our `AgeRestrictedERC20` alongside `PoseidonFacade`, `ZKPQueriesStorage` и `QueryValidator` contracts. To do that, use the scripts and instructions provided [here](https://github.com/rarimo/identity-contracts/tree/master).
 
-## Step 3: Set the Proof Query
+## Step 3: Set the proof query
 
 After the contract deployment, we should design an [Iden3 proof query](https://docs.iden3.io/protocol/querylanguage/) specifying the zero-knowledge proof's inputs and operations.
 
@@ -159,7 +159,7 @@ The query has the following fields:
 1. `credentialAtomicQueryMTPV2OnChain`: ID of the [Iden3 circuit](https://docs.iden3.io/protocol/main-circuits/) used to evaluate the proof. Set to `credentialAtomicQueryMTPV2OnChain`
 1. `value`: represents the threshold value you are querying (01/01/2000 date in our case);
 
-You can run https://go.dev/play/p/rnrRbxXTRY6 to get schema hash and `claimPathKey` using your schema.
+You can run the [Golang script](https://go.dev/play/p/rnrRbxXTRY6) to get schema hash and `claimPathKey` using your schema.
 
 To set the query for our smart contracts, use the following script:
 
@@ -213,7 +213,7 @@ main().catch((error) => {
 })
 ```
 
-## Step 4: Testing It Out
+## Step 4: Testing it out
 
 You need to integrate RariMe snap into your DApp to test the flow. Use [this snippet](https://github.com/rarimo/rarime/tree/main/packages/connector#send-proof-to-custom-verifier-contract) to generate and submit the proof inside your application.
 

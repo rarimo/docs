@@ -1,7 +1,7 @@
 ---
 ---
 
-# Smart Contracts Reference
+# Smart contracts reference
 
 Rarimo builds upon the basic [Iden3 smart contracts](https://github.com/iden3/contracts) and adapts them for cross-chain usage.
 
@@ -14,7 +14,7 @@ Identity protocol uses two types of smart contracts:
 - State Contracts hold iden3 identity states(sparse Merkle trees) that are required for on-chain ZKP verifications;
 - Verifiers are responsible for verifying zero-knowledge proofs on-chain. They fetch identity states for the State Contracts to check that the credential used to generate the proof wasn't revoked by the issuer;
 
-## State Contracts
+## State contracts
 
 Rarimo uses two types of state contracts:
 
@@ -55,7 +55,7 @@ event StateTransited(
 - `transitState` - the primary function of the contract that performs state transitions. It receives the identity, two states (old and new), a boolean whether it is genesis or not, and ZK Proof, which proves that the state transition from old to new state of this identity is valid and fair;
 - `StateTransited` - Emited after every state transition. Rarimo's oracles use it to ingest the state transitions;
 
-Full implementation can be found [here](https://github.com/rarimo/identity-contracts/blob/master/contracts/State.sol).
+See [State.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/State.sol) for the full implementation.
 
 ### `LightweightState`
 
@@ -94,7 +94,7 @@ contract LightweightState is ILightweightState, UUPSSignableUpgradeable, Signers
 - `identitiesStatesRoot` - another tree root (made specifically for the Lightweight contract) that stores the issuer ID, its state, and timestamp of state change (gist doesn't have timestamps).
 - `signedTransitState()` - state transition function that requires TSS instead of ZKP. It verifies the signature and changes the roots to the ones provided. After that, the user can submit a ZKP using the new root on the destination chain.
 
-Full implementation can be found [here](https://github.com/rarimo/identity-contracts/blob/master/contracts/LightweightState.sol).
+See [LightweightState.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/LightweightState.sol) for the full implementation.
 
 ## Verifier contracts
 
@@ -132,9 +132,9 @@ This contract uses the `zkpQueriesStorage` contract to store query IDs and the `
 - `_transitState(TransitStateParams calldata transitStateParams_)` - calls the `lightweightState` contract from `zkpQueriesStorage` and transfers the state.
 - `_verify(string memory queryId_, ProveIdentityParams calldata proveIdentityParams_)` - verifies the proof, using the `QueryValidator` for stated `queryId_`
 
-Using both functions, you can implement your custom business logic and only verified identity can use it. It is also possible to restrict certain issuers, i.e., credentials from them can't be proven because they are not on the allowed list.
+Using both functions, you can implement your custom business logic, and only verified identity can use it. It is also possible to restrict certain issuers, i.e., credentials from them can't be proven because they are not on the allowed list.
 
-Full implementation can be found [here](https://github.com/rarimo/identity-contracts/blob/master/contracts/verifiers/BaseVerifier.sol).
+See [BaseVerifier.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/verifiers/BaseVerifier.sol) for the full implementation.
 
 ### `IdentityVerifier`
 
@@ -159,7 +159,7 @@ contract IdentityVerifier is IIdentityVerifier, BaseVerifier {
 - `_identitiesProofInfo` - mapping of identity to the struct that stores address and boolean (whether the identity is proven or not);
 - `_proveIdentity(ProveIdentityParams calldata proveIdentityParams_)` - verifies the proof and stores the info in mentioned mappings and emits an `IdentityProved` event that contains the user's ID and address;
 
-Full implementation can be found [here](https://github.com/rarimo/identity-contracts/blob/master/contracts/verifiers/IdentityVerifier.sol)
+See [IdentityVerifier.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/verifiers/IdentityVerifier.sol) for the full implementation.
 
 ## Other contracts
 
@@ -209,13 +209,13 @@ contract ZKPQueriesStorage is IZKPQueriesStorage, OwnableUpgradeable, UUPSUpgrad
 }
 ```
 
-- `lightweightState` - stores the address of lightweight state contract as `ILightweightState` interface.
+- `lightweightState` - stores the address of the lightweight state contract as the `ILightweightState` interface.
 - `_queriesInfo` - stores query information, namely circuit query and queryValidator address.
 - `_supportedQueryIds` - stores the array of available queries, concretely their IDs.
 - `setZKPQuery(queryId_, queryInfo_)` - adds a new query, stores its information, and emits the event `ZKPQuerySet`.
 - `removeZKPQuery(string memory queryId_)` - removes a query and its information and emits the event `ZKPQueryRemoved`.
 
-Full implementation can be found [here](https://github.com/rarimo/identity-contracts/blob/master/contracts/ZKPQueriesStorage.sol).
+See [ZKPQueriesStorage.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/ZKPQueriesStorage.sol) for the full implementation.
 
 ### `QueryValidator`
 
@@ -318,14 +318,13 @@ abstract contract QueryValidator is IQueryValidator, OwnableUpgradeable, UUPSUpg
   It means that the user can provide proof for not the latest state, and it will still be valid.
 - `verify` verifies the ZKP (via verifier call) and Merkle proof with additional checks on ZKP, such as checking that the query hash is correct.
 
-Full implementation can be found [here](https://github.com/rarimo/identity-contracts/blob/master/contracts/validators/QueryValidator.sol).
+See [QueryValidator.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/validators/QueryValidator.sol) for the full implementation.
 
 ### `PoseidonFacade`
 
 `PoseidonFacade` is an Iden3 library that implements a ZK-friendly Poseidon hash function in solidity.
 Solidity implementation allows hashing up to 6 `uint256` elements.
 
-Functions call `poseidon(...)` linked to the facade.
 More information about that can be found [here](https://github.com/iden3/circomlibjs/blob/main/src/poseidon_gencontract.js).
 
 ```solidity
@@ -363,6 +362,6 @@ library PoseidonFacade {
 }
 ```
 
-It provides several functions for a various number of elements to be hashed (`poseidon1`, `poseidon2`, ...) and `poseidonSponge`, which hashes the array in chunks of 6 elements.
+It provides several functions for a variable number of elements to be hashed (`poseidon1`, `poseidon2`, ...) and `poseidonSponge`, which hashes the array in chunks of 6 elements.
 
-Full implementation can be found [here](https://github.com/iden3/contracts/blob/master/contracts/lib/Poseidon.sol).
+See [Poseidon.sol](https://github.com/iden3/contracts/blob/master/contracts/lib/Poseidon.sol) for the full implementation.
