@@ -1,38 +1,25 @@
 ---
+description: Proof of Humanity smart contracts interfaces, deployments and reference.
 ---
 
-# Smart Contracts Reference
-
-This page contains technical resources related to the Proof of Humanity plugin.
-
-## User-Facing DApp
-
-Users can get verified using the following DApps:
-
-- Mainnet(Polygon): https://robotornot.rarimo.com
-
-- Testnet(Goerli): https://robotornot.mainnet-beta.rarimo.com
-
-## Smart Contracts
+# Smart contracts reference
 
 To make the Proof of Humanity verification result easily re-usable and to enable easy integration with existing DApps like quest platforms, each verified user gets a soulbound token(SBT).
 
 This is facilitated by the smart contracts described below.
 
-<!-- TODO: add SBT entanglement -->
-
-### `VerifiedSBT`
+## `VerifiedSBT`
 
 The SBT awarded to users who complete the Proof of Humanity verification.
 
-#### Deployments
+### Deployments
 
 | Chain   | ChainID | Address                                                                                                                                      |
 | ------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | Polygon | `137`   | `0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373` \([Polygonscan](https://polygonscan.com/address/0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373)\)   |
 | Goerli  | `5`     | `0xfaA7e7F14a2dCAD537d0141533bB58D62dD8022c` \([Etherscan](https://goerli.etherscan.io/address/0xfaA7e7F14a2dCAD537d0141533bB58D62dD8022c)\) |
 
-#### Interface
+### Interface
 
 ```solidity
 contract VerifiedSBT is
@@ -66,20 +53,20 @@ contract VerifiedSBT is
 - `onlyVerifier()` - modifier that only allows calls by the verifier contract;
 - `mint(address)` - mints the SBT for the given address;
 
-Full implementation can be found [here](https://github.com/rarimo/identity-contracts/blob/master/contracts/tokens/VerifiedSBT.sol).
+See [VerifiedSBT.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/tokens/VerifiedSBT.sol) for the full implementation.
 
-### `SBTIdentityVerifier`
+## `SBTIdentityVerifier`
 
 It's an implementation of a verifier contract that mints a Proof of Humanity SBT when a correct proof is provided.
 
-#### Deployments
+### Deployments
 
 | Chain   | ChainID | Address                                                                                                                                      |
 | ------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | Polygon | `137`   | `0x7DdAde70efADf832A600ba483FAD26fCA477FE2A` \([Polygonscan](https://polygonscan.com/address/0x7DdAde70efADf832A600ba483FAD26fCA477FE2A)\)   |
 | Goerli  | `5`     | `0x86906AbAAfA7F58Fb4D3125BD1971Fcf04F52CDd` \([Etherscan](https://goerli.etherscan.io/address/0x86906AbAAfA7F58Fb4D3125BD1971Fcf04F52CDd)\) |
 
-#### Interface
+### Interface
 
 ```solidity
 contract SBTIdentityVerifier is ISBTIdentityVerifier, BaseVerifier {
@@ -115,4 +102,4 @@ contract SBTIdentityVerifier is ISBTIdentityVerifier, BaseVerifier {
 
 - `_proveIdentity(...)` checks the validity for a ZKP and mints an SBT;
 
-Full implementation can be found [here](https://github.com/rarimo/identity-contracts/blob/master/contracts/verifiers/SBTIdentityVerifier.sol).
+See [SBTIdentityVerifier.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/verifiers/SBTIdentityVerifier.sol) for the full implementation.

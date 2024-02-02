@@ -139,6 +139,7 @@ const sidebars = {
         },
         'ecosystem/proof-of-humanity/smart-contracts-reference',
         'ecosystem/proof-of-humanity/subgraph-reference',
+        'ecosystem/proof-of-humanity/api-reference',
       ],
     },
     {
