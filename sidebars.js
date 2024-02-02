@@ -42,10 +42,9 @@ const sidebars = {
       link: {type: 'doc', id: 'products/base-layer/overview'},
       collapsed: true,
       items: [
+        'products/base-layer/rarimo-core',
         'products/base-layer/oracles',
         'products/base-layer/threshold-signature',
-        'products/base-layer/tokenmanager-module',
-        'products/base-layer/oraclemanager',
         'products/base-layer/validator-node-operator-guide',
         'products/base-layer/staking-guide',
         'products/base-layer/api-reference',
