@@ -29,7 +29,7 @@ The user then generates a ZKP using the Polygon ID Wallet app and submits it to 
 
 ![Polygon ID ZKP Generation Flow](/img/polygon-id-zkp-flow.png)
 
-## Demo Walkthrough
+## Demo walkthrough
 
 To complete the demo and claim a soulbound token on Ethereum's Sepolia Testnet, follow these steps:
 
@@ -37,13 +37,3 @@ To complete the demo and claim a soulbound token on Ethereum's Sepolia Testnet, 
 2. Get a KYC Age credential by scanning a QR code [here](https://admin-panel.polygon.mainnet-beta.rarimo.com/credentials/scan-link/ade26bde-af43-445b-be72-907693fe6cfd) with your Polygon ID Wallet. Then, wait 2 minutes for the identity provider state to be committed and propagated on-chain;
 3. Open the [Demo DApp](https://polygon.mainnet-beta.rarimo.com/) and scan the QR-code with your Polygon ID Wallet. Confirm the proof generation;
 4. Once the DApp receives the proof, submit it to the Verifier Contract using MetaMask;
-
-## Trying It Out With Your Identity Issuer
-
-:::info
-Polygon ID x Rarimo integration is experimental and hasn't been audited yet. Please refrain from using it in production applications for now!
-:::
-
-If you run an identity issuer for Polygon ID and want to enable the usage of ZKPs on Ethereum or another EVM-compatible network, follow this [guide](/ecosystem/polygon-id-state-replication/guide-how-to-set-up-polygon-id-state-replication).
-
-Once the state replication is ready, the DApps can use the ZKPs by following the [Polygon's on-chain verification guide](https://0xpolygonid.github.io/tutorials/verifier/on-chain-verification/overview/#on-chain-verification-flow).

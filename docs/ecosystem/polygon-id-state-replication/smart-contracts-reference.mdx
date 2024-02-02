@@ -64,7 +64,7 @@ Also, core functions emit events, which contain the data about changes:
 - `SignGISTDataTransited` contains the data about roots, the previous one and the provided one;
 - `SignStateDataTransited` contains the provided identity state, previous state, and identity ID;
 
-Full implementation can be found [here](https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/LightweightStateV2.sol).
+See [LightweightStateV2.sol](https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/LightweightStateV2.sol) for the full implementation.
 
 ## `QueryVerifier`
 
@@ -131,7 +131,7 @@ contract QueryVerifier is IQueryVerifier, ZKPVerifier {
 
 The function that verifies the ZKP - `verify(...)` is inherited from the [ZKPVerifier](https://github.com/iden3/contracts/blob/master/contracts/verifiers/ZKPVerifier.sol) contract.
 
-Full implementation can be found [here](https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/QueryVerifier.sol).
+See [QueryVerifier.sol](https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/QueryVerifier.sol) for the full implementation.
 
 ## `VerifiedSBT`
 
@@ -178,4 +178,4 @@ contract VerifiedSBT is
 - `mint(address)` — mints the SBT for the given address;
 - `_beforeTokenTransfer(...)` — prevents the token from being transferred (only burn and mint are available);
 
-Full implementation can be found [here](https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/VerifiedSBT.sol).
+See [VerifiedSBT.sol](https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/VerifiedSBT.sol) for the full implementation.

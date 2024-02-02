@@ -59,7 +59,6 @@ const sidebars = {
       items: [
         'products/identity-protocol/guide-how-to-set-up-credentials-issuer',
         'products/identity-protocol/guide-how-to-verify-zero-knowledge-proof-in-a-smart-contract',
-        'products/identity-protocol/api-reference',
         'products/identity-protocol/smart-contracts-reference',
         'products/identity-protocol/js-sdk-reference',
       ],
@@ -149,7 +148,6 @@ const sidebars = {
       collapsed: true,
       items: [
         'ecosystem/polygon-id-state-replication/guide-how-to-set-up-polygon-id-state-replication',
-        // TODO: come up with a good example DApp
         'ecosystem/polygon-id-state-replication/tutorial-verifying-polygon-id-credentials-in-ethereum-dapp',
         'ecosystem/polygon-id-state-replication/smart-contracts-reference',
         'ecosystem/polygon-id-state-replication/api-reference',
@@ -157,12 +155,10 @@ const sidebars = {
     },
     {
       type: 'category',
-      // TODO: come up with a better name
       label: 'WorldCoin State Replication',
       link: {type: 'doc', id: 'ecosystem/worldcoin-state-replication/overview'},
       collapsed: true,
       items: [
-        'ecosystem/worldcoin-state-replication/overview',
         'ecosystem/worldcoin-state-replication/guide-state-replication-for-world-id',
         'ecosystem/worldcoin-state-replication/tutorial-using-world-id-zero-knowledge-proofs-in-avalanche-dapp',
         'ecosystem/worldcoin-state-replication/smart-contracts-reference',
