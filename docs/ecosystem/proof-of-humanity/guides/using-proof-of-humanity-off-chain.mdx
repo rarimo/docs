@@ -1,13 +1,13 @@
 ---
 ---
 
-# Using Proof of Humanity Off-Chain
+# Using Proof of Humanity off-chain
 
 Off-chain applications like Discord bots, quest platform backends, and many others can benefit from Proof of Humanity(PoH) integration.
 
 To integrate it, redirect your users to the [PoH DApp](https://robotornot.rarimo.com/) to verify their humanity. Then, you can check their verification status using one of the following methods.
 
-## Option #1: GraphQL Endpoint(Recommended)
+## Option #1: GraphQL endpoint(recommended)
 
 Rarimo indexes the verified users using a subgraph. You can query its GraphQL endpoint to check the verification status like this:
 
@@ -42,12 +42,12 @@ Rarimo indexes the verified users using a subgraph. You can query its GraphQL en
 
    Assume the user is verified if the `users` array is non-empty.
 
-## Option #2: NFT Indexer
+## Option #2: NFT indexer
 
 If you operate an NFT indexer already, you can also use it to check the user verification. Just check that the user owns a PoH soulbound token.
 
 ### Proof of Humanity SBT
 
-Network: Polygon Mainnet
+Network: `Polygon Mainnet`
 
-Contract Address: [0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373](https://polygonscan.com/address/0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373)
+Contract Address: [`0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373`](https://polygonscan.com/address/0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373)
