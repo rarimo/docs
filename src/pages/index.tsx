@@ -248,7 +248,8 @@ export default function Home(): JSX.Element {
           <HomepageUseCases />
           {/*Todo: Show developer links*/}
           {/*<HomepageDeveloperLinks />*/}
-          <Building />
+          {/* TODO: uncomment when developer dashboard is ready */}
+          {/* <Building /> */}
           <Links />
           <News />
           <Subscribe />
