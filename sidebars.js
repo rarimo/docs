@@ -172,7 +172,6 @@ const sidebars = {
       collapsed: true,
       items: [
         'ecosystem/token-agnostic-payments/js-sdk-reference',
-        'ecosystem/token-agnostic-payments/api-reference',
       ],
     },
     {
