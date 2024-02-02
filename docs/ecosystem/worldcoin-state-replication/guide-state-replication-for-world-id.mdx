@@ -2,12 +2,12 @@
 
 In this guide, we'll set up the cross-chain identity state replication for World ID. It enables the usage of World ID zero-knowledge proofs on any chain supported by Rarimo.
 
-## Pre-Requisites
+## Pre-requisites
 
 - [Postgres DB 13+](https://www.postgresql.org/download/) instance for the relayer service;
 - [Docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/) (optional)
 
-## Setting Up Relayer
+## Setting up relayer
 
 The Relayer service is responsible for replicating the World ID state on demand. It exposes a REST endpoint for the DApps that performs the state replication to the target chain.
 
@@ -82,7 +82,7 @@ relay:
 
 ## Run
 
-### Binary Built From Source
+### Binary built from source
 
 ```sh
 # apply DB migrations and run the service
