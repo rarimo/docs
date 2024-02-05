@@ -251,7 +251,8 @@ export default function Home(): JSX.Element {
           {/* TODO: uncomment when developer dashboard is ready */}
           {/* <Building /> */}
           <Links />
-          <News />
+          {/* TODO: uncomment when blog content ready */}
+          {/* <News /> */}
           <Subscribe />
         </main>
 

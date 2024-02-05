@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 05-02-2024
+
+### Changed
+
+- Hidden the blog section on landing;
+
 ## [2.0.0] - 02-02-2024
 
 ### Added
