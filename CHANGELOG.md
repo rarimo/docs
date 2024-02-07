@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Expanded the Polygon ID Integration usage page with verify-proxy service information;
+
 ## [2.0.1] - 05-02-2024
 
 ### Changed
@@ -31,7 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Tutorials:
   - Added the World ID Integration usage page;
   - Added the Polygon ID Integration usage page;
-  - Expanded the Polygon ID Integration usage page with verify-proxy service information;
 - Subscription form (w/o functionality)
 - Mobile sliders;
 - Redirects from old navigation links to new;
