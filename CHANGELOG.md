@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Ecosystem/Polygon ID State Replication:
+  - Added information about the `verify-proxy` service;
+
 ## [2.0.1] - 05-02-2024
 
 ### Changed
