@@ -32,7 +32,7 @@ module.exports = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/logo-icon.png',
   noIndex: isStaging(),
-  trailingSlash: false,
+  trailingSlash: true,
 
   organizationName: 'rarimo',
   projectName: 'docs',
