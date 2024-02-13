@@ -101,8 +101,6 @@ export default function HomepageUseCases() {
               key={idx}
               data-aos="fade-up"
               href={item.path}
-              target="_blank"
-              rel="nofollow noopener noreferrer"
             >
               <div
                 className={clsx(
