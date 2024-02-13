@@ -109,7 +109,7 @@ const sendTransaction = async () => {
 
   // Create the transaction bundle, which includes custom logic that tells the Rarimo contract what to do after unlocking the transferred tokens on the destination chain, such as calling another contract to buy the NFT on the destination chain.
   // Optionally, you can set the bundle salt to be able to access the temporary contracts that Rarimo uses to run the bundled transactions.
-  // See "Bundling" in the Rarimo documentation: https://docs.rarimo.com/tutorials/bundling
+  // See "Bundling" in the Rarimo documentation: https://docs.rarimo.com/products/bridging-protocol/guide-how-to-bundle-transactions
 
   // First, use the Ethers Interface to encode a command to add to the bundle.
   // This example encodes a command that purchases the NFT on the destination chain via the NFT contract's Application Binary Interface (ABI).
