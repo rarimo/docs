@@ -37,7 +37,7 @@ const useCasesList: UseCase[] = [
     title: "Self-Sovereign Identities (SSI)",
     text: "Use data in the web3 world using ZK-proofs for identity verification",
     isBig: true,
-    path: "/use-cases/self-sovereign-identities",
+    path: "/use-cases/self-sovereign-identity",
   },
   {
     img: "img/homepage-use-cases/social-graphs.webp",
