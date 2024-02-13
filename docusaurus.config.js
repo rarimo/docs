@@ -128,11 +128,11 @@ module.exports = {
               },
               {
                 html: `
-                <a href="/overview" class="footer__social-link">Overview</a>`,
+                <a href="/overview/" class="footer__social-link">Overview</a>`,
               },
               {
                 html: `
-                <a href="/use-cases" class="footer__social-link">Use cases</a>`,
+                <a href="/use-cases/" class="footer__social-link">Use cases</a>`,
               },
             ],
           },

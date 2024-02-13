@@ -41,7 +41,7 @@ const baseLayerCards: HomeCard[] = [
         'Timed SBTs for interoperability with existing platforms',
       ],
     ],
-    url: '/products/identity-protocol',
+    url: '/products/identity-protocol/',
   },
   {
     id: 'rarime',
@@ -55,7 +55,7 @@ const baseLayerCards: HomeCard[] = [
         'Dashboard for managing your credentials, SBTs and more',
       ],
     ],
-    url: '/products/rarime',
+    url: '/products/rarime/',
   },
   {
     id: 'bridging-protocol',
@@ -71,7 +71,7 @@ const baseLayerCards: HomeCard[] = [
         'CCTP integrations (coming soon)',
       ],
     ],
-    url: '/products/bridging-protocol',
+    url: '/products/bridging-protocol/',
   },
   {
     id: 'base-layer',
@@ -116,7 +116,7 @@ const baseLayerCards: HomeCard[] = [
         </span>,
       ],
     ],
-    url: '/products/base-layer',
+    url: '/products/base-layer/',
     after: (
       <>
         <a
@@ -151,7 +151,7 @@ const ecosystemCards: HomeCard[] = [
         'Protect your discord server with Collab.Land plugin',
       ],
     ],
-    url: '/ecosystem/proof-of-humanity',
+    url: '/ecosystem/proof-of-humanity/',
   },
   // {
   //   title: 'WorldCoin Cross-Chain State Replication',
@@ -162,7 +162,7 @@ const ecosystemCards: HomeCard[] = [
   //       'Cost-efficient scalability with on-demand state replication',
   //     ],
   //   ],
-  //   url: '/ecosystem/worldcoin-state-replication',
+  //   url: '/ecosystem/worldcoin-state-replication/',
   // },
   {
     title: 'Polygon ID Cross-Chain State Replication',
@@ -174,7 +174,7 @@ const ecosystemCards: HomeCard[] = [
         'Cost-efficient scalability with on-demand state replication',
       ],
     ],
-    url: '/ecosystem/polygon-id-state-replication',
+    url: '/ecosystem/polygon-id-state-replication/',
   },
   {
     title: 'Token Agnostic Payments',
@@ -186,7 +186,7 @@ const ecosystemCards: HomeCard[] = [
         'Cost-efficient scalability with on-demand state replication',
       ],
     ],
-    url: '/ecosystem/polygon-id-state-replication',
+    url: '/ecosystem/polygon-id-state-replication/',
   },
 ]
 

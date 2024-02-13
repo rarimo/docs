@@ -22,7 +22,7 @@ const FeatureList: FeatureItem[] = [
         bridging capabilities.
       </>
     ),
-    url: "./overview",
+    url: "./overview/",
   },
   {
     title: "Tutorials",
