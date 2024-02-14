@@ -1,10 +1,12 @@
 ---
 desctiption: Connect social graphs across multiple chains
 ---
+import OutLink from "@site/src/components/OutLink";
+
 
 # Social graphs
 
-Protocols like [Lens](https://www.lens.xyz/) and [CyberConnect](https://cyberconnect.me/) are innovative solutions that leverage blockchain technology to build on-chain social graphs. These protocols use non-fungible tokens (NFTs), SBTs to represent user profiles, publications, and relationships between them, while media files are typically stored in decentralized storage systems.
+Protocols like <OutLink href="https://www.lens.xyz/">Lens</OutLink> and <OutLink href="https://cyberconnect.me/">CyberConnect</OutLink> are innovative solutions that leverage blockchain technology to build on-chain social graphs. These protocols use non-fungible tokens (NFTs), SBTs to represent user profiles, publications, and relationships between them, while media files are typically stored in decentralized storage systems.
 
 These protocols typically face the following challenges when going multi-chain:
 
@@ -22,7 +24,7 @@ These protocols typically face the following challenges when going multi-chain:
 
 ## Identity protocol
 
-Rarimo has integrated a self-sovereign identity protocol based on the [Iden3 protocol](https://iden3.io/). It implements the [W3C Distributed Identity standard](https://www.w3.org/TR/did-core/), meaning each user is identified by a globally unique identifier(DID) and can possess any number of claims signed by a third-party identity provider. This approach makes user identity seamlessly portable between different chains.
+Rarimo has integrated a self-sovereign identity protocol based on the  <OutLink href="https://iden3.io/">Iden3 protocol</OutLink>. It implements the <OutLink href="https://www.w3.org/TR/did-core/">W3C Distributed Identity standard</OutLink>, meaning each user is identified by a globally unique identifier(DID) and can possess any number of claims signed by a third-party identity provider. This approach makes user identity seamlessly portable between different chains.
 
 Unlike other identity representation methods like Soul Bound Tokens (SBTs) or Non-Fungible Tokens (NFTs), Rarimo allows users to utilize cryptographic proof as their identity representation. This cryptographic proof is comprised of two main components:
 

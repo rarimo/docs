@@ -4,16 +4,18 @@ slug: /ecosystem/worldcoin-state-replication
 description: World ID State Replication makes it possible to use World ID on any EVM-compatible chain.
 ---
 
+import OutLink from "@site/src/components/OutLink";
+
 # World ID State Replication
 
-[World ID](https://worldcoin.org/world-id) is an identity protocol that relies on biometrics and zero-knowledge proofs to enable privacy-preserving personhood verification. It's a vital component of the [WorldCoin](https://worldcoin.global) ecosystem.
+<OutLink href="https://worldcoin.org/world-id">World ID</OutLink> is an identity protocol that relies on biometrics and zero-knowledge proofs to enable privacy-preserving personhood verification. It's a vital component of the <OutLink href="https://worldcoin.global">WorldCoin</OutLink> ecosystem.
 
 WorldCoin keeps a Merkle tree of all existing identities on Ethereum Mainnet. The root of this tree is used in on-chain zero-knowledge proofs. Thus, it must be replicated to any chain where users want to use their World ID.
 
 
 ## World ID state bridge
 
-To enable cross-chain usage, WorldCoin has implemented the [World ID State Bridge](https://github.com/worldcoin/world-id-state-bridge).
+To enable cross-chain usage, WorldCoin has implemented the <OutLink href="https://github.com/worldcoin/world-id-state-bridge">World ID State Bridge</OutLink>.
 
 <!-- TODO: rearimize the chart -->
 ![World ID State Bridge](/img/world-id-state-bridge.png)

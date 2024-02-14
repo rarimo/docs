@@ -127,7 +127,7 @@ const baseLayerCards: HomeCard[] = [
         </a>
         <a
           href={'https://scan.rarimo.com/proposals'}
-          rel="noopener noreferrer"
+          rel="nofollow noopener noreferrer"
           className={clsx('heroButtonSecondary', styles.linksButton)}
           target="_blank"
         >

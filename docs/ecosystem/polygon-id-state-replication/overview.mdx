@@ -2,6 +2,7 @@
 slug: /ecosystem/polygon-id-state-replication
 description: Polygon ID State Replication allows Polygon ID users to use their identities on other EVM-compatible chains.
 ---
+import OutLink from "@site/src/components/OutLink";
 
 # Polygon ID State Replication
 
@@ -33,7 +34,7 @@ The user then generates a ZKP using the Polygon ID Wallet app and submits it to 
 
 To complete the demo and claim a soulbound token on Ethereum's Sepolia Testnet, follow these steps:
 
-1. Install Polygon ID Wallet from [AppStore](https://apps.apple.com/us/app/polygon-id/id1629870183) or [Play Market](https://play.google.com/store/apps/details?id=com.polygonid.wallet&hl=en_US) and create an identity;
-2. Get a KYC Age credential by scanning a QR code [here](https://admin-panel.polygon.mainnet-beta.rarimo.com/credentials/scan-link/ade26bde-af43-445b-be72-907693fe6cfd) with your Polygon ID Wallet. Then, wait 2 minutes for the identity provider state to be committed and propagated on-chain;
-3. Open the [Demo DApp](https://polygon.mainnet-beta.rarimo.com/) and scan the QR-code with your Polygon ID Wallet. Confirm the proof generation;
+1. Install Polygon ID Wallet from <OutLink href="https://apps.apple.com/us/app/polygon-id/id1629870183">AppStore</OutLink> or <OutLink href="https://play.google.com/store/apps/details?id=com.polygonid.wallet&hl=en_US">Play Market</OutLink> and create an identity;
+2. Get a KYC Age credential by scanning a QR code <OutLink href="https://admin-panel.polygon.mainnet-beta.rarimo.com/credentials/scan-link/ade26bde-af43-445b-be72-907693fe6cfd">here</OutLink> with your Polygon ID Wallet. Then, wait 2 minutes for the identity provider state to be committed and propagated on-chain;
+3. Open the <OutLink href="https://polygon.mainnet-beta.rarimo.com/">Demo DApp</OutLink> and scan the QR-code with your Polygon ID Wallet. Confirm the proof generation;
 4. Once the DApp receives the proof, submit it to the Verifier Contract using MetaMask;

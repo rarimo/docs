@@ -3,6 +3,8 @@ description: TSS is an efficient way to secure cross-chain operations.
 # TODO: rewrite and actualize this document
 ---
 
+import OutLink from "@site/src/components/OutLink";
+
 # Threshold signature(TSS)
 
 All operations should be signed with ECDSA secp256k1 threshold (t-n) signature.
@@ -20,4 +22,4 @@ Core operation entry contains the information about some data to sign. Operation
 - change key by adding party
 - change key by removing party
 
-The [tss-svc](https://github.com/rarimo/tss-svc) is a party implementation that is responsible for generating/resharing TSS keys and signing operations.
+The <OutLink href="https://github.com/rarimo/tss-svc">tss-svc</OutLink> is a party implementation that is responsible for generating/resharing TSS keys and signing operations.

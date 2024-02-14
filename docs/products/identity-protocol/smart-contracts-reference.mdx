@@ -1,9 +1,11 @@
 ---
 ---
+import OutLink from "@site/src/components/OutLink";
+
 
 # Smart contracts reference
 
-Rarimo builds upon the basic [Iden3 smart contracts](https://github.com/iden3/contracts) and adapts them for cross-chain usage.
+Rarimo builds upon the basic <OutLink href="https://github.com/iden3/contracts">Iden3 smart contracts</OutLink> and adapts them for cross-chain usage.
 
 :::note
 Currently, identity smart contracts are available only for EVM-compatible chains.
@@ -55,7 +57,7 @@ event StateTransited(
 - `transitState` - the primary function of the contract that performs state transitions. It receives the identity, two states (old and new), a boolean whether it is genesis or not, and ZK Proof, which proves that the state transition from old to new state of this identity is valid and fair;
 - `StateTransited` - Emited after every state transition. Rarimo's oracles use it to ingest the state transitions;
 
-See [State.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/State.sol) for the full implementation.
+See <OutLink href="https://github.com/rarimo/identity-contracts/blob/master/contracts/State.sol">State.sol</OutLink> for the full implementation.
 
 ### `LightweightState`
 
@@ -63,10 +65,10 @@ See [State.sol](https://github.com/rarimo/identity-contracts/blob/master/contrac
 
 | Chain    | ChainID    | Address                                                                                                                                       |
 | -------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ethereum | `1`        | `0xF3e2491627b9eF3816A4143010B39B2B67F33E55` \([Etherscan](https://etherscan.io/address/0xF3e2491627b9eF3816A4143010B39B2B67F33E55)\)         |
-| Polygon  | `137`      | `0xf9bA419ad9c82451d31d89917db61253a1e46B3C` \([Polygonscan](https://polygonscan.com/address/0xf9bA419ad9c82451d31d89917db61253a1e46B3C)\)    |
-| Sepolia  | `11155111` | `0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315` \([Etherscan](https://sepolia.etherscan.io/address/0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315)\) |
-| Goerli   | `5`        | `0x0F08e8EA245E63F2090Bf3fF3772402Da9c047ee` \([Etherscan](https://goerli.etherscan.io/address/0x0F08e8EA245E63F2090Bf3fF3772402Da9c047ee)\)  |
+| Ethereum | `1`        | `0xF3e2491627b9eF3816A4143010B39B2B67F33E55` \(<OutLink href="https://etherscan.io/address/0xF3e2491627b9eF3816A4143010B39B2B67F33E55">Etherscan</OutLink>\)         |
+| Polygon  | `137`      | `0xf9bA419ad9c82451d31d89917db61253a1e46B3C` \(<OutLink href="https://polygonscan.com/address/0xf9bA419ad9c82451d31d89917db61253a1e46B3C">Polygonscan</OutLink>\)    |
+| Sepolia  | `11155111` | `0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315` \(<OutLink href="https://sepolia.etherscan.io/address/0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315">Etherscan</OutLink>\) |
+| Goerli   | `5`        | `0x0F08e8EA245E63F2090Bf3fF3772402Da9c047ee` \(<OutLink href="https://goerli.etherscan.io/address/0x0F08e8EA245E63F2090Bf3fF3772402Da9c047ee">Etherscan</OutLink>\)  |
 
 #### Interface
 
@@ -94,7 +96,7 @@ contract LightweightState is ILightweightState, UUPSSignableUpgradeable, Signers
 - `identitiesStatesRoot` - another tree root (made specifically for the Lightweight contract) that stores the issuer ID, its state, and timestamp of state change (gist doesn't have timestamps).
 - `signedTransitState()` - state transition function that requires TSS instead of ZKP. It verifies the signature and changes the roots to the ones provided. After that, the user can submit a ZKP using the new root on the destination chain.
 
-See [LightweightState.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/LightweightState.sol) for the full implementation.
+See <OutLink href="https://github.com/rarimo/identity-contracts/blob/master/contracts/LightweightState.sol">LightweightState.sol</OutLink> for the full implementation.
 
 ## Verifier contracts
 
@@ -134,7 +136,7 @@ This contract uses the `zkpQueriesStorage` contract to store query IDs and the `
 
 Using both functions, you can implement your custom business logic, and only verified identity can use it. It is also possible to restrict certain issuers, i.e., credentials from them can't be proven because they are not on the allowed list.
 
-See [BaseVerifier.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/verifiers/BaseVerifier.sol) for the full implementation.
+See <OutLink href="https://github.com/rarimo/identity-contracts/blob/master/contracts/verifiers/BaseVerifier.sol">BaseVerifier.sol</OutLink> for the full implementation.
 
 ### `IdentityVerifier`
 
@@ -159,7 +161,7 @@ contract IdentityVerifier is IIdentityVerifier, BaseVerifier {
 - `_identitiesProofInfo` - mapping of identity to the struct that stores address and boolean (whether the identity is proven or not);
 - `_proveIdentity(ProveIdentityParams calldata proveIdentityParams_)` - verifies the proof and stores the info in mentioned mappings and emits an `IdentityProved` event that contains the user's ID and address;
 
-See [IdentityVerifier.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/verifiers/IdentityVerifier.sol) for the full implementation.
+See <OutLink href="https://github.com/rarimo/identity-contracts/blob/master/contracts/verifiers/IdentityVerifier.sol">IdentityVerifier.sol</OutLink> for the full implementation.
 
 ## Other contracts
 
@@ -215,7 +217,7 @@ contract ZKPQueriesStorage is IZKPQueriesStorage, OwnableUpgradeable, UUPSUpgrad
 - `setZKPQuery(queryId_, queryInfo_)` - adds a new query, stores its information, and emits the event `ZKPQuerySet`.
 - `removeZKPQuery(string memory queryId_)` - removes a query and its information and emits the event `ZKPQueryRemoved`.
 
-See [ZKPQueriesStorage.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/ZKPQueriesStorage.sol) for the full implementation.
+See <OutLink href="https://github.com/rarimo/identity-contracts/blob/master/contracts/ZKPQueriesStorage.sol">ZKPQueriesStorage.sol</OutLink> for the full implementation.
 
 ### `QueryValidator`
 
@@ -318,14 +320,14 @@ abstract contract QueryValidator is IQueryValidator, OwnableUpgradeable, UUPSUpg
   It means that the user can provide proof for not the latest state, and it will still be valid.
 - `verify` verifies the ZKP (via verifier call) and Merkle proof with additional checks on ZKP, such as checking that the query hash is correct.
 
-See [QueryValidator.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/validators/QueryValidator.sol) for the full implementation.
+See <OutLink href="https://github.com/rarimo/identity-contracts/blob/master/contracts/validators/QueryValidator.sol">QueryValidator.sol</OutLink> for the full implementation.
 
 ### `PoseidonFacade`
 
 `PoseidonFacade` is an Iden3 library that implements a ZK-friendly Poseidon hash function in solidity.
 Solidity implementation allows hashing up to 6 `uint256` elements.
 
-More information about that can be found [here](https://github.com/iden3/circomlibjs/blob/main/src/poseidon_gencontract.js).
+More information about that can be found at <OutLink href="https://github.com/iden3/circomlibjs/blob/main/src/poseidon_gencontract.js">poseidon_gencontract.js</OutLink>.
 
 ```solidity
 library PoseidonFacade {
@@ -364,4 +366,4 @@ library PoseidonFacade {
 
 It provides several functions for a variable number of elements to be hashed (`poseidon1`, `poseidon2`, ...) and `poseidonSponge`, which hashes the array in chunks of 6 elements.
 
-See [Poseidon.sol](https://github.com/iden3/contracts/blob/master/contracts/lib/Poseidon.sol) for the full implementation.
+See <OutLink href="https://github.com/iden3/contracts/blob/master/contracts/lib/Poseidon.sol">Poseidon.sol</OutLink> for the full implementation.

@@ -1,6 +1,7 @@
 ---
 description: 'Prove ownership of non-fungible tokens on any chain'
 ---
+import OutLink from "@site/src/components/OutLink";
 
 # Cross-chain proofs
 
@@ -14,13 +15,13 @@ You should contact the team to register your specific tokens in Rarimo Protocol.
 
 For transferrable tokens, you have to lock them in the Rarimo bridge smart contract.
 
-1. Approve bridge smart contract to transfer NFT using `setApprovalForAll` method from [ERC721](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol#L136) or [ERC1155](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/ERC1155.sol#L100) standard. It should be done only the first time for each NFT contract;
+1. Approve bridge smart contract to transfer NFT using `setApprovalForAll` method from <OutLink href="https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol#L136">ERC721</OutLink> or <OutLink href="https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/ERC1155.sol#L100">ERC1155</OutLink> standard. It should be done only the first time for each NFT contract;
 1. Call the deposit method on the bridge contract. For ERC721 [`depositERC721`](/products/bridging-protocol/smart-contracts-reference/evm#depositerc721), for ERC1155 [`depositERC1155`](/products/bridging-protocol/smart-contracts-reference/evm#depositerc1155). Note that you could specify some code that should be called on destination chain using [bundling feature](/products/bridging-protocol/guide-how-to-bundle-transactions);
 1. Once the transaction is processed, Rarimo relayers will automatically mint a wrapped NFT on the destination network;
 
 ## Soulbound tokens
 
-SBTs are non-transferable, so they can't be locked. Thus the bridge needs to verify the sender's ownership of the token. The tokens must follow the [ERC-5192 standard](https://eips.ethereum.org/EIPS/eip-5192).
+SBTs are non-transferable, so they can't be locked. Thus the bridge needs to verify the sender's ownership of the token. The tokens must follow the <OutLink href="https://eips.ethereum.org/EIPS/eip-5192">ERC-5192 standard</OutLink>.
 
 1. Call the [`depositSBT`](/products/bridging-protocol/smart-contracts-reference/evm#depositsbt) method on the bridge contract. It checks the SBT ownership and triggers the corresponding event in the Rarimo Core;
 1. Once the transaction is processed, Rarimo relayers will automatically mint an SBT ownership token on the destination network;
