@@ -186,15 +186,15 @@ module.exports = {
       metadata: [
         {
           name: 'title',
-          content: 'Rarimo Developer Documentation',
+          content: 'Rarimo Docs',
         },
         {
           property: 'og:title',
-          content: 'Rarimo Developer Documentation',
+          content: 'Rarimo Docs',
         },
         {
           property: 'twitter:title',
-          content: 'Rarimo Developer Documentation',
+          content: 'Rarimo Docs',
         },
         {
           name: 'description',
