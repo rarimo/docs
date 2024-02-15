@@ -149,18 +149,18 @@ const sidebars = {
         'ecosystem/polygon-id-state-replication/api-reference',
       ],
     },
-    // {
-    //   type: 'category',
-    //   label: 'WorldCoin State Replication',
-    //   link: {type: 'doc', id: 'ecosystem/worldcoin-state-replication/overview'},
-    //   collapsed: true,
-    //   items: [
-    //     'ecosystem/worldcoin-state-replication/guide-state-replication-for-world-id',
-    //     'ecosystem/worldcoin-state-replication/tutorial-using-world-id-zero-knowledge-proofs-in-avalanche-dapp',
-    //     'ecosystem/worldcoin-state-replication/smart-contracts-reference',
-    //     'ecosystem/worldcoin-state-replication/api-reference',
-    //   ],
-    // },
+    {
+      type: 'category',
+      label: 'WorldCoin State Replication',
+      link: {type: 'doc', id: 'ecosystem/worldcoin-state-replication/overview'},
+      collapsed: true,
+      items: [
+        'ecosystem/worldcoin-state-replication/guide-state-replication-for-world-id',
+        'ecosystem/worldcoin-state-replication/tutorial-using-world-id-zero-knowledge-proofs-in-avalanche-dapp',
+        'ecosystem/worldcoin-state-replication/smart-contracts-reference',
+        'ecosystem/worldcoin-state-replication/api-reference',
+      ],
+    },
     {
       type: 'category',
       label: 'Token Agnostic Payments',
