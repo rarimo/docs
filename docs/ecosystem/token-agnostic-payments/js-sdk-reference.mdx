@@ -1,27 +1,28 @@
 ---
 ---
+import OutLink from "@site/src/components/OutLink";
 
 # JS-SDK reference
 
 The Rarimo SDK checkout packages provide tools to send transactions to blockchains.
 
-For information about creating transactions, see [Creating NFT checkout transactions](/ecosystem/token-agnostic-payments/guide-creating-nft-checkout-transactions).
+For information about creating transactions, see <OutLink href="/ecosystem/token-agnostic-payments/guide-creating-nft-checkout-transactions">Creating NFT checkout transactions</OutLink>.
 
-For example applications, see [rarimo/js-sdk-examples](https://github.com/rarimo/js-sdk-examples/) on GitHub.
+For example applications, see <OutLink href="https://github.com/rarimo/js-sdk-examples/">rarimo/js-sdk-examples</OutLink> on GitHub.
 
 ## @rarimo/nft-checkout
 
-The [@rarimo/nft-checkout](https://www.npmjs.com/package/@rarimo/nft-checkout) package provides tools that swap tokens and create cross-chain transactions based on the Rarimo protocol.
+The <OutLink href="https://www.npmjs.com/package/@rarimo/nft-checkout">@rarimo/nft-checkout</OutLink> package provides tools that swap tokens and create cross-chain transactions based on the Rarimo protocol.
 
 For information about swapping tokens, see [Swapping tokens](/ecosystem/token-agnostic-payments/guide-swapping-tokens).
 
 ## @rarimo/react-nft-checkout
 
-The [@rarimo/react-nft-checkout](https://www.npmjs.com/package/@rarimo/react-nft-checkout) package provides React components that you can use in your UI to create cross-chain transactions with the Rarimo protocol.
+The <OutLink href="https://www.npmjs.com/package/@rarimo/react-nft-checkout">@rarimo/react-nft-checkout</OutLink> package provides React components that you can use in your UI to create cross-chain transactions with the Rarimo protocol.
 
 For information about creating transactions with this package, see [Creating NFT checkout transactions](/ecosystem/token-agnostic-payments/guide-creating-nft-checkout-transactions).
 
-For example applications, see [rarimo/js-sdk-examples](https://github.com/rarimo/js-sdk-examples/) on GitHub.
+For example applications, see <OutLink href="https://github.com/rarimo/js-sdk-examples/">rarimo/js-sdk-examples</OutLink> on GitHub.
 
 ### React transaction flow
 
@@ -53,30 +54,30 @@ The Rarimo SDK provider packages provide tools to interact with in-browser walle
 
 For information about connecting to wallets, see [Connecting to wallets](/products/bridging-protocol/guide-connecting-wallets).
 
-For example applications, see [rarimo/js-sdk-examples](https://github.com/rarimo/js-sdk-examples/) on GitHub.
+For example applications, see <OutLink href="https://github.com/rarimo/js-sdk-examples/">rarimo/js-sdk-examples</OutLink> on GitHub.
 
 ### @rarimo/provider
 
-The [@rarimo/provider](https://www.npmjs.com/package/@rarimo/provider) package provides a common interface for access to wallets (EVM and non-EVM) to you can work with different wallets with similar code.
+The <OutLink href="https://www.npmjs.com/package/@rarimo/provider">@rarimo/provider</OutLink> package provides a common interface for access to wallets (EVM and non-EVM) to you can work with different wallets with similar code.
 
 ### Blockchain-specific providers
 
 These packages provide tools to connect to specific types of wallets:
 
-- [@rarimo/providers-evm](https://rarimo.github.io/js-sdk/modules/_rarimo_providers_evm.html): access to Metamask and Coinbase wallets on EVM-compatible chains via the [`MetamaskProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_providers_evm.MetamaskProvider.html) and [`CoinbaseProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_providers_evm.CoinbaseProvider.html) classes
-- [@rarimo/providers-near](https://rarimo.github.io/js-sdk/modules/_rarimo_providers_near.html): access to NEAR wallets on the NEAR chain via the [`NearProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_providers_near.NearProvider.html) class
-- [@rarimo/providers-solana](https://rarimo.github.io/js-sdk/modules/_rarimo_providers_solana.html): access to Phantom and Solflare wallets on the Solana chain via the [`PhantomProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_providers_solana.PhantomProvider.html) and [`SolflareProvider`](https://rarimo.github.io/js-sdk/classes/_rarimo_providers_solana.SolflareProvider.html) classes
+- <OutLink href="https://rarimo.github.io/js-sdk/modules/_rarimo_providers_evm.html">@rarimo/providers-evm</OutLink>: access to Metamask and Coinbase wallets on EVM-compatible chains via the <OutLink href="https://rarimo.github.io/js-sdk/classes/_rarimo_providers_evm.MetamaskProvider.html">`MetamaskProvider`</OutLink> and <OutLink href="https://rarimo.github.io/js-sdk/classes/_rarimo_providers_evm.CoinbaseProvider.html">`CoinbaseProvider`</OutLink> classes
+- <OutLink href="https://rarimo.github.io/js-sdk/modules/_rarimo_providers_near.html">@rarimo/providers-near</OutLink>: access to NEAR wallets on the NEAR chain via the <OutLink href="https://rarimo.github.io/js-sdk/classes/_rarimo_providers_near.NearProvider.html">`NearProvider`</OutLink> class
+- <OutLink href="https://rarimo.github.io/js-sdk/modules/_rarimo_providers_solana.html">@rarimo/providers-solana</OutLink>: access to Phantom and Solflare wallets on the Solana chain via the <OutLink href="https://rarimo.github.io/js-sdk/classes/_rarimo_providers_solana.PhantomProvider.html">`PhantomProvider`</OutLink> and <OutLink href="https://rarimo.github.io/js-sdk/classes/_rarimo_providers_solana.SolflareProvider.html">`SolflareProvider`</OutLink> classes
 
-The classes that represent specific types of wallets all implement the [`IProvider`](https://rarimo.github.io/js-sdk/interfaces/_rarimo_provider.IProvider.html) interface, which allows you to work with different wallet types in a consistent way.
+The classes that represent specific types of wallets all implement the <OutLink href="https://rarimo.github.io/js-sdk/interfaces/_rarimo_provider.IProvider.html">`IProvider`</OutLink> interface, which allows you to work with different wallet types in a consistent way.
 In this way, each provider has these main methods:
 
-- [`connect()`](https://rarimo.github.io/js-sdk/interfaces/_rarimo_provider.IProvider.html#connect): Connects to the wallet, prompting the user to log in if necessary.
+- <OutLink href="https://rarimo.github.io/js-sdk/interfaces/_rarimo_provider.IProvider.html#connect">`connect()`</OutLink>: Connects to the wallet, prompting the user to log in if necessary.
 
 After you connect, you can access information about the wallet with these properties of the provider object:
 
 - `address`: The wallet address
 - `providerType`: The type of wallet, such as `metamask`
-- `chainType`: The type of chain from the [`ChainTypes`](https://rarimo.github.io/js-sdk/enums/_rarimo_shared.ChainTypes.html) enumeration, such as EVM, Near, or Solana
+- `chainType`: The type of chain from the <OutLink href="https://rarimo.github.io/js-sdk/enums/_rarimo_shared.ChainTypes.html">`ChainTypes`</OutLink> enumeration, such as EVM, Near, or Solana
 
 Here is an example that creates a MetamaskProvider object for a MetaMask wallet on an EVM-compatible chain and prints information about it:
 
@@ -97,13 +98,13 @@ const getMetamaskWalletAddress = async () => {
 ```
 
 Many other methods and properties are available.
-For complete information about providers, see the [@rarimo/provider](https://rarimo.github.io/js-sdk/modules/_rarimo_provider.html) SDK reference and the reference for the chain-specific packages.
+For complete information about providers, see the <OutLink href="https://rarimo.github.io/js-sdk/modules/_rarimo_provider.html">@rarimo/provider</OutLink> SDK reference and the reference for the chain-specific packages.
 
 ### @rarimo/react-provider
 
-The [@rarimo/react-provider](https://www.npmjs.com/package/@rarimo/react-provider) package provides access to in-browser wallets in React applications.
+The <OutLink href="https://www.npmjs.com/package/@rarimo/react-provider">@rarimo/react-provider</OutLink> package provides access to in-browser wallets in React applications.
 
-This package supports the same chain and wallet types as the [@rarimo/provider](https://www.npmjs.com/package/@rarimo/provider) package and the chain-specific packages.
+This package supports the same chain and wallet types as the <OutLink href="https://www.npmjs.com/package/@rarimo/provider">@rarimo/provider</OutLink> package and the chain-specific packages.
 However, instead of using the `createProvider()` function, you use the `useProvider()` function in React applications, as in this example
 
 ```ts

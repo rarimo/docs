@@ -1,6 +1,7 @@
 ---
 draft: true
 ---
+import OutLink from "@site/src/components/OutLink";
 
 # Guide: State Replication for World ID
 
@@ -8,8 +9,8 @@ In this guide, we'll set up the cross-chain identity state replication for World
 
 ## Pre-requisites
 
-- [Postgres DB 13+](https://www.postgresql.org/download/) instance for the relayer service;
-- [Docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/) (optional)
+- <OutLink href="https://www.postgresql.org/download/">Postgres DB 13+</OutLink> instance for the relayer service;
+- <OutLink href="https://docs.docker.com/engine/install/">Docker</OutLink> and <OutLink href="https://docs.docker.com/compose/install/">docker-compose</OutLink> (optional)
 
 ## Setting up relayer
 
@@ -23,7 +24,7 @@ You can pull the pre-build docker image:
 docker pull ghcr.io/rarimo/worldcoin-relayer-svc:v0.1.0
 ```
 
-Or clone the [worldcoin-relayer-svc repository](https://github.com/rarimo/worldcoin-relayer-svc) and build it from the source:
+Or clone the <OutLink href="https://github.com/rarimo/worldcoin-relayer-svc">worldcoin-relayer-svc repository</OutLink> and build it from the source:
 
 ```sh
 git clone git@github.com:rarimo/worldcoin-relayer-svc.git

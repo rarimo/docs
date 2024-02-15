@@ -2,6 +2,7 @@
 description: Learn how to become a Rarimo Mainnet validator
 slug: /products/base-layer/guide-becoming-a-rarimo-validator
 ---
+import OutLink from "@site/src/components/OutLink";
 
 # Guide: Becoming a Rarimo validator
 
@@ -13,10 +14,10 @@ We will also set up a broadcaster service, TSS service, and EVM identity saver s
 To run the node, follow these steps:
 
 1. Download the following:
-   [genesis file](https://storage.cloud.google.com/rarimo-mainnet/core/genesis.json),
-   [address book](https://storage.googleapis.com/rarimo-mainnet/core/addrbook.json),
-   [APP file](https://storage.googleapis.com/rarimo-mainnet/core/app.toml) and
-   [rarimo core binary file](https://storage.googleapis.com/rarimo-mainnet/core/rarimo-core)
+  - <OutLink href="https://storage.cloud.google.com/rarimo-mainnet/core/genesis.json">genesis file</OutLink>
+  - <OutLink href="https://storage.googleapis.com/rarimo-mainnet/core/addrbook.json">address book</OutLink>,
+  - <OutLink href="https://storage.googleapis.com/rarimo-mainnet/core/app.toml">APP file</OutLink>
+  - <OutLink href="https://storage.googleapis.com/rarimo-mainnet/core/rarimo-core">rarimo core binary file</OutLink>
 
 1. Generate validator configs using `rarimo-core` binary
 
@@ -108,7 +109,7 @@ To set up the broadcaster service, you will need your previously generated priva
 
 Follow these steps:
 
-1. Download the [broadcaster server binary](https://storage.googleapis.com/rarimo-mainnet/modules/broadcaster-svc)
+1. Download the <OutLink href="https://storage.googleapis.com/rarimo-mainnet/modules/broadcaster-svc">broadcaster server binary</OutLink>
 
 The following configuration `config.yaml` file should be provided to launch your broadcaster service (paste your private key in hex format):
 
@@ -156,7 +157,7 @@ Currently, it should be one instance per account only for Polygon.
 
 To set up EVM identity saver service, follow these steps:
 
-1. Download (EVM Identity Saver service binary)[https://storage.googleapis.com/rarimo-mainnet/1.0.4/evm-identity-saver-svc]
+1. Download <OutLink href="https://storage.googleapis.com/rarimo-mainnet/1.0.4/evm-identity-saver-svc">EVM Identity Saver service binary</OutLink>
 
 1. The following configuration `config.yaml` file should be provided to launch your oracle:
 
@@ -227,7 +228,7 @@ evm-identity-saver-svc run state-update-voter
 
 To become an active TSS party, you need to follow these steps:
 
-1. Download (TSS service binary)[https://storage.googleapis.com/rarimo-mainnet/1.0.4/tss-svc]
+1. Download <OutLink href="https://storage.googleapis.com/rarimo-mainnet/1.0.4/tss-svc">TSS service binary</OutLink>
 
 1. Generate TSS account (it is recommended to generate the new one and not use it in other services):
 

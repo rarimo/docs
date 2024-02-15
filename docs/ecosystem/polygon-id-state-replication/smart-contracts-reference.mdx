@@ -1,3 +1,5 @@
+import OutLink from "@site/src/components/OutLink";
+
 # Smart contracts reference
 
 <!-- TODO: Add mainnet contracts addresses -->
@@ -12,7 +14,7 @@ The relayer service lazily updates the contract whenever a user wants to submit 
 
 | Chain   | ChainID    | Address                                                                                                                                       |
 | ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sepolia | `11155111` | `0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315` \([Etherscan](https://sepolia.etherscan.io/address/0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315)\) |
+| Sepolia | `11155111` | `0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315` \(<OutLink href="https://sepolia.etherscan.io/address/0x4EaEdFbD2156f5D77b11c4fE073032c4D90Dd315">Etherscan</OutLink>\) |
 
 ### Interface
 
@@ -64,18 +66,18 @@ Also, core functions emit events, which contain the data about changes:
 - `SignGISTDataTransited` contains the data about roots, the previous one and the provided one;
 - `SignStateDataTransited` contains the provided identity state, previous state, and identity ID;
 
-See [LightweightStateV2.sol](https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/LightweightStateV2.sol) for the full implementation.
+See <OutLink href="https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/LightweightStateV2.sol">LightweightStateV2.sol</OutLink> for the full implementation.
 
 ## `QueryVerifier`
 
-It's an implementation of a verifier contract that inherits Iden3 [ZKPVerifier](https://github.com/iden3/contracts/blob/master/contracts/verifiers/ZKPVerifier.sol) that mints an SBT.
+It's an implementation of a verifier contract that inherits Iden3 <OutLink href="https://github.com/iden3/contracts/blob/master/contracts/verifiers/ZKPVerifier.sol">ZKPVerifier</OutLink> that mints an SBT.
 It is configured to work with the KYCAge demo credential.
 
 ### Deployments
 
 | Chain   | ChainID    | Address                                                                                                                                       |
 | ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sepolia | `11155111` | `0xb95734f64f242E976E155594E1E15D39700Cbb26` \([Etherscan](https://sepolia.etherscan.io/address/0xb95734f64f242E976E155594E1E15D39700Cbb26)\) |
+| Sepolia | `11155111` | `0xb95734f64f242E976E155594E1E15D39700Cbb26` \(<OutLink href="https://sepolia.etherscan.io/address/0xb95734f64f242E976E155594E1E15D39700Cbb26">Etherscan</OutLink>\) |
 
 ### Interface
 
@@ -129,9 +131,9 @@ contract QueryVerifier is IQueryVerifier, ZKPVerifier {
 - `_beforeProofSubmit` — hook that performs some necessary security checks;
 - `_afterProofSubmit` — another hook, which mints the SBT in case of valid verification;
 
-The function that verifies the ZKP - `verify(...)` is inherited from the [ZKPVerifier](https://github.com/iden3/contracts/blob/master/contracts/verifiers/ZKPVerifier.sol) contract.
+The function that verifies the ZKP - `verify(...)` is inherited from the <OutLink href="https://github.com/iden3/contracts/blob/master/contracts/verifiers/ZKPVerifier.sol">ZKPVerifier</OutLink> contract.
 
-See [QueryVerifier.sol](https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/QueryVerifier.sol) for the full implementation.
+See <OutLink href="https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/QueryVerifier.sol">QueryVerifier.sol</OutLink> for the full implementation.
 
 ## `VerifiedSBT`
 
@@ -141,7 +143,7 @@ The SBT is awarded to users who complete the Polygon ID x Rarimo demo.
 
 | Chain   | ChainID    | Address                                                                                                                                       |
 | ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sepolia | `11155111` | `0x8A55c9CfDCbCeDcA1A543295a3F54351C335A20f` \([Etherscan](https://sepolia.etherscan.io/address/0x8A55c9CfDCbCeDcA1A543295a3F54351C335A20f)\) |
+| Sepolia | `11155111` | `0x8A55c9CfDCbCeDcA1A543295a3F54351C335A20f` \(<OutLink href="https://sepolia.etherscan.io/address/0x8A55c9CfDCbCeDcA1A543295a3F54351C335A20f">Etherscan</OutLink>\) |
 
 ### Interface
 
@@ -178,4 +180,4 @@ contract VerifiedSBT is
 - `mint(address)` — mints the SBT for the given address;
 - `_beforeTokenTransfer(...)` — prevents the token from being transferred (only burn and mint are available);
 
-See [VerifiedSBT.sol](https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/VerifiedSBT.sol) for the full implementation.
+See <OutLink href="https://github.com/rarimo/polygonid-integration-contracts/blob/master/contracts/VerifiedSBT.sol">VerifiedSBT.sol</OutLink> for the full implementation.

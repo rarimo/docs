@@ -1,6 +1,7 @@
 ---
 draft: true
 ---
+import OutLink from "@site/src/components/OutLink";
 
 # Smart contracts reference
 
@@ -51,7 +52,7 @@ contract IdentityManager is IIdentityManager, Signers {
   Requires the threshold signature of Rarimo signature providers.
   Also, emits the `SignedRootTransited` event, which contains information about the transition (both roots, timestamp of replacement, and current latest root);
 
-For the full implementation, see [IdentityManager.sol](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/IdentityManager.sol) at the GitHub.
+For the full implementation, see <OutLink href="https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/IdentityManager.sol">IdentityManager.sol</OutLink> at the GitHub.
 
 ## `Verifier`
 
@@ -101,7 +102,7 @@ contract Verifier is IVerifier, Initializable {
 - `_beforeProofValidation()` — hook that should be executed before the `verifyProof(...)`;
 - `_afterProofValidation()` — hook that gets executed after the `verifyProof(...)` call;
 
-For the full implementation, see [Verifier.sol](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/Verifier.sol) at the GitHub.
+For the full implementation, see <OutLink href="https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/Verifier.sol">Verifier.sol</OutLink> at the GitHub.
 
 ## `SemaphoreVerifier`
 
@@ -110,7 +111,7 @@ For the full implementation, see [Verifier.sol](https://github.com/rarimo/worldi
 This contract is responsible for verifying the ZKP.
 It has some necessary math functions, constants, and the primary `verifyProof(...)` function.
 It allows proofs to be verified in uncompressed or compressed form.
-Usually, uncompressed form is used, see [BN254 Point Compression](https://2π.com/23/bn254-compression) for further explanation.
+Usually, uncompressed form is used, see <OutLink href="https://2π.com/23/bn254-compression">BN254 Point Compression</OutLink> for further explanation.
 
 ### Interface
 
@@ -135,4 +136,4 @@ contract SemaphoreVerifier is ISemaphoreVerifier {
 - `verifyCompressedProof(...)` — verifies a compressed proof;
 - `verifyProof(...)` — verifies an uncompressed proof;
 
-For the full implementation, see [SemaphoreVerifier.sol](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/vendor/worldcoin/world-id-contracts/SemaphoreVerifier.sol) at the GitHub.
+For the full implementation, see <OutLink href="https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/vendor/worldcoin/world-id-contracts/SemaphoreVerifier.sol">SemaphoreVerifier.sol</OutLink> at the GitHub.

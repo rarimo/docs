@@ -1,5 +1,6 @@
 ---
 ---
+import OutLink from "@site/src/components/OutLink";
 
 # Guide: How to verify a zero knowledge proof in a smart contract
 
@@ -58,7 +59,7 @@ We'll mint 100 tokens to every user born before `01/01/2000`.
 
 ## Step 1: Inherit the `BaseVerifier` contract and add the ZKP verification
 
-We need to import the necessary [Rarimo identity contracts](https://github.com/rarimo/identity-contracts/tree/master) and inherit the [`BaseVerifier`](https://github.com/rarimo/identity-contracts/blob/aeb929ccc3fa8ab508fd7576f9fa853a081e5010/contracts/verifiers/BaseVerifier.sol) contract.
+We need to import the necessary <OutLink href="https://github.com/rarimo/identity-contracts/tree/master">Rarimo identity contracts</OutLink> and inherit the <OutLink href="https://github.com/rarimo/identity-contracts/blob/aeb929ccc3fa8ab508fd7576f9fa853a081e5010/contracts/verifiers/BaseVerifier.sol">`BaseVerifier`</OutLink> contract.
 
 Then, we need to add the ZKP verification logic into our `mint` method. Our contract must also define the query ID; in our case, it's `AGE_PROOF`. It is the identifier of the ZKP Request that we will create in the next step.
 
@@ -130,11 +131,11 @@ contract AgeRestrictedERC20 is BaseVerifier, IERC20 {
 
 ### Step 2: Deploy the contracts
 
-We need to deploy our `AgeRestrictedERC20` alongside `PoseidonFacade`, `ZKPQueriesStorage` и `QueryValidator` contracts. To do that, use the scripts and instructions provided [here](https://github.com/rarimo/identity-contracts/tree/master).
+We need to deploy our `AgeRestrictedERC20` alongside `PoseidonFacade`, `ZKPQueriesStorage` и `QueryValidator` contracts. To do that, use the scripts and instructions provided <OutLink href="https://github.com/rarimo/identity-contracts/tree/master">here</OutLink>.
 
 ## Step 3: Set the proof query
 
-After the contract deployment, we should design an [Iden3 proof query](https://docs.iden3.io/protocol/querylanguage/) specifying the zero-knowledge proof's inputs and operations.
+After the contract deployment, we should design an <OutLink href="https://docs.iden3.io/protocol/querylanguage/">Iden3 proof query</OutLink> specifying the zero-knowledge proof's inputs and operations.
 
 Here's a query that verifies that the user was born before 01/01/2000:
 
@@ -156,10 +157,10 @@ The query has the following fields:
 1. `schema`: hash of the credential schema;
 1. `claimPathKey`: represents the path to the query key inside the merklized credential (In our case, it is the path to the `birthday` key).
 1. `operator`: is either 1, 2, 3, 4, 5 or 6 (`less-than` operator we need is `2`);
-1. `credentialAtomicQueryMTPV2OnChain`: ID of the [Iden3 circuit](https://docs.iden3.io/protocol/main-circuits/) used to evaluate the proof. Set to `credentialAtomicQueryMTPV2OnChain`
+1. `credentialAtomicQueryMTPV2OnChain`: ID of the <OutLink href="https://docs.iden3.io/protocol/main-circuits/">Iden3 circuit</OutLink> used to evaluate the proof. Set to `credentialAtomicQueryMTPV2OnChain`
 1. `value`: represents the threshold value you are querying (01/01/2000 date in our case);
 
-You can run the [Golang script](https://go.dev/play/p/rnrRbxXTRY6) to get schema hash and `claimPathKey` using your schema.
+You can run the <OutLink href="https://go.dev/play/p/rnrRbxXTRY6">Golang script</OutLink> to get schema hash and `claimPathKey` using your schema.
 
 To set the query for our smart contracts, use the following script:
 
@@ -215,6 +216,6 @@ main().catch((error) => {
 
 ## Step 4: Testing it out
 
-You need to integrate RariMe snap into your DApp to test the flow. Use [this snippet](https://github.com/rarimo/rarime/tree/main/packages/connector#send-proof-to-custom-verifier-contract) to generate and submit the proof inside your application.
+You need to integrate RariMe snap into your DApp to test the flow. Use <OutLink href="https://github.com/rarimo/rarime/tree/main/packages/connector#send-proof-to-custom-verifier-contract">this snippet</OutLink> to generate and submit the proof inside your application.
 
 As a result, you should receive 100 minted tokens at your address.

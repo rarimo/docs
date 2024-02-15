@@ -1,6 +1,7 @@
 ---
 description: Proof of Humanity smart contracts interfaces, deployments and reference.
 ---
+import OutLink from "@site/src/components/OutLink";
 
 # Smart contracts reference
 
@@ -16,8 +17,8 @@ The SBT awarded to users who complete the Proof of Humanity verification.
 
 | Chain   | ChainID | Address                                                                                                                                      |
 | ------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| Polygon | `137`   | `0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373` \([Polygonscan](https://polygonscan.com/address/0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373)\)   |
-| Goerli  | `5`     | `0xfaA7e7F14a2dCAD537d0141533bB58D62dD8022c` \([Etherscan](https://goerli.etherscan.io/address/0xfaA7e7F14a2dCAD537d0141533bB58D62dD8022c)\) |
+| Polygon | `137`   | `0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373` \(<OutLink href="https://polygonscan.com/address/0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373">Polygonscan</OutLink>\)   |
+| Goerli  | `5`     | `0xfaA7e7F14a2dCAD537d0141533bB58D62dD8022c` \(<OutLink href="https://goerli.etherscan.io/address/0xfaA7e7F14a2dCAD537d0141533bB58D62dD8022c">Etherscan</OutLink>\) |
 
 ### Interface
 
@@ -53,7 +54,7 @@ contract VerifiedSBT is
 - `onlyVerifier()` - modifier that only allows calls by the verifier contract;
 - `mint(address)` - mints the SBT for the given address;
 
-See [VerifiedSBT.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/tokens/VerifiedSBT.sol) for the full implementation.
+See <OutLink href="https://github.com/rarimo/identity-contracts/blob/master/contracts/tokens/VerifiedSBT.sol">VerifiedSBT.sol</OutLink> for the full implementation.
 
 ## `SBTIdentityVerifier`
 
@@ -63,8 +64,8 @@ It's an implementation of a verifier contract that mints a Proof of Humanity SBT
 
 | Chain   | ChainID | Address                                                                                                                                      |
 | ------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| Polygon | `137`   | `0x7DdAde70efADf832A600ba483FAD26fCA477FE2A` \([Polygonscan](https://polygonscan.com/address/0x7DdAde70efADf832A600ba483FAD26fCA477FE2A)\)   |
-| Goerli  | `5`     | `0x86906AbAAfA7F58Fb4D3125BD1971Fcf04F52CDd` \([Etherscan](https://goerli.etherscan.io/address/0x86906AbAAfA7F58Fb4D3125BD1971Fcf04F52CDd)\) |
+| Polygon | `137`   | `0x7DdAde70efADf832A600ba483FAD26fCA477FE2A` \(<OutLink href="https://polygonscan.com/address/0x7DdAde70efADf832A600ba483FAD26fCA477FE2A">Polygonscan</OutLink>\)   |
+| Goerli  | `5`     | `0x86906AbAAfA7F58Fb4D3125BD1971Fcf04F52CDd` \(<OutLink href="https://goerli.etherscan.io/address/0x86906AbAAfA7F58Fb4D3125BD1971Fcf04F52CDd">Etherscan</OutLink>\) |
 
 ### Interface
 
@@ -102,4 +103,4 @@ contract SBTIdentityVerifier is ISBTIdentityVerifier, BaseVerifier {
 
 - `_proveIdentity(...)` checks the validity for a ZKP and mints an SBT;
 
-See [SBTIdentityVerifier.sol](https://github.com/rarimo/identity-contracts/blob/master/contracts/verifiers/SBTIdentityVerifier.sol) for the full implementation.
+See <OutLink href="https://github.com/rarimo/identity-contracts/blob/master/contracts/verifiers/SBTIdentityVerifier.sol">SBTIdentityVerifier.sol</OutLink> for the full implementation.

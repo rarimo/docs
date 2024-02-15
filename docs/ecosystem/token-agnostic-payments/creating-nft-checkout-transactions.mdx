@@ -1,6 +1,7 @@
 ---
 slug: /ecosystem/token-agnostic-payments/guide-creating-nft-checkout-transactions
 ---
+import OutLink from "@site/src/components/OutLink";
 
 # Guide: Creating NFT checkout transactions
 
@@ -12,11 +13,11 @@ See the following sections:
 
 ## Examples
 
-This example shows how to create a transaction in a React application: [transaction-react](https://github.com/rarimo/js-sdk-examples/tree/main/transaction-react).
+This example shows how to create a transaction in a React application: <OutLink href="https://github.com/rarimo/js-sdk-examples/tree/main/transaction-react">transaction-react</OutLink>.
 
 ## Creating NFT checkout transactions in JavaScript/TypeScript applications {#javascript}
 
-The [@rarimo/nft-checkout](https://www.npmjs.com/package/@rarimo/nft-checkout) package provides tools that create cross-chain transactions with on the Rarimo protocol.
+The <OutLink href="https://www.npmjs.com/package/@rarimo/nft-checkout">@rarimo/nft-checkout</OutLink> package provides tools that create cross-chain transactions with on the Rarimo protocol.
 
 Sending a transaction with the SDK includes these main steps:
 
@@ -199,11 +200,11 @@ When you send multiple tokens to the transaction in this way, Rarimo takes token
 
 ## Creating NFT checkout transactions with React components {#react-applications}
 
-The [@rarimo/react-nft-checkout](https://www.npmjs.com/package/@rarimo/react-nft-checkout) package provides React components that you can use in your UI to create cross-chain transactions with the Rarimo protocol.
+The <OutLink href="https://www.npmjs.com/package/@rarimo/react-nft-checkout">@rarimo/react-nft-checkout</OutLink> package provides React components that you can use in your UI to create cross-chain transactions with the Rarimo protocol.
 
 To create a transaction with the React components, follow these general steps:
 
-1. Create an object of the [CheckoutOperationParams](https://rarimo.github.io/js-sdk/types/_rarimo_nft_checkout.CheckoutOperationParams.html) type that includes the source chain, the destination chain, the recipient, and the price of the NFT:
+1. Create an object of the <OutLink href="https://rarimo.github.io/js-sdk/types/_rarimo_nft_checkout.CheckoutOperationParams.html">CheckoutOperationParams</OutLink> type that includes the source chain, the destination chain, the recipient, and the price of the NFT:
 
    ```tsx
    import { CheckoutOperationParams, Price } from '@rarimo/nft-checkout'
