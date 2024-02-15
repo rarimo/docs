@@ -23,7 +23,7 @@ const metaDescription =
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
   /** Meta information */
-  title: 'Rarimo Developer Portal',
+  title: 'Rarimo Docs',
   // TODO: better description
   tagline: metaDescription,
   url: getUrl(),
