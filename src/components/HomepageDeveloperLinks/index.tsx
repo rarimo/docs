@@ -10,7 +10,7 @@ type LinkItem = {
 //todo: Add links
 const DeveloperLinksList: LinkItem[] = [
   {
-    title: "Integrate your dApp",
+    title: "Integrate your DApp",
     items: [
       { title: "Fetch token prices", url: "#" },
       { title: "Create a trade", url: "#" },

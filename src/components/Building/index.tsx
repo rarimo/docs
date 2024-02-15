@@ -23,7 +23,7 @@ export default function Building(): JSX.Element {
           </h2>
           <p className={clsx("building__text", styles.buildingText)}>
             {
-              "Build no-code and low-code identity enabled dApps with \nRarimo Developer Dashboard"
+              "Build no-code and low-code identity enabled DApps with \nRarimo Developer Dashboard"
             }
           </p>
           <Link
