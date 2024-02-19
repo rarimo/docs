@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Ecosystem/Polygon ID State Replication:
   - Added information about the `verify-proxy` service;
+- Use-cases:
+  - Added the "Anonymous Age Verification for the Adult Entertainment Industry" page;
+
 
 ## [2.0.1] - 05-02-2024
 
