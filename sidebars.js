@@ -22,6 +22,7 @@ const sidebars = {
         'use-cases/social-graphs',
         'use-cases/cross-chain-proofs',
         'use-cases/multi-chain-mints',
+        'use-cases/organizational-access-control',
       ],
     },
     {
