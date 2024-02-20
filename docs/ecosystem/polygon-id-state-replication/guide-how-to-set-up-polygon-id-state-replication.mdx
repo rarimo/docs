@@ -27,7 +27,7 @@ The Relayer service is responsible for replicating the Polygon ID state on deman
 You can pull the pre-build docker image:
 
 ```sh
-docker pull ghcr.io/rarimo/identity-relayer-svc:v1.0.3
+docker pull ghcr.io/rarimo/identity-relayer-svc:v1.0.4
 ```
 
 Or clone the <OutLink href="https://github.com/rarimo/identity-relayer-svc">repository</OutLink> and build it from the source:
@@ -70,7 +70,9 @@ core:
   addr: tcp://core-api.mainnet-beta.rarimo.com:26657
 
 cosmos:
-  addr: rpc.node1.mainnet-beta.rarimo.com:9090
+  addr:  core-api.node1.mainnet-beta.rarimo.com:443
+  enable_tls: true
+
 
 evm:
   chains:
