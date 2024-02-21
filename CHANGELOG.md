@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.2] - 21-02-2024
+
 ### Added
 
 - Ecosystem/Polygon ID State Replication:
@@ -17,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Ecosystem/Polygon ID State Replication:
   - Updated the relayer version in the state replication guide;
+- Tweaked meta titles, description, H1s and outlinks for SEO performance;
 
 ## [2.0.1] - 05-02-2024
 
