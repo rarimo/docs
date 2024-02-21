@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `noindex` directive for staging
+
 ## [2.0.2] - 21-02-2024
 
 ### Added
