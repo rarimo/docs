@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.3] - 23-02-2024
+
 ### Added
 
 - `robots.txt` file;
+
+### Changed
+
+- Embedded promising SEO keywords;
 
 ### Fixed
 

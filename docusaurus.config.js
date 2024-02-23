@@ -18,7 +18,7 @@ function isStaging() {
 }
 
 const metaDescription =
-  'Learn to use cross-chain self-sovereign identity protocol, zero-knowledge proofs, RariMe Snap, token bridging, and more.'
+  'Learn to use cross-chain self-sovereign digital identity protocol, zero-knowledge proofs, RariMe Snap, token bridging, and more.'
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
