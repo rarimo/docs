@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.3] - 23-02-2024
 
+### Fixed
+
+- Prod deployment pipeline;
+
+## [2.0.3] - 23-02-2024
+
 ### Added
 
 - `robots.txt` file;
