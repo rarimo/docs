@@ -92,8 +92,8 @@ const sidebars = {
       collapsed: true,
       items: [
         'products/rarime/guide-for-issuers',
-        'products/rarime/js-connector-reference',
         'products/rarime/interoperability-with-external-credentials',
+        'products/rarime/js-connector-reference',
       ],
     },
 

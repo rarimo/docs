@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Products/Rarime:
+  - Added the "interoperability with external credentials" page;
+
 ## [2.0.5] - 23-02-2024
 
 ### Fixed
@@ -37,8 +42,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Products/Rarime:
-  - Added the "interoperability with external credentials" page;
 - Ecosystem/Polygon ID State Replication:
   - Added information about the `verify-proxy` service;
   - Information about `Query-based request` that we use and fixed flow logic a bit;
