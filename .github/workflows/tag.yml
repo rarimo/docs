@@ -36,6 +36,7 @@ jobs:
         run: |
           export URL="https://docs.rarimo.com"
           export BASE_URL="/"
+          export STAGING="false"
           . $(werf ci-env github --as-file)
           werf export --dev web --tag ghcr.io/$GITHUB_REPOSITORY:$GITHUB_REF_NAME
 

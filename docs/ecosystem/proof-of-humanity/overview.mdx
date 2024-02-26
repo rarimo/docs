@@ -1,21 +1,22 @@
 ---
 slug: /ecosystem/proof-of-humanity
-description: Proof of Humanity allows platforms to confirm that accounts are operated by real people.
+description: Proof of Humanity provides robust captcha altervnatives to confirm that accounts are operated by real people.
 # TODO: - Add diagrams & screenshots
 ---
+import OutLink from "@site/src/components/OutLink";
 
 # Proof of Humanity
 
 ## The problem
 
-Web3 dApps and services have long been plagued by abuse from spam and bots, and as AI proliferates, the problem is set to worsen.
+Web3 DApps and services have long been plagued by abuse from spam and bots, and as AI proliferates, the problem is set to worsen.
 In light of this, robust Proof-of-Humanity solutions that allow platforms to confirm that accounts are operated by real people are becoming increasingly vital.
 
-As Vitalik Buterin outlined in [What do I think about biometric proof of personhood?](https://vitalik.eth.limo/general/2023/07/24/biometric.html), one of the most pressing challenges currently facing the web3 community, is how to provide Proofs-of-Humanity that are not only incontestable, but upholds the principle of web3 including privacy, decentralization and user-based ownership.
+As Vitalik Buterin outlined in <OutLink href="https://vitalik.eth.limo/general/2023/07/24/biometric.html">What do I think about biometric proof of personhood?</OutLink>, one of the most pressing challenges currently facing the web3 community, is how to provide Proofs-of-Humanity that are not only incontestable, but upholds the principle of web3 including privacy, decentralization and user-based ownership.
 
 ## How the solution works
 
-Rarimo has achieved this by aggregating four identity providers: [Worldcoin](https://worldcoin.org/), [Unstoppable Domains](https://unstoppabledomains.com/), [Gitcoin Passport](https://passport.gitcoin.co/), [Kleros Proof of Humanity](https://proofofhumanity.id/) and [Civic](https://www.civic.com/).
+Rarimo has achieved this by aggregating four identity providers: <OutLink href="https://worldcoin.org/">Worldcoin</OutLink>, <OutLink href="https://unstoppabledomains.com/">Unstoppable Domains</OutLink>, <OutLink href="https://passport.gitcoin.co/">Gitcoin Passport</OutLink>, <OutLink href="https://proofofhumanity.id/">Kleros Proof of Humanity</OutLink> and <OutLink href="https://www.civic.com/">Civic</OutLink>.
 in a plug-in that allows users to generate on-chain proofs which verify they’ve met requirements only a real person could meet.
 
 For instance, if a user owns an Unstoppable Domain, Rarimo will enable them to generate a Proof-of-Humanity on the basis that the complex steps required for ownership, including possessing and making payments from a bank account, could not be executed by a bot.
@@ -34,13 +35,13 @@ By aggregating identity providers, Rarimo allows both users and platforms to cho
 They could, for instance, opt for biometrics via World Coin or Civic, or social graph activities via GitCoin Passport.
 
 This is a vital step in ensuring that no one identity provider or method of verification gains control of the web3 identity space through network effect.
-It safeguards a scenario where, for instance, biometrics becomes the only way of accessing dApps, forcing users to choose between complicity or exclusion from the space.
+It safeguards a scenario where, for instance, biometrics becomes the only way of accessing DApps, forcing users to choose between complicity or exclusion from the space.
 
 ## Interoperability
 
 As an interoperability protocol, Rarimo makes all Proof-of-Humanities instantly multi-chain and available across all networks.
 
-This enables dApps and smart contracts on any chain to verify users, ensuring that users are not restricted to a single ecosystem.
+This enables DApps and smart contracts on any chain to verify users, ensuring that users are not restricted to a single ecosystem.
 
 Under the hood, Rarimo makes this possible by syncing the on-chain states for each proof across all its connected chains.
 The integration significantly reduces the costs providers would otherwise face publishing states across multiple chains because Rarimo allows states to be published on-demand which prevents unnecessary synchronization fees, and operates several cost-reducing features such as transaction bundling.

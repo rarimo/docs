@@ -1,17 +1,20 @@
 ---
+sidebar_label: JS-SDK reference
+description: The Rarimo SDK packages provide crytpo identity verification tools.
 ---
+import OutLink from "@site/src/components/OutLink";
 
-# JS-SDK reference
+# Identity Protocol JS-SDK reference
 
 The Rarimo SDK identity packages provide tools for the identity protocol.
 
 ## @rarimo/shared-zkp-iden3
 
-The [@rarimo/shared-zkp-iden3](https://www.npmjs.com/package/@rarimo/shared-zkp-iden3) package provides constants, types, and tools other packages used for identity functionality.
+The <OutLink href="https://www.npmjs.com/package/@rarimo/shared-zkp-iden3">@rarimo/shared-zkp-iden3</OutLink> package provides constants, types, and tools other packages used for identity functionality.
 
 ## @rarimo/auth-zkp-iden3
 
-The [@rarimo/auth-zkp-iden3](https://www.npmjs.com/package/@rarimo/auth-zkp-iden3) package provides tools that authenticate a zero-knowledge proof and provide verifiable credentials from it.
+The <OutLink href="https://www.npmjs.com/package/@rarimo/auth-zkp-iden3">@rarimo/auth-zkp-iden3</OutLink> package provides tools that authenticate a zero-knowledge proof and provide verifiable credentials from it.
 
 Usage example:
 
@@ -45,7 +48,7 @@ const getVerifiableCredentials = async (identity: Identity) => {
 
 ## @rarimo/identity-gen-iden3
 
-The [@rarimo/identity-gen-iden3](https://www.npmjs.com/package/@rarimo/react-provider) package provides tools to generate distributed identities for the Iden3 protocol.
+The <OutLink href="https://www.npmjs.com/package/@rarimo/react-provider">@rarimo/identity-gen-iden3</OutLink> package provides tools to generate distributed identities for the Iden3 protocol.
 
 Usage example:
 
@@ -58,7 +61,7 @@ const identity = await Identity.create()
 
 ## @rarimo/zkp-gen-iden3
 
-The [@rarimo/zkp-gen-iden3](https://www.npmjs.com/package/@rarimo/zkp-gen-iden3) package provides tools to generate zero-knowledge proofs for the Iden3 protocol.
+The <OutLink href="https://www.npmjs.com/package/@rarimo/zkp-gen-iden3">@rarimo/zkp-gen-iden3</OutLink> package provides tools to generate zero-knowledge proofs for the Iden3 protocol.
 
 Usage example:
 

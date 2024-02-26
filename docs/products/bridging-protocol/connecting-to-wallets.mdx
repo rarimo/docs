@@ -1,6 +1,8 @@
 ---
+title: Connecting wallets
 slug: /products/bridging-protocol/guide-connecting-wallets
 ---
+import OutLink from "@site/src/components/OutLink";
 
 # Guide: Connecting wallets
 
@@ -14,14 +16,14 @@ See the following sections:
 
 These examples show how to connect to wallets:
 
-- The example [wallet-access](https://github.com/rarimo/js-sdk-examples/) shows how to connect to a wallet without using React.
-- The example [wallet-access-react](https://github.com/rarimo/js-sdk-examples/tree/main/wallet-access-react) shows how to connect to a wallet in a React application.
+- The example <OutLink href="https://github.com/rarimo/js-sdk-examples/">wallet-access</OutLink> shows how to connect to a wallet without using React.
+- The example <OutLink href="https://github.com/rarimo/js-sdk-examples/tree/main/wallet-access-react">wallet-access-react(</OutLink> shows how to connect to a wallet in a React application.
 
 ## Connecting to wallets in JavaScript/TypeScript applications {#javascript}
 
 Rarimo provides several packages for interacting with wallets on different blockchains:
 
-- The [@rarimo/provider](https://www.npmjs.com/package/@rarimo/provider) package provides a common interface for interacting with wallets, so you can work with different types of wallets and blockchains with similar code.
+- The <OutLink href="https://www.npmjs.com/package/@rarimo/provider">@rarimo/provider</OutLink> package provides a common interface for interacting with wallets, so you can work with different types of wallets and blockchains with similar code.
 - Packages that are specific to blockchain types, which provide tools for accessing wallets and interacting with them on blockchains.
 
 To connect to a wallet, first use the `createProvider()` function to create the appropriate class of provider object, which represents the wallet.
@@ -104,9 +106,9 @@ const getEVMWalletAddress = async () => {
 
 ## Connecting to wallets in React applications {#react-applications}
 
-The [@rarimo/react-provider](https://www.npmjs.com/package/@rarimo/react-provider) package provides the `useProvider` hook, which allows React applications to access wallets.
+The <OutLink href="https://www.npmjs.com/package/@rarimo/react-provider">@rarimo/react-provider</OutLink> package provides the `useProvider` hook, which allows React applications to access wallets.
 
-To connect to a wallet, import the `useProvider` hook create the appropriate wallet provider object from the [@rarimo/provider](https://www.npmjs.com/package/@rarimo/provider) package.
+To connect to a wallet, import the `useProvider` hook create the appropriate wallet provider object from the <OutLink href="https://www.npmjs.com/package/@rarimo/provider">@rarimo/provider</OutLink> package.
 Then you can use the provider object to get information about the wallet or run transactions with it, as in this example:
 
 ```ts

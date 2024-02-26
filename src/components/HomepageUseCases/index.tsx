@@ -22,14 +22,14 @@ const useCasesList: UseCase[] = [
     modifier: "mints",
     title: "Multi-Chain Mints",
     text: "Issue non-fungible tokens (NFTs) or SBTs on any chain",
-    path: "/use-cases/multi-chain-mints",
+    path: "/use-cases/multi-chain-mints/",
   },
   {
     img: "img/homepage-use-cases/gaming-profiles.webp",
     modifier: "gaming-profiles",
     title: "Gaming Profiles",
     text: "Build out player profile that can be used by third-party DApps",
-    path: "/use-cases/gaming-profiles",
+    path: "/use-cases/gaming-profiles/",
   },
   {
     img: "img/homepage-use-cases/ssi.webp",
@@ -37,7 +37,7 @@ const useCasesList: UseCase[] = [
     title: "Self-Sovereign Identities (SSI)",
     text: "Use data in the web3 world using ZK-proofs for identity verification",
     isBig: true,
-    path: "/use-cases/self-sovereign-identities",
+    path: "/use-cases/self-sovereign-identity/",
   },
   {
     img: "img/homepage-use-cases/social-graphs.webp",
@@ -45,14 +45,14 @@ const useCasesList: UseCase[] = [
     title: "Social Graphs",
     text: "Connect social graphs across multiple chains",
     isYellow: true,
-    path: "/use-cases/social-graphs",
+    path: "/use-cases/social-graphs/",
   },
   {
     img: "img/homepage-use-cases/token-agnostic.webp",
     modifier: "token-agnostic", // TODO: change image
     title: "Cross-Chain Proofs",
     text: "Prove ownership of non-fungible tokens on any chain",
-    path: "/use-cases/cross-chain-proofs",
+    path: "/use-cases/cross-chain-proofs/",
     isYellow: true,
   },
   {
@@ -61,7 +61,7 @@ const useCasesList: UseCase[] = [
     title: "Identity Protocol State Replication",
     text: "Make your ZKP-based identity protocol available on any chain",
     isYellow: true,
-    path: "/use-cases/identity-protocol-state-replication",
+    path: "/use-cases/identity-protocol-state-replication/",
   },
 ];
 
@@ -101,8 +101,6 @@ export default function HomepageUseCases() {
               key={idx}
               data-aos="fade-up"
               href={item.path}
-              target="_blank"
-              rel="nofollow noopener noreferrer"
             >
               <div
                 className={clsx(
@@ -178,8 +176,6 @@ export default function HomepageUseCases() {
                 key={idx}
                 data-aos="fade-up"
                 href={item.path}
-                target="_blank"
-                rel="nofollow noopener noreferrer"
               >
                 <div
                   className={clsx(

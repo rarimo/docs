@@ -2,26 +2,28 @@
 slug: /ecosystem/proof-of-humanity/guides/protecting-your-discord-server-from-bots-with-proof-of-humanity-and-collab-land
 description: Learn how to set up a Proof of Humanity miniapp for your Discord server and channels for verified humans only.
 ---
+import OutLink from "@site/src/components/OutLink";
 
-# Protecting your discord server from bots with Proof of Humanity and Collab.Land
+
+# Protecting your discord server from bots
 
 A typical crypto discord server is constantly attacked by bots shilling scams. Banning them manually wastes your mods' and users' time. Basic protection measures, like captcha verification, do little good, either.
 
 ![Sample Scam](/img/collabland-guide/sample-scam.png)
 
-Rarimo has developed a free plugin for the popular token-gating bot [Collab.Land](https://www.collab.land/) to fight this menace. It allows the server admin to set up channels for verified humans only.
+Rarimo has developed a free plugin for the popular token-gating bot <OutLink href="https://www.collab.land/">Collab.Land</OutLink> to fight this menace. It allows the server admin to set up channels for verified humans only.
 
 ## Configuring the Collab.Land bot
 
 ### Step #1: Invite the Collab.Land bot
 
-In case you didn't use Collab.Land yet, follow the [Discord Bot Walkthrough](https://collabland.freshdesk.com/support/solutions/articles/70000036689-discord-bot-walkthrough) to invite the bot to your server.
+In case you didn't use Collab.Land yet, follow the <OutLink href="https://collabland.freshdesk.com/support/solutions/articles/70000036689-discord-bot-walkthrough">Discord Bot Walkthrough</OutLink> to invite the bot to your server.
 
 ![Invite Collab.Land Bot](/img/collabland-guide/invite-bot.png)
 
 ### Step #2: Create a Discord role for humans
 
-Collab.Land's token gating rules are based on discord roles, so we need to create a role for the verified users by following the [Setting Up Permissions FAG](https://support.discord.com/hc/en-us/articles/206029707-Setting-Up-Permissions-FAQ#h_01FFTVYQ38W9TVCTM6YZHZXFFA) guide.
+Collab.Land's token gating rules are based on discord roles, so we need to create a role for the verified users by following the <OutLink href="https://support.discord.com/hc/en-us/articles/206029707-Setting-Up-Permissions-FAQ#h_01FFTVYQ38W9TVCTM6YZHZXFFA">Setting Up Permissions FAG</OutLink> guide.
 
 Let's call our role `Certified Human✅`:
 
@@ -29,7 +31,7 @@ Let's call our role `Certified Human✅`:
 
 ### Step #3: Add the Proof of Humanity action
 
-1. Open the [Collab.Land Command Center](https://cc.collab.land/login):
+1. Open the <OutLink href="https://cc.collab.land/login">Collab.Land Command Center</OutLink>:
    ![Open Command Center](/img/collabland-guide/dashboard-login.png)
 1. Log in via Discord:
    ![Login via Discord](/img/collabland-guide/dashboard-login-discord.png)
@@ -60,7 +62,7 @@ Now that we have the token-gating rule in place, we can configure the channels t
 
 ![Create Human-Only Channel](/img/collabland-guide/create-human-channel.png)
 
-Follow the [How do I set up a Role-Exclusive channel?](https://support.discord.com/hc/en-us/articles/206143877-How-do-I-set-up-a-Role-Exclusive-channel-#:~:text=Click%20on%20the%20%22%2B%22%20icon,have%20access%20to%20this%20channel!) guide to configure the human-only channels.
+Follow the <OutLink href="https://support.discord.com/hc/en-us/articles/206143877-How-do-I-set-up-a-Role-Exclusive-channel-#:~:text=Click%20on%20the%20%22%2B%22%20icon,have%20access%20to%20this%20channel!">How do I set up a Role-Exclusive channel?</OutLink> guide to configure the human-only channels.
 
 ### Step #6: Guide your users
 
@@ -84,7 +86,7 @@ Call the `/rarimo-verify` command to start the verification process:
 Users who completed the Proof of Humanity verification earlier can skip this step.
 :::
 
-After clicking the **Verify Your Humanity** button, you will be redirected to the [Prove Your Humanity](https://robotornot.rarimo.com) page. Follow the instructions to complete the verification.
+After clicking the **Verify Your Humanity** button, you will be redirected to the <OutLink href="https://robotornot.rarimo.com">Prove Your Humanity</OutLink> page. Follow the instructions to complete the verification.
 
 ![Complete the Proof of Humanity Verification](/img/collabland-guide/proof-of-humanity-dapp.png)
 

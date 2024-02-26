@@ -6,29 +6,29 @@ description: 'Build out player profile that can be used by third-party DApps'
 
 ## Abstract
 
-Decentralized identity is crucial in addressing key challenges of decentralized applications (dApps). By leveraging blockchain and distributed ledger technologies, decentralized identity systems enable dApps to overcome issues related to privacy, security, user onboarding, and seamless interoperability.
+Decentralized identity is crucial in addressing key challenges of decentralized applications (DApps). By leveraging blockchain and distributed ledger technologies, decentralized identity systems enable DApps to overcome issues related to privacy, security, user onboarding, and seamless interoperability.
 
 Web3 community is using different solutions:
 
-- Wallet Addresses;
-- Soulbound Tokens (SBT);
-- Ethereum Name Services (ENS) & similar solutions;
-- ZK Verifiable Credentials (Iden3, Polygon ID);
+- Wallet Addresses
+- Soulbound Tokens (SBT)
+- Ethereum Name Services (ENS) & similar solutions
+- ZK Verifiable Credentials (Iden3, Polygon ID)
 
 These solutions suffer from a list of problems:
 
-- **Identity fragmentation across chains. dApps can verify identity only on the chain where this identity was issued, in the case of the Iden3 protocol where the state was published;**
-- **High fees for publishing. For SBT you have to mint a token for each user's identity, which may require a lot of transactions and fees. ZK protocols partially solve this issue, but checking ZK proofs is still expensive, so using such protocol on a few chains will still require a lot of fees;**
-- **Privacy issues. SBT and ENS kind services reveal all the data on-chain, which may be a critical issue for some sensitive identity data;**
+- Identity fragmentation across chains. DApps can verify identity only on the chain where this identity was issued, in the case of the Iden3 protocol where the state was published
+- High fees for publishing. For SBT you have to mint a token for each user's identity, which may require a lot of transactions and fees. ZK protocols partially solve this issue, but checking ZK proofs is still expensive, so using such protocol on a few chains will still require a lot of fees
+- Privacy issues. SBT and ENS kind services reveal all the data on-chain, which may be a critical issue for some sensitive identity data
 
 Rarimo is a cross-chain ZK identity protocol that solves these issues. Rarimo has its own chain with an embedded ZK-identity protocol. All the states published on this chain are synced to other chains like Ethereum, Polygon, Solana, Near, etc., so users can use their identity on any connected chain. While syncing Rarimo uses threshold signatures and state aggregation that makes sync between chains extremely cheap.
 
 **Main advantages of Rarimo Identity protocol:**
 
-- ZK-credentials allow to use cryptographically secure credentials without revealing personal data on-chain and make publishing identities easier and cheaper for identity providers;
-- Rarimo Protocol has embedded cross-chain functionality. That means credentials published on Rarimo chain will be verifiable on any connected chain, so identity providers don’t need to write any additional integrations for new blockchains;
-- State aggregation and Threshold Signatures make publishing identity data cross-chain cheap;
-- Instant finality of consensus allows bridging identity data exactly after publishing it on Rarimo chain;
+- ZK-credentials allow to use cryptographically secure credentials without revealing personal data on-chain and make publishing identities easier and cheaper for identity providers
+- Rarimo Protocol has embedded cross-chain functionality. That means credentials published on Rarimo chain will be verifiable on any connected chain, so identity providers don’t need to write any additional integrations for new blockchains
+- State aggregation and Threshold Signatures make publishing identity data cross-chain cheap
+- Instant finality of consensus allows bridging identity data exactly after publishing it on Rarimo chain
 
 ## SSI for gaming and metaverse
 
@@ -36,14 +36,14 @@ Rarimo is a cross-chain ZK identity protocol that solves these issues. Rarimo ha
 
 Self-sovereign identity (SSI) has the potential to significantly impact gaming and metaverse experiences by offering users greater control over their digital identities and data. Here are a few examples of how SSI can be implemented in these domains:
 
-- Check that user is old enough or is a resident of some country before it joins your game;
-- Check the identity that the user got from other games, both yours and not only: games that user played, achievements, participation of some community, reputation, taking part in some events, etc;
-- Item ownership proofs;
-- Check on offline & online events identity;
+- Check that user is old enough or is a resident of some country before it joins your game
+- Check the identity that the user got from other games, both yours and not only: games that user played, achievements, participation of some community, reputation, taking part in some events, etc
+- Item ownership proofs
+- Check on offline & online events identity
 
 ### Publishing of new identity
 
 As a game/metaverse developer, you collect much information about the user and can issue them an identity. Here are some cases:
 
-- Cross-chain minting of achievement SBTs. You can issue some credentials to the user about his reputation, achievements, or participation in some event. User can use it to claim SBTs on any chain that they want;
-- The identity that you have issued can be used by third-party dApps;
+- Cross-chain minting of achievement SBTs. You can issue some credentials to the user about his reputation, achievements, or participation in some event. User can use it to claim SBTs on any chain that they want
+- The identity that you have issued can be used by third-party DApps

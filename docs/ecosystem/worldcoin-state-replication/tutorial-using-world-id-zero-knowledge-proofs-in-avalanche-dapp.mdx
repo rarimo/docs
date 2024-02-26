@@ -2,6 +2,7 @@
 title: Using World ID State Replication in a DApp
 draft: true
 ---
+import OutLink from "@site/src/components/OutLink";
 
 # Tutorial: Using World ID State Replication in a DApp
 
@@ -42,8 +43,8 @@ We should also have the `IdentityManager` contract deployed on the destination c
 
 `Verifier` has two hooks, namely `_beforeProofSubmit(...)` and `_afterProofSubmit(...)`, which are called before and after proof verification.
 You can override them with the business logic you need.
-Another contract will verify proofs – [SemaphoreVerifier](https://github.com/worldcoin/world-id-contracts/blob/main/src/SemaphoreVerifier.sol), that is fully forked from World ID, and we don't need to change it.
-Verifier also uses [Initializable from OpenZeppelin](https://github.com/OpenZeppelin/openzeppelin-upgrades/blob/master/packages/core/contracts/Initializable.sol).
+Another contract will verify proofs – <OutLink href="https://github.com/worldcoin/world-id-contracts/blob/main/src/SemaphoreVerifier.sol">SemaphoreVerifier</OutLink>, that is fully forked from World ID, and we don't need to change it.
+Verifier also uses <OutLink href="https://github.com/OpenZeppelin/openzeppelin-upgrades/blob/master/packages/core/contracts/Initializable.sol">Initializable from OpenZeppelin</OutLink>.
 
 Here is the template for our `Verifier` contract:
 
@@ -147,14 +148,14 @@ contract Verifier is IVerifier, Initializable {
 
 We have yet to fill the hooks. We leave the implementation up to you.
 
-For the full implementation, see [Verifier.sol](https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/Verifier.sol) at the GitHub.
+For the full implementation, see <OutLink href="https://github.com/rarimo/worldid-integration-contracts/blob/master/contracts/Verifier.sol">Verifier.sol</OutLink> at the GitHub.
 
 #### Deployment
 
 You can deploy the recently created `Verifier` contract and `SemaphoreVerifier` by yourself.
 Remember to set the `semaphoreVerifier` address in the `Verifier` contract.
 
-Another option is to clone our [GitHub repository](https://github.com/rarimo/worldid-integration-contracts/tree/master), extend the contracts with your business logic and follow these steps:
+Another option is to clone our <OutLink href="https://github.com/rarimo/worldid-integration-contracts/tree/master">GitHub repository</OutLink>, extend the contracts with your business logic and follow these steps:
 1. After cloning, create the `.env` file, following the example provided in `.env.example`
 1. Fill in the `deploy/config/config.json` file.
     It has the following structure:
@@ -185,13 +186,14 @@ Another option is to clone our [GitHub repository](https://github.com/rarimo/wor
     ```
 
 ### Front-end
+
 To create the front end, we will use the following stack of technologies:
-- [React](https://github.com/facebook/react/releases)
-- [Vite.js](https://github.com/vitejs/vite/releases)
-- [Distributed Lab web-kit](https://github.com/distributed-lab/web-kit/tree/main)
-- [crypto](https://github.com/iden3/js-crypto), [jwz](https://github.com/iden3/js-jwz), [core](https://github.com/iden3/js-iden3-core), [jsonld-merklization](https://github.com/iden3/js-jsonld-merklization), [merkletree](https://github.com/iden3/js-merkletree) libraries from iden3
-- [Yarn](https://github.com/yarnpkg) as a package manager
-- [World ID kit](https://github.com/worldcoin/idkit-js)
+- <OutLink href="https://github.com/facebook/react/releases">React</OutLink>
+- <OutLink href="https://github.com/vitejs/vite/releases">Vite.js</OutLink>
+- <OutLink href="https://github.com/distributed-lab/web-kit/tree/main">Distributed Lab web-kit</OutLink>
+- <OutLink href="https://github.com/iden3/js-crypto">js-crypto</OutLink>, <OutLink href="https://github.com/iden3/js-jwz">js-jwz</OutLink>, <OutLink href="https://github.com/iden3/js-iden3-core">js-iden3-core</OutLink>, <OutLink href="https://github.com/iden3/js-jsonld-merklization">jsonld-merklization</OutLink>, <OutLink href="https://github.com/iden3/js-merkletree"> js-merkletree</OutLink> libraries from Iden3
+- <OutLink href="https://github.com/yarnpkg">Yarn</OutLink> as a package manager
+- <OutLink href="https://github.com/worldcoin/idkit-js">World ID kit</OutLink>
 
 We use World ID Kit, which provides rich and easy-to-use functionality and handles proof processing.
 Namely, we will use the `IDKitWidget` component that will create the QR code, check the correctness of the proof, etc.
@@ -203,9 +205,9 @@ Typically used for on-chain actions;
 - `onSuccess` – Function to trigger when verification is successful, and the modal is closed.
 Should receive a single parameter of type `ISuccessResult`, which contains the proof details;
 - `app_id` – unique identifier for the app verifying the action.
-This should be the App ID obtained from the [Developer Portal](https://developer.worldcoin.org/);
+This should be the App ID obtained from the <OutLink href="https://developer.worldcoin.org/">Developer Portal</OutLink>;
 
-You can provide other information as well. See [WorldCoin Docs](https://docs.worldcoin.org/reference/idkit#components) for more details.
+You can provide other information as well. See <OutLink href="https://docs.worldcoin.org/reference/idkit#components">WorldCoin Docs</OutLink> for more details.
 
 Here is the part of the landing page with the `IDKitWidget`, which you can fill and use on your page:
 
@@ -458,4 +460,4 @@ Finally, after the transaction has been added to the block, we will show its has
 
 At this point, the user has passed the verification, and you can be sure that this is a real person and not a bot.
 
-If you want to tweak or expand this example, we recommend you clone [front-end](https://github.com/rarimo/web-client-worldcoin-id/tree/main) and [smart contracts](https://github.com/rarimo/worldid-integration-contracts/) from the GitHub, make the changes you need and use it further.
+If you want to tweak or expand this example, we recommend you clone <OutLink href="https://github.com/rarimo/web-client-worldcoin-id/tree/main">front-end</OutLink> and <OutLink href="https://github.com/rarimo/worldid-integration-contracts/">smart contracts</OutLink> from the GitHub, make the changes you need and use it further.

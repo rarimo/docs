@@ -1,6 +1,7 @@
 ---
 description: Learn the Rarimo lingo.
 ---
+import OutLink from "@site/src/components/OutLink";
 
 # Glossary
 
@@ -8,12 +9,12 @@ description: Learn the Rarimo lingo.
 
 Bridge contracts are a group of smart contracts that are deployed to different chains that enable you to transfer value from one chain to another.
 The user submits a deposit transaction to the bridge contract on the source chain, and the bridge contract on the target chain withdraws tokens on the target chain.
-See [Bridge overview](/products/bridging-protocol/smart-contracts-reference).
+See [Bridge overview](/products/bridging-protocol/smart-contracts-reference/).
 
 ## Bundling
 
 Bundling is the process of combining multiple transactions into a single transaction.
-See [Bundling](/products/bridging-protocol/guide-how-to-bundle-transactions).
+See [Bundling](/products/bridging-protocol/guide-how-to-bundle-transactions/).
 
 ## Decentralized application (DApp)
 
@@ -54,7 +55,7 @@ EdDSA is a complex public key cryptography signature algorithm that is based on 
 ## Ethereum Virtual Machine (EVM)
 
 A computation engine that is the foundation for EVM-compatible blockchains such as Ethereum and Polygon.
-See [ethereum.org](https://ethereum.org).
+See <OutLink href="https://ethereum.org">ethereum.org</OutLink>.
 
 ## Iden3 protocol
 
@@ -79,12 +80,12 @@ NFTs are different from fungible tokens such as BTC and ETH because fungible tok
 
 In general blockchain terms, Oracles provide information from outside a blockchain to smart contracts on the blockchain.
 Rarimo oracles observe blockchains for events, deliver these events to the Rarimo core, and verify events from other oracles.
-See [Oracles](/products/base-layer/oracles).
+See [Oracles](/products/base-layer/oracles/).
 
 ## Provider
 
 A provider is an object that represents a user's wallet, so you can interact with it in your code.
-See [Connecting to wallets](/products/bridging-protocol/guide-connecting-wallets).
+See [Connecting to wallets](/products/bridging-protocol/guide-connecting-wallets/).
 
 ## Rarimo
 
@@ -102,12 +103,12 @@ The relayer sees that witness and sends a transaction to another bridge contract
 RMO is the Rarimo token.
 The RMO token is used for governance of the Rarimo project, among other things.
 Users can stake RMO tokens to become oracles.
-See [Governance](/resources/whitepaper/governance).
+See [Governance](/resources/whitepaper/governance/).
 
 ## Secp256k1
 
 Secp256k1 refers to the parameters used in cryptography algorithms such as ECDSA.
-See [Secp256k1](https://en.bitcoin.it/wiki/Secp256k1).
+See <OutLink href="https://en.bitcoin.it/wiki/Secp256k1">Secp256k1</OutLink>.
 
 ## Smart contract
 
@@ -128,7 +129,7 @@ Swap contracts are smart contracts that exchange one token for another token on 
 
 TSS is a cryptographic method to produce a single signature from a pool of parties, none of which have access to all of the keys to create the signature by themselves.
 This process uses distributed key generation (DKG) to generate the key.
-See [TSS](/products/base-layer/threshold-signature).
+See [TSS](/products/base-layer/threshold-signature/).
 
 ## Validator
 
@@ -157,7 +158,7 @@ It consists of:
 - Cosmos SDK - blockchain application framework
 - IBC protocol - the protocol for inter-blockchain communication
 
-Tendermint allows to write dApps in any language and replicate it on machines participating in the consensus.
+Tendermint allows to write DApps in any language and replicate it on machines participating in the consensus.
 It also facilitates communication with other blockchains using the IBC (Inter-blockchain communication) Protocol.
 On a high level, it's an easy solution to create your own blockchain, which can communicate with other blockchains, too.
 
@@ -165,7 +166,7 @@ On a high level, it's an easy solution to create your own blockchain, which can 
 
 A Snap is an application built by third-party developers that adds features and functionality to MetaMask.
 Snaps can connect to blockchain protocols, show insights about transactions, display notifications, add new features, and more.
-Rarimo has its own Snap - [Rarime](https://snaps.metamask.io/snap/npm/rarimo/rarime/), which is used to store identity credentials, manage them, create ZKPs and submit these proofs to dApps.
+Rarimo has its own Snap - <OutLink href="https://snaps.metamask.io/snap/npm/rarimo/rarime/">Rarime</OutLink>, which is used to store identity credentials, manage them, create ZKPs and submit these proofs to DApps.
 
 ## Proof of Humanity (PoH)
 

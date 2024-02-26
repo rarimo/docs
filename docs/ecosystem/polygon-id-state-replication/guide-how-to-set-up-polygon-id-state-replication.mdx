@@ -1,21 +1,23 @@
 ---
+title: "How to set up Polygon ID State Replication"
 description: Learn how to set up Polygon ID State Replication for cross-chain identity state transfer.
 ---
+import OutLink from "@site/src/components/OutLink";
 
 # Guide: How to set up Polygon ID State Replication
 
 In this guide, we'll set up the cross-chain identity state replication for Polygon ID. It enables the usage of Polygon ID zero-knowledge proofs on any chain supported by Rarimo.
 
-For more information about how the Polygon ID identity state transfer works, visit [rarimo-core docs](https://github.com/rarimo/rarimo-core/blob/master/docs/common/bridging/002-identity.md).
+For more information about how the Polygon ID identity state transfer works, visit <OutLink href="https://github.com/rarimo/rarimo-core/blob/master/docs/common/bridging/002-identity.md">rarimo-core docs</OutLink>.
 
 ## Pre-requisites
 
-Before getting started, please contact us in [discord](https://discordapp.com/invite/rarimoprotocol) to ensure that the issuer is added to the allowlist and that a lightweight state contract is already deployed to the destination chain;
+Before getting started, please contact us in <OutLink href="https://discordapp.com/invite/rarimoprotocol">discord</OutLink> to ensure that the issuer is added to the allowlist and that a lightweight state contract is already deployed to the destination chain;
 
 Other pre-requisites:
 
-- [Postgres DB 13+](https://www.postgresql.org/download/) instance for the relayer service;
-- [Docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/) (optional)
+- <OutLink href="https://www.postgresql.org/download/">Postgres DB 13+</OutLink> instance for the relayer service;
+- <OutLink href="https://docs.docker.com/engine/install/">Docker</OutLink> and <OutLink href="https://docs.docker.com/compose/install/">docker-compose</OutLink> (optional)
 
 ## Setting up relayer
 
@@ -26,10 +28,10 @@ The Relayer service is responsible for replicating the Polygon ID state on deman
 You can pull the pre-build docker image:
 
 ```sh
-docker pull ghcr.io/rarimo/identity-relayer-svc:v1.0.3
+docker pull ghcr.io/rarimo/identity-relayer-svc:v1.0.4
 ```
 
-Or clone the [repository](https://github.com/rarimo/identity-relayer-svc) and build it from the source:
+Or clone the <OutLink href="https://github.com/rarimo/identity-relayer-svc">repository</OutLink> and build it from the source:
 
 <!-- TODO: fix docker image -->
 
@@ -69,7 +71,9 @@ core:
   addr: tcp://core-api.mainnet-beta.rarimo.com:26657
 
 cosmos:
-  addr: rpc.node1.mainnet-beta.rarimo.com:9090
+  addr:  core-api.node1.mainnet-beta.rarimo.com:443
+  enable_tls: true
+
 
 evm:
   chains:

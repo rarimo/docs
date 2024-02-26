@@ -18,13 +18,12 @@ function isStaging() {
 }
 
 const metaDescription =
-  'Learn to use cross-chain self-sovereign identity protocol, zero-knowledge proofs, RariMe Snap, token bridging, and more.'
+  'Learn to use cross-chain self-sovereign digital identity protocol, zero-knowledge proofs, RariMe Snap, token bridging, and more.'
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
   /** Meta information */
-  title: 'Rarimo Developer Portal',
-  // TODO: better description
+  title: 'Rarimo Docs',
   tagline: metaDescription,
   url: getUrl(),
   baseUrl: getBaseUrl(),
@@ -32,6 +31,7 @@ module.exports = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/logo-icon.png',
   noIndex: isStaging(),
+  trailingSlash: true,
 
   organizationName: 'rarimo',
   projectName: 'docs',
@@ -127,11 +127,11 @@ module.exports = {
               },
               {
                 html: `
-                <a href="/overview" class="footer__social-link">Overview</a>`,
+                <a href="/overview/" class="footer__social-link">Overview</a>`,
               },
               {
                 html: `
-                <a href="/use-cases" class="footer__social-link">Use cases</a>`,
+                <a href="/use-cases/" class="footer__social-link">Use cases</a>`,
               },
             ],
           },
@@ -143,22 +143,22 @@ module.exports = {
               },
               {
                 html: `
-                <a href="https://discord.gg/cfrH3Fe7ke" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Discord">
+                <a href="https://discord.gg/cfrH3Fe7ke" class="footer__social-link" target="_blank" rel="nofollow noreferrer noopener" aria-label="Discord">
                 Discord <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="currentColor"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="currentColor"/></g></svg>
                 </a>
               `,
               },
               {
                 html: `
-                <a href="https://t.me/rarimoprotocol" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="Telegram">
+                <a href="https://t.me/rarimoprotocol" class="footer__social-link" target="_blank" rel="nofollow noreferrer noopener" aria-label="Telegram">
                 Telegram <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="currentColor"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="currentColor"/></g></svg>
                 </a>
                 `,
               },
               {
                 html: `
-                <a href="https://twitter.com/Rarimo_protocol" class="footer__social-link" target="_blank" rel="noreferrer noopener" aria-label="X">
-                X <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="currentColor"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="currentColor"/></g></svg>
+                <a href="https://twitter.com/Rarimo_protocol" class="footer__social-link" target="_blank" rel="nofollow noreferrer noopener" aria-label="X (Twitter)">
+                X (Twitter) <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="currentColor"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="currentColor"/></g></svg>
                 </a>
                 `,
               },
@@ -184,60 +184,12 @@ module.exports = {
 
       metadata: [
         {
-          name: 'title',
-          content: 'Rarimo Developer Documentation',
-        },
-        {
-          property: 'og:title',
-          content: 'Rarimo Developer Documentation',
-        },
-        {
-          property: 'twitter:title',
-          content: 'Rarimo Developer Documentation',
-        },
-        {
-          name: 'description',
-          content: metaDescription,
-        },
-        {
-          property: 'og:description',
-          content: metaDescription,
-        },
-        {
-          property: 'twitter:description',
-          content: metaDescription,
-        },
-        {
-          property: 'og:url',
-          content: 'https://docs.rarimo.com',
-        },
-        {
           property: 'og:image',
-          content: 'https://docs.rarimo.com/img/og-img.jpg',
-        },
-        {
-          name: 'twitter:image',
           content: 'https://docs.rarimo.com/img/og-img.jpg',
         },
         {
           name: 'twitter:card',
           content: 'summary_large_image',
-        },
-        {
-          property: 'twitter:image',
-          content: 'https://docs.rarimo.com/img/og-img.jpg',
-        },
-        {
-          property: 'twitter:card',
-          content: 'summary_large_image',
-        },
-        {
-          property: 'og:image:height',
-          content: '786',
-        },
-        {
-          property: 'og:image:width',
-          content: '1600',
         },
         {
           property: 'og:locale',

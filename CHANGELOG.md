@@ -7,12 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.5] - 23-02-2024
+
+### Fixed
+
+- OpenGraph metadata generation;
+
+## [2.0.4] - 23-02-2024
+
+### Fixed
+
+- Prod deployment pipeline;
+
+## [2.0.3] - 23-02-2024
+
+### Added
+
+- `robots.txt` file;
+
+### Changed
+
+- Embedded promising SEO keywords;
+
+### Fixed
+
+- `noindex` directive for staging;
+
+## [2.0.2] - 21-02-2024
+
 ### Added
 
 - Products/Rarime:
   - Added the "interoperability with external credentials" page;
 - Ecosystem/Polygon ID State Replication:
   - Added information about the `verify-proxy` service;
+  - Information about `Query-based request` that we use and fixed flow logic a bit;
+
+### Changed
+
+- Ecosystem/Polygon ID State Replication:
+  - Updated the relayer version in the state replication guide;
+- Tweaked meta titles, description, H1s and outlinks for SEO performance;
 
 ## [2.0.1] - 05-02-2024
 
@@ -251,7 +286,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://github.com/rarimo/docs/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/v2.0.5...HEAD
+[2.0.5]: https://github.com/rarimo/docs/releases/tag/v2.0.4...v2.0.5
+[2.0.4]: https://github.com/rarimo/docs/releases/tag/v2.0.3...v2.0.4
+[2.0.3]: https://github.com/rarimo/docs/releases/tag/v2.0.2...v2.0.3
+[2.0.2]: https://github.com/rarimo/docs/releases/tag/v2.0.1...v2.0.2
+[2.0.1]: https://github.com/rarimo/docs/releases/tag/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/rarimo/docs/releases/tag/v1.6.0...v2.0.0
 [1.6.0]: https://github.com/rarimo/docs/releases/tag/v1.5.1...v1.6.0
 [1.5.1]: https://github.com/rarimo/docs/releases/tag/v1.5.0...v1.5.1
