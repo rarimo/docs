@@ -1,29 +1,25 @@
 ---
-<!--TODO: description --->
-description: ''
+description: A scalable, privacy-preserving age verification solution. Zero-knowledge proof of age.
 ---
 import OutLink from "@site/src/components/OutLink";
 
-# Anonymous Age Verification for Age-restricted content
+# Age restricted content
 
 ## Problem statement
 
-Some sites have to be age-restricted to comply with regulations or because of the nature of their content.
-Users may feel uncomfortable creating an account or submitting identifying documents on sites, where they need to prove only one thing with the document, such as being over 18 years old.
+Some content requires age restrictions to comply with regulations or for ethical reasons. Users may feel uncomfortable creating an account or submitting identifying documents on websites where they must prove their age.
 
 ## Technical Solution
 
 Rarimo proposes a scalable, privacy-preserving age verification solution.
 The protocol follows the self-sovereign identity approach and employs cryptographic zero-knowledge proofs technology.
 
-![Trust triangle](/img/trust-triangle.png)
-
 The following benefits make the protocol uniquely well-suited for the age verification use case:
 
 - Users fully own and control their private data.
-The date of birth data in the credentials is never shared with the verifying websites;
+The date of birth data in the credentials is never shared with the verifying websites.
 - Zero-Knowledge technology is a state-of-the-art privacy cryptography that allows users to confirm a certain statement is true without revealing any additional information.
-In this case, they can confirm that they have reached a certain age without disclosing their date of birth;
+In this case, they can confirm that they have reached a certain age without disclosing their date of birth.
 - It can aggregate any number of identity providers, like national biometric IDs, banks, third-party KYC providers, etc;
 - Users can prove their age once per site visit, and no one will be able to trace their previous session, giving an extra layer of anonymity;
 - Once obtained, a date of birth credential can be used on any website that supports the protocol (and specific identity providers).
@@ -37,7 +33,7 @@ This is especially helpful for networks of affiliated sites;
 - The user needs to install <OutLink href="https://metamask.io/">MetaMask</OutLink> and <OutLink hred="https://rarime.com/">RariMe</OutLink> extension for MetaMask;
 - The user needs to obtain a date of birth credential from any identity provider;
 
-**Step #1: The user selects the “Continue incognito” option**
+**Step #1: The user selects the "Continue incognito" option**
 
 ![Continue incognito button](/img/continue-incognito.png)
 
@@ -49,21 +45,21 @@ This is especially helpful for networks of affiliated sites;
 
 ![Untitled](/img/prove-the-age.png)
 
-After clicking **Prove My Age** user confirms the generation of a zero-knowledge proof:
+After clicking **Prove My Age**, the user confirms the generation of a zero-knowledge proof:
 
 ![Prove you are of legal age](/img/generate-age-zkp.png)
 
 Then, the zero-knowledge proof generation starts.
-It may take from 30s to 1 minute to generate, so it’s an ideal place to place interactive ads.
+It may take from 30 seconds to 1 minute to generate, so it's an ideal place to place interactive ads.
 
 ![Generating the zkp of legal age](/img/generating-age-proof-ads.png)
 
 To skip ads in the future, users may also mint a proof-of-age token for a fee in crypto.
 This can be an additional way of monetizing the anonymous traffic.
 
-**Step #4: Enjoy the content while the session is valid**
+**Step #4: Browse the content while the session is valid**
 
-![Enjoy age-restricted content](/img/enjoy-restricted-content.png)
+![Browse age-restricted content](/img/browse-restricted-content.png)
 
 Incognito sessions complicate tracking user activities (views, searches, clicks, etc.) that drive the algorithmic recommendations.
 To balance user engagement and privacy, we propose two possible approaches to tackling this problem:
