@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Products/Rarime:
   - Added the "interoperability with external credentials" page;
+- Use-cases:
+  - Added the "Age restricted content" page;
 
 ## [2.0.5] - 23-02-2024
 

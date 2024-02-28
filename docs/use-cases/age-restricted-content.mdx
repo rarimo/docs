@@ -1,0 +1,73 @@
+---
+description: A scalable, privacy-preserving age verification solution. Zero-knowledge proof of age.
+---
+import OutLink from "@site/src/components/OutLink";
+
+# Age restricted content
+
+## Problem statement
+
+Some content requires age restrictions to comply with regulations or for ethical reasons. Users may feel uncomfortable creating an account or submitting identifying documents on websites where they must prove their age.
+
+## Technical Solution
+
+Rarimo proposes a scalable, privacy-preserving age verification solution.
+The protocol follows the self-sovereign identity approach and employs cryptographic zero-knowledge proofs technology.
+
+The following benefits make the protocol uniquely well-suited for the age verification use case:
+
+- Users fully own and control their private data.
+The date of birth data in the credentials is never shared with the verifying websites.
+- Zero-Knowledge technology is a state-of-the-art privacy cryptography that allows users to confirm a certain statement is true without revealing any additional information.
+In this case, they can confirm that they have reached a certain age without disclosing their date of birth.
+- It can aggregate any number of identity providers, like national biometric IDs, banks, third-party KYC providers, etc;
+- Users can prove their age once per site visit, and no one will be able to trace their previous session, giving an extra layer of anonymity;
+- Once obtained, a date of birth credential can be used on any website that supports the protocol (and specific identity providers).
+This is especially helpful for networks of affiliated sites;
+- This solution can easily coexist with other methods of age verification, like creating an account and submitting the ID directly to the website;
+
+## User experience
+
+**Prerequisites**:
+
+- The user needs to install <OutLink href="https://metamask.io/">MetaMask</OutLink> and <OutLink hred="https://rarime.com/">RariMe</OutLink> extension for MetaMask;
+- The user needs to obtain a date of birth credential from any identity provider;
+
+**Step #1: The user selects the "Continue incognito" option**
+
+![Continue incognito button](/img/continue-incognito.png)
+
+**Step #2: User connects MetaMask and RariMe snap**
+
+![Connect MetaMask and RariMe](/img/connect-metamask-snap.png)
+
+**Step #3: Generate and submit a proof of age**
+
+![Untitled](/img/prove-the-age.png)
+
+After clicking **Prove My Age**, the user confirms the generation of a zero-knowledge proof:
+
+![Prove you are of legal age](/img/generate-age-zkp.png)
+
+Then, the zero-knowledge proof generation starts.
+It may take from 30 seconds to 1 minute to generate, so it's an ideal place to place interactive ads.
+
+![Generating the zkp of legal age](/img/generating-age-proof-ads.png)
+
+To skip ads in the future, users may also mint a proof-of-age token for a fee in crypto.
+This can be an additional way of monetizing the anonymous traffic.
+
+**Step #4: Browse the content while the session is valid**
+
+![Browse age-restricted content](/img/browse-restricted-content.png)
+
+Incognito sessions complicate tracking user activities (views, searches, clicks, etc.) that drive the algorithmic recommendations.
+To balance user engagement and privacy, we propose two possible approaches to tackling this problem:
+
+1. Keeping the collected metrics inside the RariMe snap.
+This approach offers more privacy because only the user decides what to share.
+Also, some additional techniques can be used to obfuscate the user identity further, like mixing the user data with random noise.
+The downside of this approach is the complexity of implementation.
+1. Allow users to opt in for a persistent anonymous ID per site that will be used for tracking the engagements.
+This way, it will be possible to see a correlation between repeated incognito sessions and thus offer personalized recommendations.
+A persistent ID reduces the degree of privacy, but no personal data gets shared at any point.

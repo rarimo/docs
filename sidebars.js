@@ -17,6 +17,7 @@ const sidebars = {
       collapsed: true,
       items: [
         'use-cases/self-sovereign-identity',
+        'use-cases/age-restricted-content',
         'use-cases/identity-protocol-state-replication',
         'use-cases/gaming-profiles',
         'use-cases/social-graphs',
