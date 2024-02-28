@@ -18,13 +18,12 @@ function isStaging() {
 }
 
 const metaDescription =
-  'Learn to use cross-chain self-sovereign identity protocol, zero-knowledge proofs, RariMe Snap, token bridging, and more.'
+  'Learn to use cross-chain self-sovereign digital identity protocol, zero-knowledge proofs, RariMe Snap, token bridging, and more.'
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
   /** Meta information */
   title: 'Rarimo Docs',
-  // TODO: better description
   tagline: metaDescription,
   url: getUrl(),
   baseUrl: getBaseUrl(),
@@ -185,60 +184,12 @@ module.exports = {
 
       metadata: [
         {
-          name: 'title',
-          content: 'Rarimo Docs',
-        },
-        {
-          property: 'og:title',
-          content: 'Rarimo Docs',
-        },
-        {
-          property: 'twitter:title',
-          content: 'Rarimo Docs',
-        },
-        {
-          name: 'description',
-          content: metaDescription,
-        },
-        {
-          property: 'og:description',
-          content: metaDescription,
-        },
-        {
-          property: 'twitter:description',
-          content: metaDescription,
-        },
-        {
-          property: 'og:url',
-          content: 'https://docs.rarimo.com',
-        },
-        {
           property: 'og:image',
-          content: 'https://docs.rarimo.com/img/og-img.jpg',
-        },
-        {
-          name: 'twitter:image',
           content: 'https://docs.rarimo.com/img/og-img.jpg',
         },
         {
           name: 'twitter:card',
           content: 'summary_large_image',
-        },
-        {
-          property: 'twitter:image',
-          content: 'https://docs.rarimo.com/img/og-img.jpg',
-        },
-        {
-          property: 'twitter:card',
-          content: 'summary_large_image',
-        },
-        {
-          property: 'og:image:height',
-          content: '786',
-        },
-        {
-          property: 'og:image:width',
-          content: '1600',
         },
         {
           property: 'og:locale',

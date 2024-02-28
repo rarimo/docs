@@ -24,6 +24,7 @@ shell:
   setup:
     - export BASE_URL={{ env "BASE_URL" }}
     - export URL={{ env "URL" }}
+    - export STAGING={{ env "STAGING" }}
     - cd /app
     - yarn build
 
