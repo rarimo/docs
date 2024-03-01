@@ -22,7 +22,7 @@ The Relayer service is responsible for replicating the World ID state on demand.
 You can pull the pre-build docker image:
 
 ```sh
-docker pull ghcr.io/rarimo/worldcoin-relayer-svc:v0.1.0
+docker pull ghcr.io/rarimo/worldcoin-relayer-svc:v1.0.0
 ```
 
 Or clone the <OutLink href="https://github.com/rarimo/worldcoin-relayer-svc">worldcoin-relayer-svc repository</OutLink> and build it from the source:
@@ -65,7 +65,8 @@ core:
   addr: tcp://validator:26657
 
 cosmos:
-  addr: validator:9090
+  addr:  core-api.node1.mainnet-beta.rarimo.com:443
+  enable_tls: true
 
 evm:
   chains:

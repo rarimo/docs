@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use-cases:
   - Added the "Age restricted content" page;
 
+### Changed
+
+- Products/WorldCoin State Replication:
+  - Updated the relayer version in the replication guide;
+
 ## [2.0.5] - 23-02-2024
 
 ### Fixed
