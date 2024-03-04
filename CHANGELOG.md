@@ -52,6 +52,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Ecosystem/Polygon ID State Replication:
   - Added information about the `verify-proxy` service;
   - Information about `Query-based request` that we use and fixed flow logic a bit;
+- Use-cases:
+  - Added the "Organizational access control" page;
 
 ### Changed
 

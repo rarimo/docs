@@ -19,6 +19,7 @@ const sidebars = {
         'use-cases/self-sovereign-identity',
         'use-cases/age-restricted-content',
         'use-cases/identity-protocol-state-replication',
+        'use-cases/organizational-access-control',
         'use-cases/gaming-profiles',
         'use-cases/social-graphs',
         'use-cases/cross-chain-proofs',
