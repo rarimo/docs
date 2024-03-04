@@ -18,11 +18,11 @@ const sidebars = {
       items: [
         'use-cases/self-sovereign-identity',
         'use-cases/identity-protocol-state-replication',
+        'use-cases/organizational-access-control',
         'use-cases/gaming-profiles',
         'use-cases/social-graphs',
         'use-cases/cross-chain-proofs',
         'use-cases/multi-chain-mints',
-        'use-cases/organizational-access-control',
       ],
     },
     {
