@@ -1,29 +1,21 @@
 ---
-
-<!--todo: description --->
-
+description: Get access to restricted resources in a privacy-preserving way
+sidebar_label: Organizational access control
+title: Organizational access control use case
 ---
 
-# Organizational Access Control
+# Organizational access control
 
-## Abstract
+## Problem statement
 
-Typically, organizations employ role-based access control (RBAC) to manage access to restricted resources.
-DAOs often do not have such a mechanism, but both types of organizations suffer from similar problems.
+Typically, organizations employ role-based access control (RBAC) to manage access to restricted resources. It is a proven approach, but it usually doesn't respect the privacy of the organization's members.
 
-In many cases, users encounter difficulties in providing proof of their membership while maintaining anonymity.
-Moreover, even if such challenges are overcome, users want to maintain control over their data and what they reveal, such as email addresses, names, phone numbers, etc.
+Privacy is especially important in the case of public on-chain actions. Leaking identifying information of the organization members gives bad actors more opportunities for social engineering or pressure.
 
-Currently, members reveal not only their roles, but the entire account with their information, which violates their privacy.
-Similarly, some part of organizations are public in nature, e.g non-profit organizations, and their members often suffer from the publicity of their actions and would be much more comfortable remaining anonymous while being able to prove that they can be trusted.
+## Rarimo's solution
 
-## Rarimo as a solution
-
-Rarimo's SSI solves these problems and provides many benefits, namely:
-- Members have full control over their data. The user decides whether to disclose their role / name / etc or not.
-- Using identity profiles, even the issuer will not be able to track who is behind the identity, but will be able to verify the membership.
-
-Usually, it is enough to disclose that you are a member of the organization and, optionally, your role in it.
-Zero-knowledge proofs technology allows to do it without problems.
+Rarimo Identity Protocol solves these problems and provides many benefits:
+- Members have complete control over their data. Only the user decides whether to disclose their role, name, or other identity attributes
+- Zero-knowledge proofs offer a privacy-preserving way to prove the membership both on-chain and off-chain
 
 ![Organizational access control flow](/img/org-access-control-flow.png)
