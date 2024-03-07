@@ -1,5 +1,6 @@
 ---
 ---
+import Image from '@theme/IdealImage';
 
 # Main flow of messages transferring
 
@@ -18,7 +19,7 @@ The main flow of message transfer happens in 4 steps:
 
 4. Receiver updates their state depending on the received message.
 
-![image](data-migration-flow.png)
+<p><Image img={require('./data-migration-flow.png')} alt="image" /></p>
 
 Let’s see examples of how it works for real cases:
 
@@ -83,4 +84,4 @@ It’s very interesting how this concept satisfies digital identity requirements
 whitepaper - identity artifacts can’t be limited only by VCs, or only by NFTs/SBTs, or only by reputation. The Rarimo
 approach allows you to work with all mentioned using a similar flow, making integration easy and seamless.
 
-![Protocol Description](protocol.png)
+<p><Image img={require('./protocol.png')} alt="Protocol Description" /></p>

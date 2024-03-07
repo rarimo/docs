@@ -4,6 +4,7 @@ sidebar_label: Self-sovereign identity
 description: Own your identity and share only what you want
 ---
 import OutLink from "@site/src/components/OutLink";
+import Image from '@theme/IdealImage';
 
 # Self-sovereign identity
 
@@ -26,7 +27,7 @@ Rarimo has integrated the ZK-identity protocol, which is based on the <OutLink h
 
 By leveraging these two components, users are able to provide dapps with proof regarding a specific statement about their identity, without disclosing any additional information. For instance, users can demonstrate to a smart contract that they are not a resident of the United States, without revealing any other personal information.
 
-![Self-sovereign identity circle scheme](/img/zkp.png)
+<p><Image img={require('/img/zkp.png')} alt="Self-sovereign identity circle scheme" /></p>
 
 Utilizing these cryptographic proofs also simplifies and reduces costs for identity providers. Rather than having to mint a separate NFT for each identity, providers can simply update the on-chain state in the event of a change. The Rarimo protocol even supports minting credentials, updating them, revoking them, and setting credentials with expiration times, further streamlining the process for identity providers.
 
@@ -34,7 +35,7 @@ Utilizing these cryptographic proofs also simplifies and reduces costs for ident
 
 To enable cross-chain verification of identity, Rarimo transfers the on-chain state from different identity providers across the supported chains. This means that each smart contract can verify credentials on the chain where it is located without requiring additional logic for bridging. By publishing identity data through the Rarimo Protocol, identity providers are not required to implement any additional logic or integration to enable clients to utilize proofs on other chains.
 
-![Self-sovereign identity states scheme](/img/identity-state-replication.png)
+<p><Image img={require('/img/identity-state-replication.png')} alt="Self-sovereign identity states scheme" /></p>
 
 **On-demand verification**
 

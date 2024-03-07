@@ -3,6 +3,7 @@ slug: /ecosystem/token-agnostic-payments
 description: Token-agnostic payments allow users to pay in any fungible token with just a few clicks. We handle the token swaps and bridging for you.
 ---
 import OutLink from "@site/src/components/OutLink";
+import Image from '@theme/IdealImage';
 
 # Token-agnostic payments
 
@@ -29,31 +30,31 @@ Let's walk through a <OutLink href="https://nft-checkout.rarimo.com/">demo</OutL
 
    :::
 
-   ![Token-agnostic page](/img/token-agnostic-page.png)
+   <p><Image img={require('/img/token-agnostic-page.png')} alt="Token-agnostic page" /></p>
 
 2. Click "Purchase with any token" and connect your Metamask
 
-   ![Token-agnostic wallet](/img/token-agnostic-walletconnection.png)
+   <p><Image img={require('/img/token-agnostic-walletconnection.png')} alt="Token-agnostic wallet" /></p>
 
 3. Select the token you want to pay with(in this case, it's UNI)
 
-   ![Token-agnostic tokens](/img/token-agnostic-tokens.png)
+   <p><Image img={require('/img/token-agnostic-tokens.png')} alt="Token-agnostic tokens" /></p>
 
 4. Check out the estimated fees and proceed to the checkout
 
-   ![Token-agnostic reciept](/img/token-agnostic-receipt.png)
+   <p><Image img={require('/img/token-agnostic-receipt.png')} alt="Token-agnostic reciept" /></p>
 
 5. Approve the token spending for the Rarimo swap contract
 
-   ![Token-agnostic swap](/img/token-agnostic-swap.png)
+   <p><Image img={require('/img/token-agnostic-swap.png')} alt="Token-agnostic swap" /></p>
 
 6. Confirm the swap of UNI to WETH
 
-   ![Token-agnostic swap confirm](/img/token-agnostic-swap-confirm.png)
+   <p><Image img={require('/img/token-agnostic-swap-confirm.png')} alt="Token-agnostic swap confirm" /></p>
 
 7. …and, that's it! Rarimo Relayer will pick up the transaction and automatically complete the purchase of the NFT in the destination network
 
-   ![Token-agnostic confirmation](/img/token-agnostic-confirmation.png)
+   <p><Image img={require('/img/token-agnostic-confirmation.png')} alt="Token-agnostic confirmation" /></p>
 
 ## Integration
 
@@ -61,7 +62,7 @@ Token-agnostic payments can be added to your DApp using one of these options:
 
 - [Customizable react component](/ecosystem/token-agnostic-payments/guide-creating-nft-checkout-transactions#react-applications)
 
-  ![Token-agnostic button for buying](/img/token-agnostic-button.png)
+  <p><Image img={require('/img/token-agnostic-button.png')} alt="Token-agnostic button for buying" /></p>
 
 - [TypeScript SDK](/ecosystem/token-agnostic-payments/guide-creating-nft-checkout-transactions#javascript)
 
