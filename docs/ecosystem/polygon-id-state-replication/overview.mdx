@@ -17,19 +17,19 @@ The goals of this demo are:
 
 The Iden3 Identity State(pictured below) is proposed to make the ZK Proofs feasible on other chains. However, replicating each state change to each supported chain is unreliable and costly.
 
-<Image className="idealImage" img={require('/img/iden3-state.png')} alt="Iden3 State" />
+<Image className="idealImage" img={require('/img/iden3-state.png')} alt="Iden3 State" shouldAutoDownload={() => true} />
 
 On-demand state replication using Rarimo's cross-chain infrastructure is proposed to mitigate these issues. Rarimo oracles will replicate the complete identity state history to a State Contract on the Rarimo Protocol chain. State Contracts on the other chains will be modified to accept lazy state updates. The updates will be secured by Rarimo's TSS instead of the state transition proofs used by Iden3.
 
-<Image className="idealImage" img={require('/img/polygon-id-integration.png')} alt="Polygon ID Integration Architecture" />
+<Image className="idealImage" img={require('/img/polygon-id-integration.png')} alt="Polygon ID Integration Architecture" shouldAutoDownload={() => true} />
 
 In order to prove a statement on the Ethereum chain, the relayer will fetch a state update transaction from the Rarimo API and submit it just before the user submits the ZKP. This way, the state will be used only when it's needed.
 
-<Image className="idealImage" img={require('/img/polygon-id-state-replication.png')} alt="Polygon ID State Replication Flow" />
+<Image className="idealImage" img={require('/img/polygon-id-state-replication.png')} alt="Polygon ID State Replication Flow" shouldAutoDownload={() => true} />
 
 The user then generates a ZKP using the Polygon ID Wallet app and submits it to the verifier contract using Metamask.
 
-<Image className="idealImage" img={require('/img/polygon-id-zkp-flow.png')} alt="Polygon ID ZKP Generation Flow" />
+<Image className="idealImage" img={require('/img/polygon-id-zkp-flow.png')} alt="Polygon ID ZKP Generation Flow" shouldAutoDownload={() => true} />
 
 ## Demo walkthrough
 

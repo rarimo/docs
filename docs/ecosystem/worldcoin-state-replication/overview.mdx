@@ -19,7 +19,7 @@ WorldCoin keeps a Merkle tree of all existing identities on Ethereum Mainnet. Th
 To enable cross-chain usage, WorldCoin has implemented the <OutLink href="https://github.com/worldcoin/world-id-state-bridge">World ID State Bridge</OutLink>.
 
 <!-- TODO: rearimize the chart -->
-<Image className="idealImage" img={require('/img/world-id-state-bridge.png')} alt="World ID State Bridge" />
+<Image className="idealImage" img={require('/img/world-id-state-bridge.png')} alt="World ID State Bridge" shouldAutoDownload={() => true} />
 
 `WorldIDIdentityManager` contract on Ethereum Mainnet calls `propagateRoot()` methods on the state bridge contracts that, in turn, leverage the L1-L2 messaging to propagate the latest state.
 Currently, the replication is supported for Polygon(PoS), Optimism, and Base chains.
@@ -41,7 +41,7 @@ Each target chain has a lightweight state contract updated on-demand when a user
 
 Let's look at its inner workings in more detail by following the state replication from Ethereum to Polygon:
 
-<Image className="idealImage" img={require('/img/world-id-state-replication-flow.png')} alt="World ID On-Demand Identity State Replication" />
+<Image className="idealImage" img={require('/img/world-id-state-replication-flow.png')} alt="World ID On-Demand Identity State Replication" shouldAutoDownload={() => true} />
 
 The key benefits of this solution are:
 

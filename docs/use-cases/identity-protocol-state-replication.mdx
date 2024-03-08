@@ -10,7 +10,7 @@ import Image from '@theme/IdealImage';
 Most self-sovereign identity protocols rely on zero-knowledge proofs when interacting with smart contracts.
 This approach typically requires some stateful metadata (let's call it *the state*) available on-chain.
 
-<Image className="idealImage" img={require('/img/zkp.png')} alt="Replication flow in a nutshell" />
+<Image className="idealImage" img={require('/img/zkp.png')} alt="Replication flow in a nutshell" shouldAutoDownload={() => true} />
 
 Generally, this metadata falls into two categories:
 
@@ -46,7 +46,7 @@ The state updates are protected from spoofing by a decentralized network of orac
 
 Let's look at its inner workings in more detail by following the state replication from Ethereum to Polygon:
 
-<Image className="idealImage" img={require('/img/polygon-eth-replication.png')} alt="State Replication flow from Ethereum to Polygon" />
+<Image className="idealImage" img={require('/img/polygon-eth-replication.png')} alt="State Replication flow from Ethereum to Polygon" shouldAutoDownload={() => true} />
 
 The key benefits of this solution are:
 
