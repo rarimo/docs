@@ -3,7 +3,7 @@ slug: /products/bridging-protocol
 description: Rarimo's Bridging Protocol allows users to transfer assets across chains.
 ---
 import OutLink from "@site/src/components/OutLink";
-import Image from '@theme/IdealImage';
+import IdealImage from '@site/src/components/IdealImage';
 
 # Bridging Protocol
 
@@ -20,7 +20,7 @@ Currently, it is available for:
 
 Let's look at the inner workings of the protocol in a real-world example: a user bridges funds from Ethereum to Polygon to buy an NFT. The diagram below describes the entire flow. Note that a single transaction is submitted on the source chain to perform this complex cross-chain task.
 
-<Image className="idealImage" img={require('/img/bridging-flow.png')} alt="Bridging Flow" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/bridging-flow.png')} alt="Bridging Flow" />
 
 ## Protocol features
 
@@ -54,7 +54,7 @@ Rarimo has integrated the <OutLink href="https://www.circle.com/en/cross-chain-t
 
 With Rarimo's token-agnostic payments, customers can consolidate funds from multiple chains and in various tokens to make payments with just a few clicks. The system handles the token swaps and bridging.
 
-<Image  className="idealImage" img={require('/img/token-agnostic-receipt.png')} alt="Token Agnostic Payments Example" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/token-agnostic-receipt.png')} alt="Token Agnostic Payments Example"/>
 
 Fundamentally, the product provides four capabilities:
 

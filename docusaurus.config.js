@@ -205,7 +205,7 @@ module.exports = {
   /** Plugins https://docusaurus.io/docs/using-plugins */
   plugins: [
     [
-      '@docusaurus/plugin-ideal-image',
+      require.resolve('@docusaurus/plugin-ideal-image'),
       {
         max: 1920, 
         min: 128, 

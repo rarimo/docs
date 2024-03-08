@@ -3,7 +3,7 @@ title: Multi-chain mints use case
 sidebar_label: Multi-chain mints
 description: 'Issue non-fungible tokens (NFTs) or SBTs on any chain'
 ---
-import Image from '@theme/IdealImage';
+import IdealImage from '@site/src/components/IdealImage';
 
 # Multi-chain mints
 
@@ -15,7 +15,7 @@ In the case of some solutions, Most rewards are issued on a single chain, irresp
 
 The current method of organizing cross-chain interaction, in the absence of Rarimo, involves the use of various NFT bridges to enable the transfer of NFTs between different networks. However, this approach has a limitation whereby an up-to-date NFT can only exist on one network at a time. To improve interoperability, wrapped NFTs can be received on certain networks, albeit in a layered fashion. As a result, determining the original source of the NFT (NFT source) becomes more challenging.
 
-<Image className="idealImage" img={require('/img/cross-chain-mint-without-Rarimo.png')} alt="Cross-chain mint without Rarimo scheme" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/cross-chain-mint-without-Rarimo.png')} alt="Cross-chain mint without Rarimo scheme" />
 
 Furthermore, to maintain the principle and intended purpose of SBT tokens, their transfer should be restricted. Typically, sending NFTs across a bridge involves transferring control of the token to the bridge contract. During this time, it becomes difficult to verify the ownership of the NFT by the user until it is on the target chain, and the proof is validated by the decentralized application deployed on the relevant contract.
 
@@ -25,11 +25,11 @@ Community protocols can benefit from the integration of the Rarimo protocol beca
 
 - **The SBT on demand -** feature allows users to independently choose the network where they want to mint their SBT, if they choose to do so. Subsequently, the user provides proof of the SBT's existence to the contract and mints the SBT to the required account. This functionality is crucial when the target contract necessitates on-chain SBT ownership verification or displaying on OpenSea.
 
-  <Image className="idealImage" img={require('/img/cross-chain-mint-SBT.png')} alt="Cross-chain mint Rarimo SBT scheme" shouldAutoDownload={() => true} />
+  <IdealImage img={require('/img/cross-chain-mint-SBT.png')} alt="Cross-chain mint Rarimo SBT scheme" />
 
 - **The Proof on demand -** feature enables users to provide proof of the existence of their SBT on Rarimo directly to the destination contract, provided the target DApp is connected to the Rarimo integrator contract. The integrator contract stores the state defined by the Rarimo protocol and the mechanism used for verification, which is not memory-intensive and can contain thousands of proofs-of-existence. Additionally, this approach can be utilized during off-chain verification procedures, such as providing proof of a certificate's existence to a university.
 
-  <Image className="idealImage" img={require('/img/cross-chain-mint-proof.png')} alt="Cross-chain mint Rarimo Proof scheme" shouldAutoDownload={() => true} />
+  <IdealImage img={require('/img/cross-chain-mint-proof.png')} alt="Cross-chain mint Rarimo Proof scheme" />
 
 ## Fees options
 

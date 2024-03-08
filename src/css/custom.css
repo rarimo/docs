@@ -22,6 +22,7 @@
   --ifm-color-primary-lightest: var(--primary-main);
   --ifm-menu-link-padding-vertical: 0.75rem;
   --ifm-menu-link-padding-horizontal: 1rem;
+  --ifm-paragraph-margin-bottom: 20px;
   --white: #ffffff;
   --ifm-font-family-base: 'Inter', 'Segoe UI', Tahoma, sans-serif;
   --ifm-code-font-size: 95%;
@@ -558,10 +559,6 @@ span.DocSearch-Button-Placeholder {
 .swiper-slide-shadow-right,
 .swiper-slide-shadow-left {
   background: none !important;
-}
-
-.idealImage{
-  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 996px) {

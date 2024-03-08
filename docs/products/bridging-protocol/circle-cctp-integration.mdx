@@ -1,6 +1,6 @@
 ---
 ---
-import Image from '@theme/IdealImage';
+import IdealImage from '@site/src/components/IdealImage';
 
 # Circle CCTP integration
 
@@ -14,7 +14,7 @@ With Rarimo's NFT Checkout solution, users can purchase NFTs with non-native tok
 
 Such apps usually suffer from liquidity problems as they need to manage liquidity on different chains, but using Circle's Cross-Chain Transfer Protocol fully eliminates this problem. Under the hood, Rarimo will swap tokens to USDC and transfer them to the chain where NFT will be bought. As Circle CCTP will burn USDC in one chain and issue the same amount in the destination chain, Rarimo doesn’t need to hold any liquidity pools and can rely on Circle Protocol to provide cross-chain USDC liquidity.
 
-<Image className="idealImage" img={require('/img/USDC-NFT-Checkout.png')} alt="flow" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/USDC-NFT-Checkout.png')} alt="flow" />
 
 ## Cross-Chain Transfer Protocol for Rarimo Identity
 
@@ -24,4 +24,4 @@ Circle Cross-Chain Transfer Protocol allows you to use USDC cross-chain. The int
 
 For example, assume there is a decentralized bank on Avalanche, and you have some USDC on Ethereum that you want to deposit into this bank. To accept the deposit, the bank has to verify your identity to make sure that you are eligible. The user can deposit USDC from Ethereum to a DApp on Avalanche, and Rarimo Protocol will provide a proof.
 
-<Image className="idealImage" img={require('/img/USDC-ID.png')} alt="flow" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/USDC-ID.png')} alt="flow" />

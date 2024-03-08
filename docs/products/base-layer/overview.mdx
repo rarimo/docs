@@ -2,7 +2,7 @@
 slug: /products/base-layer
 description: Rarimo Base Layer is a decentralized interchain messaging protocol.
 ---
-import Image from '@theme/IdealImage';
+import IdealImage from '@site/src/components/IdealImage';
 
 # Base Layer
 
@@ -18,7 +18,7 @@ The interchain layer must be as decentralized as the chains it connects, not to 
 The system comprises a network of dozens of independent validators and oracles.
 Oracles observe events in the outer world in a trustless way, and Validators collaborate to achieve secure consensus on the order of events.
 
-<Image className="idealImage" img={require('/img/validator.png')} alt="Rarimo Base Layer" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/validator.png')} alt="Rarimo Base Layer" />
 
 ### Extensibility
 
@@ -26,7 +26,7 @@ The protocol provides a general messaging protocol foundation for cross-chain us
 Users can implement their own sub-protocols and submit them via the proposals mechanism.
 Rarimo offers ready-to-use [identity](/products/identity-protocol) and [bridging](/products/bridging-protocol/) sub-protocols.
 
-<Image className="idealImage" img={require('/img/protocol-layers.png')} alt="Rarimo Protocols" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/protocol-layers.png')} alt="Rarimo Protocols" />
 
 Additionally, Rarimo Core supports EVM-compatible smart contracts for greater flexibility.
 

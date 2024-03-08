@@ -3,13 +3,13 @@ slug: /ecosystem/proof-of-humanity/guides/protecting-your-discord-server-from-bo
 description: Learn how to set up a Proof of Humanity miniapp for your Discord server and channels for verified humans only.
 ---
 import OutLink from "@site/src/components/OutLink";
-import Image from '@theme/IdealImage';
+import IdealImage from '@site/src/components/IdealImage';
 
 # Protecting your discord server from bots
 
 A typical crypto discord server is constantly attacked by bots shilling scams. Banning them manually wastes your mods' and users' time. Basic protection measures, like captcha verification, do little good, either.
 
-<Image className="idealImage" img={require('/img/collabland-guide/sample-scam.png')} alt="Sample Scam" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/collabland-guide/sample-scam.png')} alt="Sample Scam" />
 
 Rarimo has developed a free plugin for the popular token-gating bot <OutLink href="https://www.collab.land/">Collab.Land</OutLink> to fight this menace. It allows the server admin to set up channels for verified humans only.
 
@@ -19,7 +19,7 @@ Rarimo has developed a free plugin for the popular token-gating bot <OutLink hre
 
 In case you didn't use Collab.Land yet, follow the <OutLink href="https://collabland.freshdesk.com/support/solutions/articles/70000036689-discord-bot-walkthrough">Discord Bot Walkthrough</OutLink> to invite the bot to your server.
 
-<Image className="idealImage" img={require('/img/collabland-guide/invite-bot.png')} alt="Invite Collab.Land Bot" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/collabland-guide/invite-bot.png')} alt="Invite Collab.Land Bot" />
 
 ### Step #2: Create a Discord role for humans
 
@@ -27,40 +27,40 @@ Collab.Land's token gating rules are based on discord roles, so we need to creat
 
 Let's call our role `Certified Human✅`:
 
-<Image className="idealImage" img={require('/img/collabland-guide/role.png')} alt="Create a Role" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/collabland-guide/role.png')} alt="Create a Role" />
 
 ### Step #3: Add the Proof of Humanity action
 
 1. Open the <OutLink href="https://cc.collab.land/login">Collab.Land Command Center</OutLink>:
-   <Image className="idealImage" img={require('/img/collabland-guide/dashboard-login.png')} alt="Open Command Center" shouldAutoDownload={() => true} />
+   <IdealImage img={require('/img/collabland-guide/dashboard-login.png')} alt="Open Command Center" />
 1. Log in via Discord:
-   <Image className="idealImage" img={require('/img/collabland-guide/dashboard-login-discord.png')} alt="Login via Discord" shouldAutoDownload={() => true} />
+   <IdealImage img={require('/img/collabland-guide/dashboard-login-discord.png')} alt="Login via Discord" />
 1. Click on the **Marketplace** tab:
-   <Image className="idealImage" img={require('/img/collabland-guide/marketplace.png')} alt="Marketplace" shouldAutoDownload={() => true} />
+   <IdealImage img={require('/img/collabland-guide/marketplace.png')} alt="Marketplace" />
 1. Install the **Rarimo Proof of Humanity Verify Action** by clicking on the **Free Install** button:
-   <Image className="idealImage" img={require('/img/collabland-guide/install-action.png')} alt="Install Action" shouldAutoDownload={() => true} />
+   <IdealImage img={require('/img/collabland-guide/install-action.png')} alt="Install Action" />
 
 ### Step #4: Set up a token-gating rule
 
 1. Click on the **TGRs** tab in the Collab.Land console:
-   <Image className="idealImage" img={require('/img/collabland-guide/tgr-tab.png')} alt="TGRs Tab" shouldAutoDownload={() => true} />
+   <IdealImage img={require('/img/collabland-guide/tgr-tab.png')} alt="TGRs Tab" />
 1. Click on the **Select Role** button:
-   <Image className="idealImage" img={require('/img/collabland-guide/tgr-select-role.png')} alt="TGRs Select Role" shouldAutoDownload={() => true} />
+   <IdealImage img={require('/img/collabland-guide/tgr-select-role.png')} alt="TGRs Select Role" />
 1. Select the role you created in Step #1 and click **Apply**:
-   <Image className="idealImage" img={require('/img/collabland-guide/select-role.png')} alt="TGRs Select Role" shouldAutoDownload={() => true} />
+   <IdealImage img={require('/img/collabland-guide/select-role.png')} alt="TGRs Select Role" />
 1. Fill in the following fields and verify that the screenshot below matches your form:
    - Chain: `Polygon`;
    - Token Type: `ERC721`;
    - Addresses: `0xaD7De01cb7eaAFf3a419A0a0a3133a964cD90373`([reference](/ecosystem/proof-of-humanity/smart-contracts-reference#deployments));
-     <Image className="idealImage" img={require('/img/collabland-guide/tgr-config.png')} alt="TGRs Config" shouldAutoDownload={() => true} />
+     <IdealImage img={require('/img/collabland-guide/tgr-config.png')} alt="TGRs Config" />
 1. Click **Save** and verify that you see the following screen:
-   <Image className="idealImage" img={require('/img/collabland-guide/tgr-saved.png')} alt="TGRs Config Saved" shouldAutoDownload={() => true} />
+   <IdealImage img={require('/img/collabland-guide/tgr-saved.png')} alt="TGRs Config Saved" />
 
 ### Step #5: Configure the channels
 
 Now that we have the token-gating rule in place, we can configure the channels that require the `Certified Human✅` role.
 
-<Image className="idealImage" img={require('/img/collabland-guide/create-human-channel.png')} alt="Create Human-Only Channel" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/collabland-guide/create-human-channel.png')} alt="Create Human-Only Channel" />
 
 Follow the <OutLink href="https://support.discord.com/hc/en-us/articles/206143877-How-do-I-set-up-a-Role-Exclusive-channel-#:~:text=Click%20on%20the%20%22%2B%22%20icon,have%20access%20to%20this%20channel!">How do I set up a Role-Exclusive channel?</OutLink> guide to configure the human-only channels.
 
@@ -68,7 +68,7 @@ Follow the <OutLink href="https://support.discord.com/hc/en-us/articles/20614387
 
 Add a greeting message to your `#collabland-join` or other appropriate channel that prompts users to get verified.
 
-<Image className="idealImage" img={require('/img/collabland-guide/join-instructions.png')} alt="Example of a message with verification isntructions" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/collabland-guide/join-instructions.png')} alt="Example of a message with verification isntructions" />
 
 ## Verification guide for users
 
@@ -78,7 +78,7 @@ Now that the server is configured, let's see how the users can obtain the `Certi
 
 Call the `/rarimo-verify` command to start the verification process:
 
-<Image className="idealImage" img={require('/img/collabland-guide/call-verify.png')} alt="Call /rarimo-verify" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/collabland-guide/call-verify.png')} alt="Call /rarimo-verify" />
 
 ### Step #2: Complete the Proof of Humanity verification
 
@@ -88,13 +88,13 @@ Users who completed the Proof of Humanity verification earlier can skip this ste
 
 After clicking the **Verify Your Humanity** button, you will be redirected to the <OutLink href="https://robotornot.rarimo.com">Prove Your Humanity</OutLink> page. Follow the instructions to complete the verification.
 
-<Image className="idealImage" img={require('/img/collabland-guide/proof-of-humanity-dapp.png')} alt="Complete the Proof of Humanity Verification" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/collabland-guide/proof-of-humanity-dapp.png')} alt="Complete the Proof of Humanity Verification" />
 
 ### Step #3: Claim the verified role
 
 Once you've completed the verification, go to the `#collabland-join` channel and click on the **Let's go** button to obtain your verified role:
 
-<Image className="idealImage" img={require('/img/collabland-guide/collabland-verify-asstes.png')} alt="Collab.Land Verify Assets" shouldAutoDownload={() => true} />
+<IdealImage img={require('/img/collabland-guide/collabland-verify-asstes.png')} alt="Collab.Land Verify Assets" />
 
 ### Step #4: Enjoy the quality discussions
 
