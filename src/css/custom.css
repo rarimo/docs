@@ -560,6 +560,10 @@ span.DocSearch-Button-Placeholder {
   background: none !important;
 }
 
+.idealImage{
+  margin-bottom: 20px;
+}
+
 @media screen and (max-width: 996px) {
   .footer__items {
     display: flex;

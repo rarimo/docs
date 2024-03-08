@@ -32,27 +32,27 @@ For example applications, see <OutLink href="https://github.com/rarimo/js-sdk-ex
 
 The transaction flow starts with the `DappContextProvider` and `RarimoPayButton` components:
 
-<p><Image img={require('/img/sdk/RarimoPayButton.png')} alt="The Rarimo pay button" /></p>
+<Image className="idealImage" img={require('/img/sdk/RarimoPayButton.png')} alt="The Rarimo pay button" />
 
 When a user clicks the button, the `RarimoPayDialog` component opens, prompting the user to select the wallet to use.
 It includes the `PaymentWallets` and `CheckoutModal` components, which list the wallets detected in the browser:
 
-<p><Image img={require('/img/sdk/RarimoPayDialog-wallets.png')} alt="The Rarimo pay dialog, with an embedded list of wallets" /></p>
+<Image className="idealImage" img={require('/img/sdk/RarimoPayDialog-wallets.png')} alt="The Rarimo pay dialog, with an embedded list of wallets" />
 
 When the user selects a wallet and logs in to it, the `RarimoPayDialog` component shows the `BridgeChainSelect` component, which prompts the user to select a chain:
 
-<p><Image img={require('/img/sdk/RarimoPayDialog-chains.png')} alt="The Rarimo pay dialog, with a list of chains" /></p>
+<Image className="idealImage" img={require('/img/sdk/RarimoPayDialog-chains.png')} alt="The Rarimo pay dialog, with a list of chains" />
 
 When the user selects a chain, the dialog updates to show the tokens in the wallet in the `PaymentTokensList` component:
 
-<p><Image img={require('/img/sdk/RarimoPayDialog-tokens.png')} alt="The Rarimo pay dialog, with an embedded list of tokens in the selected wallet and chain" /></p>
+<Image className="idealImage" img={require('/img/sdk/RarimoPayDialog-tokens.png')} alt="The Rarimo pay dialog, with an embedded list of tokens in the selected wallet and chain" />
 
 When the user clicks a token, the dialog opens a `LoadingIndicator` component as it retrieves prices.
 Then the dialog shows the price of the transaction and the fees involved.
 
 If the wallet has enough of the selected token, the dialog shows the transaction fees and prompts the user to complete the transaction, as in this example:
 
-<p><Image img={require('/img/sdk/RarimoPayDialog-checkout.png')} alt="The Rarimo pay dialog, showing the selected token, the price conversion, and the fees" /></p>
+<Image className="idealImage" img={require('/img/sdk/RarimoPayDialog-checkout.png')} alt="The Rarimo pay dialog, showing the selected token, the price conversion, and the fees" />
 
 The Rarimo SDK provider packages provide tools to interact with in-browser wallets.
 

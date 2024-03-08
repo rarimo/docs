@@ -17,19 +17,19 @@ The goals of this demo are:
 
 The Iden3 Identity State(pictured below) is proposed to make the ZK Proofs feasible on other chains. However, replicating each state change to each supported chain is unreliable and costly.
 
-<p><Image img={require('/img/iden3-state.png')} alt="Iden3 State" /></p>
+<Image className="idealImage" img={require('/img/iden3-state.png')} alt="Iden3 State" />
 
 On-demand state replication using Rarimo's cross-chain infrastructure is proposed to mitigate these issues. Rarimo oracles will replicate the complete identity state history to a State Contract on the Rarimo Protocol chain. State Contracts on the other chains will be modified to accept lazy state updates. The updates will be secured by Rarimo's TSS instead of the state transition proofs used by Iden3.
 
-<p><Image img={require('/img/polygon-id-integration.png')} alt="Polygon ID Integration Architecture" /></p>
+<Image className="idealImage" img={require('/img/polygon-id-integration.png')} alt="Polygon ID Integration Architecture" />
 
 In order to prove a statement on the Ethereum chain, the relayer will fetch a state update transaction from the Rarimo API and submit it just before the user submits the ZKP. This way, the state will be used only when it's needed.
 
-<p><Image img={require('/img/polygon-id-state-replication.png')} alt="Polygon ID State Replication Flow" /></p>
+<Image className="idealImage" img={require('/img/polygon-id-state-replication.png')} alt="Polygon ID State Replication Flow" />
 
 The user then generates a ZKP using the Polygon ID Wallet app and submits it to the verifier contract using Metamask.
 
-<p><Image img={require('/img/polygon-id-zkp-flow.png')} alt="Polygon ID ZKP Generation Flow" /></p>
+<Image className="idealImage" img={require('/img/polygon-id-zkp-flow.png')} alt="Polygon ID ZKP Generation Flow" />
 
 ## Demo walkthrough
 

@@ -15,19 +15,19 @@ So, having the Worldcoin issuer and state contract anchored on Ethereum, we can 
 1. Firstly, the user will be asked to connect his Metamask wallet.
     After connecting the wallet, the user can go through the verification process.
 
-    <p><Image img={require('/img/world-id-verify.png')} alt="Verify with World ID" /></p>
+    <Image className="idealImage" img={require('/img/world-id-verify.png')} alt="Verify with World ID" />
 
 1. After clicking the button, a QR code is shown, and the user can scan it with his World App and generate proof that he is an actual human.
 
-    <p><Image img={require('/img/world-id-qr-code.png')} alt="QR Code, that can be scanned with World App" /></p>
+    <Image className="idealImage" img={require('/img/world-id-qr-code.png')} alt="QR Code, that can be scanned with World App" />
 
 1. After successful proof generation, the relayer will be called to replicate the state from Ethereum to Avalanche.
 
-    <p><Image img={require('/img/world-id-proof-generated.png')} alt="Proof Generated, transiting the state, using the relayer" /></p>
+    <Image className="idealImage" img={require('/img/world-id-proof-generated.png')} alt="Proof Generated, transiting the state, using the relayer" />
 
 1. After proof is submitted, the user can review the correctness using the transaction hash
 
-    <p><Image img={require('/img/world-id-tx-hash.png')} alt="Proof Submitted, user can check the transaction" /></p>
+    <Image className="idealImage" img={require('/img/world-id-tx-hash.png')} alt="Proof Submitted, user can check the transaction" />
 
 ## DApp creation
 
