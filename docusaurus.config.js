@@ -208,8 +208,8 @@ module.exports = {
       require.resolve('@docusaurus/plugin-ideal-image'),
       {
         max: 1920, 
-        min: 128, 
-        steps: 5,
+        min: 720, 
+        steps: 3,
         disableInDev: false,
       },
     ],
