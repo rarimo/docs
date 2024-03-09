@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Products/WorldCoin State Replication:
   - Updated the relayer version in the replication guide;
+- Used `@docusaurus/plugin-ideal-image` for image optimization
 
 ## [2.0.5] - 23-02-2024
 

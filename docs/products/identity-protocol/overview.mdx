@@ -4,6 +4,7 @@ title: Rarimo Identity Protocol
 description:  Self-sovereign digital identity protocol lets users prove their identity on any blockchain. Crytpo identity privacy is protected by zero-knowledge proof technology.
 ---
 import OutLink from "@site/src/components/OutLink";
+import IdealImage from '@site/src/components/IdealImage';
 
 # Rarimo Identity Protocol
 
@@ -34,13 +35,13 @@ The Protocol implements the <OutLink href= "https://www.w3.org/TR/did-core/">W3C
 
 Zero-knowledge proofs enable privacy, preserving selective disclosure of identity aspects. DApps can verify specific attributes of user identity on-chain without compromising the sensitive data. For example, users can prove they're over 21 without revealing their age. The security is ensured by the proven <OutLink href= "https://docs.iden3.io/">Iden3 Protocol</OutLink>.
 
-![Cross-Chain Identity](/img/zkp.png)
+<IdealImage img={require('/img/zkp.png')} alt="Cross-Chain Identity" />
 
 ### Use your blockchain identity anywhere
 
 Rarimo's cross-chain messaging base layer ensures that all the metadata necessary for verifying zero-knowledge proofs is available on demand on any supported chains. A synergy of instant consensus finality and threshold signature(TSS) makes metadata replication fast, secure, and cheap.
 
-![Cross-Chain Identity](/img/identity-state-replication.png)
+<IdealImage img={require('/img/identity-state-replication.png')} alt="Cross-Chain Identity" />
 
 ### Enjoy seamless UX with RariMe
 
@@ -50,7 +51,7 @@ Self sovereign identity is an overwhelming paradigm shift for the users. <OutLin
 
 The Rarimo Identity Protocol doesn't gatekeep the credential issuance and instead embraces the Triangle of Trust between the issuer, holder, and verifier. Any party can join and issue its own credentials. Any verifier can accept these credentials if they trust the issuer.
 
-![Trust Triangle](/img/trust-triangle.png)
+<IdealImage img={require('/img/trust-triangle.png')} alt="Trust Triangle" />
 
 ### Integrate identity in your DApp
 

@@ -2,6 +2,7 @@
 description: A scalable, privacy-preserving age verification solution. Zero-knowledge proof of age.
 ---
 import OutLink from "@site/src/components/OutLink";
+import IdealImage from '@site/src/components/IdealImage';
 
 # Age restricted content
 
@@ -35,31 +36,31 @@ This is especially helpful for networks of affiliated sites;
 
 **Step #1: The user selects the "Continue incognito" option**
 
-![Continue incognito button](/img/continue-incognito.png)
+<IdealImage img={require('/img/continue-incognito.png')} alt="Continue incognito button" />
 
 **Step #2: User connects MetaMask and RariMe snap**
 
-![Connect MetaMask and RariMe](/img/connect-metamask-snap.png)
+<IdealImage img={require('/img/connect-metamask-snap.png')} alt="Connect MetaMask and RariMe" />
 
 **Step #3: Generate and submit a proof of age**
 
-![Untitled](/img/prove-the-age.png)
+<IdealImage img={require('/img/prove-the-age.png')} alt="Untitled" />
 
 After clicking **Prove My Age**, the user confirms the generation of a zero-knowledge proof:
 
-![Prove you are of legal age](/img/generate-age-zkp.png)
+<IdealImage img={require('/img/generate-age-zkp.png')} alt="Prove you are of legal age" />
 
 Then, the zero-knowledge proof generation starts.
 It may take from 30 seconds to 1 minute to generate, so it's an ideal place to place interactive ads.
 
-![Generating the zkp of legal age](/img/generating-age-proof-ads.png)
+<IdealImage img={require('/img/generating-age-proof-ads.png')} alt="Generating the zkp of legal age" />
 
 To skip ads in the future, users may also mint a proof-of-age token for a fee in crypto.
 This can be an additional way of monetizing the anonymous traffic.
 
 **Step #4: Browse the content while the session is valid**
 
-![Browse age-restricted content](/img/browse-restricted-content.png)
+<IdealImage img={require('/img/browse-restricted-content.png')} alt="Browse age-restricted content" />
 
 Incognito sessions complicate tracking user activities (views, searches, clicks, etc.) that drive the algorithmic recommendations.
 To balance user engagement and privacy, we propose two possible approaches to tackling this problem:

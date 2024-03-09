@@ -4,6 +4,7 @@ sidebar_label: Social graphs
 desctiption: Connect social graphs across multiple chains
 ---
 import OutLink from "@site/src/components/OutLink";
+import IdealImage from '@site/src/components/IdealImage';
 
 
 # Social graphs
@@ -16,7 +17,7 @@ These protocols typically face the following challenges when going multi-chain:
 - **Fragmentation by the underlying chain** creates silos that prevent users from engaging with content on other chains. For example, a user can’t leave a comment on a post from another chain because the social graph smart contract can't reference it. Replicating the social graph elements can mitigate this issue, but it is economically unfeasible for a big graph;
 - **Lack of cross-chain interoperability** means there is no structured way to interact with the third-party DApps on other chains or to bring in external assets such as NFT avatars;
 
-![Social Graphs links scheme](/img/social-graphs-links-scheme.png)
+<IdealImage img={require('/img/social-graphs-links-scheme.png')} alt="Social Graphs links scheme" />
 
 **Rarimo provides several solutions to address these issues:**
 
@@ -33,7 +34,7 @@ Unlike other identity representation methods like Soul Bound Tokens (SBTs) or No
 - On-chain state that is used to verify proofs;
 - An off-chain claim that is owned by the user;
 
-![Social Graphs states circle scheme](/img/zkp.png)
+<IdealImage img={require('/img/zkp.png')} alt="Social Graphs states circle scheme" />
 
 By leveraging these two components, users can provide DApps with proof regarding a specific statement about their identity without disclosing any additional information.
 
