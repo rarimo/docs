@@ -142,6 +142,16 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Freedom Tool',
+      link: {type: 'doc', id: 'ecosystem/freedom-tool/overview'},
+      collapsed: true,
+      items: [
+        // 'ecosystem/freedom-tool/guide-how-to-use-freedom-tool',
+        // 'ecosystem/freedom-tool/smart-contracts-reference',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Polygon ID State Replication',
       link: {type: 'doc', id: 'ecosystem/polygon-id-state-replication/overview'},
       collapsed: true,

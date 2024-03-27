@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added the "interoperability with external credentials" page;
 - Use-cases:
   - Added the "Age restricted content" page;
+- Ecosystem/Freedom Tool:
+  - Added "Overview" page;
 
 ### Changed
 
