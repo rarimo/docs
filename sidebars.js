@@ -150,6 +150,15 @@ const sidebars = {
         'ecosystem/polygon-id-state-replication/api-reference',
       ],
     },
+    {
+      type: 'category',
+      label: 'Freedom Tool',
+    //  link: {type: 'doc', id: 'ecosystem/polygon-id-state-replication/overview'},
+      collapsed: true,
+      items: [
+        'ecosystem/freedom-tool/smart-contracts-reference',
+      ],
+    },
     // {
     //   type: 'category',
     //   label: 'WorldCoin State Replication',
