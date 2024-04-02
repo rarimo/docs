@@ -1,0 +1,281 @@
+---
+sidebar_label: 'Smart contracts reference'
+description: 'Listing of smart contracts used by the Freedom Tool.'
+---
+
+import OutLink from "@site/src/components/OutLink";
+
+# Freedom Tool: Smart contracts reference
+
+## `VotingRegistry`
+
+A facade for either `Voting` or `Registration` instances. It is responsible for managing the pool types and their implementations.
+
+### Deployments
+
+| Chain   | ChainID    | Address                                                                                                                                       |
+| ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Arbitrum | `42161` | `0x1d84cFd4839fE92dAe8E1F8F777010c08a60013C` \(<OutLink href="https://arbiscan.io/address/0x1d84cFd4839fE92dAe8E1F8F777010c08a60013C">Arbiscan</OutLink>\) |
+
+
+### Interface
+
+```solidity title="/contracts/core/VotingRegistry.sol"
+contract VotingRegistry is IVotingRegistry, Initializable, OwnableUpgradeable, UUPSUpgradeable {
+    address public poolFactory;
+
+    function setNewImplementations(
+        string[] memory poolTypes_,
+        address[] memory newImplementations_
+    ) external onlyOwner onlyEqualLength(poolTypes_, newImplementations_) {
+        // ...
+    }
+
+    function bindVotingToRegistration(
+        address proposer_,
+        address voting_,
+        address registration_
+    ) external onlyFactory {
+        // ...
+    }
+
+```
+
+- `poolFactory` — address of the `VotingFactory` contract;
+- `setNewImplementations()` — sets or upgrades the implementations for specified pool types. Only callable by the owner;
+- `bindVotingToRegistration()` — Binds a voting contract to a registration contract. Only callable by the owner;
+
+See <OutLink href="https://github.com/rarimo/voting-contracts/blob/main/contracts/core/VotingRegistry.sol">VotingRegistry.sol</OutLink> for the full implementation.
+
+## `VotingFactory`
+
+Responsible for the creation of new voting and registration instances.
+
+### Deployments
+
+| Chain   | ChainID    | Address                                                                                                                                       |
+| ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Arbitrum | `42161` | `0x43E547aCE25b91d2cb00D96BE6b10f34f36A6B7F` \(<OutLink href="https://arbiscan.io/address/0x43E547aCE25b91d2cb00D96BE6b10f34f36A6B7F">Arbiscan</OutLink>\) |
+
+
+### Interface
+
+```solidity title="/contracts/core/VotingFactory.sol"
+event InstanceCreated(
+        string indexed instanceType,
+        address indexed creator,
+        address indexed voting
+    );
+
+/* ... */
+
+contract VotingFactory is IVotingFactory, Initializable, UUPSUpgradeable {
+    IVotingRegistry public votingRegistry;
+
+    function createRegistration(string memory registrationType_, bytes memory data_) external {
+        // ...
+    }
+
+    function createRegistrationWithSalt(
+        string memory registrationType_,
+        bytes memory data_,
+        bytes32 salt_
+    ) external {
+        // ...
+    }
+
+    function createVoting(string memory votingType_, bytes memory data_) external {
+        // ...
+    }
+
+    function createVotingWithSalt(
+        string memory votingType_,
+        bytes memory data_,
+        bytes32 salt_
+    ) external {
+        // ...
+    }
+
+    function predictAddress(
+        string memory poolType_,
+        address proposer_,
+        bytes32 salt_
+    ) external view returns (address) {
+        // ...
+    }
+}
+```
+
+- `InstanceCreated` — an event emitted when a new instance is created. Contains:
+    - `instanceType` — the type of the instance;
+    - `creator` — creator address;
+    - `voting` — address of the newly created instance;
+- `onlyExistingPoolType()` — modifier that requires the poolType to exist in the `votingRegistry`;
+- `createRegistration()` — creates a new registration instance with specified parameters;
+- `createRegistrationWithSalt()` — creates a new registration instance deterministically with specified parameters and a salt;
+- `createVoting()` — creates a new voting instance with specified parameters;
+- `createVotingWithSalt()` — creates a new voting instance deterministically with specified parameters and salt;
+- `predictAddress()` — predicts the address of an instance that will be deployed with the given parameters and salt;
+
+See <OutLink href="https://github.com/rarimo/voting-contracts/blob/main/contracts/core/VotingFactory.sol">VotingFactory.sol</OutLink> for the full implementation.
+
+## `RegisterVerifier`
+
+It is a modified Iden3 smart contract that verifies a ZK elegibility proof and checks the applicants' uniqueness.
+
+<!-- TODO: Add arbitrum contracts addresses -->
+
+### Interface
+
+```solidity title="/contracts/iden3/verifiers/RegisterVerifier.sol"
+event RegisterAccepted(
+    uint256 documentNullifier,
+    RegisterProofInfo registerProofInfo
+    );
+
+/* ... */
+
+contract RegisterVerifier is IRegisterVerifier, BaseVerifier {
+    string public constant REGISTER_PROOF_QUERY_ID = "REGISTER_PROOF";
+
+    function proveRegistration(
+        ProveIdentityParams memory proveIdentityParams_,
+        RegisterProofInfo memory registerProofInfo_
+    ) external onlyRegistrationContract(registerProofInfo_) {
+        // ...
+    }
+
+    function transitStateAndProveRegistration(
+        ProveIdentityParams memory proveIdentityParams_,
+        RegisterProofInfo memory registerProofInfo_,
+        TransitStateParams memory transitStateParams_
+    ) external onlyRegistrationContract(registerProofInfo_) {
+        // ...
+    }
+}
+```
+
+- `RegisterAccepted` — event that is emitted when registration is accepted. Contains:
+    - `documentNullifier` — unique nullifier for the document;
+    - `registerProofInfo` — information regarding the registration proof;
+- `REGISTER_PROOF_QUERY_ID` — unique query identifier. Used as a public parameter in ZKP;
+- `onlyRegistrationContract()` — modifier that requires the caller to be equal to the registration contract address;
+- `proveRegistration()` — proves registration with given parameters;
+- `transitStateAndProveRegistration()` — transits the state and proves registration with given parameters;
+
+See <OutLink href="https://github.com/rarimo/voting-contracts/blob/main/contracts/iden3/verifiers/RegisterVerifier.sol">RegisterVerifier.sol</OutLink> for the full implementation.
+
+## `Registration`
+
+This contract handles voter registrations and keeps track of all the participants.
+
+### Deployments
+
+| Chain   | ChainID    | Address                                                                                                                                       |
+| ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Arbitrum | `42161` | `0x1cd9be5BBD91c07aA31180834e48cf4838992317` \(<OutLink href="https://arbiscan.io/address/0x1cd9be5BBD91c07aA31180834e48cf4838992317">Arbiscan</OutLink>\) |
+
+
+### Interface
+
+```solidity title="/contracts/core/Registration.sol"
+event UserRegistered(
+    address indexed user,
+    IBaseVerifier.ProveIdentityParams proveIdentityParams,
+    IRegisterVerifier.RegisterProofParams registerProofParams
+);
+
+/* ... */
+
+contract Registration is IRegistration, PoseidonSMT, Initializable {
+    IRegisterVerifier public immutable registerVerifier;
+    uint256 public immutable smtTreeMaxDepth;
+    RegistrationInfo public registrationInfo;
+    mapping(bytes32 => bool) public commitments;
+    mapping(bytes32 => bool) public rootsHistory;
+
+    function register(
+        IBaseVerifier.ProveIdentityParams memory proveIdentityParams_,
+        IRegisterVerifier.RegisterProofParams memory registerProofParams_,
+        IBaseVerifier.TransitStateParams memory transitStateParams_,
+        bool isTransitState_
+    ) external {
+        // ...
+        emit UserRegistered(msg.sender, proveIdentityParams_, registerProofParams_);
+    }
+}
+```
+
+- `UserRegistered` — an event emitted when a user successfully registers. Contains:
+    - `user` — address of the user registering;
+    - `proveIdentityParams` — parameters used for proving the user's identity;
+    - `registerProofParams` — parameters used for the registration proof;
+- `registerVerifier` — contract for registration proof verification;
+- `smtTreeMaxDepth` — the maximum depth of the Sparse Merkle Tree (SMT);
+- `registrationInfo` — struct containing all relevant registration information;
+- `commitments` — mapping to track commitments and prevent duplicate registrations;
+- `rootsHistory` — mapping to track roots and validate their existence;
+- `register()` — registers a user, verifying his identity and proof of registration. Checks that the user is unique and hasn't been previously registered (through `RegisterVerifier` call);
+
+See <OutLink href="https://github.com/rarimo/voting-contracts/blob/main/contracts/core/Registration.sol">Registration.sol</OutLink> for the full implementation.
+
+## `Voting`
+
+Implement a voting system with registration and voting phases. It saves votes in a Merkle tree.
+
+### Deployments
+
+| Chain   | ChainID    | Address                                                                                                                                       |
+| ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Arbitrum | `42161` | `0x933284F0E1D76C5cA49f72eD38cc36Dd39b38704` \(<OutLink href="https://arbiscan.io/address/0x933284F0E1D76C5cA49f72eD38cc36Dd39b38704">Arbiscan</OutLink>\) |
+
+
+### Interface
+
+```solidity title="/contracts/core/Voting.sol"
+event UserVoted(
+    address indexed user,
+    bytes32 root,
+    bytes32 nullifierHash,
+    bytes32 candidate
+    );
+
+/* ... */
+
+contract Voting is IVoting, ERC165, Initializable {
+    uint256 public constant MAX_CANDIDATES = 100;
+    address public immutable voteVerifier;
+    IRegistration public registration;
+    VotingInfo public votingInfo;
+    mapping(bytes32 => bool) public nullifiers;
+    mapping(bytes32 => bool) public candidates;
+    mapping(bytes32 => uint256) public votesPerCandidate;
+
+    function vote(
+        bytes32 root_,
+        bytes32 nullifierHash_,
+        bytes32 candidate_,
+        VerifierHelper.ProofPoints memory proof_
+    ) external {
+        // ...
+
+        emit UserVoted(msg.sender, root_, nullifierHash_, candidate_);
+    }
+}
+```
+
+- `UserVoted` — event that is emitted when the user casts a vote. Contains:
+    - `user` — address of the user voting;
+    - `root` — the root of the SMT that was used at the time of voting;
+    - `nullifierHash` — hash of the nullifier to prevent double voting;
+    - `candidate` —  identifier of the candidate who was voted for;
+- `MAX_CANDIDATES` — maximum number of candidates in a pool;
+- `voteVerifier` — contract for voting proof verification;
+- `registration` — contract for validation of registration;
+- `votingInfo` — struct containing all relevant voting information;
+- `nullifiers` — mapping to track nullifiers and prevent double voting;
+- `candidates` — mapping of candidates available for voting;
+- `votesPerCandidate` — mapping to track votes per candidate;
+- `vote()` — allows a registered user to cast a vote for a candidate;
+
+See <OutLink href="https://github.com/rarimo/voting-contracts/blob/main/contracts/core/Voting.sol">Voting.sol</OutLink> for the full implementation.

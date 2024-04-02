@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added the "Age restricted content" page;
 - Ecosystem/Freedom Tool:
   - Added "Overview" page;
+  - Added "Smart contracts reference" page;
 
 ### Changed
 

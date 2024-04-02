@@ -147,7 +147,7 @@ const sidebars = {
       collapsed: true,
       items: [
         // 'ecosystem/freedom-tool/guide-how-to-use-freedom-tool',
-        // 'ecosystem/freedom-tool/smart-contracts-reference',
+         'ecosystem/freedom-tool/smart-contracts-reference',
       ],
     },
     {
