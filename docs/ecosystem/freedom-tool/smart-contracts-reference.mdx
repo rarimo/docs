@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Smart contracts reference'
-description: 'Information about the smart contracts used in the Freedom Tool.'
+description: 'Listing of smart contracts used by the Freedom Tool.'
 ---
 
 import OutLink from "@site/src/components/OutLink";
@@ -9,10 +9,8 @@ import OutLink from "@site/src/components/OutLink";
 
 ## `VotingRegistry`
 
-Responsible for managing pool implementations and instances.
-Right now it supports following types:
-- "Simple Voting": contract is `Voting`
-- "Simple Registration": contract is `Registration`
+Responsible for managing voting pools.
+It handles the `Voting` and `Registration` instances.
 
 ### Deployments
 
@@ -26,8 +24,8 @@ Right now it supports following types:
 ```solidity title="/contracts/core/VotingRegistry.sol"
 contract VotingRegistry is IVotingRegistry, Initializable, OwnableUpgradeable, UUPSUpgradeable {
     address public poolFactory;
-    mapping(address => string) private _typeByPool; 
-    mapping(string => EnumerableSet.AddressSet) private _poolByType; 
+    mapping(address => string) private _typeByPool;
+    mapping(string => EnumerableSet.AddressSet) private _poolByType;
     mapping(address => EnumerableSet.AddressSet) private _poolByAddress;
     mapping(address => mapping(string => EnumerableSet.AddressSet)) private _poolByAddressAndType;
     mapping(string => address) private _poolImplementations;
@@ -94,18 +92,18 @@ contract VotingRegistry is IVotingRegistry, Initializable, OwnableUpgradeable, U
 - `_poolByAddressAndType` — mapping from proposer to mapping from poolType to pool;
 - `_poolImplementations` — mapping from poolType to poolImplementation;
 - `_registrationToVoting` — mapping from proposer to mapping from registration to voting;
-- `onlyEqualLength()` — modifier, that requires two input arrays to have the same length;
-- `onlyFactory()` — modifier, that requires the `msg.sender` to be equal to `poolFactory`;
+- `onlyEqualLength()` — modifier that requires two input arrays to have the same length;
+- `onlyFactory()` — modifier that requires the `msg.sender` to be equal to `poolFactory`;
 - `setNewImplementations()` — sets or upgrades the implementations for specified pool types. Only callable by the owner;
 - `bindVotingToRegistration()` — Binds a voting contract to a registration contract. Only callable by the owner;
-- `_requireEqualLength()` — private function, that implements the logic of `onlyEqualLength()` modifier;
-- `_requireOnlyFactory()` — private function, that implements the logic of `onlyFactory()` modifier;
+- `_requireEqualLength()` — private function that implements the logic of `onlyEqualLength()` modifier;
+- `_requireOnlyFactory()` — private function that implements the logic of `onlyFactory()` modifier;
 
 See <OutLink href="https://github.com/rarimo/voting-contracts/blob/main/contracts/core/VotingRegistry.sol">VotingRegistry.sol</OutLink> for the full implementation.
 
 ## `VotingFactory`
 
-Responsible for creation of new voting and registration instances.
+Responsible for the creation of new voting and registration instances.
 
 ### Deployments
 
@@ -271,23 +269,23 @@ contract VotingFactory is IVotingFactory, Initializable, UUPSUpgradeable {
 }
 ```
 
-- `InstanceCreated` — event, that is emitted when a new instance is created. Contains:
+- `InstanceCreated` — an event emitted when a new instance is created. Contains:
     - `instanceType` — the type of the instance;
     - `creator` — creator address;
     - `voting` — address of the newly created instance;
-- `onlyExistingPoolType()` — modifier, that requires the poolType to exist in the `votingRegistry`;
+- `onlyExistingPoolType()` — modifier that requires the poolType to exist in the `votingRegistry`;
 - `createRegistration()` — creates a new registration instance with specified parameters;
 - `createRegistrationWithSalt()` — creates a new registration instance deterministically with specified parameters and a salt;
 - `createVoting()` — creates a new voting instance with specified parameters;
 - `createVotingWithSalt()` — creates a new voting instance deterministically with specified parameters and salt;
-- `predictAddress()` — predicts the address of an instance that would be deployed with the given parameters and salt;
-- `_requireExistingPoolType()` — private function, that implements the logic of `onlyExistingPoolType` modifier;
+- `predictAddress()` — predicts the address of an instance that will be deployed with the given parameters and salt;
+- `_requireExistingPoolType()` — private function that implements the logic of `onlyExistingPoolType` modifier;
 
 See <OutLink href="https://github.com/rarimo/voting-contracts/blob/main/contracts/core/VotingFactory.sol">VotingFactory.sol</OutLink> for the full implementation.
 
 ## `RegisterVerifier`
 
-Modified Iden3 contract, that verifies ZKP, checks that the identity hasn't been registered before and that it is unique.
+It is a modified Iden3 contract that verifies ZKP and checks the uniqueness of the applicants.
 
 <!-- TODO: Add arbitrum contracts addresses -->
 
@@ -295,7 +293,7 @@ Modified Iden3 contract, that verifies ZKP, checks that the identity hasn't been
 
 ```solidity title="/contracts/iden3/verifiers/RegisterVerifier.sol"
 event RegisterAccepted(
-    uint256 documentNullifier, 
+    uint256 documentNullifier,
     RegisterProofInfo registerProofInfo
     );
 
@@ -441,25 +439,25 @@ contract RegisterVerifier is IRegisterVerifier, BaseVerifier {
 }
 ```
 
-- `RegisterAccepted` — event, that is emitted when registration is accepted. Contains:
+- `RegisterAccepted` — event that is emitted when registration is accepted. Contains:
     - `documentNullifier` — unique nullifier for the document;
     - `registerProofInfo` — information regarding the registration proof;
-- `REGISTER_PROOF_QUERY_ID` — unique query identifier. Used as public parameter in ZKP;
-- `_issuingAuthorityWhitelist` — whitelist of issuing authorities;
-- `_issuingAuthorityBlacklist` — blacklist of issuing authorities;
+- `REGISTER_PROOF_QUERY_ID` — unique query identifier. Used as a public parameter in ZKP;
+- `_issuingAuthorityWhitelist` — a whitelist of issuing authorities;
+- `_issuingAuthorityBlacklist` — a blacklist of issuing authorities;
 - `_registrationProofInfo` — mapping from registration contract address to mapping from documentNullifier to RegisterProofInfo;
-- `onlyRegistrationContract()` — modifier, that requires the caller to be equal to the registration contract address;
+- `onlyRegistrationContract()` — modifier that requires the caller to be equal to the registration contract address;
 - `proveRegistration()` — proves registration with given parameters;
 - `transitStateAndProveRegistration()` — transits the state and proves registration with given parameters;
 - `_verify()` — verifies the ZKP;
-- `_onlyRegistrationContract()` — private function, that implements the logic of `onlyRegistrationContract()` modifier;
+- `_onlyRegistrationContract()` — private function that implements the logic of the `onlyRegistrationContract()` modifier;
 - `_validateRegistrationFields()` — performs the validation of fields (whitelisted/blacklisted/commitments equivalence, etc);
 
 See <OutLink href="https://github.com/rarimo/voting-contracts/blob/main/contracts/iden3/verifiers/RegisterVerifier.sol">RegisterVerifier.sol</OutLink> for the full implementation.
 
 ## `Registration`
 
-Implementation of a registration system with ZKPs for privacy and integrity, and a Merkle tree for registration tracking.
+This contract contracts checks the ZK eligibility proofs and keeps track of all the participants.
 
 ### Deployments
 
@@ -480,10 +478,10 @@ event UserRegistered(
 /* ... */
 
 contract Registration is IRegistration, PoseidonSMT, Initializable {
-    IRegisterVerifier public immutable registerVerifier; 
-    uint256 public immutable smtTreeMaxDepth; 
-    RegistrationInfo public registrationInfo; 
-    mapping(bytes32 => bool) public commitments; 
+    IRegisterVerifier public immutable registerVerifier;
+    uint256 public immutable smtTreeMaxDepth;
+    RegistrationInfo public registrationInfo;
+    mapping(bytes32 => bool) public commitments;
     mapping(bytes32 => bool) public rootsHistory;
 
     function register(
@@ -527,7 +525,7 @@ contract Registration is IRegistration, PoseidonSMT, Initializable {
 }
 ```
 
-- `UserRegistered` — event, that is emitted when a user successfully registers. Contains:
+- `UserRegistered` — an event emitted when a user successfully registers. Contains:
     - `user` — address of the user registering;
     - `proveIdentityParams` — parameters used for proving the user's identity;
     - `registerProofParams` — parameters used for the registration proof;
@@ -536,7 +534,7 @@ contract Registration is IRegistration, PoseidonSMT, Initializable {
 - `registrationInfo` — struct containing all relevant registration information;
 - `commitments` — mapping to track commitments and prevent duplicate registrations;
 - `rootsHistory` — mapping to track roots and validate their existence;
-- `register()` — registers a user, verifying his identity and registration proof. Checks that the user is unique and hasn't been previously registered (through `RegisterVerifier` call);
+- `register()` — registers a user, verifying his identity and proof of registration. Checks that the user is unique and hasn't been previously registered (through `RegisterVerifier` call);
 
 See <OutLink href="https://github.com/rarimo/voting-contracts/blob/main/contracts/core/Registration.sol">Registration.sol</OutLink> for the full implementation.
 
@@ -555,22 +553,22 @@ Implementation of a voting system with registration and voting phases, utilizing
 
 ```solidity title="/contracts/core/Voting.sol"
 event UserVoted(
-    address indexed user, 
-    bytes32 root, 
-    bytes32 nullifierHash, 
+    address indexed user,
+    bytes32 root,
+    bytes32 nullifierHash,
     bytes32 candidate
     );
 
-/* ... */ 
+/* ... */
 
 contract Voting is IVoting, ERC165, Initializable {
     uint256 public constant MAX_CANDIDATES = 100;
-    address public immutable voteVerifier; 
-    IRegistration public registration; 
-    VotingInfo public votingInfo; 
-    mapping(bytes32 => bool) public nullifiers; 
-    mapping(bytes32 => bool) public candidates; 
-    mapping(bytes32 => uint256) public votesPerCandidate; 
+    address public immutable voteVerifier;
+    IRegistration public registration;
+    VotingInfo public votingInfo;
+    mapping(bytes32 => bool) public nullifiers;
+    mapping(bytes32 => bool) public candidates;
+    mapping(bytes32 => uint256) public votesPerCandidate;
 
     function vote(
         bytes32 root_,
@@ -632,9 +630,9 @@ contract Voting is IVoting, ERC165, Initializable {
 }
 ```
 
-- `UserVoted` — event, that is emitted when user casts a vote. Contains:
+- `UserVoted` — event that is emitted when the user casts a vote. Contains:
     - `user` — address of the user voting;
-    - `root` — root of the SMT that was used at the time of voting;
+    - `root` — the root of the SMT that was used at the time of voting;
     - `nullifierHash` — hash of the nullifier to prevent double voting;
     - `candidate` —  identifier of the candidate who was voted for;
 - `MAX_CANDIDATES` — maximum number of candidates in a pool;
