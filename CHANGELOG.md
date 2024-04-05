@@ -24,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Used `@docusaurus/plugin-ideal-image` for image optimization
 - Used `react-medium-image-zoom` to zoom images
 
+### Removed
+
+- Old whitepaper;
+
 ## [2.0.6] - 04-04-2024
 
 ### Added

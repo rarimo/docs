@@ -1,6 +1,7 @@
 import 'aos/dist/aos.css'
 import 'swiper/css'
 
+import {whitepaperLink} from '@site/src/const'
 import BrowserOnly from '@docusaurus/BrowserOnly'
 import Building from '@site/src/components/Building'
 import CardsSection from '@site/src/components/CardsSection'
@@ -120,7 +121,7 @@ const baseLayerCards: HomeCard[] = [
     after: (
       <>
         <a
-          href={'/resources/whitepaper/'}
+          href={whitepaperLink}
           className={clsx('heroButtonSecondary', styles.linksButton)}
         >
           Whitepaper
