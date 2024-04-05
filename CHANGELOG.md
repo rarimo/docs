@@ -16,7 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Ecosystem/Freedom Tool:
   - Added "Overview" page;
   - Added "Smart contracts reference" page;
-- Whitepaper v3;
 
 ### Changed
 
@@ -24,6 +23,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Updated the relayer version in the replication guide;
 - Used `@docusaurus/plugin-ideal-image` for image optimization
 - Used `react-medium-image-zoom` to zoom images
+
+## [2.0.6] - 04-04-2024
+
+### Added
+
+- Whitepaper v3;
 
 ## [2.0.5] - 23-02-2024
 
@@ -304,7 +309,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://github.com/rarimo/docs/compare/v2.0.5...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/v2.0.6...HEAD
+[2.0.6]: https://github.com/rarimo/docs/releases/tag/v2.0.5...v2.0.6
 [2.0.5]: https://github.com/rarimo/docs/releases/tag/v2.0.4...v2.0.5
 [2.0.4]: https://github.com/rarimo/docs/releases/tag/v2.0.3...v2.0.4
 [2.0.3]: https://github.com/rarimo/docs/releases/tag/v2.0.2...v2.0.3
