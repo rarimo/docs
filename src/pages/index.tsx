@@ -59,22 +59,6 @@ const baseLayerCards: HomeCard[] = [
     url: '/products/rarime/',
   },
   {
-    id: 'bridging-protocol',
-    title: 'Bridging Protocol',
-    IconName: BracketsIcon,
-    list: [
-      [
-        'Cross-chain transfers of NFTs, FTs, native coins',
-        'Cross-chain SBT ownership proofs',
-        'Available on EVM-compatible chains, Solana and Near',
-        'EVM transactions bundling',
-        'Low gas fees',
-        'CCTP integrations (coming soon)',
-      ],
-    ],
-    url: '/products/bridging-protocol/',
-  },
-  {
     id: 'base-layer',
     title: 'Base Layer',
     IconName: LayersIcon,
@@ -178,16 +162,16 @@ const ecosystemCards: HomeCard[] = [
     url: '/ecosystem/polygon-id-state-replication/',
   },
   {
-    title: 'Token Agnostic Payments',
+    title: 'Freedom Tool',
     IconName: PolygonIcon,
     list: [
       [
-        'Prove your identity on any EVM-compatible chain',
-        'Compatible with Polygon ID Wallet',
-        'Cost-efficient scalability with on-demand state replication',
+        'Transparent and secure online voting',
+        'Onboard with a biometric passport',
+        'Privacy ensured by zero-knowledge proof technology',
       ],
     ],
-    url: '/ecosystem/polygon-id-state-replication/',
+    url: '/ecosystem/freedom-tool/',
   },
 ]
 
