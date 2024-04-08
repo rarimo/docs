@@ -59,22 +59,6 @@ const baseLayerCards: HomeCard[] = [
     url: '/products/rarime/',
   },
   {
-    id: 'bridging-protocol',
-    title: 'Bridging Protocol',
-    IconName: BracketsIcon,
-    list: [
-      [
-        'Cross-chain transfers of NFTs, FTs, native coins',
-        'Cross-chain SBT ownership proofs',
-        'Available on EVM-compatible chains, Solana and Near',
-        'EVM transactions bundling',
-        'Low gas fees',
-        'CCTP integrations (coming soon)',
-      ],
-    ],
-    url: '/products/bridging-protocol/',
-  },
-  {
     id: 'base-layer',
     title: 'Base Layer',
     IconName: LayersIcon,
@@ -141,6 +125,18 @@ const baseLayerCards: HomeCard[] = [
 
 const ecosystemCards: HomeCard[] = [
   {
+    title: 'Freedom Tool',
+    IconName: PolygonIcon,
+    list: [
+      [
+        'Transparent and secure online voting',
+        'Onboard with a biometric passport',
+        'Privacy ensured by zero-knowledge proof technology',
+      ],
+    ],
+    url: '/ecosystem/freedom-tool/',
+  },
+  {
     title: 'Proof Of Humanity',
     IconName: BadgeIcon,
     list: [
@@ -167,18 +163,6 @@ const ecosystemCards: HomeCard[] = [
   // },
   {
     title: 'Polygon ID Cross-Chain State Replication',
-    IconName: PolygonIcon,
-    list: [
-      [
-        'Prove your identity on any EVM-compatible chain',
-        'Compatible with Polygon ID Wallet',
-        'Cost-efficient scalability with on-demand state replication',
-      ],
-    ],
-    url: '/ecosystem/polygon-id-state-replication/',
-  },
-  {
-    title: 'Token Agnostic Payments',
     IconName: PolygonIcon,
     list: [
       [
@@ -237,8 +221,8 @@ export default function Home(): JSX.Element {
         <main>
           <CardsSection
             cards={baseLayerCards}
-            columns={3}
-            gridTemplate={`"${baseLayerCards[0].id} ${baseLayerCards[1].id} ${baseLayerCards[2].id}" "${baseLayerCards[3].id} ${baseLayerCards[3].id} ${baseLayerCards[3].id}"`}
+            columns={2}
+            gridTemplate={`"${baseLayerCards[0].id} ${baseLayerCards[1].id}" "${baseLayerCards[2].id} ${baseLayerCards[2].id}"`}
             title="Learn The Core Products"
           />
           <CardsSection

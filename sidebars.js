@@ -23,7 +23,6 @@ const sidebars = {
         'use-cases/gaming-profiles',
         'use-cases/social-graphs',
         'use-cases/cross-chain-proofs',
-        'use-cases/multi-chain-mints',
       ],
     },
     {
@@ -62,29 +61,6 @@ const sidebars = {
         'products/identity-protocol/guide-how-to-verify-zero-knowledge-proof-in-a-smart-contract',
         'products/identity-protocol/smart-contracts-reference',
         'products/identity-protocol/js-sdk-reference',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Bridging Protocol',
-      link: { type: 'doc', id: 'products/bridging-protocol/overview' },
-      collapsed: true,
-      items: [
-        'products/bridging-protocol/circle-cctp-integration',
-        'products/bridging-protocol/guide-how-to-bundle-transactions',
-        'products/bridging-protocol/connecting-to-wallets',
-        {
-          type: 'category',
-          label: 'Smart Contracts Reference',
-          link: { type: 'doc', id: 'products/bridging-protocol/smart-contracts-reference/overview' },
-          collapsed: true,
-          items: [
-            'products/bridging-protocol/smart-contracts-reference/evm',
-            'products/bridging-protocol/smart-contracts-reference/solana',
-            'products/bridging-protocol/smart-contracts-reference/near',
-          ],
-        },
-        'products/bridging-protocol/js-sdk-reference',
       ],
     },
     {
@@ -174,17 +150,6 @@ const sidebars = {
     //     'ecosystem/worldcoin-state-replication/api-reference',
     //   ],
     // },
-    {
-      type: 'category',
-      label: 'Token Agnostic Payments',
-      link: {type: 'doc', id: 'ecosystem/token-agnostic-payments/overview'},
-      collapsed: true,
-      items: [
-        'ecosystem/token-agnostic-payments/creating-nft-checkout-transactions',
-        'ecosystem/token-agnostic-payments/swapping-tokens',
-        'ecosystem/token-agnostic-payments/js-sdk-reference',
-      ],
-    },
     {
       type: 'html',
       value: `
