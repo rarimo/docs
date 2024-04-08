@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Old whitepaper;
 - Products/Bridging;
 - Ecosystem/Token Agnostic Payments;
+- "Mutlichain mints", "Cross-chain proofs" use cases;
 
 ## [2.0.6] - 04-04-2024
 

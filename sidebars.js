@@ -22,7 +22,6 @@ const sidebars = {
         'use-cases/organizational-access-control',
         'use-cases/gaming-profiles',
         'use-cases/social-graphs',
-        'use-cases/cross-chain-proofs',
       ],
     },
     {

@@ -48,14 +48,6 @@ const useCasesList: UseCase[] = [
     path: "/use-cases/social-graphs/",
   },
   {
-    img: "img/homepage-use-cases/token-agnostic.webp",
-    modifier: "token-agnostic", // TODO: change image
-    title: "Cross-Chain Proofs",
-    text: "Prove ownership of non-fungible tokens on any chain",
-    path: "/use-cases/cross-chain-proofs/",
-    isYellow: true,
-  },
-  {
     img: "img/homepage-use-cases/name-servers.webp",
     modifier: "name-servers", // TODO: change image
     title: "Identity Protocol State Replication",
