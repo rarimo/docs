@@ -125,6 +125,18 @@ const baseLayerCards: HomeCard[] = [
 
 const ecosystemCards: HomeCard[] = [
   {
+    title: 'Freedom Tool',
+    IconName: PolygonIcon,
+    list: [
+      [
+        'Transparent and secure online voting',
+        'Onboard with a biometric passport',
+        'Privacy ensured by zero-knowledge proof technology',
+      ],
+    ],
+    url: '/ecosystem/freedom-tool/',
+  },
+  {
     title: 'Proof Of Humanity',
     IconName: BadgeIcon,
     list: [
@@ -160,18 +172,6 @@ const ecosystemCards: HomeCard[] = [
       ],
     ],
     url: '/ecosystem/polygon-id-state-replication/',
-  },
-  {
-    title: 'Freedom Tool',
-    IconName: PolygonIcon,
-    list: [
-      [
-        'Transparent and secure online voting',
-        'Onboard with a biometric passport',
-        'Privacy ensured by zero-knowledge proof technology',
-      ],
-    ],
-    url: '/ecosystem/freedom-tool/',
   },
 ]
 
@@ -221,8 +221,8 @@ export default function Home(): JSX.Element {
         <main>
           <CardsSection
             cards={baseLayerCards}
-            columns={3}
-            gridTemplate={`"${baseLayerCards[0].id} ${baseLayerCards[1].id} ${baseLayerCards[2].id}" "${baseLayerCards[3].id} ${baseLayerCards[3].id} ${baseLayerCards[3].id}"`}
+            columns={2}
+            gridTemplate={`"${baseLayerCards[0].id} ${baseLayerCards[1].id}" "${baseLayerCards[2].id} ${baseLayerCards[2].id}"`}
             title="Learn The Core Products"
           />
           <CardsSection
