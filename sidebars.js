@@ -66,29 +66,6 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Bridging Protocol',
-      link: { type: 'doc', id: 'products/bridging-protocol/overview' },
-      collapsed: true,
-      items: [
-        'products/bridging-protocol/circle-cctp-integration',
-        'products/bridging-protocol/guide-how-to-bundle-transactions',
-        'products/bridging-protocol/connecting-to-wallets',
-        {
-          type: 'category',
-          label: 'Smart Contracts Reference',
-          link: { type: 'doc', id: 'products/bridging-protocol/smart-contracts-reference/overview' },
-          collapsed: true,
-          items: [
-            'products/bridging-protocol/smart-contracts-reference/evm',
-            'products/bridging-protocol/smart-contracts-reference/solana',
-            'products/bridging-protocol/smart-contracts-reference/near',
-          ],
-        },
-        'products/bridging-protocol/js-sdk-reference',
-      ],
-    },
-    {
-      type: 'category',
       label: 'RariMe',
       link: {type: 'doc', id: 'products/rarime/overview'},
       collapsed: true,
@@ -174,17 +151,6 @@ const sidebars = {
     //     'ecosystem/worldcoin-state-replication/api-reference',
     //   ],
     // },
-    {
-      type: 'category',
-      label: 'Token Agnostic Payments',
-      link: {type: 'doc', id: 'ecosystem/token-agnostic-payments/overview'},
-      collapsed: true,
-      items: [
-        'ecosystem/token-agnostic-payments/creating-nft-checkout-transactions',
-        'ecosystem/token-agnostic-payments/swapping-tokens',
-        'ecosystem/token-agnostic-payments/js-sdk-reference',
-      ],
-    },
     {
       type: 'html',
       value: `
