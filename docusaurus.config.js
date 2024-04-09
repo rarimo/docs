@@ -18,7 +18,7 @@ function isStaging() {
 }
 
 const metaDescription =
-  'Learn to use cross-chain self-sovereign digital identity protocol, zero-knowledge proofs, RariMe Snap, token bridging, and more.'
+  'Learn to use a privacy-first social protocol, which seamlessly combines various identity standards and forms a private but verifiable social graph.'
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
@@ -32,7 +32,9 @@ module.exports = {
   favicon: 'img/logo-icon.png',
   noIndex: isStaging(),
   trailingSlash: true,
-
+  customFields: {
+    whitepaperUrl: 'https://docs.rarimo.com/files/Rarimo_whitepaper_v3.pdf'
+  },
   organizationName: 'rarimo',
   projectName: 'docs',
 
@@ -207,8 +209,8 @@ module.exports = {
     [
       require.resolve('@docusaurus/plugin-ideal-image'),
       {
-        max: 1920, 
-        min: 720, 
+        max: 1920,
+        min: 720,
         steps: 3,
         disableInDev: false,
       },

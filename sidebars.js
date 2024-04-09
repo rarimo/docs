@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
+const config = require('./docusaurus.config')
+
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   sidebar: [
@@ -167,7 +169,7 @@ const sidebars = {
         {
           type: 'link',
           label: 'Whitepaper',
-          href: 'https://docs.rarimo.com/files/Rarimo_whitepaper_v3.pdf',
+          href: config.customFields.whitepaperUrl,
         },
         'resources/audits',
         'resources/glossary',

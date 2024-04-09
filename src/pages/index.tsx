@@ -1,7 +1,7 @@
 import 'aos/dist/aos.css'
 import 'swiper/css'
 
-import {whitepaperLink} from '@site/src/const'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import BrowserOnly from '@docusaurus/BrowserOnly'
 import Building from '@site/src/components/Building'
 import CardsSection from '@site/src/components/CardsSection'
@@ -29,99 +29,101 @@ import styles from './index.module.css'
 
 register()
 
-const baseLayerCards: HomeCard[] = [
-  {
-    id: 'identity-protocol',
-    title: 'Identity Protocol',
-    IconName: UserIcon,
-    list: [
-      [
-        'Implements W3C DID standard',
-        'Enhanced privacy with zero-knowledge proofs',
-        'On-chain ZKPs available on any supported EVM chain',
-        'Timed SBTs for interoperability with existing platforms',
+function makeBaseLayerCards(whitepaperUrl: string): HomeCard[] {
+  return [
+    {
+      id: 'identity-protocol',
+      title: 'Identity Protocol',
+      IconName: UserIcon,
+      list: [
+        [
+          'Implements W3C DID standard',
+          'Enhanced privacy with zero-knowledge proofs',
+          'On-chain ZKPs available on any supported EVM chain',
+          'Timed SBTs for interoperability with existing platforms',
+        ],
       ],
-    ],
-    url: '/products/identity-protocol/',
-  },
-  {
-    id: 'rarime',
-    title: 'RariMe',
-    IconName: ShieldIcon,
-    list: [
-      [
-        'Universal wallet for digital indentites',
-        'Lives in your MetaMask',
-        'Zero-Knowledge proofs of identity',
-        'Dashboard for managing your credentials, SBTs and more',
+      url: '/products/identity-protocol/',
+    },
+    {
+      id: 'rarime',
+      title: 'RariMe',
+      IconName: ShieldIcon,
+      list: [
+        [
+          'Universal wallet for digital indentites',
+          'Lives in your MetaMask',
+          'Zero-Knowledge proofs of identity',
+          'Dashboard for managing your credentials, SBTs and more',
+        ],
       ],
-    ],
-    url: '/products/rarime/',
-  },
-  {
-    id: 'base-layer',
-    title: 'Base Layer',
-    IconName: LayersIcon,
-    list: [
-      [
-        'Efficient cross-chain messaging',
-        'Decentralized Oracles',
-        'Proof of Stake Consensus',
+      url: '/products/rarime/',
+    },
+    {
+      id: 'base-layer',
+      title: 'Base Layer',
+      IconName: LayersIcon,
+      list: [
+        [
+          'Efficient cross-chain messaging',
+          'Decentralized Oracles',
+          'Proof of Stake Consensus',
+        ],
+        [
+          'EVM-compatible smart contracts',
+          'Instant finality',
+          'Cost-efficient signature scheme (TSS)',
+        ],
+        [
+          <span
+            className={clsx(
+              'homepage-base-layer__text',
+              styles.homepageBaseLayerText
+            )}
+            key={0}
+          >
+            Supported chains
+          </span>,
+          <span
+            className={clsx(
+              'homepage-base-layer__blockchains',
+              styles.homepageBaseLayerBlockchains
+            )}
+            key={1}
+          >
+            {blockchains.map(({ IconComponent, alt }, idx) => (
+              <IconComponent
+                key={idx}
+                className={styles.homeCardSvg}
+                role="img"
+                aria-label={alt}
+              />
+            ))}
+          </span>,
+        ],
       ],
-      [
-        'EVM-compatible smart contracts',
-        'Instant finality',
-        'Cost-efficient signature scheme (TSS)',
-      ],
-      [
-        <span
-          className={clsx(
-            'homepage-base-layer__text',
-            styles.homepageBaseLayerText
-          )}
-          key={0}
-        >
-          Supported chains
-        </span>,
-        <span
-          className={clsx(
-            'homepage-base-layer__blockchains',
-            styles.homepageBaseLayerBlockchains
-          )}
-          key={1}
-        >
-          {blockchains.map(({ IconComponent, alt }, idx) => (
-            <IconComponent
-              key={idx}
-              className={styles.homeCardSvg}
-              role="img"
-              aria-label={alt}
-            />
-          ))}
-        </span>,
-      ],
-    ],
-    url: '/products/base-layer/',
-    after: (
-      <>
-        <a
-          href={whitepaperLink}
-          className={clsx('heroButtonSecondary', styles.linksButton)}
-        >
-          Whitepaper
-        </a>
-        <a
-          href={'https://scan.rarimo.com/proposals'}
-          rel="nofollow noopener noreferrer"
-          className={clsx('heroButtonSecondary', styles.linksButton)}
-          target="_blank"
-        >
-          Protocol Proposals
-        </a>
-      </>
-    ),
-  },
-]
+      url: '/products/base-layer/',
+      after: (
+        <>
+          <a
+            href={whitepaperUrl}
+            className={clsx('heroButtonSecondary', styles.linksButton)}
+          >
+            Whitepaper
+          </a>
+          <a
+            href={'https://scan.rarimo.com/proposals'}
+            rel="nofollow noopener noreferrer"
+            className={clsx('heroButtonSecondary', styles.linksButton)}
+            target="_blank"
+          >
+            Protocol Proposals
+          </a>
+        </>
+      ),
+    },
+  ]
+}
 
 const ecosystemCards: HomeCard[] = [
   {
@@ -177,6 +179,10 @@ const ecosystemCards: HomeCard[] = [
 
 export default function Home(): JSX.Element {
   const light = useRef(null)
+  const {siteConfig} = useDocusaurusContext();
+  const whitepaperUrl: string = typeof siteConfig.customFields?.whitepaperUrl === 'string' ? siteConfig.customFields?.whitepaperUrl : '#';
+  const baseLayerCards = makeBaseLayerCards(whitepaperUrl);
+
   return (
     <>
       <div className="bgImage">
