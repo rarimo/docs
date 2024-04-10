@@ -1,0 +1,40 @@
+---
+<!-- TODO: description --->
+---
+import OutLink from "@site/src/components/OutLink";
+import IdealImage from '@site/src/components/IdealImage';
+
+# Passport-enabled airdrops
+
+Token airdrops are popular "events" on new blockchains or products. It allows making an initial list of stakeholders and "introducing" the project to the public.
+But it comes with some limitations.
+
+## Problem statement
+
+If the only airdrop requirement would be to press a "Participate" button — a lot of people would abuse it, to potentially get rich in the future by using multiple accounts.
+That's why most airdrops require some sort of KYC procedure to protect themselves.
+Until recently, people may needed to reveal their private data (such as their residential country) to participate in the airdrop.
+Zero-knowledge proofs partially solved this problem, but not the multi-accounts, or identity problem.
+
+## Rarimo's solution
+
+Rarimo as an identity platform solves both problems at once.
+The user may bind their passport-based identity to the address (potentially whitelisted in the airdrop), so the airdrop maintainer may be sure, that it's indeed a real human and besides that, the person behind the address passes some checks, e.g. he is not a resident of the USA, etc.
+
+## The airdrop flow
+
+Let's take a look at universal airdrop flow, that can be used almost everywhere, requiring minor changes:
+
+<!-- TODO: add flow pictures --->
+
+1. User enters the airdrop page and agrees to the "Terms and Conditions".
+1. User connects his wallet (e.g. Metamask) and, if needed, whitelist checks are performed.
+1. A message indicating user's eligibility and the number of tokens reserved for their account appears after.
+1. By clicking the "Claim" button, user will be asked to prove that he is a person and isn't a resident of some country (e.g. USA). Other requirements can be added as well.
+1. User should download the Rarimo App and scan his passport in it. It will generate the proof and user can use it further.
+1. After providing the proof, user can claim his reward instantly or after some delay, depending on the airdrop structure.
+
+As a result, we achieved the following:
+- User successfully received his reward.
+- User did not disclose any data, except some facts, that he agreed to reveal.
+- Airdrop is fully protected from multi-accounts and bots.
