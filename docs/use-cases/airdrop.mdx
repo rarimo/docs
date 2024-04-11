@@ -28,11 +28,19 @@ Let's take a look at universal airdrop flow, that can be used almost everywhere,
 <!-- TODO: add flow pictures --->
 
 1. User enters the airdrop page and agrees to the "Terms and Conditions".
+    <IdealImage img={require('/img/airdrop-step1.png')} alt="Step 1 - agree to the Terms and conditions" />
 1. User connects his wallet (e.g. Metamask) and, if needed, whitelist checks are performed.
+    <IdealImage img={require('/img/airdrop-step2.png')} alt="Step 2 - connect the wallet" />
 1. A message indicating user's eligibility and the number of tokens reserved for their account appears after.
-1. By clicking the "Claim" button, user will be asked to prove that he is a person and isn't a resident of some country (e.g. USA). Other requirements can be added as well.
-1. User should download the Rarimo App and scan his passport in it. It will generate the proof and user can use it further.
+    <IdealImage img={require('/img/airdrop-step3.png')} alt="Step 3 - checking eligibility" />
+1. By clicking the "Claim" button, user will be asked to dowload the Rarimo App and verify his passport in it.
+    <IdealImage img={require('/img/airdrop-step4.png')} alt="Step 4 - downdload the app and verify your passport" />
+1. User should scan his passport in the app to verify it and generate the identity.
+    <IdealImage img={require('/img/airdrop-step5.png')} alt="Step 5 - app flow" />
+1. After generating the identity, user will be asked to generate ZKP, in our case — that he is not a US resident.
+    <IdealImage img={require('/img/airdrop-step6.png')} alt="Step 6 - generate the zkp" />
 1. After providing the proof, user can claim his reward instantly or after some delay, depending on the airdrop structure.
+    <IdealImage img={require('/img/airdrop-step7.png')} alt="Step 7 - claim your reward" />
 
 As a result, we achieved the following:
 - User successfully received his reward.
