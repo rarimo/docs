@@ -21,8 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Products/WorldCoin State Replication:
   - Updated the relayer version in the replication guide;
-- Used `@docusaurus/plugin-ideal-image` for image optimization
-- Used `react-medium-image-zoom` to zoom images
+- Used `@docusaurus/plugin-ideal-image` for image optimization;
+- Used `react-medium-image-zoom` to zoom images;
+- Updated "Overview" doc;
 
 ### Removed
 
