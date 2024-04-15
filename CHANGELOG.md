@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Hero block design;
+
 ## [3.0.0] - 12-04-2024
 
 ### Added
