@@ -1,31 +1,30 @@
 ---
-<!-- TODO: description --->
+slug: /use-cases/passport-enabled-airdrops
+description: Privacy-preserving solution with anti-bot and anti-Sybil protection for airdrops based on passport-generated identity.
 ---
 import OutLink from "@site/src/components/OutLink";
 import IdealImage from '@site/src/components/IdealImage';
 
 # Passport-enabled airdrops
 
-Token airdrops are popular "events" on new blockchains or products. It allows making an initial list of stakeholders and "introducing" the project to the public.
+Token airdrops are popular events on new blockchains or products. It allows making an initial list of stakeholders and introducing the project to the public.
 But it comes with some limitations.
 
 ## Problem statement
 
-If the only airdrop requirement would be to press a "Participate" button — a lot of people would abuse it, to potentially get rich in the future by using multiple accounts.
-That's why most airdrops require some sort of KYC procedure to protect themselves.
+If the only airdrop requirement would be to press a "Participate" button — a lot of people would abuse it, to potentially get rich in the future by using more than one account.
+That's why most airdrops require some sort of anti-bot and anti-Sybil protection procedure. 
 Until recently, people may needed to reveal their private data (such as their residential country) to participate in the airdrop.
-Zero-knowledge proofs partially solved this problem, but not the multi-accounts, or identity problem.
+Zero-knowledge proofs partially solved this problem, but not the Sybil accounts, or identity problem.
 
 ## Rarimo's solution
 
 Rarimo as an identity platform solves both problems at once.
-The user may bind their passport-based identity to the address (potentially whitelisted in the airdrop), so the airdrop maintainer may be sure, that it's indeed a real human and besides that, the person behind the address passes some checks, e.g. he is not a resident of the USA, etc.
+The user may bind their passport-based identity to the address (potentially whitelisted in the airdrop), so the airdrop maintainer may be sure, that it's indeed a real human and besides that, the person behind the address passes some optional filters by residency/age, e.g. he is not a resident of the USA, etc.
 
 ## The airdrop flow
 
 Let's take a look at universal airdrop flow, that can be used almost everywhere, requiring minor changes:
-
-<!-- TODO: add flow pictures --->
 
 1. User enters the airdrop page and agrees to the "Terms and Conditions".
     <IdealImage img={require('/img/airdrop-step1.png')} alt="Step 1 - agree to the Terms and conditions" />
@@ -45,4 +44,4 @@ Let's take a look at universal airdrop flow, that can be used almost everywhere,
 As a result, we achieved the following:
 - User successfully received his reward.
 - User did not disclose any data, except some facts, that he agreed to reveal.
-- Airdrop is fully protected from multi-accounts and bots.
+- Airdrop is fully protected from Sybil accounts and bots.
