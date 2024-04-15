@@ -1,8 +1,8 @@
 import 'aos/dist/aos.css'
 import 'swiper/css'
 
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import BrowserOnly from '@docusaurus/BrowserOnly'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Building from '@site/src/components/Building'
 import CardsSection from '@site/src/components/CardsSection'
 import HomepageHeader from '@site/src/components/HomepageHeader'
@@ -179,98 +179,54 @@ const ecosystemCards: HomeCard[] = [
 
 export default function Home(): JSX.Element {
   const light = useRef(null)
-  const {siteConfig} = useDocusaurusContext();
-  const whitepaperUrl: string = typeof siteConfig.customFields?.whitepaperUrl === 'string' ? siteConfig.customFields?.whitepaperUrl : '#';
-  const baseLayerCards = makeBaseLayerCards(whitepaperUrl);
+  const { siteConfig } = useDocusaurusContext()
+  const whitepaperUrl: string =
+    typeof siteConfig.customFields?.whitepaperUrl === 'string'
+      ? siteConfig.customFields?.whitepaperUrl
+      : '#'
+  const baseLayerCards = makeBaseLayerCards(whitepaperUrl)
 
   return (
-    <>
-      <div className="bgImage">
-        <div className={clsx('bgImageFirst', styles.bgImageFirst)} />
-        <div
-          className={clsx('bgImageSecond', styles.bgImageSecond)}
-          ref={light}
-        />
-        <div
-          data-aos="fade-up"
-          className={clsx(
-            'bgImageThird squareWaveAnimationDown',
-            styles.bgImageThird
-          )}
-        />
-        <div
-          data-aos="fade-up"
-          className={clsx(
-            'bgImageFourth squareWaveAnimationUp',
-            styles.bgImageFourth
-          )}
-        />
-        <div
-          data-aos="fade-up"
-          className={clsx(
-            'bgImageFifth squareWaveAnimationUp',
-            styles.bgImageFifth
-          )}
-        />
-        <div
-          data-aos="fade-up"
-          className={clsx(
-            'bgImageSixth squareWaveAnimationDown',
-            styles.bgImageSixth
-          )}
-        />
-      </div>
+    <Layout>
+      <HomepageHeader />
 
-      <Layout>
-        <HomepageHeader />
+      <main>
+        <CardsSection
+          cards={baseLayerCards}
+          columns={2}
+          gridTemplate={`"${baseLayerCards[0].id} ${baseLayerCards[1].id}" "${baseLayerCards[2].id} ${baseLayerCards[2].id}"`}
+          title="Learn The Core Products"
+        />
+        <CardsSection
+          cards={ecosystemCards}
+          title="Explore The Ecosystem"
+          isSwiperOnMobile={true}
+        />
+        <HomepageUseCases />
+        {/*Todo: Show developer links*/}
+        {/*<HomepageDeveloperLinks />*/}
+        {/* TODO: uncomment when developer dashboard is ready */}
+        {/* <Building /> */}
+        <Links />
+        {/* TODO: uncomment when blog content ready */}
+        {/* <News /> */}
+        <Subscribe />
+      </main>
 
-        <main>
-          <CardsSection
-            cards={baseLayerCards}
-            columns={2}
-            gridTemplate={`"${baseLayerCards[0].id} ${baseLayerCards[1].id}" "${baseLayerCards[2].id} ${baseLayerCards[2].id}"`}
-            title="Learn The Core Products"
-          />
-          <CardsSection
-            cards={ecosystemCards}
-            title="Explore The Ecosystem"
-            isSwiperOnMobile={true}
-          />
-          <HomepageUseCases />
-          {/*Todo: Show developer links*/}
-          {/*<HomepageDeveloperLinks />*/}
-          {/* TODO: uncomment when developer dashboard is ready */}
-          {/* <Building /> */}
-          <Links />
-          {/* TODO: uncomment when blog content ready */}
-          {/* <News /> */}
-          <Subscribe />
-        </main>
+      <BrowserOnly>
+        {() => {
+          aos.init({
+            duration: 900,
+            easing: 'ease',
+            offset: 0,
+            once: true,
+            mirror: false,
+            anchorPlacement: 'center-bottom',
+          })
 
-        <BrowserOnly>
-          {() => {
-            aos.init({
-              duration: 900,
-              easing: 'ease',
-              offset: 0,
-              once: true,
-              mirror: false,
-              anchorPlacement: 'center-bottom',
-            })
-            document.addEventListener('mousemove', function ({ pageX, pageY }) {
-              const x = pageX
-              const y = pageY
-              const spotlightSize =
-                'rgba(255, 255, 255, 0.02) 80px, var(--primary-bg-color) 200px)'
-              if (light.current) {
-                light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`
-              }
-            })
-
-            return null
-          }}
-        </BrowserOnly>
-      </Layout>
-    </>
+          return null
+        }}
+      </BrowserOnly>
+    </Layout>
   )
 }
