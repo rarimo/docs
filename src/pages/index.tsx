@@ -223,15 +223,6 @@ export default function Home(): JSX.Element {
             mirror: false,
             anchorPlacement: 'center-bottom',
           })
-          document.addEventListener('mousemove', function ({ pageX, pageY }) {
-            const x = pageX
-            const y = pageY
-            const spotlightSize =
-              'rgba(255, 255, 255, 0.02) 80px, var(--primary-bg-color) 200px)'
-            if (light.current) {
-              light.current.style.background = `radial-gradient(circle at ${x}px ${y}px, ${spotlightSize}`
-            }
-          })
 
           return null
         }}
