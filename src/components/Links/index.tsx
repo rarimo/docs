@@ -41,7 +41,7 @@ export default function Links(): JSX.Element {
           target="_blank"
           rel="nofollow noopener noreferrer"
         >
-          <XIcon />Х (Twitter)
+          <XIcon />Х
         </Link>
       </div>
     </div>

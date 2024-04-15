@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Hero block design;
 
+### Removed
+- "Twitter" label from X social media links;
+
 ## [3.0.0] - 12-04-2024
 
 ### Added
