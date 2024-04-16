@@ -11,32 +11,11 @@ import IdealImage from '@site/src/components/IdealImage';
 
 Rarimo is a privacy-first social protocol that seamlessly combines various identity standards on-chain and off-chain and allows the formation of a private yet verifiable history of their use and relations.
 
-<!-- TODO: a diagram? -->
+At the heart of the Rarimo Social Protocol are three design pillars:
 
-At the core of the Rarimo Social Protocol are three design pillars:
-
-1. **Control**. Users should have exclusive authority over managing their identity and all connected attributes. Optionally, specific processes (e.g., identity recovery) can involve trusted parties for additional protection, but only at the user's request.
-1. **Privacy**. Sensitive data must remain inaccessible to third parties. The user should decide what information to share, when, and with whom. While some protocols may require verifying the user's uniqueness, this should not compromise the privacy of personal information.
+1. **Control**. Users should have exclusive authority over managing their identity and social graph. Only the user decides what information to disclose and when.
+1. **Privacy**. Sensitive data must remain inaccessible to third parties. The user should decide what information to share, when, and with whom. While some protocols may require verifying the user's uniqueness and humanity, this should not compromise the privacy of personal information.
 1. **Compatibility**. The digital identity solution should support various industry standards, such as W3C DID credentials, soulbound tokens (SBTs), ENS records, etc. Each of these identity formats offers unique advantages. Therefore, the social protocol must allow interoperability among them. Additionally, it should support both off-chain and on-chain verification methods.
-
-The most significant aspect of identity is its relationships with other identities, including bidirectional attestations, shared communion, and participation. However, these should be private by default and disclosed only upon request.
-
-## Why Rarimo?
-
-Rarimo believes that social protocols are the next frontier for Web3. A robust digital identity system is a prerequisite for building a social graph. The current landscape of digital identity management faces significant challenges in maintaining ownership privacy and ensuring untraceability for its users. Soulbond tokens and similar on-chain solutions, while useful in representing ownership and attributes, need to provide comprehensive control and privacy guarantees. Self-sovereign identity solutions offer means to create accounts and associate attributes privately, yet they lack the inter-account relationship mapping crucial for building social graphs.
-
-Let's examine the building blocks of digital identity in web3 space:
-
-- Account addresses, which denote asset ownership and balance.
-- NFT and SBT tokens signifying memberships and attributes
-- Verifiable Credentials representing statements
-- Web services that bridge web3 applications with the traditional web
-- Document-derived artifacts representing legal documents to be integrated and utilized within web3.
-
-From these separately evolving building blocks, three primary challenges emerge:
-- **Identity fragmentation and a lack of interoperability**: It is difficult for DApps to verify users accurately from different ecosystems, which obstructs the unification of identity components across different chains.
-- **Privacy concerns**: Maintaining a reasonable level of anonymity or managing sensitive data on-chain proves difficult. Currently, only protocols incorporating zero-knowledge proofs effectively address these privacy issues.
-- **Complex identity verification algorithms**: The challenge of building a universal identity query that covers all potential scenarios complicates identity verification. Although verification methods are robust, a standardized API is essential for developing applications that can navigate this complexity.
 
 Rarimo aims to solve these challenges by providing a robust baselayer and a diverse toolset of identity subprotocols.
 
@@ -50,22 +29,17 @@ The Rarimo Core is a decentralized blockchain-based system designed for timestam
 
 ### Social Protocol
 
-The Social Protocol aims to enable the creation of private social graphs consisting of user actions and interactions. These actions are invisible to the public until their owner selectively discloses them using zero-knowledge proofs. A few use cases of such proofs are:
-- Proving the credential and attestation ownership at a particular time (and continuously).
-- Proving that a particular user initiated some actions.
-- Proving that specific actions were initiated by the set of identities (group of people), and all/some/at least one satisfies defined requirements.
-- Proving that some claims and/or passports are connected to one identity.
-- Proving that the user is(not) included in specific lists or groups.
-- Proving that the sent/received attestation came to/from the identity or service that satisfies some criteria without revealing the identity owner.
+The Social Protocol aims to enable the creation of private social graphs consisting of user actions and interactions. These actions are invisible to the public until their owner selectively discloses them using zero-knowledge proofs. A few examples of such proofs are:
+- Proving a credential and attestation ownership at a particular time.
+- Proving that a particular user or a group initiated some actions.
+- Proving that some claims or passports belong to one identity.
+- Proving that the user is a member of a specific group.
+
+<IdealImage img={require('/img/rarimo-social-identity.png')} alt="Rarimo Social Identity" />
 
 The social protocol consists of two key sub-protocols:
-
-- Zero-knowledge identity protocol based on Iden3 standard
-- Biometric passport-derived profiles
-
-**The Iden3 protocol** is suitable for receiving identity statements in a Verifiable Credential format. Rarimo allows identity providers to publish only state hashes into the Rarimo blockchain. After propagating to connected networks, DApps can use the mentioned states to verify various zero-knowledge identity statements. This flow presumes the identity provider issues Verifiable Credentials and pushes their state in the Rarimo Core or connected blockchains. Periodically or upon request, identity states are broadcast across connected networks, making them accessible to end-users directly on the requested chains.
-
-**Passport-derived profiles** enable users to set up an identity solely with their government-issued documents without needing a third-party issuer. Using this functionality, users can verify the authenticity of their documents without disclosing their personal information, thereby creating a profile linked to the specified data. Once the identity profile is established, users can demonstrate the validity of certain information within their documents and ensure the uniqueness of the identity for the application in use. From the cryptographic perspective, passport-derived profiles are compatible with the Iden3 protocol. Users can create passport-derived profiles and connect additional verifiable credentials or attributes. Additionally, identity providers can track passport revocation events and automatically revoke/reissue Verifiable Credentials.
+1. **An Iden3 protocol** implementation for issuing identity statements in a W3C DID Verifiable Credential format. The credentials contain parts of social graphs, such as user profile details, likes, group memberships, reputation scores, etc. Users may disclose some attributes of these credentials using zero-knowledge proofs, both on-chain and off-chain.
+1. **Passport-derived profiles** enable users to establish an identity solely with their government-issued biometric documents without needing a third-party issuer. With these profiles, users verify their humanity, assert their uniqueness, or selectively disclose some passport attributes, such as citizenship or being of legal age, using zero-knowledge proofs. Iden3 identity providers can track passport revocation events and automatically revoke or reissue Verifiable Credentials.
 
 ### Applications
 
