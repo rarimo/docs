@@ -18,8 +18,9 @@ const sidebars = {
       },
       collapsed: true,
       items: [
-        'use-cases/self-sovereign-identity',
+        'use-cases/airdrop',
         'use-cases/age-restricted-content',
+        'use-cases/self-sovereign-identity',
         'use-cases/identity-protocol-state-replication',
         'use-cases/organizational-access-control',
         'use-cases/gaming-profiles',

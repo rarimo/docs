@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added the "interoperability with external credentials" page;
 - Use-cases:
   - Added the "Age restricted content" page;
+  - Added the "Passport-enabled airdrops" page;
 - Ecosystem/Freedom Tool:
   - Added "Overview" page;
   - Added "Smart contracts reference" page;
