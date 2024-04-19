@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- "Use cases/Passport-enabled airdrops": emphasized proofs of citizenship and age.
+
 ## [3.2.0] - 19-04-2024
 
 ### Changed

@@ -9,23 +9,29 @@ import IdealImage from '@site/src/components/IdealImage';
 
 ## Problem statement
 
-Token airdrops are a common way to launch new crypto projects. One of the most complex parts of a successful airdrop is preventing abuse by bots and Sybil accounts. While traditional centralized KYC providers can mitigate this issue, they are at odds with the pro-decentralization spirit of the Web3 space.
+Token airdrops are a popular method for launching new crypto projects. However, they often face challenges like abuse by bots or Sybil accounts. Additionally, legal requirements such as citizenship and age verification can be a hurdle. While centralized KYC providers can address these issues, they contradict the decentralized nature of the Web3 space.
 
-Rarimo presents a robust privacy-preserving proof of personhood solution that leverages biometric passports and zero-knowledge proofs for anti bot and Sybil resistance protection. Additionally, it allows filtering by citizenship and age while ensuring user anonymity.
+Rarimo stands out with its unique privacy-preserving proof of passport solution. It harnesses the power of biometric passports and zero-knowledge proofs to provide robust airdrop protection.
+
+Proof of Passport allows airdrop organizers to:
+- Verify personhood using *Proof of Passport Validity*
+- Prevent sybil airdrop farming by using *Proof of Uniqueness*
+- Restrict access for risky countries using *Proof of Citizenship*
+- Set minimum age requirements using *Proof of Age*
 
 ## How it works
 
 1. The user learns about the eligibility criteria and accepts the terms and conditions.
-    <IdealImage img={require('/img/airdrop-step1.png')} alt="Step 1 - agree to the Terms and conditions" />
+ <IdealImage img={require('/img/airdrop-step1.png')} alt="Step 1 - agree to the Terms and conditions" />
 1. The user connects a wallet
-    <IdealImage img={require('/img/airdrop-step2.png')} alt="Step 2 - connect the wallet" />
+ <IdealImage img={require('/img/airdrop-step2.png')} alt="Step 2 - connect the wallet" />
 1. The user is prompted to claim the rewards.
-    <IdealImage img={require('/img/airdrop-step3.png')} alt="Step 3 - checking eligibility" />
+ <IdealImage img={require('/img/airdrop-step3.png')} alt="Step 3 - checking eligibility" />
 1. After clicking the **Claim** button, the user is asked to download the RariMe App.
-    <IdealImage img={require('/img/airdrop-step4.png')} alt="Step 4 - download the app and verify your passport" />
+ <IdealImage img={require('/img/airdrop-step4.png')} alt="Step 4 - download the app and verify your passport" />
 1. The user scans a biometric passport in the app using NFC. Note that the personal data isn't shared with any third parties and remains confidential.
-    <IdealImage img={require('/img/airdrop-step5.png')} alt="Step 5 - app flow" />
+ <IdealImage img={require('/img/airdrop-step5.png')} alt="Step 5 - app flow" />
 1. The user is asked to generate a zero-knowledge proof of passport validity. Additionally, the proof may contain citizenship and age checks. For example, airdrops may be denied to US citizens for legal reasons.
-    <IdealImage img={require('/img/airdrop-step6.png')} alt="Step 6 - generate the zero-knowledge proof" />
+ <IdealImage img={require('/img/airdrop-step6.png')} alt="Step 6 - generate the zero-knowledge proof" />
 1. After providing the proof, the user can claim the rewards.
-    <IdealImage img={require('/img/airdrop-step7.png')} alt="Step 7 - claim your reward" />
+ <IdealImage img={require('/img/airdrop-step7.png')} alt="Step 7 - claim your reward" />
