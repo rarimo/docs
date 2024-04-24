@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.4.0] - 24-02-2024
+
+### Changed
+
+- Restyled charts in "Overview";
+
 ## [3.3.0] - 22-04-2024
 
 ### Changed
@@ -342,7 +348,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://github.com/rarimo/docs/compare/v3.3.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/v3.4.0...HEAD
+[3.4.0]: https://github.com/rarimo/docs/releases/tag/v3.3.0...v3.4.0
 [3.3.0]: https://github.com/rarimo/docs/releases/tag/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/rarimo/docs/releases/tag/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/rarimo/docs/releases/tag/v3.0.0...v3.1.0
