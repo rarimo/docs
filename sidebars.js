@@ -130,6 +130,15 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Proof of Passport',
+      link: { type: 'doc', id: 'ecosystem/proof-of-passport/overview' },
+      collapsed: true,
+      items: [
+
+      ],
+    },
+    {
+      type: 'category',
       label: 'Polygon ID State Replication',
       link: {type: 'doc', id: 'ecosystem/polygon-id-state-replication/overview'},
       collapsed: true,

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Ecosystem/Proof of Passport doc;
+
 ## [3.4.1] - 25-04-2024
 
 ### Fixed
