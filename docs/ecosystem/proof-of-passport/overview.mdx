@@ -1,0 +1,104 @@
+---
+slug: /ecosystem/proof-of-passport
+description: Proof of Passport is a zero-knowledge solution that allows using biometric passports to verify your identity in DApps.
+---
+import OutLink from "@site/src/components/OutLink";
+import IdealImage from '@site/src/components/IdealImage';
+
+# Proof of Passport
+
+Biometric passports are familiar to any traveler. Currently, 172 nations issue ID documents compatible with the ICAO Machine Readable Travel Documents standard, making them one of the most widely used identity credentials worldwide. Yet, due to technical limitations, they are rarely used outside airports.
+
+Rarimo has developed a robust solution that leverages your biometric passport to verify your identity within any DApp. Importantly, this is done without compromising the security of your sensitive data by using zero-knowledge proofs.
+
+DApp developers can use Proof of Passport to:
+- Verify personhood using *Proof of Passport Validity*
+- Prevent Sybil attacks by using *Proof of Uniqueness*
+- Restrict access for risky countries using *Proof of Citizenship*
+- Set minimum age requirements using *Proof of Age*
+
+## Biometric passport 101
+
+A biometric passport is a government-issued ID document that contains a Machine-Readable Zone (MRZ). The MRZ includes an RFID chip that contains data for biometric verification, personal details, an expiration date, and the issuer's digital signature.
+
+<IdealImage img={require('/img/biometric-passport-data.jpg')} alt="Biometric Passport Data Layout" />
+
+To check the validity of a passport, the verifier has to read the MRZ using an NFC scanner, verify the issuer's digital signature, and check the expiration date.
+
+## How it works
+
+The Proof of Passport solution consists of the following components:
+- RariMe mobile apps are available for Android and iOS. They scan passports, securely store users' credentials, and generate ZK proofs.
+- A custom Circom ZK circuit that proves the validity of the passport.
+- Identity provider service that accepts the proof of passport validity and issues Iden3 Verifiable Credentials.
+- Iden3 circuits generate zero-knowledge proofs of identity using the Verifiable Credential.
+- Rarimo's Identity Protocol manages the Iden3 Identity states and propagates them to other chains.
+
+<!-- TODO: diagram -->
+
+Let's walk through the user flow and explore the inner workings of this solution.
+
+### Scanning the passport
+
+To get started, the user must read the passport information using NFC. Under the hood, the reading process consists of the following steps:
+1. Receive the basic passport data from MRZ and generate authentication keys.
+1. Scan the data from the passport in encrypted form
+1. Decrypt and verify the data locally.
+1. Store the relevant passport data locally on the device.
+
+<IdealImage img={require('/img/passport-scanning.png')} alt="Scanning the passport" />
+
+
+After verifying the passport validity, the device securely stores the following data locally:
+- *DG1 Personal Details*. This section includes the passport holder's primary identity information, such as name, date of birth, nationality, and passport number. It reflects much of the information printed on the passport's data page.
+- *DG2 Facial photograph*. This section contains the passport holder's portrait. In the future, the protection method based on it will be possible to extend with face recognition and ZKML proofs.
+- *DG7: Signature/Image of Holder*. This data group stores the scanned image of the passport holder's handmade signature.
+- *DG15: Active Authentication Public Key*. This includes the public key used for active authentication, a security feature preventing unauthorized copying of passport data.
+- Hash values of other DGs.
+- Issuer's signature.
+- *Document Signer Certificate (CDS)*.
+
+Let's note that the list of biometric data groups can be extended in the future (or for some countries). *DG2(Portrait)* and *DG7 (Photo of a physical signature)* are currently the most widespread biometrics in passports.
+
+All actions within this process are performed locally, without access to the Internet. The certificate path can also be verified on the device if the application stores a set of valid certificates for Trust Anchors. No personal data is shared anywhere or accessible to outside parties.
+
+### Generating the identity keypair
+
+Next, the user needs to generate an Iden3 identity keypair, from which the user's unique identifier(DID) is derived. It is necessary because the cryptographic signature algorithms built into the passport are unsuitable for verification inside the zero-knowledge proofs.
+
+<IdealImage img={require('/img/passport-keypair-did.png')} alt="Generating the identity keypair" />
+
+To bind the keypair and the passport, the DID is signed with the private key stored in a secure segment of the passport. The corresponding public key is located in DG15. You can think of this as a self-signed PK certificate signed using the passport's secret.
+
+### Obtaining a Verifiable Credential
+
+Once an identity keypair has been created, we need to issue a Verifiable Credential, which on-chain contracts can verify without disclosing personal data with the help of zk-SNARK proofs.
+
+To do this, the user must submit the following data to one of the available identity providers:
+- DID and the signature generated by the passport secret key.
+- Authentication public key (DG15).
+- *SOD (hash values of all DGs)*.
+- The signature of the SOD and Document Signer Certificate (CDS).
+- Zero-knowledge proofs for relevant personal details, e.g., citizenship, date of birth, etc.
+
+<IdealImage img={require('/img/passport-vc-issuance.png')} alt="VC issuance" />
+
+In the future, the verification could be done on-chain. However, this approach would require publicizing some of the data and generating the necessary proofs for this process, which can be quite challenging for user devices.
+
+After the verification, the user receives a W3C DID Verifiable Credential containing all the metadata necessary to generate zero-knowledge proofs. The credential is stored on the user's device and is registered in the Identity state contract on the Rarimo chain.
+
+### Generating zero-knowledge proofs
+
+After receiving the Verifiable Credential, it can be used to generate zero-knowledge proofs of identity using Iden3's standard ZK circuits.
+
+DApps can verify the proofs both on-chain and off-chain. Rarimo's on-demand identity state replication technology scales the usage of on-chain proofs to any EVM-compatible network.
+
+## Challenges and limitations
+
+The first implementation of Proof of Passport comes with some limitations:
+
+- No biometric checks are included, meaning someone may scan a stolen or borrowed passport. ZKML solutions may be used to alleviate it in the future.
+- There's no way to prevent a holder of multiple passports from onboarding multiple times.
+- Only passports that support Active Authentication are supported now. We're working on an MPC-based solution to circumvent this limitation.
+
+<!-- Supported hashing algorithms? -->
