@@ -5,9 +5,21 @@ import OutLink from "@site/src/components/OutLink";
 
 # Glossary
 
+## Active Authentication (AA)
+
+A security feature in biometric passports aimed at preventing unauthorized copying of passport data.
+
+## Biometric Passport
+
+A passport that includes biometric information, such as a facial photograph, typically includes an RFID chip containing data for biometric verification, personal details, an expiration date, and the issuer's digital signature.
+
 ## Bundling
 
 Bundling is the process of combining multiple EVM transactions into a single transaction.
+
+## Circom Circuit
+
+A Circom circuit is a computational construct used in zero-knowledge proof systems, defining constraints for efficient verification. It enables the generation and verification of proofs, preserving privacy by allowing one party to convince another of a statement's validity without revealing additional information.
 
 ## Decentralized application (DApp)
 
@@ -27,6 +39,18 @@ Delegated proof of stake is a way of using consensus to select validators.
 Users propose themselves as validators, and other users that trust them stake tokens on their behalf.
 Users with the most staked tokens become validators for a certain length of time.
 
+## DG1 Personal Details
+
+A data group within a biometric passport includes the passport holder's primary identity information, such as name, date of birth, nationality, and passport number.
+
+## DG15: Active Authentication Public Key
+
+The data group within a biometric passport includes the public key used for Active Authentication (AA).
+
+## DG2 Facial Photograph
+
+Data group within a biometric passport containing the passport holder's portrait.
+
 ## Digital autonomous organization (DAO)
 
 A DAO is a member-owned community without centralized leadership or governing bodies.
@@ -37,13 +61,13 @@ Rarimo uses a DAO to manage its threshold signature scheme.
 DKG is a method for creating a key by combining secrets from multiple parties.
 As a result, no individual party can construct the key without secrets from the other parties.
 
-## Elliptic Curve Digital Signature Algorithm (ECDSA)
-
-ECDSA is a complex public key cryptography signature algorithm in which keys are generated via elliptic curve cryptography.
-
 ## Edwards-curve Digital Signature Algorithm (EdDSA)
 
 EdDSA is a complex public key cryptography signature algorithm that is based on Edwards curves.
+
+## Elliptic Curve Digital Signature Algorithm (ECDSA)
+
+ECDSA is a complex public key cryptography signature algorithm in which keys are generated via elliptic curve cryptography.
 
 ## Ethereum Virtual Machine (EVM)
 
@@ -59,10 +83,28 @@ Rarimo's identity protocol is based on Iden3.
 
 In the Iden3 protocol, the Identity State consists of multiple Sparse Merkle Trees(SMT) that describe the status of claims associated with an identity. The state is stored on-chain and is used during the ZKP verification.
 
+## JSON Web Zero-knowledge (JWZ)
+
+JSON Web Zero-knowledge (JWZ) is an open standard that employs zero-knowledge technology for secure messaging. It facilitates message exchange between parties while concealing the sender's public keys. The JWZ format includes a header defining token features, a payload with the message, and a proof representing a zero-knowledge authentication based on the authentication circuit.
+
+## Machine-Readable Zone (MRZ)
+
+A portion of a passport that contains key personal data in a format readable by machine scanners.
+
 ## Merkle tree
 
 A Merkle tree stores hashes of data in a tree that allows you to verify the contents of the tree.
 You can use Merkle branches to follow the hashes through the tree to verify that a specific piece of data is in the tree.
+
+## MetaMask Snap (Snap)
+
+A Snap is an application built by third-party developers that adds features and functionality to MetaMask.
+Snaps can connect to blockchain protocols, show insights about transactions, display notifications, add new features, and more.
+Rarimo has its own Snap - <OutLink href="https://snaps.metamask.io/snap/npm/rarimo/rarime/">Rarime</OutLink>, which is used to store identity credentials, manage them, create ZKPs and submit these proofs to DApps.
+
+## NFC (Near Field Communication)
+
+A technology used for short-range communication between devices, often used in passports for wireless data transfer.
 
 ## Non-fungible token (NFT)
 
@@ -74,6 +116,18 @@ NFTs are different from fungible tokens such as BTC and ETH because fungible tok
 In general blockchain terms, Oracles provide information from outside a blockchain to smart contracts on the blockchain.
 Rarimo oracles observe blockchains for events, deliver these events to the Rarimo core, and verify events from other oracles.
 See [Oracles](/products/base-layer/oracles/).
+
+## Passport-Derived Profile
+
+A digital identity credential for Web3 derived from a biometric passport, allowing selective disclosure of passport data through zero-knowledge proofs.
+
+## Proof of Humanity (PoH)
+
+Proof of Humanity is a secure on-chain verification protocol that allows DApps to filter out bots and ensure that only verified humans are using their services.
+Currently, Rarimo partners with the four biggest identity providers in the space: Worldcoin, Unstoppable Domains, Gitcoin Passport, and Civic.
+
+After passing the verification, the user will receive his VC (and an SBT), proving he is a real human.
+Rarimo uses ZKPs to preserve users' privacy and ensure that no information, other than the fact that they are verified humans, is revealed.
 
 ## Rarimo
 
@@ -97,6 +151,15 @@ Users can stake RMO tokens to become oracles.
 Secp256k1 refers to the parameters used in cryptography algorithms such as ECDSA.
 See <OutLink href="https://en.bitcoin.it/wiki/Secp256k1">Secp256k1</OutLink>.
 
+## Slashing
+
+Slashing is a penalty towards the validator for actions contrary to the consensus protocol.
+
+Penalties may include, but are not limited to:
+
+- Burning some amount of their stake
+- Jailing
+
 ## Smart contract
 
 Smart contracts are programs that run on EVM-compatible blockchains.
@@ -108,32 +171,13 @@ Smart contracts provide the logic for NFTs and decentralized applications.
 Soulbound tokens are tokens that cannot be transferred.
 They often represent parts of a user's identity, history, or accomplishments.
 
+## Sparse Merkle Tree
+
+A data structure designed for efficiently storing and verifying large data sets with minimal storage requirements.
+
 ## Swap contract
 
 Swap contracts are smart contracts that exchange one token for another token on the same chain via a decentralized exchange (DEX).
-
-## Threshold Signature Scheme (TSS)
-
-TSS is a cryptographic method to produce a single signature from a pool of parties, none of which have access to all of the keys to create the signature by themselves.
-This process uses distributed key generation (DKG) to generate the key.
-See [TSS](/products/base-layer/threshold-signature/).
-
-## Validator
-
-Validators are nodes that verify that transactions are valid before adding them to the blockchain.
-
-## Slashing
-
-Slashing is a penalty towards the validator for actions contrary to the consensus protocol.
-
-Penalties may include, but are not limited to:
-
-- Burning some amount of their stake
-- Jailing
-
-## Jailing
-
-Jailing is an action that removes the validator's ability to vote on future blocks for a certain period.
 
 ## Tendermint
 
@@ -149,19 +193,15 @@ Tendermint allows to write DApps in any language and replicate it on machines pa
 It also facilitates communication with other blockchains using the IBC (Inter-blockchain communication) Protocol.
 On a high level, it's an easy solution to create your own blockchain, which can communicate with other blockchains, too.
 
-## MetaMask Snap (Snap)
+## Threshold Signature Scheme (TSS)
 
-A Snap is an application built by third-party developers that adds features and functionality to MetaMask.
-Snaps can connect to blockchain protocols, show insights about transactions, display notifications, add new features, and more.
-Rarimo has its own Snap - <OutLink href="https://snaps.metamask.io/snap/npm/rarimo/rarime/">Rarime</OutLink>, which is used to store identity credentials, manage them, create ZKPs and submit these proofs to DApps.
+TSS is a cryptographic method to produce a single signature from a pool of parties, none of which have access to all of the keys to create the signature by themselves.
+This process uses distributed key generation (DKG) to generate the key.
+See [TSS](/products/base-layer/threshold-signature/).
 
-## Proof of Humanity (PoH)
+## Validator
 
-Proof of Humanity is a secure on-chain verification protocol that allows DApps to filter out bots and ensure that only verified humans are using their services.
-Currently, Rarimo partners with the four biggest identity providers in the space: Worldcoin, Unstoppable Domains, Gitcoin Passport, and Civic.
-
-After passing the verification, the user will receive his VC (and an SBT), proving he is a real human.
-Rarimo uses ZKPs to preserve users' privacy and ensure that no information, other than the fact that they are verified humans, is revealed.
+Validators are nodes that verify that transactions are valid before adding them to the blockchain.
 
 ## Verifiable Credential (VC)
 
@@ -178,6 +218,6 @@ For example, a ZKP can verify that a user is above a certain age without reveali
 A zk-SNARK is the type of ZKP that Rarimo Identity Protocol uses.
 One characteristic of zk-SNARKs is that they are non-interactive, meaning that the user and verifier interact only once, unlike some other types of ZKPs.
 
-## JSON Web Zero-knowledge (JWZ)
+## ZKML (Zero-Knowledge Machine Learning)
 
-JSON Web Zero-knowledge (JWZ) is an open standard that employs zero-knowledge technology for secure messaging. It facilitates message exchange between parties while concealing the sender's public keys. The JWZ format includes a header defining token features, a payload with the message, and a proof representing a zero-knowledge authentication based on the authentication circuit.
+ZKML stands for Zero-Knowledge Machine Learning, which combines zero-knowledge proofs (ZK proofs) with machine learning algorithms. It enables machine learning tasks to be performed on encrypted or private data without revealing the data itself, ensuring privacy and confidentiality.
