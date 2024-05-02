@@ -1,6 +1,6 @@
 ---
-slug: /ecosystem/passport-divided-profiles
-description: Passport-derived profiles are a zero-knowledge solution that allows using biometric passports to verify your identity in DApps.
+slug: /products/passport-divided-profiles
+description: Passport-derived profiles turn biometric passports into zero-knowledge identity credentials for Web3.
 ---
 import OutLink from "@site/src/components/OutLink";
 import IdealImage from '@site/src/components/IdealImage';
@@ -15,7 +15,7 @@ DApp developers can use the passport-derived profiles to:
 - Create provable social graph attestations
 - Prevent Sybil attacks
 - Verify personhood
-- ...and more!
+- Any other use cases with selective disclosure of the passport data.
 
 ## Biometric passports 101
 
@@ -52,17 +52,16 @@ To get started, the user must read the passport information using NFC. Under the
 After verifying the passport validity, the device securely stores the following data locally:
 - *DG1 Personal Details*. This section includes the passport holder's primary identity information, such as name, date of birth, nationality, and passport number. It reflects much of the information printed on the passport's data page.
 - *DG2 Facial photograph*. This section contains the passport holder's portrait. In the future, the protection method based on it will be possible to extend with face recognition and ZKML proofs.
-- *DG7: Signature/Image of Holder*. This data group stores the scanned image of the passport holder's handmade signature.
-- *DG15: Active Authentication Public Key*. This includes the public key used for active authentication, a security feature preventing unauthorized copying of passport data.
+- *DG15: Active Authentication Public Key*. This includes the public key used for *Active Authentication(AA)*, a security feature preventing unauthorized copying of passport data.
 - Hash values of other DGs.
 - Issuer's signature.
 - *Document Signer Certificate (CDS)*.
 
-Let's note that the list of biometric data groups can be extended in the future (or for some countries). *DG2(Portrait)* and *DG7 (Photo of a physical signature)* are currently the most widespread biometrics in passports.
+Let's note that the list of biometric data groups can be extended in the future (or for some countries). *DG2(Portrait)* is currently the most widespread biometrics in passports.
 
 All actions within this process are performed locally, without access to the Internet. The certificate path can also be verified on the device if the application stores a set of valid certificates for Trust Anchors. No personal data is shared anywhere or accessible to outside parties.
 
-### Creating the password-derived profile
+### Creating a passport-derived profile
 
 Next, we create a passport-derived profile by following this protocol:
 1. The user generates the keypair `<sk, pk>` for identity management and `β = Hash(sk)` to blind personal data.
@@ -83,7 +82,7 @@ The user may try to create several profiles using different `pk` for the same pa
 
 <IdealImage img={require('/img/passport-profile-creation.png')} alt="Passport-derived profile creation" />
 
-Users may revoke or change the identity management keypair, but this operation requires a password signature.
+Users may revoke or change the identity management keypair, but this operation requires a passport signature.
 
 Additionally, the protocol allows the creation of periodic passport liveness commitments to prove passport ownership over a period of time. This is useful in use cases like voting, where a corrupt government may try to skew the results by issuing fake passports. The verifier application can set the time threshold to limit the impact of freshly printed documents on the final use case.
 
