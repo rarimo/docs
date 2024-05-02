@@ -31,8 +31,8 @@ To check the validity of a passport, the verifier has to read the MRZ using an N
 
 The passport-derived profiles solution consists of the following components:
 - RariMe mobile apps are available for Android and iOS. They scan passports, securely store the passport data, and generate ZK proofs.
-- A set of Circom circuits designed to generate and verify zero-knowledge proofs of identity.
-- A set of smart contracts for managing the identity profile states.
+- A <OutLink href="https://github.com/rarimo/passport-zk-circuits/">set of Circom circuits</OutLink> designed to generate and verify zero-knowledge proofs of identity.
+- A <OutLink href="https://github.com/rarimo/passport-contracts">set of smart contracts</OutLink> for managing the identity profile states.
 - Rarimo's cross-chain messaging protocol propagates the identity states to other chains on demand.
 
 Let's walk through the user flow and explore the inner workings of this solution.
