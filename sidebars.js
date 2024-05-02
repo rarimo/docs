@@ -55,6 +55,15 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Passport-Derived Profiles',
+      link: { type: 'doc', id: 'products/passport-derived-profiles/overview' },
+      collapsed: true,
+      items: [
+
+      ],
+    },
+    {
+      type: 'category',
       label: 'Identity Protocol',
       link: {type: 'doc', id: 'products/identity-protocol/overview'},
       collapsed: true,
@@ -126,15 +135,6 @@ const sidebars = {
       items: [
         // 'ecosystem/freedom-tool/guide-how-to-use-freedom-tool',
          'ecosystem/freedom-tool/smart-contracts-reference',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Proof of Passport',
-      link: { type: 'doc', id: 'ecosystem/proof-of-passport/overview' },
-      collapsed: true,
-      items: [
-
       ],
     },
     {
