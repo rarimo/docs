@@ -105,12 +105,12 @@ function makeBaseLayerCards(whitepaperUrl: string): HomeCard[] {
       url: '/products/base-layer/',
       after: (
         <>
-          <a
+          {/* <a
             href={whitepaperUrl}
             className={clsx('heroButtonSecondary', styles.linksButton)}
           >
             Whitepaper
-          </a>
+          </a> */}
           <a
             href={'https://scan.rarimo.com/proposals'}
             rel="nofollow noopener noreferrer"

@@ -176,11 +176,11 @@ const sidebars = {
       },
       collapsed: true,
       items: [
-        {
-          type: 'link',
-          label: 'Whitepaper',
-          href: config.customFields.whitepaperUrl,
-        },
+        // {
+        //   type: 'link',
+        //   label: 'Whitepaper',
+        //   href: config.customFields.whitepaperUrl,
+        // },
         'resources/audits',
         'resources/glossary',
       ],
