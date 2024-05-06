@@ -46,6 +46,20 @@ function makeBaseLayerCards(whitepaperUrl: string): HomeCard[] {
       url: '/products/identity-protocol/',
     },
     {
+      id: 'passport-derived-profiles',
+      title: 'Passport-Derived Profiles',
+      IconName: UserIcon,
+      list: [
+        [
+          'Privacy-preserving identity based on biometric passports',
+          'Proof of Citizenship',
+          'Proof of Age',
+          'Selective disclosure of personal data',
+        ],
+      ],
+      url: '/products/passport-derived-profiles/',
+    },
+    {
       id: 'rarime',
       title: 'RariMe',
       IconName: ShieldIcon,
@@ -193,8 +207,8 @@ export default function Home(): JSX.Element {
       <main>
         <CardsSection
           cards={baseLayerCards}
-          columns={2}
-          gridTemplate={`"${baseLayerCards[0].id} ${baseLayerCards[1].id}" "${baseLayerCards[2].id} ${baseLayerCards[2].id}"`}
+          columns={3}
+          gridTemplate={`"${baseLayerCards[0].id} ${baseLayerCards[1].id} ${baseLayerCards[2].id}" "${baseLayerCards[3].id} ${baseLayerCards[3].id} ${baseLayerCards[3].id}"`}
           title="Learn The Core Products"
         />
         <CardsSection

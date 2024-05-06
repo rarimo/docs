@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Passport-derived profiles overview doc;
 - Passport related terms to the glossary;
 
+### Removed
+
+- Old whitepaper;
+
 ## [3.4.1] - 25-04-2024
 
 ### Fixed
