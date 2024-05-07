@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.5.1] - 07-05-2024
+
 ### Changed
 
 - Proof of Humanity: renamed "KYC service" to "HumanOrNot service";
@@ -370,7 +372,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://github.com/rarimo/docs/compare/v3.5.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/v3.5.1...HEAD
+[3.5.1]: https://github.com/rarimo/docs/releases/tag/v3.5.0...v3.5.1
 [3.5.0]: https://github.com/rarimo/docs/releases/tag/v3.4.1...v3.5.0
 [3.4.1]: https://github.com/rarimo/docs/releases/tag/v3.4.0...v3.4.1
 [3.4.0]: https://github.com/rarimo/docs/releases/tag/v3.3.0...v3.4.0
