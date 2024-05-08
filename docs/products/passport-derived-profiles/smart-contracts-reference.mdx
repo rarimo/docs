@@ -1,0 +1,321 @@
+---
+sidebar_label: Smart contracts reference
+description: 'A set of Solidity smart contracts implementing passport-derived profiles.'
+---
+import OutLink from "@site/src/components/OutLink";
+import IdealImage from '@site/src/components/IdealImage';
+
+# Passport-derived profiles smart contracts reference
+
+A set of contracts that make possible the issuance of on-chain identities that are connected to users' passports without revealing any private data.
+
+Currently, there are five main contract sections:
+1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/authenticators">Authenticators</OutLink>
+ — perform the passport Active Authentication (AA) and call one of the verifier contracts, based on the provided passport type, to verify ZKP.
+1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/dispatchers">Dispatchers</OutLink>
+ — Connect the main `Registration` contract with authenticators corresponding to different passport types.
+1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/verifiers">Verifiers</OutLink>
+ — auto-generated contracts, the main purpose of which is to verify the ZKP.
+1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/registration">Registration</OutLink>
+ — primary section with main `Registration` contract, that:
+    * Allows users registration (with binding of their identity to the passport);
+    * Allows revocation of passport-identity binding;
+    * Allows re-issuance of previously revoked identity;
+    * Allows registration and revocation of ICAO member's certificates;
+    * Stores and manages some passport and identity information;
+    * Stores the Sparse Merkle Tree with registered identities;
+    * Stores the Sparse Merkle Tree with registered certificates of ICAO members;
+    * Manages different dispatchers;
+1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/utils">Utilities</OutLink>
+ — some utility contracts, such as X509, SHA1, RSA implementations in solidity language and other.
+
+<IdealImage img={require('/img/pass-derived-profiles-contracts.png')} alt="Contracts interaction between each other" />
+
+## `Registration`
+
+### Interface
+
+```solidity
+contract Registration is OwnableUpgradeable, TSSSigner {
+
+    PoseidonSMT public registrationSmt;
+    PoseidonSMT public certificatesSmt;
+    bytes32 public icaoMasterTreeMerkleRoot;
+
+    mapping(bytes32 => IPassportDispatcher) public passportDispatchers;
+    mapping(bytes32 => CertificateInfo) internal _certificateInfos;
+    mapping(bytes32 => PassportInfo) internal _passportInfos;
+    mapping(bytes32 => IdentityInfo) internal _identityInfos;
+    mapping(bytes32 => bool) internal _usedSignatures;
+
+    /* ... */
+
+    function registerCertificate(
+        bytes32[] memory icaoMerkleProof_,
+        bytes memory icaoMemberKey_,
+        bytes memory icaoMemberSignature_,
+        bytes memory x509SignedAttributes_,
+        uint256 x509KeyOffset_,
+        uint256 x509ExpirationOffset_
+    ) external {
+
+        /* ... */
+
+        emit CertificateRegistered(bytes32(value_), expirationTimestamp_);
+    }
+
+    function revokeCertificate(bytes32 certificateKey_) external {
+
+        /* ... */
+
+        emit CertificateRevoked(certificateKey_);
+    }
+
+    function register(
+        uint256 identityKey_,
+        uint256 dgCommit_,
+        Passport memory passport_,
+        VerifierHelper.ProofPoints memory zkPoints_
+    ) external {
+
+        /* ... */
+
+        _useSignature(passport_.signature);
+        _authenticate(dispatcher_, challenge_, passport_);
+        _verifyZKProof(dispatcher_, passportKey_, identityKey_, dgCommit_, zkPoints_);
+
+        /* ... */
+
+        emit Registered(bytes32(passportKey_), bytes32(identityKey_));
+    }
+
+    function revoke(uint256 identityKey_, Passport memory passport_) external {
+
+        /* ... */
+
+        _useSignature(passport_.signature);
+        _authenticate(dispatcher_, challenge_, passport_);
+
+        /* ... */
+
+        emit Revoked(bytes32(passportKey_), bytes32(identityKey_));
+    }
+
+function reissueIdentity(
+        uint256 identityKey_,
+        uint256 dgCommit_,
+        Passport memory passport_,
+        VerifierHelper.ProofPoints memory zkPoints_
+    ) external {
+
+        /* ... */
+
+        _useSignature(passport_.signature);
+        _authenticate(dispatcher_, challenge_, passport_);
+        _verifyZKProof(dispatcher_, passportKey_, identityKey_, dgCommit_, zkPoints_);
+
+        /* ... */
+
+        emit ReissuedIdentity(bytes32(passportKey_), bytes32(identityKey_));
+    }
+
+}
+```
+
+- `registrationSmt` — Sparse Merkle Tree that stores data about registered identities;
+- `certificatesSmt` — Sparse Merkle Tree that stores data about registered certificates of ICAO members;
+- `icaoMasterTreeMerkleRoot` — Merkle tree root of supported ICAO members (computed off-chain and set during the contract initialization);
+- `passportDispatchers` — mapping from passport type to its dispatcher;
+- `_certificateInfos` — internal mapping from the hash of the certificate key to the information about the certificate;
+- `_passportInfos` — internal mapping from the hash of the passport public key to the information about the passport;
+- `_identityInfos` — internal mapping from identity public key to the information about the corresponding identity;
+- `_usedSignatures` — internal mapping from signature hashes to the boolean, whether they were used or not (to prevent certain attacks);
+- `registerCertificate(...)` — registers the ICAO member certificate and emits `CertificateRegistered` event with certificate key and expiration date information;
+- `revokeCertificate(...)` — revokes the ICAO member certificate and emits `CertificateRevoked` event with the certificate key;
+- `register(...)` — registers the user (identity) by its passport, technically — issues the identity, calls the dispatcher to verify ZKP, links the identity to its passport, and emits `Registered` event with passport and identity public keys;
+- `revoke(...)` — revokes the identity and its passport by the user's will, marks the passport (and identity) as revoked, and emits `Revoked` event with passport and identity public keys;
+- `reissueIdentity(...)` — issues the identity, if it was revoked before, links the identity to its passport, and emits `ReissuedIdentity` event with passport and identity public keys;
+
+There are also several getter functions that return data from mappings, such as `getPassportInfo(key)`, which returns passport info for the provided passport key, but they are not so important, so they weren't mentioned.
+
+For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/registration/Registration.sol">Registration.sol</OutLink> at the GitHub.
+
+## `ECDSASHA1Authenticator`
+
+Authenticator for `ECDSA_SHA1` passport types. The contract verifies the ECDSA signature using the passport's public key.
+
+### Interface
+
+```solidity
+contract ECDSASHA1Authenticator {
+
+    /* brainpool256r1 curve parameters... */
+
+    function authenticate(
+        bytes memory challenge,
+        uint256 r,
+        uint256 s,
+        uint256 x,
+        uint256 y
+    ) external pure returns (bool) {
+        /* ... */
+    }
+}
+```
+
+- `authenticate(...)` — checks active authentication of a passport via ECDSA signature, where message is SHA1 hash of challenge;
+
+For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/authenticators/ECDSASHA1Authenticator.sol">ECDSASHA1Authenticator.sol</OutLink> at the GitHub.
+
+## `RSASHA1Authenticator`
+
+Authenticator for `RSA_SHA1` passport types. Verifies RSA signature using passport's public key, which was hashed with a random salt.
+
+### Interface
+
+```solidity
+contract RSASHA1Authenticator {
+
+    function authenticate(
+        bytes memory challenge_,
+        bytes memory s_,
+        bytes memory n_
+    ) external view returns (bool) {
+
+        /* ... */
+
+    }
+}
+```
+
+- `authenticate()` — checks active authentication of a passport via RSA signature, where message is SHA1 hash of challenge+salt;
+
+For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/authenticators/RSASHA1Authenticator.sol">RSASHA1Authenticator.sol</OutLink> at the GitHub.
+
+## `RSAECDSAVerifier`
+
+### Interface
+
+```solidity
+contract RSAECDSAVerifier {
+
+    /* some constants */
+
+    function verifyProof(
+        uint[2] calldata _pA,
+        uint[2][2] calldata _pB,
+        uint[2] calldata _pC,
+        uint[4] calldata _pubSignals
+    ) public view returns (bool) {
+        /* ... */
+    }
+}
+```
+
+- `verifyProof(...)` — verifies passport validity ZKP;
+
+For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/verifiers/RSAECDSAVerifier.sol">RSAECDSAVerifier.sol</OutLink> at the GitHub.
+
+## `RSASHA1Dispatcher`
+
+### Interface
+
+```solidity
+contract RSASHA1Dispatcher is IPassportDispatcher, Initializable {
+
+    address public authenticator;
+    address public verifier;
+
+    function authenticate(
+        bytes memory challenge_,
+        bytes memory passportSignature_,
+        bytes memory passportPublicKey_
+    ) external view returns (bool) {
+        return
+            RSASHA1Authenticator(authenticator).authenticate(
+                challenge_,
+                passportSignature_,
+                passportPublicKey_
+            );
+    }
+
+    function verifyZKProof(
+        uint256[] memory pubSignals_,
+        VerifierHelper.ProofPoints memory zkPoints_
+    ) external view returns (bool) {
+        return verifier.verifyProof(pubSignals_, zkPoints_);
+    }
+
+    function getPassportChallenge(
+        uint256 identityKey_
+    ) external pure returns (bytes memory challenge_) {
+        /* ... */
+    }
+
+    function getPassportKey(bytes memory passportPublicKey_) external pure returns (uint256) {
+        return passportPublicKey_.hash1024();
+    }
+}
+```
+
+- `authenticator` — address of the `RSASHA1Authenticator` contract;
+- `verifier` — address of the `RSAECDSAVerifier` contract;
+- `authenticate(...)` — Authenticate the RSASHA1 passport;
+- `verifyZKProof(...)` — calls the `RSAECDSAVerifier` to verify passport validity ZKP;
+- `getPassportChallenge(key)` — returns the passport challenge to be used in active authentication (last 8 bytes of the identity key);
+- `getPassportKey(pk)` — returns the RSASHA1 passport public key representation;
+
+For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/dispatchers/RSASHA1Dispatcher.sol">RSASHA1Dispatcher.sol</OutLink> at the GitHub.
+
+## `ECDSASHA1Dispatcher`
+
+### Interface
+
+```solidity
+contract ECDSASHA1Dispatcher is IPassportDispatcher, Initializable {
+
+    address public authenticator;
+    address public verifier;
+
+    function authenticate(
+        bytes memory challenge_,
+        bytes memory passportSignature_,
+        bytes memory passportPublicKey_
+    ) external view returns (bool) {
+
+        /* ... */
+
+        return ECDSASHA1Authenticator(authenticator).authenticate(challenge_, r_, s_, x_, y_);
+    }
+
+    function verifyZKProof(
+        uint256[] memory pubSignals_,
+        VerifierHelper.ProofPoints memory zkPoints_
+    ) external view returns (bool) {
+        return verifier.verifyProof(pubSignals_, zkPoints_);
+    }
+
+    function getPassportChallenge(
+        uint256 identityKey_
+    ) external pure returns (bytes memory challenge_) {
+        challenge_ = new bytes(8);
+
+        for (uint256 i = 0; i < challenge_.length; ++i) {
+            challenge_[challenge_.length - i - 1] = bytes1(uint8(identityKey_ >> (8 * i)));
+        }
+    }
+
+    function getPassportKey(bytes memory passportPublicKey_) external pure returns (uint256) {
+        return passportPublicKey_.hash512();
+    }
+}
+```
+
+- `authenticator` — address of the `ECDSASHA1Authenticator` contract;
+- `verifier` — address of the `RSAECDSAVerifier` contract;
+- `authenticate(...)` — authenticates the ECDSASHA1 passport;
+- `verifyZKProof(...)` — calls the `RSAECDSAVerifier` to verify passport validity ZKP;
+- `getPassportChallenge(key)` — returns the passport challenge to be used in Active Authentication (last 8 bytes of the identity key);
+- `getPassportKey(pk)` — returns the ECDSA passport public key representation;
+
+For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/dispatchers/ECDSASHA1Dispatcher.sol">ECDSASHA1Dispatcher.sol</OutLink> at the GitHub.

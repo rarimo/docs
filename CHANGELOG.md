@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Passport-derived profiles smart contracts reference;
+
 ## [3.5.2] - 08-05-2024
 
 ### Added
+
 - OG image for "Passport-enabled airdrops" use case;
 
 ## [3.5.1] - 07-05-2024
