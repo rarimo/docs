@@ -58,9 +58,7 @@ const sidebars = {
       label: 'Passport-Derived Profiles',
       link: { type: 'doc', id: 'products/passport-derived-profiles/overview' },
       collapsed: true,
-      items: [
-
-      ],
+      items: ['products/passport-derived-profiles/smart-contracts-reference'],
     },
     {
       type: 'category',
