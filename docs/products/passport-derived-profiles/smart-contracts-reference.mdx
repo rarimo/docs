@@ -1,26 +1,27 @@
 ---
 sidebar_label: Smart contracts reference
-description: 'Information about the smart contracts, used for passport-derived profiles.'
+description: 'A set of Solidity smart contracts implementing passport-derived profiles.'
 ---
 import OutLink from "@site/src/components/OutLink";
 import IdealImage from '@site/src/components/IdealImage';
 
 # Passport-derived profiles smart contracts reference
 
-Set of contracts, that make possible on-chain identities issuance, that are connected to users passports, without revealing any private data.
+A set of contracts that make possible the issuance of on-chain identities that are connected to users' passports without revealing any private data.
+
 Currently, there are five main contract sections:
 1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/authenticators">Authenticators</OutLink>
- — perform the passport Active Authentication (AA) and calls one of the verifier contracts, based on the provided passport type, to verify ZKP.
+ — perform the passport Active Authentication (AA) and call one of the verifier contracts, based on the provided passport type, to verify ZKP.
 1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/dispatchers">Dispatchers</OutLink>
- — Connect the main `Registration` contract with different authenticators, that correspond to different passport types.
+ — Connect the main `Registration` contract with authenticators corresponding to different passport types.
 1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/verifiers">Verifiers</OutLink>
  — auto-generated contracts, the main purpose of which is to verify the ZKP.
 1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/registration">Registration</OutLink>
  — primary section with main `Registration` contract, that:
     * Allows users registration (with binding of their identity to the passport);
     * Allows revocation of passport-identity binding;
-    * Allows reissuance of previously revoked identity;
-    * Allows registration and revocation of ICAO members certificates;
+    * Allows re-issuance of previously revoked identity;
+    * Allows registration and revocation of ICAO member's certificates;
     * Stores and manages some passport and identity information;
     * Stores the Sparse Merkle Tree with registered identities;
     * Stores the Sparse Merkle Tree with registered certificates of ICAO members;
@@ -121,27 +122,27 @@ function reissueIdentity(
 }
 ```
 
-- `registrationSmt` — sparse merkle tree, that stores data about registered identities;
-- `certificatesSmt` — sparse merkle tree, that stores data about registered certificates of ICAO members;
-- `icaoMasterTreeMerkleRoot` — merkle tree root of supported ICAO members (computed off-chain and set during the contract initialization);
+- `registrationSmt` — Sparse Merkle Tree that stores data about registered identities;
+- `certificatesSmt` — Sparse Merkle Tree that stores data about registered certificates of ICAO members;
+- `icaoMasterTreeMerkleRoot` — Merkle tree root of supported ICAO members (computed off-chain and set during the contract initialization);
 - `passportDispatchers` — mapping from passport type to its dispatcher;
-- `_certificateInfos` — internal mapping from hash of certificate key to the information about the certificate;
-- `_passportInfos` — internal mapping from the hash of passport public key to the information about the passport;
-- `_identityInfos` — internal mapping from identity public key to the information about corresponding identity;
+- `_certificateInfos` — internal mapping from the hash of the certificate key to the information about the certificate;
+- `_passportInfos` — internal mapping from the hash of the passport public key to the information about the passport;
+- `_identityInfos` — internal mapping from identity public key to the information about the corresponding identity;
 - `_usedSignatures` — internal mapping from signature hashes to the boolean, whether they were used or not (to prevent certain attacks);
 - `registerCertificate(...)` — registers the ICAO member certificate and emits `CertificateRegistered` event with certificate key and expiration date information;
-- `revokeCertificate(...)` — revokes the ICAO member certificate and emits `CertificateRevoked` event with certificate key;
-- `register(...)` — registers the user (identity) by its passport, technically — issues the identity, calls the dispatcher to verify ZKP, links the identity to its passport and emits `Registered` event with passport and identity public keys;
-- `revoke(...)` — revokes the identity and its passport by the user's will, marks the passport (and identity) as revoked and emits `Revoked` event with passport and identity public keys;
-- `reissueIdentity(...)` — issues the identity, if it was revoked before, links the identity to its passport and emits `ReissuedIdentity` event with passport and identity public keys;
+- `revokeCertificate(...)` — revokes the ICAO member certificate and emits `CertificateRevoked` event with the certificate key;
+- `register(...)` — registers the user (identity) by its passport, technically — issues the identity, calls the dispatcher to verify ZKP, links the identity to its passport, and emits `Registered` event with passport and identity public keys;
+- `revoke(...)` — revokes the identity and its passport by the user's will, marks the passport (and identity) as revoked, and emits `Revoked` event with passport and identity public keys;
+- `reissueIdentity(...)` — issues the identity, if it was revoked before, links the identity to its passport, and emits `ReissuedIdentity` event with passport and identity public keys;
 
-There are also several getter functions, that return data from mappings, such as `getPassportInfo(key)` — returns passport info for provided passport key, but they are not so important, so they weren't mentioned.
+There are also several getter functions that return data from mappings, such as `getPassportInfo(key)`, which returns passport info for the provided passport key, but they are not so important, so they weren't mentioned.
 
 For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/registration/Registration.sol">Registration.sol</OutLink> at the GitHub.
 
 ## `ECDSASHA1Authenticator`
 
-Authenticator for `ECDSA_SHA1` passport types. Verifies ECDSA signature on passport's public key.
+Authenticator for `ECDSA_SHA1` passport types. The contract verifies the ECDSA signature using the passport's public key.
 
 ### Interface
 
@@ -168,7 +169,7 @@ For the full implementation, see <OutLink href="https://github.com/rarimo/passpo
 
 ## `RSASHA1Authenticator`
 
-Authenticator for `RSA_SHA1` passport types. Verifies RSA signature on passport's public key, that was hashed with a random salt.
+Authenticator for `RSA_SHA1` passport types. Verifies RSA signature using passport's public key, which was hashed with a random salt.
 
 ### Interface
 
@@ -187,7 +188,7 @@ contract RSASHA1Authenticator {
 }
 ```
 
-- `authenticate()` — checks active authenticattion of a passport via RSA signature, where message is SHA1 hash of challenge+salt;
+- `authenticate()` — checks active authentication of a passport via RSA signature, where message is SHA1 hash of challenge+salt;
 
 For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/authenticators/RSASHA1Authenticator.sol">RSASHA1Authenticator.sol</OutLink> at the GitHub.
 
@@ -314,7 +315,7 @@ contract ECDSASHA1Dispatcher is IPassportDispatcher, Initializable {
 - `verifier` — address of the `RSAECDSAVerifier` contract;
 - `authenticate(...)` — authenticates the ECDSASHA1 passport;
 - `verifyZKProof(...)` — calls the `RSAECDSAVerifier` to verify passport validity ZKP;
-- `getPassportChallenge(key)` — returns the passport challenge to be used in active authentication (last 8 bytes of the identity key);
+- `getPassportChallenge(key)` — returns the passport challenge to be used in Active Authentication (last 8 bytes of the identity key);
 - `getPassportKey(pk)` — returns the ECDSA passport public key representation;
 
 For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/dispatchers/ECDSASHA1Dispatcher.sol">ECDSASHA1Dispatcher.sol</OutLink> at the GitHub.
