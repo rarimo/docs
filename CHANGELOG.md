@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Passport-derived profiles smart contracts reference;
 
+### Fixed
+
+- Expired EVM bridge audit link;
+
 ## [3.5.2] - 08-05-2024
 
 ### Added
