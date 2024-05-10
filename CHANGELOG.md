@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.6.0] - 10-05-2024
+
 ### Added
 
 - Passport-derived profiles smart contracts reference;
@@ -386,7 +388,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://github.com/rarimo/docs/compare/v3.5.2...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/v3.6.0...HEAD
+[3.6.0]: https://github.com/rarimo/docs/releases/tag/v3.5.2...v3.6.0
 [3.5.2]: https://github.com/rarimo/docs/releases/tag/v3.5.1...v3.5.2
 [3.5.1]: https://github.com/rarimo/docs/releases/tag/v3.5.0...v3.5.1
 [3.5.0]: https://github.com/rarimo/docs/releases/tag/v3.4.1...v3.5.0
