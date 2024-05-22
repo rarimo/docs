@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.7.2] - 22-05-2024
+### Fixed
+- Markup in the "Passport-enabled aridrops" use case;
+
 ## [3.7.1] - 13-05-2024
 ### Added
 - Sepolia deployments for the Identity Protocol and Proof of Humanity smart contracts;
@@ -402,8 +406,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://github.com/rarimo/docs/compare/v3.7.1...HEAD
-[3.7.1]: https://github.com/rarimo/docs/releases/tag/v3.7.1...v3.7.1
+[Unreleased]: https://github.com/rarimo/docs/compare/v3.7.2...HEAD
+[3.7.2]: https://github.com/rarimo/docs/releases/tag/v3.7.1...v3.7.2
+[3.7.1]: https://github.com/rarimo/docs/releases/tag/v3.7.0...v3.7.1
 [3.7.0]: https://github.com/rarimo/docs/releases/tag/v3.6.1...v3.7.0
 [3.6.1]: https://github.com/rarimo/docs/releases/tag/v3.6.0...v3.6.1
 [3.6.0]: https://github.com/rarimo/docs/releases/tag/v3.5.2...v3.6.0
