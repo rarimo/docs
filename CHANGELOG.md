@@ -1,5 +1,4 @@
 # Changelog
-
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -7,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.7.4] - 2024-05-25
 ### Added
 - `@napalmpapalam/rlx` package for changelog automation;
 
@@ -26,87 +26,62 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sepolia deployments for the Identity Protocol and Proof of Humanity smart contracts;
 
 ## [3.7.0] - 2024-05-10
-
 ### Added
 - Freedom Tool audits;
 
 ## [3.6.1] - 2024-05-10
-
 ### Changed
 - Updated charts in passporot-derived profiles overview;
 
 ## [3.6.0] - 2024-05-10
-
 ### Added
-
 - Passport-derived profiles smart contracts reference;
 
 ### Fixed
-
 - Expired EVM bridge audit link;
 
 ## [3.5.2] - 2024-05-08
-
 ### Added
-
 - OG image for "Passport-enabled airdrops" use case;
 
 ## [3.5.1] - 2024-05-07
-
 ### Changed
-
 - Proof of Humanity: renamed "KYC service" to "HumanOrNot service";
 
 ## [3.5.0] - 2024-05-06
-
 ### Added
-
 - Passport-derived profiles overview doc;
 - Passport related terms to the glossary;
 
 ### Removed
-
 - Old whitepaper;
 
 ## [3.4.1] - 2024-04-25
-
 ### Fixed
-
 - Typos in Polygon ID State Replication chart;
 
-
 ## [3.4.0] - 2024-04-24
-
 ### Changed
-
 - Restyled charts in "Overview";
 
 ## [3.3.0] - 2024-04-22
-
 ### Changed
-
 - "Use cases/Passport-enabled airdrops": emphasized proofs of citizenship and age.
 
 ## [3.2.0] - 2024-04-19
-
 ### Changed
 - Simplified the "Overview" doc;
 - Updated diagrams;
 
 ## [3.1.0] - 2024-04-15
-
-
 ### Changed
-
 - Hero block design;
 
 ### Removed
 - "Twitter" label from X social media links;
 
 ## [3.0.0] - 2024-04-12
-
 ### Added
-
 - Products/Rarime:
   - Added the "interoperability with external credentials" page;
 - Use-cases:
@@ -117,7 +92,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added "Smart contracts reference" page;
 
 ### Changed
-
 - Products/WorldCoin State Replication:
   - Updated the relayer version in the replication guide;
 - Used `@docusaurus/plugin-ideal-image` for image optimization;
@@ -125,48 +99,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated "Overview" doc;
 
 ### Removed
-
 - Old whitepaper;
 - Products/Bridging;
 - Ecosystem/Token Agnostic Payments;
 - "Mutlichain mints", "Cross-chain proofs" use cases;
 
 ## [2.0.6] - 2024-04-04
-
 ### Added
-
 - Whitepaper v3;
 
 ## [2.0.5] - 2024-02-23
-
 ### Fixed
-
 - OpenGraph metadata generation;
 
 ## [2.0.4] - 2024-02-23
-
 ### Fixed
-
 - Prod deployment pipeline;
 
 ## [2.0.3] - 2024-02-23
-
 ### Added
-
 - `robots.txt` file;
 
 ### Changed
-
 - Embedded promising SEO keywords;
 
 ### Fixed
-
 - `noindex` directive for staging;
 
 ## [2.0.2] - 2024-02-21
-
 ### Added
-
 - Ecosystem/Polygon ID State Replication:
   - Added information about the `verify-proxy` service;
   - Information about `Query-based request` that we use and fixed flow logic a bit;
@@ -174,21 +135,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added the "Organizational access control" page;
 
 ### Changed
-
 - Ecosystem/Polygon ID State Replication:
   - Updated the relayer version in the state replication guide;
 - Tweaked meta titles, description, H1s and outlinks for SEO performance;
 
 ## [2.0.1] - 2024-02-05
-
 ### Changed
-
 - Hidden the blog section on landing;
 
 ## [2.0.0] - 2024-02-02
-
 ### Added
-
 - Themes (light and dark);
 - Reference:
   - Added the "Polygon ID State Replication" page;
@@ -211,7 +167,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added the "Rarimo protocol overview" page;
 
 ### Changed
-
 - Design:
   - Header
   - Fonts and texts (where needed)
@@ -232,14 +187,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of highlighted line in <code> block;
 
 ### Fixed
-
 - Minor markup fix in Proof of Humanity tech reference;
 - Minor markup fix in "Setting up validator" guide;
 
 ## [1.6.0] - 2023-11-28
-
 ### Added
-
 - Technical Reference:
   - audits page;
   - fungible and non-fungible token documentation for the Near bridge;
@@ -248,7 +200,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - added Zealy demo video;
 
 ### Changed
-
 - Unify chart styles;
 - Technical Reference:
   - Updated Goerli Proof of Humanity SBT contract's address;
@@ -257,123 +208,89 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Refactored and updated Solana bridge program reference;
 
 ## [1.5.1] - 2023-11-16
-
 ### Changed
-
 - Issuer github link;
 - Updated screenshots in how-to/setup-issuer;
 
 ## [1.5.0] - 2023-11-15
-
 ### Added
-
 - Technical Reference: contract deployments near the definitions;
 
-### Removed
+### Changed
+- Reordered how-to guides by priority;
 
+### Removed
 - Technical Reference: smart contract addresses page;
 
 ### Fixed
-
 - Polygon ID spelling;
 - Typos in Polygon ID integration charts;
 - Rust syntax highlight;
 
-### Changed
-
-- Reordered how-to guides by priority;
-
 ## [1.4.3] - 2023-11-09
-
 ### Added
-
 - Cache headers for static assets;
 
 ### Changed
-
 - Use updated CCTP use case charts;
 - Minor wording changes in CCTP and Token-Agnostic Payments use cases;
 
-
 ## [1.4.2] - 2023-11-09
-
 ### Changed
-
 - Use new video in the Identity Protocol overview;
 
 ## [1.4.1] - 2023-11-08
-
 ### Fixed
-
 - Build errors caused by the Solidity syntax fix;
 
-
 ## [1.4.0] - 2023-11-08
-
 ### Added
-
 - API Reference;
 - OpenGraph thumbnails for PoH how-to guides;
 
 ### Changed
-
 - Identity Contracts reference: added `ZKPQueriesStorage`, `QueryValidator` and `PoseidonFacade` contracts;
 
 ### Removed
-
 - PoH subgraph reference;
 
 ### Fixed
-
 - Solidity syntax highlight;
 - Used docusaurus admonitions;
 
 ## [1.3.1] - 2023-11-08
-
 ### Changed
-
 - How-to-Guides:
   - Use the new template name in the QuestN guide;
 
 ## [1.3.0] - 2023-11-07
-
 ### Changed
-
 - How-to-Guides:
   - Updated the QuestN x PoH integration guide;
   - Updated the Zealy x PoH integration guide;
 
 ### Removed
-
 - Whitepaper link from technical reference;
 
 ## [1.2.1] - 2023-11-03
-
 ### Fixed
-
 - Minor wording tweaks.
 
 ## [1.2.0] - 2023-11-02
-
 ### Added
-
 - How-to-Guides:
   - Mention the issuer allowlist;
 
 ### Changed
-
 - Reference:
   - Grouped smart contract deployments by the product and contract;
   - Consolidated Proof
 
- of Humanity references into a single page;
+   of Humanity references into a single page;
 - Used new Proof of Humanity demo videos;
 
-
 ## [1.1.0] - 2023-10-27
-
 ### Added
-
 - Technical Reference:
   - Identity contracts reference;
   - Proof of Humanity SBT;
@@ -381,74 +298,70 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - PoH subgraph reference;
   - Added "Snap", "Slashing", "Jailing", "Tendermint", and "PoH" terms to the glossary;
 
-### Fixed
-
-- Invalid links in the Glossary;
-
 ### Changed
-
 - Technical Rererence:
   - Improved bridge contracts reference structure;
 - How-to-Guides:
   - User Rarimo's verifier contracts in the on-chain ZKP verification guide;
 - Used re-designed charts;
 
+### Fixed
+- Invalid links in the Glossary;
+
 ## [1.0.0] - 2023-10-24
-
-### Changed
-
-- Adopted [divio documentation system](https://documentation.divio.com/);
-- Meta description;
-- Rewritten "Overview" section;
-
 ### Added
-
 - How-to guides for identity protocol and Proof of Humanity;
 - Reference for identity protocol JS libraries;
 - Proof of Humanity use case doc;
 
-### Removed
+### Changed
+- Adopted [divio documentation system](https://documentation.divio.com/);
+- Meta description;
+- Rewritten "Overview" section;
 
+### Removed
 - Outdated API and smart contract references;
 - Inaccurate descriptions of identity and bridging protocols;
 
 ### Fixed
-
 - `Not Found` page returning HTTP status `200`;
 - Broken logo link in the footer;
 
-[Unreleased]: https://github.com/rarimo/docs/compare/v3.7.3...HEAD
-[3.7.3]: https://github.com/rarimo/docs/releases/tag/v3.7.2...v3.7.2
-[3.7.2]: https://github.com/rarimo/docs/releases/tag/v3.7.1...v3.7.2
-[3.7.1]: https://github.com/rarimo/docs/releases/tag/v3.7.0...v3.7.1
-[3.7.0]: https://github.com/rarimo/docs/releases/tag/v3.6.1...v3.7.0
-[3.6.1]: https://github.com/rarimo/docs/releases/tag/v3.6.0...v3.6.1
-[3.6.0]: https://github.com/rarimo/docs/releases/tag/v3.5.2...v3.6.0
-[3.5.2]: https://github.com/rarimo/docs/releases/tag/v3.5.1...v3.5.2
-[3.5.1]: https://github.com/rarimo/docs/releases/tag/v3.5.0...v3.5.1
-[3.5.0]: https://github.com/rarimo/docs/releases/tag/v3.4.1...v3.5.0
-[3.4.1]: https://github.com/rarimo/docs/releases/tag/v3.4.0...v3.4.1
-[3.4.0]: https://github.com/rarimo/docs/releases/tag/v3.3.0...v3.4.0
-[3.3.0]: https://github.com/rarimo/docs/releases/tag/v3.2.0...v3.3.0
-[3.2.0]: https://github.com/rarimo/docs/releases/tag/v3.1.0...v3.2.0
-[3.1.0]: https://github.com/rarimo/docs/releases/tag/v3.0.0...v3.1.0
-[3.0.0]: https://github.com/rarimo/docs/releases/tag/v2.0.6...v3.0.0
-[2.0.6]: https://github.com/rarimo/docs/releases/tag/v2.0.5...v2.0.6
-[2.0.5]: https://github.com/rarimo/docs/releases/tag/v2.0.4...v2.0.5
-[2.0.4]: https://github.com/rarimo/docs/releases/tag/v2.0.3...v2.0.4
-[2.0.3]: https://github.com/rarimo/docs/releases/tag/v2.0.2...v2.0.3
-[2.0.2]: https://github.com/rarimo/docs/releases/tag/v2.0.1...v2.0.2
-[2.0.1]: https://github.com/rarimo/docs/releases/tag/v2.0.0...v2.0.1
-[2.0.0]: https://github.com/rarimo/docs/releases/tag/v1.6.0...v2.0.0
-[1.6.0]: https://github.com/rarimo/docs/releases/tag/v1.5.1...v1.6.0
-[1.5.1]: https://github.com/rarimo/docs/releases/tag/v1.5.0...v1.5.1
-[1.5.0]: https://github.com/rarimo/docs/releases/tag/v1.4.3...v1.5.0
-[1.4.3]: https://github.com/rarimo/docs/releases/tag/v1.4.2...v1.4.3
-[1.4.2]: https://github.com/rarimo/docs/releases/tag/v1.4.1...v1.4.2
-[1.4.1]: https://github.com/rarimo/docs/releases/tag/v1.4.0...v1.4.1
-[1.4.0]: https://github.com/rarimo/docs/releases/tag/v1.3.1...v1.4.0
-[1.3.1]: https://github.com/rarimo/docs/releases/tag/v1.3.0...v1.3.1
-[1.3.0]: https://github.com/rarimo/docs/releases/tag/v1.2.0...v1.3.0
-[1.2.0]: https://github.com/rarimo/docs/releases/tag/v1.1.0...v1.2.0
-[1.1.0]: https://github.com/rarimo/docs/releases/tag/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/rarimo/docs/releases/tag/v1.0.0
+
+[Unreleased]: https://github.com/rarimo/docs/compare/3.7.4...HEAD
+[3.7.4]: https://github.com/rarimo/docs/compare/3.7.3...3.7.4
+[3.7.3]: https://github.com/rarimo/docs/compare/3.7.2...3.7.3
+[3.7.2]: https://github.com/rarimo/docs/compare/3.7.1...3.7.2
+[3.7.1]: https://github.com/rarimo/docs/compare/3.7.0...3.7.1
+[3.7.0]: https://github.com/rarimo/docs/compare/3.6.1...3.7.0
+[3.6.1]: https://github.com/rarimo/docs/compare/3.6.0...3.6.1
+[3.6.0]: https://github.com/rarimo/docs/compare/3.5.2...3.6.0
+[3.5.2]: https://github.com/rarimo/docs/compare/3.5.1...3.5.2
+[3.5.1]: https://github.com/rarimo/docs/compare/3.5.0...3.5.1
+[3.5.0]: https://github.com/rarimo/docs/compare/3.4.1...3.5.0
+[3.4.1]: https://github.com/rarimo/docs/compare/3.4.0...3.4.1
+[3.4.0]: https://github.com/rarimo/docs/compare/3.3.0...3.4.0
+[3.3.0]: https://github.com/rarimo/docs/compare/3.2.0...3.3.0
+[3.2.0]: https://github.com/rarimo/docs/compare/3.1.0...3.2.0
+[3.1.0]: https://github.com/rarimo/docs/compare/3.0.0...3.1.0
+[3.0.0]: https://github.com/rarimo/docs/compare/2.0.6...3.0.0
+[2.0.6]: https://github.com/rarimo/docs/compare/2.0.5...2.0.6
+[2.0.5]: https://github.com/rarimo/docs/compare/2.0.4...2.0.5
+[2.0.4]: https://github.com/rarimo/docs/compare/2.0.3...2.0.4
+[2.0.3]: https://github.com/rarimo/docs/compare/2.0.2...2.0.3
+[2.0.2]: https://github.com/rarimo/docs/compare/2.0.1...2.0.2
+[2.0.1]: https://github.com/rarimo/docs/compare/2.0.0...2.0.1
+[2.0.0]: https://github.com/rarimo/docs/compare/1.6.0...2.0.0
+[1.6.0]: https://github.com/rarimo/docs/compare/1.5.1...1.6.0
+[1.5.1]: https://github.com/rarimo/docs/compare/1.5.0...1.5.1
+[1.5.0]: https://github.com/rarimo/docs/compare/1.4.3...1.5.0
+[1.4.3]: https://github.com/rarimo/docs/compare/1.4.2...1.4.3
+[1.4.2]: https://github.com/rarimo/docs/compare/1.4.1...1.4.2
+[1.4.1]: https://github.com/rarimo/docs/compare/1.4.0...1.4.1
+[1.4.0]: https://github.com/rarimo/docs/compare/1.3.1...1.4.0
+[1.3.1]: https://github.com/rarimo/docs/compare/1.3.0...1.3.1
+[1.3.0]: https://github.com/rarimo/docs/compare/1.2.1...1.3.0
+[1.2.1]: https://github.com/rarimo/docs/compare/1.2.0...1.2.1
+[1.2.0]: https://github.com/rarimo/docs/compare/1.1.0...1.2.0
+[1.1.0]: https://github.com/rarimo/docs/compare/1.0.0...1.1.0
+[1.0.0]: https://github.com/rarimo/docs/releases/tag/1.0.0
