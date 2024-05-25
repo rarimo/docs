@@ -1,4 +1,4 @@
-## Changelog
+# Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -7,29 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [3.7.3] - 23-05-2024
+### Added
+- `@napalmpapalam/rlx` package for changelog automation;
+
+### Changed
+- Format changelog to match `Keep a Changelog` format
+
+## [3.7.3] - 2024-05-23
 ### Added
 - Updated whitepaper;
 
-## [3.7.2] - 22-05-2024
+## [3.7.2] - 2024-05-22
 ### Fixed
 - Markup in the "Passport-enabled aridrops" use case;
 
-## [3.7.1] - 13-05-2024
+## [3.7.1] - 2024-05-13
 ### Added
 - Sepolia deployments for the Identity Protocol and Proof of Humanity smart contracts;
 
-## [3.7.0] - 10-05-2024
+## [3.7.0] - 2024-05-10
 
 ### Added
 - Freedom Tool audits;
 
-## [3.6.1] - 10-05-2024
+## [3.6.1] - 2024-05-10
 
 ### Changed
 - Updated charts in passporot-derived profiles overview;
 
-## [3.6.0] - 10-05-2024
+## [3.6.0] - 2024-05-10
 
 ### Added
 
@@ -39,19 +45,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Expired EVM bridge audit link;
 
-## [3.5.2] - 08-05-2024
+## [3.5.2] - 2024-05-08
 
 ### Added
 
 - OG image for "Passport-enabled airdrops" use case;
 
-## [3.5.1] - 07-05-2024
+## [3.5.1] - 2024-05-07
 
 ### Changed
 
 - Proof of Humanity: renamed "KYC service" to "HumanOrNot service";
 
-## [3.5.0] - 06-05-2024
+## [3.5.0] - 2024-05-06
 
 ### Added
 
@@ -62,32 +68,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Old whitepaper;
 
-## [3.4.1] - 25-04-2024
+## [3.4.1] - 2024-04-25
 
 ### Fixed
 
 - Typos in Polygon ID State Replication chart;
 
 
-## [3.4.0] - 24-04-2024
+## [3.4.0] - 2024-04-24
 
 ### Changed
 
 - Restyled charts in "Overview";
 
-## [3.3.0] - 22-04-2024
+## [3.3.0] - 2024-04-22
 
 ### Changed
 
 - "Use cases/Passport-enabled airdrops": emphasized proofs of citizenship and age.
 
-## [3.2.0] - 19-04-2024
+## [3.2.0] - 2024-04-19
 
 ### Changed
 - Simplified the "Overview" doc;
 - Updated diagrams;
 
-## [3.1.0] - 15-04-2024
+## [3.1.0] - 2024-04-15
 
 
 ### Changed
@@ -97,7 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - "Twitter" label from X social media links;
 
-## [3.0.0] - 12-04-2024
+## [3.0.0] - 2024-04-12
 
 ### Added
 
@@ -125,25 +131,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Ecosystem/Token Agnostic Payments;
 - "Mutlichain mints", "Cross-chain proofs" use cases;
 
-## [2.0.6] - 04-04-2024
+## [2.0.6] - 2024-04-04
 
 ### Added
 
 - Whitepaper v3;
 
-## [2.0.5] - 23-02-2024
+## [2.0.5] - 2024-02-23
 
 ### Fixed
 
 - OpenGraph metadata generation;
 
-## [2.0.4] - 23-02-2024
+## [2.0.4] - 2024-02-23
 
 ### Fixed
 
 - Prod deployment pipeline;
 
-## [2.0.3] - 23-02-2024
+## [2.0.3] - 2024-02-23
 
 ### Added
 
@@ -157,7 +163,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `noindex` directive for staging;
 
-## [2.0.2] - 21-02-2024
+## [2.0.2] - 2024-02-21
 
 ### Added
 
@@ -173,13 +179,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Updated the relayer version in the state replication guide;
 - Tweaked meta titles, description, H1s and outlinks for SEO performance;
 
-## [2.0.1] - 05-02-2024
+## [2.0.1] - 2024-02-05
 
 ### Changed
 
 - Hidden the blog section on landing;
 
-## [2.0.0] - 02-02-2024
+## [2.0.0] - 2024-02-02
 
 ### Added
 
@@ -224,14 +230,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Navigation system to product-based;
 - Docusaurus version to 3.1.0 (and all packages);
 - Color of highlighted line in <code> block;
-- Moved `/whitepaper` to `/resources/whitepaper`;
 
 ### Fixed
 
 - Minor markup fix in Proof of Humanity tech reference;
 - Minor markup fix in "Setting up validator" guide;
 
-## [1.6.0] - 28-11-2023
+## [1.6.0] - 2023-11-28
 
 ### Added
 
@@ -251,14 +256,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Refactored Near Bridge Contract reference;
   - Refactored and updated Solana bridge program reference;
 
-## [1.5.1] - 16-11-2023
+## [1.5.1] - 2023-11-16
 
 ### Changed
 
 - Issuer github link;
 - Updated screenshots in how-to/setup-issuer;
 
-## [1.5.0] - 15-11-2023
+## [1.5.0] - 2023-11-15
 
 ### Added
 
@@ -278,7 +283,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Reordered how-to guides by priority;
 
-## [1.4.3] - 09-11-2023
+## [1.4.3] - 2023-11-09
 
 ### Added
 
@@ -290,20 +295,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Minor wording changes in CCTP and Token-Agnostic Payments use cases;
 
 
-## [1.4.2] - 09-11-2023
+## [1.4.2] - 2023-11-09
 
 ### Changed
 
 - Use new video in the Identity Protocol overview;
 
-## [1.4.1] - 08-11-2023
+## [1.4.1] - 2023-11-08
 
 ### Fixed
 
 - Build errors caused by the Solidity syntax fix;
 
 
-## [1.4.0] - 08-11-2023
+## [1.4.0] - 2023-11-08
 
 ### Added
 
@@ -323,14 +328,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Solidity syntax highlight;
 - Used docusaurus admonitions;
 
-## [1.3.1] - 08-11-2023
+## [1.3.1] - 2023-11-08
 
 ### Changed
 
 - How-to-Guides:
   - Use the new template name in the QuestN guide;
 
-## [1.3.0] - 07-11-2023
+## [1.3.0] - 2023-11-07
 
 ### Changed
 
@@ -342,13 +347,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Whitepaper link from technical reference;
 
-## [1.2.1] - 03-11-2023
+## [1.2.1] - 2023-11-03
 
 ### Fixed
 
 - Minor wording tweaks.
 
-## [1.2.0] - 02-11-2023
+## [1.2.0] - 2023-11-02
 
 ### Added
 
@@ -359,11 +364,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Reference:
   - Grouped smart contract deployments by the product and contract;
-  - Consolidated Proof of Humanity references into a single page;
+  - Consolidated Proof
+
+ of Humanity references into a single page;
 - Used new Proof of Humanity demo videos;
 
 
-## [1.1.0] - 27-10-2023
+## [1.1.0] - 2023-10-27
 
 ### Added
 
