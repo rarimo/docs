@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [3.7.5] - 2024-05-27
 ### Fixed
 - Subscribe block padding on the landing page;
 
@@ -330,7 +332,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/3.7.4...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/3.7.5...HEAD
+[3.7.5]: https://github.com/rarimo/docs/compare/3.7.4...3.7.5
 [3.7.4]: https://github.com/rarimo/docs/compare/3.7.3...3.7.4
 [3.7.3]: https://github.com/rarimo/docs/compare/3.7.2...3.7.3
 [3.7.2]: https://github.com/rarimo/docs/compare/3.7.1...3.7.2
