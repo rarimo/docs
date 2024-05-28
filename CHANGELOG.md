@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.7.6] - 2024-05-28
 ### Changed
 - Updated the whitepaper;
 
@@ -335,7 +336,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/3.7.5...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/3.7.6...HEAD
+[3.7.6]: https://github.com/rarimo/docs/compare/3.7.5...3.7.6
 [3.7.5]: https://github.com/rarimo/docs/compare/3.7.4...3.7.5
 [3.7.4]: https://github.com/rarimo/docs/compare/3.7.3...3.7.4
 [3.7.3]: https://github.com/rarimo/docs/compare/3.7.2...3.7.3
