@@ -169,12 +169,11 @@ module.exports = {
         ],
       },
       algolia: {
-        apiKey: '8ececec9220ccf9a750c79fc04ecc23f',
-        indexName: 'rar',
+        apiKey: '83365d4a10b0020fbb4dd3b74fd2f786',
+        indexName: 'rarimo',
+        appId: '4PAZA7JWOP',
         contextualSearch: true,
-        appId: 'PBVGCPZL48',
         searchParameters: {},
-        placeholder: 'Search in the jungle',
         searchPagePath: 'search',
       },
       prism: {
