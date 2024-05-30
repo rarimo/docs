@@ -169,12 +169,13 @@ module.exports = {
         ],
       },
       algolia: {
-        apiKey: '83365d4a10b0020fbb4dd3b74fd2f786',
+        apiKey: '18092da45b925ef9b6428ca707da2165',
         indexName: 'rarimo',
         appId: '4PAZA7JWOP',
-        contextualSearch: true,
+        contextualSearch: false,
         searchParameters: {},
         searchPagePath: 'search',
+        debug: false,
       },
       prism: {
         theme: lightCodeTheme,
