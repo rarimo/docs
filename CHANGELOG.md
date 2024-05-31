@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.7.8] - 2024-05-31
 ### Changed
 - Disabled the "search" page for now due to bug in Algolia plugin;
 
@@ -346,7 +347,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/3.7.7...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/3.7.8...HEAD
+[3.7.8]: https://github.com/rarimo/docs/compare/3.7.7...3.7.8
 [3.7.7]: https://github.com/rarimo/docs/compare/3.7.6...3.7.7
 [3.7.6]: https://github.com/rarimo/docs/compare/3.7.5...3.7.6
 [3.7.5]: https://github.com/rarimo/docs/compare/3.7.4...3.7.5
