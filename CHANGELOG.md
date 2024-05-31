@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Disabled the "search" page for now due to bug in Algolia plugin;
+
 ## [3.7.7] - 2024-05-30
 ### Changed
 - Use new algolia account for search;

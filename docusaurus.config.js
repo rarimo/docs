@@ -173,8 +173,7 @@ module.exports = {
         indexName: 'rarimo',
         appId: '4PAZA7JWOP',
         contextualSearch: false,
-        searchParameters: {},
-        searchPagePath: 'search',
+        searchPagePath: false,
         debug: false,
       },
       prism: {
