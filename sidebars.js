@@ -9,38 +9,6 @@ const sidebars = {
     'overview',
     {
       type: 'category',
-      label: 'Use Cases',
-      link: {
-        type: 'generated-index',
-        title: 'Use Cases',
-        description: 'Learn about the different use cases for Rarimo Protocol',
-        slug: '/use-cases',
-      },
-      collapsed: true,
-      items: [
-        'use-cases/airdrop',
-        'use-cases/age-restricted-content',
-        'use-cases/self-sovereign-identity',
-        'use-cases/identity-protocol-state-replication',
-        'use-cases/organizational-access-control',
-        'use-cases/gaming-profiles',
-        'use-cases/social-graphs',
-      ],
-    },
-    {
-      type: 'html',
-      value: `
-        <div class="menu__splitter"></div>
-      `
-    },
-    {
-      type: 'html',
-      value: `
-        <span class="menu__link menu__link--no-hover">Products</span>
-      `
-    },
-    {
-      type: 'category',
       label: 'Base Layer',
       link: {type: 'doc', id: 'products/base-layer/overview'},
       collapsed: true,
@@ -81,6 +49,27 @@ const sidebars = {
         'products/rarime/guide-for-issuers',
         'products/rarime/interoperability-with-external-credentials',
         'products/rarime/js-connector-reference',
+      ],
+    },
+
+    {
+      type: 'category',
+      label: 'Use Cases',
+      link: {
+        type: 'generated-index',
+        title: 'Use Cases',
+        description: 'Learn about the different use cases for Rarimo Protocol',
+        slug: '/use-cases',
+      },
+      collapsed: true,
+      items: [
+        'use-cases/airdrop',
+        'use-cases/age-restricted-content',
+        'use-cases/self-sovereign-identity',
+        'use-cases/identity-protocol-state-replication',
+        'use-cases/organizational-access-control',
+        'use-cases/gaming-profiles',
+        'use-cases/social-graphs',
       ],
     },
 
