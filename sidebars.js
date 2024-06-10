@@ -8,9 +8,31 @@ const sidebars = {
   sidebar: [
     'overview',
     {
+      // formely: products/passport-derived-profiles
+      type: 'category',
+      label: 'Passport-Derived Profiles',
+      link: { type: 'doc', id: 'products/passport-derived-profiles/overview' },
+      collapsed: true,
+      items: ['products/passport-derived-profiles/smart-contracts-reference'],
+    },
+    {
+      // formely products/identity-protocol
+      type: 'category',
+      label: 'Credential Trees',
+      link: {type: 'doc', id: 'credential-trees/overview'},
+      collapsed: true,
+      items: [
+        'credential-trees/guide-how-to-set-up-credentials-issuer',
+        'credential-trees/guide-how-to-verify-zero-knowledge-proof-in-a-smart-contract',
+        'credential-trees/smart-contracts-reference',
+        'credential-trees/js-sdk-reference',
+      ],
+    },
+    {
+      // formely: products/base-layer
       type: 'category',
       label: 'Base Layer',
-      link: {type: 'doc', id: 'products/base-layer/overview'},
+      link: { type: 'doc', id: 'products/base-layer/overview' },
       collapsed: true,
       items: [
         'products/base-layer/rarimo-core',
@@ -22,25 +44,7 @@ const sidebars = {
       ],
     },
     {
-      type: 'category',
-      label: 'Passport-Derived Profiles',
-      link: { type: 'doc', id: 'products/passport-derived-profiles/overview' },
-      collapsed: true,
-      items: ['products/passport-derived-profiles/smart-contracts-reference'],
-    },
-    {
-      type: 'category',
-      label: 'Identity Protocol',
-      link: {type: 'doc', id: 'products/identity-protocol/overview'},
-      collapsed: true,
-      items: [
-        'products/identity-protocol/guide-how-to-set-up-credentials-issuer',
-        'products/identity-protocol/guide-how-to-verify-zero-knowledge-proof-in-a-smart-contract',
-        'products/identity-protocol/smart-contracts-reference',
-        'products/identity-protocol/js-sdk-reference',
-      ],
-    },
-    {
+      // formely: products/rarime
       type: 'category',
       label: 'RariMe',
       link: {type: 'doc', id: 'products/rarime/overview'},
