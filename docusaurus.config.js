@@ -173,8 +173,8 @@ module.exports = {
         indexName: 'rarimo',
         appId: '4PAZA7JWOP',
         contextualSearch: false,
-        searchPagePath: false,
-        debug: false,
+        searchPagePath: "search",
+        debug: true,
       },
       prism: {
         theme: lightCodeTheme,
