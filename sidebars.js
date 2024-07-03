@@ -6,6 +6,12 @@ const config = require('./docusaurus.config')
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   sidebar: [
+    {
+      type: 'html',
+      value: `
+        <span class="menu__link menu__link--no-hover">ZK Social Protocol</span>
+      `
+    },
     'overview',
     {
       // formely: products/passport-derived-profiles
@@ -43,25 +49,19 @@ const sidebars = {
         'rarimo-core/api-reference',
       ],
     },
-
-    {
-      type: 'html',
-      value: `
-        <div class="menu__splitter"></div>
-      `
-    },
     {
       // formely: products/rarime
       type: 'category',
-      label: 'RariMe',
-      link: {type: 'doc', id: 'products/rarime/overview'},
+      label: 'RariMe App',
+      link: {type: 'doc', id: 'rarime/overview'},
       collapsed: true,
       items: [
-        'products/rarime/guide-for-issuers',
-        'products/rarime/interoperability-with-external-credentials',
-        'products/rarime/js-connector-reference',
+        'rarime/guide-for-issuers',
+        'rarime/interoperability-with-external-credentials',
+        'rarime/js-connector-reference',
       ],
     },
+
     {
       type: 'html',
       value: `
