@@ -17,9 +17,9 @@ const sidebars = {
       // formely: products/passport-derived-profiles
       type: 'category',
       label: 'Accounts',
-      link: { type: 'doc', id: 'products/passport-derived-profiles/overview' },
+      link: { type: 'doc', id: 'accounts/overview' },
       collapsed: true,
-      items: ['products/passport-derived-profiles/smart-contracts-reference'],
+      items: ['accounts/smart-contracts-reference'],
     },
     {
       // formely products/identity-protocol
