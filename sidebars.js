@@ -10,7 +10,7 @@ const sidebars = {
     {
       // formely: products/passport-derived-profiles
       type: 'category',
-      label: 'Passport-Derived Profiles',
+      label: 'Accounts',
       link: { type: 'doc', id: 'products/passport-derived-profiles/overview' },
       collapsed: true,
       items: ['products/passport-derived-profiles/smart-contracts-reference'],
@@ -31,17 +31,24 @@ const sidebars = {
     {
       // formely: products/base-layer
       type: 'category',
-      label: 'Base Layer',
-      link: { type: 'doc', id: 'products/base-layer/overview' },
+      label: 'Rarimo Core',
+      link: { type: 'doc', id: 'rarimo-core/overview' },
       collapsed: true,
       items: [
-        'products/base-layer/rarimo-core',
-        'products/base-layer/oracles',
-        'products/base-layer/threshold-signature',
-        'products/base-layer/validator-node-operator-guide',
-        'products/base-layer/staking-guide',
-        'products/base-layer/api-reference',
+        'rarimo-core/rarimo-core',
+        'rarimo-core/oracles',
+        'rarimo-core/threshold-signature',
+        'rarimo-core/validator-node-operator-guide',
+        'rarimo-core/staking-guide',
+        'rarimo-core/api-reference',
       ],
+    },
+
+    {
+      type: 'html',
+      value: `
+        <div class="menu__splitter"></div>
+      `
     },
     {
       // formely: products/rarime
@@ -54,6 +61,12 @@ const sidebars = {
         'products/rarime/interoperability-with-external-credentials',
         'products/rarime/js-connector-reference',
       ],
+    },
+    {
+      type: 'html',
+      value: `
+        <div class="menu__splitter"></div>
+      `
     },
 
     {
