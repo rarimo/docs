@@ -222,9 +222,8 @@ a:hover {
 }
 
 .menu__splitter {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.1);
-  margin: 0.75rem 1rem;
+  /* background: rgba(255, 255, 255, 0.1); */
+  margin: 1.2rem 0 1rem 0;
 }
 
 .DocSearch-Button .DocSearch-Search-Icon{

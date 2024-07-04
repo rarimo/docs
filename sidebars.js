@@ -27,7 +27,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Commitment Trees',
+      label: 'Commitment trees',
       link: { type: 'doc', id: 'commitment-trees/overview' },
       collapsed: true,
       items: [
@@ -39,7 +39,7 @@ const sidebars = {
     {
       // formely products/identity-protocol
       type: 'category',
-      label: 'Credential Trees',
+      label: 'Credential trees',
       link: {type: 'doc', id: 'credential-trees/overview'},
       collapsed: true,
       items: [
@@ -83,27 +83,19 @@ const sidebars = {
         <div class="menu__splitter"></div>
       `
     },
-
     {
-      type: 'category',
-      label: 'Use Cases',
-      link: {
-        type: 'generated-index',
-        title: 'Use Cases',
-        description: 'Learn about the different use cases for Rarimo Protocol',
-        slug: '/use-cases',
-      },
-      collapsed: true,
-      items: [
-        'use-cases/airdrop',
-        'use-cases/age-restricted-content',
-        'use-cases/self-sovereign-identity',
-        'use-cases/identity-protocol-state-replication',
-        'use-cases/organizational-access-control',
-        'use-cases/gaming-profiles',
-        'use-cases/social-graphs',
-      ],
+      type: 'html',
+      value: `
+        <span class="menu__link menu__link--no-hover">Use Cases</span>
+      `
     },
+    'use-cases/airdrop',
+    'use-cases/age-restricted-content',
+    'use-cases/identity-protocol-state-replication',
+    'use-cases/organizational-access-control',
+    // 'use-cases/self-sovereign-identity',
+    //'use-cases/gaming-profiles',
+    //'use-cases/social-graphs',
 
     {
       type: 'html',
