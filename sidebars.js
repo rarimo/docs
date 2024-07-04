@@ -22,6 +22,17 @@ const sidebars = {
       items: ['accounts/smart-contracts-reference'],
     },
     {
+      type: 'category',
+      label: 'Commitment Trees',
+      link: { type: 'doc', id: 'commitment-trees/overview' },
+      collapsed: true,
+      items: [
+        'commitment-trees/commitments',
+        'commitment-trees/statement-trees',
+        'commitment-trees/time-trees',
+      ],
+    },
+    {
       // formely products/identity-protocol
       type: 'category',
       label: 'Credential Trees',
