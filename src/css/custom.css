@@ -9,7 +9,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('./animations.css');
 :root {
   --primary-main: #4E9E7F;
   --error-main: #df1c41;
@@ -20,7 +19,7 @@
   --ifm-color-primary-light: #46d9ce;
   --ifm-color-primary-lighter: #51dcd1;
   --ifm-color-primary-lightest: var(--primary-main);
-  --ifm-menu-link-padding-vertical: 0.75rem;
+  --ifm-menu-link-padding-vertical: 0.5rem;
   --ifm-menu-link-padding-horizontal: 1rem;
   --white: #ffffff;
   --ifm-font-family-base: 'Inter', 'Segoe UI', Tahoma, sans-serif;
@@ -213,14 +212,18 @@ a:hover {
   text-decoration: none;
 }
 
+.menu__link--no-hover {
+  color: var(--primary-text-color);
+}
+
 .menu__link--no-hover:hover {
+  color: var(--primary-text-color);
   background: none;
 }
 
 .menu__splitter {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.1);
-  margin: 0.75rem 1rem;
+  /* background: rgba(255, 255, 255, 0.1); */
+  margin: 1.2rem 0 1rem 0;
 }
 
 .DocSearch-Button .DocSearch-Search-Icon{
@@ -308,10 +311,6 @@ a:hover {
 
 .menu__list-item--collapsed .menu__caret {
   transform: rotate(90deg);
-}
-
-.theme-doc-sidebar-item-link .menu__link:not(.menu__link--active) {
-  color: #8f8f8f;
 }
 
 .menu__list-item-collapsible {
