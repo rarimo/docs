@@ -1,9 +1,22 @@
 ---
 slug: /commitment-trees/statement-trees
 title: Statement trees
-description: Statement trees
+description: A type of commitment tree that accommodates basic statements without hierarchical relations and time bounds.
+# TODO: add illustrations
 ---
 import OutLink from "@site/src/components/OutLink";
 import IdealImage from '@site/src/components/IdealImage';
 
 # Statement trees
+
+Statement Trees (ST) accommodate basic statements without hierarchical relations and time bounds. They are further subdivided into arbitrary and adjustable.
+
+## Arbitrary Statement Trees (ARST)
+
+This subtype imposes no validation rules on the data added. It acts as an open outlet where any commitment can be submitted and later revealed alongside its validation rules, like a permissionless wall where anyone can write what they want.
+
+## Adjustable Statement Trees (ADST)
+
+This subtype allows setting rules for adding commitments to the tree. To add commitment to the ADST tree, the user must prove that the statement satisfies the rules (partial knowledge).
+
+
