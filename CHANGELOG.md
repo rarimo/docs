@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Updated the docs structure to reflect the shift to social protocol;
+- Renamed the "Identity Protocol" to "Credential Trees";
+- Restyled the sidebar;
+= Root path leads to the "Overview" doc;
+
+### Removed
+- Landing page;
+- Obsolete use case docs:
+  - "Social graphs";
+  - "Gaming profiles"
+  - "Self-sovereign identity";
+
 ## [3.7.8] - 2024-05-31
 ### Changed
 - Disabled the "search" page for now due to bug in Algolia plugin;
