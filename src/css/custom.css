@@ -19,7 +19,7 @@
   --ifm-color-primary-light: #46d9ce;
   --ifm-color-primary-lighter: #51dcd1;
   --ifm-color-primary-lightest: var(--primary-main);
-  --ifm-menu-link-padding-vertical: 0.75rem;
+  --ifm-menu-link-padding-vertical: 0.5rem;
   --ifm-menu-link-padding-horizontal: 1rem;
   --white: #ffffff;
   --ifm-font-family-base: 'Inter', 'Segoe UI', Tahoma, sans-serif;

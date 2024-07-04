@@ -86,7 +86,7 @@ const sidebars = {
     {
       type: 'html',
       value: `
-        <span class="menu__link menu__link--no-hover">Use Cases</span>
+        <span class="menu__link menu__link--no-hover">Use cases</span>
       `
     },
     'use-cases/airdrop',
@@ -115,7 +115,6 @@ const sidebars = {
       link: { type: 'doc', id: 'ecosystem/freedom-tool/overview' },
       collapsed: true,
       items: [
-        // 'ecosystem/freedom-tool/guide-how-to-use-freedom-tool',
         'ecosystem/freedom-tool/smart-contracts-reference',
       ],
     },
