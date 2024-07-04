@@ -115,6 +115,16 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Freedom Tool',
+      link: { type: 'doc', id: 'ecosystem/freedom-tool/overview' },
+      collapsed: true,
+      items: [
+        // 'ecosystem/freedom-tool/guide-how-to-use-freedom-tool',
+        'ecosystem/freedom-tool/smart-contracts-reference',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Proof of Humanity',
       link: {type: 'doc', id: 'ecosystem/proof-of-humanity/overview'},
       collapsed: true,
@@ -140,16 +150,6 @@ const sidebars = {
         'ecosystem/proof-of-humanity/smart-contracts-reference',
         'ecosystem/proof-of-humanity/subgraph-reference',
         'ecosystem/proof-of-humanity/api-reference',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Freedom Tool',
-      link: {type: 'doc', id: 'ecosystem/freedom-tool/overview'},
-      collapsed: true,
-      items: [
-        // 'ecosystem/freedom-tool/guide-how-to-use-freedom-tool',
-         'ecosystem/freedom-tool/smart-contracts-reference',
       ],
     },
     {
