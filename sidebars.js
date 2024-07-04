@@ -12,7 +12,11 @@ const sidebars = {
         <span class="menu__link menu__link--no-hover">ZK Social Protocol</span>
       `
     },
-    'overview',
+    {
+      type: 'doc',
+      label: 'Overview',
+      id: 'overview',
+    },
     {
       // formely: products/passport-derived-profiles
       type: 'category',
@@ -176,6 +180,7 @@ const sidebars = {
         'ecosystem/worldcoin-state-replication/api-reference',
       ],
     },
+
     {
       type: 'html',
       value: `
@@ -183,23 +188,18 @@ const sidebars = {
       `
     },
     {
-      type: 'category',
-      label: 'Resources',
-      link: {
-        type: 'generated-index',
-        slug: '/resources',
-      },
-      collapsed: true,
-      items: [
-        {
-          type: 'link',
-          label: 'Whitepaper',
-          href: config.customFields.whitepaperUrl,
-        },
-        'resources/audits',
-        'resources/glossary',
-      ],
+      type: 'html',
+      value: `
+        <span class="menu__link menu__link--no-hover">Resources</span>
+      `
     },
+    {
+      type: 'link',
+      label: 'Whitepaper',
+      href: config.customFields.whitepaperUrl,
+    },
+    'resources/audits',
+    'resources/glossary',
   ]
 }
 
