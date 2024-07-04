@@ -56,7 +56,6 @@ const sidebars = {
       link: { type: 'doc', id: 'rarimo-core/overview' },
       collapsed: true,
       items: [
-        'rarimo-core/rarimo-core',
         'rarimo-core/oracles',
         'rarimo-core/threshold-signature',
         'rarimo-core/validator-node-operator-guide',
