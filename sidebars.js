@@ -23,7 +23,10 @@ const sidebars = {
       label: 'Accounts',
       link: { type: 'doc', id: 'accounts/overview' },
       collapsed: true,
-      items: ['accounts/smart-contracts-reference'],
+      items: [
+        'accounts/zk-passport',
+        'accounts/smart-contracts-reference'
+      ],
     },
     {
       type: 'category',

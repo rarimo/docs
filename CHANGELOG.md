@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Accounts overview doc;
+
 ### Changed
 - Updated the docs structure to reflect the shift to social protocol;
 - Renamed the "Identity Protocol" to "Credential Trees";
