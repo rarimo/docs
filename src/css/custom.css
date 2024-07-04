@@ -212,7 +212,12 @@ a:hover {
   text-decoration: none;
 }
 
+.menu__link--no-hover {
+  color: var(--primary-text-color);
+}
+
 .menu__link--no-hover:hover {
+  color: var(--primary-text-color);
   background: none;
 }
 
@@ -307,10 +312,6 @@ a:hover {
 
 .menu__list-item--collapsed .menu__caret {
   transform: rotate(90deg);
-}
-
-.theme-doc-sidebar-item-link .menu__link:not(.menu__link--active) {
-  color: #8f8f8f;
 }
 
 .menu__list-item-collapsible {
