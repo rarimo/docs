@@ -1,53 +1,76 @@
 ---
-description: Rarimo is a privacy-first social protocol that seamlessly combines various identity standards and forms a private but verifiable social graph.
+description: Rarimo protocol combines anonymity with a verifiable social graph using zero-knowledge proofs, ensuring private social interactions.
 slug: /
 ---
 import OutLink from "@site/src/components/OutLink";
 import IdealImage from '@site/src/components/IdealImage';
 
 
-# Overview
+# What is Rarimo?
 
-##  What is Rarimo
+Rarimo is a privacy-first (zk) social protocol designed to facilitate the development of a new generation of social apps. Traditionally, social apps have had to balance user privacy against engagement. Rarimo resolves this tradeoff by enabling users to interact anonymously while maintaining a history of their actions, connections, and identity attributes. With Rarimo, users can selectively disclose specific information while keeping other aspects of their social graph private.
 
-Rarimo is a privacy-first social protocol that seamlessly combines various identity standards on-chain and off-chain and allows the formation of a private yet verifiable history of their use and relations.
+The Rarimo Protocol is built on three foundational components:
+- **Self-Issued Identity Framework**: This ensures that only verified, real individuals can participate in social apps, enhancing trust and authenticity.
+- **Private Social Graph**: This infrastructure supports private yet verifiable social interactions, allowing users to engage without compromising their privacy.
+**RariMe App**: This is a self-sovereign wallet for managing your identity, giving users full control over their personal data.
 
-At the heart of the Rarimo Social Protocol are three design pillars:
+Let's explore these components in detail to understand how the Rarimo Protocol operates.
 
-1. **Control**. Users should have exclusive authority over managing their identity and social graph. Only the user decides what information to disclose and when.
-1. **Privacy**. Sensitive data must remain inaccessible to third parties. The user should decide what information to share, when, and with whom. While some protocols may require verifying the user's uniqueness and humanity, this should not compromise the privacy of personal information.
-1. **Compatibility**. The digital identity solution should support various industry standards, such as W3C DID credentials, soulbound tokens (SBTs), ENS records, etc. Each of these identity formats offers unique advantages. Therefore, the social protocol must allow interoperability among them. Additionally, it should support both off-chain and on-chain verification methods.
+## Verifiable self-issued identity framework
 
-Rarimo aims to solve these challenges by providing a robust baselayer and a diverse toolset of identity subprotocols.
+Creating a pseudonymous account without linking it to a real person is easy, but such identities often lead to issues like fake accounts (Sybil attacks) that disrupt social interactions.
 
-## Rarimo architecture
+Traditionally, identity verification involves a trusted issuer that authenticates users. This approach poses risks as the issuer could compromise privacy or be shut down. Verifying user uniqueness might require sharing sensitive data, like government IDs, which increases privacy risks.
 
-### Rarimo Core
+Rarimo offers a solution by allowing users to establish their identity using only their government-issued biometric documents without needing a third-party issuer. Here's how it works:
 
-The Rarimo Core is a decentralized blockchain-based system designed for timestamping, storing, and updating identity states and social relations that other networks and protocols can use. It is maintained by a set of validators that achieve consensus using the BFT-based delegated Proof-of-Stake mechanism. The chain has instant finality and supports EVM-compatible smart contracts. Additionally, Rarimo Core allows the efficient on-demand propagation of identity states over connected networks using decentralized oracles.
+1. **Keypair generation**: The user generates a keypair on their device.
+2. **Biometric document scan**: The user scans their biometric document using the RariMe App.
+3. **Registration**: The keypair is bound to the passport by submitting a zero-knowledge proof (ZKP) of passport validity and the public key to the registration smart contract.
 
-<IdealImage img={require('/img/rarimo-core.png')} alt="Rarimo Design Principles" />
+This process allows users to verify their humanity, assert their uniqueness, or selectively disclose passport attributes (like citizenship or legal age) using ZKPs without revealing private data to any third party. The proofs can be verified both on-chain and off-chain.
 
-### Social Protocol
+Additionally, the app calculates a hash of the passport's public key (Active Authentication Public Key), serving as the passport's unique identifier. This hash is stored in the registration smart contract to prevent multiple registrations with the same document.
 
-The Social Protocol aims to enable the creation of private social graphs consisting of user actions and interactions. These actions are invisible to the public until their owner selectively discloses them using zero-knowledge proofs. A few examples of such proofs are:
-- Proving a credential and attestation ownership at a particular time.
-- Proving that a particular user or a group initiated some actions.
-- Proving that some claims or passports belong to one identity.
-- Proving that the user is a member of a specific group.
+To mitigate potential "dictionary" attacks, where a passport issuer or third party might try to identify registered passports by hashing known values, Rarimo maintains a global Merkle tree of passport hashes. This tree is shared across all social apps, providing plausible deniability for users and preventing attackers from deducing participation in specific applications. The more passports and social apps accumulate over time, the more robust this identity system becomes.
+
+
+## Private Social Graph
+
+The Rarimo protocol enables the creation of private social graphs. These graphs consist of user actions and interactions that remain invisible to the public until the owner selectively discloses them using zero-knowledge proofs. This ensures user privacy while allowing for verifiable claims.
+
+**Examples of ZK proofs**:
+- **Credential and Attestation Ownership**: Proving ownership of a credential or attestation at a specific time.
+- **Action Initiation**: Proving that a particular user or group initiated certain actions.
+- **Group Membership**: Proving that a user is a member of a specific group.
 
 <IdealImage img={require('/img/rarimo-private-social-graph.png')} alt="Rarimo Social Identity" />
 
-The social protocol consists of two key sub-protocols:
-1. **An Iden3 protocol** implementation for issuing identity statements in a W3C DID Verifiable Credential format. The credentials contain parts of social graphs, such as user profile details, likes, group memberships, reputation scores, etc. Users may disclose some attributes of these credentials using zero-knowledge proofs, both on-chain and off-chain.
-1. **ZK Passport** enable users to establish an identity solely with their government-issued biometric documents without needing a third-party issuer. With these profiles, users verify their humanity, assert their uniqueness, or selectively disclose some passport attributes, such as citizenship or being of legal age, using zero-knowledge proofs. Iden3 identity providers can track passport revocation events and automatically revoke or reissue Verifiable Credentials.
+To achieve this, Rarimo provides a set of data structures for creating on-chain anchors of the social graph data, which can be used in zero-knowledge proofs. These data structures include:
 
-### Applications
+- **Commitments**: Secure, private statements about user actions or attributes.
+- **Commitment Trees**: Hierarchical structures that organize commitments, enabling efficient and scalable storage on-chain.
 
-Rarimo provides a set of applications that leverage the Rarimo Core and Social Protocol to offer a seamless user experience. These applications include:
+These structures allow users to maintain a private yet verifiable record of their social interactions, ensuring both privacy and authenticity.
 
-- **RariMe**: An identity wallet that allows users to manage their digital identity and social relations, generate zero-knowledge proofs, and much more. It is available as a mobile app and a MetaMask snap.
-- **Freedom Tool**: A ZK-enabled tool for transparent and privacy-preserving online voting.
-- **Proof of Humanity**: Aggregates the most popular proof of humanity solutions into a single interface available on and off-chain.
-- **Polygon ID State Replication**: Scales the use of Polygon ID credentials to any EVM-compatible chain on demand.
-- **World ID State Replication**: Scales the use of WolrdID proofs to any EVM-compatible chain on demand.
+## RariMe App
+
+The RariMe App is a mobile self-custody wallet designed to provide private yet verifiable social identities. During signup, the app uses the phone's camera and NFC chip to scan the user's biometric documents. The app ensures that no user data is shared with any party unless the user explicitly chooses to disclose certain aspects of their identity using zero-knowledge proofs.
+
+**Key features:**
+
+- **Biometric document scanning**: Utilizes the camera and NFC chip to scan and verify user documents securely.
+- **Privacy-by-Default**: Guarantees user data remains private.
+- **Zero-Knowledge Proofs**: Allows users to selectively disclose specific identity attributes without revealing private data.
+
+The RariMe App empowers users with control over their identity, ensuring both privacy and verifiability in social interactions.
+
+## Ecosystem
+
+Building on Rarimo technology, the following ecosystem products have been created:
+
+- **Freedom Tool**: A zero-knowledge-enabled tool for transparent and privacy-preserving online voting.
+- **Proof of Humanity**: Aggregates the most popular proof of humanity solutions into a single interface, available both on and off-chain.
+- **Polygon ID State Replication**: Enables the scaling of Polygon ID credentials to any EVM-compatible chain on demand.
+- **World ID State Replication**: Facilitates the scaling of WorldID proofs to any EVM-compatible chain on demand.
