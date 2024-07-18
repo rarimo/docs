@@ -14,7 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated the docs structure to reflect the shift to social protocol;
 - Renamed the "Identity Protocol" to "Credential Trees";
 - Restyled the sidebar;
-= Root path leads to the "Overview" doc;
+- Root path leads to the "Overview" doc;
+- Revamped the "Overview" doc;
 
 ### Removed
 - Landing page;
