@@ -8,7 +8,7 @@ import IdealImage from '@site/src/components/IdealImage';
 
 # What is Rarimo?
 
-Rarimo is a privacy-first (zk) social protocol designed to facilitate the development of a new generation of social apps. Traditionally, social apps have had to balance user privacy against engagement. Rarimo resolves this tradeoff by enabling users to interact anonymously while maintaining a history of their actions, connections, and identity attributes. With Rarimo, users can selectively disclose specific information while keeping other aspects of their social graph private.
+Rarimo is a privacy-first (ZK) social protocol designed to facilitate the development of a new generation of social apps. Traditionally, social apps have had to balance user privacy against engagement. Rarimo resolves this tradeoff by enabling users to interact anonymously while maintaining a history of their actions, connections, and identity attributes. With Rarimo, users can selectively disclose specific information while keeping other aspects of their social graph private.
 
 The Rarimo Protocol is built on three foundational components:
 - **Self-Issued Identity**: This ensures that only verified, real individuals can participate in social apps, enhancing trust and authenticity.
@@ -23,6 +23,9 @@ Creating a pseudonymous account without linking it to a real person is easy, but
 
 Traditionally, identity verification involves a trusted issuer that authenticates users. This approach poses risks as the issuer could compromise privacy or be shut down. Verifying user uniqueness might require sharing sensitive data, like government IDs, which increases privacy risks.
 
+<IdealImage img={require('/img/self-issued-identity.png')} alt="Self-issued identity" />
+
+
 Rarimo offers a solution by allowing users to establish their identity using only their government-issued biometric documents without needing a third-party issuer. Here's how it works:
 
 1. **Keypair generation**: The user generates a keypair on their device.
@@ -32,6 +35,8 @@ Rarimo offers a solution by allowing users to establish their identity using onl
 This process allows users to verify their humanity, assert their uniqueness, or selectively disclose passport attributes (like citizenship or legal age) using ZKPs without revealing private data to any third party. The proofs can be verified both on-chain and off-chain.
 
 Additionally, the app calculates a hash of the passport's public key (Active Authentication Public Key), serving as the passport's unique identifier. This hash is stored in the registration smart contract to prevent multiple registrations with the same document.
+
+<IdealImage img={require('/img/passport-hashes-dilution.png')} alt="Passport hashes dilution" />
 
 To mitigate potential "dictionary" attacks, where a passport issuer or third party might try to identify registered passports by hashing known values, Rarimo maintains a global Merkle tree of passport hashes. This tree is shared across all social apps, providing plausible deniability for users and preventing attackers from deducing participation in specific applications. The more passports and social apps accumulate over time, the more robust this identity system becomes.
 
