@@ -53,6 +53,19 @@ const sidebars = {
       ],
     },
     {
+      // formely: products/rarime
+      type: 'category',
+      label: 'RariMe App',
+      link: { type: 'doc', id: 'rarime/overview' },
+      collapsed: true,
+      items: [
+        'rarime/guide-for-issuers',
+        'rarime/interoperability-with-external-credentials',
+        'rarime/js-connector-reference',
+      ],
+    },
+
+    {
       // formely: products/base-layer
       type: 'category',
       label: 'Rarimo Core',
@@ -66,19 +79,6 @@ const sidebars = {
         'rarimo-core/api-reference',
       ],
     },
-    {
-      // formely: products/rarime
-      type: 'category',
-      label: 'RariMe App',
-      link: {type: 'doc', id: 'rarime/overview'},
-      collapsed: true,
-      items: [
-        'rarime/guide-for-issuers',
-        'rarime/interoperability-with-external-credentials',
-        'rarime/js-connector-reference',
-      ],
-    },
-
     {
       type: 'html',
       value: `
