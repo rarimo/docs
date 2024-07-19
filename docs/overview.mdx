@@ -5,19 +5,18 @@ slug: /
 import OutLink from "@site/src/components/OutLink";
 import IdealImage from '@site/src/components/IdealImage';
 
-
 # What is Rarimo?
 
-Rarimo is a privacy-first (ZK) social protocol designed to facilitate the development of a new generation of social apps. Traditionally, social apps have had to balance user privacy against engagement. Rarimo resolves this tradeoff by enabling users to interact anonymously while maintaining a history of their actions, connections, and identity attributes. With Rarimo, users can selectively disclose specific information while keeping other aspects of their social graph private.
+Rarimo is a privacy-first (ZK) social protocol that builds the largest network of private identities and brings real-world communities on-chain. Rarimo empowers the creation of the next generation of social apps where users can interact anonymously while maintaining a history of their actions, connections, and identity attributes. Users can selectively disclose specific information while keeping other aspects of their social graph private.
 
 The Rarimo Protocol is built on three foundational components:
-- **Self-Issued Identity**: This ensures that only verified, real individuals can participate in social apps, enhancing trust and authenticity.
-- **Confidential Social Graph**: This infrastructure supports private yet verifiable social interactions, allowing users to engage without compromising their privacy.
-- **RariMe App**: This is a self-sovereign wallet for managing your identity, giving users full control over their personal data.
+- **Self-Issued Identity**: Ensures that only verified, real individuals can participate in social apps, enhancing trust and authenticity.
+- **Confidential Social Graph**: Supports private yet verifiable social interactions, allowing users to engage without compromising their privacy.
+- **RariMe App**: A self-sovereign wallet for managing your identity, giving users full control over their personal data.
 
 Let's explore these components in detail to understand how the Rarimo Protocol operates.
 
-## Verifiable self-issued identity
+## Verifiable Self-Issued Identity
 
 Creating a pseudonymous account without linking it to a real person is easy, but such identities often lead to issues like fake accounts (Sybil attacks) that disrupt social interactions.
 
@@ -25,27 +24,23 @@ Traditionally, identity verification involves a trusted issuer that authenticate
 
 <IdealImage img={require('/img/self-issued-identity.png')} alt="Self-issued identity" />
 
+Rarimo offers a solution by allowing users to establish their identity using only their government-issued biometric documents without needing a third-party issuer. This solution enables users to verify their humanity, assert their uniqueness, or selectively disclose passport attributes (like citizenship or legal age) using ZKPs without revealing private data to any third party. The proofs can be verified both on-chain and off-chain.
 
-Rarimo offers a solution by allowing users to establish their identity using only their government-issued biometric documents without needing a third-party issuer. Here's how it works:
+Here's how it works:
 
-1. **Keypair generation**: The user generates a keypair on their device.
-2. **Biometric document scan**: The user scans their biometric document using the RariMe App.
-3. **Registration**: The keypair is bound to the passport by submitting a zero-knowledge proof (ZKP) of passport validity and the public key to the registration smart contract.
-
-This process allows users to verify their humanity, assert their uniqueness, or selectively disclose passport attributes (like citizenship or legal age) using ZKPs without revealing private data to any third party. The proofs can be verified both on-chain and off-chain.
-
-Additionally, the app calculates a hash of the passport's public key (Active Authentication Public Key), serving as the passport's unique identifier. This hash is stored in the registration smart contract to prevent multiple registrations with the same document.
+1. **Keypair Generation**: The user generates a keypair on their device.
+2. **Biometric Document Scan**: The user scans their biometric document using the RariMe App.
+3. **Registration**: The keypair is bound to the passport by submitting a zero-knowledge proof (ZKP) of passport validity and the public key to the Registration smart contract. A hash of the passport's public key (Active Authentication Public Key) is added to a Sparse Merkle Tree (SMT) in the Registration smart contract to prevent multiple registrations with the same document. The registration process is fully trustless and decentralized, meaning no trusted third parties or centralized points of failure are involved.
 
 <IdealImage img={require('/img/passport-hashes-dilution.png')} alt="Passport hashes dilution" />
 
-To mitigate potential "dictionary" attacks, where a passport issuer or third party might try to identify registered passports by hashing known values, Rarimo maintains a global Merkle tree of passport hashes. This tree is shared across all social apps, providing plausible deniability for users and preventing attackers from deducing participation in specific applications. The more passports and social apps accumulate over time, the more robust this identity system becomes.
-
+By using a global tree of passport hashes shared by all users and social apps, Rarimo creates a "privacy network effect" where the system's security is enhanced with the growth of the user base. Passport issuers or other third parties may try to identify users who participate in specific social apps by executing a "dictionary" attack that consists of hashing all known passports and checking them against the Registration smart contract. The dilution of hashes in the shared Merkle tree makes it progressively more challenging to deduce a connection between specific passports and social apps. The bigger the network gets, the more plausible deniability the users get.
 
 ## Confidential Social Graph
 
 The Rarimo protocol enables the creation of confidential social graphs. These graphs consist of user actions and interactions that remain invisible to the public until the owner selectively discloses them using zero-knowledge proofs. This ensures user privacy while allowing for verifiable claims.
 
-Examples of ZK proofs:
+### Examples of ZK Proofs:
 - **Credential and Attestation Ownership**: Proving ownership of a credential or attestation at a specific time.
 - **Action Initiation**: Proving that a particular user or group initiated certain actions.
 - **Group Membership**: Proving that a user is a member of a specific group.
@@ -61,15 +56,13 @@ These structures allow users to maintain a private yet verifiable record of thei
 
 ## RariMe App
 
-The RariMe App is a mobile self-custody wallet designed to provide private yet verifiable social identities. During signup, the app uses the phone's camera and NFC chip to scan the user's biometric documents. The app ensures that no user data is shared with any party unless the user explicitly chooses to disclose certain aspects of their identity using zero-knowledge proofs.
+The RariMe App is a mobile self-custody wallet that provides an entry point into Rarimo for end users.
 
-Key features:
+### Key features:
 
-- **Biometric document scanning**: Utilizes the camera and NFC chip to scan and verify user documents securely.
-- **Privacy-by-Default**: Guarantees user data remains private.
-- **Zero-Knowledge Proofs**: Allows users to selectively disclose specific identity attributes without revealing private data.
-
-The RariMe App empowers users with control over their identity, ensuring both privacy and verifiability in social interactions.
+- **Biometric Document Scanner**: The app facilitates the scanning of biometric documents via camera and NFC.
+- **Private Data Vault**: The app securely stores all identity and social graph data locally on the device. The data is never shared with any third party.
+- **Zero-Knowledge Proof Generation**: The app allows users to selectively disclose aspects of their identity and social graph using zero-knowledge proofs. Social apps may request the proofs via QR codes.
 
 ## Ecosystem
 
