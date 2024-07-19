@@ -12,7 +12,7 @@ Rarimo is a privacy-first (ZK) social protocol designed to facilitate the develo
 
 The Rarimo Protocol is built on three foundational components:
 - **Self-Issued Identity**: This ensures that only verified, real individuals can participate in social apps, enhancing trust and authenticity.
-- **Private Social Graph**: This infrastructure supports private yet verifiable social interactions, allowing users to engage without compromising their privacy.
+- **Confidential Social Graph**: This infrastructure supports private yet verifiable social interactions, allowing users to engage without compromising their privacy.
 - **RariMe App**: This is a self-sovereign wallet for managing your identity, giving users full control over their personal data.
 
 Let's explore these components in detail to understand how the Rarimo Protocol operates.
@@ -41,9 +41,9 @@ Additionally, the app calculates a hash of the passport's public key (Active Aut
 To mitigate potential "dictionary" attacks, where a passport issuer or third party might try to identify registered passports by hashing known values, Rarimo maintains a global Merkle tree of passport hashes. This tree is shared across all social apps, providing plausible deniability for users and preventing attackers from deducing participation in specific applications. The more passports and social apps accumulate over time, the more robust this identity system becomes.
 
 
-## Private Social Graph
+## Confidential Social Graph
 
-The Rarimo protocol enables the creation of private social graphs. These graphs consist of user actions and interactions that remain invisible to the public until the owner selectively discloses them using zero-knowledge proofs. This ensures user privacy while allowing for verifiable claims.
+The Rarimo protocol enables the creation of confidential social graphs. These graphs consist of user actions and interactions that remain invisible to the public until the owner selectively discloses them using zero-knowledge proofs. This ensures user privacy while allowing for verifiable claims.
 
 Examples of ZK proofs:
 - **Credential and Attestation Ownership**: Proving ownership of a credential or attestation at a specific time.
