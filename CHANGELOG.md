@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Projects using Freedom Tool;
+
 ## [4.0.0] - 2024-07-19
 ### Added
 - Accounts overview doc;
