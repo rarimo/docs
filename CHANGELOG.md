@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.0] - 2024-07-26
 ### Added
 - Projects using Freedom Tool;
 
@@ -369,7 +370,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/4.0.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/4.1.0...HEAD
+[4.1.0]: https://github.com/rarimo/docs/compare/4.0.0...4.1.0
 [4.0.0]: https://github.com/rarimo/docs/compare/3.7.8...4.0.0
 [3.7.8]: https://github.com/rarimo/docs/compare/3.7.7...3.7.8
 [3.7.7]: https://github.com/rarimo/docs/compare/3.7.6...3.7.7
