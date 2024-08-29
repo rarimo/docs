@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Updated the docs structure to reflect the shift to social protocol;
+- Updated the smart contracts reference for ZK passports;
 - Renamed the "Identity Protocol" to "Credential Trees";
 - Restyled the sidebar;
 - Root path leads to the "Overview" doc;
