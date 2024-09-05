@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Updated the smart contracts reference for ZK passports;
+
+
 ## [4.1.0] - 2024-07-26
 ### Added
 - Projects using Freedom Tool;
@@ -17,7 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Updated the docs structure to reflect the shift to social protocol;
-- Updated the smart contracts reference for ZK passports;
 - Renamed the "Identity Protocol" to "Credential Trees";
 - Restyled the sidebar;
 - Root path leads to the "Overview" doc;
