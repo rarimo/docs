@@ -1,17 +1,17 @@
 ---
 sidebar_label: Smart contracts reference
-description: 'A set of Solidity smart contracts implementing passport-derived profiles.'
+description: 'A set of Solidity smart contracts implementing anonymous self-issued identity based on ZK Passport.'
 ---
 import OutLink from "@site/src/components/OutLink";
 import IdealImage from '@site/src/components/IdealImage';
 
 # ZK Passport smart contracts reference
 
-A set of contracts that make possible the issuance of on-chain identities that are connected to users' passports without revealing any private data.
+A set of contracts facilitating self-issued anonymous identities based on the ZK Passport tech.
 
-Currently, there are 7 contract sections:
+Currently, there are seven contract sections:
 1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/state">State </OutLink>
- — main `StateKeeper` contract, together with a set of utility contracts. `StateKeeper` acts as a singleton state instance, that registration contracts interact with. `StateKeeper` does the following:
+ — main `StateKeeper` contract and a set of utility contracts. `StateKeeper` acts as a singleton state instance with which registration contracts interact. `StateKeeper` does the following:
     * Stores the Sparse Merkle Tree with registered identities;
     * Stores the Sparse Merkle Tree with registered certificates of ICAO members;
     * Stores and manages some passport and identity information;
@@ -27,10 +27,10 @@ Currently, there are 7 contract sections:
 1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/verifiers">Verifiers</OutLink>
  — auto-generated contracts, the main purpose of which is to verify the ZKP.
 1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/dispatchers">Dispatchers</OutLink>
- — acts as a bridge between registration contracts and: 
+ — acts as a bridge between registration contracts and:
     * authenticators corresponding to different passport types, if it is a passport dispatcher;
     * signers, if it is a certificate dispatcher.
-1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/dispatchers">Signers</OutLink> 
+1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/dispatchers">Signers</OutLink>
  — responsible for verifying the signature of the ICAO member's certificate. It also stores information required for signature verification (e.g. RSA exponent).
 1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/authenticators">Authenticators</OutLink>
  — perform the passport Active Authentication (AA).
@@ -45,7 +45,7 @@ Currently, there are 7 contract sections:
 
 ```solidity
 contract Registration is Initializable, TSSUpgradeable {
-    
+
     StateKeeper public stateKeeper
     mapping(bytes32 => address) public certificateDispatchers;
     mapping(bytes32 => address) public passportDispatchers;
@@ -56,19 +56,7 @@ contract Registration is Initializable, TSSUpgradeable {
         ICAOMember memory icaoMember_,
         bytes32[] memory icaoMerkleProof_
     ) external {
-        
-        /* ... */
-
-        _verifyICAOSignature(
-            dispatcher_,
-            certificate_.signedAttributes,
-            icaoMember_.signature,
-            icaoMember_.publicKey
-        );
-
        /* ... */
-
-        stateKeeper.addCertificate(bytes32(certificateKey), expirationTimestamp_);
     }
 
     function revokeCertificate(bytes32 certificateKey_) external {
@@ -82,32 +70,11 @@ contract Registration is Initializable, TSSUpgradeable {
         Passport memory passport_,
         VerifierHelper.ProofPoints memory zkPoints_
     ) external {
-        
         /* ... */
-
-        _useSignature(passport_.signature);
-        _authenticate(dispatcher_, challenge_, passport_);
-        _verifyZKProof(
-            dispatcher_,
-            verifier_,
-            certificatesRoot_,
-            passportKey_,
-            identityKey_,
-            dgCommit_,
-            zkPoints_
-        );
-
-        stateKeeper.addBond(bytes32(passportKey_), bytes32(0), bytes32(identityKey_), dgCommit_);
     }
 
     function revoke(uint256 identityKey_, Passport memory passport_) external {
-        
         /* ... */
-
-        _useSignature(passport_.signature);
-        _authenticate(dispatcher_, challenge_, passport_);
-
-        stateKeeper.revokeBond(bytes32(passportKey_), bytes32(identityKey_));
     }
 
     function reissueIdentity(
@@ -117,22 +84,7 @@ contract Registration is Initializable, TSSUpgradeable {
         Passport memory passport_,
         VerifierHelper.ProofPoints memory zkPoints_
     ) external {
-        
         /* ... */
-
-        _useSignature(passport_.signature);
-        _authenticate(dispatcher_, challenge_, passport_);
-        _verifyZKProof(
-            dispatcher_,
-            verifier_,
-            certificatesRoot_,
-            passportKey_,
-            identityKey_,
-            dgCommit_,
-            zkPoints_
-        );
-
-        stateKeeper.reissueBondIdentity(bytes32(passportKey_), bytes32(identityKey_), dgCommit_);
     }
 
     function updateDependency(
@@ -140,18 +92,12 @@ contract Registration is Initializable, TSSUpgradeable {
         bytes calldata data_,
         bytes calldata proof_
     ) external {
-
         /* ... */
-
-        _checkMerkleSignature(leaf_, proof_);
-        _useNonce(uint8(methodId_), nonce_);
-
-       /* ... */
-    }   
+    }
 }
 ```
 
-- `stateKeeper` — instance of `StateKeeper` contract that saves all data about registrations, certificates, etcß;
+- `stateKeeper` — instance of `StateKeeper` contract that saves all data about registrations, certificates, etc;
 - `certificateDispatchers` — mapping from ICAO member's certificate to its dispatcher;
 - `passportDispatchers` — mapping from passport type to its dispatcher contract;
 - `passportVerifiers` — mapping from passport type to its verifier contract;
@@ -159,7 +105,7 @@ contract Registration is Initializable, TSSUpgradeable {
 - `revokeCertificate(...)` — revokes an expired ICAO member's X509 certificate (calls `StateKeeper` contract);
 - `register(...)` — registers the user (identity) by its passport, technically — issues the identity, calls the dispatcher to verify ZKP, links the identity to its passport by calling `StateKeeper`;
 - `revoke(...)` — revokes the identity and its passport by the user's will, marks the passport (and identity) as revoked;
-- `reissueIdentity(...)` — issues previously passport \<> identity bond by migration to a new identity;
+- `reissueIdentity(...)` — issues previous passport \<> identity bond by migrating to a new identity;
 - `updateDependency(...)` — adds or removes, depending on the method provided, a dispatcher via Rarimo TSS;
 
 For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/registration/Registration.sol">Registration.sol</OutLink> at the GitHub.
@@ -181,22 +127,10 @@ contract Registration2 is Initializable, TSSUpgradeable {
         ICAOMember memory icaoMember_,
         bytes32[] memory icaoMerkleProof_
     ) external virtual {
-
         /* ... */
-
-        _verifyICAOSignature(
-            dispatcher_,
-            certificate_.signedAttributes,
-            icaoMember_.signature,
-            icaoMember_.publicKey
-        );
-
-        /* ... */
-
-        stateKeeper.addCertificate(bytes32(certificateKey), expirationTimestamp_);
     }
 
- 
+
     function revokeCertificate(bytes32 certificateKey_) external virtual {
         stateKeeper.removeCertificate(certificateKey_);
     }
@@ -209,38 +143,11 @@ contract Registration2 is Initializable, TSSUpgradeable {
         Passport memory passport_,
         VerifierHelper.ProofPoints memory zkPoints_
     ) external virtual {
-
         /* ... */
-
-        _useSignature(passport_.signature);
-        _authenticate(dispatcher_, challenge_, passport_);
-        // here are the difference with Registration contract
-        _verifyZKProof(
-            verifier_,
-            certificatesRoot_,
-            passportKey_,
-            uint256(passport_.passportHash),
-            identityKey_,
-            dgCommit_,
-            zkPoints_
-        );
-
-        stateKeeper.addBond(
-            bytes32(passportKey_),
-            passport_.passportHash,
-            bytes32(identityKey_),
-            dgCommit_
-        );
     }
 
     function revoke(uint256 identityKey_, Passport memory passport_) external virtual {
-        
         /* ... */
-
-        _useSignature(passport_.signature);
-        _authenticate(dispatcher_, challenge_, passport_);
-
-        stateKeeper.revokeBond(bytes32(passportKey_), bytes32(identityKey_));
     }
 
     function reissueIdentity(
@@ -250,23 +157,7 @@ contract Registration2 is Initializable, TSSUpgradeable {
         Passport memory passport_,
         VerifierHelper.ProofPoints memory zkPoints_
     ) external virtual {
-        
         /* ... */
-
-        _useSignature(passport_.signature);
-        _authenticate(dispatcher_, challenge_, passport_);
-        // here are the difference with Registration contract
-        _verifyZKProof(
-            verifier_,
-            certificatesRoot_,
-            passportKey_,
-            uint256(passport_.passportHash),
-            identityKey_,
-            dgCommit_,
-            zkPoints_
-        );
-
-        stateKeeper.reissueBondIdentity(bytes32(passportKey_), bytes32(identityKey_), dgCommit_);
     }
 
     function updateDependency(
@@ -274,14 +165,7 @@ contract Registration2 is Initializable, TSSUpgradeable {
         bytes calldata data_,
         bytes calldata proof_
     ) external virtual {
-        
         /* ... */
-
-        _checkMerkleSignature(leaf_, proof_);
-        _useNonce(uint8(methodId_), nonce_);
-
-        /* ... */
-        
     }
 
 }
@@ -295,9 +179,9 @@ The main difference between `Registration` and `Registration2` contracts is that
 - `passportVerifiers` — mapping from passport type to its verifier contract;
 - `registerCertificate(...)` — registers an ICAO member's X509 certificate in the certificates SMT (calls `StateKeeper` contract);
 - `revokeCertificate(...)` — revokes an expired ICAO member's X509 certificate (calls `StateKeeper` contract);
-- `register(...)` — registers the user (identity) by its passport, technically — issues the identity, calls the dispatcher to verify ZKP (that was created using different schema, compared to `Registration`), links the identity to its passport by calling `StateKeeper`;
+- `register(...)` — registers the user (identity) by its passport, technically — issues the identity, calls the dispatcher to verify ZKP (that was created using a different schema, compared to `Registration`), links the identity to its passport by calling `StateKeeper`;
 - `revoke(...)` — revokes the identity and its passport by the user's will, marks the passport (and identity) as revoked;
-- `reissueIdentity(...)` — issues previously passport \<> identity bond by migration to a new identity;
+- `reissueIdentity(...)` — re-issues previous passport \<> identity bond by migration to a new identity;
 - `updateDependency(...)` — adds or removes, depending on the method provided, a dispatcher via Rarimo TSS;
 
 For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/registration/Registration2.sol">Registration2.sol</OutLink> at the GitHub.
@@ -322,7 +206,7 @@ contract ExampleVerifier {
 }
 ```
 
-All verifiers are generated contracts that have the same interface. The difference is that different verifiers accept proofs that were generated by different ZK schemas. Here are the list of all current verifiers:
+All verifiers are generated contracts that share the same interface. However, each verifier is designed to accept proofs generated by specific ZK schemas. Below is a list of the current verifiers:
     * `PUniversal2048Verifier` — used to create ZKPs that will be accepted by `Registration`;
     * `PUniversal4096Verifier` — used to create ZKPs that will be accepted by `Registration`;
     * `PUniversal2048Verifier2` — used to create ZKPs that will be accepted by `Registration2`;
@@ -330,7 +214,7 @@ All verifiers are generated contracts that have the same interface. The differen
     * `PInternalOptVerifier2` — internal verifier for `Registration2`;
     * `PInternalVerifier2` — internal verifier for `Registration2`;
     * `PMNEOptVerifier2` — internal verifier for `Registration2`;
-  
+
 - `verifyProof(...)` — verifies passport validity ZKP;
 
 For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/passport/verifiers">verifiers for `Registration`</OutLink> and <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/passport/verifiers2">verifiers for `Registration2`</OutLink> at the GitHub.
@@ -349,10 +233,7 @@ contract PECDSASHA1Dispatcher is IPassportDispatcher, Initializable {
         bytes memory passportSignature_,
         bytes memory passportPublicKey_
     ) external view returns (bool) {
-        
         /* ... */
-
-        return PECDSASHA1Authenticator(authenticator).authenticate(challenge_, r_, s_, x_, y_);
     }
 
 }
@@ -381,7 +262,7 @@ contract PNOAADispatcher is IPassportDispatcher, Initializable {
 }
 ```
 
-A special case of dispatcher for passports without active authentication.
+This is a special dispatcher for passports without Active Authentication.
 
 - `authenticate(...)` — authenticates the passport without AA. Just return __true__;
 
@@ -425,7 +306,7 @@ For the full implementation, see <OutLink href="https://github.com/rarimo/passpo
 
 ```solidity
 contract CRSADispatcher is ICertificateDispatcher, Initializable {
-    
+
     address public signer;
 
     function verifyICAOSignature(
@@ -457,7 +338,7 @@ For the full implementation, see <OutLink href="hhttps://github.com/rarimo/passp
 
 ```solidity
 contract CRSAPSSSigner is ICertificateRSASigner, Initializable {
-    uint256 public exponent; 
+    uint256 public exponent;
     bool public isSha2;
 
     function verifyICAOSignature(
@@ -497,23 +378,7 @@ contract CRSASigner is ICertificateRSASigner, Initializable {
         bytes memory icaoMemberSignature_,
         bytes memory icaoMemberKey_
     ) external view override returns (bool) {
-        bytes memory x509SAHash = isSha1
-            ? abi.encodePacked(x509SignedAttributes_.sha1())
-            : abi.encodePacked(sha256(x509SignedAttributes_));
-
-        bytes memory decrypted_ = icaoMemberSignature_.decrypt(
-            abi.encodePacked(exponent),
-            icaoMemberKey_
-        );
-
-        bytes32 decryptedX509SAHash_;
-        uint256 offset_ = isSha1 ? 12 : 0; // offset for sha1 or sha2
-
-        assembly {
-            decryptedX509SAHash_ := mload(add(add(decrypted_, mload(decrypted_)), offset_)) // load the last 32 or 20 bytes (depends on hash function)
-        }
-
-        return bytes32(x509SAHash) == decryptedX509SAHash_;
+        /* ... */
     }
 }
 ```
@@ -540,11 +405,9 @@ contract PECDSASHA1Authenticator {
         uint256 x,
         uint256 y
     ) external pure returns (bool) {
-
-    /* ... */
-
+        /* ... */
     }
-  
+
 }
 ```
 
@@ -566,9 +429,7 @@ contract PRSASHA1Authenticator is Initializable {
         bytes memory s_,
         bytes memory n_
     ) external view returns (bool) {
-        
         /* ... */
-
     }
 }
 ```
