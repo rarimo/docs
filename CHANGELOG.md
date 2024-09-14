@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Optimized image sizes;
+
 ## [4.2.0] - 2024-09-05
 ### Changed
 - Updated the smart contracts reference for ZK passports;
