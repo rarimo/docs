@@ -53,15 +53,22 @@ const sidebars = {
       ],
     },
     {
-      // formely: products/rarime
       type: 'category',
       label: 'RariMe App',
-      link: { type: 'doc', id: 'rarime/overview' },
+      link: { type: 'doc', id: 'rarime-app/overview' },
       collapsed: true,
       items: [
-        'rarime/guide-for-issuers',
-        'rarime/interoperability-with-external-credentials',
-        'rarime/js-connector-reference',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'RariMe Snap',
+      link: { type: 'doc', id: 'rarime-snap/overview' },
+      collapsed: true,
+      items: [
+        'rarime-snap/guide-for-issuers',
+        'rarime-snap/interoperability-with-external-credentials',
+        'rarime-snap/js-connector-reference',
       ],
     },
 

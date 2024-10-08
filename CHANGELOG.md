@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Split RariMe App and RariMe Snap docs into separate folders;
+
 ## [4.2.1] - 2024-09-14
 ### Changed
 - Optimized image sizes;
