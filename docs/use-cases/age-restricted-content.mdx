@@ -8,7 +8,7 @@ import IdealImage from '@site/src/components/IdealImage';
 
 ## Problem statement
 
-Some content requires age restrictions to comply with regulations or for ethical reasons. Users may feel uncomfortable creating an account or submitting identifying documents on websites where they must prove their age.
+Some content requires age restrictions to comply with regulations or for ethical reasons. Users may feel uncomfortable creating an account or submitting identifying documents directly on websites where they must prove their age.
 
 ## Technical Solution
 
@@ -18,55 +18,44 @@ The protocol follows the self-sovereign identity approach and employs cryptograp
 The following benefits make the protocol uniquely well-suited for the age verification use case:
 
 - Users fully own and control their private data.
-The date of birth data in the credentials is never shared with the verifying websites.
+The date of birth data from the credentials is never shared with the verifying websites.
 - Zero-Knowledge technology is a state-of-the-art privacy cryptography that allows users to confirm a certain statement is true without revealing any additional information.
 In this case, they can confirm that they have reached a certain age without disclosing their date of birth.
-- It can aggregate any number of identity providers, like national biometric IDs, banks, third-party KYC providers, etc;
+- Supports any biometric passport, eliminating the need to integrate multiple KYC providers for different regions worldwide.
 - Users can prove their age once per site visit, and no one will be able to trace their previous session, giving an extra layer of anonymity;
-- Once obtained, a date of birth credential can be used on any website that supports the protocol (and specific identity providers).
-This is especially helpful for networks of affiliated sites;
 - This solution can easily coexist with other methods of age verification, like creating an account and submitting the ID directly to the website;
 
 ## User experience
 
 **Prerequisites**:
 
-- The user needs to install <OutLink href="https://metamask.io/">MetaMask</OutLink> and <OutLink hred="https://rarime.com/">RariMe</OutLink> extension for MetaMask;
-- The user needs to obtain a date of birth credential from any identity provider;
+- The user needs to install RariMe App from <OutLink href="https://play.google.com/store/apps/details?id=com.rarilabs.rarime&hl=ru">Google Play Store</OutLink> or <OutLink href="https://apps.apple.com/ru/app/rarime/id6503300598">App Store</OutLink>;
+- The user needs to scan his ID card or passport to receive the SSI (self-sovereign identity);
 
 **Step #1: The user selects the "Continue incognito" option**
 
-<IdealImage img={require('/img/continue-incognito.png')} alt="Continue incognito button" />
+<IdealImage img={require('/img/test21.png')} alt="Continue incognito button" />
 
-**Step #2: User connects MetaMask and RariMe snap**
+**Step #2: User scans the QR code using RariMe App**
 
-<IdealImage img={require('/img/connect-metamask-snap.png')} alt="Connect MetaMask and RariMe" />
+<IdealImage img={require('/img/test22.png')} alt="Scan QR code with RariMe" />
 
 **Step #3: Generate and submit a proof of age**
 
-<IdealImage img={require('/img/prove-the-age.png')} alt="Untitled" />
+<IdealImage img={require('/img/test2.png')} alt="Untitled" />
 
-After clicking **Prove My Age**, the user confirms the generation of a zero-knowledge proof:
-
-<IdealImage img={require('/img/generate-age-zkp.png')} alt="Prove you are of legal age" />
-
-Then, the zero-knowledge proof generation starts.
-It may take from 30 seconds to 1 minute to generate, so it's an ideal place to place interactive ads.
-
-<IdealImage img={require('/img/generating-age-proof-ads.png')} alt="Generating the zkp of legal age" />
-
-To skip ads in the future, users may also mint a proof-of-age token for a fee in crypto.
-This can be an additional way of monetizing the anonymous traffic.
+After clicking **Generate Proof**, the user confirms the generation of a zero-knowledge proof.
+It may take from 30 secons to 1 minute to generate.
 
 **Step #4: Browse the content while the session is valid**
 
-<IdealImage img={require('/img/browse-restricted-content.png')} alt="Browse age-restricted content" />
+<IdealImage img={require('/img/test23.png')} alt="Successfully verified" />
 
 Incognito sessions complicate tracking user activities (views, searches, clicks, etc.) that drive the algorithmic recommendations.
 To balance user engagement and privacy, we propose two possible approaches to tackling this problem:
 
-1. Keeping the collected metrics inside the RariMe snap.
-This approach offers more privacy because only the user decides what to share.
+1. Keeping the collected metrics in the user's device.
+This approach offers more privacy because only the user decides what to share (using RariMe).
 Also, some additional techniques can be used to obfuscate the user identity further, like mixing the user data with random noise.
 The downside of this approach is the complexity of implementation.
 1. Allow users to opt in for a persistent anonymous ID per site that will be used for tracking the engagements.
