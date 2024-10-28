@@ -72,20 +72,20 @@ const sidebars = {
       ],
     },
 
-    {
-      // formely: products/base-layer
-      type: 'category',
-      label: 'Rarimo Core',
-      link: { type: 'doc', id: 'rarimo-core/overview' },
-      collapsed: true,
-      items: [
-        'rarimo-core/oracles',
-        'rarimo-core/threshold-signature',
-        'rarimo-core/validator-node-operator-guide',
-        'rarimo-core/staking-guide',
-        'rarimo-core/api-reference',
-      ],
-    },
+    // {
+    //   // formely: products/base-layer
+    //   type: 'category',
+    //   label: 'Rarimo Core',
+    //   link: { type: 'doc', id: 'rarimo-core/overview' },
+    //   collapsed: true,
+    //   items: [
+    //     'rarimo-core/oracles',
+    //     'rarimo-core/threshold-signature',
+    //     'rarimo-core/validator-node-operator-guide',
+    //     'rarimo-core/staking-guide',
+    //     'rarimo-core/api-reference',
+    //   ],
+    // },
     {
       type: 'html',
       value: `
@@ -154,30 +154,6 @@ const sidebars = {
         'ecosystem/proof-of-humanity/smart-contracts-reference',
         'ecosystem/proof-of-humanity/subgraph-reference',
         'ecosystem/proof-of-humanity/api-reference',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Polygon ID State Replication',
-      link: {type: 'doc', id: 'ecosystem/polygon-id-state-replication/overview'},
-      collapsed: true,
-      items: [
-        'ecosystem/polygon-id-state-replication/guide-how-to-set-up-polygon-id-state-replication',
-        'ecosystem/polygon-id-state-replication/tutorial-verifying-polygon-id-credentials-in-ethereum-dapp',
-        'ecosystem/polygon-id-state-replication/smart-contracts-reference',
-        'ecosystem/polygon-id-state-replication/api-reference',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'WorldCoin State Replication',
-      link: {type: 'doc', id: 'ecosystem/worldcoin-state-replication/overview'},
-      collapsed: true,
-      items: [
-        'ecosystem/worldcoin-state-replication/guide-state-replication-for-world-id',
-        'ecosystem/worldcoin-state-replication/tutorial-using-world-id-zero-knowledge-proofs-in-avalanche-dapp',
-        'ecosystem/worldcoin-state-replication/smart-contracts-reference',
-        'ecosystem/worldcoin-state-replication/api-reference',
       ],
     },
 
