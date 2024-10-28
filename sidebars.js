@@ -9,13 +9,19 @@ const sidebars = {
     {
       type: 'html',
       value: `
-        <span class="menu__link menu__link--no-hover">ZK Social Protocol</span>
+        <span class="menu__link menu__link--no-hover">ZK Registry</span>
       `
     },
     {
       type: 'doc',
       label: 'Overview',
       id: 'overview',
+    },
+    {
+      type: 'html',
+      value: `
+        <span class="menu__link menu__link--no-hover">ZK Reputation</span>
+      `
     },
     {
       // formely: products/passport-derived-profiles
@@ -51,6 +57,15 @@ const sidebars = {
         'credential-trees/smart-contracts-reference',
         'credential-trees/js-sdk-reference',
       ],
+    },
+
+
+
+    {
+      type: 'html',
+      value: `
+        <span class="menu__link menu__link--no-hover">ZK Passport</span>
+      `
     },
     {
       type: 'category',
@@ -114,7 +129,7 @@ const sidebars = {
     {
       type: 'html',
       value: `
-        <span class="menu__link menu__link--no-hover">Ecosystem</span>
+        <span class="menu__link menu__link--no-hover">Freedom Tool</span>
       `
     },
     {
