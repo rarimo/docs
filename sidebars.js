@@ -60,17 +60,17 @@ const sidebars = {
       items: [
       ],
     },
-    {
-      type: 'category',
-      label: 'RariMe Snap',
-      link: { type: 'doc', id: 'rarime-snap/overview' },
-      collapsed: true,
-      items: [
-        'rarime-snap/guide-for-issuers',
-        'rarime-snap/interoperability-with-external-credentials',
-        'rarime-snap/js-connector-reference',
-      ],
-    },
+    // {
+    //   type: 'category',
+    //   label: 'RariMe Snap',
+    //   link: { type: 'doc', id: 'rarime-snap/overview' },
+    //   collapsed: true,
+    //   items: [
+    //     'rarime-snap/guide-for-issuers',
+    //     'rarime-snap/interoperability-with-external-credentials',
+    //     'rarime-snap/js-connector-reference',
+    //   ],
+    // },
 
     // {
     //   // formely: products/base-layer
@@ -127,35 +127,35 @@ const sidebars = {
         'ecosystem/freedom-tool/smart-contracts-reference',
       ],
     },
-    {
-      type: 'category',
-      label: 'Proof of Humanity',
-      link: {type: 'doc', id: 'ecosystem/proof-of-humanity/overview'},
-      collapsed: true,
-      items: [
-        {
-          type: 'category',
-          label: 'Guides',
-          collapsed: true,
-          link: {
-            type: 'generated-index',
-            title: 'Proof of Humanity integration guides',
-            description: 'Follow these step-by-step guides to integrate Proof of Humanity into your application.',
-            slug: '/ecosystem/proof-of-humanity/guides',
-          },
-          items: [
-            'ecosystem/proof-of-humanity/guides/using-proof-of-humanity-off-chain',
-            'ecosystem/proof-of-humanity/guides/using-rarimos-proof-of-humanity-plugin-for-questn',
-            'ecosystem/proof-of-humanity/guides/using-rarimos-proof-of-humanity-plugin-for-zealy',
-            'ecosystem/proof-of-humanity/guides/using-rarimos-proof-of-humanity-plugin-for-galxe',
-            'ecosystem/proof-of-humanity/guides/collab-land-setup',
-          ],
-        },
-        'ecosystem/proof-of-humanity/smart-contracts-reference',
-        'ecosystem/proof-of-humanity/subgraph-reference',
-        'ecosystem/proof-of-humanity/api-reference',
-      ],
-    },
+    // {
+    //   type: 'category',
+    //   label: 'Proof of Humanity',
+    //   link: {type: 'doc', id: 'ecosystem/proof-of-humanity/overview'},
+    //   collapsed: true,
+    //   items: [
+    //     {
+    //       type: 'category',
+    //       label: 'Guides',
+    //       collapsed: true,
+    //       link: {
+    //         type: 'generated-index',
+    //         title: 'Proof of Humanity integration guides',
+    //         description: 'Follow these step-by-step guides to integrate Proof of Humanity into your application.',
+    //         slug: '/ecosystem/proof-of-humanity/guides',
+    //       },
+    //       items: [
+    //         'ecosystem/proof-of-humanity/guides/using-proof-of-humanity-off-chain',
+    //         'ecosystem/proof-of-humanity/guides/using-rarimos-proof-of-humanity-plugin-for-questn',
+    //         'ecosystem/proof-of-humanity/guides/using-rarimos-proof-of-humanity-plugin-for-zealy',
+    //         'ecosystem/proof-of-humanity/guides/using-rarimos-proof-of-humanity-plugin-for-galxe',
+    //         'ecosystem/proof-of-humanity/guides/collab-land-setup',
+    //       ],
+    //     },
+    //     'ecosystem/proof-of-humanity/smart-contracts-reference',
+    //     'ecosystem/proof-of-humanity/subgraph-reference',
+    //     'ecosystem/proof-of-humanity/api-reference',
+    //   ],
+    // },
 
     {
       type: 'html',
