@@ -92,16 +92,15 @@ const sidebars = {
         <div class="menu__splitter"></div>
       `
     },
-    {
-      type: 'html',
-      value: `
-        <span class="menu__link menu__link--no-hover">Use cases</span>
-      `
-    },
-    'use-cases/airdrop',
-    'use-cases/age-restricted-content',
-    'use-cases/identity-protocol-state-replication',
-    'use-cases/organizational-access-control',
+    // {
+    //   type: 'html',
+    //   value: `
+    //     <span class="menu__link menu__link--no-hover">Use cases</span>
+    //   `
+    // },
+    // 'use-cases/airdrop',
+    // 'use-cases/age-restricted-content',
+    // 'use-cases/organizational-access-control',
     // 'use-cases/self-sovereign-identity',
     //'use-cases/gaming-profiles',
     //'use-cases/social-graphs',
