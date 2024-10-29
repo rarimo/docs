@@ -91,9 +91,6 @@ const sidebars = {
     // 'use-cases/airdrop',
     // 'use-cases/age-restricted-content',
     // 'use-cases/organizational-access-control',
-    // 'use-cases/self-sovereign-identity',
-    //'use-cases/gaming-profiles',
-    //'use-cases/social-graphs',
 
     {
       type: 'html',
