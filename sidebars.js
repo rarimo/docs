@@ -43,23 +43,9 @@ const sidebars = {
         'commitment-trees/commitments',
         'commitment-trees/statement-trees',
         'commitment-trees/time-trees',
+        // TODO: add credential trees, move commitment trees
       ],
     },
-    {
-      // formely products/identity-protocol
-      type: 'category',
-      label: 'Credential trees',
-      link: {type: 'doc', id: 'credential-trees/overview'},
-      collapsed: true,
-      items: [
-        'credential-trees/guide-how-to-set-up-credentials-issuer',
-        'credential-trees/guide-how-to-verify-zero-knowledge-proof-in-a-smart-contract',
-        'credential-trees/smart-contracts-reference',
-        'credential-trees/js-sdk-reference',
-      ],
-    },
-
-
 
     {
       type: 'html',
@@ -75,18 +61,7 @@ const sidebars = {
       items: [
       ],
     },
-    // {
-    //   type: 'category',
-    //   label: 'RariMe Snap',
-    //   link: { type: 'doc', id: 'rarime-snap/overview' },
-    //   collapsed: true,
-    //   items: [
-    //     'rarime-snap/guide-for-issuers',
-    //     'rarime-snap/interoperability-with-external-credentials',
-    //     'rarime-snap/js-connector-reference',
-    //   ],
-    // },
-
+    // TODO: remove
     // {
     //   // formely: products/base-layer
     //   type: 'category',
