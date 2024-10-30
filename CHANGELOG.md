@@ -6,6 +6,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- ZK Registry docs;
+- ZK Reputation docs;
+- ZK Passport docs;
+
+### Changed
+- Moved Freedom Tool docs to the top level;
+
+### Removed
+- Polygon ID state replication docs;
+- World ID state replication docs;
+- Credentials trees docs;
+- Commitment trees docs;
+- RariMe snap docs;
+- Rarimo core docs;
+- Proof of Humanity docs;
+- Use cases docs;
+
 ## [4.2.3] - 2024-10-28
 ### Changed
 - Updated image for "Organizational access control" use case;
