@@ -104,6 +104,12 @@ Selector `Sel` is used to selectively disclose personal information from a passp
 
 DApps can verify the proofs both on-chain and off-chain. Rarimo's on-demand identity state replication technology scales the usage of on-chain proofs to any EVM-compatible network.
 
+## Dictionary attacks
+
+<IdealImage img={require('/img/passport-hashes-dilution.png')} alt="Passport hashes dilution" />
+
+By using a global tree of passport hashes shared by all users and social apps, Rarimo creates a "privacy network effect" where the system's security is enhanced with the growth of the user base. Passport issuers or other third parties may try to identify users who participate in specific social apps by executing a "dictionary" attack that consists of hashing all known passports and checking them against the passport registry. The dilution of hashes in the shared Merkle tree makes it progressively more challenging to deduce a connection between specific passports and social apps. The bigger the network gets, the more plausible deniability the users get.
+
 ## Challenges and limitations
 
 The first implementation of ZK Passport comes with some limitations:

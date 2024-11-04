@@ -72,7 +72,6 @@ const sidebars = {
       ],
     },
     {
-      // redirect from 'ecosystem/freedom-tool'
       type: 'category',
       label: 'Freedom Tool',
       link: { type: 'doc', id: 'freedom-tool/overview' },
