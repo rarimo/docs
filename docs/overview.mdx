@@ -1,69 +1,35 @@
 ---
-description: Rarimo protocol combines anonymity with a verifiable social graph using zero-knowledge proofs, ensuring private social interactions.
+description: Rarimo protocol combines zero-knowledge proofs and a verifiable social graph, empowering private, secure social interactions and privacy-focused applications.
 slug: /
 ---
+
 import OutLink from "@site/src/components/OutLink";
 import IdealImage from '@site/src/components/IdealImage';
 
+
 # What is Rarimo?
 
-Rarimo is a privacy-first (ZK) social protocol that builds the largest network of private identities and brings real-world communities on-chain. Rarimo empowers the creation of the next generation of social apps where users can interact anonymously while maintaining a history of their actions, connections, and identity attributes. Users can selectively disclose specific information while keeping other aspects of their social graph private.
+Rarimo is building a permissionless ZK Registry for identities, user interactions, and other components of the social graph. This infrastructure enables privacy-focused social apps, allowing users to selectively disclose information while keeping other aspects of their social data private. With Rarimo, developers can create apps that respect user anonymity without discarding historical interactions or identity continuity.
 
-The Rarimo Protocol is built on three foundational components:
-- **Self-Issued Identity**: Ensures that only verified, real individuals can participate in social apps, enhancing trust and authenticity.
-- **Confidential Social Graph**: Supports private yet verifiable social interactions, allowing users to engage without compromising their privacy.
-- **RariMe App**: A self-sovereign wallet for managing your identity, giving users full control over their personal data.
+## What is a ZK Registry?
 
-Let's explore these components in detail to understand how the Rarimo Protocol operates.
+The ZK Registry is a zkRollup that functions as an on-chain registry for abstract statements. It enables proving the system's state without revealing details about individual statements. This zero-knowledge approach boosts the reusability, scalability, and security of privacy-focused applications. By centralizing standardized, provable statements in a permissionless registry, the ZK Registry provides a flexible foundation for many use cases. Developers can implement protocols like identity verification, reputation, and proof-of-attendance with minimal effort, making it easier to build privacy-preserving applications.
 
-## Verifiable Self-Issued Identity
+<IdealImage img={require('/img/zk-registry.png')} alt="ZK Registry" />
 
-Creating a pseudonymous account without linking it to a real person is easy, but such identities often lead to issues like fake accounts (Sybil attacks) that disrupt social interactions.
+## Why a zkRollup?
 
-Traditionally, identity verification involves a trusted issuer that authenticates users. This approach poses risks as the issuer could compromise privacy or be shut down. Verifying user uniqueness might require sharing sensitive data, like government IDs, which increases privacy risks.
+Rarimo's legacy setup operates as a Cosmos-based Layer 1 chain with an EVM module. While having an own Layer 1 has its benefits, it has also introduced friction for both end users and DApp developers. The next iteration of Rarimo will shift to a zkRollup to leverage Ethereum's security and interoperability, all while keeping the chain affordable and flexible. Additionally, ZK Registry updates can be propagated to other Layer 1 networks, enabling seamless synchronization of root states across multiple ecosystems.
 
-<IdealImage img={require('/img/self-issued-identity.png')} alt="Self-issued identity" />
+## Ecosystem
 
-Rarimo offers a solution by allowing users to establish their identity using only their government-issued biometric documents without needing a third-party issuer. This solution enables users to verify their humanity, assert their uniqueness, or selectively disclose passport attributes (like citizenship or legal age) using ZKPs without revealing private data to any third party. The proofs can be verified both on-chain and off-chain.
+Several applications are being built on top of Rarimo:
 
-Here's how it works:
+- [**RariMe App**](/rarime-app): A self-sovereign mobile wallet for managing digital identity.
+- [**ZK Passport**](/zk-passport): Transforms biometric passports into privacy-preserving digital identities.
+- [**ZK Reputation**](/zk-reputation): Allows users to prove their reputation without compromising privacy.
+- [**Freedom Tool**](/freedom-tool): A privacy-preserving voting solution designed for e-democracy.
 
-1. **Keypair Generation**: The user generates a keypair on their device.
-2. **Biometric Document Scan**: The user scans their biometric document using the RariMe App.
-3. **Registration**: The keypair is bound to the passport by submitting a zero-knowledge proof (ZKP) of passport validity and the public key to the Registration smart contract. A hash of the passport's public key (Active Authentication Public Key) is added to a Sparse Merkle Tree (SMT) in the Registration smart contract to prevent multiple registrations with the same document. The registration process is fully trustless and decentralized, meaning no trusted third parties or centralized points of failure are involved.
+## Can I use it now?
 
-<IdealImage img={require('/img/passport-hashes-dilution.png')} alt="Passport hashes dilution" />
-
-By using a global tree of passport hashes shared by all users and social apps, Rarimo creates a "privacy network effect" where the system's security is enhanced with the growth of the user base. Passport issuers or other third parties may try to identify users who participate in specific social apps by executing a "dictionary" attack that consists of hashing all known passports and checking them against the Registration smart contract. The dilution of hashes in the shared Merkle tree makes it progressively more challenging to deduce a connection between specific passports and social apps. The bigger the network gets, the more plausible deniability the users get.
-
-## Confidential Social Graph
-
-The Rarimo protocol enables the creation of confidential social graphs. These graphs consist of user actions and interactions that remain invisible to the public until the owner selectively discloses them using zero-knowledge proofs. This ensures user privacy while allowing for verifiable claims.
-
-### Examples of ZK Proofs:
-- **Credential and Attestation Ownership**: Proving ownership of a credential or attestation at a specific time.
-- **Action Initiation**: Proving that a particular user or group initiated certain actions.
-- **Group Membership**: Proving that a user is a member of a specific group.
-
-<IdealImage img={require('/img/confidential-social-graph.png')} alt="Confidential Social Graph" />
-
-To achieve this, Rarimo provides a set of data structures for creating on-chain anchors of the social graph data, which can be used in zero-knowledge proofs. These data structures include:
-
-- **Commitments**: Secure, private statements about user actions or attributes.
-- **Commitment Trees**: Hierarchical structures that organize commitments, enabling efficient and scalable storage on-chain.
-
-These structures allow users to maintain a private yet verifiable record of their social interactions, ensuring both privacy and authenticity.
-
-## RariMe App
-
-The RariMe App is a mobile self-custody wallet that provides an entry point into Rarimo for end users.
-
-### Key features:
-
-- **Biometric Document Scanner**: The app facilitates the scanning of biometric documents via camera and NFC.
-- **Private Data Vault**: The app securely stores all identity and social graph data locally on the device. The data is never shared with any third party.
-- **Zero-Knowledge Proof Generation**: The app allows users to selectively disclose aspects of their identity and social graph using zero-knowledge proofs. Social apps may request the proofs via QR codes.
-
-## Freedom Tool
-
-A zero-knowledge-enabled tool for transparent and privacy-preserving online voting.
+Yes and no. While the Rarimo ZK Registry is still under development, you can already access and use technologies like the RariMe App, ZK Passport, and Freedom Tool.
