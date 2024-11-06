@@ -64,7 +64,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'ZK Reputation',
-      link: { type: 'doc', id: 'commitment-trees/overview' },
+      link: { type: 'doc', id: 'zk-reputation/overview' },
       collapsed: false,
       items: [
         'zk-reputation/guide-verifying-reputation',
