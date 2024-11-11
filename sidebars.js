@@ -11,7 +11,6 @@ const sidebars = {
       label: 'What is Rarimo?',
       id: 'overview',
     },
-
     {
       type: 'html',
       value: `
@@ -21,12 +20,12 @@ const sidebars = {
     {
       type: 'html',
       value: `
-        <span class="menu__link menu__link--no-hover">Ecosystem</span>
+        <span class="menu__link menu__link--no-hover">Infrastructure</span>
       `
     },
     {
       type: 'category',
-      label: 'ZK Registry',
+      label: 'ZK Registry Rollup',
       link: { type: 'doc', id: 'zk-registry/overview' },
       collapsed: false,
       items: [
@@ -53,15 +52,6 @@ const sidebars = {
       ],
     },
     {
-      'type': 'category',
-      'label': 'RariMe App',
-      'link': { type: 'doc', id: 'rarime-app/overview' },
-      'collapsed': false,
-      'items': [
-        'rarime-app/guide-for-ambassadors',
-      ],
-    },
-    {
       type: 'category',
       label: 'ZK Reputation',
       link: { type: 'doc', id: 'zk-reputation/overview' },
@@ -70,6 +60,19 @@ const sidebars = {
         'zk-reputation/guide-verifying-reputation',
         'zk-reputation/contracts',
       ],
+    },
+    {
+      type: 'html',
+      value: `
+        <div class="menu__splitter"></div>
+      `
+    },
+
+    {
+      type: 'html',
+      value: `
+        <span class="menu__link menu__link--no-hover">Products</span>
+      `
     },
     {
       type: 'category',
@@ -83,6 +86,16 @@ const sidebars = {
 
       ],
     },
+    {
+      'type': 'category',
+      'label': 'RariMe App',
+      'link': { type: 'doc', id: 'rarime-app/overview' },
+      'collapsed': false,
+      'items': [
+        'rarime-app/guide-for-ambassadors',
+      ],
+    },
+
     {
       type: 'html',
       value: `
