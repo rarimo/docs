@@ -1,9 +1,53 @@
 ---
-description: ZK Registry
+description: The ZK Registry is a permissionless system for securely committing and proving private data on-chain, enabling cross-chain verifications with zero-knowledge privacy.
+slug: /zk-registry
 ---
 import OutLink from "@site/src/components/OutLink";
 import IdealImage from '@site/src/components/IdealImage';
 
 # ZK Registry
 
->TODO
+## What is the ZK Registry?
+
+The ZK Registry is a permissionless registry designed to securely commit and prove private data on-chain without revealing it. By leveraging ZK Rollup technology, the ZK Registry centralizes identity-related verifications, making them verifiable across multiple applications while preserving user privacy.
+
+## Why deploy on a ZK Rollup?
+
+Deploying the ZK Registry on a ZK Rollup rather than on a separate chain ensures enhanced security, flexibility, and interoperability by inheriting Ethereum’s security model. A ZK Rollup reduces data segregation, supporting a unified registry of passports, credentials, social graphs, etc, that can be accessed and verified across chains, thus minimizing privacy risks. Additionally, using a ZK Rollup optimizes scalability and simplifies the integration of new verification algorithms.
+
+## How does the ZK Registry work?
+
+The ZK Registry functions through a modular architecture consisting of two primary components:
+
+- **EvidenceRegistry**: A central contract where statements are registered. It interacts with an on-chain database, **EvidenceDB**, which stores hashed proofs of user data.
+- **Registrar**: The component that manages specific use cases, such as identity verification or proof of attendance, by structuring data and coordinating with **EvidenceRegistry**.
+
+Each registered statement is stored as a Merkle root, ensuring users can prove data inclusion without revealing sensitive details. The use of Sparse Merkle Trees (SMTs) and Poseidon hashing enables efficient zero-knowledge proof compatibility.
+
+On top of this base structure, several types of commitment trees can be built:
+
+1. **Statement Trees (ST)**: Accommodate basic statements without hierarchy or time constraints.
+   - **Adjustable Statement Trees (ADST)**: Allow commitments if they meet predefined rules, requiring partial knowledge proof.
+   - **Arbitrary Statement Trees (ARST)**: No validation rules; acts as an open platform for any commitment.
+
+1. **Credential Trees (CT)**: Support hierarchical, one-to-many relationships between issuers and credential holders, with optional multisig support.
+
+1. **Time Trees (TT)**: Linked to specific time ranges, allowing no new commitments after a set period. These can be based on ST or CT structures.
+
+## Use cases
+
+- **Identity Verification**: Prove identity without requiring disclosure of personal details.
+- **Reputation Systems**: Enable users to verify their reputation based on past interactions or contributions, preserving privacy.
+- **Proof of Attendance**: Allow users to validate event participation without exposing location or identity.
+- **Verifiable Credentials**: Allows users to issue private but provable digital credentials, like certificates.
+
+## Scaling to other chains
+
+To maintain accurate, verifiable records, the ZK Registry synchronizes its state root with Ethereum and potentially other chains:
+
+- **L2 to L1 Sync**: Ethereum-based smart contracts store the current state root of the registry. As Rarimo posts updates, it also publishes the latest root, ensuring other chains relying on Ethereum for verification have consistent data.
+- **Cross-Chain Syncing**: For alternative L1s, the state root is propagated from Ethereum via cross-chain messaging. Future implementations may explore alternative solutions to reduce reliance on external messaging systems.
+
+## Can I create my own ZK Registry now?
+
+The ZK Registry is currently under development. If you are a builder who can benefit from ZK Registry, reach out to us on [X](https://x.com/Rarimo_protocol).
