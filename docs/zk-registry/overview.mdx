@@ -22,6 +22,8 @@ The ZK Registry functions through a modular architecture consisting of two prima
 - **EvidenceRegistry**: A central contract where statements are registered. It interacts with an on-chain database, **EvidenceDB**, which stores hashed proofs of user data.
 - **Registrar**: The component that manages specific use cases, such as identity verification or proof of attendance, by structuring data and coordinating with **EvidenceRegistry**.
 
+<IdealImage img={require('/img/evidence-registry.png')} alt="Evidence Registry" />
+
 Each registered statement is stored as a Merkle root, ensuring users can prove data inclusion without revealing sensitive details. The use of Sparse Merkle Trees (SMTs) and Poseidon hashing enables efficient zero-knowledge proof compatibility.
 
 On top of this base structure, several types of commitment trees can be built:
@@ -33,6 +35,8 @@ On top of this base structure, several types of commitment trees can be built:
 1. **Credential Trees (CT)**: Support hierarchical, one-to-many relationships between issuers and credential holders, with optional multisig support.
 
 1. **Time Trees (TT)**: Linked to specific time ranges, allowing no new commitments after a set period. These can be based on ST or CT structures.
+
+<IdealImage img={require('/img/social-forest.png')} alt="Social forest" />
 
 ## Use cases
 
@@ -47,6 +51,8 @@ To maintain accurate, verifiable records, the ZK Registry synchronizes its state
 
 - **L2 to L1 Sync**: Ethereum-based smart contracts store the current state root of the registry. As Rarimo posts updates, it also publishes the latest root, ensuring other chains relying on Ethereum for verification have consistent data.
 - **Cross-Chain Syncing**: For alternative L1s, the state root is propagated from Ethereum via cross-chain messaging. Future implementations may explore alternative solutions to reduce reliance on external messaging systems.
+
+<IdealImage img={require('/img/rollup-state-sync.png')} alt="Syncing the states across other chains" />
 
 ## Can I create my own ZK Registry now?
 
