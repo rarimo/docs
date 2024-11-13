@@ -29,9 +29,9 @@ const sidebars = {
       link: { type: 'doc', id: 'zk-registry/overview' },
       collapsed: false,
       items: [
-        'zk-registry/using-rollup',
-        'zk-registry/contracts',
-        'zk-registry/network-info',
+        // 'zk-registry/using-rollup',
+        // 'zk-registry/contracts',
+        // 'zk-registry/network-info',
       ],
     },
     {
@@ -43,11 +43,11 @@ const sidebars = {
       link: { type: 'doc', id: 'zk-passport/overview' },
       collapsed: false,
       items: [
-        'zk-passport/use-cases',
-        'zk-passport/biometric-passports-101',
-        'zk-passport/map',
-        'zk-passport/guide-proof-of-citizenship',
-        'zk-passport/api-reference',
+        // 'zk-passport/use-cases',
+        // 'zk-passport/biometric-passports-101',
+        // 'zk-passport/map',
+        // 'zk-passport/guide-proof-of-citizenship',
+        // 'zk-passport/api-reference',
         'zk-passport/contracts',
       ],
     },
@@ -57,8 +57,8 @@ const sidebars = {
       link: { type: 'doc', id: 'zk-reputation/overview' },
       collapsed: false,
       items: [
-        'zk-reputation/guide-verifying-reputation',
-        'zk-reputation/contracts',
+        // 'zk-reputation/guide-verifying-reputation',
+        // 'zk-reputation/contracts',
       ],
     },
     {
@@ -80,9 +80,9 @@ const sidebars = {
       link: { type: 'doc', id: 'freedom-tool/overview' },
       collapsed: true,
       items: [
-        'freedom-tool/success-stories',
+        //'freedom-tool/success-stories',
         'freedom-tool/smart-contracts-reference',
-        'freedom-tool/resources',
+        //'freedom-tool/resources',
 
       ],
     },
@@ -92,7 +92,7 @@ const sidebars = {
       'link': { type: 'doc', id: 'rarime-app/overview' },
       'collapsed': false,
       'items': [
-        'rarime-app/guide-for-ambassadors',
+        //'rarime-app/guide-for-ambassadors',
       ],
     },
 
