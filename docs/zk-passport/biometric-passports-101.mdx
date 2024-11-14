@@ -1,10 +1,16 @@
 ---
 sidebar_label: "Biometric passport 101"
-description: Biometric passports 101.
-draft: true
+description: Learn the essentials of biometric passports, their global adoption, MRZ data, RFID chip verification, and how they enable secure, machine-readable travel.
 ---
 import OutLink from "@site/src/components/OutLink";
 import IdealImage from '@site/src/components/IdealImage';
 
 # Biometric passports 101
 
+Biometric passports are now a standard travel document, issued by 172 nations worldwide in accordance with the ICAO Machine Readable Travel Documents standard. They serve as one of the most widely recognized identity credentials globally.
+
+Each biometric passport includes a *Machine-Readable Zone (MRZ)*, which contains an RFID chip. This chip securely stores data for biometric verification, personal information, the passport's expiration date, and the issuing authority’s digital signature.
+
+<IdealImage img={require('/img/biometric-passport-data.png')} alt="Biometric Passport Data Layout" />
+
+To verify the passport’s validity, the verifier reads the MRZ using an NFC scanner, checks the issuing authority’s digital signature, and confirms the expiration date.

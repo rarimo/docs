@@ -44,7 +44,7 @@ const sidebars = {
       collapsed: false,
       items: [
         // 'zk-passport/use-cases',
-        // 'zk-passport/biometric-passports-101',
+        'zk-passport/biometric-passports-101',
         // 'zk-passport/map',
         // 'zk-passport/guide-proof-of-citizenship',
         // 'zk-passport/api-reference',

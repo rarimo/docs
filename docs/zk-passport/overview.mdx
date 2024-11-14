@@ -1,6 +1,6 @@
 ---
 slug: /zk-passport
-description: ZK passport technology turn biometric passports into zero-knowledge identity credentials for Web3.
+description: ZK passport technology turns biometric passports into zero-knowledge identity credentials for Web3.
 ---
 import OutLink from "@site/src/components/OutLink";
 import IdealImage from '@site/src/components/IdealImage';
@@ -9,25 +9,16 @@ import IdealImage from '@site/src/components/IdealImage';
 
 Rarimo has developed a novel solution that turns a regular biometric passport into a flexible digital identity credential for Web3. Importantly, this is done without compromising the security of your sensitive data by using zero-knowledge proofs.
 
-DApp developers can use the passport-derived profiles to:
-- Restrict access for risky countries
-- Set minimum age requirements
-- Create provable social graph attestations
-- Prevent Sybil attacks
-- Verify personhood
-- Any other use cases with selective disclosure of the passport data.
-
-## Biometric passports 101
-
-Biometric passports are familiar to any traveler. Currently, 172 nations issue ID documents compatible with the ICAO Machine Readable Travel Documents standard, making them one of the most widely used identity credentials worldwide.
-
-Each biometric passport contains a *MRZ(Machine-Readable Zone)*. The MRZ includes an RFID chip that contains data for biometric verification, personal details, an expiration date, and the issuer's digital signature.
-
-<IdealImage img={require('/img/biometric-passport-data.jpg')} alt="Biometric Passport Data Layout" />
-
-To check the validity of a passport, the verifier has to read the MRZ using an NFC scanner, verify the issuer's digital signature, and check the expiration date.
+ZK Passport can be used to prove reliably:
+- *Age*
+- *Uniqueness*
+- *Personhood*
+- *Citizenship*
+- *Partially disclosed personal data*
 
 ## How it works
+
+<!-- TODO: add light proofs -->
 
 The passport-derived profiles solution consists of the following components:
 - RariMe mobile apps are available for Android and iOS. They scan passports, securely store the passport data, and generate ZK proofs.
@@ -65,7 +56,7 @@ All actions within this process are performed locally, without access to the Int
 
 Next, we create a passport-derived profile by following this protocol:
 1. The user generates the keypair `<sk, pk>` for identity management and `β = Hash(sk)` to blind personal data.
-1. The user signs `pk` with the passport signature `sig = sign(challenge, sk_pass)`  by using passport active authentication and providing `Hash(pk)[:64]` as a challenge.
+1. The user signs `pk` with the passport signature `sig = sign(challenge, sk_pass)` by using passport active authentication and providing `Hash(pk)[:64]` as a challenge.
 1. The user generates a ZK `reg_proof` that `pk_pass` is a public key belonging to the passport (signed by a key from the ICAO list, without revealing the exact passport's issuer).
 1. The circuit calculates a commitment `DG_commit = Hash(DG1 || β)`.
 1. The user submits the registration data `<pk, pk_pass, sig, reg_proof>` to the registration relayer service, which then submits to the identity state contract on the Rarimo chain.
@@ -98,22 +89,23 @@ When generating proof, the prover requests the historical state of the Identity 
 
 <IdealImage img={require('/img/passport-proof-flow.png')} alt="Generating a proof of identity" />
 
-Selector `Sel` is used to selectively disclose personal information from a passport. Each private data signal is multiplied by a corresponding Sel bit. If the bit is 0, the data is blinded by multiplying it with 0. If the bit is 1, data is sent to the output signal without modifications.
+Selector `Sel` is used to disclose personal information from a passport selectively. Each private data signal is multiplied by a corresponding Sel bit. If the bit is 0, the data is blinded by multiplying it with 0. If the bit is 1, data is sent to the output signal without modifications.
 
 <IdealImage img={require('/img/passport-proof-selector.png')} alt="Passport proof selector" />
 
 DApps can verify the proofs both on-chain and off-chain. Rarimo's on-demand identity state replication technology scales the usage of on-chain proofs to any EVM-compatible network.
 
-## Dictionary attacks
+## Privacy network effect
+
+Rarimo strengthens privacy by using a global tree of passport hashes shared across all users and social apps, creating a network effect where security increases as the user base grows. To identify specific users within this network, passport issuers or third parties might attempt a "dictionary attack." This involves hashing all known passports and comparing them against entries in the passport registry. However, as the shared Merkle tree expands, the number of hashes grows, making it increasingly difficult to link specific passports to social apps. In essence, the larger the network, the greater the privacy and plausible deniability for users.
 
 <IdealImage img={require('/img/passport-hashes-dilution.png')} alt="Passport hashes dilution" />
-
-By using a global tree of passport hashes shared by all users and social apps, Rarimo creates a "privacy network effect" where the system's security is enhanced with the growth of the user base. Passport issuers or other third parties may try to identify users who participate in specific social apps by executing a "dictionary" attack that consists of hashing all known passports and checking them against the passport registry. The dilution of hashes in the shared Merkle tree makes it progressively more challenging to deduce a connection between specific passports and social apps. The bigger the network gets, the more plausible deniability the users get.
 
 ## Challenges and limitations
 
 The first implementation of ZK Passport comes with some limitations:
 
+- Some types of passports are not supported in the full verification mode yet due to limitations of mobile phone hardware.
 - No biometric checks are included, meaning someone may scan a stolen or borrowed passport. ZKML solutions may alleviate this in the future.
 - There's no way to prevent a holder of multiple passports from onboarding multiple times.
-- Only passports that support Active Authentication are supported now. We're working on an MPC-based solution to circumvent this limitation.
+- Only passports with Active Authentication support recovery at the moment. An MPC-based solution is considered to circumvent this limitation.
