@@ -5,8 +5,10 @@ on:
 
 env:
   IMAGE_NAME: ghcr.io/${{ github.repository }}:${{github.ref_name}}
-  URL: "https://staging.docs.rarimo.com"
+  URL: "https://docs.rarimo.com"
   DOMAIN: staging.docs.rarimo.com
+  BASE_URL: "/"
+  STAGING: "false"
 
 jobs:
   converge:
@@ -23,9 +25,6 @@ jobs:
         # This is where you will update the personal access token to GITHUB_TOKEN
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
-          export URL="https://docs.rarimo.com"
-          export BASE_URL="/"
-          export STAGING="false"
       
       - name: Cache layers
         uses: actions/cache@v3
