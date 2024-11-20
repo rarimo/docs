@@ -5,7 +5,7 @@ ARG BASE_URL
 ARG URL
 ARG STAGING
 
-WORKDIR /build
+WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn
 
@@ -14,4 +14,4 @@ RUN yarn build
 
 FROM nginx:1.20.2-alpine
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=builder /build/dist /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
