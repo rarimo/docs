@@ -10,94 +10,42 @@ import IdealImage from '@site/src/components/IdealImage';
 Rarimo has developed a novel solution that turns a regular biometric passport into a flexible digital identity credential for Web3. Importantly, this is done without compromising the security of your sensitive data by using zero-knowledge proofs.
 
 ZK Passport can be used to prove reliably:
-- *Age*
-- *Uniqueness*
-- *Personhood*
-- *Citizenship*
-- *Partially disclosed personal data*
+- **uniqueness**
+- **humanity**
+- **citizenship**
+- **age**
+- **any other data contained in the passport**
 
 ## How it works
 
-<!-- TODO: add light proofs -->
-
-The passport-derived profiles solution consists of the following components:
-- RariMe mobile apps are available for Android and iOS. They scan passports, securely store the passport data, and generate ZK proofs.
-- A <OutLink href="https://github.com/rarimo/passport-zk-circuits/">set of Circom circuits</OutLink> designed to generate and verify zero-knowledge proofs of identity.
-- A <OutLink href="https://github.com/rarimo/passport-contracts">set of smart contracts</OutLink> for managing the identity profile states.
-- Rarimo's cross-chain messaging protocol propagates the identity states to other chains on demand.
-
-Let's walk through the user flow and explore the inner workings of this solution.
-
-<IdealImage img={require('/img/passport-full-flow.png')} alt="ZK Passport flow" />
-
-### Scanning the passport
-
-To get started, the user must read the passport information using NFC. Under the hood, the reading process consists of the following steps:
-1. Receive the basic passport data from MRZ and generate authentication keys.
-1. Scan the data from the passport in encrypted form
-1. Decrypt and verify the data locally.
-1. Store the relevant passport data locally on the device.
-
-<IdealImage img={require('/img/passport-scanning.png')} alt="Scanning the passport" />
-
-After verifying the passport validity, the device securely stores the following data locally:
-- *DG1 Personal Details*. This section includes the passport holder's primary identity information, such as name, date of birth, nationality, and passport number. It reflects much of the information printed on the passport's data page.
-- *DG2 Facial photograph*. This section contains the passport holder's portrait. In the future, the protection method based on it will be possible to extend with face recognition and ZKML proofs.
-- *DG15: Active Authentication Public Key*. This includes the public key used for *Active Authentication(AA)*, a security feature preventing unauthorized copying of passport data.
-- Hash values of other DGs.
-- Issuer's signature.
-- *Document Signer Certificate (CDS)*.
-
-Let's note that the list of biometric data groups can be extended in the future (or for some countries). *DG2(Portrait)* is currently the most widespread biometrics in passports.
-
-All actions within this process are performed locally, without access to the Internet. The certificate path can also be verified on the device if the application stores a set of valid certificates for Trust Anchors. No personal data is shared anywhere or accessible to outside parties.
-
-### Creating a passport-derived profile
-
-Next, we create a passport-derived profile by following this protocol:
-1. The user generates the keypair `<sk, pk>` for identity management and `β = Hash(sk)` to blind personal data.
-1. The user signs `pk` with the passport signature `sig = sign(challenge, sk_pass)` by using passport active authentication and providing `Hash(pk)[:64]` as a challenge.
-1. The user generates a ZK `reg_proof` that `pk_pass` is a public key belonging to the passport (signed by a key from the ICAO list, without revealing the exact passport's issuer).
-1. The circuit calculates a commitment `DG_commit = Hash(DG1 || β)`.
-1. The user submits the registration data `<pk, pk_pass, sig, reg_proof>` to the registration relayer service, which then submits to the identity state contract on the Rarimo chain.
-
 :::info
-We use the registration relayer service instead of submitting the transaction directly to subsidize the gas fees for new users.
+Check out the [ZK Passport sandbox](https://app.rarime.com/proof-requests-demo) to get familiar with the flow.
 :::
 
-A link between the `pk` and `pk_pass` is saved in a leaf of a Sparse Merkle Tree in the identity state contract on the Rarimo chain. The leaf position and value are derived like this:
-- Leaf position: `id_pos ← Hash(pk ∥ pk_pass)`
-- Leaf value:  `v ← Hash(id_pos, DG_commit)`
+Using ZK Passport from a user perspective is simple and seamless:
+1. **Set Up**: Install the RariMe App on your phone. Use the app to scan your passport with the phone's camera and NFC chip during a one-time setup.
+1. **Proof Request**: When a DApp requests passport proof, scan the QR code provided by the DApp using the RariMe App and approve the proof generation request.
+1. **Proceed**: After the proof is processed, continue using the DApp without interruption.
 
-The user may try to create several profiles using different `pk` for the same passport, but the smart contract will reject these attempts.
+<IdealImage img={require('/img/zk-passport-flow.png')} alt="ZK Passport user flow" />
 
-<IdealImage img={require('/img/passport-profile-creation.png')} alt="Passport-derived profile creation" />
+## Light vs full verification mode
 
-Users may revoke or change the identity management keypair, but this operation requires a passport signature.
+ZK Passport offers two modes of verification to balance decentralization and computation load on the client:
 
-Additionally, the protocol allows the creation of periodic passport liveness commitments to prove passport ownership over a period of time. This is useful in use cases like voting, where a corrupt government may try to skew the results by issuing fake passports. The verifier application can set the time threshold to limit the impact of freshly printed documents on the final use case.
+- **Full Verification**: This mode is fully decentralized. The client generates proof of passport validity by verifying the issuer's signature and checking the hash sum for integrity. Uniqueness is guaranteed by adding the passport hash to an on-chain Merkle tree stored in the [ZK Registry](/zk-registry). However, a limitation of this mode is that certain types of digital signatures used in passports cannot yet be efficiently incorporated into ZK proofs. Despite this, full verification is the preferred choice for privacy-sensitive applications, offering robust censorship resistance and leveraging the *privacy network effect* described below.
 
-### Generating zero-knowledge proofs of identity
+- **Light Verification**: This mode reduces decentralization slightly to offload some computations from the client while maintaining privacy. The client generates proof of passport integrity (hash sum check), while a trusted verifier performs the validity check (issuer's signature). Uniqueness is limited to the scope of the verifier instance. By offloading signature verification, this mode supports most existing passport types out of the box, making it a practical option for less privacy-critical applications.
 
-The Passport Validity Circom circuit enables proving that the user owned a valid passport-derived profile at the specified time. Additionally, the circuit allows the user to prove that:
-- The citizenship matches the provided allowlist.
-- The expiration date of their passport is within some time bounds.
-- The date of their birth is within some time bounds.
-- Selectively disclose personal data from DG1 using a selector `Sel`.
+<IdealImage img={require('/img/full-vs-light-verification.png')} alt="Full vs light verification" />
 
-When generating proof, the prover requests the historical state of the Identity Smart Contract.
+DApps can verify the proofs both on-chain and off-chain.
 
-<IdealImage img={require('/img/passport-proof-flow.png')} alt="Generating a proof of identity" />
+## Dictionary attacks and the privacy network effect
 
-Selector `Sel` is used to disclose personal information from a passport selectively. Each private data signal is multiplied by a corresponding Sel bit. If the bit is 0, the data is blinded by multiplying it with 0. If the bit is 1, data is sent to the output signal without modifications.
+Passport issuers or other third parties may try to identify users who participate in specific social apps by executing a "dictionary" attack that consists of hashing all known passports and checking them against the passport registry.
 
-<IdealImage img={require('/img/passport-proof-selector.png')} alt="Passport proof selector" />
-
-DApps can verify the proofs both on-chain and off-chain. Rarimo's on-demand identity state replication technology scales the usage of on-chain proofs to any EVM-compatible network.
-
-## Privacy network effect
-
-Rarimo strengthens privacy by using a global tree of passport hashes shared across all users and social apps, creating a network effect where security increases as the user base grows. To identify specific users within this network, passport issuers or third parties might attempt a "dictionary attack." This involves hashing all known passports and comparing them against entries in the passport registry. However, as the shared Merkle tree expands, the number of hashes grows, making it increasingly difficult to link specific passports to social apps. In essence, the larger the network, the greater the privacy and plausible deniability for users.
+By using a global Merkle tree of passport hashes shared by all users and social apps, Rarimo creates a *privacy network effect* where the system's security is enhanced with the growth of the user base. The dilution of hashes in the shared Merkle tree makes it progressively more challenging to deduce a connection between specific passports and social apps. The bigger the network gets, the more plausible deniability the users get.
 
 <IdealImage img={require('/img/passport-hashes-dilution.png')} alt="Passport hashes dilution" />
 
