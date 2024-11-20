@@ -1,0 +1,10 @@
+apiVersion: skaffold/v2beta28
+kind: Config
+build:
+  artifacts:
+  - image: docs
+    docker:
+      buildArgs:
+        BASE_URL: "{{.BASE_URL}}"
+        URL: "{{.URL}}"
+        STAGING: "{{.STAGING}}"
