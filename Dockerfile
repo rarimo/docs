@@ -6,7 +6,7 @@ ARG URL
 ARG STAGING
 
 WORKDIR /build
-COPY package.json yarn.lock .yarnrc.yml ./
+COPY package.json yarn.lock ./
 RUN yarn
 
 COPY . .
