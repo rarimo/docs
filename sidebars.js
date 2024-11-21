@@ -108,11 +108,6 @@ const sidebars = {
         <span class="menu__link menu__link--no-hover">Resources</span>
       `
     },
-    {
-      type: 'link',
-      label: 'Whitepaper',
-      href: config.customFields.whitepaperUrl,
-    },
     'resources/audits',
     'resources/glossary',
   ]
