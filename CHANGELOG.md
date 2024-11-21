@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Migrated from the legacy werf CI to vanilla GitHub Actions;
+
 ## [5.0.0] - 2024-11-21
 ### Added
 - ZK Registry docs;
