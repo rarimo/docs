@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.1] - 2024-11-21
 ### Changed
 - Migrated from the legacy werf CI to vanilla GitHub Actions;
 
@@ -409,7 +410,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.0.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.0.1...HEAD
+[5.0.1]: https://github.com/rarimo/docs/compare/5.0.0...5.0.1
 [5.0.0]: https://github.com/rarimo/docs/compare/4.2.3...5.0.0
 [4.2.3]: https://github.com/rarimo/docs/compare/4.2.2...4.2.3
 [4.2.2]: https://github.com/rarimo/docs/compare/4.2.1...4.2.2
