@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [5.1.0] - 2024-12-02
 ### Changed
 - Updated the details of the ZK Passport verification modes.
 
@@ -412,7 +414,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.0.1...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.1.0...HEAD
+[5.1.0]: https://github.com/rarimo/docs/compare/5.0.1...5.1.0
 [5.0.1]: https://github.com/rarimo/docs/compare/5.0.0...5.0.1
 [5.0.0]: https://github.com/rarimo/docs/compare/4.2.3...5.0.0
 [4.2.3]: https://github.com/rarimo/docs/compare/4.2.2...4.2.3
