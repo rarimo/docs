@@ -29,17 +29,25 @@ Using ZK Passport from a user perspective is simple and seamless:
 
 <IdealImage img={require('/img/zk-passport-flow.png')} alt="ZK Passport user flow" />
 
-## Light vs full verification mode
+## Light vs full passport verification
 
-ZK Passport offers two modes of verification to balance decentralization and computation load on the client:
+To start using identity proofs, a user's passport needs to be registered in the ZK Registry's on-chain Merkle tree. This process eliminates the need to create expensive passport validity proofs for each transaction. Instead, users can rely on simpler proofs of inclusion in the Merkle tree.
 
-- **Full Verification**: This mode is fully decentralized. The client generates proof of passport validity by verifying the issuer's signature and checking the hash sum for integrity. Uniqueness is guaranteed by adding the passport hash to an on-chain Merkle tree stored in the [ZK Registry](/zk-registry). However, a limitation of this mode is that certain types of digital signatures used in passports cannot yet be efficiently incorporated into ZK proofs. Despite this, full verification is the preferred choice for privacy-sensitive applications, offering robust censorship resistance and leveraging the *privacy network effect* described below.
+:::info
+DApps can verify the ZK Passport proofs both on-chain and off-chain.
+:::
 
-- **Light Verification**: This mode reduces decentralization slightly to offload some computations from the client while maintaining privacy. The client generates proof of passport integrity (hash sum check), while a trusted verifier performs the validity check (issuer's signature). Uniqueness is limited to the scope of the verifier instance. By offloading signature verification, this mode supports most existing passport types out of the box, making it a practical option for less privacy-critical applications.
+<IdealImage img={require('/img/zk-passport-proof-flow.png')} alt="ZK Passport proof verification flow" />
 
-<IdealImage img={require('/img/full-vs-light-verification.png')} alt="Full vs light verification" />
+For the initial registration, Rarimo provides two passport verification modes to balance decentralization with the computation load on users' mobile devices:
 
-DApps can verify the proofs both on-chain and off-chain.
+- **Full Verification**: In this fully decentralized mode, the client generates a ZK proof to confirm two things: the passport's validity (by verifying the issuer's signature) and its integrity (by checking the hash). However, this process is limited by current smartphone hardware, which struggles to process certain digital signatures used in passports efficiently.
+- **Light Verification**: This mode reduces decentralization slightly to ease the computational load on the user's mobile device while maintaining privacy. The client generates proof of passport integrity (hash verification) while a trusted Rarimo verifier checks the passport's validity (issuer signature). This method works seamlessly with most passport types.
+
+<IdealImage img={require('/img/light-vs-full-verification.png')} alt="ZK Passport proof verification flow" />
+
+
+To balance decentralization and compatibility, the RariMe App defaults to the full verification mode and switches to light verification when necessary. This is done automatically and seamlessly for the user.
 
 ## Dictionary attacks and the privacy network effect
 
