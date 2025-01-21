@@ -1,11 +1,165 @@
 ---
-description: Use ZK Passport to verify citizenship without revealing private data.
+description: Use ZK Passport to verify citizenship off-chain without revealing private data. Learn how to implement the verification process step-by-step with RariMe App.
 sidebar_label: "Guide: verifying citizenship"
-draft: true
 ---
 import OutLink from "@site/src/components/OutLink";
 import IdealImage from '@site/src/components/IdealImage';
 
-# Guide: Use ZK Passport to verify citizenship
+# Guide: Use ZK Passport to verify citizenship off-chain
 
->TODO
+Before getting started with implementing the citizenship check, let’s quickly review all the steps of the process on the diagram below.
+
+<IdealImage img={require('/img/zk-passport-proof-of-citizenship-flow.png')} alt="ZK Passport user flow" />
+
+Basically, it goes likes this:
+
+1. User installs the RariMe App and scans the passport
+2. Scan a QR-code in the DApp
+3. Gets prompted to generate a proof of eligibility in RariMe App
+4. The app submits the proof to the callback URL(specified in the QR code) for verification
+5. DApp backend fetches the verification status and citizenship data from a REST API
+
+You can check out this flow in the sandbox: <OutLink href="https://app.rarime.com/proof-requests-demo">ZK Passport Demo</OutLink>
+
+## Pre-requisites
+
+:::tip
+You can use this public instance of `verifier-svc` for testing: <OutLink href="https://api.app.rarime.com/">https://api.app.rarime.com/</OutLink>
+:::
+
+To get started, you SHOULD deploy your own instance of https://github.com/rarimo/verificator-svc. This service encapsulates proof verification and provides a convenient REST API for requesting parameters for the QR code, checking the user verification status, etc. You need to trust the instance of `verifier-svc` so the best option is to host your own instance.
+
+API docs: <OutLink href="https://rarimo.github.io/verificator-svc/">verificator-svc | ReDoc</OutLink>
+
+## Step #1: Ask the user to install RariMe App and scan the passport
+
+<IdealImage img={require('/img/install-rarime.png')} alt="Install RariMe App" />
+
+Links for installation:
+
+- <OutLink href="https://apps.apple.com/us/app/rarime/id6503300598">RariMe for iOS | AppStore</OutLink>
+- <OutLink href="https://play.google.com/store/apps/details?id=com.rarilabs.rarime">RariMe for Android | Google Play</OutLink>
+
+## Step #2: Render a QR code with a verification request in your app
+
+To request data for the QR code, you need to call this endpoint on the `verifier-svc`:
+<OutLink href="https://rarimo.github.io/verificator-svc/#tag/Light-User-verification/operation/getVerificationLink">https://rarimo.github.io/verificator-svc/#tag/Light-User-verification/operation/getVerificationLink</OutLink>
+
+The following JS snippet gets data for a QR code for a passport verification with a uniqueness check on:
+
+```jsx
+const verificatorUrl = 'https://api.app.rarime.com/' // your verificator-svc instance URL
+const body = {
+  data: {
+	  type: "user",
+    // Some public and unique Icebreaker user ID
+    // Will be used to fetch status later
+    id: "some-user-id",
+    attributes: {
+      // Denotes the application and activity that is requesting the verification
+      event_id: "icebreaker_citizenship_verification",
+      // Let a single passport pass verification just once
+      uniqueness: true
+    }
+  }
+}
+
+const response = await fetch(
+
+  `${verificatorUrl}/integrations/verificator-svc/light/private/verification-link`,
+  {
+    headers: {
+      'Accept': 'application/vnd.api+json',
+      'Content-Type': 'application/vnd.api+json',
+    },
+    method: "POST",
+    body: JSON.stringify(body),
+  }
+)
+const { data } = await response.json()
+// Proof Params URL for RariMe app
+const proofParamsUrl = data.attributes.get_proof_params
+const encodedUrl = encodeURIComponent(proofParamsUrl)
+// Render this data in a QR code:
+const qrCodeContent = `rarime://external?type=light-verification&proof_params_url=${encodedUrl}`)
+```
+
+```jsx
+const verificatorUrl = 'https://api.app.rarime.com/' // your verifier-svc instance URL
+const body = {
+  data: {
+	  type: "user",
+    // Some public and unique Icebreaker user ID
+    // Will be used to fetch status later
+    id: "some-user-id",
+    attributes: {
+      // Denotes the application and activity that is requesting the verification
+      event_id: "icebreaker_citizenship_verification",
+      // Let a single passport pass verification just once
+      uniqueness: true
+    }
+  }
+}
+
+const response = await fetch(
+
+  `${verificatorUrl}/integrations/verificator-svc/light/private/verification-link`,
+  {
+    headers: {
+      'Accept': 'application/vnd.api+json',
+      'Content-Type': 'application/vnd.api+json',
+    },
+    method: "POST",
+    body: JSON.stringify(body),
+  }
+)
+const { data } = await response.json()
+// Proof Params URL for RariMe app
+const proofParamsUrl = data.attributes.get_proof_params
+const encodedUrl = encodeURIComponent(proofParamsUrl)
+// Render this data in a QR code:
+const qrCodeContent = `rarime://external?type=light-verification&proof_params_url=${encodedUrl}`)
+```
+
+Some notes:
+
+- `event_id` is an arbitrary string that denotes the application scope of the proof, should be something like `APP_ID:ACTION_ID`
+- `id` is a public unique ID associated with a user within your system. It will be used in Step #3 to check the user status
+
+After scanning the QR code, the user will complete the verification in RariMe App.
+
+## Step #3: Check the user status
+
+You can fetch the verification status for a particular `id` from this endpoint:
+<OutLink href="https://rarimo.github.io/verificator-svc/#tag/Light-User-verification/operation/getUserStatus">https://rarimo.github.io/verificator-svc/#tag/Light-User-verification/operation/getUserStatus</OutLink>
+
+Here is a JS snippet for doing this
+
+```jsx
+const backendUrl = 'https://api.app.rarime.com/'
+const userId = 'some-user-id' // the `id` from step #2
+
+const response = await fetch(`${backendUrl}/integrations/verification-svc/light/private/verification-status/${userId}`)
+const { data } = await response.json()
+
+// responseUserId === userId
+const responseUserId = data.id
+
+// Verification status enum:
+// - "not_verified" - user is not verified
+// - "verified" - user is verified
+// - "failed_verification" - user verification failed
+// - "uniqueness_check_failed" - user uniqueness check failed
+const verificationStatus = data.attributes.status
+```
+
+If the user has status `verified`, you can fetch the verified citizenship code like this:
+
+```jsx
+const response = await fetch(`${backendUrl}/integrations/verification-svc/light/private/user/${userId}`)
+const { data } = await response.json()
+
+// ISO 3166 alpha-3 country code: https://www.iban.com/country-codes
+// Note: German passports may have a single-letter "D" code
+const citizenshipISOCode = data.attributes.nationality // e.g. "UKR"
+```
