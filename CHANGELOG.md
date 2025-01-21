@@ -6,11 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-- Updated the glossary;
-
+## [5.2.0] - 2025-01-22
 ### Added
 - How to use ZK Passport for proof of citizenship guide;
+
+### Changed
+- Updated the glossary;
 
 ## [5.1.0] - 2024-12-02
 ### Changed
@@ -420,7 +421,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.1.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.2.0...HEAD
+[5.2.0]: https://github.com/rarimo/docs/compare/5.1.0...5.2.0
 [5.1.0]: https://github.com/rarimo/docs/compare/5.0.1...5.1.0
 [5.0.1]: https://github.com/rarimo/docs/compare/5.0.0...5.0.1
 [5.0.0]: https://github.com/rarimo/docs/compare/4.2.3...5.0.0
