@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.2.1] - 2025-02-04
 ### Fixed
 - Minor typos in the ZK Passport guide;
 
@@ -424,7 +425,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.2.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.2.1...HEAD
+[5.2.1]: https://github.com/rarimo/docs/compare/5.2.0...5.2.1
 [5.2.0]: https://github.com/rarimo/docs/compare/5.1.0...5.2.0
 [5.1.0]: https://github.com/rarimo/docs/compare/5.0.1...5.1.0
 [5.0.1]: https://github.com/rarimo/docs/compare/5.0.0...5.0.1
