@@ -52,12 +52,12 @@ const verificatorUrl = 'https://api.app.rarime.com/' // your verificator-svc ins
 const body = {
   data: {
 	  type: "user",
-    // Some public and unique Icebreaker user ID
+    // Some public and unique user ID
     // Will be used to fetch status later
     id: "some-user-id",
     attributes: {
       // Denotes the application and activity that is requesting the verification
-      event_id: "icebreaker_citizenship_verification",
+      event_id: "citizenship_verification",
       // Let a single passport pass verification just once
       uniqueness: true
     }
@@ -89,12 +89,12 @@ const verificatorUrl = 'https://api.app.rarime.com/' // your verifier-svc instan
 const body = {
   data: {
 	  type: "user",
-    // Some public and unique Icebreaker user ID
+    // Some public and unique user ID
     // Will be used to fetch status later
     id: "some-user-id",
     attributes: {
       // Denotes the application and activity that is requesting the verification
-      event_id: "icebreaker_citizenship_verification",
+      event_id: "citizenship_verification",
       // Let a single passport pass verification just once
       uniqueness: true
     }

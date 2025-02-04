@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Minor typos in the ZK Passport guide;
+
 ## [5.2.0] - 2025-01-22
 ### Added
 - How to use ZK Passport for proof of citizenship guide;
