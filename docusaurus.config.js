@@ -194,7 +194,7 @@ module.exports = {
       metadata: [
         {
           property: 'og:image',
-          content: 'https://docs.rarimo.com/img/og-img.jpg',
+          content: 'https://docs.rarimo.com/img/og-img.png',
         },
         {
           name: 'twitter:card',
