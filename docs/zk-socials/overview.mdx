@@ -1,0 +1,37 @@
+---
+description: ZK Socials is a privacy-preserving solution that leverages zkTLS to create ZK Registries from Web2 data, enabling seamless, anonymous, and reusable credentials for Web3.
+slug: /zk-socials
+---
+
+import OutLink from "@site/src/components/OutLink";
+import IdealImage from '@site/src/components/IdealImage';
+
+# ZK Socials
+
+## What is ZK Socials?
+
+ZK Socials is a privacy-preserving solution that utilizes zkTLS to establish ZK Registries based on Web2 data. This makes it ideal for use cases such as bridging credentials from the legacy web to Web3.
+
+## Why ZK Socials?
+
+While zkTLS solutions provide a secure way to generate attestations of Web2 data, they often come with a complex user experience. Integrating these attestations into a ZK Registry makes them instantly reusable, composable, and anonymous, significantly enhancing usability.
+
+## How does it work?
+
+Using ZK Socials follows these steps:
+1. The user obtains an attestation via a zkTLS protocol of their choice.
+1. The user submits a ZK proof of attestation's validity to a permissionless ZK Registry, which verifies it on-chain and records it in the registry.
+1. Once the attestation is stored, the user can generate ZK proofs of inclusion for any DApps that require them.
+
+<IdealImage img={require('/img/zk-socials.png')} alt="ZK Socials flows" />
+
+## Use case: X Blue Checkmark registry
+
+A prediction market <OutLink href="https://openion.com/">Openion</OutLink> has integrated ZK Socials to check X Blue Checkmarks. To withdraw rewards, users must verify their X account using zkPass and submit a ZK proof of membership in the Blue Checkmark ZK Registry.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/REK4m9ZkvLk?si=VikF7jbnzMVFMSHa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+## How can I start building using ZK Socials?
+
+ZK Socials is open for builders and is currently seeking early adopters. Please get in touch with us on <OutLink href="https://x.com/Rarimo_protocol">X</OutLink>.
