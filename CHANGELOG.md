@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+- Legacy assets;
+- Legacy L1 docs;
+
 ## [5.3.0] - 2025-02-13
 ### Added
 - ZK Socials overview doc;
