@@ -139,7 +139,7 @@ Here is a JS snippet for doing this
 const backendUrl = 'https://api.app.rarime.com/'
 const userId = 'some-user-id' // the `id` from step #2
 
-const response = await fetch(`${backendUrl}/integrations/verification-svc/light/private/verification-status/${userId}`)
+const response = await fetch(`${backendUrl}/integrations/verificator-svc/light/private/verification-status/${userId}`)
 const { data } = await response.json()
 
 // responseUserId === userId
@@ -156,7 +156,7 @@ const verificationStatus = data.attributes.status
 If the user has status `verified`, you can fetch the verified citizenship code like this:
 
 ```jsx
-const response = await fetch(`${backendUrl}/integrations/verification-svc/light/private/user/${userId}`)
+const response = await fetch(`${backendUrl}/integrations/verificator-svc/light/private/user/${userId}`)
 const { data } = await response.json()
 
 // ISO 3166 alpha-3 country code: https://www.iban.com/country-codes
