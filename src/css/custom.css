@@ -6,12 +6,10 @@
 
 /* You can override the default Infima variables here. */
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 :root {
-  --primary-main: #4E9E7F;
-  --error-main: #df1c41;
+  --primary-main: #45C45C;
+  --error-main: #DD3B36;
   --ifm-color-primary: var(--primary-main);
   --ifm-color-primary-dark: #28c3b7;
   --ifm-color-primary-darker: #25b8ad;
@@ -32,7 +30,7 @@
   --secondary-text-color-light: var(--white);
   --primary-text-color-dark: #131313;
   --primary-border: 1px solid var(--secondary-bg-color);
-  --primary-font-family: 'Oswald';
+  --primary-font-family: 'Inter';
   --secondary-font-family: 'Inter';
   --z-index-default: 1;
   --z-index-background-image: -1;
@@ -41,7 +39,7 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 html[data-theme='dark'] {
-  --primary-main: #8ab5a4;
+  --primary-main: #69DE7F;
   --error-main: #bb1837;
   --ifm-color-primary: var(--primary-main);
   --ifm-color-primary-dark: #28c3b7;
@@ -51,7 +49,7 @@ html[data-theme='dark'] {
   --ifm-color-primary-lighter: #51dcd1;
   --ifm-color-primary-lightest: var(--primary-main);
   --bg-rect-border-color: rgba(255, 255, 255, 5%);
-  --primary-text-color: #8f8f8f;
+  --primary-text-color: rgba(255, 255, 255, 0.56);
   --primary-text-color-light: rgba(255, 255, 255, 0.9);
   --primary-bg-rect-size: 4.125rem;
   --ifm-font-color: rgba(255, 255, 255, 0.84);
@@ -84,8 +82,8 @@ html[data-theme='dark'] {
 
 html[data-theme='light'] {
   --primary-text-color-dark: #fff;
-  --primary-text-color: #8f8f8f;
-  --primary-text-color-light: #0d0d0d;
+  --primary-text-color: rgba(40, 40, 40, 0.56);
+  --primary-text-color-light: #282828;
   --primary-bg-color: #fff;
   --primary-bg-color-light: #f5f5f5;
   --bg-rect-border-color: rgba(0, 0, 0, 0.05);
@@ -319,7 +317,7 @@ a:hover {
 }
 
 .menu__link--active{
-  --ifm-menu-color-background-active: rgba(78, 158, 127, 0.08);
+  --ifm-menu-color-background-active: rgba(130, 237, 150, 0.08);
   --ifm-menu-color-active: var(--primary-main);
 }
 .menu__link{
