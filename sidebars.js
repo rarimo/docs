@@ -31,7 +31,7 @@ const sidebars = {
       items: [
         // 'zk-registry/using-rollup',
         // 'zk-registry/contracts',
-        // 'zk-registry/network-info',
+        'zk-registry/network-info',
       ],
     },
     {
