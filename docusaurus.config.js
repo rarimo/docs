@@ -86,10 +86,10 @@ module.exports = {
         },
         items: [
           {
-            href: 'https://discord.gg/cfrH3Fe7ke',
+            href: 'https://t.me/+pWugh5xgDiE3Y2Jk',
             html: `
             <span class="header__social-link">
-            Discord <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="currentColor"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="currentColor"/></g></svg>
+            Telegram <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="currentColor"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="currentColor"/></g></svg>
             </span>`,
             position: 'right',
           },
@@ -153,21 +153,14 @@ module.exports = {
               },
               {
                 html: `
-                <a href="https://discord.gg/cfrH3Fe7ke" class="footer__social-link" target="_blank" rel="nofollow noreferrer noopener" aria-label="Discord">
-                Discord <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="currentColor"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="currentColor"/></g></svg>
-                </a>
-              `,
-              },
-              {
-                html: `
-                <a href="https://t.me/rarimoprotocol" class="footer__social-link" target="_blank" rel="nofollow noreferrer noopener" aria-label="Telegram">
+                <a href="https://t.me/+pWugh5xgDiE3Y2Jk" class="footer__social-link" target="_blank" rel="nofollow noreferrer noopener" aria-label="Telegram">
                 Telegram <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="currentColor"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="currentColor"/></g></svg>
                 </a>
                 `,
               },
               {
                 html: `
-                <a href="https://twitter.com/Rarimo_protocol" class="footer__social-link" target="_blank" rel="nofollow noreferrer noopener" aria-label="X">
+                <a href="https://x.com/Rarimo_protocol" class="footer__social-link" target="_blank" rel="nofollow noreferrer noopener" aria-label="X">
                 X <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <mask id="mask0_1217_16813" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"><rect width="20" height="20" fill="currentColor"/></mask><g mask="url(#mask0_1217_16813)"><path d="M5.33329 15L4.16663 13.8333L12.1666 5.83329H4.99996V4.16663H15V14.1666H13.3333V6.99996L5.33329 15Z" fill="currentColor"/></g></svg>
                 </a>
                 `,
@@ -181,7 +174,7 @@ module.exports = {
         indexName: 'rarimo',
         appId: '4PAZA7JWOP',
         contextualSearch: false,
-        searchPagePath: "search",
+        searchPagePath: 'search',
         debug: true,
       },
       prism: {
