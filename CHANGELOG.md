@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [5.4.2] - 2025-03-24
 ### Changed
 - Updated Docusaurus packages to v3.7.0;
 
@@ -451,7 +453,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.4.1...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.4.2...HEAD
+[5.4.2]: https://github.com/rarimo/docs/compare/5.4.1...5.4.2
 [5.4.1]: https://github.com/rarimo/docs/compare/5.4.0...5.4.1
 [5.4.0]: https://github.com/rarimo/docs/compare/5.3.1...5.4.0
 [5.3.1]: https://github.com/rarimo/docs/compare/5.3.0...5.3.1
