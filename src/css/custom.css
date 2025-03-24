@@ -195,10 +195,6 @@ a {
   transition: all 0.25s ease-out !important;
 }
 
-a:hover {
-  text-decoration: none;
-}
-
 .menu__link--no-hover {
   color: var(--primary-text-color);
 }
