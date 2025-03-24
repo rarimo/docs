@@ -1,10 +1,6 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { SidebarsConfig } from '@docusaurus/plugin-content-docs'
 
-const config = require('./docusaurus.config')
-
-/** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
-const sidebars = {
+const sidebars: SidebarsConfig = {
   sidebar: [
     {
       type: 'doc',
@@ -15,13 +11,13 @@ const sidebars = {
       type: 'html',
       value: `
         <div class="menu__splitter"></div>
-      `
+      `,
     },
     {
       type: 'html',
       value: `
         <span class="menu__link menu__link--no-hover">Infrastructure</span>
-      `
+      `,
     },
     {
       type: 'category',
@@ -66,22 +62,20 @@ const sidebars = {
       label: 'ZK Socials',
       link: { type: 'doc', id: 'zk-socials/overview' },
       collapsed: false,
-      items: [
-
-      ],
+      items: [],
     },
     {
       type: 'html',
       value: `
         <div class="menu__splitter"></div>
-      `
+      `,
     },
 
     {
       type: 'html',
       value: `
         <span class="menu__link menu__link--no-hover">Products</span>
-      `
+      `,
     },
     {
       type: 'category',
@@ -92,15 +86,14 @@ const sidebars = {
         //'freedom-tool/success-stories',
         'freedom-tool/smart-contracts-reference',
         //'freedom-tool/resources',
-
       ],
     },
     {
-      'type': 'category',
-      'label': 'RariMe App',
-      'link': { type: 'doc', id: 'rarime-app/overview' },
-      'collapsed': false,
-      'items': [
+      type: 'category',
+      label: 'RariMe App',
+      link: { type: 'doc', id: 'rarime-app/overview' },
+      collapsed: false,
+      items: [
         //'rarime-app/guide-for-ambassadors',
       ],
     },
@@ -109,17 +102,17 @@ const sidebars = {
       type: 'html',
       value: `
         <div class="menu__splitter"></div>
-      `
+      `,
     },
     {
       type: 'html',
       value: `
         <span class="menu__link menu__link--no-hover">Resources</span>
-      `
+      `,
     },
     'resources/audits',
     'resources/glossary',
-  ]
+  ],
 }
 
-module.exports = sidebars
+export default sidebars

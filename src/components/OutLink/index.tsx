@@ -1,9 +1,16 @@
-import React from 'react';
+import Link from '@docusaurus/Link'
+import React from 'react'
 
-export default function OutLink({children, href}) {
+export default function OutLink({
+  href,
+  children,
+}: {
+  href: string
+  children: React.ReactNode
+}) {
   return (
-    <a href={href} target="_blank" rel="nofollow noopener noreferrer">
-        {children}
-    </a>
-  );
+    <Link to={href} target="_blank" rel="nofollow noopener noreferrer">
+      {children}
+    </Link>
+  )
 }
