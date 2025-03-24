@@ -11,7 +11,7 @@ const config: Config = {
   baseUrl: process.env.BASE_URL || '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/logo-black.svg',
+  favicon: 'favicon.ico',
   noIndex: process.env.STAGING === 'true',
   trailingSlash: true,
   customFields: {
