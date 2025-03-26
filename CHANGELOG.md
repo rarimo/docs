@@ -10,7 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Migrated config & components to TypeScript;
-- Updated `OutLink` component to use `Link` from `@docusaurus/Link`
+- Updated `OutLink` component to use `Link` from `@docusaurus/Link`;
+
+### Fixed
+- URLs in the proof of citizenship guide;
 
 ### Removed
 - Unused assets and components;
