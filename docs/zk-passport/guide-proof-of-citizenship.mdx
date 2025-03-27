@@ -43,7 +43,7 @@ Links for installation:
 ## Step #2: Render a QR code with a verification request in your app
 
 To request data for the QR code, you need to call this endpoint on the `verifier-svc`:
-<OutLink href="https://rarimo.github.io/verificator-svc/#tag/Light-User-verification/operation/getVerificationLink">https://rarimo.github.io/verificator-svc/#tag/Light-User-verification/operation/getVerificationLink</OutLink>
+<OutLink href="https://api.stage.rarime.com/integrations/verificator-svc/private/verification-link">https://api.stage.rarime.com/integrations/verificator-svc/private/verification-link</OutLink>
 
 The following JS snippet gets data for a QR code for a passport verification with a uniqueness check on:
 
@@ -66,7 +66,7 @@ const body = {
 
 const response = await fetch(
 
-  `${verificatorUrl}/integrations/verificator-svc/light/private/verification-link`,
+  `${verificatorUrl}/integrations/verificator-svc/private/verification-link`,
   {
     headers: {
       'Accept': 'application/vnd.api+json',
@@ -81,44 +81,7 @@ const { data } = await response.json()
 const proofParamsUrl = data.attributes.get_proof_params
 const encodedUrl = encodeURIComponent(proofParamsUrl)
 // Render this data in a QR code:
-const qrCodeContent = `rarime://external?type=light-verification&proof_params_url=${encodedUrl}`)
-```
-
-```jsx
-const verificatorUrl = 'https://api.app.rarime.com/' // your verifier-svc instance URL
-const body = {
-  data: {
-	  type: "user",
-    // Some public and unique user ID
-    // Will be used to fetch status later
-    id: "some-user-id",
-    attributes: {
-      // Denotes the application and activity that is requesting the verification
-      event_id: "citizenship_verification",
-      // Let a single passport pass verification just once
-      uniqueness: true
-    }
-  }
-}
-
-const response = await fetch(
-
-  `${verificatorUrl}/integrations/verificator-svc/light/private/verification-link`,
-  {
-    headers: {
-      'Accept': 'application/vnd.api+json',
-      'Content-Type': 'application/vnd.api+json',
-    },
-    method: "POST",
-    body: JSON.stringify(body),
-  }
-)
-const { data } = await response.json()
-// Proof Params URL for RariMe app
-const proofParamsUrl = data.attributes.get_proof_params
-const encodedUrl = encodeURIComponent(proofParamsUrl)
-// Render this data in a QR code:
-const qrCodeContent = `rarime://external?type=light-verification&proof_params_url=${encodedUrl}`)
+const qrCodeContent = `rarime://external?type=proof-request&proof_params_url=${encodedUrl}`)
 ```
 
 Some notes:
@@ -131,7 +94,7 @@ After scanning the QR code, the user will complete the verification in RariMe Ap
 ## Step #3: Check the user status
 
 You can fetch the verification status for a particular `id` from this endpoint:
-<OutLink href="https://rarimo.github.io/verificator-svc/#tag/Light-User-verification/operation/getUserStatus">https://rarimo.github.io/verificator-svc/#tag/Light-User-verification/operation/getUserStatus</OutLink>
+<OutLink href="https://rarimo.github.io/verificator-svc/#tag/User-verification/operation/getUserStatus">https://rarimo.github.io/verificator-svc/#tag/User-verification/operation/getUserStatus</OutLink>
 
 Here is a JS snippet for doing this
 
@@ -139,7 +102,7 @@ Here is a JS snippet for doing this
 const backendUrl = 'https://api.app.rarime.com/'
 const userId = 'some-user-id' // the `id` from step #2
 
-const response = await fetch(`${backendUrl}/integrations/verificator-svc/light/private/verification-status/${userId}`)
+const response = await fetch(`${backendUrl}/integrations/verificator-svc/private/verification-status/${userId}`)
 const { data } = await response.json()
 
 // responseUserId === userId
@@ -156,7 +119,7 @@ const verificationStatus = data.attributes.status
 If the user has status `verified`, you can fetch the verified citizenship code like this:
 
 ```jsx
-const response = await fetch(`${backendUrl}/integrations/verificator-svc/light/private/user/${userId}`)
+const response = await fetch(`${backendUrl}/integrations/verificator-svc/private/user/${userId}`)
 const { data } = await response.json()
 
 // ISO 3166 alpha-3 country code: https://www.iban.com/country-codes

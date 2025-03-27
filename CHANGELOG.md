@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Use full verification flow in the off-chain proof of citizenship guide;
+
 ## [5.5.0] - 2025-03-26
 ### Added
 - Favicon;
