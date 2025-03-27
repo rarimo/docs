@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.5.1] - 2025-03-27
 ### Changed
 - Use full verification flow in the off-chain proof of citizenship guide;
 
@@ -470,7 +471,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.5.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.5.1...HEAD
+[5.5.1]: https://github.com/rarimo/docs/compare/5.5.0...5.5.1
 [5.5.0]: https://github.com/rarimo/docs/compare/5.4.2...5.5.0
 [5.4.2]: https://github.com/rarimo/docs/compare/5.4.1...5.4.2
 [5.4.1]: https://github.com/rarimo/docs/compare/5.4.0...5.4.1
