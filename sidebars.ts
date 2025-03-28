@@ -57,19 +57,6 @@ const sidebars: SidebarsConfig = {
         // 'zk-reputation/contracts',
       ],
     },
-    {
-      type: 'category',
-      label: 'ZK Socials',
-      link: { type: 'doc', id: 'zk-socials/overview' },
-      collapsed: false,
-      items: [],
-    },
-    {
-      type: 'html',
-      value: `
-        <div class="menu__splitter"></div>
-      `,
-    },
 
     {
       type: 'html',
