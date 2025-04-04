@@ -24,10 +24,10 @@ You can check out this flow in the sandbox: <OutLink href="https://app.rarime.co
 ## Pre-requisites
 
 :::tip
-You can use this public instance of `verifier-svc` for testing: <OutLink href="https://api.app.rarime.com/">https://api.app.rarime.com/</OutLink>
+You can use this public instance of `verificator-svc` for testing: <OutLink href="https://api.app.rarime.com/">https://api.app.rarime.com/</OutLink>
 :::
 
-To get started, you SHOULD deploy your own instance of https://github.com/rarimo/verificator-svc. This service encapsulates proof verification and provides a convenient REST API for requesting parameters for the QR code, checking the user verification status, etc. You need to trust the instance of `verifier-svc` so the best option is to host your own instance.
+To get started, you SHOULD deploy your own instance of https://github.com/rarimo/verificator-svc. This service encapsulates proof verification and provides a convenient REST API for requesting parameters for the QR code, checking the user verification status, etc. You need to trust the instance of `verificator-svc` so the best option is to host your own instance.
 
 API docs: <OutLink href="https://rarimo.github.io/verificator-svc/">verificator-svc | ReDoc</OutLink>
 
@@ -42,7 +42,7 @@ Links for installation:
 
 ## Step #2: Render a QR code with a verification request in your app
 
-To request data for the QR code, you need to call this endpoint on the `verifier-svc`:
+To request data for the QR code, you need to call this endpoint on the `verificator-svc`:
 <OutLink href="https://api.stage.rarime.com/integrations/verificator-svc/private/verification-link">https://api.stage.rarime.com/integrations/verificator-svc/private/verification-link</OutLink>
 
 The following JS snippet gets data for a QR code for a passport verification with a uniqueness check on:
