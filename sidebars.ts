@@ -33,9 +33,6 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'ZK Passport',
-      // TODO:
-      // - redirect from 'accounts/zk-passport'
-      // = redirect from 'accounts/smart-contracts-reference',
       link: { type: 'doc', id: 'zk-passport/overview' },
       collapsed: false,
       items: [
