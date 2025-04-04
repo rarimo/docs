@@ -41,7 +41,7 @@ const sidebars: SidebarsConfig = {
         // 'zk-passport/map',
         'zk-passport/guide-proof-of-citizenship',
         'zk-passport/guide-on-chain-verification',
-        'zk-passport/guide-setting-up-cross-chain-verification',
+        'zk-passport/guide-setting-up-cross-chain-replication',
         'zk-passport/guide-setting-up-verifier-svc',
         // 'zk-passport/api-reference',
         'zk-passport/contracts',
