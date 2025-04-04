@@ -1,12 +1,21 @@
 ---
-description: Use ZK Passport to verify users on-chain without revealing private data. Learn how to implement the verification process step-by-step with RariMe App.
+description: Set up ZK Passport Registry replication to verify ZK Passport proofs on any EVM-compatible chain.
 sidebar_label: "Guide: setting up cross-chain replication"
 ---
+
 import OutLink from "@site/src/components/OutLink";
 import IdealImage from '@site/src/components/IdealImage';
 
-1. Deployed the **RegistrationSMTReplicator** contract for ZK Registry state replication.
-2. Set up your relayer or front-end submission flow.
+# Guide: Setting up cross-chain replication for ZK Passport
+
+:::info
+Native state transfer to Ethereum L1 is currently under construction.
+:::
+
+This guide walks you through the process of setting up cross-chain replication for ZK Passport Registry state. By the end of this tutorial, you will have:
+
+1. Deployed the **RegistrationSMTReplicator** contract on the target chain.
+1. Set up your relayer or front-end submission flow.
 
 ## Step 1: Deploy the RegistrationSMTReplicator
 
@@ -14,7 +23,7 @@ The **RegistrationSMTReplicator** handles the replication of state from the ZK R
 
 1. **Obtain the contract code** for `RegistrationSMTReplicator` (contact the provider of the ZK Registry or check their repository for the contract source).
 
-2. **Deploy** the `RegistrationSMTReplicator` to your chain:
+1. **Deploy** the `RegistrationSMTReplicator` to your chain:
 
    ```solidity
    // Example snippet (pseudo-code)
@@ -24,10 +33,22 @@ The **RegistrationSMTReplicator** handles the replication of state from the ZK R
    );
    ```
 
-3. **Configure** your relayer service or front-end to submit state updates to the `RegistrationSMTReplicator`. These updates keep the replicated data on your chain in sync with the ZK Registry.
+## Step 2: Set up the relayer or front-end submission flow to replicate the states
 
-   - **Option A**: Spin up a **relayer service** to automatically listen for on-chain events from the ZK Registry and relay state updates to your chain.
-   - **Option B**: Submit updates **from your front-end**. This requires you to collect state updates (e.g., new leaves in the Merkle tree, updated Merkle roots) from the ZK Registry and call a function like `updateState(...)` on the `RegistrationSMTReplicator` contract.
+To keep the state of the ZK Registry in sync with your chain, you need to set up a relayer or front-end submission flow. This will ensure that any changes in the ZK Registry are reflected in the `RegistrationSMTReplicator` contract.
 
-   > **Note**: If you want to implement Option B, you can reach out to the ZK Registry team for more detailed instructions on how to collect state updates client-side.
+You have two options:
+1. **Option A**: Set up a relayer service that listens for events from the ZK Registry and submits state updates to your `RegistrationSMTReplicator` instance.
 
+   - This relayer will listen for events such as new passport registrations or updates to existing registrations.
+   - When an event is detected, the relayer will call the `updateState(...)` function on the `RegistrationSMTReplicator` contract.
+   - This option is more user-friendly but requires you to pay the gas for the state updates on your chain.
+
+1. **Option B**: Send the updates the state update transactions on-demand from your front-end:
+   - This option is more cost-effective but requires the user to pay the gas for the state updates on your chain.
+   - You can use the `updateState(...)` function on the `RegistrationSMTReplicator` contract to submit state updates.
+
+
+To set up a relayer for the **Option A**, follow the instructions in <OutLink href="https://github.com/rarimo/proof-verification-relayer">proof-verification-relayer README</OutLink>.
+
+The **Option B** is more more complex to set up, so we recommended reaching out to Rarimo contributors for help.
