@@ -28,7 +28,7 @@ This tutorial walks you through the process of setting up on-chain verification 
 
 The **Verificator** contract is responsible for verifying the ZK proofs on-chain. This contract often comes with a precompiled ZK circuit.
 
-1. Obtain the `Verificator` contract [source code](https://github.com/rarimo/passport-voting-contracts/blob/4cccd0ca8613330c4af68d8e0f7ca46bd3b68ac9/contracts/voting/verifiers/BioPassportVotingVerifier.sol) and add it to your project.
+1. Obtain the `Verificator` contract <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/4cccd0ca8613330c4af68d8e0f7ca46bd3b68ac9/contracts/voting/verifiers/BioPassportVotingVerifier.sol">source code</OutLink> and add it to your project.
 
    ```solidity
    contract Verificator {
@@ -52,7 +52,7 @@ Once your chain is replicating ZK Registry state and you have a deployed `Verifi
 
 When a user scans a QR code and submits a proof:
 
-1. Your DApp calls the [`getProof`](https://rarimo.github.io/verificator-svc/#tag/User-verification/operation/getProof) endpoint from `verificator-svc`.
+1. Your DApp calls the <OutLink href="https://rarimo.github.io/verificator-svc/#tag/User-verification/operation/getProof">`getProof`</OutLink> endpoint from `verificator-svc`.
 1. Receive both `pubSignals` and the `proof` from the service:
 
    ```json
@@ -167,20 +167,20 @@ contract MyPassportContract {
 
 Here are a couple of code references that demonstrate how to collect proof public signals and pass them to a verification contract:
 
-- **[ERC1155ETH.sol](https://github.com/rarimo/eip1155-eth/blob/main/contracts/ERC1155ETH.sol#L155)**
+- **[ERC1155ETH.sol](https://github.com/rarimo/eip1155-eth/blob/main/contracts/ERC1155ETH.sol#L155)**1155ETH.sol</OutLink>**
   Shows how a contract gathers public signals and proof parameters before calling `verifyProof`.
 
-- **[BioPassportVoting.sol](https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/voting/BioPassportVoting.sol#L65)**
+- **[BioPassportVoting.sol](https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/voting/BioPassportVoting.sol#L65)**tVoting.sol</OutLink>**
   Demonstrates a voting contract that uses ZK proofs for passport-based identity checks.
 
 
-{/* ## Conclusion
+## Conclusion
 
 With these steps:
 
 1. **Replicate** the ZK Registry state using `RegistrationSMTReplicator`.
-2. **Get** proof parameters from `verificator-svc`.
-3. **Deploy** your `Verificator` contract.
-4. **Integrate** `verifyProof(...)` calls in your own contract logic. */}
+2. **Get** proof parameters from `verificator-svc` to collect the ZK Proof in our DApp.
+3. **Deploy** your `Verificator` contract to verify the proofs.
+4. **Integrate** `verifyProof(...)` calls in your own contract logic.
 
 We've set up on-chain verification of ZK Passport proofs. This allows you to verify user identities without revealing sensitive data, ensuring privacy and security in your application.
