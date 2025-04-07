@@ -33,22 +33,27 @@ The **RegistrationSMTReplicator** handles the replication of state from the ZK R
    );
    ```
 
-## Step 2: Set up the relayer or front-end submission flow to replicate the states
+## Step 2: Set up the relayer with front-end submission to replicate the states
 
-To keep the state of the ZK Registry in sync with your chain, you need to set up a relayer or front-end submission flow. This will ensure that any changes in the ZK Registry are reflected in the `RegistrationSMTReplicator` contract.
+To keep the state of the ZK Registry in sync with your chain, you need to set up a relayer with front-end submission.
+This will ensure that any changes in the ZK Registry are reflected in the `RegistrationSMTReplicator` contract.
 
-You have two options:
-1. **Option A**: Set up a relayer service that listens for events from the ZK Registry and submits state updates to your `RegistrationSMTReplicator` instance.
+You have to set up backend service and make your front-end app update the root:
+1. **Relayer**: Run a relayer service that listens for events from the ZK Registry.
 
-   - This relayer will listen for events such as new passport registrations or updates to existing registrations.
-   - When an event is detected, the relayer will call the `updateState(...)` function on the `RegistrationSMTReplicator` contract.
-   - This option is more user-friendly but requires you to pay the gas for the state updates on your chain.
+   - Follow the instructions in <OutLink href="https://github.com/rarimo/proof-verification-relayer">proof-verification-relayer README</OutLink>.
+   - Make sure you set the right replicator contract address and private key of corresponding `allowedUpdaterAddress` in the config.
+   - Make sure <OutLink href="https://rarimo.github.io/proof-verification-relayer/#tag/State/operation/GetState">endpoint</OutLink> is available for your frontend app.
 
-1. **Option B**: Send the updates the state update transactions on-demand from your front-end:
-   - This option is more cost-effective but requires the user to pay the gas for the state updates on your chain.
+1. **Front-end**: Send the state update transactions on-demand from your front-end:
+   - After obtaining the proof from verificator-svc you know the required `root` (it is a <OutLink href="https://github.com/rarimo/passport-zk-circuits/?tab=readme-ov-file#query-circuit-public-signals">11th pub signal</OutLink>).
+   - Now you can get signed state by root
+   ```typescript
+   export async function getSignedRootState(root: string): Promise<SignedRootStateResponse> {
+     const res = await api.get<SignedRootStateResponse>(
+       `${ApiServicePaths.ProofVerificationRelayer}/v1/state`,
+       { query: { filter: { root } } },
+     )
+     return res.data
+   }```
    - You can use the `updateState(...)` function on the `RegistrationSMTReplicator` contract to submit state updates.
-
-
-To set up a relayer for the **Option A**, follow the instructions in <OutLink href="https://github.com/rarimo/proof-verification-relayer">proof-verification-relayer README</OutLink>.
-
-The **Option B** is more more complex to set up, so we recommended reaching out to Rarimo contributors for help.
