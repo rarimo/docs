@@ -1,6 +1,10 @@
-import { SidebarsConfig } from '@docusaurus/plugin-content-docs'
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
-const sidebars: SidebarsConfig = {
+const config = require('./docusaurus.config')
+
+/** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
+const sidebars = {
   sidebar: [
     {
       type: 'doc',
@@ -11,13 +15,13 @@ const sidebars: SidebarsConfig = {
       type: 'html',
       value: `
         <div class="menu__splitter"></div>
-      `,
+      `
     },
     {
       type: 'html',
       value: `
         <span class="menu__link menu__link--no-hover">Infrastructure</span>
-      `,
+      `
     },
     {
       type: 'category',
@@ -40,9 +44,6 @@ const sidebars: SidebarsConfig = {
         'zk-passport/biometric-passports-101',
         // 'zk-passport/map',
         'zk-passport/guide-proof-of-citizenship',
-        'zk-passport/guide-on-chain-verification',
-        'zk-passport/guide-setting-up-cross-chain-replication',
-        'zk-passport/guide-setting-up-verificator-svc',
         // 'zk-passport/api-reference',
         'zk-passport/contracts',
       ],
@@ -57,12 +58,27 @@ const sidebars: SidebarsConfig = {
         // 'zk-reputation/contracts',
       ],
     },
+    {
+      type: 'category',
+      label: 'ZK Socials',
+      link: { type: 'doc', id: 'zk-socials/overview' },
+      collapsed: false,
+      items: [
+
+      ],
+    },
+    {
+      type: 'html',
+      value: `
+        <div class="menu__splitter"></div>
+      `
+    },
 
     {
       type: 'html',
       value: `
         <span class="menu__link menu__link--no-hover">Products</span>
-      `,
+      `
     },
     {
       type: 'category',
@@ -73,14 +89,15 @@ const sidebars: SidebarsConfig = {
         //'freedom-tool/success-stories',
         'freedom-tool/smart-contracts-reference',
         //'freedom-tool/resources',
+
       ],
     },
     {
-      type: 'category',
-      label: 'RariMe App',
-      link: { type: 'doc', id: 'rarime-app/overview' },
-      collapsed: false,
-      items: [
+      'type': 'category',
+      'label': 'RariMe App',
+      'link': { type: 'doc', id: 'rarime-app/overview' },
+      'collapsed': false,
+      'items': [
         //'rarime-app/guide-for-ambassadors',
       ],
     },
@@ -89,17 +106,17 @@ const sidebars: SidebarsConfig = {
       type: 'html',
       value: `
         <div class="menu__splitter"></div>
-      `,
+      `
     },
     {
       type: 'html',
       value: `
         <span class="menu__link menu__link--no-hover">Resources</span>
-      `,
+      `
     },
     'resources/audits',
     'resources/glossary',
-  ],
+  ]
 }
 
-export default sidebars
+module.exports = sidebars

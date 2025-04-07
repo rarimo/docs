@@ -1,0 +1,93 @@
+---
+description: Learn how to set up the verificator-svc service for ZK Passport.
+sidebar_label: "Guide: hosting your own off-chain verificator"
+---
+import OutLink from "@site/src/components/OutLink";
+import IdealImage from '@site/src/components/IdealImage';
+
+# Guide: Setting up your own off-chain verificator for ZK Passport
+
+`verificator-svc` is a service that verifies ZK Passport proofs off-chain. It provides a convenient REST API for requesting parameters for the QR code, checking the user verification status, etc. You need to trust the instance of `verificator-svc`, so the best option is to host your own instance.
+
+## Prerequisites
+
+- Docker
+- PostgreSQL 10+
+
+## Step 1: Create a config fields
+
+Here is a sample config file for `verificator-svc`. Set the appropriate `db` connection string, `verifier.event_id`, and `callback.url` values for your deployment:
+
+```yaml title="config.yaml"
+log:
+  level: debug
+  disable_sentry: true
+
+db:
+  # Your PostgreSQL connection string goes here
+  url: "postgres://..."
+
+verifier:
+  # Pick an arbitrary sting as a default value for the event_id.
+  event_id: "my_app_event_id"
+  verification_key_path: "./proof_keys/passport.json"
+  allowed_identity_timestamp: 1741972260
+  multiproof: false
+  preserve_user_id_case: false
+  erc_1155: "0x0000000000000000000000000000000000000000"
+
+callback:
+  # URL of the current instance of verifier-svc
+  url: "http://mybackend.net:8000"
+
+listener:
+  addr: :8000
+
+cop:
+  disabled: true
+  endpoint: "http://..."
+  upstream: "http://..."
+  service_name: verificator-svc
+  service_port: 80
+
+
+
+signature_verification:
+  pub_key: "04e29323ad356ab524fa5dbe3e490244e741b4d445ac7d2ee5f321556b3fda616bb9d2f2216fc27e099ab3019103cca872679e130629b2b90ea16cedb2b2136371"
+
+poseidonsmt_root_verifier:
+  rpc: "https://l2.rarimo.com"
+  contract: "0x479F84502Db545FA8d2275372E0582425204A879"
+  request_timeout: 10s
+
+auth:
+  enabled: false
+  addr: http://rarime-auth
+```
+
+{
+  // TODO: explain other params e.g. `erc_1155`, `signature_verification`
+}
+
+
+## Step 2: Run the service
+
+Run the service in docker with the following command:
+
+```bash
+docker build -t github.com/rarimo/verificator-svc .
+docker run -e KV_VIPER_FILE=/config.yaml github.com/rarimo/verificator-svc
+```
+
+
+{
+// TODO: add sample output
+}
+
+## API reference
+
+`verificator-svc` API reference can be found here: <OutLink href="https://rarimo.github.io/verificator-svc/">https://rarimo.github.io/verificator-svc/</OutLink>
+
+## Running from source and contributing
+
+Refer to the <OutLink href="https://github.com/rarimo/verificator-svc">README</OutLink> on github.

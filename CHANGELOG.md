@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- ZK Passport guide for on-chain verification;
+- Guide for setting up a verificator-svc instance;
+- Guide for setting up state replication for ZK Passport;
+
 ## [5.6.0] - 2025-03-28
 ### Removed
 - ZK Socials
