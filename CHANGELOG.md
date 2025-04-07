@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.7.0] - 2025-04-07
 ### Added
 - ZK Passport guide for on-chain verification;
 - Guide for setting up a verificator-svc instance;
@@ -480,7 +481,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.6.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.7.0...HEAD
+[5.7.0]: https://github.com/rarimo/docs/compare/5.6.0...5.7.0
 [5.6.0]: https://github.com/rarimo/docs/compare/5.5.1...5.6.0
 [5.5.1]: https://github.com/rarimo/docs/compare/5.5.0...5.5.1
 [5.5.0]: https://github.com/rarimo/docs/compare/5.4.2...5.5.0
