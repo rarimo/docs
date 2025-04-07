@@ -28,7 +28,7 @@ db:
   url: "postgres://..."
 
 verifier:
-  // Pick an arbitrary sting as a default value for the event_id.
+  # Pick an arbitrary sting as a default value for the event_id.
   event_id: "my_app_event_id"
   verification_key_path: "./proof_keys/passport.json"
   allowed_identity_timestamp: 1741972260
@@ -78,6 +78,7 @@ Run the service in docker with the following command:
 docker build -t github.com/rarimo/verificator-svc .
 docker run -e KV_VIPER_FILE=/config.yaml github.com/rarimo/verificator-svc
 ```
+
 
 {
 // TODO: add sample output
