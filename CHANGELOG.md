@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Code block in ZK Passport state replication guide.
+
 ## [5.8.0] - 2025-04-08
 ### Added
 - Provide more details in the ZK Passport state replication guide.
