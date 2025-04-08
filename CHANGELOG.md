@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Code block in ZK Passport state replication guide.
+- Link to Noir verifiers
 
 ## [5.8.0] - 2025-04-08
 ### Added
