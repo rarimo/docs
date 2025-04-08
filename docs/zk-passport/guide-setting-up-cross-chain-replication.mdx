@@ -21,15 +21,15 @@ This guide walks you through the process of setting up cross-chain replication f
 
 The **RegistrationSMTReplicator** handles the replication of state from the ZK Registry onto your chain. This ensures your chain is kept up to date with changes to passport registrations.
 
-1. **Obtain the contract code** for `RegistrationSMTReplicator` (contact the provider of the ZK Registry or check their repository for the contract source).
+1. **Obtain the contract code** for <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/4cccd0ca8613330c4af68d8e0f7ca46bd3b68ac9/contracts/replication/RegistrationSMTReplicator.sol">RegistrationSMTReplicator</OutLink>.
 
-1. **Deploy** the `RegistrationSMTReplicator` to your chain:
+1. **Deploy** the `RegistrationSMTReplicator` to your chain and initialize it:
 
-   ```solidity
-   // Example snippet (pseudo-code)
-   RegistrationSMTReplicator replicator = new RegistrationSMTReplicator(
-       registryRoot,
-       allowedUpdaterAddress
+   ```ts
+   await replicator.__RegistrationSMTReplicator_init(
+      signer,     // public key of the replicator
+      sourceSMT,  // contract address of the original registry on Rarimo L2
+      chainName   // target chain name
    );
    ```
 
@@ -51,13 +51,13 @@ You have to set up backend service and make your front-end app update the root:
    ```typescript
    async function getSignedRootState(root: string) {
      const API_BASE_URL = 'https://api.example.com'
-   
+
      const requestUrl = new URL(`${API_BASE_URL}/integrations/proof-verification-relayer/v1/state`)
      requestUrl.searchParams.set('filter[root]', root)
-   
+
      const res = await fetch(requestUrl.toString())
      const { data } = await res.json()
-   
+
      return {
        // Signature of root state signed by relayer private key.
        signature: data.attributes.signature,
@@ -65,4 +65,4 @@ You have to set up backend service and make your front-end app update the root:
        timestamp: data.attributes.timestamp,
      }
    }
-   - You can use the `updateState(...)` function on the `RegistrationSMTReplicator` contract to submit state updates.
+   - You can use the <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/4cccd0ca8613330c4af68d8e0f7ca46bd3b68ac9/contracts/replication/RegistrationSMTReplicator.sol#L32">`transitionRoot(root, timestamp, signature)`</OutLink> method on the `RegistrationSMTReplicator` contract to submit state updates.
