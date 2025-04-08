@@ -5,11 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Link to Noir verifiers.
 
 ## [5.8.1] - 2025-04-08
 ### Fixed
 - Code block in ZK Passport state replication guide.
-- Link to Noir verifiers
 
 ## [5.8.0] - 2025-04-08
 ### Added
