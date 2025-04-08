@@ -17,98 +17,27 @@ Currently, there are seven contract sections:
     * Stores and manages some passport and identity information;
     * Manages the "Passport \<> Identity" bonds.
 1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/registration">Registration</OutLink>
- — primary section with `Registration` and `Registration2` contracts, that:
+ — primary section with `Registration2` contract, that:
     * Allow users registration (with binding of their identity to the passport);
     * Allow revocation of passport-identity binding;
     * Allow re-issuance of previously revoked identity;
     * Allow registration and revocation of ICAO member's certificates (calls `StateKeeper`);
     * Call one of the verifier contracts, based on the provided passport type, to verify ZKP;
     * Manage different dispatchers.
-1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/verifiers">Verifiers</OutLink>
+1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/passport/verifiers2">Verifiers</OutLink>
  — auto-generated contracts, the main purpose of which is to verify the ZKP.
-1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/dispatchers">Dispatchers</OutLink>
+1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/passport/dispatchers">Dispatchers</OutLink>
  — acts as a bridge between registration contracts and:
     * authenticators corresponding to different passport types, if it is a passport dispatcher;
     * signers, if it is a certificate dispatcher.
-1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/dispatchers">Signers</OutLink>
+1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/certificate/signers">Signers</OutLink>
  — responsible for verifying the signature of the ICAO member's certificate. It also stores information required for signature verification (e.g. RSA exponent).
-1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/authenticators">Authenticators</OutLink>
+1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/passport/authenticators">Authenticators</OutLink>
  — perform the passport Active Authentication (AA).
 1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/utils">Utilities</OutLink>
  — some utility contracts, such as X509, SHA1, RSA implementations in solidity language and other.
 
 <IdealImage img={require('/img/pass-derived-profiles-contracts.png')} alt="Contracts interaction between each other" />
-
-## `Registration`
-
-### Interface
-
-```solidity
-contract Registration is Initializable, TSSUpgradeable {
-
-    StateKeeper public stateKeeper
-    mapping(bytes32 => address) public certificateDispatchers;
-    mapping(bytes32 => address) public passportDispatchers;
-    mapping(bytes32 => address) public passportVerifiers;
-
-    function registerCertificate(
-        Certificate memory certificate_,
-        ICAOMember memory icaoMember_,
-        bytes32[] memory icaoMerkleProof_
-    ) external {
-       /* ... */
-    }
-
-    function revokeCertificate(bytes32 certificateKey_) external {
-        stateKeeper.removeCertificate(certificateKey_);
-    }
-
-    function register(
-        bytes32 certificatesRoot_,
-        uint256 identityKey_,
-        uint256 dgCommit_,
-        Passport memory passport_,
-        VerifierHelper.ProofPoints memory zkPoints_
-    ) external {
-        /* ... */
-    }
-
-    function revoke(uint256 identityKey_, Passport memory passport_) external {
-        /* ... */
-    }
-
-    function reissueIdentity(
-        bytes32 certificatesRoot_,
-        uint256 identityKey_,
-        uint256 dgCommit_,
-        Passport memory passport_,
-        VerifierHelper.ProofPoints memory zkPoints_
-    ) external {
-        /* ... */
-    }
-
-    function updateDependency(
-        MethodId methodId_,
-        bytes calldata data_,
-        bytes calldata proof_
-    ) external {
-        /* ... */
-    }
-}
-```
-
-- `stateKeeper` — instance of `StateKeeper` contract that saves all data about registrations, certificates, etc;
-- `certificateDispatchers` — mapping from ICAO member's certificate to its dispatcher;
-- `passportDispatchers` — mapping from passport type to its dispatcher contract;
-- `passportVerifiers` — mapping from passport type to its verifier contract;
-- `registerCertificate(...)` — registers an ICAO member's X509 certificate in the certificates SMT (calls `StateKeeper` contract);
-- `revokeCertificate(...)` — revokes an expired ICAO member's X509 certificate (calls `StateKeeper` contract);
-- `register(...)` — registers the user (identity) by its passport, technically — issues the identity, calls the dispatcher to verify ZKP, links the identity to its passport by calling `StateKeeper`;
-- `revoke(...)` — revokes the identity and its passport by the user's will, marks the passport (and identity) as revoked;
-- `reissueIdentity(...)` — issues previous passport \<> identity bond by migrating to a new identity;
-- `updateDependency(...)` — adds or removes, depending on the method provided, a dispatcher via Rarimo TSS;
-
-For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/registration/Registration.sol">Registration.sol</OutLink> at the GitHub.
 
 ## `Registration2`
 
@@ -146,6 +75,16 @@ contract Registration2 is Initializable, TSSUpgradeable {
         /* ... */
     }
 
+    function registerViaNoir(
+        bytes32 certificatesRoot_,
+        uint256 identityKey_,
+        uint256 dgCommit_,
+        Passport memory passport_,
+        bytes memory zkPoints_
+    ) external virtual {
+        /* ... */
+    }
+
     function revoke(uint256 identityKey_, Passport memory passport_) external virtual {
         /* ... */
     }
@@ -156,6 +95,16 @@ contract Registration2 is Initializable, TSSUpgradeable {
         uint256 dgCommit_,
         Passport memory passport_,
         VerifierHelper.ProofPoints memory zkPoints_
+    ) external virtual {
+        /* ... */
+    }
+
+    function reissueIdentityViaNoir(
+        bytes32 certificatesRoot_,
+        uint256 identityKey_,
+        uint256 dgCommit_,
+        Passport memory passport_,
+        bytes memory zkPoints_
     ) external virtual {
         /* ... */
     }
@@ -171,17 +120,17 @@ contract Registration2 is Initializable, TSSUpgradeable {
 }
 ```
 
-The main difference between `Registration` and `Registration2` contracts is that they use different ZK registration schemas.
-
-- `stateKeeper` — instance of `StateKeeper` contract that saves all data about registrations, certificates, etcß;
+- `stateKeeper` — instance of `StateKeeper` contract that saves all data about registrations, certificates, etc.;
 - `certificateDispatchers` — mapping from ICAO member's certificate to its dispatcher;
 - `passportDispatchers` — mapping from passport type to its dispatcher contract;
 - `passportVerifiers` — mapping from passport type to its verifier contract;
 - `registerCertificate(...)` — registers an ICAO member's X509 certificate in the certificates SMT (calls `StateKeeper` contract);
 - `revokeCertificate(...)` — revokes an expired ICAO member's X509 certificate (calls `StateKeeper` contract);
-- `register(...)` — registers the user (identity) by its passport, technically — issues the identity, calls the dispatcher to verify ZKP (that was created using a different schema, compared to `Registration`), links the identity to its passport by calling `StateKeeper`;
+- `register(...)` — registers the user (identity) by its passport, technically — issues the identity, calls the dispatcher to verify ZKP, links the identity to its passport by calling `StateKeeper`;
+- `registerViaNoir(...)` - the same as `register(...)` but uses Noir proof instead of Circom;
 - `revoke(...)` — revokes the identity and its passport by the user's will, marks the passport (and identity) as revoked;
 - `reissueIdentity(...)` — re-issues previous passport \<> identity bond by migration to a new identity;
+- `reissueIdentityViaNoir(...)` — the same as `reissueIdentity(...)` but uses Noir proof instead of Circom;
 - `updateDependency(...)` — adds or removes, depending on the method provided, a dispatcher via Rarimo TSS;
 
 For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/registration/Registration2.sol">Registration2.sol</OutLink> at the GitHub.
@@ -207,17 +156,15 @@ contract ExampleVerifier {
 ```
 
 All verifiers are generated contracts that share the same interface. However, each verifier is designed to accept proofs generated by specific ZK schemas. Below is a list of the current verifiers:
-    * `PUniversal2048Verifier` — used to create ZKPs that will be accepted by `Registration`;
-    * `PUniversal4096Verifier` — used to create ZKPs that will be accepted by `Registration`;
-    * `PUniversal2048Verifier2` — used to create ZKPs that will be accepted by `Registration2`;
-    * `PUniversal4096Verifier2` — used to create ZKPs that will be accepted by `Registration2`;
-    * `PInternalOptVerifier2` — internal verifier for `Registration2`;
-    * `PInternalVerifier2` — internal verifier for `Registration2`;
-    * `PMNEOptVerifier2` — internal verifier for `Registration2`;
+    * <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/passport/verifiers2/per-passport">`Circom verifiers`</OutLink> — the list of acceptable by `Registration2` smart contracts to verify biometric passport;
+    * <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/passport/verifiers2/noir;">`Noir verifiers`</OutLink> — the list of acceptable by `Registration2` smart contracts to verify biometric passport;
+    * `PInternalOptVerifier2` — Georgian ID card verifier for `Registration2`;
+    * `PInternalVerifier2` — Georgian ID card verifier for `Registration2`;
+    * `PMNEOptVerifier2` — Montenegro ID card verifier for `Registration2`;
 
 - `verifyProof(...)` — verifies passport validity ZKP;
 
-For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/passport/verifiers">verifiers for `Registration`</OutLink> and <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/passport/verifiers2">verifiers for `Registration2`</OutLink> at the GitHub.
+For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/passport/verifiers2">verifiers for `Registration2`</OutLink> at the GitHub.
 
 ## `PECDSASHA1Dispatcher`
 
@@ -270,12 +217,12 @@ This is a special dispatcher for passports without Active Authentication.
 For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/passport/dispatchers/PNOAADispatcher.sol">PNOAADispatcher.sol</OutLink> at the GitHub.
 
 
-## `PRSASHA1Dispatcher`
+## `PRSASHADispatcher`
 
 ### Interface
 
 ```solidity
-contract PRSASHA1Dispatcher is IPassportDispatcher, Initializable {
+contract PRSASHADispatcher is IPassportDispatcher, Initializable {
 
     address public authenticator;
 
@@ -285,7 +232,7 @@ contract PRSASHA1Dispatcher is IPassportDispatcher, Initializable {
         bytes memory passportPublicKey_
     ) external view returns (bool) {
         return
-            PRSASHA1Authenticator(authenticator).authenticate(
+            PRSASHAAuthenticator(authenticator).authenticate(
                 challenge_,
                 passportSignature_,
                 passportPublicKey_
@@ -295,10 +242,10 @@ contract PRSASHA1Dispatcher is IPassportDispatcher, Initializable {
 }
 ```
 
-- `authenticator` — address of the RSASHA1Authenticator contract for passports;
-- `authenticate(...)` — authenticates the RSASHA1 passport;
+- `authenticator` — address of the RSASHAAuthenticator contract for passports;
+- `authenticate(...)` — authenticates the RSASHA passport;
 
-For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/passport/dispatchers/PRSASHA1Dispatcher.sol">PRSASHA1Dispatcher.sol</OutLink> at the GitHub.
+For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/passport/dispatchers/PRSASHADispatcher.sol">PRSASHADispatcher.sol</OutLink> at the GitHub.
 
 ## `CRSADispatcher`
 
@@ -330,7 +277,7 @@ As for passports, there are authenticators for certificates, and it's one of the
 - `signer` — address of the CRSASigner or CRSAPSSSigner contract for certificates;
 - `verifyICAOSignature(...)` — verifies RSA signature of ICAO member's certificate;
 
-For the full implementation, see <OutLink href="hhttps://github.com/rarimo/passport-contracts/blob/master/contracts/certificate/dispatchers/CRSADispatcher.sol">CRSADispatcher.sol</OutLink> at the GitHub.
+For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/certificate/dispatchers/CRSADispatcher.sol">CRSADispatcher.sol</OutLink> at the GitHub.
 
 ## `CRSAPSSSigner`
 
@@ -415,12 +362,12 @@ contract PECDSASHA1Authenticator {
 
 For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/passport/authenticators/PECDSASHA1Authenticator.sol">PECDSASHA1Authenticator.sol</OutLink> at the GitHub.
 
-## `PRSASHA1Authenticator`
+## `PRSASHAAuthenticator`
 
 ### Interface
 
 ```solidity
-contract PRSASHA1Authenticator is Initializable {
+contract PRSASHAAuthenticator is Initializable {
 
     uint256 public exponent; // RSA exponent
 
@@ -437,4 +384,4 @@ contract PRSASHA1Authenticator is Initializable {
 - `exponent` — RSA exponent;
 - `authenticate(...)` — checks active authentication of a passport (RSA signature);
 
-For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/passport/authenticators/PRSASHA1Authenticator.sol">PRSASHA1Authenticator.sol</OutLink> at the GitHub.
+For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/passport/authenticators/PRSASHAAuthenticator.sol">PRSASHAAuthenticator.sol</OutLink> at the GitHub.
