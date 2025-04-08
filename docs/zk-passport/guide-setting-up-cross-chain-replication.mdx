@@ -52,12 +52,12 @@ You have to set up backend service and make your front-end app update the root:
    async function getSignedRootState(root: string) {
      const API_BASE_URL = 'https://api.example.com'
 
-     const requestUrl = new URL(`${API_BASE_URL}/integrations/proof-verification-relayer/v1/state`)
+     const requestUrl = new URL(`${API_BASE_URL}/integrations/proof-verification-relayer/v2/state`)
      requestUrl.searchParams.set('filter[root]', root)
-
+   
      const res = await fetch(requestUrl.toString())
      const { data } = await res.json()
-
+   
      return {
        // Signature of root state signed by relayer private key.
        signature: data.attributes.signature,
