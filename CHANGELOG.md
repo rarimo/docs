@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.8.1] - 2025-04-08
 ### Fixed
 - Code block in ZK Passport state replication guide.
 - Link to Noir verifiers
@@ -492,7 +493,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.8.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.8.1...HEAD
+[5.8.1]: https://github.com/rarimo/docs/compare/5.8.0...5.8.1
 [5.8.0]: https://github.com/rarimo/docs/compare/5.7.0...5.8.0
 [5.7.0]: https://github.com/rarimo/docs/compare/5.6.0...5.7.0
 [5.6.0]: https://github.com/rarimo/docs/compare/5.5.1...5.6.0
