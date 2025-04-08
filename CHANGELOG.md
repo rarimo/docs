@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Provide more details in the ZK Passport state replication guide.
 
+### Changed
+- ZK Passport Smart contracts reference.
+
 ## [5.7.0] - 2025-04-07
 ### Added
 - ZK Passport guide for on-chain verification;
