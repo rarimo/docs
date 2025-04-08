@@ -49,11 +49,20 @@ You have to set up backend service and make your front-end app update the root:
    - After obtaining the proof from verificator-svc you know the required `root` (it is a <OutLink href="https://github.com/rarimo/passport-zk-circuits/?tab=readme-ov-file#query-circuit-public-signals">11th pub signal</OutLink>).
    - Now you can get signed state by root
    ```typescript
-   export async function getSignedRootState(root: string): Promise<SignedRootStateResponse> {
-     const res = await api.get<SignedRootStateResponse>(
-       `${ApiServicePaths.ProofVerificationRelayer}/v1/state`,
-       { query: { filter: { root } } },
-     )
-     return res.data
-   }```
+   async function getSignedRootState(root: string) {
+     const API_BASE_URL = 'https://api.example.com'
+   
+     const requestUrl = new URL(`${API_BASE_URL}/integrations/proof-verification-relayer/v1/state`)
+     requestUrl.searchParams.set('filter[root]', root)
+   
+     const res = await fetch(requestUrl.toString())
+     const { data } = await res.json()
+   
+     return {
+       // Signature of root state signed by relayer private key.
+       signature: data.attributes.signature,
+       // Time when the event was caught, a.k.a state transition timestamp
+       timestamp: data.attributes.timestamp,
+     }
+   }
    - You can use the `updateState(...)` function on the `RegistrationSMTReplicator` contract to submit state updates.
