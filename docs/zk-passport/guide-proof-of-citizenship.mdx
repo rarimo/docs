@@ -19,6 +19,8 @@ Basically, it goes likes this:
 4. The app submits the proof to the callback URL(specified in the QR code) for verification
 5. DApp backend fetches the verification status and citizenship data from a REST API
 
+QR code generation and all the interactions with the backend are facilitated by Rarimo's ZK Passport library, which is available as an NPM package: `@rarimo/zk-passport`. The library provides a convenient API for generating QR codes and verifying the proof status.
+
 You can check out this flow in the sandbox: <OutLink href="https://app.rarime.com/proof-requests-demo">ZK Passport Demo</OutLink>
 
 ## Pre-requisites
@@ -40,65 +42,68 @@ Links for installation:
 - <OutLink href="https://apps.apple.com/us/app/rarime/id6503300598">RariMe for iOS | AppStore</OutLink>
 - <OutLink href="https://play.google.com/store/apps/details?id=com.rarilabs.rarime">RariMe for Android | Google Play</OutLink>
 
-## Step #2: Render a QR code with a verification request in your app
+## Step #2: Install `@rarimo/zk-passport-react` package
 
-To request data for the QR code, you need to call this endpoint on the `verificator-svc`:
-<OutLink href="https://api.app.rarime.com/integrations/verificator-svc/private/verification-link">https://api.app.rarime.com/integrations/verificator-svc/private/verification-link</OutLink>
+To install the package, run the following command in your project directory:
 
-The following JS snippet gets data for a QR code for a passport verification with a uniqueness check on:
-
-```jsx
-const verificatorUrl = 'https://api.app.rarime.com/' // your verificator-svc instance URL
-const body = {
-  data: {
-	  type: "user",
-    // Some public and unique user ID
-    // Will be used to fetch status later
-    id: "some-user-id",
-    attributes: {
-      // Denotes the application and activity that is requesting the verification
-      event_id: "citizenship_verification",
-      // Let a single passport pass verification just once
-      uniqueness: true
-    }
-  }
-}
-
-const response = await fetch(
-
-  `${verificatorUrl}/integrations/verificator-svc/private/verification-link`,
-  {
-    headers: {
-      'Accept': 'application/vnd.api+json',
-      'Content-Type': 'application/vnd.api+json',
-    },
-    method: "POST",
-    body: JSON.stringify(body),
-  }
-)
-const { data } = await response.json()
-// Proof Params URL for RariMe app
-const proofParamsUrl = data.attributes.get_proof_params
-const encodedUrl = encodeURIComponent(proofParamsUrl)
-// Render this data in a QR code:
-const qrCodeContent = `rarime://external?type=proof-request&proof_params_url=${encodedUrl}`)
+```bash npm2yarn
+npm install @rarimo/zk-passport-react
 ```
 
-Some notes:
+If you don't use React, you can use the `@rarimo/zk-passport` package instead. It provides a low-level API for for requesting and passing for verification of ZK Passport proofs.
 
-- `event_id` is an arbitrary string that denotes the application scope of the proof, should be something like `APP_ID:ACTION_ID`
-- `id` is a public unique ID associated with a user within your system. It will be used in Step #3 to check the user status
+```bash npm2yarn
+npm install @rarimo/zk-passport
+```
 
-After scanning the QR code, the user will complete the verification in RariMe App.
+## Step #3: Import the library and render the QR code
 
-## Step #3: Check the user status
+The following JS snippet uses the library to render a QR code with a proof of citizenship request and handles the results:
 
-You can fetch the verification status for a particular `id` from this endpoint:
+```jsx
+import ZkPassportQrCode from '@rarimo/zk-passport-react'
+
+// this is a public instance of verificator-svc(https://github.com/rarimo/verificator-svc). Replace it with the URL of your instance
+const apiUrl = 'https://api.app.rarime.com'
+
+// `requestid` is a public unique ID associated with a user within your system. It will be used in the Step #3 to check the user status
+const requestId = 'account-1'
+
+// `event_id` is an arbitrary number that denotes the application scope of the proof
+const eventId = 1337
+
+const verificationOpts: RequestVerificationLinkOpts = {
+  uniqueness: true, // check if the user has already passed the verification
+  nationalityCheck: true, // include user's citizenship in the output(proof public signals)
+  eventId: eventId, // scope of the proof
+}
+
+return (
+  <ZkPassportQrCode
+    // Proof request params
+    apiUrl={apiUrl}
+    requestId={requestId}
+    verificationOptions={verificationOpts}
+
+    // QR code component props
+    qrProps={{ size: 256 }}
+
+    // place your callbacks here
+    onStatusChange={status => console.log(status)}
+    onSuccess={proof => console.log(proof)}
+    onError={error => console.error(error)}
+  />
+)
+```
+
+## Step #3: Fetch the verification status and the citizenship code on the backend
+
+You can fetch the verification status for a particular `id` from this verificator endpoint:
 <OutLink href="https://rarimo.github.io/verificator-svc/#tag/User-verification/operation/getUserStatus">https://rarimo.github.io/verificator-svc/#tag/User-verification/operation/getUserStatus</OutLink>
 
 Here is a JS snippet for doing this
 
-```jsx
+```ts
 const backendUrl = 'https://api.app.rarime.com/'
 const userId = 'some-user-id' // the `id` from step #2
 
@@ -118,7 +123,7 @@ const verificationStatus = data.attributes.status
 
 If the user has status `verified`, you can fetch the verified citizenship code like this:
 
-```jsx
+```ts
 const response = await fetch(`${backendUrl}/integrations/verificator-svc/private/user/${userId}`)
 const { data } = await response.json()
 
@@ -126,3 +131,7 @@ const { data } = await response.json()
 // Note: German passports may have a single-letter "D" code
 const citizenshipISOCode = data.attributes.nationality // e.g. "UKR"
 ```
+
+## Conclusion
+
+In this guide, we set up off-chain citizenship verification using ZK Passport and the RariMe App, enabling secure proof of citizenship without exposing private user data.

@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed the link to the verifier instance in the proof of citizenship guide;
 
+### Changed
+- Use the new lib for React in the proof of citizenship guide;
+
 ## [5.8.2] - 2025-04-08
 ### Fixed
 - Link to Noir verifiers.
