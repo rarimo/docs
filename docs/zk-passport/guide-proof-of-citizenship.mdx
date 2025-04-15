@@ -73,7 +73,7 @@ const requestId = 'account-1'
 const eventId = 1337
 
 const verificationOpts: RequestVerificationLinkOpts = {
-  uniqueness: true, // don't allow to submit a single passport multiple times
+  uniqueness: true, // check if the user has already passed the verification
   nationalityCheck: true, // include user's citizenship in the output(proof public signals)
   eventId: eventId, // scope of the proof
 }
