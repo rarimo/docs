@@ -5,14 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [5.9.0] - 2025-04-15
+### Changed
+- Use the new lib for React in the proof of citizenship guide;
+
 ### Removed
 - RariMe snap audit
 
 ### Fixed
 - Fixed the link to the verifier instance in the proof of citizenship guide;
-
-### Changed
-- Use the new lib for React in the proof of citizenship guide;
 
 ## [5.8.2] - 2025-04-08
 ### Fixed
@@ -504,7 +506,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.8.2...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.9.0...HEAD
+[5.9.0]: https://github.com/rarimo/docs/compare/5.8.2...5.9.0
 [5.8.2]: https://github.com/rarimo/docs/compare/5.8.1...5.8.2
 [5.8.1]: https://github.com/rarimo/docs/compare/5.8.0...5.8.1
 [5.8.0]: https://github.com/rarimo/docs/compare/5.7.0...5.8.0
