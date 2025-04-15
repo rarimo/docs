@@ -61,20 +61,20 @@ npm install @rarimo/zk-passport
 The following JS snippet uses the library to render a QR code with a proof of citizenship request and handles the results:
 
 ```jsx
-import ZkPassportQrCode, { ProofRequestStatuses } from '@rarimo/zk-passport-react'
+import ZkPassportQrCode from '@rarimo/zk-passport-react'
 
-// this is a public instance of verifier-svc. Replace it with the URL of your instance
+// this is a public instance of verificator-svc(https://github.com/rarimo/verificator-svc). Replace it with the URL of your instance
 const apiUrl = 'https://api.app.rarime.com'
 
 // `requestid` is a public unique ID associated with a user within your system. It will be used in the Step #3 to check the user status
 const requestId = 'account-1'
 
-// `event_id` is an arbitrary string that denotes the application scope of the proof, should be something like `APP_ID:ACTION_ID`
-const eventId = 'my_dapp'
+// `event_id` is an arbitrary number that denotes the application scope of the proof, should be something like `APP_ID:ACTION_ID`
+const eventId = 1337
 
 const verificationOpts: RequestVerificationLinkOpts = {
   uniqueness: true, // don't allow to submit a single passport multiple times
-  nationalityCheck: true, // include user's citizenship in the output
+  nationalityCheck: true, // include user's citizenship in the output(proof public signals)
   eventId: eventId, // scope of the proof
 }
 
