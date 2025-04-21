@@ -156,59 +156,43 @@ contract Voting is BaseVoting {
 
 See <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/voting/Voting.sol">Voting.sol</OutLink> for the full implementation.
 
-## `Registration`
+## `BaseVoting`
 
-This contract handles voter registrations and keeps track of all the participants.
-
-### Deployments
-
-| Chain   | ChainID    | Address                                                                                                                                       |
-| ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Arbitrum | `42161` | `0x1cd9be5BBD91c07aA31180834e48cf4838992317` \(<OutLink href="https://arbiscan.io/address/0x1cd9be5BBD91c07aA31180834e48cf4838992317">Arbiscan</OutLink>\) |
-
+This abstract contract encapsulates common logic for both `BioPassportVoting` and `Voting`.
 
 ### Interface
 
-```solidity title="/contracts/core/Registration.sol"
-event UserRegistered(
-    address indexed user,
-    IBaseVerifier.ProveIdentityParams proveIdentityParams,
-    IRegisterVerifier.RegisterProofParams registerProofParams
-);
+```solidity title="/contracts/voting/BaseVoting.sol"
 
-/* ... */
+abstract contract BaseVoting is OwnableUpgradeable, UUPSUpgradeable {
+    uint256 public constant ZERO_DATE = 0x303030303030;
 
-contract Registration is IRegistration, PoseidonSMT, Initializable {
-    IRegisterVerifier public immutable registerVerifier;
-    uint256 public immutable smtTreeMaxDepth;
-    RegistrationInfo public registrationInfo;
-    mapping(bytes32 => bool) public commitments;
-    mapping(bytes32 => bool) public rootsHistory;
-
-    function register(
-        IBaseVerifier.ProveIdentityParams memory proveIdentityParams_,
-        IRegisterVerifier.RegisterProofParams memory registerProofParams_,
-        IBaseVerifier.TransitStateParams memory transitStateParams_,
-        bool isTransitState_
-    ) external {
-        // ...
-        emit UserRegistered(msg.sender, proveIdentityParams_, registerProofParams_);
+    struct UserData {
+        uint256 nullifier;
+        uint256 citizenship;
+        uint256 identityCreationTimestamp;
     }
+
+    struct ProposalRules {
+        uint256 selector;
+        uint256[] citizenshipWhitelist;
+        uint256 identityCreationTimestampUpperBound;
+        uint256 identityCounterUpperBound;
+        uint256 sex;
+        uint256 birthDateLowerbound;
+        uint256 birthDateUpperbound;
+        uint256 expirationDateLowerBound;
+    }
+
+    address public registrationSMT;
+    address public proposalsState;
+    address public votingVerifier;
 }
 ```
 
-- `UserRegistered` — an event emitted when a user successfully registers. Contains:
-    - `user` — address of the user registering;
-    - `proveIdentityParams` — parameters used for proving the user's identity;
-    - `registerProofParams` — parameters used for the registration proof;
-- `registerVerifier` — contract for registration proof verification;
-- `smtTreeMaxDepth` — the maximum depth of the Sparse Merkle Tree (SMT);
-- `registrationInfo` — struct containing all relevant registration information;
-- `commitments` — mapping to track commitments and prevent duplicate registrations;
-- `rootsHistory` — mapping to track roots and validate their existence;
-- `register()` — registers a user, verifying his identity and proof of registration. Checks that the user is unique and hasn't been previously registered (through `RegisterVerifier` call);
+- `registrationSMT` — address of Sparse Merkle Tree with registered identities;
 
-See <OutLink href="https://github.com/rarimo/voting-contracts/blob/main/contracts/core/Registration.sol">Registration.sol</OutLink> for the full implementation.
+See <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/voting/BaseVoting.sol">BaseVoting.sol</OutLink> for the full implementation.
 
 ## `Voting`
 
