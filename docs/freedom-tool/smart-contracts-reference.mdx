@@ -101,7 +101,7 @@ See <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/mast
 
 ## `BioPassportVoting`
 
-Responsible for the <OutLink href="https://github.com/rarimo/passport-zk-circuits/?tab=readme-ov-file#query-circuit-public-signals">query proof</OutLink> verification and pub signal validation.
+Responsible for the Biometric Passport <OutLink href="https://github.com/rarimo/passport-zk-circuits/?tab=readme-ov-file#query-circuit-public-signals">query proof</OutLink> verification and pub signal validation.
 
 ### Deployments
 
@@ -127,55 +127,34 @@ contract BioPassportVoting is BaseVoting {
 }
 ```
 
-- `vote()` — verifies query proof and call `vote()` function of `ProposalState` smart contract;
+- `vote()` — verifies query proof and calls `vote()` function of `ProposalState` smart contract;
 
 See <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/voting/BioPassportVoting.sol">BioPassportVoting.sol</OutLink> for the full implementation.
 
-## `RegisterVerifier`
+## `Voting`
 
-It is a modified Iden3 smart contract that verifies a ZK elegibility proof and checks the applicants' uniqueness.
-
-<!-- TODO: Add arbitrum contracts addresses -->
+Responsible for the National ID Card <OutLink href="https://github.com/rarimo/passport-zk-circuits/?tab=readme-ov-file#query-circuit-public-signals">query proof</OutLink> verification and pub signal validation.
 
 ### Interface
 
-```solidity title="/contracts/iden3/verifiers/RegisterVerifier.sol"
-event RegisterAccepted(
-    uint256 documentNullifier,
-    RegisterProofInfo registerProofInfo
-    );
-
-/* ... */
-
-contract RegisterVerifier is IRegisterVerifier, BaseVerifier {
-    string public constant REGISTER_PROOF_QUERY_ID = "REGISTER_PROOF";
-
-    function proveRegistration(
-        ProveIdentityParams memory proveIdentityParams_,
-        RegisterProofInfo memory registerProofInfo_
-    ) external onlyRegistrationContract(registerProofInfo_) {
-        // ...
-    }
-
-    function transitStateAndProveRegistration(
-        ProveIdentityParams memory proveIdentityParams_,
-        RegisterProofInfo memory registerProofInfo_,
-        TransitStateParams memory transitStateParams_
-    ) external onlyRegistrationContract(registerProofInfo_) {
+```solidity title="/contracts/voting/Voting.sol"
+contract Voting is BaseVoting {
+    function vote(
+        bytes32 registrationRoot_,
+        uint256 currentDate_,
+        uint256 proposalId_,
+        uint256[] memory vote_,
+        UserData memory userData_,
+        VerifierHelper.ProofPoints memory zkPoints_
+    ) external override {
         // ...
     }
 }
 ```
 
-- `RegisterAccepted` — event that is emitted when registration is accepted. Contains:
-    - `documentNullifier` — unique nullifier for the document;
-    - `registerProofInfo` — information regarding the registration proof;
-- `REGISTER_PROOF_QUERY_ID` — unique query identifier. Used as a public parameter in ZKP;
-- `onlyRegistrationContract()` — modifier that requires the caller to be equal to the registration contract address;
-- `proveRegistration()` — proves registration with given parameters;
-- `transitStateAndProveRegistration()` — transits the state and proves registration with given parameters;
+- `vote()` — verifies query proof and calls `vote()` function of `ProposalState` smart contract;
 
-See <OutLink href="https://github.com/rarimo/voting-contracts/blob/main/contracts/iden3/verifiers/RegisterVerifier.sol">RegisterVerifier.sol</OutLink> for the full implementation.
+See <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/voting/Voting.sol">Voting.sol</OutLink> for the full implementation.
 
 ## `Registration`
 
