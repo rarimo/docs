@@ -7,45 +7,97 @@ import OutLink from "@site/src/components/OutLink";
 
 # Freedom Tool: Smart contracts reference
 
-## `VotingRegistry`
+## `ProposalsState`
 
-A facade for either `Voting` or `Registration` instances. It is responsible for managing the pool types and their implementations.
+A facade for voting creation and management by creator. It is responsible for counting votes and adding voters to SMT by nullifier.
 
 ### Deployments
 
 | Chain   | ChainID    | Address                                                                                                                                       |
 | ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Arbitrum | `42161` | `0x1d84cFd4839fE92dAe8E1F8F777010c08a60013C` \(<OutLink href="https://arbiscan.io/address/0x1d84cFd4839fE92dAe8E1F8F777010c08a60013C">Arbiscan</OutLink>\) |
+| Rarimo | `7368` | `0x9C4b84a940C9D3140a1F40859b3d4367DC8d099a` \(<OutLink href="https://scan.rarimo.com/address/0x9C4b84a940C9D3140a1F40859b3d4367DC8d099a">Arbiscan</OutLink>\) |
 
 
 ### Interface
 
-```solidity title="/contracts/core/VotingRegistry.sol"
-contract VotingRegistry is IVotingRegistry, Initializable, OwnableUpgradeable, UUPSUpgradeable {
-    address public poolFactory;
+```solidity title="/contracts/state/ProposalsState.sol"
+contract ProposalsState is OwnableUpgradeable, AccessControlUpgradeable, UUPSUpgradeable {
+    uint256 public lastProposalId;
+    uint256 public minFundingAmount;
 
-    function setNewImplementations(
-        string[] memory poolTypes_,
-        address[] memory newImplementations_
-    ) external onlyOwner onlyEqualLength(poolTypes_, newImplementations_) {
+    struct ProposalConfig {
+        uint64 startTimestamp;
+        uint64 duration;
+        uint256 multichoice;
+        uint256[] acceptedOptions;
+        string description;
+        address[] votingWhitelist; // must be sorted
+        bytes[] votingWhitelistData; // data per voting whitelist
+    }
+
+    enum ProposalStatus {
+        None,
+        Waiting,
+        Started,
+        Ended,
+        DoNotShow
+    }
+
+    struct ProposalInfo {
+        address proposalSMT;
+        ProposalStatus status;
+        ProposalConfig config;
+        uint256[MAXIMUM_CHOICES_PER_OPTION][] votingResults;
+    }
+
+    function createProposal(
+        ProposalConfig calldata proposalConfig_
+    ) external payable {
         // ...
     }
 
-    function bindVotingToRegistration(
-        address proposer_,
-        address voting_,
-        address registration_
-    ) external onlyFactory {
+    function addFundsToProposal(
+        uint256 proposalId_
+    ) external payable {
+        // ...
+    }
+
+    function changeProposalDuration(
+        uint256 proposalId_,
+        uint64 newDuration_
+    ) external onlyProposalCreator(proposalId_) {
+        // ...
+    }
+
+    function hideProposal(
+        uint256 proposalId_
+    ) external onlyProposalCreator(proposalId_) {
+        // ...
+    }
+
+    function getProposalEventId(
+        uint256 proposalId_
+    ) external view returns (uint256) {
+        // ...
+    }
+
+    function getProposalInfo(
+        uint256 proposalId_
+    ) external view returns (ProposalInfo memory info_) {
         // ...
     }
 
 ```
 
-- `poolFactory` — address of the `VotingFactory` contract;
-- `setNewImplementations()` — sets or upgrades the implementations for specified pool types. Only callable by the owner;
-- `bindVotingToRegistration()` — Binds a voting contract to a registration contract. Only callable by the owner;
+- `createProposal()` — creates a new voting with initial amount (more than `minFundingAmount`) to cover fees per each user;
+- `addFundsToProposal()` — allows to top up a voting to cover more voting transactions;
+- `changeProposalDuration()` — allows voting prolongation. Only callable by the proposal creator;
+- `hideProposal()` — allows to hide proposal (switch status to `DoNotShow`). There is no way to make it visible again;
+- `getProposalEventId()` — returns unique number which is used to calculate nullifier;
+- `getProposalInfo()` — allows voting prolongation. Only callable by the proposal creator;
 
-See <OutLink href="https://github.com/rarimo/voting-contracts/blob/main/contracts/core/VotingRegistry.sol">VotingRegistry.sol</OutLink> for the full implementation.
+
+See <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/state/ProposalsState.sol">ProposalsState.sol</OutLink> for the full implementation.
 
 ## `VotingFactory`
 
