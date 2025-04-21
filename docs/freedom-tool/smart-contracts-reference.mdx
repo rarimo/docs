@@ -194,63 +194,34 @@ abstract contract BaseVoting is OwnableUpgradeable, UUPSUpgradeable {
 
 See <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/voting/BaseVoting.sol">BaseVoting.sol</OutLink> for the full implementation.
 
-## `Voting`
+## `RegistrationSMTReplicator`
 
-Implement a voting system with registration and voting phases. It saves votes in a Merkle tree.
-
-### Deployments
-
-| Chain   | ChainID    | Address                                                                                                                                       |
-| ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Arbitrum | `42161` | `0x933284F0E1D76C5cA49f72eD38cc36Dd39b38704` \(<OutLink href="https://arbiscan.io/address/0x933284F0E1D76C5cA49f72eD38cc36Dd39b38704">Arbiscan</OutLink>\) |
-
+Use it instead of `registrationSMT` unless your contracts on Rarimo.
 
 ### Interface
 
-```solidity title="/contracts/core/Voting.sol"
-event UserVoted(
-    address indexed user,
-    bytes32 root,
-    bytes32 nullifierHash,
-    bytes32 candidate
-    );
+```solidity title="/contracts/replication/RegistrationSMTReplicator.sol"
+contract RegistrationSMTReplicator is MultiOwnable, UUPSUpgradeable {
+    uint256 public constant ROOT_VALIDITY = 1 hours;
+    bytes32 public latestRoot;
+    uint256 public latestTimestamp;
 
-/* ... */
-
-contract Voting is IVoting, ERC165, Initializable {
-    uint256 public constant MAX_CANDIDATES = 100;
-    address public immutable voteVerifier;
-    IRegistration public registration;
-    VotingInfo public votingInfo;
-    mapping(bytes32 => bool) public nullifiers;
-    mapping(bytes32 => bool) public candidates;
-    mapping(bytes32 => uint256) public votesPerCandidate;
-
-    function vote(
-        bytes32 root_,
-        bytes32 nullifierHash_,
-        bytes32 candidate_,
-        VerifierHelper.ProofPoints memory proof_
-    ) external {
+    function transitionRoot(
+        bytes32 newRoot_,
+        uint256 transitionTimestamp_,
+        bytes calldata proof_
+    ) external virtual onlyOwner {
         // ...
+    }
 
-        emit UserVoted(msg.sender, root_, nullifierHash_, candidate_);
+    function isRootValid(bytes32 root_) external view virtual returns (bool) {
+        // ...
+    }
+
+    function isRootLatest(bytes32 root_) public view virtual returns (bool) {
+        // ...
     }
 }
 ```
 
-- `UserVoted` — event that is emitted when the user casts a vote. Contains:
-    - `user` — address of the user voting;
-    - `root` — the root of the SMT that was used at the time of voting;
-    - `nullifierHash` — hash of the nullifier to prevent double voting;
-    - `candidate` —  identifier of the candidate who was voted for;
-- `MAX_CANDIDATES` — maximum number of candidates in a pool;
-- `voteVerifier` — contract for voting proof verification;
-- `registration` — contract for validation of registration;
-- `votingInfo` — struct containing all relevant voting information;
-- `nullifiers` — mapping to track nullifiers and prevent double voting;
-- `candidates` — mapping of candidates available for voting;
-- `votesPerCandidate` — mapping to track votes per candidate;
-- `vote()` — allows a registered user to cast a vote for a candidate;
-
-See <OutLink href="https://github.com/rarimo/voting-contracts/blob/main/contracts/core/Voting.sol">Voting.sol</OutLink> for the full implementation.
+See <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/replication/RegistrationSMTReplicator.sol">RegistrationSMTReplicator.sol</OutLink> for the full implementation.
