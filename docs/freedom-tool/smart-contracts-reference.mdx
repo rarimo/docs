@@ -13,9 +13,9 @@ A facade for voting creation and management by creator. It is responsible for co
 
 ### Deployments
 
-| Chain   | ChainID    | Address                                                                                                                                       |
-| ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Rarimo | `7368` | `0x9C4b84a940C9D3140a1F40859b3d4367DC8d099a` \(<OutLink href="https://scan.rarimo.com/address/0x9C4b84a940C9D3140a1F40859b3d4367DC8d099a">Arbiscan</OutLink>\) |
+| Chain  | ChainID | Address                                                                                                                                           |
+|--------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rarimo | `7368`  | <OutLink href="https://scan.rarimo.com/address/0x9C4b84a940C9D3140a1F40859b3d4367DC8d099a">`0x9C4b84a940C9D3140a1F40859b3d4367DC8d099a`</OutLink> |
 
 
 ### Interface
@@ -86,7 +86,7 @@ contract ProposalsState is OwnableUpgradeable, AccessControlUpgradeable, UUPSUpg
     ) external view returns (ProposalInfo memory info_) {
         // ...
     }
-
+}
 ```
 
 - `createProposal()` — creates a new voting with initial amount (more than `minFundingAmount`) to cover fees per each user;
@@ -99,77 +99,37 @@ contract ProposalsState is OwnableUpgradeable, AccessControlUpgradeable, UUPSUpg
 
 See <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/state/ProposalsState.sol">ProposalsState.sol</OutLink> for the full implementation.
 
-## `VotingFactory`
+## `BioPassportVoting`
 
-Responsible for the creation of new voting and registration instances.
+Responsible for the <OutLink href="https://github.com/rarimo/passport-zk-circuits/?tab=readme-ov-file#query-circuit-public-signals">query proof</OutLink> verification and pub signal validation.
 
 ### Deployments
 
-| Chain   | ChainID    | Address                                                                                                                                       |
-| ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Arbitrum | `42161` | `0x43E547aCE25b91d2cb00D96BE6b10f34f36A6B7F` \(<OutLink href="https://arbiscan.io/address/0x43E547aCE25b91d2cb00D96BE6b10f34f36A6B7F">Arbiscan</OutLink>\) |
+| Chain  | ChainID | Address                                                                                                                                           |
+|--------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| Rarimo | `7368`  | <OutLink href="https://scan.rarimo.com/address/0x8Dea8065888A14F66ba9Fb944353d898663863cf">`0x8Dea8065888A14F66ba9Fb944353d898663863cf`</OutLink> |
 
 
 ### Interface
 
-```solidity title="/contracts/core/VotingFactory.sol"
-event InstanceCreated(
-        string indexed instanceType,
-        address indexed creator,
-        address indexed voting
-    );
-
-/* ... */
-
-contract VotingFactory is IVotingFactory, Initializable, UUPSUpgradeable {
-    IVotingRegistry public votingRegistry;
-
-    function createRegistration(string memory registrationType_, bytes memory data_) external {
-        // ...
-    }
-
-    function createRegistrationWithSalt(
-        string memory registrationType_,
-        bytes memory data_,
-        bytes32 salt_
-    ) external {
-        // ...
-    }
-
-    function createVoting(string memory votingType_, bytes memory data_) external {
-        // ...
-    }
-
-    function createVotingWithSalt(
-        string memory votingType_,
-        bytes memory data_,
-        bytes32 salt_
-    ) external {
-        // ...
-    }
-
-    function predictAddress(
-        string memory poolType_,
-        address proposer_,
-        bytes32 salt_
-    ) external view returns (address) {
+```solidity title="/contracts/voting/BioPassportVoting.sol"
+contract BioPassportVoting is BaseVoting {
+    function vote(
+        bytes32 registrationRoot_,
+        uint256 currentDate_,
+        uint256 proposalId_,
+        uint256[] memory vote_,
+        UserData memory userData_,
+        VerifierHelper.ProofPoints memory zkPoints_
+    ) external override {
         // ...
     }
 }
 ```
 
-- `InstanceCreated` — an event emitted when a new instance is created. Contains:
-    - `instanceType` — the type of the instance;
-    - `creator` — creator address;
-    - `voting` — address of the newly created instance;
-- `onlyExistingPoolType()` — modifier that requires the poolType to exist in the `votingRegistry`;
-- `createRegistration()` — creates a new registration instance with specified parameters;
-- `createRegistrationWithSalt()` — creates a new registration instance deterministically with specified parameters and a salt;
-- `createVoting()` — creates a new voting instance with specified parameters;
-- `createVotingWithSalt()` — creates a new voting instance deterministically with specified parameters and salt;
-- `predictAddress()` — predicts the address of an instance that will be deployed with the given parameters and salt;
+- `vote()` — verifies query proof and call `vote()` function of `ProposalState` smart contract;
 
-See <OutLink href="https://github.com/rarimo/voting-contracts/blob/main/contracts/core/VotingFactory.sol">VotingFactory.sol</OutLink> for the full implementation.
+See <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/voting/BioPassportVoting.sol">BioPassportVoting.sol</OutLink> for the full implementation.
 
 ## `RegisterVerifier`
 
