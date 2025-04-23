@@ -5,11 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Changed
-- Freedom Tool smart contract reference (v1 -> v2)
 
+## [5.10.0] - 2025-04-23
 ### Added
 - Deployment of ZK passport smart contracts
+
+### Changed
+- Freedom Tool smart contract reference (v1 -> v2)
 
 ## [5.9.0] - 2025-04-15
 ### Changed
@@ -511,7 +513,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.9.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.10.0...HEAD
+[5.10.0]: https://github.com/rarimo/docs/compare/5.9.0...5.10.0
 [5.9.0]: https://github.com/rarimo/docs/compare/5.8.2...5.9.0
 [5.8.2]: https://github.com/rarimo/docs/compare/5.8.1...5.8.2
 [5.8.1]: https://github.com/rarimo/docs/compare/5.8.0...5.8.1
