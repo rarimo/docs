@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fix typos in documentation and configuration files
+
 ## [5.10.0] - 2025-04-23
 ### Added
 - Deployment of ZK passport smart contracts
