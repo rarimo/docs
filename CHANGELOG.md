@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## 5.9.0 - 2025-04-24
+
+### Changed
+- Fix typos in documentation and configuration files
+
+### Fixed
+  - Corrected "informations" to "information" in nginx configuration
+  - Fixed "inheretance" to "inheritance" in nginx header comment
+  - Fixed "BlobSubmitionOperator" to "BlobSubmissionOperator" in network info documentation
+
 ## [5.9.0] - 2025-04-15
 ### Changed
 - Use the new lib for React in the proof of citizenship guide;
