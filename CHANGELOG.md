@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fix typos in documentation and configuration files
 
+### Changed
+- Transformed the citizenship verification guide into a generic off-chain verification guide;
+- Improved sidebar labels;
+
+
+### Removed
+- Legacy sidebar.js file;
+
 ## [5.10.0] - 2025-04-23
 ### Added
 - Deployment of ZK passport smart contracts
