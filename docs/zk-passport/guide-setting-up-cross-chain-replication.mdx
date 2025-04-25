@@ -1,6 +1,6 @@
 ---
 description: Set up ZK Passport Registry replication to verify ZK Passport proofs on any EVM-compatible chain.
-sidebar_label: "Guide: setting up cross-chain replication"
+sidebar_label: "Going cross-chain"
 ---
 
 import OutLink from "@site/src/components/OutLink";
@@ -54,10 +54,10 @@ You have to set up backend service and make your front-end app update the root:
 
      const requestUrl = new URL(`${API_BASE_URL}/integrations/proof-verification-relayer/v2/state`)
      requestUrl.searchParams.set('filter[root]', root)
-   
+
      const res = await fetch(requestUrl.toString())
      const { data } = await res.json()
-   
+
      return {
        // Signature of root state signed by relayer private key.
        signature: data.attributes.signature,
