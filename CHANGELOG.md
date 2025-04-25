@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [5.11.1] - 2025-04-25
 ### Fixed
 - Redirect from the old proof of citizenship guide;
 
@@ -526,7 +528,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.11.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.11.1...HEAD
+[5.11.1]: https://github.com/rarimo/docs/compare/5.11.0...5.11.1
 [5.11.0]: https://github.com/rarimo/docs/compare/5.10.0...5.11.0
 [5.10.0]: https://github.com/rarimo/docs/compare/5.9.0...5.10.0
 [5.9.0]: https://github.com/rarimo/docs/compare/5.8.2...5.9.0
