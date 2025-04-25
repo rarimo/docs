@@ -36,15 +36,13 @@ const sidebars: SidebarsConfig = {
       link: { type: 'doc', id: 'zk-passport/overview' },
       collapsed: false,
       items: [
-        // 'zk-passport/use-cases',
         'zk-passport/biometric-passports-101',
-        // 'zk-passport/map',
-        'zk-passport/guide-proof-of-citizenship',
+        'zk-passport/guide-off-chain-verification',
         'zk-passport/guide-on-chain-verification',
         'zk-passport/guide-setting-up-cross-chain-replication',
         'zk-passport/guide-setting-up-verificator-svc',
-        // 'zk-passport/api-reference',
         'zk-passport/contracts',
+        //'zk-passport/resources',
       ],
     },
     {
