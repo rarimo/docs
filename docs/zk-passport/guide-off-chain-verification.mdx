@@ -1,0 +1,135 @@
+---
+description: Use ZK Passport to verify user attributes off-chain without revealing private data. Learn how to implement secure verification processes with RariMe App.
+sidebar_label: "Verifying off-chain"
+---
+import OutLink from "@site/src/components/OutLink";
+import IdealImage from '@site/src/components/IdealImage';
+
+# Guide: Using ZK Passport for off-chain verification
+
+Before getting started with implementing off-chain verification, let's quickly review all the steps of the process on the diagram below.
+
+<IdealImage img={require('/img/zk-passport-proof-of-citizenship-flow.png')} alt="ZK Passport user flow" />
+
+The basic verification flow works like this:
+
+1. User installs the RariMe App and scans their identity document
+2. User scans a QR-code in your DApp
+3. User gets prompted to generate a proof of the requested attribute in RariMe App
+4. The app submits the proof to the callback URL (specified in the QR code) for verification
+5. Your DApp backend fetches the verification status and verified data from a REST API
+
+You can check out this flow in the sandbox: <OutLink href="https://app.rarime.com/proof-requests-demo">ZK Passport Demo</OutLink>
+
+## [Optional]: Spin up your own verificator backend
+
+By default, the library uses a public instance of `verificator-svc` hosted by Rarimo contributors: <OutLink href="https://api.app.rarime.com/">https://api.app.rarime.com/</OutLink>
+
+However, you can also host your own instance of `verificator-svc` to have full control over the verification process and data. Follow the instructions in the [Hosting your own verificator](/zk-passport/guide-setting-up-verificator-svc) guide to set up your own instance.
+
+## Step #1: Install `@rarimo/zk-passport-react` package
+
+To install the package, run the following command in your project directory:
+
+```bash npm2yarn
+npm install @rarimo/zk-passport-react
+```
+
+If you don't use React, you can use the `@rarimo/zk-passport` package instead. It provides a low-level API for requesting and verification of ZK Passport proofs.
+
+```bash npm2yarn
+npm install @rarimo/zk-passport
+```
+
+## Step #2: Import the library and render the QR code
+
+The following JS snippet uses the library to render a QR code with a verification request and handles the results:
+
+```jsx
+import ZkPassportQrCode from '@rarimo/zk-passport-react'
+
+// this is a public instance of verificator-svc(https://github.com/rarimo/verificator-svc). Replace it with the URL of your instance
+const apiUrl = 'https://api.app.rarime.com'
+
+// `requestid` is a public unique ID associated with a user within your system. It will be used later to check the user status
+const requestId = 'account-1'
+
+// `event_id` is an arbitrary number that denotes the application scope of the proof
+const eventId = 1337
+
+const verificationOpts: RequestVerificationLinkOpts = {
+  uniqueness: true, // check if the user has already passed the verification
+  nationalityCheck: true, // include user's citizenship in the output(proof public signals)
+  // you can include other options based on your verification requirements
+  eventId: eventId, // scope of the proof
+}
+
+return (
+  <ZkPassportQrCode
+    // Proof request params
+    apiUrl={apiUrl}
+    requestId={requestId}
+    verificationOptions={verificationOpts}
+
+    // QR code component props
+    qrProps={{ size: 256 }}
+
+    // place your callbacks here
+    onStatusChange={status => console.log(status)}
+    onSuccess={proof => console.log(proof)}
+    onError={error => console.error(error)}
+  />
+)
+```
+
+## Step #3: Fetch the verification status and data on the backend
+
+You can fetch the verification status for a particular `id` from this verificator endpoint:
+<OutLink href="https://rarimo.github.io/verificator-svc/#tag/User-verification/operation/getUserStatus">https://rarimo.github.io/verificator-svc/#tag/User-verification/operation/getUserStatus</OutLink>
+
+Here is a JS snippet for checking verification status:
+
+```ts
+const backendUrl = 'https://api.app.rarime.com/'
+const userId = 'some-user-id' // the `id` from step #3
+
+const response = await fetch(`${backendUrl}/integrations/verificator-svc/private/verification-status/${userId}`)
+const { data } = await response.json()
+
+// responseUserId === userId
+const responseUserId = data.id
+
+// Verification status enum:
+// - "not_verified" - user is not verified
+// - "verified" - user is verified
+// - "failed_verification" - user verification failed
+// - "uniqueness_check_failed" - user uniqueness check failed
+const verificationStatus = data.attributes.status
+```
+
+If the user has status `verified`, you can fetch the verified attribute data like this:
+
+```ts
+const response = await fetch(`${backendUrl}/integrations/verificator-svc/private/user/${userId}`)
+const { data } = await response.json()
+
+// Depending on what attributes you requested in your verification options
+// For example, if you requested nationalityCheck:
+// ISO 3166 alpha-3 country code: https://www.iban.com/country-codes
+// Note: German passports may have a single-letter "D" code
+const citizenshipISOCode = data.attributes.nationality // e.g. "UKR"
+
+// Other attributes might be available depending on your verification request
+```
+
+## Example use cases
+
+Here are some common verification scenarios you can implement:
+
+1. **Citizenship verification**: Verify a user's nationality without seeing their passport
+2. **Age verification**: Check if a user is above a certain age without knowing their birth date
+3. **Identity uniqueness**: Ensure each physical person can only create one account
+
+## Conclusion
+
+In this guide, we set up an off-chain verification system using ZK Passport and the RariMe App, enabling secure proof of user attributes without exposing private data. This approach allows you to create privacy-preserving verification flows for various use cases while maintaining compliance with data protection regulations.
