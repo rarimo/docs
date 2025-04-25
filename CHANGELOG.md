@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix typos in documentation and configuration files
 
 ### Changed
-- Transformed the citizenship verification guide into a generic off-chain verification guide;
+- Transformed the citizenship verification guide into a simplified generic off-chain verification guide;
 - Improved sidebar labels;
 
 
