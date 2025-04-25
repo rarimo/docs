@@ -19,30 +19,15 @@ The basic verification flow works like this:
 4. The app submits the proof to the callback URL (specified in the QR code) for verification
 5. Your DApp backend fetches the verification status and verified data from a REST API
 
-QR code generation and all the interactions with the backend are facilitated by Rarimo's ZK Passport library, which is available as an NPM package: `@rarimo/zk-passport`. The library provides a convenient API for generating QR codes and verifying the proof status.
-
 You can check out this flow in the sandbox: <OutLink href="https://app.rarime.com/proof-requests-demo">ZK Passport Demo</OutLink>
 
-## Pre-requisites
+## [Optional]: Spin up your own verificator backend
 
-:::tip
-You can use this public instance of `verificator-svc` for testing: <OutLink href="https://api.app.rarime.com/">https://api.app.rarime.com/</OutLink>
-:::
+By default, the library uses a public instance of `verificator-svc` hosted by Rarimo contributors: <OutLink href="https://api.app.rarime.com/">https://api.app.rarime.com/</OutLink>
 
-To get started, you SHOULD deploy your own instance of <OutLink href="https://github.com/rarimo/verificator-svc">verificator-svc</OutLink>. This service encapsulates proof verification and provides a convenient REST API for requesting parameters for the QR code, checking the user verification status, etc. You need to trust the instance of `verificator-svc` so the best option is to host your own instance.
+However, you can also host your own instance of `verificator-svc` to have full control over the verification process and data. Follow the instructions in the [Hosting your own verificator](/zk-passport/guide-setting-up-verificator-svc) guide to set up your own instance.
 
-API docs: <OutLink href="https://rarimo.github.io/verificator-svc/">verificator-svc | ReDoc</OutLink>
-
-## Step #1: Ask the user to install RariMe App and scan their identity document
-
-<IdealImage img={require('/img/install-rarime.png')} alt="Install RariMe App" />
-
-Links for installation:
-
-- <OutLink href="https://apps.apple.com/us/app/rarime/id6503300598">RariMe for iOS | AppStore</OutLink>
-- <OutLink href="https://play.google.com/store/apps/details?id=com.rarilabs.rarime">RariMe for Android | Google Play</OutLink>
-
-## Step #2: Install `@rarimo/zk-passport-react` package
+## Step #1: Install `@rarimo/zk-passport-react` package
 
 To install the package, run the following command in your project directory:
 
@@ -56,7 +41,7 @@ If you don't use React, you can use the `@rarimo/zk-passport` package instead. I
 npm install @rarimo/zk-passport
 ```
 
-## Step #3: Import the library and render the QR code
+## Step #2: Import the library and render the QR code
 
 The following JS snippet uses the library to render a QR code with a verification request and handles the results:
 
@@ -97,7 +82,7 @@ return (
 )
 ```
 
-## Step #4: Fetch the verification status and data on the backend
+## Step #3: Fetch the verification status and data on the backend
 
 You can fetch the verification status for a particular `id` from this verificator endpoint:
 <OutLink href="https://rarimo.github.io/verificator-svc/#tag/User-verification/operation/getUserStatus">https://rarimo.github.io/verificator-svc/#tag/User-verification/operation/getUserStatus</OutLink>
