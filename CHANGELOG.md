@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.11.2] - 2025-05-01
 ### Changed
 - Added link to the ERC-7812 standard in the ZK Registry overview;
 
@@ -531,7 +532,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.11.1...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.11.2...HEAD
+[5.11.2]: https://github.com/rarimo/docs/compare/5.11.1...5.11.2
 [5.11.1]: https://github.com/rarimo/docs/compare/5.11.0...5.11.1
 [5.11.0]: https://github.com/rarimo/docs/compare/5.10.0...5.11.0
 [5.10.0]: https://github.com/rarimo/docs/compare/5.9.0...5.10.0
