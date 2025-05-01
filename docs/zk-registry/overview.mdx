@@ -1,5 +1,5 @@
 ---
-description: The ZK Registry is a permissionless system for securely committing and proving private data on-chain, enabling cross-chain verifications with zero-knowledge privacy.
+description: Explore the ZK Registry (ERC-7812) for secure, cross-chain data verification with zero-knowledge privacy
 slug: /zk-registry
 ---
 import OutLink from "@site/src/components/OutLink";
@@ -19,7 +19,7 @@ Deploying the ZK Registry on a ZK Rollup rather than on a separate chain ensures
 
 The ZK Registry functions through a modular architecture consisting of two primary components:
 
-- **EvidenceRegistry**: A central contract where statements are registered. It interacts with an on-chain database, **EvidenceDB**, which stores hashed proofs of user data.
+- **EvidenceRegistry**: A central contract where statements are registered, as described in <OutLink href="https://eips.ethereum.org/EIPS/eip-7812">ERC-7812: ZK Identity Registry</OutLink>. It interacts with an on-chain database, **EvidenceDB**, which stores hashed proofs of user data.
 - **Registrar**: The component that manages specific use cases, such as identity verification or proof of attendance, by structuring data and coordinating with **EvidenceRegistry**.
 
 <IdealImage img={require('/img/evidence-registry.png')} alt="Evidence Registry" />

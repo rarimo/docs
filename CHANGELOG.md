@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Added link to the ERC-7812 standard in the ZK Registry overview;
+
 ## [5.11.1] - 2025-04-25
 ### Fixed
 - Redirect from the old proof of citizenship guide;
