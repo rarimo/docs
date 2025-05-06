@@ -57,6 +57,14 @@ By using a global Merkle tree of passport hashes shared by all users and social 
 
 <IdealImage img={require('/img/passport-hashes-dilution.png')} alt="Passport hashes dilution" />
 
+## ZK circuits
+
+The ZK Passport circuits can be found in the following repositories:
+- <OutLink href="https://github.com/rarimo/passport-zk-circuits">passport-zk-circuits</OutLink>
+- <OutLink href="https://github.com/rarimo/passport-zk-circuits-noir">passport-zk-circuits-noir</OutLink>
+
+Originally, the circuits were created using Circom, but the project is now transitioning to Noir. Noir eliminates the need for a per-circuit trusted setup, significantly reducing download sizes and enhancing overall security. This makes Noir the preferred framework for future ZK Passport development.
+
 ## Challenges and limitations
 
 The first implementation of ZK Passport comes with some limitations:
@@ -64,4 +72,4 @@ The first implementation of ZK Passport comes with some limitations:
 - Some types of passports are not supported in the full verification mode yet due to limitations of mobile phone hardware.
 - No biometric checks are included, meaning someone may scan a stolen or borrowed passport. ZKML solutions may alleviate this in the future.
 - There's no way to prevent a holder of multiple passports from onboarding multiple times.
-- Only passports with Active Authentication support recovery at the moment. An MPC-based solution is considered to circumvent this limitation.
+- Only passports with Active Authentication support recovery at the moment. Alternative recovery methods are being researched.
