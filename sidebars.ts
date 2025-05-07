@@ -16,7 +16,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'html',
       value: `
-        <span class="menu__link menu__link--no-hover">Building blocks</span>
+        <span class="menu__link menu__link--no-hover">Framework</span>
       `,
     },
     {
