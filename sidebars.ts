@@ -33,6 +33,19 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: 'Bionetta(ZKML)',
+      link: { type: 'doc', id: 'bionetta/overview' },
+      collapsed: false,
+      items: [
+
+        'bionetta/tutorial-creating-a-model',
+        'bionetta/tutorial-account-recovery',
+        'bionetta/proof-of-liveness',
+        'bionetta/objects-as-keys',
+      ],
+    },
+    {
+      type: 'category',
       label: 'ZK Passport',
       link: { type: 'doc', id: 'zk-passport/overview' },
       collapsed: false,
