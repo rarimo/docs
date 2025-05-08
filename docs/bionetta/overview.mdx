@@ -1,0 +1,75 @@
+---
+title: "Bionetta: the ultimate client-side ZKML framework"
+description: "Build private, on-device inference proofs with Bionetta, a Groth16-powered client-side ZKML framework."
+---
+
+import OutLink from "@site/src/components/OutLink";
+import IdealImage from '@site/src/components/IdealImage';
+
+# Bionetta: the ultimate client-side ZKML framework [Preview]
+
+:::info
+Bionetta is in an active development phase, and the implementation is currently private. The framework will be released in Q2 2025.
+:::
+
+Bionetta is a client-side framework designed to generate secure and private inference proofs using Zero-Knowledge Machine Learning (ZKML). Unlike other frameworks, Bionetta assumes the AI model and its weights are public, keeping user inputs strictly private. Utilizing Groth16-based ZK-SNARKs, Bionetta efficiently executes neural network inferences, typically completing proofs directly on smartphones in under two minutes.
+
+Core principles of Bionetta:
+- **Provability**: Anyone can independently verify that the model executed correctly.
+- **Zero-Knowledge**: Verification does not reveal sensitive user data, such as biometric information.
+- **Client-Side Proving**: Proof generation occurs entirely on the user's device, minimizing data leaks and eliminating reliance on external trusted providers.
+
+This approach makes Bionetta ideal for biometrics-based identity proofs. For example, users can scan their faces using mobile devices to demonstrate membership within a specific group, without exposing any raw biometric data.
+
+## Key features and capabilities
+
+### Developer-friendly architecture
+
+Bionetta prioritizes simplicity and developer experience, offering:
+- TensorFlow integration: An SDK built on TensorFlow enables easy training of neural networks compatible with the Bionetta system. It automatically generates R1CS circuits in Circom, simplifying the workflow from model training to ZK proof generation.
+- Upcoming PyTorch integration: Work is underway to add PyTorch support, further expanding developer flexibility.
+- Optimized neural network layers: Pre-designed layers optimized specifically for ZK-friendly operations, such as ReLU, LeakyReLU, and HardSwish.
+
+### Efficient inference proving
+
+Bionetta leverages custom neural network architectures optimized specifically for Rank-1 Constraint Systems (R1CS), significantly reducing the computational constraints required. This tailored approach enables practical, efficient inference verification on-chain, without sacrificing performance or resource efficiency.
+
+### High-performance witness generation
+
+Bionetta includes a high-performance Rust-based witness generator, dramatically speeding up witness computation for neural network inference. Even relatively large neural networks can be verified rapidly, enabling feasible real-time biometric verification on consumer devices.
+
+### Optimized floating-point arithmetization
+
+Floating-point operations are essential in model inference but challenging to implement efficiently within zero-knowledge circuits. Bionetta employs a specialized quantization scheme that effectively encodes real numbers into finite fields (such as BN254), minimizing accuracy loss during quantization and arithmetic operations. This precise approach is critical for accurate neural network inference.
+
+## Use cases
+
+### Physical objects as keys
+
+With Bionetta, physical objects (e.g., books, figurines, or even cats) can serve as secure keys. Users prove their possession of the object through image proximity proofs, confirming their identity without exposing any detailed information about the object itself.
+
+### Liveness checks
+
+Bionetta can securely verify the liveness of users in biometric authentication processes. ZK proofs confirm that users are physically present without revealing raw biometric data, enhancing security against spoofing or replay attacks.
+
+### Face registries
+
+Bionetta supports private face registries, allowing users to prove their membership within specific groups or communities anonymously. Participants can demonstrate their identity securely without exposing biometric details.
+
+## Challenges & limitations
+
+### Groth16 proving system
+
+Requires a trusted setup and large verification keys; any circuit change (e.g., updating the model) mandates repeating that ceremony.
+
+### Public-weights assumption
+
+Optimized only for models whose architecture and weights are public, making it unsuitable for proprietary or private fine-tuned weights.
+
+### Limited model portability
+
+Off-the-shelf neural networks, such as MobileNet, can't be adopted directly. Their dense activations would blow up the constraint count and become impractical for consumer hardware.
+
+## Conclusion
+
+Bionetta represents a significant advancement in the ZKML (zero-knowledge machine learning) field, providing a robust, developer-friendly framework for integrating efficient client-side inference proving into blockchain and privacy-preserving applications.

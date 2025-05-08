@@ -16,7 +16,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'html',
       value: `
-        <span class="menu__link menu__link--no-hover">Infrastructure</span>
+        <span class="menu__link menu__link--no-hover">Framework</span>
       `,
     },
     {
@@ -25,9 +25,23 @@ const sidebars: SidebarsConfig = {
       link: { type: 'doc', id: 'zk-registry/overview' },
       collapsed: false,
       items: [
-        // 'zk-registry/using-rollup',
-        // 'zk-registry/contracts',
+        // TODO:
+        // - bridging guide?
+        // - ZK Registry <> Rollup split
         'zk-registry/network-info',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Bionetta(ZKML)',
+      link: { type: 'doc', id: 'bionetta/overview' },
+      collapsed: false,
+      items: [
+
+        'bionetta/tutorial-creating-a-model',
+        'bionetta/tutorial-account-recovery',
+        'bionetta/proof-of-liveness',
+        'bionetta/objects-as-keys',
       ],
     },
     {
@@ -36,13 +50,15 @@ const sidebars: SidebarsConfig = {
       link: { type: 'doc', id: 'zk-passport/overview' },
       collapsed: false,
       items: [
+        // TODO:
+        // - airdrop tutorial
+        // - proof knobs
         'zk-passport/biometric-passports-101',
         'zk-passport/guide-off-chain-verification',
         'zk-passport/guide-on-chain-verification',
         'zk-passport/guide-setting-up-verificator-svc',
         'zk-passport/guide-setting-up-cross-chain-replication',
         'zk-passport/contracts',
-        //'zk-passport/resources',
       ],
     },
     {
@@ -50,16 +66,13 @@ const sidebars: SidebarsConfig = {
       label: 'ZK Reputation',
       link: { type: 'doc', id: 'zk-reputation/overview' },
       collapsed: false,
-      items: [
-        // 'zk-reputation/guide-verifying-reputation',
-        // 'zk-reputation/contracts',
-      ],
+      items: [],
     },
 
     {
       type: 'html',
       value: `
-        <span class="menu__link menu__link--no-hover">Products</span>
+        <span class="menu__link menu__link--no-hover">Apps</span>
       `,
     },
     {
@@ -70,7 +83,6 @@ const sidebars: SidebarsConfig = {
       items: [
         //'freedom-tool/success-stories',
         'freedom-tool/smart-contracts-reference',
-        //'freedom-tool/resources',
       ],
     },
     {

@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Bionetta overview doc;
+
+### Changed
+- Minor sidebar tweaks;
+
 ## [5.12.0] - 2025-05-06
 ### Changed
 - Added links to the circuits repositories in the ZK Passport overview;
