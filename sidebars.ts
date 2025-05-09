@@ -16,7 +16,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'html',
       value: `
-        <span class="menu__link menu__link--no-hover">Framework</span>
+        <span class="menu__link menu__link--no-hover">Infrastructure</span>
       `,
     },
     {
@@ -29,19 +29,6 @@ const sidebars: SidebarsConfig = {
         // - bridging guide?
         // - ZK Registry <> Rollup split
         'zk-registry/network-info',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Bionetta(ZKML)',
-      link: { type: 'doc', id: 'bionetta/overview' },
-      collapsed: false,
-      items: [
-
-        'bionetta/tutorial-creating-a-model',
-        'bionetta/tutorial-account-recovery',
-        'bionetta/proof-of-liveness',
-        'bionetta/objects-as-keys',
       ],
     },
     {
@@ -67,6 +54,19 @@ const sidebars: SidebarsConfig = {
       link: { type: 'doc', id: 'zk-reputation/overview' },
       collapsed: false,
       items: [],
+    },
+    {
+      type: 'category',
+      label: 'Bionetta',
+      link: { type: 'doc', id: 'bionetta/overview' },
+      collapsed: false,
+      items: [
+
+        'bionetta/tutorial-creating-a-model',
+        'bionetta/tutorial-account-recovery',
+        'bionetta/proof-of-liveness',
+        'bionetta/objects-as-keys',
+      ],
     },
 
     {
