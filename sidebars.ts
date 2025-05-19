@@ -50,23 +50,23 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: 'ZKML Bionetta',
+      link: { type: 'doc', id: 'zkml-bionetta/overview' },
+      collapsed: false,
+      items: [
+
+        'zkml-bionetta/tutorial-creating-a-model',
+        'zkml-bionetta/tutorial-account-recovery',
+        'zkml-bionetta/proof-of-liveness',
+        'zkml-bionetta/objects-as-keys',
+      ],
+    },
+    {
+      type: 'category',
       label: 'ZK Reputation',
       link: { type: 'doc', id: 'zk-reputation/overview' },
       collapsed: false,
       items: [],
-    },
-    {
-      type: 'category',
-      label: 'Bionetta',
-      link: { type: 'doc', id: 'bionetta/overview' },
-      collapsed: false,
-      items: [
-
-        'bionetta/tutorial-creating-a-model',
-        'bionetta/tutorial-account-recovery',
-        'bionetta/proof-of-liveness',
-        'bionetta/objects-as-keys',
-      ],
     },
 
     {
