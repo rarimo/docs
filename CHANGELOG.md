@@ -5,8 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Changed
 
+## [5.14.0] - 2025-05-19
+### Changed
 - Bionetta => ZKML Bionetta
 
 ## [5.13.0] - 2025-05-09
@@ -546,7 +547,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.13.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.14.0...HEAD
+[5.14.0]: https://github.com/rarimo/docs/compare/5.13.0...5.14.0
 [5.13.0]: https://github.com/rarimo/docs/compare/5.12.0...5.13.0
 [5.12.0]: https://github.com/rarimo/docs/compare/5.11.2...5.12.0
 [5.11.2]: https://github.com/rarimo/docs/compare/5.11.1...5.11.2
