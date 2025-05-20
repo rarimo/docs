@@ -55,7 +55,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
 
-        'zkml-bionetta/tutorial-creating-a-model',
+        'zkml-bionetta/tutorial-creating-a-zkml-model',
         'zkml-bionetta/tutorial-account-recovery',
         'zkml-bionetta/proof-of-liveness',
         'zkml-bionetta/objects-as-keys',
