@@ -9,7 +9,6 @@ import IdealImage from '@site/src/components/IdealImage';
 {
     // TODO:
     // - Inputs?
-    // - Illustrations
 }
 
 # Creating a ZKML model with Bionetta
@@ -46,9 +45,9 @@ Running Bionetta Framework is as easy as writing an init script in Python with t
 
 Then you should run this script and wait till the end of the process. After running the script everything would be ready to build your own ZKML model.
 
-{/* ![**Figure 1.** The architecture of the inner workings of the Bionetta framework during the simple `.compile_circuits()` command.](Writing%20Client-Side%20ZKML%20in%20Bionetta%201d9239f9e478809faa3dcdfee7fa9ab1/bionetta-flow.png) */}
+The inner workings behind the Bionetta's `.compile_circuits()` command are shown below:
 
-**Figure 1.** The architecture of the inner workings of the Bionetta framework during the simple `.compile_circuits()` command.
+<IdealImage img={require('/img/bionetta-flow.png')} alt="Inner workings of Bionetta framework" />
 
 ## Step 1. Training the model
 
@@ -145,13 +144,14 @@ To train the model and execute the Bionetta framework, run this script and wait 
 python3 -m examples.bionetta_mnist
 ```
 
-{/* ![image.png](Writing%20Client-Side%20ZKML%20in%20Bionetta%201d9239f9e478809faa3dcdfee7fa9ab1/81a96fa5-1ee3-4297-a074-b92ea78d5531.png) */}
+After running the script, you will see the following output:
 
+<IdealImage img={require('/img/bionetta-output.png')} alt="Bionetta output" />
 
 ## Step 2. Proving and verifying inference
 
 After running Bionetta, you will find the following files in the `examples/bionetta_mnist_circuits` directory:
-- `.zkey`  file keeps data received by running trusted setup for your circuit. It holds all the pre computations needed to construct Groth16 proof. In future such file is used to create proof for your witness.
+- `.zkey` file keeps data received by running trusted setup for your circuit. It holds all the pre computations needed to construct Groth16 proof. In future such file is used to create proof for your witness.
 - `bionetta-witness-generator` executable and library for C.
 - `.wtns`  file keeps witness for your circuit. It is a file that contains all the information about the input to your neural network and the output of the neural network.
 - `verification_key.json` file with the verification key for your circuit.
@@ -159,7 +159,7 @@ After running Bionetta, you will find the following files in the `examples/bione
 
 ### Proving
 
-Many preparations were done, and now is the time to eat a cherry on the cake: prove that you’ve indeed received data from certain neural network. All the magic is done by running one command:
+To generate a proof for the inference, you need to run the following command:
 
 ```bash
 snarkjs groth16 prove \
@@ -168,13 +168,13 @@ snarkjs groth16 prove \
     proof.json public.json
 ```
 
-Under the hood it produces Groth16 proof for given `.wtns` and `.zkey` files. In the output it will give you  two json’s `public.json`  and `proof.json` . First one contains all the information about public circuit outputs(address of the contract, nonce, threshold, output of the neural network, etc).
+Under the hood it produces Groth16 proof for given `.wtns` and `.zkey` files. In the output it will give you  two json’s `public.json`  and `proof.json`. First one contains all the information about public circuit outputs(address of the contract, nonce, threshold, output of the neural network, etc).
 
 Also `.wtns` and `.zkey` file are compatible with <OutLink href="https://github.com/iden3/rapidsnark">Rapidsnark</OutLink>, so it is also possible to use it for proof generation. I would personally say that it is even preferable, because Rapidsnark generates proofs much faster than snarkjs command.
 
 ### Verification
 
-As we previously mentioned *Bionetta*🌿 produces verification keys and Solidity verification contract. In case if are not familiar with Solidity you can run one command to verify your proof:
+To verify the proof generated in the previous step, run the following command:
 
 ```bash
 snarkjs groth16 verify \
