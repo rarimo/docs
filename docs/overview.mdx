@@ -17,29 +17,37 @@ The ZK Registry is a ZK Rollup that functions as an on-chain registry for abstra
 
 <IdealImage img={require('/img/zk-registry.png')} alt="ZK Registry" />
 
-## Permissionless self-issued identities with ZK Passport
+## Why a ZK Rollup?
+
+Rarimo deploys the ZK Registry to a dedicated ZK Rollup to leverage Ethereum's security and interoperability while maintaining affordability and flexibility. Additionally, ZK Registry updates can be propagated to other Layer 1 networks, ensuring seamless synchronization of root states across multiple ecosystems.
+
+## Tools for building privacy-preserving applications
+
+Rarimo provides a suite of tools to help developers build trustless identities and privacy-preserving applications. These tools include:
+
+### ZK Passport for permissionless self-issued identities
 
 ZK Passport Registry transforms biometric passports into unique, privacy-preserving digital identities. Unlike most solutions, it combines decentralized infrastructure, reliable uniqueness verification, and privacy.
 
-*Decentralization* is achieved through self-issuance: since passports already contain the necessary validity data, no third-party issuer is needed, making it self-serve and resistant to shutdown.
-
-*Uniqueness* is ensured by publishing passport hashes on-chain, allowing users to prove their inclusion in the registry. With each additional user and application, privacy strengthens through a network effect, making it increasingly challenging to deduce individual actions, whether related to protests or meme coins.
-
 Learn more at [ZK Passport](/zk-passport).
 
-## ZK Reputation
+### Bionetta for client-side ZKML
+
+Bionetta is a client-side framework for generating private inference proofs using Zero-Knowledge Machine Learning(ZKML).
+By focusing on public model weights, Bionetta ensures user inputs remain fully private.
+This approach is ideally suited for privacy-preserving use cases such as biometric verification in Web3.
+
+Learn more at [ZKML Bionetta](/zkml-bionetta).
+
+### ZK Reputation for provable credibility
+
+{
+    // TODO: Remove
+}
 
 The ZK Reputation Registry allows users to prove their reputation based on private relationships and interactions, without exposing sensitive details. By leveraging zero-knowledge proofs, users can verify their trustworthiness and standing in various communities while maintaining complete control over their privacy.
 
 Learn more at [ZK Reputation](/zk-reputation).
-
-## Launch your own ZK Registry
-
-ZK Registry is entirely open-source and built with extensibility in mind. If your DApp can benefit from private yet provable data, bring it on!
-
-## Why a ZK Rollup?
-
-Rarimo deploys the ZK Registry to a dedicated ZK Rollup to leverage Ethereum's security and interoperability while maintaining affordability and flexibility. Additionally, ZK Registry updates can be propagated to other Layer 1 networks, ensuring seamless synchronization of root states across multiple ecosystems.
 
 ## Ecosystem
 
@@ -48,6 +56,6 @@ Several applications are being built on top of Rarimo:
 - [**RariMe App**](/rarime-app): A self-sovereign mobile wallet for managing digital identity.
 - [**Freedom Tool**](/freedom-tool): A privacy-preserving voting solution designed for e-democracy.
 
-## Can I use it now?
+## Launch your own ZK Registry
 
-Yes and no. While the Rarimo ZK Registry is still under development, you can already access and use technologies like the RariMe App, ZK Passport, and Freedom Tool.
+ZK Registry is entirely open-source and built with extensibility in mind, following [ERC-7812](/zk-registry). If your DApp can benefit from private yet provable data, bring it on!
