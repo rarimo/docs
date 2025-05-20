@@ -152,12 +152,10 @@ python3 -m examples.bionetta_mnist
 
 After running Bionetta, you will find the following files in the `examples/bionetta_mnist_circuits` directory:
 - `.zkey`  file keeps data received by running trusted setup for your circuit. It holds all the pre computations needed to construct Groth16 proof. In future such file is used to create proof for your witness.
-- Witness generator executable and library for C. This is a file that contains all the information about the input to your neural network and the output of the neural network.
+- `bionetta-witness-generator` executable and library for C.
 - `.wtns`  file keeps witness for your circuit. It is a file that contains all the information about the input to your neural network and the output of the neural network.
-- `.json` file with the verification key for your circuit.
-- Solidity verification contract
-- `.json` file with public inputs. This file contains all the information about the public inputs to your circuit. It is a file that contains all the information about the input to your neural network and the output of the neural network.
-
+- `verification_key.json` file with the verification key for your circuit.
+- `verifier.sol` Solidity verification contract
 
 ### Proving
 
