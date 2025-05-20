@@ -8,7 +8,7 @@ import IdealImage from '@site/src/components/IdealImage';
 
 {
     // TODO:
-    // - Inputs?
+    // - include a link to the MNIST demo
 }
 
 # Creating a ZKML model with Bionetta
@@ -168,7 +168,7 @@ snarkjs groth16 prove \
     proof.json public.json
 ```
 
-Under the hood it produces Groth16 proof for given `.wtns` and `.zkey` files. In the output it will give you  two json’s `public.json`  and `proof.json`. First one contains all the information about public circuit outputs(address of the contract, nonce, threshold, output of the neural network, etc).
+This command will use a random image from the test set as input to the neural network. The `proof.json` file will contain the proof, and the `public.json` file will contain the public inputs to the circuit.
 
 Also `.wtns` and `.zkey` file are compatible with <OutLink href="https://github.com/iden3/rapidsnark">Rapidsnark</OutLink>, so it is also possible to use it for proof generation. I would personally say that it is even preferable, because Rapidsnark generates proofs much faster than snarkjs command.
 
