@@ -3,8 +3,7 @@ description: Use ZK Passport to verify users on-chain without revealing private 
 sidebar_label: "Verifying on-chain"
 ---
 
-import OutLink from "@site/src/components/OutLink";
-import IdealImage from '@site/src/components/IdealImage';
+
 
 # Guide: Setting up on-chain user verification with ZK Passport
 
@@ -28,8 +27,8 @@ This tutorial walks you through the process of setting up on-chain verification 
 {
 /*
 TODO:
-    - put this contract into an npm package?
-    - guide to customizing the query params
+- put this contract into an npm package?
+- guide to customizing the query params
 */
 }
 
@@ -37,17 +36,17 @@ The **Verificator** contract is responsible for verifying ZK proofs on-chain. Th
 
 1. Obtain the `Verificator` contract <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/4cccd0ca8613330c4af68d8e0f7ca46bd3b68ac9/contracts/voting/verifiers/BioPassportVotingVerifier.sol">source code</OutLink> and add it to your project.
 
-   ```solidity
-   contract Verificator {
-        function verifyProof(
-            uint[2] calldata _pA,
-            uint[2][2] calldata _pB,
-            uint[2] calldata _pC,
-            uint[23] calldata _pubSignals
-        ) public view returns (bool) {
-            // ...
-        }
-   }
+```solidity
+contract Verificator {
+     function verifyProof(
+         uint[2] calldata _pA,
+         uint[2][2] calldata _pB,
+         uint[2] calldata _pC,
+         uint[23] calldata _pubSignals
+     ) public view returns (bool) {
+         // ...
+     }
+}
    ```
 2. Deploy it to your chain and record the address of the newly deployed `Verificator`. You will use this address in your other contracts to verify proofs.
 
@@ -55,117 +54,50 @@ The **Verificator** contract is responsible for verifying ZK proofs on-chain. Th
 
 Once your chain is replicating ZK Registry state and you have a deployed `Verificator` contract, you can add ZK proof checks to your own contract logic.
 
-### A. Collect public signals and proof from `verificator-svc`
-
-When a user scans a QR code and submits a proof:
-
-1. Your DApp calls the <OutLink href="https://rarimo.github.io/verificator-svc/#tag/User-verification/operation/getProof">`getProof`</OutLink> endpoint from `verificator-svc`.
-2. Receive both `pubSignals` and the `proof` from the service:
-
-   ```json
-   {
-     "pubSignals": ["12345", "67890", "..."],
-     "proof": {
-       "pi_a": ["0x123...", "0x456..."],
-       "pi_b": [["0x789...", "0xabc..."], ["0xdef...", "0x123..."]],
-       "pi_c": ["0x456...", "0x789..."]
-     }
-   }
-   ```
-
-3. Pass the `pubSignals` as calldata to the `execute()` method in the smart contract along with the `proof`.
-
-   ```solidity
-   pragma solidity ^0.8.28;
-
-   import {IPoseidonSMT} from "@rarimo/passport-contracts/interfaces/state/IPoseidonSMT.sol";
-   import {AQueryProofExecutor} from "@rarimo/passport-contracts/sdk/AQueryProofExecutor.sol";
-   import {PublicSignalsBuilder} from "@rarimo/passport-contracts/sdk/lib/PublicSignalsBuilder.sol";
-
-   contract MyPassportContract is AQueryProofExecutor {
-        struct UserData {
-            uint256 nullifier;
-            uint256 identityCreationTimestamp;
-        }
-
-        mapping(uint256 => bool) public usedNullifiers;
-
-        constructor(address registrationSMT_, address verifier_) {
-            __AQueryProofExecutor_init(registrationSMT_, verifier_);
-        }
-
-        // Called before proof verification
-        function _beforeVerify(bytes32, uint256, bytes memory userPayload_) public override {
-            (address user, UserData memory userData) = abi.decode(
-                userPayload_,
-                (address, UserData)
-            );
-
-            require(!usedNullifiers[userData.nullifier], "Nullifier already used");
-            usedNullifiers[userData.nullifier] = true;
-        }
-
-        // Called after successful proof verification
-        function _afterVerify(bytes32, uint256, bytes memory userPayload_) public override {
-            (address user, UserData memory userData) = abi.decode(
-                userPayload_,
-                (address, UserData)
-            );
-
-            // Grant access, mint tokens, or perform other actions
-            // Example: grantAccess(user);
-        }
-
-         // Builds the public signals for verification
-        function _buildPublicSignals(
-            bytes32,
-            uint256 currentDate_,
-            bytes memory userPayload_
-        ) public override returns (uint256 dataPointer_) {
-            (address user, UserData memory userData) = abi.decode(
-                userPayload_,
-                (address, UserData)
-            );
-
-            // Query proof verification logic here
-
-            return dataPointer_;
-        }
-    }
-    ```
-
-    The critical parts are the three required override methods:
-
-    ```solidity
-    // Called before proof verification
-    function _beforeVerify(bytes32, uint256, bytes memory userPayload_) public override { /* ... */ }
-
-    // Called after successful proof verification
-    function _afterVerify(bytes32, uint256, bytes memory userPayload_) public override { /* ... */ }
-
-    // Builds the public signals for verification
-    function _buildPublicSignals(bytes32, uint256 currentDate_, bytes memory userPayload_)
-        public override returns (uint256 dataPointer_) { /* ... */ }
-
-    ```
-
-    Here, your contract inherits from `AQueryProofExecutor`, which handles the ZK proof validation internally.
-
-### B. Manually Assemble the Public Signals Before Passing Them to the `verifyProof` Method
-
-In your smart contract (let's call it `MyPassportContract`), you would do something like this:
+Below is a skeleton of the DApp that relies on the Query Proof Verification to perform some actions (token mint, grant a role, etc.).
 
 ```solidity
 pragma solidity ^0.8.28;
 
-   import {IPoseidonSMT} from "@rarimo/passport-contracts/interfaces/state/IPoseidonSMT.sol";
-   import {AQueryProofExecutor} from "@rarimo/passport-contracts/sdk/AQueryProofExecutor.sol";
-   import {PublicSignalsBuilder} from "@rarimo/passport-contracts/sdk/lib/PublicSignalsBuilder.sol";
+import {IPoseidonSMT} from "@rarimo/passport-contracts/interfaces/state/IPoseidonSMT.sol";
+import {AQueryProofExecutor} from "@rarimo/passport-contracts/sdk/AQueryProofExecutor.sol";
+import {PublicSignalsBuilder} from "@rarimo/passport-contracts/sdk/lib/PublicSignalsBuilder.sol";
 
-   contract MyPassportContract is AQueryProofExecutor {
-    // code before 
+contract MyPassportContract is AQueryProofExecutor {
+    struct UserData {
+        uint256 nullifier;
+        uint256 identityCreationTimestamp;
+    }
 
-    // Builds the public signals for verification
+    mapping(uint256 => bool) public usedNullifiers;
+
+    constructor(address registrationSMT_, address verifier_) {
+        __AQueryProofExecutor_init(registrationSMT_, verifier_);
+    }
+
+    // Called before proof verification
+    function _beforeVerify(bytes32, uint256, bytes memory userPayload_) public override {
+        (address user, UserData memory userData) = abi.decode(
+            userPayload_,
+            (address, UserData)
+        );
+
+        require(!usedNullifiers[userData.nullifier], "Nullifier already used");
+        usedNullifiers[userData.nullifier] = true;
+    }
+
+    // Called after successful proof verification
+    function _afterVerify(bytes32, uint256, bytes memory userPayload_) public override {
+        (address user, UserData memory userData) = abi.decode(
+            userPayload_,
+            (address, UserData)
+        );
+
+        // Grant access, mint tokens, or perform other actions
+        // Example: grantAccess(user);
+    }
+
+     // Builds the public signals for verification
     function _buildPublicSignals(
         bytes32,
         uint256 currentDate_,
@@ -175,62 +107,112 @@ pragma solidity ^0.8.28;
             userPayload_,
             (address, UserData)
         );
-        
-        // highlight-start
-        uint256 identityCreationTimestampUpperBound = getIdentityCreationTimestampUpperBound();
-        uint256 identityCounterUpperBound = type(uint32).max;
-        
-        if (userData.identityCreationTimestamp > 0) {
-            identityCreationTimestampUpperBound = userData.identityCreationTimestamp;
-            identityCounterUpperBound = 1;
-        }
-        
-        dataPointer_ = PublicSignalsBuilder.newPublicSignalsBuilder(SELECTOR, userData.nullifier);
-        dataPointer_.withEventIdAndData(getEventId(user), getEventData());
-        dataPointer_.withCurrentDate(currentDate_, 1 days);
-        dataPointer_.withTimestampLowerboundAndUpperbound(0, identityCreationTimestampUpperBound);
-        dataPointer_.withBirthDateLowerboundAndUpperbound(
-            PublicSignalsBuilder.ZERO_DATE,
-            BIRTHDAY_UPPERBOUND
-        );
-        dataPointer_.withIdentityCounterLowerbound(0, identityCounterUpperBound);
-        dataPointer_.withExpirationDateLowerboundAndUpperbound(
-            currentDate_,
-            PublicSignalsBuilder.ZERO_DATE
-        );
-        // highlight-end
-        
+
+        // Query proof verification logic here
+
         return dataPointer_;
     }
+}
+```
 
-    // Helper functions
-    function getIdentityCreationTimestampUpperBound() public view returns (uint256) {
-        return accessStartTimestamp - IPoseidonSMT(getRegistrationSMT()).ROOT_VALIDITY();
+The critical parts are the three required override methods:
+
+```solidity
+  // Called before proof verification
+  function _beforeVerify(bytes32 registrationRoot_, uint256 currentDate_, bytes memory userPayload_) public override { /* ... */ }
+
+  // Called after successful proof verification
+  function _afterVerify(bytes32 registrationRoot_, uint256 currentDate_, bytes memory userPayload_) public override { /* ... */ }
+
+  // Builds the public signals for verification
+  function _buildPublicSignals(bytes32 registrationRoot_, uint256 currentDate_, bytes memory userPayload_)
+        public override returns (uint256 dataPointer_) { /* ... */ }
+```
+
+Above, your contract inherits from `AQueryProofExecutor`, which handles the ZK proof validation internally.
+
+Below, you can see detailed structure for the `_buildPublicSignals` function. Which is the core of the SDK, where you setup the constraints for identity verification.
+
+```solidity
+function _buildPublicSignals(
+    bytes32,
+    uint256 currentDate_,
+    bytes memory userPayload_
+) public override returns (uint256 dataPointer_) {
+    (address user, UserData memory userData) = abi.decode(
+        userPayload_,
+        (address, UserData)
+    );
+
+    // highlight-start
+    uint256 identityCreationTimestampUpperBound = getIdentityCreationTimestampUpperBound();
+    uint256 identityCounterUpperBound = type(uint32).max;
+
+    if (userData.identityCreationTimestamp > 0) {
+        identityCreationTimestampUpperBound = userData.identityCreationTimestamp;
+        identityCounterUpperBound = 1;
     }
-    
-    function getEventId(address user) public view returns (uint256) {
-        // Implementation depends on your application
-        return uint256(keccak256(abi.encodePacked(block.chainid, address(this), user)));
-    }
-    
-    function getEventData() public view returns (uint256) {
-        // Implementation depends on your application
-        return uint256(uint248(uint256(keccak256(abi.encodePacked(accessStartTimestamp)))));
-    }
+
+    dataPointer_ = PublicSignalsBuilder.newPublicSignalsBuilder(SELECTOR, userData.nullifier);
+    dataPointer_.withEventIdAndData(getEventId(user), getEventData());
+    dataPointer_.withCurrentDate(currentDate_, 1 days);
+    dataPointer_.withTimestampLowerboundAndUpperbound(0, identityCreationTimestampUpperBound);
+    dataPointer_.withBirthDateLowerboundAndUpperbound(
+        PublicSignalsBuilder.ZERO_DATE,
+        BIRTHDAY_UPPERBOUND
+    );
+    dataPointer_.withIdentityCounterLowerbound(0, identityCounterUpperBound);
+    dataPointer_.withExpirationDateLowerboundAndUpperbound(
+        currentDate_,
+        PublicSignalsBuilder.ZERO_DATE
+    );
+    // highlight-end
+
+    return dataPointer_;
+}
+
+// Helper functions
+function getIdentityCreationTimestampUpperBound() public view returns (uint256) {
+    return accessStartTimestamp - IPoseidonSMT(getRegistrationSMT()).ROOT_VALIDITY();
+}
+
+function getEventId(address user) public view returns (uint256) {
+    // Implementation depends on your application
+    return uint256(keccak256(abi.encodePacked(block.chainid, address(this), user)));
+}
+
+function getEventData() public view returns (uint256) {
+    // Implementation depends on your application
+    return uint256(uint248(uint256(keccak256(abi.encodePacked(/* some data*/)))));
 }
 ```
 Here are a couple of code references that demonstrate how to collect proof public signals and pass them to a verification contract:
 
 - **<OutLink href="https://github.com/rarimo/erc20-query-proof-contracts/blob/main/contracts/ClaimableToken.sol">ClaimableToken.sol</OutLink>**
-  {
-/*
-TODO: Describe
-*/
-}
+  Simplest example with the uniqueness check
 
 - **<OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/voting/BioPassportVoting.sol">BioPassportVoting.sol</OutLink>**
   Demonstrates a voting contract that uses ZK proofs for passport-based identity checks.
 
+### Collect public signals and proof from `verificator-svc` and send it to the contract
+
+When a user scans a QR code and submits a proof:
+
+1. Your DApp calls the <OutLink href="https://rarimo.github.io/verificator-svc/#tag/User-verification/operation/getProof">`getProof`</OutLink> endpoint from `verificator-svc`.
+2. Receive both `pubSignals` and the `proof` from the service:
+
+```json
+{
+  "pubSignals": ["12345", "67890", "..."],
+  "proof": {
+    "pi_a": ["0x123...", "0x456..."],
+    "pi_b": [["0x789...", "0xabc..."], ["0xdef...", "0x123..."]],
+    "pi_c": ["0x456...", "0x789..."]
+  }
+}
+   ```
+
+3. Call the `execute` method with following parameters: `registrationRoot`, `currentDate`, `userPayload` and `proof`.
 
 ## Conclusion
 
@@ -239,6 +221,7 @@ With these steps:
 1. **Replicate** the ZK Registry state using `RegistrationSMTReplicator`.
 2. **Get** proof parameters from `verificator-svc` to collect the ZK Proof in your DApp.
 3. **Deploy** your `MyPassportContract` contract to verify proofs and do specific tasks.
+4. **Call** the `execute` method on the `MyPassportContract` contract to perform some action alongside Query Proof Verification
 
 We've set up on-chain verification of ZK Passport proofs. This allows you to verify user identities without revealing sensitive data, ensuring privacy and security in your application.
 
