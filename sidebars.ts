@@ -55,11 +55,15 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
 
-        'zkml-bionetta/tutorial-creating-a-zkml-model',
-        'zkml-bionetta/tutorial-account-recovery',
-        'zkml-bionetta/proof-of-liveness',
-        'zkml-bionetta/objects-as-keys',
+        'zkml-bionetta/tutorial-creating-a-zkml-model'
       ],
+    },
+    {
+      type: 'category',
+      label: 'ZK Recovery',
+      link: { type: 'doc', id: 'zk-recovery/overview' },
+      collapsed: false,
+      items: [],
     },
     {
       type: 'category',

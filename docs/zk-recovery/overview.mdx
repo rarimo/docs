@@ -1,0 +1,58 @@
+---
+title: ZK Recovery
+description: Recover crypto wallets without centralized services using Bionetta ZKML. Your face or any object can be your recovery key.
+slug: /zk-recovery
+sidebar_label: ZK Recovery
+---
+
+{{
+    // TODO:
+    // - Add a link to the demo
+    // - Bitcoin use case
+    // - Fuzzy extractors
+}}
+
+import OutLink from "@site/src/components/OutLink";
+import IdealImage from '@site/src/components/IdealImage';
+
+# ZK Recovery
+
+Rarimo's ZK Recovery enables you to restore your crypto accounts securely without depending on centralized services. Utilizing the Bionetta ZKML framework, it leverages image recognition for recovery. You can use your face, a physical object (like a book cover), or even your cat as a unique recovery key. This means no more worries about losing your seed phrase, while staying true to the principle of "not your keys, not your coins."
+
+## How it works
+
+The solution is based on account abstraction and implements the <OutLink href="https://ethereum-magicians.org/t/eip-xxxx-universal-account-recovery-standard-uars/24080">Universal Account Recovery Standard (UARS)</OutLink>.
+
+To set up ZK Recovery, we need to to:
+1. Scan the physical object(e.g. a book cover) or your face using a mobile app.
+2. Using a locally run ZKML model, extract a vector of features from the scanned object. This vector is a unique representation of the object, which we will call *S*.
+3. Save the *S* vector securely, ensuring that it can only be accessed by you(e.g. in a cloud storage with e2e encryption).
+4. Calculate a Poseidon hash of the *S* vector and store it in a smart contract wallet.
+
+Importantly, no raw image data is stored on-chain, and the *S* vector is never shared with anyone.
+
+When you need to recover your wallet, the following steps are needed:
+1. You can scan the same object or face again.
+2. The new scan of the object, original feature vector *S* and hash(*S*) are provided as inputs to a Bionetta ZKML circuit. The circuit will:
+   - Calculate the *S'* vector from the new scan.
+   - Check similarity between the *S* and *S'* vectors using a distance metric:
+        ```
+        dist(S, S') < threshold
+        ```
+    - Prove that *S* is the real pre-image of hash(*S*).
+3. Submit the ZK proof to the smart contract wallet, which will verify the proof and unlock the account.
+
+## Challenges & limitations
+
+
+- It's necessary to store the original feature vector *S* securely. Alternative solutions, such as fuzzy extractors are considered to get rid of this requirement.
+- Face scanning on mobile devices will be less accurate than built-in Face ID or similar solutions, due to hardware limitations.
+- On its own, ZK Recovery may be not robust enough, making it more suitable for a multi-factor authentication setup. For example, you can combine ZK Recovery with a hardware wallet or a social recovery mechanism.
+
+## Can I use it now?
+
+ZK Recovery is not production grade yet. However, you can contact us on <OutLink href="https://t.me/+pWugh5xgDiE3Y2Jk">Telegram</OutLink> to discuss your use case and get early access to the solution.
+
+## Conclusion
+
+ZK Recovery offers a novel approach to account recovery by leveraging zero-knowledge proofs and image recognition. By allowing users to utilize unique physical objects or their own faces as recovery keys, it enhances security while minimizing reliance on traditional recovery methods.
