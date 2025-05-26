@@ -61,7 +61,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'ZK Recovery',
-      link: { type: 'doc', id: 'zk-recovery/overview' },
+      link: { type: 'doc', id: 'seedless-recovery/overview' },
       collapsed: false,
       items: [],
     },
