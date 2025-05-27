@@ -75,7 +75,7 @@ The primary advantage of this method is its enhanced security and lightweight op
 
 ## Seedless Recovery for Bitcoin
 
-Seedless Recovery can also be applied to Bitcoin accounts, allowing users to recover their wallets without relying on seed phrases by using their face or a physical object as a recovery key. By taking advantage of taproot addresses, users can create a wallet that requires authentication via Seedless Recovery to access funds.
+Seedless Recovery can also be applied to Bitcoin accounts, allowing users to recover their wallets without relying on seed phrases by using their face or a physical object as a recovery key. By taking advantage of taproot addresses, users can create a wallet that can an account with a shortened private key and an admixture of output from a fuzzy extractor(hash of an image). When the user loses the shortened private key, they can recover the wallet by scanning the same face or physical object again and finding the shortened key using discrete logarithm in reasonable time. Outsiders cannot effectively brute-force the key due to the high entropy of the fuzzy extractor output, which is combined with a shortened private key. This setup allows for secure recovery without the need for a seed phrase.
 
 ## Challenges & limitations
 
