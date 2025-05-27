@@ -8,8 +8,7 @@ sidebar_label: Seedless Recovery
 {{
     // TODO:
     // - Add a link to the demo
-    // - Bitcoin use case
-    // - Fuzzy extractors
+    // - Add illustrations for the Seedless Recovery flow
 }}
 
 import OutLink from "@site/src/components/OutLink";
@@ -17,11 +16,17 @@ import IdealImage from '@site/src/components/IdealImage';
 
 # Seedless Recovery
 
-Rarimo's Seedless Recovery enables you to restore your crypto accounts securely without depending on centralized services. Utilizing the Bionetta ZKML framework, it leverages image recognition for recovery. You can use your face, a physical object (like a book cover), or even your cat as a unique recovery key. This means no more worries about losing your seed phrase, while staying true to the principle of "not your keys, not your coins."
+Rarimo's Seedless Recovery enables you to restore your crypto accounts securely without depending on centralized services. You can use your face, a physical object (like a book cover), or even your cat as a unique recovery key. This means no more worries about losing your seed phrase, while staying true to the principle of "not your keys, not your coins."
 
 ## How it works
 
 The solution is based on account abstraction and implements the <OutLink href="https://ethereum-magicians.org/t/eip-xxxx-universal-account-recovery-standard-uars/24080">Universal Account Recovery Standard (UARS)</OutLink>.
+
+For the actual image recognition, Rarimo is currently researching two approaches:
+1. **Seedless Recovery with [Bionetta ZKML](/zkml-bionetta)**: This approach uses the [Bionetta](/zkml-bionetta) ZKML framework to perform image recognition on the client side and generate ZK proofs of image proximity.
+1. **Seedless Recovery with Fuzzy Extractors**: This approach uses fuzzy extractors to generate a unique representation of the scanned object or face, which can be used for recovery without storing the raw image data.
+
+### Seedless Recovery with Bionetta ZKML
 
 To set up Seedless Recovery, we need to to:
 1. Scan the physical object(e.g. a book cover) or your face using a mobile app.
@@ -33,7 +38,7 @@ Importantly, no raw image data is stored on-chain, and the *S* vector is never s
 
 When you need to recover your wallet, the following steps are needed:
 1. You can scan the same object or face again.
-2. The new scan of the object, original feature vector *S* and hash(*S*) are provided as inputs to a Bionetta ZKML circuit. The circuit will:
+2. The new scan of the object, original feature vector *S* and hash(*S*) are provided as inputs to a [Bionetta](/zkml-bionetta) ZKML circuit. The circuit will:
    - Calculate the *S'* vector from the new scan.
    - Check similarity between the *S* and *S'* vectors using a distance metric:
         ```
@@ -42,10 +47,28 @@ When you need to recover your wallet, the following steps are needed:
     - Prove that *S* is the real pre-image of hash(*S*).
 3. Submit the ZK proof to the smart contract wallet, which will verify the proof and unlock the account.
 
+The downside of this approach is that it requires keeping the original feature vector *S* to generate the ZK proof. However, it does not require storing the raw image data on-chain, which enhances security and privacy.
+
+### Seedless Recovery with Fuzzy Extractors
+
+Fuzzy extractors are cryptographic primitives that allow you to generate a unique key from noisy data, such as a scanned image of a physical object or a face. The key can be used for account recovery without storing the raw image data. The benefit of this approach is that it does not need to keep the original feature vector *S* or the ZKML model on the device, making it more secure and lightweight.
+
+To set up Seedless Recovery with fuzzy extractors, you need to:
+1. Scan the physical object or your face using a mobile app.
+2. Use a fuzzy extractor algorithm to generate a hash from the scanned image. This key is derived from the image but does not reveal any sensitive information about it.
+3. Submit the hash to a smart contract.
+
+When you need to recover your wallet, the following steps are needed:
+1. Scan the same object or face again.
+2. Use the fuzzy extractor algorithm to generate a new hash from the new scan.
+3. Submit the new hash to the smart contract, which will verify that the new hash matches the stored hash with distance within the tolerable threshold and unlock the account.
+
+## Seedless Recovery for Bitcoin
+
+Seedless Recovery can also be applied to Bitcoin accounts, allowing users to recover their wallets without relying on seed phrases by using their face or a physical object as a recovery key. By taking advantage of taproot addresses, users can create a wallet that requires authentication via Seedless Recovery to access funds.
+
 ## Challenges & limitations
 
-
-- It's necessary to store the original feature vector *S* securely. Alternative solutions, such as fuzzy extractors are considered to get rid of this requirement.
 - Face scanning on mobile devices will be less accurate than built-in Face ID or similar solutions, due to hardware limitations.
 - On its own, Seedless Recovery may be not robust enough, making it more suitable for a multi-factor authentication setup. For example, you can combine Seedless Recovery with a hardware wallet or a social recovery mechanism.
 
@@ -55,4 +78,4 @@ Seedless Recovery is not production grade yet. However, you can contact us on <O
 
 ## Conclusion
 
-Seedless Recovery offers a novel approach to account recovery by leveraging zero-knowledge proofs and image recognition. By allowing users to utilize unique physical objects or their own faces as recovery keys, it enhances security while minimizing reliance on traditional recovery methods.
+Seedless Recovery offers a novel approach to account recovery by leveraging verifiable client side image recognition. By allowing users to utilize unique physical objects or their own faces as recovery keys, it enhances security while minimizing reliance on traditional recovery methods.
