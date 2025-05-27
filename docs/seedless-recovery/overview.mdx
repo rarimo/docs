@@ -8,7 +8,6 @@ sidebar_label: Seedless Recovery
 {{
     // TODO:
     // - Add a link to the demo
-    // - Add illustrations for the Seedless Recovery flow
 }}
 
 import OutLink from "@site/src/components/OutLink";
@@ -51,7 +50,7 @@ The downside of this approach is that it requires keeping the original feature v
 
 ### Seedless Recovery with Fuzzy Extractors
 
-Fuzzy extractors are cryptographic primitives that allow you to generate a unique key from noisy data, such as a scanned image of a physical object or a face. The key can be used for account recovery without storing the raw image data. The benefit of this approach is that it does not need to keep the original feature vector *S* or the ZKML model on the device, making it more secure and lightweight.
+Fuzzy extractors are cryptographic primitives that allow you to generate a cryptographically secure hash from noisy data, such as a scanned image of a physical object or a face. The key can be used for account recovery without storing the raw image data. The benefit of this approach is that it does not need to keep the original feature vector *S* or the ZKML model on the device, making it more secure and lightweight.
 
 To set up Seedless Recovery with fuzzy extractors, you need to:
 1. Scan the physical object or your face using a mobile app.
