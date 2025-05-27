@@ -187,10 +187,15 @@ function getEventData() public view returns (uint256) {
     return uint256(uint248(uint256(keccak256(abi.encodePacked(/* some data*/)))));
 }
 ```
+
+The client application calls the `function execute(registrationRoot, currentDate, userPayload, zkPoints_)` to perform the actions and verify the Query Proof.
+
+### References
+
 Here are a couple of code references that demonstrate how to collect proof public signals and pass them to a verification contract:
 
 - **<OutLink href="https://github.com/rarimo/erc20-query-proof-contracts/blob/main/contracts/ClaimableToken.sol">ClaimableToken.sol</OutLink>**
-  Simplest example with the uniqueness check
+  Simplest example with the uniqueness and age checks
 
 - **<OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/voting/BioPassportVoting.sol">BioPassportVoting.sol</OutLink>**
   Demonstrates a voting contract that uses ZK proofs for passport-based identity checks.
