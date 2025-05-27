@@ -55,16 +55,20 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
 
-        'zkml-bionetta/tutorial-creating-a-zkml-model',
-        'zkml-bionetta/tutorial-account-recovery',
-        'zkml-bionetta/proof-of-liveness',
-        'zkml-bionetta/objects-as-keys',
+        'zkml-bionetta/tutorial-creating-a-zkml-model'
       ],
     },
     {
       type: 'category',
       label: 'ZK Reputation',
       link: { type: 'doc', id: 'zk-reputation/overview' },
+      collapsed: false,
+      items: [],
+    },
+    {
+      type: 'category',
+      label: 'Seedless Recovery',
+      link: { type: 'doc', id: 'seedless-recovery/overview' },
       collapsed: false,
       items: [],
     },
