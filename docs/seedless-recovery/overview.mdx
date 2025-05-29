@@ -75,7 +75,28 @@ The primary advantage of this method is its enhanced security and lightweight op
 
 ## Seedless Recovery for Bitcoin
 
-Seedless Recovery can also be applied to Bitcoin accounts, allowing users to recover their wallets without relying on seed phrases by using their face or a physical object as a recovery key. By taking advantage of taproot addresses, users can create a wallet that can an account with a shortened private key and an admixture of output from a fuzzy extractor(hash of an image). When the user loses the shortened private key, they can recover the wallet by scanning the same face or physical object again and finding the shortened key using discrete logarithm in reasonable time. Outsiders cannot effectively brute-force the key due to the high entropy of the fuzzy extractor output, which is combined with a shortened private key. This setup allows for secure recovery without the need for a seed phrase.
+Seedless Recovery is also available for Bitcoin wallets. It transforms something you already have, such as your face or a distinctive physical object, into a secure backup key without revealing the original image.
+
+For Taproot wallets, Seedless Recovery is implemented by embedding a small script tree next to the standard key-path. Let's look at both paths:
+
+* **Key-path:** This is the default method, allowing you to spend Bitcoin using your regular, full 32-byte secret key, typically used for everyday transactions.
+
+* **Recovery path:** This acts as an emergency method if you lose your seed phrase. The spend key for this path is derived from:
+
+  * A 120-bit fuzzy extractor output (*H(IMG)*), representing a hashed version of the original image.
+  * A random 60-bit nonce (*r*).
+  * A static 16-bit mask (*m*).
+
+This recovery path includes a one-year timelock, enhancing security (see below).
+
+If you lose your private key, recovery involves the following steps:
+
+1. **Scan the original object again** to recreate the hash (*H(IMG)*).
+2. **Recover the nonce (*r*)** using Pollard’s rho algorithm for discrete logarithms, which is achievable on consumer hardware in a reasonable time due to the 60-bit nonce length.
+3. **Derive the recovery key** from the values *H(IMG)*, *r*, and the known mask *m*.
+4. **Transfer funds** securely to a new wallet.
+
+Without the **H(IMG)** value, attackers face brute-forcing a 180-bit key, an economically impractical task. Additionally, the one-year timelock provides extra protection against such attacks.
 
 ## Challenges & limitations
 
