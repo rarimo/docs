@@ -33,6 +33,23 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: 'ZKML Bionetta',
+      link: { type: 'doc', id: 'zkml-bionetta/overview' },
+      collapsed: false,
+      items: [
+
+        'zkml-bionetta/tutorial-creating-a-zkml-model'
+      ],
+    },
+
+    {
+      type: 'html',
+      value: `
+        <span class="menu__link menu__link--no-hover">Solutions</span>
+      `,
+    },
+    {
+      type: 'category',
       label: 'ZK Passport',
       link: { type: 'doc', id: 'zk-passport/overview' },
       collapsed: false,
@@ -50,25 +67,15 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'ZKML Bionetta',
-      link: { type: 'doc', id: 'zkml-bionetta/overview' },
-      collapsed: false,
-      items: [
-
-        'zkml-bionetta/tutorial-creating-a-zkml-model'
-      ],
-    },
-    {
-      type: 'category',
-      label: 'ZK Reputation',
-      link: { type: 'doc', id: 'zk-reputation/overview' },
+      label: 'Seedless Recovery',
+      link: { type: 'doc', id: 'seedless-recovery/overview' },
       collapsed: false,
       items: [],
     },
     {
       type: 'category',
-      label: 'Seedless Recovery',
-      link: { type: 'doc', id: 'seedless-recovery/overview' },
+      label: 'ZK Reputation',
+      link: { type: 'doc', id: 'zk-reputation/overview' },
       collapsed: false,
       items: [],
     },

@@ -87,7 +87,7 @@ For Taproot wallets, Seedless Recovery is implemented by embedding a small scrip
   * A random 60-bit nonce (*r*).
   * A static 16-bit mask (*m*).
 
-This recovery path includes a one-year timelock, enhancing security (see below).
+This recovery path includes a timelock, enhancing security (see below).
 
 If you lose your private key, recovery involves the following steps:
 
@@ -96,7 +96,7 @@ If you lose your private key, recovery involves the following steps:
 3. **Derive the recovery key** from the values *H(IMG)*, *r*, and the known mask *m*.
 4. **Transfer funds** securely to a new wallet.
 
-Without the **H(IMG)** value, attackers face brute-forcing a 180-bit key, an economically impractical task. Additionally, the one-year timelock provides extra protection against such attacks.
+Without the **H(IMG)** value, attackers face brute-forcing a 180-bit key, an economically impractical task. Additionally, the timelock provides extra protection against such attacks.
 
 ## Challenges & limitations
 
