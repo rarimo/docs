@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.17.0] - 2025-05-30
 ### Added
 - Seedless Recovry overview;
 - "Solutions" section in the sidebar;
@@ -563,7 +564,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.16.1...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.17.0...HEAD
+[5.17.0]: https://github.com/rarimo/docs/compare/5.16.1...5.17.0
 [5.16.1]: https://github.com/rarimo/docs/compare/5.16.0...5.16.1
 [5.16.0]: https://github.com/rarimo/docs/compare/5.15.0...5.16.0
 [5.15.0]: https://github.com/rarimo/docs/compare/5.14.0...5.15.0
