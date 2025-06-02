@@ -188,6 +188,24 @@ If everything was done correctly you will receive the following result:
 [INFO]  snarkJS: OK!
 ```
 
+### Proving and Verifying in Python
+
+Alternatively, you can generate proofs and verify them directly from your Python script using Bionetta's built-in methods.
+
+To generate a proof for a given input and then verify it:
+
+```python
+proof_dir = './examples/simple_mnist_circuits/proof'
+
+model.prove(
+    input=test_input,
+    target_dir=proof_dir
+)
+
+model.verify(proof_dir=proof_dir)
+```
+This will create the proof files in the specified `proof_dir` and then attempt to verify them.
+
 ### Conclusion
 
 In this tutorial, we have shown you how to create a simple ZKML model using the Bionetta framework. We covered the steps of preparing the dataset, building and training the model, compiling ZK circuits, and generating and verifying proofs. With Bionetta, you can easily create privacy-preserving models that leverage the power of zero-knowledge proofs.
