@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- ZK Likeness overview;
+- ZK Liveness overview;
+
 ## [5.19.0] - 2025-06-04
 ### Fixed
 - Fixed Seedless Recovery overview based on feedback;
