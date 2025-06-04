@@ -1,0 +1,39 @@
+---
+title: ZK Likeness
+sidebar_label: ZK Likeness
+description: ZK Likeness verifies facial similarity without revealing biometric data, enabling privacy-preserving face recognition.
+slug: /zk-likeness
+---
+
+import OutLink from "@site/src/components/OutLink";
+import IdealImage from '@site/src/components/IdealImage';
+
+# ZK Likeness
+
+:::info
+ZK Likeness is currently in an active development phase, and the implementation is currently private. Contact us on <OutLink href="https://t.me/+pWugh5xgDiE3Y2Jk">Telegram</OutLink> to get early access to this model.
+:::
+
+ZK Likeness is a ZKML solution powered by [Bionetta ZKML framework](/zkml-bionetta) designed to verify that two faces are of the same person without revealing any biometric data. This enables privacy-preserving face recognition for various applications.
+
+## ZK Likeness Registry
+
+The ZK Likeness Registry is a decentralized solution powered by ZK Liveness and ZK Registry technology, enabling individuals to manage and license their digital likeness. Each record links an extracted key from user biometric data with access policies and optional additional information. To create an entry, users process their biometric data through an extractor, define policies like "PROHIBITED," "FREE USAGE," or "PAYABLE," provide relevant details such as payment addresses for commercial uses and create a ZK proof of likeness authenticating the transaction.
+
+<IdealImage img={require('/img/zk-likeness-registry.png')} alt="ZK Likeness Registry" />
+
+Data consumers, such as AI models, can verify the presence of data without accessing the raw data, enhancing privacy.
+
+<IdealImage img={require('/img/zk-likeness-registry-inclusion.png')} alt="Checking inclusion into ZK Likeness Registry" />
+
+Crucially, the face scan data never leaves the device during likeness creation, and it cannot be reverse-engineered from the registry. This approach provides significant data protection benefits, eliminating the need for companies to handle, transmit, or store sensitive biometric information and reducing compliance risks and operational burdens.
+
+## Use cases
+
+ZK Likeness can be used in various scenarios, including:
+
+- **Managing use of likeness for AI-generated content**: Verifying that a person has given consent for their likeness to be used in AI-generated content, such as deepfakes or avatars, without revealing their actual face.
+- **Identity verification**: Confirming a user's identity by comparing a new selfie with a registered face.
+- **Access control**: Granting access to physical or digital resources based on facial recognition without storing or processing raw biometric data.
+- **Duplicate account prevention**: Detecting and preventing users from creating multiple accounts using different identities but the same face.
+
