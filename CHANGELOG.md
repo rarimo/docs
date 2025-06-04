@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [5.19.0] - 2025-06-04
 ### Fixed
 - Fixed Seedless Recovery overview based on feedback;
 
@@ -575,7 +577,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.18.2...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.19.0...HEAD
+[5.19.0]: https://github.com/rarimo/docs/compare/5.18.2...5.19.0
 [5.18.2]: https://github.com/rarimo/docs/compare/5.18.0...5.18.2
 [5.18.0]: https://github.com/rarimo/docs/compare/5.17.0...5.18.0
 [5.17.0]: https://github.com/rarimo/docs/compare/5.16.1...5.17.0
