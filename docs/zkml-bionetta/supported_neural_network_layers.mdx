@@ -1,0 +1,39 @@
+---
+title: Supported Neural network layers
+description:~
+---
+
+import OutLink from "@site/src/components/OutLink";
+import IdealImage from '@site/src/components/IdealImage';
+
+### Squeeze-and-Excitation Block
+
+One of such examples in the existing literature is the Squeeze-and-Excitation (SE) block [HSS18]. [cite: 184] The original network proceeds as follows: given the input volume $X \in \mathbb{R}^{W \times H \times C}$, we apply the global average pooling operation to get the vector $z \in \mathbb{R}^{C}$, where each $z_c$ is the average of the c-th channel of the input volume: [cite: 184]
+
+$$z_c = \frac{1}{W \cdot H} \sum_{i=1}^{W} \sum_{j=1}^{H} X_{i,j,c}, \quad c \in [C]$$
+
+Next, we apply the gating mechanism to the vector z to set $s \in \mathbb{R}^{C}$, which essentially is the encoder-decoder layer, but with the non-linearity applied at the end: $s = \sigma(W_D\phi(W_E z))$. [cite: 185] Here, the number of neurons in the hidden layer is $\frac{C}{r}$ for some constant r. [cite: 185] Finally, we multiply each channel of the input volume X by the corresponding $s_c$ to get the output volume: $Y[:,:,c] \leftarrow s_c \cdot X[:,:,c]$. [cite: 186] The whole computation flow is illustrated in Figure 5. [cite: 186]
+
+We give the following proposition to get the number of constraints.
+
+**Proposition.** Given that both $\sigma$ and $\phi$ cost b constraints to verify, the total cost of the squeeze-and-excitation block is approximately $(1+\frac{1}{r})Cb + HWC$. [cite: 187]
+
+**Reasoning.** Since all linearities are free, we only need to (a) check the activation $\phi$ over the hidden layer, (b) check the activation $\sigma$ over the output layer and (c) check the multiplication of the input volume with the output of the SE block. [cite: 188] The first step costs $\frac{C}{r} \cdot b$ constraints, the second step costs Cb constraints and the third step costs HWC constraints. [cite: 189] The total cost is therefore $(1+\frac{1}{r})Cb + HWC$. [cite: 190]
+
+(Figure 5: The Squeeze-and-Excitation (SE) block one of R1CS-friendly layers [cite: 191])
+
+One modification of such block is the following: instead of applying the global average pooling along the whole volume, we can effectively split it into blocks (say, forming the grid of size $P_W \times P_H$). [cite: 192] This way, we increase the number of constraints by the factor of $P_W P_H$, but the neural network can learn more complex representations. [cite: 193]
+
+### Encoder-Decoder Convolutional Layer
+
+The issue with the Squeeze-and-Excitation Block is that it does not change the shape of the volume. [cite: 194] For that reason, we give the more interesting construction, which is the encoder-decoder convolutional layer. [cite: 195] We combine certain ideas from the Vision Transformer [Dos+21] and the previously mentioned squeeze-and-excitation block [HSS18]. [cite: 196]
+
+(Figure 6: The encoder-decoder convolutional layer. [cite: 197] The input volume is split into blocks of size $P \times P \times C$ and the encoder-decoder layer is applied to each block. [cite: 197] The output is obtained by combining the outputs of processed blocks with the proper reshaping. [cite: 198])
+
+First, we split the input volume into blocks of size $P_W \times P_H$. [cite: 200] For simplicity, assume $P_W = P_H = P$ and naturally assume $P|W,H$. [cite: 200] Assuming the input volume is $X \in \mathbb{R}^{W \times H \times C}$, we get $P^2$ blocks $X_{i,j} \in \mathbb{R}^{\frac{W}{P} \times \frac{H}{P} \times C}$ for $i,j \in [P]$. [cite: 201] Then, we flatten each block into the vector of size $\frac{WHC}{P^2}$. [cite: 201] We connect the flattened blocks to the encoder-decoder layer, each with the K hidden units. [cite: 202] Finally, assume we want to get $W'$, $H'$ and $C'$ as the output volume. [cite: 202] This way, we connect the latent layer (of size K) to the output layer of size $\frac{W'H'C'}{P^2}$. [cite: 203] Finally, we reshape the output volume into the volume of size $\frac{W'}{P} \times \frac{H'}{P} \times C'$ and combine the blocks together to get the final output volume $Y \in \mathbb{R}^{W' \times H' \times C'}$. [cite: 204]
+
+Now, let us analyze the cost of such convolution. [cite: 205]
+
+**Proposition.** Given that the non-linearity in the encoder-decoder layer costs b constraints, the total cost of the encoder-decoder convolutional layer is approximately $P^2Kb$. [cite: 206]
+
+**Reasoning.** The only non-linear operation in the encoder-decoder layer is the activation function. [cite: 207] Since each processing of encoder-decoder costs Kb constraints and we need to process $P^2$ blocks, the total cost is $P^2Kb$. [cite: 208] Note that while the regular convolutional layer costs W'H'C'b constraints, we reduce it significantly to $P^2Kb$ constraints. [cite: 209]
