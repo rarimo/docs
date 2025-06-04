@@ -74,6 +74,15 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: 'ZK Liveness',
+      link: {
+        type: 'doc',
+        id: 'zk-liveness/overview',
+      },
+      items: [],
+    },
+    {
+      type: 'category',
       label: 'ZK Reputation',
       link: { type: 'doc', id: 'zk-reputation/overview' },
       collapsed: false,
