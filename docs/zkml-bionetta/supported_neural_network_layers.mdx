@@ -20,6 +20,8 @@ We give the following proposition to get the number of constraints.
 
 **Reasoning.** Since all linearities are free, we only need to (a) check the activation $\phi$ over the hidden layer, (b) check the activation $\sigma$ over the output layer and (c) check the multiplication of the input volume with the output of the SE block. [cite: 188] The first step costs $\frac{C}{r} \cdot b$ constraints, the second step costs Cb constraints and the third step costs HWC constraints. [cite: 189] The total cost is therefore $(1+\frac{1}{r})Cb + HWC$. [cite: 190]
 
+<IdealImage img={require('/img/se_block.png')} alt="SE block" />
+
 (Figure 5: The Squeeze-and-Excitation (SE) block one of R1CS-friendly layers [cite: 191])
 
 One modification of such block is the following: instead of applying the global average pooling along the whole volume, we can effectively split it into blocks (say, forming the grid of size $P_W \times P_H$). [cite: 192] This way, we increase the number of constraints by the factor of $P_W P_H$, but the neural network can learn more complex representations. [cite: 193]
@@ -27,6 +29,8 @@ One modification of such block is the following: instead of applying the global 
 ### Encoder-Decoder Convolutional Layer
 
 The issue with the Squeeze-and-Excitation Block is that it does not change the shape of the volume. [cite: 194] For that reason, we give the more interesting construction, which is the encoder-decoder convolutional layer. [cite: 195] We combine certain ideas from the Vision Transformer [Dos+21] and the previously mentioned squeeze-and-excitation block [HSS18]. [cite: 196]
+
+<IdealImage img={require('/img/encoder-decoder-convolutional-layer.png')} alt="Encoder-decoder convolutional layer" />
 
 (Figure 6: The encoder-decoder convolutional layer. [cite: 197] The input volume is split into blocks of size $P \times P \times C$ and the encoder-decoder layer is applied to each block. [cite: 197] The output is obtained by combining the outputs of processed blocks with the proper reshaping. [cite: 198])
 
