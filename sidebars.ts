@@ -92,8 +92,8 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'ZK Reputation',
-      link: { type: 'doc', id: 'zk-reputation/overview' },
+      label: 'ZK Graph',
+      link: { type: 'doc', id: 'zk-graph/overview' },
       collapsed: false,
       items: [],
     },

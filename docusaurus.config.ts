@@ -112,7 +112,7 @@ const config: Config = {
             },
             {
               html: `
-                <a href="/zk-reputation/" class="footer__social-link">ZK Reputation</a>`,
+                <a href="/zk-graph/" class="footer__social-link">ZK Graph</a>`,
             },
           ],
         },
