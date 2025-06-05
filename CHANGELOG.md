@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Renamed ZK Reputation to ZK Graph;
+- Renamed zk-reputation.png image to zk-graph.png;
 
 ## [5.20.0] - 2025-06-04
 ### Added
@@ -185,7 +188,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [5.0.0] - 2024-11-21
 ### Added
 - ZK Registry docs;
-- ZK Reputation docs;
+- ZK Graph docs;
 - ZK Passport docs;
 
 ### Changed
