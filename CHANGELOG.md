@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.21.1] - 2025-06-11
 ### Added
 - Link to a Bionetta demo.
 
@@ -590,7 +591,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.21.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.21.1...HEAD
+[5.21.1]: https://github.com/rarimo/docs/compare/5.21.0...5.21.1
 [5.21.0]: https://github.com/rarimo/docs/compare/5.20.0...5.21.0
 [5.20.0]: https://github.com/rarimo/docs/compare/5.19.0...5.20.0
 [5.19.0]: https://github.com/rarimo/docs/compare/5.18.2...5.19.0
