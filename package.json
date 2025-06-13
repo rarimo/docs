@@ -1,6 +1,6 @@
 {
   "name": "rarimo-docs",
-  "version": "5.21.1",
+  "version": "5.21.2",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
