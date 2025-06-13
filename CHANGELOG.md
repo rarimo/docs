@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+- Temporarily removed the Bionetta demo link.
+
 ## [5.21.1] - 2025-06-11
 ### Added
 - Link to a Bionetta demo.
