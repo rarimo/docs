@@ -13,14 +13,18 @@ import IdealImage from '@site/src/components/IdealImage';
 
 # Creating a ZKML model with Bionetta
 
-In this tutorial, we will walk you through the process of creating a simple ZKML model capable of recognizing handwritten digits using the MNIST dataset (<OutLink href="https://keras.io/api/datasets/mnist/">official source</OutLink>). The model will be trained using TensorFlow and then compiled into a ZKML model using the Bionetta framework.
+In this tutorial, you'll learn how to build a simple ZKML model that recognizes handwritten digits. This model enables users to prove they've presented a specific handwritten digit (e.g., "7") without revealing the original image. We'll train the model with TensorFlow using the <OutLink href="https://keras.io/api/datasets/mnist/">MNIST dataset</OutLink> and then compile it into a ZKML-compatible format using the Bionetta framework.
 
 ## Prerequisites
 
-To get started, clone the <OutLink href="">bionetta-tf</OutLink> repository that contains the Bionetta framework and the example MNIST model:
+:::info
+Bionetta is currently in an active development phase, and the implementation is currently private. Contact us on <OutLink href="https://t.me/+pWugh5xgDiE3Y2Jk">Telegram</OutLink> to get early access to the framework.
+:::
+
+To get started, clone the <OutLink href="https://github.com/rarimo/bionetta">bionetta</OutLink> repository that contains the Bionetta framework and the example MNIST model:
 
 ```bash
-git clone git@github.com:rarimo/bionetta-tf.git
+git clone git@github.com:rarimo/bionetta.git
 ```
 
 Then, install the required dependencies:
@@ -32,7 +36,7 @@ Then, install the required dependencies:
 - Circom 2.1.7
 - Snarkjs
 
-Refer to <OutLink href="https://github.com/rarimo/bionetta-tf/blob/115f9a1e0b720b8c9acbce0a3f8eca02e7bc206c/install.sh">`install.sh` script</OutLink> for the complete list of dependencies and installation instructions.
+Refer to <OutLink href="https://github.com/rarimo/bionetta/blob/17897304bd2f627ccb97df753ed3e763457a0edd/install.sh">`install.sh` script</OutLink> for the complete list of dependencies and installation instructions.
 
 ## Recipe to build your own ZKML model
 
@@ -44,10 +48,6 @@ Running Bionetta Framework is as easy as writing an init script in Python with t
 4. Compiling ZK circuits using Bionetta with just one single extra line: `model.compile_circuits(*)`
 
 Then you should run this script and wait till the end of the process. After running the script everything would be ready to build your own ZKML model.
-
-The inner workings behind the Bionetta's `.compile_circuits()` command are shown below:
-
-<IdealImage img={require('/img/bionetta-flow.png')} alt="Inner workings of Bionetta framework" />
 
 ## Step 1. Training the model
 
@@ -187,6 +187,24 @@ If everything was done correctly you will receive the following result:
 ```bash
 [INFO]  snarkJS: OK!
 ```
+
+### Proving and Verifying in Python
+
+Alternatively, you can generate proofs and verify them directly from your Python script using Bionetta's built-in methods.
+
+To generate a proof for a given input and then verify it:
+
+```python
+proof_dir = './examples/simple_mnist_circuits/proof'
+
+model.prove(
+    input=test_input,
+    target_dir=proof_dir
+)
+
+model.verify(proof_dir=proof_dir)
+```
+This will create the proof files in the specified `proof_dir` and then attempt to verify them.
 
 ### Conclusion
 

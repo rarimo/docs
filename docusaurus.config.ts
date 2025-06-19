@@ -2,6 +2,8 @@ import { Options } from '@docusaurus/preset-classic'
 import npm2yarn from '@docusaurus/remark-plugin-npm2yarn'
 import { Config } from '@docusaurus/types'
 import { themes } from 'prism-react-renderer'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
 
 const config: Config = {
   title: 'Rarimo Docs',
@@ -36,7 +38,8 @@ const config: Config = {
           breadcrumbs: false,
           showLastUpdateTime: true,
           editUrl: 'https://github.com/rarimo/docs/blob/main',
-          remarkPlugins: [[npm2yarn, { sync: true }]],
+          remarkPlugins: [[npm2yarn, { sync: true }], remarkMath],
+          rehypePlugins: [rehypeKatex],
         },
         theme: { customCss: './src/css/custom.css' },
         gtag: { trackingID: 'G-PVC393K31J' },
@@ -109,7 +112,7 @@ const config: Config = {
             },
             {
               html: `
-                <a href="/zk-reputation/" class="footer__social-link">ZK Reputation</a>`,
+                <a href="/zk-graph/" class="footer__social-link">ZK Graph</a>`,
             },
           ],
         },
