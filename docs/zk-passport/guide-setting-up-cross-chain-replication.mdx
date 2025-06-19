@@ -21,11 +21,39 @@ This guide walks you through the process of setting up cross-chain replication f
 
 The **RegistrationSMTReplicator** handles the replication of state from the ZK Registry onto your chain. This ensures your chain is kept up to date with changes to passport registrations.
 
-1. **Obtain the contract code** for <OutLink href="https://github.com/rarimo/passport-contracts/blob/6812b70ca12209ccf1bb3179e1358dbcbe7e9f3e/contracts/sdk/RegistrationSMTReplicator.sol">RegistrationSMTReplicator</OutLink>.
+1. **Install the Rarimo Passport Contracts** package:
 
-2. **Deploy** the `RegistrationSMTReplicator` to your chain and initialize it:
+   ```bash npm2yarn
+   npm install @rarimo/passport-contracts
+   ```
 
-   ```ts
+1. **Generate a key pair** for the relayer that will submit state updates to the `RegistrationSMTReplicator` contract.
+
+   You can use the `ethers` library to generate a new key pair:
+
+   ```typescript
+   import { ethers } from 'ethers';
+
+   const wallet = ethers.Wallet.createRandom();
+   console.log('Address:', wallet.address);
+   console.log('Private Key:', wallet.privateKey);
+   ```
+
+   Make sure to securely store the private key, as it will be used by the relayer to sign state updates.
+
+
+1. **Deploy** the `RegistrationSMTReplicator` to your chain and initialize it:
+
+   ```typescript
+   import { RegistrationSMTReplicator } from '@rarimo/passport-contracts';
+
+   const replicator = await RegistrationSMTReplicator.deploy({
+      // Specify the chain and network parameters here
+   });
+
+   const oracle = '0x...'; // Replace with your relayer address from the previous step
+   const sourceSMT = '0x479F84502Db545FA8d2275372E0582425204A879'; // This is the address of the original ZK Passport Registry on Rarimo L2.
+
    await replicator.__RegistrationSMTReplicator_init(
       [oracle],  // list of oracle public keys that can submit roots directly
       sourceSMT  // contract address of the original registry on Rarimo L2
@@ -49,6 +77,7 @@ You have to set up backend service and make your front-end app update the root:
 2. **Front-end**: Send the state update transactions on-demand from your front-end:
    - After obtaining the proof from verificator-svc you know the required `root` (it is a <OutLink href="https://github.com/rarimo/passport-zk-circuits/?tab=readme-ov-file#query-circuit-public-signals">11th pub signal</OutLink>).
    - Now you can get signed state by root
+
    ```typescript
    async function getSignedRootState(root: string) {
      const API_BASE_URL = 'https://api.example.com'
