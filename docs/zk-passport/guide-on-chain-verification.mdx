@@ -15,7 +15,10 @@ This tutorial walks you through the process of setting up on-chain verification 
 3. Integrated verification logic into your own contract to validate proof public signals.
 
 {
-//TODO: add step for setting up the front-end with our new SDK
+//TODO:
+// - use the `Verificator` contract from the npm package
+// - add step for setting up the front-end with our new SDK
+// - guide to customizing the query params
 }
 
 ## Prerequisites
@@ -24,14 +27,6 @@ This tutorial walks you through the process of setting up on-chain verification 
 - Access to the <OutLink href="https://github.com/rarimo/verificator-svc">`verificator-svc`</OutLink> service for retrieving proof parameters. You can use the public instance of `verificator-svc` (<OutLink href="https://api.app.rarime.com/">https://api.app.rarime.com/</OutLink>) for testing, but it's recommended to deploy your own instance for production use, as described in [Setting up `verificator-svc`](/zk-passport/guide-setting-up-verificator-svc).
 
 ## Step 1: Deploy the Verificator smart contract
-
-{
-/*
-TODO:
-- put this contract into an npm package?
-- guide to customizing the query params
-*/
-}
 
 The **Verificator** contract is responsible for verifying ZK proofs on-chain. This contract often comes with a precompiled ZK circuit.
 
@@ -54,6 +49,12 @@ contract Verificator {
 ## Step 2: Integrate proof verification into your smart contract
 
 Once your chain is replicating ZK Registry state and you have a deployed `Verificator` contract, you can add ZK proof checks to your own contract logic.
+
+Start by installing the @rarimo/passport-contracts package:
+
+```bash npm2yarn
+npm install @rarimo/passport-contracts
+```
 
 Below is a skeleton of the DApp that relies on the Query Proof Verification to perform some actions (token mint, grant a role, etc.).
 
