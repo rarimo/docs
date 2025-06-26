@@ -15,21 +15,48 @@ Native state transfer to Ethereum L1 is currently under construction.
 This guide walks you through the process of setting up cross-chain replication for ZK Passport Registry state. By the end of this tutorial, you will have:
 
 1. Deployed the **RegistrationSMTReplicator** contract on the target chain.
-1. Set up your relayer or front-end submission flow.
+2. Set up your relayer or front-end submission flow.
 
 ## Step 1: Deploy the RegistrationSMTReplicator
 
 The **RegistrationSMTReplicator** handles the replication of state from the ZK Registry onto your chain. This ensures your chain is kept up to date with changes to passport registrations.
 
-1. **Obtain the contract code** for <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/4cccd0ca8613330c4af68d8e0f7ca46bd3b68ac9/contracts/replication/RegistrationSMTReplicator.sol">RegistrationSMTReplicator</OutLink>.
+1. **Install the Rarimo Passport Contracts** package:
+
+   ```bash npm2yarn
+   npm install @rarimo/passport-contracts
+   ```
+
+1. **Generate a key pair** for the relayer that will submit state updates to the `RegistrationSMTReplicator` contract.
+
+   You can use the `ethers` library to generate a new key pair:
+
+   ```typescript
+   import { ethers } from 'ethers';
+
+   const wallet = ethers.Wallet.createRandom();
+   console.log('Address:', wallet.address);
+   console.log('Private Key:', wallet.privateKey);
+   ```
+
+   Make sure to securely store the private key, as it will be used by the relayer to sign state updates.
+
 
 1. **Deploy** the `RegistrationSMTReplicator` to your chain and initialize it:
 
-   ```ts
+   ```typescript
+   import { RegistrationSMTReplicator } from '@rarimo/passport-contracts';
+
+   const replicator = await RegistrationSMTReplicator.deploy({
+      // Specify the chain and network parameters here
+   });
+
+   const oracle = '0x...'; // Replace with your relayer address from the previous step
+   const sourceSMT = '0x479F84502Db545FA8d2275372E0582425204A879'; // This is the address of the original ZK Passport Registry on Rarimo L2.
+
    await replicator.__RegistrationSMTReplicator_init(
-      signer,     // public key of the replicator
-      sourceSMT,  // contract address of the original registry on Rarimo L2
-      chainName   // target chain name
+      [oracle],  // list of oracle public keys that can submit roots directly
+      sourceSMT  // contract address of the original registry on Rarimo L2
    );
    ```
 
@@ -39,15 +66,18 @@ To keep the state of the ZK Registry in sync with your chain, you need to set up
 This will ensure that any changes in the ZK Registry are reflected in the `RegistrationSMTReplicator` contract.
 
 You have to set up backend service and make your front-end app update the root:
+
 1. **Relayer**: Run a relayer service that listens for events from the ZK Registry.
 
    - Follow the instructions in <OutLink href="https://github.com/rarimo/proof-verification-relayer">proof-verification-relayer README</OutLink>.
    - Make sure you set the right replicator contract address and private key of corresponding `allowedUpdaterAddress` in the config.
    - Make sure <OutLink href="https://rarimo.github.io/proof-verification-relayer/#tag/State/operation/GetState">endpoint</OutLink> is available for your frontend app.
+   - Make sure that the relayer's corresponding key is set as an oracle in the replicator contract. You can check this using the <OutLink href="https://github.com/rarimo/passport-contracts/blob/6812b70ca12209ccf1bb3179e1358dbcbe7e9f3e/contracts/sdk/RegistrationSMTReplicator.sol#L152">`isOracle(address)`</OutLink> method on the `RegistrationSMTReplicator` contract.
 
-1. **Front-end**: Send the state update transactions on-demand from your front-end:
+2. **Front-end**: Send the state update transactions on-demand from your front-end:
    - After obtaining the proof from verificator-svc you know the required `root` (it is a <OutLink href="https://github.com/rarimo/passport-zk-circuits/?tab=readme-ov-file#query-circuit-public-signals">11th pub signal</OutLink>).
    - Now you can get signed state by root
+
    ```typescript
    async function getSignedRootState(root: string) {
      const API_BASE_URL = 'https://api.example.com'
@@ -66,4 +96,4 @@ You have to set up backend service and make your front-end app update the root:
      }
    }
    ```
-   - You can use the <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/4cccd0ca8613330c4af68d8e0f7ca46bd3b68ac9/contracts/replication/RegistrationSMTReplicator.sol#L32">`transitionRoot(root, timestamp, signature)`</OutLink> method on the `RegistrationSMTReplicator` contract to submit state updates.
+   - You can use the <OutLink href="https://github.com/rarimo/passport-contracts/blob/6812b70ca12209ccf1bb3179e1358dbcbe7e9f3e/contracts/sdk/RegistrationSMTReplicator.sol#L102">`transitionRootWithSignature(root, timestamp, signature)`</OutLink> method on the `RegistrationSMTReplicator` contract to submit state updates.
