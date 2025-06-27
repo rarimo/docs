@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Use updated smart contracts for on-chain ZK Passport verification;
 - Use updated smart contracts for cross-chain ZK Passport state replication;
+- Updated the glossary with new terms;
 
 ## [5.21.2] - 2025-06-13
 ### Removed

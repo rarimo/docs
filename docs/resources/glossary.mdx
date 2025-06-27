@@ -13,6 +13,10 @@ A security feature in biometric passports aimed at preventing unauthorized copyi
 
 A passport that includes biometric information, such as a facial photograph, typically includes an RFID chip containing data for biometric verification, personal details, an expiration date, and the issuer's digital signature.
 
+## Bionetta
+
+Bionetta is a client-side framework for generating secure and private inference proofs using Zero-Knowledge Machine Learning (ZKML).
+
 ## Circom Circuit
 
 A Circom circuit is a computational construct used in zero-knowledge proof systems, defining constraints for efficient verification. It enables the generation and verification of proofs, preserving privacy by allowing one party to convince another of a statement's validity without revealing additional information.
@@ -33,23 +37,30 @@ The data group within a biometric passport includes the public key used for Acti
 
 Data group within a biometric passport containing the passport holder's portrait.
 
-## Digital autonomous organization (DAO)
-
-A DAO is a member-owned community without centralized leadership or governing bodies.
-Rarimo uses a DAO to manage its threshold signature scheme.
-
-## Edwards-curve Digital Signature Algorithm (EdDSA)
-
-EdDSA is a complex public key cryptography signature algorithm that is based on Edwards curves.
-
-## Elliptic Curve Digital Signature Algorithm (ECDSA)
-
-ECDSA is a complex public key cryptography signature algorithm in which keys are generated via elliptic curve cryptography.
-
 ## Ethereum Virtual Machine (EVM)
 
 A computation engine that is the foundation for EVM-compatible blockchains such as Ethereum and Polygon.
 See <OutLink href="https://ethereum.org">ethereum.org</OutLink>.
+
+## Freedom Tool
+
+A decentralized, transparent, and privacy-preserving online voting tool on the blockchain.
+
+## Fuzzy Extractors
+
+A cryptographic technique used for account recovery with noisy data, like images, without storing the raw data.
+
+## Groth16
+
+A specific type of zk-SNARK proof system used in Bionetta and ZK Passport for efficient proof generation.
+
+## L1
+
+Layer 1 blockchain, referring to the main Ethereum network in the context of the ZK Registry.
+
+## L2
+
+Layer 2 scaling solution, referring to the Rarimo ZK Rollup network.
 
 ## Machine-Readable Zone (MRZ)
 
@@ -69,16 +80,31 @@ A technology used for short-range communication between devices, often used in p
 An NFT is a piece of data stored on a blockchain that certifies a digital asset to be unique and not interchangeable with any other asset.
 NFTs are different from fungible tokens such as BTC and ETH because fungible tokens are equivalent and interchangeable.
 
+## Nullifier
+
+A unique value used to prevent double-voting or double-spending in a privacy-preserving way.
+
+## Poseidon Hashing
+
+A hash function optimized for zero-knowledge proof systems, used in the ZK Registry and Seedless Recovery.
+
+## Query Proof
+
+A zero-knowledge proof that verifies specific information from a biometric passport or other identity document.
+
 ## RMO
 
 RMO is the Rarimo token.
 The RMO token is used for governance of the Rarimo project, among other things.
 Users can stake RMO tokens to become oracles.
 
-## Secp256k1
+## RariMe App
 
-Secp256k1 refers to the parameters used in cryptography algorithms such as ECDSA.
-See <OutLink href="https://en.bitcoin.it/wiki/Secp256k1">Secp256k1</OutLink>.
+A mobile application that turns a biometric passport into an anonymous digital ID.
+
+## Seedless Recovery
+
+An innovative, visual approach to crypto account recovery using physical objects or biometrics.
 
 ## Smart contract
 
@@ -86,14 +112,37 @@ Smart contracts are programs that run on EVM-compatible blockchains.
 They can provide public functions and accept transactions, such as selling NFTs or exchanging tokens.
 Smart contracts provide the logic for NFTs and decentralized applications.
 
-## Soulbound Token (SBT)
-
-Soulbound tokens are tokens that cannot be transferred.
-They often represent parts of a user's identity, history, or accomplishments.
-
 ## Sparse Merkle Tree
 
 A data structure designed for efficiently storing and verifying large data sets with minimal storage requirements.
+
+## ZK Graph
+
+ZK Graph allows users to prove their reputation based on private interactions or relationships using zero-knowledge proofs, ensuring privacy while verifying trustworthiness.
+
+## ZK Likeness
+
+ZK Likeness is a ZKML solution powered by the Bionetta framework. It verifies that two faces belong to the same person without revealing any biometric data, enabling privacy-preserving face recognition for various applications.
+
+## ZK Liveness
+
+A solution to verify that a user is a live person, used in conjunction with ZK Likeness.
+
+## ZK Passport
+
+A solution that allows users to prove their identity on-chain without revealing private data from their passport.
+
+## ZK Registry
+
+The ZK Registry is a privacy-focused on-chain registry. It enables proving system states without revealing individual details, supporting applications like identity verification and reputation systems. This design ensures data integrity and user anonymity​.
+
+## ZK Registry Rollup
+
+A ZK Registry Rollup is an on-chain registry used to prove system states without exposing individual data, enabling privacy-preserving applications.
+
+## ZKML (Zero-Knowledge Machine Learning)
+
+ZKML stands for Zero-Knowledge Machine Learning, which combines zero-knowledge proofs (ZK proofs) with machine learning algorithms. It enables machine learning tasks to be performed on encrypted or private data without revealing the data itself, ensuring privacy and confidentiality.
 
 ## Zero-Knowledge Proof (ZKP)
 
@@ -104,19 +153,3 @@ For example, a ZKP can verify that a user is above a certain age without reveali
 
 A zk-SNARK is the type of ZKP that Rarimo Identity Protocol uses.
 One characteristic of zk-SNARKs is that they are non-interactive, meaning that the user and verifier interact only once, unlike some other types of ZKPs.
-
-## ZK Registry
-
-The ZK Registry is a privacy-focused on-chain registry. It enables proving system states without revealing individual details, supporting applications like identity verification and reputation systems. This design ensures data integrity and user anonymity​.
-
-## ZK Registry Rollup
-
-A ZK Registry Rollup is an on-chain registry used to prove system states without exposing individual data, enabling privacy-preserving applications.
-
-## ZK Graph
-
-ZK Graph allows users to prove their reputation based on private interactions or relationships using zero-knowledge proofs, ensuring privacy while verifying trustworthiness.
-
-## ZKML (Zero-Knowledge Machine Learning)
-
-ZKML stands for Zero-Knowledge Machine Learning, which combines zero-knowledge proofs (ZK proofs) with machine learning algorithms. It enables machine learning tasks to be performed on encrypted or private data without revealing the data itself, ensuring privacy and confidentiality.
