@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Added llms.txt file to make the docs searchable by LLMs;
+
 ### Changed
 - Use updated smart contracts for on-chain ZK Passport verification;
 - Use updated smart contracts for cross-chain ZK Passport state replication;

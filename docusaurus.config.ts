@@ -184,6 +184,7 @@ const config: Config = {
         disableInDev: false,
       },
     ],
+    'docusaurus-plugin-llms',
   ],
 }
 

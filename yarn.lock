@@ -4460,6 +4460,14 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
+docusaurus-plugin-llms@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/docusaurus-plugin-llms/-/docusaurus-plugin-llms-0.1.4.tgz#2bff60ab8e20fc0ffff1258e71a7ea10f96eb32a"
+  integrity sha512-51JukBpl4SNBtubyk1JU/YWGm/Ewithp3QkedXcj8bs/Dd81HcizpmVdyvV9zQ1T2/nEpbrg8g7oZ1OjHdlWPQ==
+  dependencies:
+    gray-matter "^4.0.3"
+    minimatch "^9.0.3"
+
 docusaurus-plugin-redoc@2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/docusaurus-plugin-redoc/-/docusaurus-plugin-redoc-2.2.2.tgz#d208a52756a2e7bb84d0d35c710c857c168ebc53"
@@ -7852,6 +7860,13 @@ minimatch@^5.0.1:
   version "5.1.6"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-5.1.6.tgz#1cfcb8cf5522ea69952cd2af95ae09477f122a96"
   integrity sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==
+  dependencies:
+    brace-expansion "^2.0.1"
+
+minimatch@^9.0.3:
+  version "9.0.5"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-9.0.5.tgz#d74f9dd6b57d83d8e98cfb82133b03978bc929e5"
+  integrity sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==
   dependencies:
     brace-expansion "^2.0.1"
 
