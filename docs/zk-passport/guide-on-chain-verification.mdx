@@ -11,12 +11,11 @@ import IdealImage from '@site/src/components/IdealImage';
 This tutorial walks you through the process of setting up on-chain verification of ZK Passport proofs. By the end of this tutorial, you will have:
 
 1. Ensured that you have all the necessary components in place to verify ZK Passport proofs on your chain.
-2. Deployed the **Verificator** contract on your chain to handle proof verification.
+2. Deployed the `TD3QueryProofVerifier` contract on your chain to handle proof verification.
 3. Integrated verification logic into your own contract to validate proof public signals.
 
 {
 //TODO:
-// - use the `Verificator` contract from the npm package
 // - add step for setting up the front-end with our new SDK
 // - guide to customizing the query params
 }
@@ -26,35 +25,30 @@ This tutorial walks you through the process of setting up on-chain verification 
 - If you are using an EVM-compatible chain other than Rarimo's L2, you'll need to set up ZK Passport Registry state replication as described in [Setting up Cross-Chain Verification](/zk-passport/guide-setting-up-cross-chain-replication).
 - Access to the <OutLink href="https://github.com/rarimo/verificator-svc">`verificator-svc`</OutLink> service for retrieving proof parameters. You can use the public instance of `verificator-svc` (<OutLink href="https://api.app.rarime.com/">https://api.app.rarime.com/</OutLink>) for testing, but it's recommended to deploy your own instance for production use, as described in [Setting up `verificator-svc`](/zk-passport/guide-setting-up-verificator-svc).
 
-## Step 1: Deploy the Verificator smart contract
+## Step 1: Add the Rarimo Passport Contracts library to your project
 
-The **Verificator** contract is responsible for verifying ZK proofs on-chain. This contract often comes with a precompiled ZK circuit.
-
-1. Obtain the `Verificator` contract <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/4cccd0ca8613330c4af68d8e0f7ca46bd3b68ac9/contracts/voting/verifiers/BioPassportVotingVerifier.sol">source code</OutLink> and add it to your project.
-
-```solidity
-contract Verificator {
-     function verifyProof(
-         uint[2] calldata _pA,
-         uint[2][2] calldata _pB,
-         uint[2] calldata _pC,
-         uint[23] calldata _pubSignals
-     ) public view returns (bool) {
-         // ...
-     }
-}
-   ```
-2. Deploy it to your chain and record the address of the newly deployed `Verificator`. You will use this address in your other contracts to verify proofs.
-
-## Step 2: Integrate proof verification into your smart contract
-
-Once your chain is replicating ZK Registry state and you have a deployed `Verificator` contract, you can add ZK proof checks to your own contract logic.
-
-Start by installing the @rarimo/passport-contracts package:
+The contracts are available in the <OutLink href="https://www.npmjs.com/package/@rarimo/passport-contracts">@rarimo/passport-contracts</OutLink> npm package:
 
 ```bash npm2yarn
 npm install @rarimo/passport-contracts
 ```
+
+## Step 1: Deploy the TD3QueryProofVerifier smart contract
+
+
+The `TD3QueryProofVerifier ` contract is responsible for verifying ZK proofs on-chain. This contract often comes with a precompiled ZK circuit.
+
+Import the `TD3QueryProofVerifier ` contract from the Rarimo Passport Contracts library:
+
+```solidity
+import {TD3QueryProofVerifier } from "@rarimo/passport-contracts/sdk/verifier/TD3QueryProofVerifier.sol";
+```
+
+Then deploy it to your chain and record the address of the newly deployed `TD3QueryProofVerifier `. You will use this address in your other contracts to verify proofs.
+
+## Step 2: Integrate proof verification into your smart contract
+
+Once your chain is replicating ZK Registry state and you have a deployed `TD3QueryProofVerifier ` contract, you can add ZK proof checks to your own contract logic.
 
 Below is a skeleton of the DApp that relies on the Query Proof Verification to perform some actions (token mint, grant a role, etc.).
 
@@ -225,10 +219,11 @@ When a user scans a QR code and submits a proof:
 
 With these steps:
 
-1. **Replicate** the ZK Registry state using `RegistrationSMTReplicator`.
-2. **Get** proof parameters from `verificator-svc` to collect the ZK Proof in your DApp.
-3. **Deploy** your `MyPassportContract` contract to verify proofs and do specific tasks.
-4. **Call** the `execute` method on the `MyPassportContract` contract to perform some action alongside Query Proof Verification
+1. **Set up** the ZK Passport Registry state replication on your chain if needed.
+1. **Deploy** the `TD3QueryProofVerifier` contract to facilitate ZK proof verification.
+1. **Get** proof parameters from `verificator-svc` to collect the ZK Proof in your DApp.
+1. **Deploy** your `MyPassportContract` contract to verify proofs and do specific tasks.
+1. **Call** the `execute` method on the `MyPassportContract` contract to perform some action alongside Query Proof Verification
 
 We've set up on-chain verification of ZK Passport proofs. This allows you to verify user identities without revealing sensitive data, ensuring privacy and security in your application.
 
