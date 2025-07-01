@@ -221,9 +221,6 @@ With these steps:
 
 1. **Set up** the ZK Passport Registry state replication on your chain if needed.
 1. **Deploy** the `TD3QueryProofVerifier` contract to facilitate ZK proof verification.
-1. **Get** proof parameters from `verificator-svc` to collect the ZK Proof in your DApp.
-1. **Deploy** your `MyPassportContract` contract to verify proofs and do specific tasks.
-1. **Call** the `execute` method on the `MyPassportContract` contract to perform some action alongside Query Proof Verification
+1. **Integrate** proof verification into your DApp's smart contract by inheriting from `AQueryProofExecutor` and implementing the required methods.
 
 We've set up on-chain verification of ZK Passport proofs. This allows you to verify user identities without revealing sensitive data, ensuring privacy and security in your application.
-
