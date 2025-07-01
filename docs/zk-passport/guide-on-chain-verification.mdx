@@ -33,7 +33,7 @@ The contracts are available in the <OutLink href="https://www.npmjs.com/package/
 npm install @rarimo/passport-contracts
 ```
 
-## Step 1: Deploy the TD3QueryProofVerifier smart contract
+## Step 2: Deploy the TD3QueryProofVerifier smart contract
 
 
 The `TD3QueryProofVerifier ` contract is responsible for verifying ZK proofs on-chain. This contract often comes with a precompiled ZK circuit.
@@ -46,7 +46,7 @@ import {TD3QueryProofVerifier } from "@rarimo/passport-contracts/sdk/verifier/TD
 
 Then deploy it to your chain and record the address of the newly deployed `TD3QueryProofVerifier `. You will use this address in your other contracts to verify proofs.
 
-## Step 2: Integrate proof verification into your smart contract
+## Step 3: Integrate proof verification into your smart contract
 
 Once your chain is replicating ZK Registry state and you have a deployed `TD3QueryProofVerifier ` contract, you can add ZK proof checks to your own contract logic.
 
