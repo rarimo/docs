@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.22.0] - 2025-07-01
 ### Added
 - Added llms.txt file to make the docs searchable by LLMs;
 
@@ -603,7 +604,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.21.2...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.22.0...HEAD
+[5.22.0]: https://github.com/rarimo/docs/compare/5.21.2...5.22.0
 [5.21.2]: https://github.com/rarimo/docs/compare/5.21.1...5.21.2
 [5.21.1]: https://github.com/rarimo/docs/compare/5.21.0...5.21.1
 [5.21.0]: https://github.com/rarimo/docs/compare/5.20.0...5.21.0
