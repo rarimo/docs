@@ -78,6 +78,5 @@ jobs:
         - name: Deploy to GKE
           run: |
             kubectl get pods -n docs-staging
-            
-# helm upgrade -i "docs" ".helm" --set global.IngressDomain=staging.docs.rarimo.com --set "image.repository=ghcr.io/${GITHUB_REPOSITORY}" --set "image.tag=${GITHUB_SHA}"  --namespace docs-staging
+            helm upgrade -i "docs" ".helm" --set global.IngressDomain=staging.docs.rarimo.com --set "image.repository=ghcr.io/${GITHUB_REPOSITORY}" --set "image.tag=${GITHUB_SHA}"  --namespace docs-staging
 
