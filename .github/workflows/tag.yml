@@ -9,6 +9,10 @@ env:
   DOMAIN: staging.docs.rarimo.com
   BASE_URL: "/"
   STAGING: "false"
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  SA_KEY: ${{ secrets.GKE_SA_KEY }}
+  GKE_CLUSTER: websites
+  GKE_ZONE: us-central1-c
 
 jobs:
   converge:
@@ -57,9 +61,20 @@ jobs:
             token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
           id: install
 
-        - name: ConfigCreate
+        - id: 'auth'
+          uses: 'google-github-actions/auth@v2'
+          with:
+            project_id: '${{ env.PROJECT_ID }}'
+            credentials_json: '${{ env.SA_KEY }}'
+
+        - name: Set up GKE credentials
+          uses: google-github-actions/get-gke-credentials@v2
+          with:
+            cluster_name: ${{ env.GKE_CLUSTER }}
+            location: ${{ env.GKE_ZONE }}
+            namespace: docs-prod
+
+        - name: Deploy to GKE
           run: |
-            mkdir ~/.kube/
-            echo "${{ secrets.K8SCONFIG }}" | base64 -d > config
-            mv config ~/.kube/
+            kubectl get pods -n docs-prod
             helm upgrade -i "docs" ".helm" --set global.IngressDomain=docs.rarimo.com --set "image.repository=ghcr.io/${GITHUB_REPOSITORY}" --set "image.tag=${GITHUB_REF_NAME}"  --namespace docs-prod
