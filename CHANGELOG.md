@@ -6,8 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.24.0] - 2025-08-13
 ### Added
-
 - Referrence for TD3QueryProofVerifier, PublicSignalsBuilder, RegReplicator contracts;
 
 ## [5.23.0] - 2025-07-14
@@ -612,7 +612,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.23.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.24.0...HEAD
+[5.24.0]: https://github.com/rarimo/docs/compare/5.23.0...5.24.0
 [5.23.0]: https://github.com/rarimo/docs/compare/5.22.0...5.23.0
 [5.22.0]: https://github.com/rarimo/docs/compare/5.21.2...5.22.0
 [5.21.2]: https://github.com/rarimo/docs/compare/5.21.1...5.21.2
