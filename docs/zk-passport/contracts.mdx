@@ -398,3 +398,113 @@ contract PRSASHAAuthenticator is Initializable {
 - `authenticate(...)` — checks active authentication of a passport (RSA signature);
 
 For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/passport/authenticators/PRSASHAAuthenticator.sol">PRSASHAAuthenticator.sol</OutLink> at the GitHub.
+
+## `TD3QueryProofVerifier`
+
+### Interface
+
+```solidity
+contract TD3QueryProofVerifier {
+    function verifyProof(
+        uint256[2] calldata _pA,
+        uint256[2][2] calldata _pB,
+        uint256[2] calldata _pC,
+        uint256[] calldata _pubSignals
+    ) external view returns (bool) {
+        /* ... */
+    }
+}
+```
+
+- Verifies TD3-query zero-knowledge proofs produced by the Query circuit (e.g., age, uniqueness, country masks) without revealing raw passport data.
+- Accepts Groth16 proof points and the public signals array (23 items for Query circuit) and returns `true` if valid.
+- Intended for SDK-level integrations where on-chain verification of query proofs is needed.
+
+For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/sdk/verifier/TD3QueryProofVerifier.sol">TD3QueryProofVerifier.sol</OutLink> at the GitHub.
+
+## `PublicSignalsBuilder`
+
+### Interface
+
+```solidity
+library PublicSignalsBuilder {
+    uint256 public constant PROOF_SIGNALS_COUNT = 23;
+
+    function newPublicSignalsBuilder(
+        uint256 selector_,
+        uint256 nullifier_
+    ) internal pure returns (uint256 dataPointer_);
+
+    function withName(uint256 dataPointer_, uint256 name_) internal pure;
+    function withNameResidual(uint256 dataPointer_, uint256 nameResidual_) internal pure;
+    function withNationality(uint256 dataPointer_, uint256 nationality_) internal pure;
+    function withCitizenship(uint256 dataPointer_, uint256 citizenship_) internal pure;
+    function withSex(uint256 dataPointer_, uint256 sex_) internal pure;
+    function withEventIdAndData(uint256 dataPointer_, uint256 eventId_, uint256 eventData_) internal pure;
+    function withIdStateRoot(uint256 dataPointer_, bytes32 idStateRoot_) internal view;
+    function withSelector(uint256 dataPointer_, uint256 selector_) internal pure;
+    function withCurrentDate(uint256 dataPointer_, uint256 currentDate_, uint256 timeBound_) internal view;
+    function withTimestampLowerboundAndUpperbound(uint256 dataPointer_, uint256 lb_, uint256 ub_) internal pure;
+    function withIdentityCounterLowerbound(uint256 dataPointer_, uint256 lb_, uint256 ub_) internal pure;
+    function withBirthDateLowerboundAndUpperbound(uint256 dataPointer_, uint256 lb_, uint256 ub_) internal pure;
+    function withExpirationDateLowerboundAndUpperbound(uint256 dataPointer_, uint256 lb_, uint256 ub_) internal pure;
+    function withCitizenshipMask(uint256 dataPointer_, uint256 citizenshipMask_) internal pure;
+
+    function buildAsUintArray(uint256 dataPointer_) internal pure returns (uint256[] memory);
+    function buildAsBytesArray(uint256 dataPointer_) internal pure returns (bytes32[] memory);
+}
+```
+
+- Helper library to construct the Query circuit public signals in the exact index layout expected by verifiers (see <OutLink href="https://github.com/rarimo/passport-zk-circuits/?tab=readme-ov-file#query-circuit-public-signals">Query circuit public signals spec</OutLink>).
+- Validates constraints via `AQueryProofExecutor` storage; `withIdStateRoot(...)` checks `IPoseidonSMT(registrationSMT).isRootValid(...)` before writing the root at index 11.
+- Date handling: `withCurrentDate(...)` parses `yyMMdd` to a timestamp and enforces a ±timeBound window using `Date2Time` utilities.
+- Produces either `uint256[]` or `bytes32[]` views of the same in-memory array for downstream verifier calls.
+
+For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/sdk/lib/PublicSignalsBuilder.sol">PublicSignalsBuilder.sol</OutLink> at the GitHub.
+
+## `RegistrationSMTReplicator`
+
+### Interface
+
+```solidity
+contract RegistrationSMTReplicator is IPoseidonSMT {
+    uint256 public constant ROOT_VALIDITY = 1 hours;
+    string public constant REGISTRATION_ROOT_PREFIX = "Rarimo root";
+
+    address public sourceSMT;
+    bytes32 public latestRoot;
+    uint256 public latestTimestamp;
+
+    event RootTransitioned(bytes32 newRoot, uint256 transitionTimestamp);
+
+    function __RegistrationSMTReplicator_init(
+        address[] memory oracles_,
+        address sourceSMT_
+    ) external;
+
+    function addOracles(address[] memory oracles_) external;
+    function removeOracles(address[] memory oracles_) external;
+    function setSourceSMT(address newSourceSMT_) external;
+
+    function transitionRoot(bytes32 newRoot_, uint256 transitionTimestamp_) external;
+    function transitionRootWithSignature(
+        bytes32 newRoot_,
+        uint256 transitionTimestamp_,
+        bytes memory signature_
+    ) external;
+
+    function isRootValid(bytes32 root_) external view returns (bool);
+    function isRootLatest(bytes32 root_) public view returns (bool);
+    function isOracle(address oracle_) public view returns (bool);
+    function getOracles() external view returns (address[] memory);
+}
+```
+
+- Deployed on target chains to replicate the Registration SMT root when the canonical `StateKeeper` is not directly available.
+- Root updates can be pushed by:
+  - Authorized oracles via `transitionRoot(...)`.
+  - Anyone with an oracle-signed message via `transitionRootWithSignature(...)` using `keccak256(abi.encodePacked(REGISTRATION_ROOT_PREFIX, sourceSMT, address(this), newRoot, timestamp))` recovered with ECDSA.
+- `isRootValid(root)` returns true if the root is the latest or if it was observed within `ROOT_VALIDITY` (1 hour), enabling lightweight freshness checks by verifiers depending on `IPoseidonSMT`.
+- Owners manage the oracle set and can update `sourceSMT`; contract follows UUPS upgradeability and multi-owner controls.
+
+For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/sdk/RegistrationSMTReplicator.sol">RegistrationSMTReplicator.sol</OutLink> at the GitHub.
