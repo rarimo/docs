@@ -6,11 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Removed
-- Outdated "Seedless Recovery" page;
-
+## [5.25.0] - 2025-09-24
 ### Added
 - Link to Unforgettable documentation;
+
+### Removed
+- Outdated "Seedless Recovery" page;
 
 ## [5.24.0] - 2025-08-13
 ### Added
@@ -618,7 +619,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.24.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/5.25.0...HEAD
+[5.25.0]: https://github.com/rarimo/docs/compare/5.24.0...5.25.0
 [5.24.0]: https://github.com/rarimo/docs/compare/5.23.0...5.24.0
 [5.23.0]: https://github.com/rarimo/docs/compare/5.22.0...5.23.0
 [5.22.0]: https://github.com/rarimo/docs/compare/5.21.2...5.22.0
