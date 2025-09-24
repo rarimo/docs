@@ -18,10 +18,10 @@
     "version": "rlx changelog release $(node -p \"require('./package.json').version\") && git add ."
   },
   "dependencies": {
-    "@docusaurus/core": "^3.7.0",
-    "@docusaurus/plugin-ideal-image": "3.7.0",
-    "@docusaurus/preset-classic": "^3.7.0",
-    "@docusaurus/remark-plugin-npm2yarn": "^3.7.0",
+    "@docusaurus/core": "^3.8.0",
+    "@docusaurus/plugin-ideal-image": "^3.8.0",
+    "@docusaurus/preset-classic": "^3.8.0",
+    "@docusaurus/remark-plugin-npm2yarn": "^3.8.0",
     "@mdx-js/react": "^3.0.0",
     "docusaurus-plugin-llms": "^0.1.4",
     "prism-react-renderer": "^2.3.1",
@@ -30,7 +30,8 @@
     "react-medium-image-zoom": "4.4.3",
     "redocusaurus": "^2.0.0",
     "rehype-katex": "6",
-    "remark-math": "5"
+    "remark-math": "5",
+    "sharp": "^0.34.4"
   },
   "devDependencies": {
     "@docusaurus/eslint-plugin": "^3.7.0",
