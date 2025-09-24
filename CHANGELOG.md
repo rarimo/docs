@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+- Outdated "Seedless Recovery" page;
+
+### Added
+- Link to Unforgettable documentation;
+
 ## [5.24.0] - 2025-08-13
 ### Added
 - Referrence for TD3QueryProofVerifier, PublicSignalsBuilder, RegReplicator contracts;

@@ -65,12 +65,15 @@ const sidebars: SidebarsConfig = {
         <span class="menu__link menu__link--no-hover">Solutions</span>
       `,
     },
+
     {
-      type: 'category',
-      label: 'Seedless Recovery',
-      link: { type: 'doc', id: 'seedless-recovery/overview' },
-      collapsed: false,
-      items: [],
+      type: 'link',
+      label: 'Unforgettable Recovery',
+      href: 'https://docs.unforgettable.app',
+      customProps: {
+        target: '_blank',
+        rel: 'noopener',
+      },
     },
     {
       label: 'ZK Liveness',
