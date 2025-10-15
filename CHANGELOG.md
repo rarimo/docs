@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- ZK Liveness demo;
+
 ## [5.25.0] - 2025-09-24
 ### Added
 - Link to Unforgettable documentation;
