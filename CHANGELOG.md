@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.0.0] - 2025-10-20
 ### Changed
 - RariMe App => Rarimo App;
 
@@ -626,7 +627,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/5.25.1...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/6.0.0...HEAD
+[6.0.0]: https://github.com/rarimo/docs/compare/5.25.1...6.0.0
 [5.25.1]: https://github.com/rarimo/docs/compare/5.25.0...5.25.1
 [5.25.0]: https://github.com/rarimo/docs/compare/5.24.0...5.25.0
 [5.24.0]: https://github.com/rarimo/docs/compare/5.23.0...5.24.0
