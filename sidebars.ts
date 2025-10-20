@@ -119,11 +119,11 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'RariMe App',
-      link: { type: 'doc', id: 'rarime-app/overview' },
+      label: 'Rarimo App',
+      link: { type: 'doc', id: 'rarimo-app/overview' },
       collapsed: false,
       items: [
-        //'rarime-app/guide-for-ambassadors',
+        //'rarimo-app/guide-for-ambassadors',
       ],
     },
 
