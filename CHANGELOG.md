@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Block time and finality info to the ZK Rollup network info doc;
+
 ## [6.0.0] - 2025-10-20
 ### Changed
 - RariMe App => Rarimo App;
