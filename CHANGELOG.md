@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.0.1] - 2025-11-10
 ### Added
 - Block time and finality info to the ZK Rollup network info doc;
 
@@ -630,7 +631,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Broken logo link in the footer;
 
 
-[Unreleased]: https://github.com/rarimo/docs/compare/6.0.0...HEAD
+[Unreleased]: https://github.com/rarimo/docs/compare/6.0.1...HEAD
+[6.0.1]: https://github.com/rarimo/docs/compare/6.0.0...6.0.1
 [6.0.0]: https://github.com/rarimo/docs/compare/5.25.1...6.0.0
 [5.25.1]: https://github.com/rarimo/docs/compare/5.25.0...5.25.1
 [5.25.0]: https://github.com/rarimo/docs/compare/5.24.0...5.25.0
