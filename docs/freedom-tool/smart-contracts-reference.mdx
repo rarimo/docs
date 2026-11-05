@@ -16,6 +16,7 @@ A facade for voting creation and management by creator. It is responsible for co
 | Chain  | ChainID | Address                                                                                                                                           |
 |--------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rarimo | `7368`  | <OutLink href="https://scan.rarimo.com/address/0x9C4b84a940C9D3140a1F40859b3d4367DC8d099a">`0x9C4b84a940C9D3140a1F40859b3d4367DC8d099a`</OutLink> |
+| Gnosis | `100`   | <OutLink href="https://gnosisscan.io/address/0xa85352098017095e3e0B21B3c4864967A9cf44E3">`0xa85352098017095e3e0B21B3c4864967A9cf44E3`</OutLink>    |
 
 
 ### Interface
@@ -108,6 +109,7 @@ Responsible for the Biometric Passport <OutLink href="https://github.com/rarimo/
 | Chain  | ChainID | Address                                                                                                                                           |
 |--------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 | Rarimo | `7368`  | <OutLink href="https://scan.rarimo.com/address/0x8Dea8065888A14F66ba9Fb944353d898663863cf">`0x8Dea8065888A14F66ba9Fb944353d898663863cf`</OutLink> |
+| Gnosis | `100`   | <OutLink href="https://gnosisscan.io/address/0x078EE3866175D8c14E4b9D21B3cD20909B5b6D14">`0x078EE3866175D8c14E4b9D21B3cD20909B5b6D14`</OutLink>    |
 
 
 ### Interface
@@ -130,6 +132,37 @@ contract BioPassportVoting is BaseVoting {
 - `vote()` — verifies query proof and calls `vote()` function of `ProposalState` smart contract;
 
 See <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/voting/BioPassportVoting.sol">BioPassportVoting.sol</OutLink> for the full implementation.
+
+## `IDCardVoting`
+
+Responsible for the ID card (TD1) query proof verification and pub signal validation.
+
+### Deployments
+
+| Chain  | ChainID | Address                                                                                                                                            |
+|--------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Gnosis | `100`   | <OutLink href="https://gnosisscan.io/address/0x5f7Df1Cd31646438F08a6B36C41D3555728693Aa">`0x5f7Df1Cd31646438F08a6B36C41D3555728693Aa`</OutLink>    |
+
+On Gnosis, the contract is registered in `ProposalsState` as `TD1NoirVoting`.
+
+### Interface
+
+```solidity title="/contracts/voting/IDCardVoting.sol"
+contract IDCardVoting is BaseVoting {
+    function executeTD1Noir(
+        bytes32 registrationRoot_,
+        uint256 currentDate_,
+        bytes memory userPayload_,
+        bytes memory zkPoints_
+    ) external {
+        // ...
+    }
+}
+```
+
+- `executeTD1Noir()` — verifies the TD1 Noir query proof and calls `vote()` function of `ProposalState` smart contract. `userPayload_` is `abi.encode(proposalId, vote, userData)`;
+
+See <OutLink href="https://github.com/rarimo/passport-voting-contracts/blob/master/contracts/voting/IDCardVoting.sol">IDCardVoting.sol</OutLink> for the full implementation.
 
 ## `Voting`
 
