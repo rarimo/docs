@@ -46,6 +46,7 @@ const sidebars: SidebarsConfig = {
         'zk-passport/guide-setting-up-verificator-svc',
         'zk-passport/guide-setting-up-cross-chain-replication',
         'zk-passport/contracts',
+        'zk-passport/gnosis-deployment',
       ],
     },
     {

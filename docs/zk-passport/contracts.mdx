@@ -28,6 +28,8 @@ Currently, there are seven contract sections:
     * Allow registration and revocation of ICAO member's certificates (calls `StateKeeper`);
     * Call one of the verifier contracts, based on the provided passport type, to verify ZKP;
     * Manage different dispatchers.
+
+    On Gnosis, the section also includes `NoAARecovery`, which restores the identity of documents without Active Authentication.
 1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/passport/verifiers2">Verifiers</OutLink>
  — auto-generated contracts, the main purpose of which is to verify the ZKP.
 1. <OutLink href="https://github.com/rarimo/passport-contracts/tree/master/contracts/passport/dispatchers">Dispatchers</OutLink>
@@ -43,12 +45,19 @@ Currently, there are seven contract sections:
 
 ### Deployments
 
-| Name            | Address                                                                                                                                           |
-|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| StateKeeper     | <OutLink href="https://scan.rarimo.com/address/0x61aa5b68D811884dA4FEC2De4a7AA0464df166E1">`0x61aa5b68D811884dA4FEC2De4a7AA0464df166E1`</OutLink> |
-| RegistrationSMT | <OutLink href="https://scan.rarimo.com/address/0x479F84502Db545FA8d2275372E0582425204A879">`0x479F84502Db545FA8d2275372E0582425204A879`</OutLink> |
-| CertificatesSMT | <OutLink href="https://scan.rarimo.com/address/0xA8b350d699632569D5351B20ffC1b31202AcEDD8">`0xA8b350d699632569D5351B20ffC1b31202AcEDD8`</OutLink> |
-| Registration2   | <OutLink href="https://scan.rarimo.com/address/0x11BB4B14AA6e4b836580F3DBBa741dD89423B971">`0x11BB4B14AA6e4b836580F3DBBa741dD89423B971`</OutLink> |
+| Name            | Chain  | ChainID | Address                                                                                                                                            |
+|-----------------|--------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| StateKeeper     | Rarimo | `7368`  | <OutLink href="https://scan.rarimo.com/address/0x61aa5b68D811884dA4FEC2De4a7AA0464df166E1">`0x61aa5b68D811884dA4FEC2De4a7AA0464df166E1`</OutLink>  |
+| RegistrationSMT | Rarimo | `7368`  | <OutLink href="https://scan.rarimo.com/address/0x479F84502Db545FA8d2275372E0582425204A879">`0x479F84502Db545FA8d2275372E0582425204A879`</OutLink>  |
+| CertificatesSMT | Rarimo | `7368`  | <OutLink href="https://scan.rarimo.com/address/0xA8b350d699632569D5351B20ffC1b31202AcEDD8">`0xA8b350d699632569D5351B20ffC1b31202AcEDD8`</OutLink>  |
+| Registration2   | Rarimo | `7368`  | <OutLink href="https://scan.rarimo.com/address/0x11BB4B14AA6e4b836580F3DBBa741dD89423B971">`0x11BB4B14AA6e4b836580F3DBBa741dD89423B971`</OutLink>  |
+| StateKeeper     | Gnosis | `100`   | <OutLink href="https://gnosisscan.io/address/0x5228826C38D322302470463346dc60341F52b6b9">`0x5228826C38D322302470463346dc60341F52b6b9`</OutLink>    |
+| RegistrationSMT | Gnosis | `100`   | <OutLink href="https://gnosisscan.io/address/0xF8432966Cc9e34673f707F85cB30789d227FCF2a">`0xF8432966Cc9e34673f707F85cB30789d227FCF2a`</OutLink>    |
+| CertificatesSMT | Gnosis | `100`   | <OutLink href="https://gnosisscan.io/address/0x1CF1D4f237e2b92E8EC1eC705b556e6841125dC4">`0x1CF1D4f237e2b92E8EC1eC705b556e6841125dC4`</OutLink>    |
+| Registration2   | Gnosis | `100`   | <OutLink href="https://gnosisscan.io/address/0x31002550646F755A5BCcC2b45150524fC9675e34">`0x31002550646F755A5BCcC2b45150524fC9675e34`</OutLink>    |
+| NoAARecovery    | Gnosis | `100`   | <OutLink href="https://gnosisscan.io/address/0xd7190aad9B6F1b9fdB2dd527A202A4557e89258a">`0xd7190aad9B6F1b9fdB2dd527A202A4557e89258a`</OutLink>    |
+
+Dispatchers, signers, authenticators and verifiers deployed on Gnosis, with the supported document types, are listed in [ZK Passport on Gnosis Chain](/zk-passport/gnosis-deployment).
 
 <IdealImage img={require('/img/pass-derived-profiles-contracts.png')} alt="Contracts interaction between each other" />
 
@@ -147,6 +156,108 @@ contract Registration2 is Initializable, TSSUpgradeable {
 - `updateDependency(...)` — adds or removes, depending on the method provided, a dispatcher via Rarimo TSS;
 
 For the full implementation, see <OutLink href="https://github.com/rarimo/passport-contracts/blob/master/contracts/registration/Registration2.sol">Registration2.sol</OutLink> at the GitHub.
+
+## `NoAARecovery`
+
+:::info
+`NoAARecovery` is deployed on Gnosis only. See [ZK Passport on Gnosis Chain](/zk-passport/gnosis-deployment).
+:::
+
+Restores the identity of a document without Active Authentication (`P_NO_AA`). Such a document can't prove possession of its chip key, so `Registration2` can't revoke its bond: without this module, a lost identity key would lock the document forever. `NoAARecovery` lets the holder of the document move the bond to a new identity key:
+
+1. `requestRecovery(...)` — the holder proves the document again with a Noir register proof for the new identity key;
+2. `recoveryDelay` (3 days) passes, during which the current key holder can cancel the request;
+3. `finalizeRecovery(...)` — anyone moves the bond: the old identity is revoked and the new one is issued with an incremented `identityReissueCounter`.
+
+The module is registered in `StateKeeper` as `NO_AA_RECOVERY`, which allows it to call `revokeBond(...)` and `reissueBondIdentity(...)`.
+
+### Interface
+
+```solidity
+contract NoAARecovery is Initializable, UUPSUpgradeable {
+
+    enum Action {
+        None,
+        CancelRecovery,
+        LockRecovery,
+        UnlockRecovery
+    }
+
+    struct RecoveryRequest {
+        bytes32 oldIdentityKey;
+        bytes32 newIdentityKey;
+        uint256 dgCommit;
+        uint64 readyAt;
+    }
+
+    StateKeeper public stateKeeper;
+    Registration2 public registration;
+
+    address public keyPossessionVerifier;
+
+    uint64 public recoveryDelay;
+    uint64 public lockDuration;
+
+    mapping(bytes32 => bool) public allowedZkTypes;
+    mapping(bytes32 => uint64) public lockedUntil;
+    mapping(bytes32 => bool) public isRecoveryLocked;
+    mapping(bytes32 => uint256) public nonces;
+
+    function requestRecovery(
+        bytes32 certificatesRoot_,
+        uint256 identityKey_,
+        uint256 dgCommit_,
+        bytes32 passportHash_,
+        bytes32 zkType_,
+        bytes memory zkPoints_
+    ) external virtual {
+        /* ... */
+    }
+
+    function finalizeRecovery(bytes32 passportHash_) external virtual {
+        /* ... */
+    }
+
+    function cancelRecovery(bytes32 passportHash_, bytes memory zkPoints_) external virtual {
+        /* ... */
+    }
+
+    function lockRecovery(bytes32 passportHash_, bytes memory zkPoints_) external virtual {
+        /* ... */
+    }
+
+    function unlockRecovery(bytes32 passportHash_, bytes memory zkPoints_) external virtual {
+        /* ... */
+    }
+
+    function getRecoveryRequest(bytes32 passportHash_) external view returns (RecoveryRequest memory);
+
+    function getKeyPossessionMessage(bytes32 passportHash_, Action action_) public view returns (bytes32);
+
+}
+```
+
+- `recoveryDelay` — time between a recovery request and its finalization;
+- `lockDuration` — how long the document is locked after a cancelled or contested request;
+- `allowedZkTypes` — register circuit types accepted for recovery (the Noir `..._NA` types);
+- `lockedUntil` — the time until which no recovery can be requested for the document;
+- `isRecoveryLocked` — whether the current key holder has disabled recovery of the document;
+- `nonces` — the number of KeyPossession proofs used for the document, part of the proof message;
+- `requestRecovery(...)` — requests to move the bond of `passportHash_` to `identityKey_`. Verifies the register proof with the `Registration2` verifier of `zkType_` against a valid certificates root. If a request for another key is already pending, the request is contested: both are dropped and the document is locked for `lockDuration`;
+- `finalizeRecovery(...)` — moves the bond once `readyAt` has passed, if the active identity has not changed since the request. Callable by anyone;
+- `cancelRecovery(...)` — drops the pending request and locks the document for `lockDuration`. Requires a KeyPossession proof of the active identity key;
+- `lockRecovery(...)` — disables recovery of the document and drops the pending request, if any. Requires a KeyPossession proof. If the identity key is lost while locked, the document can never be recovered;
+- `unlockRecovery(...)` — enables recovery again. Requires a KeyPossession proof;
+- `getRecoveryRequest(...)` — returns the pending request of the document;
+- `getKeyPossessionMessage(...)` — returns the message the next KeyPossession proof for the document and action must be bound to;
+
+The register proof of `requestRecovery(...)` has the same public signals as in `registerViaNoir(...)`: AA public key hash (always zero), passport hash, DG1 commitment, identity key and certificates root.
+
+A KeyPossession proof is a Noir proof of the identity secret key, generated with the <OutLink href="https://github.com/deantech-io/passport-zk-circuits-noir/tree/feature/key-possession/key_possession">`key_possession`</OutLink> circuit. Its public signals are the active identity key and the message `keccak256(abi.encode(chainId, address(this), action, passportHash, nonce)) >> 8`, so each proof is valid for one document, one action and one use.
+
+Reissued bonds have `identityReissueCounter` of 1 or more. Votings that set `identityCounterUpperBound` to 0 exclude identities recovered after the proposal start.
+
+For the full implementation, see <OutLink href="https://github.com/deantech-io/passport-contracts/blob/feature/no-aa-recovery/contracts/registration/NoAARecovery.sol">NoAARecovery.sol</OutLink> at the GitHub.
 
 ## `Verifiers`
 
