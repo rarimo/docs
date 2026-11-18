@@ -20,16 +20,9 @@ const sidebars: SidebarsConfig = {
       `,
     },
     {
-      type: 'category',
-      label: 'ZK Registry Rollup',
-      link: { type: 'doc', id: 'zk-registry/overview' },
-      collapsed: false,
-      items: [
-        // TODO:
-        // - bridging guide?
-        // - ZK Registry <> Rollup split
-        'zk-registry/network-info',
-      ],
+      type: 'doc',
+      label: 'ZK Registry',
+      id: 'zk-registry/overview',
     },
     {
       type: 'category',

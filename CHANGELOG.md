@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Gnosis deployments to the ZK Passport and Freedom Tool smart contracts references;
 - `IDCardVoting` section to the Freedom Tool smart contracts reference;
 
+### Changed
+- ZK Passport and Freedom Tool smart contracts references: Rarimo L2 deployments are marked as archived;
+
+### Removed
+- ZK Registry network info and using the rollup pages: Rarimo L2 has been shut down. The ZK Registry overview stays as a single sidebar page;
+- "Why a ZK Rollup?" section from the overview;
+
 ## [6.0.1] - 2025-11-10
 ### Added
 - Block time and finality info to the ZK Rollup network info doc;
