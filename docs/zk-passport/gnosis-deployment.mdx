@@ -1,0 +1,303 @@
+---
+sidebar_label: Gnosis deployment
+description: 'Addresses and supported document types of the ZK Passport registry deployed on Gnosis Chain.'
+---
+
+import OutLink from "@site/src/components/OutLink";
+
+# ZK Passport on Gnosis Chain
+
+The ZK Passport registry runs natively on <OutLink href="https://www.gnosis.io">Gnosis Chain</OutLink> (chain ID `100`) with its own `StateKeeper`, Sparse Merkle Trees and `Registration2`. Contracts that verify query proofs on Gnosis read the registration root directly, so no [cross-chain replication](/zk-passport/guide-setting-up-cross-chain-replication) is needed.
+
+The deployment supports every document type registered on Rarimo L2, and adds the [`NoAARecovery`](/zk-passport/contracts#noaarecovery) module for documents without Active Authentication. See the [smart contracts reference](/zk-passport/contracts) for the interfaces.
+
+:::info
+Registration and query proofs must be generated with the circuits the verifiers were built from:
+
+- Register proofs: <OutLink href="https://github.com/rarimo/passport-zk-circuits-noir/releases/tag/v0.2.7">passport-zk-circuits-noir v0.2.7</OutLink> (SHA-256 full-modulus certificate leaf);
+- Query proofs: <OutLink href="https://github.com/rarimo/passport-zk-circuits-noir/releases/tag/v0.2.6">passport-zk-circuits-noir v0.2.6</OutLink> (`query_identity`, `query_identity_td1`).
+
+Proofs from older circuit releases are rejected.
+:::
+
+## Registry
+
+| Name | Address |
+|------|---------|
+| StateKeeper | <OutLink href="https://gnosisscan.io/address/0x5228826C38D322302470463346dc60341F52b6b9">`0x5228826C38D322302470463346dc60341F52b6b9`</OutLink> |
+| RegistrationSMT | <OutLink href="https://gnosisscan.io/address/0xF8432966Cc9e34673f707F85cB30789d227FCF2a">`0xF8432966Cc9e34673f707F85cB30789d227FCF2a`</OutLink> |
+| CertificatesSMT | <OutLink href="https://gnosisscan.io/address/0x1CF1D4f237e2b92E8EC1eC705b556e6841125dC4">`0x1CF1D4f237e2b92E8EC1eC705b556e6841125dC4`</OutLink> |
+| Registration2 | <OutLink href="https://gnosisscan.io/address/0x31002550646F755A5BCcC2b45150524fC9675e34">`0x31002550646F755A5BCcC2b45150524fC9675e34`</OutLink> |
+| NoAARecovery | <OutLink href="https://gnosisscan.io/address/0xd7190aad9B6F1b9fdB2dd527A202A4557e89258a">`0xd7190aad9B6F1b9fdB2dd527A202A4557e89258a`</OutLink> |
+| NoirKeyPossession | <OutLink href="https://gnosisscan.io/address/0x2821fc8c55023d5Fe70623c0225Ac83DE54Eb76E">`0x2821fc8c55023d5Fe70623c0225Ac83DE54Eb76E`</OutLink> |
+| EvidenceRegistry | <OutLink href="https://gnosisscan.io/address/0xb919966581cfb63a5a8C4A686910a946347c240b">`0xb919966581cfb63a5a8C4A686910a946347c240b`</OutLink> |
+| EvidenceDB | <OutLink href="https://gnosisscan.io/address/0x2dD609280A1DE3884adB13B64FFd98CD68716DC2">`0x2dD609280A1DE3884adB13B64FFd98CD68716DC2`</OutLink> |
+
+The registry is owned by the <OutLink href="https://gnosisscan.io/address/0x87f89d2BAc98F54969488cBbf676d4b6822D4958">Safe</OutLink> `0x87f89d2BAc98F54969488cBbf676d4b6822D4958`: `StateKeeper.isOwner` gates `StateKeeper`, `Registration2`, both trees and `NoAARecovery`.
+
+Configuration:
+
+- ICAO master tree root: `0x490355b1c9cca56d89c180780c5ea66c1766d57cf22670c7a9a07dc18b835a4f`, the same as on Rarimo L2;
+- Tree height: 80;
+- `NoAARecovery`: recovery delay 3 days, lock duration 30 days.
+
+## Libraries
+
+Poseidon libraries with the <OutLink href="https://github.com/iden3/circomlibjs">circomlibjs</OutLink> bytecode, linked by the trees and by the Poseidon-based dispatchers.
+
+| Library | Address |
+|---------|---------|
+| PoseidonUnit1L | <OutLink href="https://gnosisscan.io/address/0xC7F2Fb0b229a29d3E5D204212f81ac75C9Db5888">`0xC7F2Fb0b229a29d3E5D204212f81ac75C9Db5888`</OutLink> |
+| PoseidonUnit2L | <OutLink href="https://gnosisscan.io/address/0xCAF0A58380e1e11f8a5b6A4E40Cc80254ca61077">`0xCAF0A58380e1e11f8a5b6A4E40Cc80254ca61077`</OutLink> |
+| PoseidonUnit3L | <OutLink href="https://gnosisscan.io/address/0xAAfc6100d638C6a0d1C0633c27bae6aB03A50550">`0xAAfc6100d638C6a0d1C0633c27bae6aB03A50550`</OutLink> |
+| PoseidonUnit4L | <OutLink href="https://gnosisscan.io/address/0x00C3e1dfBF6e5DF4b5B8074c7080d356CCed08C9">`0x00C3e1dfBF6e5DF4b5B8074c7080d356CCed08C9`</OutLink> |
+| PoseidonUnit5L | <OutLink href="https://gnosisscan.io/address/0x0553bc2395dF5780D516869a16b38F8C25Cc7159">`0x0553bc2395dF5780D516869a16b38F8C25Cc7159`</OutLink> |
+
+## Certificate dispatchers
+
+Verify the signature of a document signer certificate (DSC) by its country signing certificate (CSCA). The type name encodes the CSCA signature and the DSC key size.
+
+| Type | Dispatcher |
+|------|------------|
+| `C_RSA_2048` | <OutLink href="https://gnosisscan.io/address/0xB3D39fB0E6803165949ca6329515320E6E23AF02">`0xB3D39fB0E6803165949ca6329515320E6E23AF02`</OutLink> |
+| `C_RSA_SHA1_4096` | <OutLink href="https://gnosisscan.io/address/0xE8e74C1Bf3d87EcF900140171b417852D3AA206E">`0xE8e74C1Bf3d87EcF900140171b417852D3AA206E`</OutLink> |
+| `C_RSA_SHA1_2048` | <OutLink href="https://gnosisscan.io/address/0xbf3A58fd2FA7a2eB2834038944f6594891a861d9">`0xbf3A58fd2FA7a2eB2834038944f6594891a861d9`</OutLink> |
+| `C_RSA_4096` | <OutLink href="https://gnosisscan.io/address/0xFe0e7C867213b940b2393Cd4973D1C40f5b1bB90">`0xFe0e7C867213b940b2393Cd4973D1C40f5b1bB90`</OutLink> |
+| `C_RSA_3072` | <OutLink href="https://gnosisscan.io/address/0x0a82A33E33b63e427697e404d5FCA52de5383968">`0x0a82A33E33b63e427697e404d5FCA52de5383968`</OutLink> |
+| `C_RSA_SHA512_2048` | <OutLink href="https://gnosisscan.io/address/0x2962E66A8B181Aa5f52751881EEDa149C617C3EA">`0x2962E66A8B181Aa5f52751881EEDa149C617C3EA`</OutLink> |
+| `C_RSA_SHA512_4096` | <OutLink href="https://gnosisscan.io/address/0x40F37852B306c422b8eEFAD2241052999B1f2352">`0x40F37852B306c422b8eEFAD2241052999B1f2352`</OutLink> |
+| `C_RSA_3072_56611` | <OutLink href="https://gnosisscan.io/address/0xd1d2ED7d54CD4Ee5c950A8d8673b6FcF48f7Ed29">`0xd1d2ED7d54CD4Ee5c950A8d8673b6FcF48f7Ed29`</OutLink> |
+| `C_RSA_2048_122125` | <OutLink href="https://gnosisscan.io/address/0x2ba01Ae6820E8dd04526083af3AA2be40FFF9499">`0x2ba01Ae6820E8dd04526083af3AA2be40FFF9499`</OutLink> |
+| `C_RSAPSS_SHA2_2048` | <OutLink href="https://gnosisscan.io/address/0x7Bf2cdbeebC8a4ec8D514E85A6217d3c36e49580">`0x7Bf2cdbeebC8a4ec8D514E85A6217d3c36e49580`</OutLink> |
+| `C_RSAPSS_SHA2_4096` | <OutLink href="https://gnosisscan.io/address/0x59ff2e6B4b460e5c79B334c99245F7692DdC099E">`0x59ff2e6B4b460e5c79B334c99245F7692DdC099E`</OutLink> |
+| `C_RSAPSS_SHA512_2048` | <OutLink href="https://gnosisscan.io/address/0xCCb0f7A4C861a198a0d34b98D25d4897DCdfAF7a">`0xCCb0f7A4C861a198a0d34b98D25d4897DCdfAF7a`</OutLink> |
+| `C_RSAPSS_SHA512_4096` | <OutLink href="https://gnosisscan.io/address/0x9F27E3275A27F0a9e75C488bC8F8E3f3a4228e4a">`0x9F27E3275A27F0a9e75C488bC8F8E3f3a4228e4a`</OutLink> |
+| `C_RSAPSS_SHA2_2048_3` | <OutLink href="https://gnosisscan.io/address/0xceaC5117b248cb57247FF3D26015a8F14265662D">`0xceaC5117b248cb57247FF3D26015a8F14265662D`</OutLink> |
+| `C_RSAPSS_SHA2_3072` | <OutLink href="https://gnosisscan.io/address/0xAcD3A3c9256481a36C388125CB6fd7f20ad9Ab42">`0xAcD3A3c9256481a36C388125CB6fd7f20ad9Ab42`</OutLink> |
+| `C_RSAPSS_SHA384_2048` | <OutLink href="https://gnosisscan.io/address/0xBde8c9059d68Bfb72443F5C7AB4B7152b3A6ea15">`0xBde8c9059d68Bfb72443F5C7AB4B7152b3A6ea15`</OutLink> |
+| `C_ECDSA_SECP256R1_SHA1_256` | <OutLink href="https://gnosisscan.io/address/0xc44da297b02F584227eee670D198F2b49e42D334">`0xc44da297b02F584227eee670D198F2b49e42D334`</OutLink> |
+| `C_ECDSA_SECP256R1_SHA1_384` | <OutLink href="https://gnosisscan.io/address/0x5972Bee9A709F334c62a1Fc828739Ffd0E2f6ae7">`0x5972Bee9A709F334c62a1Fc828739Ffd0E2f6ae7`</OutLink> |
+| `C_ECDSA_SECP256R1_SHA1_512` | <OutLink href="https://gnosisscan.io/address/0xA1b09508f93ff9BF3a9740182E545DBd512121Fa">`0xA1b09508f93ff9BF3a9740182E545DBd512121Fa`</OutLink> |
+| `C_ECDSA_SECP256R1_SHA2_512` | <OutLink href="https://gnosisscan.io/address/0x57117b11cc5DF3fE87e23557F633046d3a639ACA">`0x57117b11cc5DF3fE87e23557F633046d3a639ACA`</OutLink> |
+| `C_ECDSA_SECP256R1_SHA2_768` | <OutLink href="https://gnosisscan.io/address/0xc6BAF25D1ABD972f902E2cD9de407EE9B8df1587">`0xc6BAF25D1ABD972f902E2cD9de407EE9B8df1587`</OutLink> |
+| `C_ECDSA_SECP256R1_SHA2_2048` | <OutLink href="https://gnosisscan.io/address/0xDCBc61709680f07cD626279399934e36be7BdB00">`0xDCBc61709680f07cD626279399934e36be7BdB00`</OutLink> |
+| `C_ECDSA_SECP384R1_SHA2_512` | <OutLink href="https://gnosisscan.io/address/0x189ccfD8dA09AED695DE7028FDe7d9705953E818">`0x189ccfD8dA09AED695DE7028FDe7d9705953E818`</OutLink> |
+| `C_ECDSA_SECP384R1_SHA384_512` | <OutLink href="https://gnosisscan.io/address/0x43e57a1B1e1591A51DB659eD6150550Adf360f93">`0x43e57a1B1e1591A51DB659eD6150550Adf360f93`</OutLink> |
+| `C_ECDSA_BRAINPOOLP256R1_SHA1_448` | <OutLink href="https://gnosisscan.io/address/0x2b9A564B1DeA65e454e17c876B0897e92d27B2f7">`0x2b9A564B1DeA65e454e17c876B0897e92d27B2f7`</OutLink> |
+| `C_ECDSA_BRAINPOOLP256R1_SHA2_512` | <OutLink href="https://gnosisscan.io/address/0xFC7A03c4682b3d60023bfB356f628BD2DC94d5A5">`0xFC7A03c4682b3d60023bfB356f628BD2DC94d5A5`</OutLink> |
+| `C_ECDSA_BRAINPOOLP384R1_SHA2_512` | <OutLink href="https://gnosisscan.io/address/0xe92A2ec858f0D34F7E6cD1358c0b121bbAE923D3">`0xe92A2ec858f0D34F7E6cD1358c0b121bbAE923D3`</OutLink> |
+| `C_ECDSA_BRAINPOOLP384R1_SHA384_512` | <OutLink href="https://gnosisscan.io/address/0x7b4326Dcf43B37D020fF90A38296203b30495468">`0x7b4326Dcf43B37D020fF90A38296203b30495468`</OutLink> |
+| `C_ECDSA_BRAINPOOLP384R1_SHA384_768` | <OutLink href="https://gnosisscan.io/address/0x4A1730eEC0Ef307D8EA9DDf02864c774584035a8">`0x4A1730eEC0Ef307D8EA9DDf02864c774584035a8`</OutLink> |
+| `C_ECDSA_BRAINPOOLP512R1_SHA512_1024` | <OutLink href="https://gnosisscan.io/address/0xc68D96B3B5418c3577eCe9109D0D313AD9550991">`0xc68D96B3B5418c3577eCe9109D0D313AD9550991`</OutLink> |
+
+Notes:
+
+- `C_ECDSA_BRAINPOOLP384R1_SHA384_768` and `C_ECDSA_BRAINPOOLP512R1_SHA512_1024`: verifying a brainpool-384 or brainpool-512 ECDSA signature in Solidity costs more gas than a Gnosis block can hold (17M), so certificates signed by such CSCAs are valid but can not be registered on Gnosis;
+- 14 types have never been used on Rarimo L2: `C_RSA_SHA1_4096`, `C_RSA_SHA512_2048`, `C_RSA_SHA512_4096`, `C_RSAPSS_SHA2_4096`, `C_RSAPSS_SHA512_2048`, `C_RSAPSS_SHA512_4096`, `C_RSAPSS_SHA384_2048`, `C_ECDSA_SECP256R1_SHA1_256`, `C_ECDSA_SECP384R1_SHA2_512`, `C_ECDSA_SECP384R1_SHA384_512`, `C_ECDSA_BRAINPOOLP384R1_SHA2_512`, `C_ECDSA_BRAINPOOLP384R1_SHA384_512`, `C_ECDSA_BRAINPOOLP384R1_SHA384_768`, `C_ECDSA_BRAINPOOLP512R1_SHA512_1024`.
+
+### Signers
+
+Verify the CSCA signature for the certificate dispatchers.
+
+| Signer | Parameters | Address |
+|--------|------------|---------|
+| `CRSASigner` | e = 65537, SHA-256 | <OutLink href="https://gnosisscan.io/address/0x36B0F07D9ae8e5474c9381f7A0becD963b31AC46">`0x36B0F07D9ae8e5474c9381f7A0becD963b31AC46`</OutLink> |
+| `CRSASigner` | e = 65537, SHA-1 | <OutLink href="https://gnosisscan.io/address/0xE05d253447B86b11Da5cB186fe13Fa7CbFF4bf2a">`0xE05d253447B86b11Da5cB186fe13Fa7CbFF4bf2a`</OutLink> |
+| `CRSASigner` | e = 65537, SHA-256 | <OutLink href="https://gnosisscan.io/address/0x01367fCa20AE2361520a0b99D3da3B20298C2d05">`0x01367fCa20AE2361520a0b99D3da3B20298C2d05`</OutLink> |
+| `CRSASigner` | e = 65537, SHA-512 | <OutLink href="https://gnosisscan.io/address/0x2Ec7bC3B2e8198404493D691ccba4DCECA0a8fB4">`0x2Ec7bC3B2e8198404493D691ccba4DCECA0a8fB4`</OutLink> |
+| `CRSASigner` | e = 56611, SHA-256 | <OutLink href="https://gnosisscan.io/address/0x73F20C64AEA3151E62fBa8a7eDf1dabFe9c47dD7">`0x73F20C64AEA3151E62fBa8a7eDf1dabFe9c47dD7`</OutLink> |
+| `CRSASigner` | e = 122125, SHA-256 | <OutLink href="https://gnosisscan.io/address/0x07F4736d70C6EA701C593c0b62C530099433a040">`0x07F4736d70C6EA701C593c0b62C530099433a040`</OutLink> |
+| `CRSAPSSSigner` | e = 65537, SHA-256 | <OutLink href="https://gnosisscan.io/address/0x4A07A42cb7B4aDC3E5c083B8612Ab96c77Bc61dD">`0x4A07A42cb7B4aDC3E5c083B8612Ab96c77Bc61dD`</OutLink> |
+| `CRSAPSSSigner` | e = 65537, SHA-512 | <OutLink href="https://gnosisscan.io/address/0xd6d0e48407B84f8822c7eACc10f8aD2C703B497f">`0xd6d0e48407B84f8822c7eACc10f8aD2C703B497f`</OutLink> |
+| `CRSAPSSSigner` | e = 3, SHA-256 | <OutLink href="https://gnosisscan.io/address/0x71B7daC6fF37489457179a99122639DFF49eb7b5">`0x71B7daC6fF37489457179a99122639DFF49eb7b5`</OutLink> |
+| `CRSAPSSSigner` | e = 65537, SHA-384 | <OutLink href="https://gnosisscan.io/address/0x6639f97b4cfBDACbF2b3d2BbfFa32aB77B0610Fb">`0x6639f97b4cfBDACbF2b3d2BbfFa32aB77B0610Fb`</OutLink> |
+| `CECDSA256Signer` | secp256r1, SHA-1 | <OutLink href="https://gnosisscan.io/address/0x28A7B045a5e2ca16486313fCB68B941C9c2AEcfE">`0x28A7B045a5e2ca16486313fCB68B941C9c2AEcfE`</OutLink> |
+| `CECDSA256Signer` | secp256r1, SHA-256 | <OutLink href="https://gnosisscan.io/address/0xDa7D3804ED135cD5FfD1D6EaAEdc053dC4544974">`0xDa7D3804ED135cD5FfD1D6EaAEdc053dC4544974`</OutLink> |
+| `CECDSA384Signer` | secp384r1, SHA-256 | <OutLink href="https://gnosisscan.io/address/0x4207268D504863C84b4C0D839c4D379d28711623">`0x4207268D504863C84b4C0D839c4D379d28711623`</OutLink> |
+| `CECDSA384Signer` | secp384r1, SHA-384 | <OutLink href="https://gnosisscan.io/address/0x2D3673cf99C01536624c1055b3E65877370796F3">`0x2D3673cf99C01536624c1055b3E65877370796F3`</OutLink> |
+| `CECDSA256Signer` | brainpoolP256r1, SHA-1 | <OutLink href="https://gnosisscan.io/address/0x2191BeC99ACa14a6aC31553B810087827BB0d84E">`0x2191BeC99ACa14a6aC31553B810087827BB0d84E`</OutLink> |
+| `CECDSA256Signer` | brainpoolP256r1, SHA-256 | <OutLink href="https://gnosisscan.io/address/0x784CAc9207bC308D4DC91936549B66629A2382E5">`0x784CAc9207bC308D4DC91936549B66629A2382E5`</OutLink> |
+| `CECDSA384Signer` | brainpoolP384r1, SHA-256 | <OutLink href="https://gnosisscan.io/address/0x1d3Fd2100d7c7D65380c39e955fC122FdfC4cF9b">`0x1d3Fd2100d7c7D65380c39e955fC122FdfC4cF9b`</OutLink> |
+| `CECDSA384Signer` | brainpoolP384r1, SHA-384 | <OutLink href="https://gnosisscan.io/address/0x702fBa819a1fe366D2Dc6d91E30C050f3de5Ce43">`0x702fBa819a1fe366D2Dc6d91E30C050f3de5Ce43`</OutLink> |
+| `CECDSA512Signer` | brainpoolP512r1, SHA-512 | <OutLink href="https://gnosisscan.io/address/0xA110cB21bD756D206aD3a6acC5a16d6DA5C21E9f">`0xA110cB21bD756D206aD3a6acC5a16d6DA5C21E9f`</OutLink> |
+
+## Passport dispatchers
+
+Verify Active Authentication (AA) of a document, or skip it for documents without AA.
+
+| Type | Dispatcher |
+|------|------------|
+| `P_NO_AA` | <OutLink href="https://gnosisscan.io/address/0xd77ee3b6Ba39027B88D171C376c115B4BAe86939">`0xd77ee3b6Ba39027B88D171C376c115B4BAe86939`</OutLink> |
+| `P_RSA_SHA1_2688` | <OutLink href="https://gnosisscan.io/address/0x5Bda24a73428699100867b8b181Daf8BC88C140B">`0x5Bda24a73428699100867b8b181Daf8BC88C140B`</OutLink> |
+| `P_RSA_SHA1_2688_3` | <OutLink href="https://gnosisscan.io/address/0x09B0D041B54bf477954d8d86de9606260C615C66">`0x09B0D041B54bf477954d8d86de9606260C615C66`</OutLink> |
+| `P_ECDSA_SHA1_2704` | <OutLink href="https://gnosisscan.io/address/0xE625210e51Ae281816A0BB5E8c97B94313d723BE">`0xE625210e51Ae281816A0BB5E8c97B94313d723BE`</OutLink> |
+| `P_RSA_SHA256_2688` | <OutLink href="https://gnosisscan.io/address/0x3784Fb896D3e4F57CC4abD7338DDF66f1182c38a">`0x3784Fb896D3e4F57CC4abD7338DDF66f1182c38a`</OutLink> |
+
+### Authenticators
+
+Verify the AA signature for the passport dispatchers: `PRSASHAAuthenticator` for the RSA types and `PECDSASHA1Authenticator` for `P_ECDSA_SHA1_2704`. `P_NO_AA` has no authenticator.
+
+| Type | Parameters | Address |
+|------|------------|---------|
+| `P_RSA_SHA1_2688` | e = 65537, SHA-1 | <OutLink href="https://gnosisscan.io/address/0x81d70c0B14F07838aD8b486b7BFE12D5676362De">`0x81d70c0B14F07838aD8b486b7BFE12D5676362De`</OutLink> |
+| `P_RSA_SHA1_2688_3` | e = 3, SHA-1 | <OutLink href="https://gnosisscan.io/address/0x366113e10A19B15d9ec65A5618dbeD35cAF3d8b5">`0x366113e10A19B15d9ec65A5618dbeD35cAF3d8b5`</OutLink> |
+| `P_ECDSA_SHA1_2704` | brainpoolP256r1, SHA-1 | <OutLink href="https://gnosisscan.io/address/0xF782175da72EAE1fbb1d2CB96be9BC5689b26940">`0xF782175da72EAE1fbb1d2CB96be9BC5689b26940`</OutLink> |
+| `P_RSA_SHA256_2688` | e = 65537, SHA-256 | <OutLink href="https://gnosisscan.io/address/0x9D67Dc8af21ec16Ee53059aaa339718D1A58344b">`0x9D67Dc8af21ec16Ee53059aaa339718D1A58344b`</OutLink> |
+
+
+## Register verifiers
+
+Verify the register proof of a document type. A circuit name encodes the document parameters:
+
+`<signature type>_<hash size>_<document type>_<encapsulated content chunks>_<encapsulated content shift>_<DG1 shift>_<AA>`
+
+where the document type is `3` for passports (TD3) and `1` for ID cards (TD1), and `<AA>` is `NA` for documents without Active Authentication or `<AA signature type>_<DG15 shift>_<DG15 chunks>_<AA key shift>` otherwise.
+
+### Noir (77)
+
+Noir (UltraPlonk) verifiers, used by the current app. The type of a verifier in `Registration2` is `Z_NOIR_PASSPORT_` followed by the circuit name, for example `Z_NOIR_PASSPORT_1_256_3_5_576_248_NA`. Types without Active Authentication (`..._NA`) are also accepted by `NoAARecovery`.
+
+| Circuit | Address |
+|---------|---------|
+| `1_256_1_6_960_248_NA` | <OutLink href="https://gnosisscan.io/address/0x3d0c1c28FF8Cff4eb5D0C7EbbB84297EDC14a132">`0x3d0c1c28FF8Cff4eb5D0C7EbbB84297EDC14a132`</OutLink> |
+| `1_256_3_5_576_248_NA` | <OutLink href="https://gnosisscan.io/address/0x0C1674407CeAA70EcE5416Cb8Ff0D0E79140042a">`0x0C1674407CeAA70EcE5416Cb8Ff0D0E79140042a`</OutLink> |
+| `1_256_3_4_600_248_1_1496_3_256` | <OutLink href="https://gnosisscan.io/address/0x4Fc5B16ea52b5DaC83EFcAf633b067c7060461E7">`0x4Fc5B16ea52b5DaC83EFcAf633b067c7060461E7`</OutLink> |
+| `1_256_3_5_336_248_1_2120_4_256` | <OutLink href="https://gnosisscan.io/address/0x6c48f7D994a5b2302B3cC9fce7B2C240e1e3Cb94">`0x6c48f7D994a5b2302B3cC9fce7B2C240e1e3Cb94`</OutLink> |
+| `10_256_3_3_576_248_1_1184_5_264` | <OutLink href="https://gnosisscan.io/address/0x3dBB16874Ffc24Ac89F0B3Cf7f92FcF340402E31">`0x3dBB16874Ffc24Ac89F0B3Cf7f92FcF340402E31`</OutLink> |
+| `11_256_3_4_336_232_1_1480_4_256` | <OutLink href="https://gnosisscan.io/address/0x4e59D3783263e38A5DFC5A70Fb4a888Ba3C1a6Fa">`0x4e59D3783263e38A5DFC5A70Fb4a888Ba3C1a6Fa`</OutLink> |
+| `14_256_3_3_576_240_NA` | <OutLink href="https://gnosisscan.io/address/0xA35951728B0557502a69f9c4d760F6Cf3B61220f">`0xA35951728B0557502a69f9c4d760F6Cf3B61220f`</OutLink> |
+| `14_256_3_4_576_248_1_1496_3_256` | <OutLink href="https://gnosisscan.io/address/0xe9c4537eb9317bd3847C4701f1F811AD584c2F32">`0xe9c4537eb9317bd3847C4701f1F811AD584c2F32`</OutLink> |
+| `2_256_3_4_336_232_1_1480_4_256` | <OutLink href="https://gnosisscan.io/address/0x697d2E36A1bFE140cAdB72B2D1d3C3B3efB38c24">`0x697d2E36A1bFE140cAdB72B2D1d3C3B3efB38c24`</OutLink> |
+| `2_256_3_4_336_248_NA` | <OutLink href="https://gnosisscan.io/address/0xAFAbeD6f76138A7562Ba823d4398C0ef6553DFD0">`0xAFAbeD6f76138A7562Ba823d4398C0ef6553DFD0`</OutLink> |
+| `2_256_3_6_336_248_1_2432_3_256` | <OutLink href="https://gnosisscan.io/address/0x8FF82226C7Fba6495f77cC2ED5074b52E86D46Fe">`0x8FF82226C7Fba6495f77cC2ED5074b52E86D46Fe`</OutLink> |
+| `2_256_3_6_576_248_1_2432_3_256` | <OutLink href="https://gnosisscan.io/address/0x595Ee5574F247F6acf94867fFaA87DB2527aC3e0">`0x595Ee5574F247F6acf94867fFaA87DB2527aC3e0`</OutLink> |
+| `20_160_3_2_576_184_NA` | <OutLink href="https://gnosisscan.io/address/0xA088e564Dc1306caE7F5AeA17026a5944D98CE77">`0xA088e564Dc1306caE7F5AeA17026a5944D98CE77`</OutLink> |
+| `20_256_3_3_336_224_NA` | <OutLink href="https://gnosisscan.io/address/0x6a2d51676AD43AD771cA8eC85e32A16F9B3F81E8">`0x6a2d51676AD43AD771cA8eC85e32A16F9B3F81E8`</OutLink> |
+| `21_256_3_3_576_232_NA` | <OutLink href="https://gnosisscan.io/address/0xd002009f2Cda38781c5650d0c46a995551153e27">`0xd002009f2Cda38781c5650d0c46a995551153e27`</OutLink> |
+| `3_512_3_3_336_264_NA` | <OutLink href="https://gnosisscan.io/address/0x0ee9422F7B76A7F6807f043EDaA76CC08C78CA68">`0x0ee9422F7B76A7F6807f043EDaA76CC08C78CA68`</OutLink> |
+| `2_256_3_6_336_264_21_2448_6_2008` | <OutLink href="https://gnosisscan.io/address/0xFdE13D627DEe019b571d331C615eB1A4B6066934">`0xFdE13D627DEe019b571d331C615eB1A4B6066934`</OutLink> |
+| `21_256_3_4_576_232_NA` | <OutLink href="https://gnosisscan.io/address/0x80cdcBFA19fb7CEE9C2B91c7124Fa5BA47465EDb">`0x80cdcBFA19fb7CEE9C2B91c7124Fa5BA47465EDb`</OutLink> |
+| `1_256_3_4_576_232_1_1480_3_256` | <OutLink href="https://gnosisscan.io/address/0x4dfb1160205b63F5ce186d297d955F508560e57e">`0x4dfb1160205b63F5ce186d297d955F508560e57e`</OutLink> |
+| `1_256_3_6_576_264_1_2448_3_256` | <OutLink href="https://gnosisscan.io/address/0xA2e1303FF365Dd1AFdb8e492b4cD6fef073e4dd9">`0xA2e1303FF365Dd1AFdb8e492b4cD6fef073e4dd9`</OutLink> |
+| `3_256_3_4_600_248_1_1496_3_256` | <OutLink href="https://gnosisscan.io/address/0x814980604d9A2BeA07516f90C8eA1389ae20c819">`0x814980604d9A2BeA07516f90C8eA1389ae20c819`</OutLink> |
+| `6_160_3_3_336_216_1_1080_3_256` | <OutLink href="https://gnosisscan.io/address/0xC2bB9D115a2Fdf55C3e2B791C0cd96DF54C73c7a">`0xC2bB9D115a2Fdf55C3e2B791C0cd96DF54C73c7a`</OutLink> |
+| `11_256_3_3_576_248_NA` | <OutLink href="https://gnosisscan.io/address/0x1948Ef80eA757382bca8F7f5604366eA3A9832bA">`0x1948Ef80eA757382bca8F7f5604366eA3A9832bA`</OutLink> |
+| `11_256_3_5_576_248_NA` | <OutLink href="https://gnosisscan.io/address/0x8CAE7D2CB4d8749aFCa79cF298ff3b3a07Dc6dbd">`0x8CAE7D2CB4d8749aFCa79cF298ff3b3a07Dc6dbd`</OutLink> |
+| `14_256_3_4_336_232_1_1480_5_296` | <OutLink href="https://gnosisscan.io/address/0xB075016627610649AEa5e16ECa948fA86e6F5272">`0xB075016627610649AEa5e16ECa948fA86e6F5272`</OutLink> |
+| `20_160_3_3_576_200_NA` | <OutLink href="https://gnosisscan.io/address/0x872AF8F3A3554dAd79F77b76980f4Dd88f97cA65">`0x872AF8F3A3554dAd79F77b76980f4Dd88f97cA65`</OutLink> |
+| `20_256_3_5_336_248_NA` | <OutLink href="https://gnosisscan.io/address/0x9036637982a9Eb5D5E785EF6B0ED0B71534f04E7">`0x9036637982a9Eb5D5E785EF6B0ED0B71534f04E7`</OutLink> |
+| `23_160_3_3_576_200_NA` | <OutLink href="https://gnosisscan.io/address/0xa628d13d18fd7ff11FEc1a17B5E713Eb5BFb1Ae0">`0xa628d13d18fd7ff11FEc1a17B5E713Eb5BFb1Ae0`</OutLink> |
+| `24_256_3_4_336_248_NA` | <OutLink href="https://gnosisscan.io/address/0x7Ef181997edAa5D7eB16B5ef24b5f5C485A258ad">`0x7Ef181997edAa5D7eB16B5ef24b5f5C485A258ad`</OutLink> |
+| `11_256_3_5_576_248_1_1808_4_256` | <OutLink href="https://gnosisscan.io/address/0x4a4C49E49239cFff6698b0B8efD30cee8ff42255">`0x4a4C49E49239cFff6698b0B8efD30cee8ff42255`</OutLink> |
+| `11_256_3_5_576_264_NA` | <OutLink href="https://gnosisscan.io/address/0x2650E691713ABF24bDEb74751f4d4952FD3B56fD">`0x2650E691713ABF24bDEb74751f4d4952FD3B56fD`</OutLink> |
+| `11_256_3_5_584_264_1_2136_4_256` | <OutLink href="https://gnosisscan.io/address/0x746d00208773114c1e2ab5dc611C510481A0caFD">`0x746d00208773114c1e2ab5dc611C510481A0caFD`</OutLink> |
+| `1_256_3_4_336_232_NA` | <OutLink href="https://gnosisscan.io/address/0x43408d1b5Ba1365b6eDF4A73CfEb7513Fc8b05f6">`0x43408d1b5Ba1365b6eDF4A73CfEb7513Fc8b05f6`</OutLink> |
+| `2_256_3_4_336_248_22_1496_7_2408` | <OutLink href="https://gnosisscan.io/address/0xF54f5836D7ABa80b3659754Bce80c836eA9658eE">`0xF54f5836D7ABa80b3659754Bce80c836eA9658eE`</OutLink> |
+| `25_384_3_3_336_232_NA` | <OutLink href="https://gnosisscan.io/address/0x56A90D14fc11616c381acE68456a1382a7E35388">`0x56A90D14fc11616c381acE68456a1382a7E35388`</OutLink> |
+| `25_384_3_4_336_264_1_2904_2_256` | <OutLink href="https://gnosisscan.io/address/0x0b1a8437eB807d17834f784bEE71774e89C58f2E">`0x0b1a8437eB807d17834f784bEE71774e89C58f2E`</OutLink> |
+| `26_512_3_3_336_248_NA` | <OutLink href="https://gnosisscan.io/address/0xfD9285b8B356B771B5f9AC0AabD3eb9156583206">`0xfD9285b8B356B771B5f9AC0AabD3eb9156583206`</OutLink> |
+| `26_512_3_3_336_264_1_1968_2_256` | <OutLink href="https://gnosisscan.io/address/0xe3E780A8727Fac70da0c1Bf04C338DF35069E580">`0xe3E780A8727Fac70da0c1Bf04C338DF35069E580`</OutLink> |
+| `27_512_3_4_336_248_NA` | <OutLink href="https://gnosisscan.io/address/0x14429c54C118B169d1001877B6500989476ee368">`0x14429c54C118B169d1001877B6500989476ee368`</OutLink> |
+| `ID_CARD_I` | <OutLink href="https://gnosisscan.io/address/0x93a4B838538E01Fb9c38152cF3095CDFF76773eC">`0x93a4B838538E01Fb9c38152cF3095CDFF76773eC`</OutLink> |
+| `1_256_3_5_336_248_1_2120_3_256` | <OutLink href="https://gnosisscan.io/address/0x94b47259033c5972DA182727cfe961B3b69D699c">`0x94b47259033c5972DA182727cfe961B3b69D699c`</OutLink> |
+| `7_160_3_3_336_216_1_1080_3_256` | <OutLink href="https://gnosisscan.io/address/0xE47e890f006d8cE7DDaC49dCb4b371117067f85E">`0xE47e890f006d8cE7DDaC49dCb4b371117067f85E`</OutLink> |
+| `8_160_3_3_336_216_1_1080_3_256` | <OutLink href="https://gnosisscan.io/address/0xeafc403C527De312cF104d4C69aBAea1a0A35Db5">`0xeafc403C527De312cF104d4C69aBAea1a0A35Db5`</OutLink> |
+| `11_256_3_2_336_216_NA` | <OutLink href="https://gnosisscan.io/address/0xb497d1F268bDF04dE64a3D6d976E72dCbB3A1d44">`0xb497d1F268bDF04dE64a3D6d976E72dCbB3A1d44`</OutLink> |
+| `11_256_3_3_336_248_NA` | <OutLink href="https://gnosisscan.io/address/0x3A22D6B82d3BF696f71d282626cD62d166963E29">`0x3A22D6B82d3BF696f71d282626cD62d166963E29`</OutLink> |
+| `11_256_3_3_576_240_1_864_5_264` | <OutLink href="https://gnosisscan.io/address/0x40Ea24C60e60314D99cf07e9d6F77C4d51d520Ac">`0x40Ea24C60e60314D99cf07e9d6F77C4d51d520Ac`</OutLink> |
+| `11_256_3_3_576_248_1_1184_5_264` | <OutLink href="https://gnosisscan.io/address/0x68173436309A0Ab5449E0Be9d493C58C5ff5118b">`0x68173436309A0Ab5449E0Be9d493C58C5ff5118b`</OutLink> |
+| `11_256_3_4_584_248_1_1496_4_256` | <OutLink href="https://gnosisscan.io/address/0x8A00989814C08430B4dC01865428d668c855a7AC">`0x8A00989814C08430B4dC01865428d668c855a7AC`</OutLink> |
+| `11_256_3_5_576_248_1_1808_5_296` | <OutLink href="https://gnosisscan.io/address/0x44c90CAF341d1DdC48D5877ca355204b4Cff4626">`0x44c90CAF341d1DdC48D5877ca355204b4Cff4626`</OutLink> |
+| `12_256_3_3_336_232_NA` | <OutLink href="https://gnosisscan.io/address/0x6499E3c845A221A599A72467F4057706D221873C">`0x6499E3c845A221A599A72467F4057706D221873C`</OutLink> |
+| `15_512_3_3_336_248_NA` | <OutLink href="https://gnosisscan.io/address/0x20f898c3DB92CBa945843D7eF3B960981d9c110E">`0x20f898c3DB92CBa945843D7eF3B960981d9c110E`</OutLink> |
+| `1_160_3_3_576_200_NA` | <OutLink href="https://gnosisscan.io/address/0xD3690281f261218305FeeFCFc2C76224f2aE3757">`0xD3690281f261218305FeeFCFc2C76224f2aE3757`</OutLink> |
+| `1_256_3_3_576_248_NA` | <OutLink href="https://gnosisscan.io/address/0x5f3b6c181180D598B16d94067bcACe0404D2b49D">`0x5f3b6c181180D598B16d94067bcACe0404D2b49D`</OutLink> |
+| `1_256_3_4_336_232_1_1480_5_296` | <OutLink href="https://gnosisscan.io/address/0x60bD4AAaB061529a82dd73D68749871307a20Bd0">`0x60bD4AAaB061529a82dd73D68749871307a20Bd0`</OutLink> |
+| `1_256_3_6_336_248_1_2744_4_256` | <OutLink href="https://gnosisscan.io/address/0x721A02338dd21990077741479721dBE44b35bC1D">`0x721A02338dd21990077741479721dBE44b35bC1D`</OutLink> |
+| `1_256_3_6_576_248_1_2432_5_296` | <OutLink href="https://gnosisscan.io/address/0x173dE42906A557A4AfA8173112a7a8333264D312">`0x173dE42906A557A4AfA8173112a7a8333264D312`</OutLink> |
+| `21_256_3_3_336_232_NA` | <OutLink href="https://gnosisscan.io/address/0x4a2A279988F5c5517045ffa5294f99f2c6659316">`0x4a2A279988F5c5517045ffa5294f99f2c6659316`</OutLink> |
+| `21_256_3_5_576_232_NA` | <OutLink href="https://gnosisscan.io/address/0xB32bd1dCfC0152a53FF413615F1ff33A428f602B">`0xB32bd1dCfC0152a53FF413615F1ff33A428f602B`</OutLink> |
+| `24_256_3_4_336_232_NA` | <OutLink href="https://gnosisscan.io/address/0x1fBe33Ec6eD3B786bc3C241d9E1E04fe6d4045CC">`0x1fBe33Ec6eD3B786bc3C241d9E1E04fe6d4045CC`</OutLink> |
+| `25_384_3_3_336_248_NA` | <OutLink href="https://gnosisscan.io/address/0x03d35797e997A12e9aD88f798172Aaf9f3138E6A">`0x03d35797e997A12e9aD88f798172Aaf9f3138E6A`</OutLink> |
+| `25_384_3_3_336_264_1_2024_3_296` | <OutLink href="https://gnosisscan.io/address/0x45497F0C7F878337bA6ACF292885ff6484Fb5c89">`0x45497F0C7F878337bA6ACF292885ff6484Fb5c89`</OutLink> |
+| `28_384_3_3_576_264_24_2024_4_2792` | <OutLink href="https://gnosisscan.io/address/0x679b9e195A1936564C73AE78E60ac92b66076300">`0x679b9e195A1936564C73AE78E60ac92b66076300`</OutLink> |
+| `2_256_3_6_336_264_1_2448_3_256` | <OutLink href="https://gnosisscan.io/address/0xbcf1a433C6148cB5007f3a7E602D4F3134d547B9">`0xbcf1a433C6148cB5007f3a7E602D4F3134d547B9`</OutLink> |
+| `3_160_3_3_336_200_NA` | <OutLink href="https://gnosisscan.io/address/0x3781c09D3928E6b69e6F3d39db799d97dC20C4d5">`0x3781c09D3928E6b69e6F3d39db799d97dC20C4d5`</OutLink> |
+| `3_160_3_4_576_216_1_1512_3_256` | <OutLink href="https://gnosisscan.io/address/0x760d6A8291CCc1Bad34952B56d24bdb01D39CA67">`0x760d6A8291CCc1Bad34952B56d24bdb01D39CA67`</OutLink> |
+| `3_256_3_3_576_248_NA` | <OutLink href="https://gnosisscan.io/address/0x681Cd94D44Dab35c17e985552290667c0bFF79A5">`0x681Cd94D44Dab35c17e985552290667c0bFF79A5`</OutLink> |
+| `11_256_3_4_576_248_1_1496_5_296` | <OutLink href="https://gnosisscan.io/address/0x3f2731546aDff3BE4230a50225cf85a5eB567c26">`0x3f2731546aDff3BE4230a50225cf85a5eB567c26`</OutLink> |
+| `1_256_3_4_336_248_1_1496_4_256` | <OutLink href="https://gnosisscan.io/address/0x05fdC0430667afdaAe3f45211ad38F3dffeE1E47">`0x05fdC0430667afdaAe3f45211ad38F3dffeE1E47`</OutLink> |
+| `1_256_3_5_344_232_NA` | <OutLink href="https://gnosisscan.io/address/0x4789Bf0C02690bA6031199AF3cA317ef727de133">`0x4789Bf0C02690bA6031199AF3cA317ef727de133`</OutLink> |
+| `1_256_3_6_336_248_1_2432_3_256` | <OutLink href="https://gnosisscan.io/address/0x26673654207346A4C39F5d8Ee28478Cb913fEb24">`0x26673654207346A4C39F5d8Ee28478Cb913fEb24`</OutLink> |
+| `21_256_3_7_336_264_21_3072_6_2008` | <OutLink href="https://gnosisscan.io/address/0xD51f3891A19Cb257c3504d76B6319be2c3c9cC90">`0xD51f3891A19Cb257c3504d76B6319be2c3c9cC90`</OutLink> |
+| `25_384_3_5_576_248_20_3768_3_2008` | <OutLink href="https://gnosisscan.io/address/0xDb16E041F46956aC4e73febC120fDba4f735a0E3">`0xDb16E041F46956aC4e73febC120fDba4f735a0E3`</OutLink> |
+| `2_256_3_5_336_248_22_1808_7_2408` | <OutLink href="https://gnosisscan.io/address/0xd69598747ca233405Ae25BE7355F1B6D8CD5cf6f">`0xd69598747ca233405Ae25BE7355F1B6D8CD5cf6f`</OutLink> |
+| `1_256_3_4_336_232_1_1480_4_256` | <OutLink href="https://gnosisscan.io/address/0x0c0A26452675a5D8D022Ef9bA30c88C7e2082D2B">`0x0c0A26452675a5D8D022Ef9bA30c88C7e2082D2B`</OutLink> |
+| `1_256_3_4_336_248_1_560_4_256` | <OutLink href="https://gnosisscan.io/address/0x5e9fdf957552f5b945cb6Cf39a2443aF8c6d5c65">`0x5e9fdf957552f5b945cb6Cf39a2443aF8c6d5c65`</OutLink> |
+| `1_256_3_5_336_232_NA` | <OutLink href="https://gnosisscan.io/address/0x4c1BF03B61Ea88A767B8A0A155F66486e911Ea5c">`0x4c1BF03B61Ea88A767B8A0A155F66486e911Ea5c`</OutLink> |
+| `1_256_3_7_336_264_20_2760_6_2008` | <OutLink href="https://gnosisscan.io/address/0xEDB4aC708cabEf0AFb732040c59199D5896adC0D">`0xEDB4aC708cabEf0AFb732040c59199D5896adC0D`</OutLink> |
+
+### Circom (45)
+
+Groth16 verifiers used by older app versions.
+
+Per-passport circuits (35). The type is `Z_PER_PASSPORT_` followed by the circuit name.
+
+| Circuit | Address |
+|---------|---------|
+| `1_256_3_5_576_248_NA` | <OutLink href="https://gnosisscan.io/address/0xb6EC9801e6870d767e39073b1F5203cE265Bb230">`0xb6EC9801e6870d767e39073b1F5203cE265Bb230`</OutLink> |
+| `1_256_3_6_576_248_1_2432_5_296` | <OutLink href="https://gnosisscan.io/address/0x85747539722d145E84e6E4651eCa225c6515C528">`0x85747539722d145E84e6E4651eCa225c6515C528`</OutLink> |
+| `2_256_3_6_336_264_21_2448_6_2008` | <OutLink href="https://gnosisscan.io/address/0xbf49c63cA36E5C6D78e6d3d609a16eE1bEFdfaDB">`0xbf49c63cA36E5C6D78e6d3d609a16eE1bEFdfaDB`</OutLink> |
+| `21_256_3_7_336_264_21_3072_6_2008` | <OutLink href="https://gnosisscan.io/address/0xf5904Bc5C4aEB4dc7A0c7776D98590877831A3Cd">`0xf5904Bc5C4aEB4dc7A0c7776D98590877831A3Cd`</OutLink> |
+| `1_256_3_6_576_264_1_2448_3_256` | <OutLink href="https://gnosisscan.io/address/0x0518e270f90226E05860c44Cfd56C009d4d4bBb9">`0x0518e270f90226E05860c44Cfd56C009d4d4bBb9`</OutLink> |
+| `2_256_3_6_336_248_1_2432_3_256` | <OutLink href="https://gnosisscan.io/address/0x68b4F20bdA745f505283DCb576fC012EFCb4e583">`0x68b4F20bdA745f505283DCb576fC012EFCb4e583`</OutLink> |
+| `2_256_3_6_576_248_1_2432_3_256` | <OutLink href="https://gnosisscan.io/address/0xe33642d075ED722879A48d12D109c357bC76c8eF">`0xe33642d075ED722879A48d12D109c357bC76c8eF`</OutLink> |
+| `11_256_3_3_576_248_1_1184_5_264` | <OutLink href="https://gnosisscan.io/address/0xE7fd85Cc2CD0E33886A7ABe411c3997994684bA0">`0xE7fd85Cc2CD0E33886A7ABe411c3997994684bA0`</OutLink> |
+| `12_256_3_3_336_232_NA` | <OutLink href="https://gnosisscan.io/address/0xc71Cd0Ff5C8e1F29Ad0a78c7C62B5548Eb959380">`0xc71Cd0Ff5C8e1F29Ad0a78c7C62B5548Eb959380`</OutLink> |
+| `1_256_3_4_336_232_1_1480_5_296` | <OutLink href="https://gnosisscan.io/address/0x61076655d963f079eD9290a25BF4171C8f998500">`0x61076655d963f079eD9290a25BF4171C8f998500`</OutLink> |
+| `1_256_3_4_600_248_1_1496_3_256` | <OutLink href="https://gnosisscan.io/address/0x6606fC6DC455764480Dac74c5D7B291485Ec00E7">`0x6606fC6DC455764480Dac74c5D7B291485Ec00E7`</OutLink> |
+| `1_160_3_4_576_200_NA` | <OutLink href="https://gnosisscan.io/address/0x9Df6ebF40123ae696d716FecE30CA9151b2C575E">`0x9Df6ebF40123ae696d716FecE30CA9151b2C575E`</OutLink> |
+| `21_256_3_3_336_232_NA` | <OutLink href="https://gnosisscan.io/address/0xA422763c54339B8C20d0B093016F90B1D7460720">`0xA422763c54339B8C20d0B093016F90B1D7460720`</OutLink> |
+| `24_256_3_4_336_232_NA` | <OutLink href="https://gnosisscan.io/address/0x2Fc8851bC7B35BEdb2a0F58a758e3557FD9B9A1C">`0x2Fc8851bC7B35BEdb2a0F58a758e3557FD9B9A1C`</OutLink> |
+| `1_160_3_3_576_200_NA` | <OutLink href="https://gnosisscan.io/address/0xb85a38e9944914fa85850fC4263f8A092e07b47A">`0xb85a38e9944914fa85850fC4263f8A092e07b47A`</OutLink> |
+| `1_256_3_3_576_248_NA` | <OutLink href="https://gnosisscan.io/address/0x3Cf2598E425e52DF256E75d21C444CB7Da4a33Bc">`0x3Cf2598E425e52DF256E75d21C444CB7Da4a33Bc`</OutLink> |
+| `20_256_3_3_336_224_NA` | <OutLink href="https://gnosisscan.io/address/0xa4DF4f44e8d26FE507a869537A1Ad28eC92A7865">`0xa4DF4f44e8d26FE507a869537A1Ad28eC92A7865`</OutLink> |
+| `10_256_3_3_576_248_1_1184_5_264` | <OutLink href="https://gnosisscan.io/address/0x935D6FE234D3CC41E4e78f3823BA25a8DAF9B729">`0x935D6FE234D3CC41E4e78f3823BA25a8DAF9B729`</OutLink> |
+| `11_256_3_5_576_248_1_1808_4_256` | <OutLink href="https://gnosisscan.io/address/0xBEd9B0986bD689E8390436f13863C01D1A7614AA">`0xBEd9B0986bD689E8390436f13863C01D1A7614AA`</OutLink> |
+| `21_256_3_3_576_232_NA` | <OutLink href="https://gnosisscan.io/address/0x6370bcB29F672650C8a4525d6E3f8d3f486f1f18">`0x6370bcB29F672650C8a4525d6E3f8d3f486f1f18`</OutLink> |
+| `2_256_3_6_336_264_1_2448_3_256` | <OutLink href="https://gnosisscan.io/address/0xF1584e9bAeA9E65FDdE78BE68E94819fBDcAfE31">`0xF1584e9bAeA9E65FDdE78BE68E94819fBDcAfE31`</OutLink> |
+| `3_160_3_3_336_200_NA` | <OutLink href="https://gnosisscan.io/address/0x208aca88cf1c1C25b9A07c3427D28330d81A1619">`0x208aca88cf1c1C25b9A07c3427D28330d81A1619`</OutLink> |
+| `3_160_3_4_576_216_1_1512_3_256` | <OutLink href="https://gnosisscan.io/address/0x0fb73C85FAd6A72091e054D14FC5cD534B422BFa">`0x0fb73C85FAd6A72091e054D14FC5cD534B422BFa`</OutLink> |
+| `11_256_3_3_576_240_1_864_5_264` | <OutLink href="https://gnosisscan.io/address/0xA6F26A4517BD1AF7562c3E6347a71B7Ca099c9e9">`0xA6F26A4517BD1AF7562c3E6347a71B7Ca099c9e9`</OutLink> |
+| `11_256_3_5_576_248_1_1808_5_296` | <OutLink href="https://gnosisscan.io/address/0xf822B0C259c31122A2405E2179eb3Db4A70952ad">`0xf822B0C259c31122A2405E2179eb3Db4A70952ad`</OutLink> |
+| `21_256_3_4_576_232_NA` | <OutLink href="https://gnosisscan.io/address/0xc9325Da6E90b9bAFc9c18Af4323fE5B5175e1B38">`0xc9325Da6E90b9bAFc9c18Af4323fE5B5175e1B38`</OutLink> |
+| `1_256_3_6_336_248_1_2744_4_256` | <OutLink href="https://gnosisscan.io/address/0xA3a8B618b915d8A99A7DFfCa8988Ad71664433bb">`0xA3a8B618b915d8A99A7DFfCa8988Ad71664433bb`</OutLink> |
+| `1_256_3_6_336_560_1_2744_4_256` | <OutLink href="https://gnosisscan.io/address/0x3D15c50CB9F9559583421f27DaeF10538AFF06d7">`0x3D15c50CB9F9559583421f27DaeF10538AFF06d7`</OutLink> |
+| `4_160_3_3_336_216_1_1296_3_256` | <OutLink href="https://gnosisscan.io/address/0x5E4e9fb5faB2eA8b880Da285432876C3946d14cc">`0x5E4e9fb5faB2eA8b880Da285432876C3946d14cc`</OutLink> |
+| `11_256_3_3_336_248_NA` | <OutLink href="https://gnosisscan.io/address/0x5968Eb59611225275c8c4268A586698FDe8B17a8">`0x5968Eb59611225275c8c4268A586698FDe8B17a8`</OutLink> |
+| `14_256_3_4_336_64_1_1480_5_296` | <OutLink href="https://gnosisscan.io/address/0xc72266Fe3533143F83a6B69Bb7C7228CeAe07967">`0xc72266Fe3533143F83a6B69Bb7C7228CeAe07967`</OutLink> |
+| `15_512_3_3_336_248_NA` | <OutLink href="https://gnosisscan.io/address/0x9AAdc0750AD8dCA6A30C497A48300B369119997B">`0x9AAdc0750AD8dCA6A30C497A48300B369119997B`</OutLink> |
+| `20_160_3_3_736_200_NA` | <OutLink href="https://gnosisscan.io/address/0xE570e2C03314a5D95148BD1FC0FBdFC280c9Fdc5">`0xE570e2C03314a5D95148BD1FC0FBdFC280c9Fdc5`</OutLink> |
+| `20_256_3_5_336_72_NA` | <OutLink href="https://gnosisscan.io/address/0x994E37b4ec097187d24bB0FD63744443742FeE57">`0x994E37b4ec097187d24bB0FD63744443742FeE57`</OutLink> |
+| `21_256_3_5_576_232_NA` | <OutLink href="https://gnosisscan.io/address/0xe1Ca951C85D7386a3f68e3cF176c3956C7792DF7">`0xe1Ca951C85D7386a3f68e3cF176c3956C7792DF7`</OutLink> |
+
+Universal and ID card circuits (10):
+
+| Type | Address |
+|------|---------|
+| `Z_UNIVERSAL_4096` | <OutLink href="https://gnosisscan.io/address/0x92FE5c243Ca53b4617C30578Aea0c5D508050C3d">`0x92FE5c243Ca53b4617C30578Aea0c5D508050C3d`</OutLink> |
+| `Z_UNIVERSAL_2048` | <OutLink href="https://gnosisscan.io/address/0x0F7160821b42734EE948326E8C00b0DA8Ab80285">`0x0F7160821b42734EE948326E8C00b0DA8Ab80285`</OutLink> |
+| `Z_UNIVERSAL_2048_V2` | <OutLink href="https://gnosisscan.io/address/0x6623073EE974b807D3c6fEc17c7C693d7C051631">`0x6623073EE974b807D3c6fEc17c7C693d7C051631`</OutLink> |
+| `Z_UNIVERSAL_PSS_2048_S32_E2` | <OutLink href="https://gnosisscan.io/address/0x959F964aE49d3Afa1eE1aa22dEc0fB2478A75cDe">`0x959F964aE49d3Afa1eE1aa22dEc0fB2478A75cDe`</OutLink> |
+| `Z_UNIVERSAL_PSS_2048_S32_E17` | <OutLink href="https://gnosisscan.io/address/0xDD568bB5e529D12d8E1a7F38834eca34781A8968">`0xDD568bB5e529D12d8E1a7F38834eca34781A8968`</OutLink> |
+| `Z_UNIVERSAL_PSS_2048_S64_E17` | <OutLink href="https://gnosisscan.io/address/0xb2bCfD68DB6cB551DF783e87F5FB36624a1cfBB2">`0xb2bCfD68DB6cB551DF783e87F5FB36624a1cfBB2`</OutLink> |
+| `Z_INTERNAL` | <OutLink href="https://gnosisscan.io/address/0xa4eFb783389C35046D2f8Bce81F4668bF603a112">`0xa4eFb783389C35046D2f8Bce81F4668bF603a112`</OutLink> |
+| `Z_INTERNAL_OPT` | <OutLink href="https://gnosisscan.io/address/0x3aae75a002F52802f6f44a9a30733FC05cC0645B">`0x3aae75a002F52802f6f44a9a30733FC05cC0645B`</OutLink> |
+| `Z_MNE_OPT` | <OutLink href="https://gnosisscan.io/address/0x6501f9AAC888bCbEA53b178FC0143754298F9784">`0x6501f9AAC888bCbEA53b178FC0143754298F9784`</OutLink> |
+| `Z_MNE_OPT_2` | <OutLink href="https://gnosisscan.io/address/0x1403EB3469F261CACE3E68e5aF78e610D34c1CAA">`0x1403EB3469F261CACE3E68e5aF78e610D34c1CAA`</OutLink> |
+
+
+## Voting
+
+See the [Freedom Tool smart contracts reference](/freedom-tool/smart-contracts-reference) for `ProposalsState` and the voting contracts on Gnosis.
+
